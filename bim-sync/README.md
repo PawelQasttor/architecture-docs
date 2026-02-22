@@ -38,11 +38,38 @@ python bim-sync/sbm-to-ifc.py --input build/green-terrace/sbm.json --output buil
 ### What it generates
 
 - **Spatial hierarchy**: IfcProject → IfcSite → IfcBuilding → IfcBuildingStorey
-- **IfcSpace** for each SBM space (with bounding-box geometry derived from `designArea` and `designHeight`)
+- **IfcSpace** with polygon-extruded geometry (when `geometry.outline` is present) or bounding boxes (fallback)
+- **IfcWall** elements along room boundaries — interior (0.12m) and exterior (0.20m) walls auto-detected from shared edges
+- **IfcSlab** floor element covering the storey footprint
+- **IfcDoor** + **IfcOpeningElement** for connections between spaces (from `adjacentSpaces[].door` data)
 - **IfcZone** grouping spaces via `IfcRelAssignsToGroup`
-- **Pset_SBM_Space**: SBM_ID, SBM_SpaceName, SBM_SpaceType, SBM_DesignArea, SBM_DesignHeight, SBM_DesignVolume, SBM_MaxOccupants, SBM_UsagePattern, SBM_Requirements, SBM_ZoneIds
-- **Pset_SBM_Zone**: SBM_ID, SBM_ZoneName, SBM_ZoneType + zone-specific properties
+- **Property sets**: Pset_SBM_Space, Pset_SBM_Zone, Pset_WallCommon (IsExternal, LoadBearing)
 - **GlobalIds** preserved from `ifcMapping.globalId` in SBM data
+
+### Geometry data
+
+When spaces include a `geometry` field in `sbm.json`, the generator creates proper building geometry:
+
+```json
+{
+  "geometry": {
+    "outline": [[0, 0], [4.03, 0], [4.03, 3.60], [0, 3.60]],
+    "elevation": 0.0
+  }
+}
+```
+
+Door positions are specified in `adjacentSpaces` entries:
+
+```json
+{
+  "id": "SP-BLD-01-L01-CORR",
+  "relationship": "connects_via_door",
+  "door": { "position": [4.03, 1.35], "width": 0.90, "height": 2.10 }
+}
+```
+
+Without geometry data, spaces are rendered as simple bounding boxes derived from `designArea`.
 
 ### Example output (Green Terrace)
 
@@ -51,7 +78,9 @@ Buildings:  1
 Storeys:    1
 Spaces:     3
 Zones:      3
-Output: build/green-terrace/green-terrace.ifc
+Walls:      10
+Slabs:      1
+Doors:      2
 ```
 
 ### Viewing the IFC file
