@@ -6,7 +6,8 @@ Python scripts for bi-directional synchronization between IFC building models an
 
 These tools enable:
 - **IFC → Markdown**: Extract building element data from IFC files into human-readable markdown
-- **Markdown → IFC** *(Coming soon)*: Update IFC properties from markdown specifications
+- **Markdown → IFC**: Update IFC properties from markdown specifications
+- **SBM → IFC**: Generate IFC4 files from compiled SBM JSON data
 
 ## Prerequisites
 
@@ -24,9 +25,46 @@ pip install -r requirements.txt
 
 **Key dependency:** `ifcopenshell` - IFC parsing library
 
-## Quick Start
+## SBM-to-IFC Generator
 
-### 1. Export IFC from BIM Tool
+Generate a valid IFC4 file from a compiled SBM JSON, openable in BIMvision, BlenderBIM, or any IFC viewer.
+
+### Usage
+
+```bash
+python bim-sync/sbm-to-ifc.py --input build/green-terrace/sbm.json --output build/green-terrace/green-terrace.ifc
+```
+
+### What it generates
+
+- **Spatial hierarchy**: IfcProject → IfcSite → IfcBuilding → IfcBuildingStorey
+- **IfcSpace** for each SBM space (with bounding-box geometry derived from `designArea` and `designHeight`)
+- **IfcZone** grouping spaces via `IfcRelAssignsToGroup`
+- **Pset_SBM_Space**: SBM_ID, SBM_SpaceName, SBM_SpaceType, SBM_DesignArea, SBM_DesignHeight, SBM_DesignVolume, SBM_MaxOccupants, SBM_UsagePattern, SBM_Requirements, SBM_ZoneIds
+- **Pset_SBM_Zone**: SBM_ID, SBM_ZoneName, SBM_ZoneType + zone-specific properties
+- **GlobalIds** preserved from `ifcMapping.globalId` in SBM data
+
+### Example output (Green Terrace)
+
+```
+Buildings:  1
+Storeys:    1
+Spaces:     3
+Zones:      3
+Output: build/green-terrace/green-terrace.ifc
+```
+
+### Viewing the IFC file
+
+- **BIMvision** (free, Windows): https://bimvision.eu/
+- **BlenderBIM** (free, cross-platform): https://blenderbim.org/
+- **Open IFC Viewer** (web): https://openifcviewer.com/
+
+## IFC-to-Markdown Converter
+
+### Quick Start
+
+#### 1. Export IFC from BIM Tool
 
 From Revit, ArchiCAD, or other BIM software:
 - Export to IFC 4.0 format
@@ -34,7 +72,7 @@ From Revit, ArchiCAD, or other BIM software:
 - Include quantity sets (Qtos)
 - Include material information
 
-### 2. Convert IFC to Markdown
+#### 2. Convert IFC to Markdown
 
 ```bash
 # Convert all walls, slabs, windows, doors
@@ -50,7 +88,7 @@ python ifc-to-markdown.py building.ifc --output ../docs/elements/
 python ifc-to-markdown.py building.ifc -e IfcWall -e IfcSlab
 ```
 
-### 3. Review Generated Markdown
+#### 3. Review Generated Markdown
 
 Generated files will be in `./output/` (or specified directory):
 
@@ -73,7 +111,7 @@ Each markdown file includes:
 - ✅ Material layers
 - ✅ Compliance checklist placeholders
 
-### 4. Edit and Version Control
+#### 4. Edit and Version Control
 
 ```bash
 # Review changes
@@ -225,7 +263,6 @@ python ifc-to-markdown.py building.ifc \
 
 ### 🚧 Coming Soon
 
-- Markdown → IFC property updates
 - Custom property set creation
 - Compliance auto-verification
 - Change detection and merging

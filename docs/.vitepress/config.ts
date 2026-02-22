@@ -147,7 +147,8 @@ export default defineConfig({
                 { text: 'Governance', link: '/en/project-management/governance' },
                 { text: 'Document Control', link: '/en/project-management/document-control' },
                 { text: 'Change Management', link: '/en/project-management/change-management' },
-                { text: 'Risk Management', link: '/en/project-management/risk-management' }
+                { text: 'Risk Management', link: '/en/project-management/risk-management' },
+                { text: 'Data Governance', link: '/en/project-management/data-governance' }
               ]
             }
           ],
@@ -410,7 +411,8 @@ export default defineConfig({
                 { text: 'Nadzór i organizacja', link: '/pl/zarzadzanie-projektem/zarzadzanie' },
                 { text: 'Kontrola dokumentów', link: '/pl/zarzadzanie-projektem/kontrola-dokumentow' },
                 { text: 'Zarządzanie zmianami', link: '/pl/zarzadzanie-projektem/zarzadzanie-zmianami' },
-                { text: 'Zarządzanie ryzykiem', link: '/pl/zarzadzanie-projektem/zarzadzanie-ryzykiem' }
+                { text: 'Zarządzanie ryzykiem', link: '/pl/zarzadzanie-projektem/zarzadzanie-ryzykiem' },
+                { text: 'Zarządzanie danymi', link: '/pl/zarzadzanie-projektem/zarzadzanie-danymi' }
               ]
             }
           ],

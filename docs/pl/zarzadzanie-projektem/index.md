@@ -7,7 +7,7 @@ description: Przegląd procesów zarządzania projektem architektonicznym — na
 
 Projekt architektoniczny to wielomiesięczny proces angażujący dziesiątki specjalistów, setki dokumentów i ciągłe zmiany wynikające z decyzji inwestora, warunków terenowych czy aktualizacji przepisów. Bez spójnego systemu zarządzania nawet dobrze zaprojektowany budynek traci jakość na etapie koordynacji i realizacji.
 
-Ta sekcja opisuje cztery filary zarządzania projektem architektonicznym w standardzie SP-BLD:
+Ta sekcja opisuje pięć filarów zarządzania projektem architektonicznym w standardzie SP-BLD:
 
 | Filar | Opis | Podstrona |
 |---|---|---|
@@ -15,6 +15,7 @@ Ta sekcja opisuje cztery filary zarządzania projektem architektonicznym w stand
 | **Kontrola dokumentów** | Struktura folderów, nazewnictwo, rewizje, statusy | [Kontrola dokumentów](./kontrola-dokumentow) |
 | **Zarządzanie zmianami** | Wnioski o zmianę, analiza wpływu, zatwierdzanie | [Zarządzanie zmianami](./zarzadzanie-zmianami) |
 | **Zarządzanie ryzykiem** | Rejestr ryzyk, macierz oceny, strategie łagodzenia | [Zarządzanie ryzykiem](./zarzadzanie-ryzykiem) |
+| **Zarządzanie danymi** | Przechwytywanie danych, potok przetwarzania, identyfikowalność źródeł, poziomy pewności | [Zarządzanie danymi](./zarzadzanie-danymi) |
 
 ## Dlaczego zarządzanie projektem jest niezbędne?
 
@@ -29,7 +30,7 @@ Projekty architektoniczne różnią się od wielu innych przedsięwzięć inżyn
 Brak spójnego systemu zarządzania projektem prowadzi do typowych problemów: praca na nieaktualnych wersjach dokumentów, niezarejestrowane decyzje podważane na budowie, ryzyka identyfikowane dopiero po wystąpieniu szkody, niekontrolowane zmiany rozsadzające budżet i harmonogram.
 :::
 
-## Cztery filary w praktyce
+## Pięć filarów w praktyce
 
 Filary zarządzania projektem nie działają niezależnie --- wzajemnie się uzupełniają:
 
@@ -37,6 +38,7 @@ Filary zarządzania projektem nie działają niezależnie --- wzajemnie się uzu
 2. **Kontrola dokumentów** zapewnia, że wszyscy pracują na aktualnych i poprawnie oznaczonych wersjach.
 3. **Zarządzanie zmianami** gwarantuje, że każda modyfikacja projektu jest świadomą decyzją z przeanalizowanym wpływem.
 4. **Zarządzanie ryzykiem** pozwala wyprzedzać problemy zamiast gasić pożary.
+5. **Zarządzanie danymi** definiuje, jak surowe dane (e-maile, PDF-y, audio, zdjęcia) trafiają do systemu i pozostają identyfikowalne.
 
 Każdy z tych filarów jest zintegrowany z [7 typami dokumentów](/pl/szablony/) standardu SP-BLD (Budynek, Kondygnacja, Strefa, Pomieszczenie, Instalacja, Urządzenie, Wymaganie) oraz z [procesami jakości](/pl/jakosc/).
 

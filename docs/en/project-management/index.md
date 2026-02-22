@@ -17,6 +17,7 @@ This section provides the frameworks and templates you need to keep your project
 | [Document Control](./document-control) | Folder structure, file naming, version tracking, approval gates |
 | [Change Management](./change-management) | Change requests, impact analysis, approval workflows |
 | [Risk Management](./risk-management) | Risk registers, assessment matrices, mitigation strategies |
+| [Data Governance](./data-governance) | Raw data capture, processing pipeline, source traceability, confidence levels |
 
 ## Why Structured PM Matters for This Standard
 
@@ -44,6 +45,7 @@ Not every PM activity runs at the same intensity throughout the project. The tab
 | Document control | Medium | Medium | High | High | High | High | High | Medium |
 | Change management | Low | Low | Medium | High | High | High | Medium | Low |
 | Risk management | High | High | Medium | Medium | Medium | High | Low | Low |
+| Data governance | High | Medium | Medium | Medium | Medium | High | High | Medium |
 | Quality gates | -- | High | High | High | High | High | High | High |
 
 ::: info
@@ -59,7 +61,8 @@ If you are setting up a new project, follow this sequence:
 3. **Set up the folder structure and naming conventions** -- Before anyone creates a document, agree on how files are organised. See [Document Control](./document-control).
 4. **Establish the change request process** -- Agree on how changes will be proposed, reviewed, and approved. See [Change Management](./change-management).
 5. **Populate the initial risk register** -- Capture known risks from the brief, site, and regulatory context. See [Risk Management](./risk-management).
-6. **Align with BIM processes** -- If the project uses BIM, coordinate document control with the [BIM Execution Plan](/en/bim-integration/bep) and the [Common Data Environment](/en/bim-integration/cde).
+6. **Set up the raw data folder structure** -- Define how incoming data (emails, PDFs, audio, photos) will be captured and filed. See [Data Governance](./data-governance).
+7. **Align with BIM processes** -- If the project uses BIM, coordinate document control with the [BIM Execution Plan](/en/bim-integration/bep) and the [Common Data Environment](/en/bim-integration/cde).
 
 ::: warning
 Do not skip the setup steps during Initiation. Retrofitting governance and document control mid-project is far more expensive than establishing it at the start.
