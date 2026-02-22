@@ -176,7 +176,51 @@ git tag -a v2.3 -m "BIM model v2.3 documentation"
 
 ---
 
-## Workflow 2: Markdown → BIM *(Future)*
+## Workflow 2: SBM → IFC (Generate)
+
+Generate a valid IFC4 file from compiled SBM JSON data. This allows visualization of SBM spatial data in any IFC viewer (BIMvision, BlenderBIM, openifcviewer.com).
+
+### Step 1: Compile SBM Data
+
+Ensure your SBM data includes geometry information for spaces:
+
+```json
+{
+  "geometry": {
+    "outline": [[0, 0], [4.03, 0], [4.03, 3.60], [0, 3.60]],
+    "elevation": 0.0
+  }
+}
+```
+
+### Step 2: Generate IFC
+
+```bash
+python bim-sync/sbm-to-ifc.py \
+  --input build/green-terrace/sbm.json \
+  --output build/green-terrace/green-terrace.ifc
+```
+
+### Step 3: View Result
+
+Open the generated `.ifc` file in:
+- **BIMvision** (free, Windows): https://bimvision.eu/
+- **BlenderBIM** (free, cross-platform): https://blenderbim.org/
+- **Open IFC Viewer** (web): https://openifcviewer.com/
+
+**Generated elements:**
+- IfcSpace with polygon geometry (rooms)
+- IfcWall (interior 0.12m, exterior 0.20m, auto-detected)
+- IfcSlab (floor slab)
+- IfcDoor + IfcOpeningElement (from adjacency data)
+- IfcZone (space groupings)
+- Property sets (Pset_SBM_Space, Pset_SBM_Zone)
+
+Without `geometry.outline` data, spaces fall back to simple bounding boxes derived from `designArea`.
+
+---
+
+## Workflow 3: Markdown → BIM *(Future)*
 
 Update BIM model properties from markdown specifications.
 

@@ -265,7 +265,15 @@ export default defineConfig({
                     { text: 'Corridor', link: '/en/examples/green-terrace/spaces/corridor' },
                     { text: 'Fire Zone ZL-IV', link: '/en/examples/green-terrace/zones/fire-zone-zl-iv' },
                     { text: 'HVAC Zone North', link: '/en/examples/green-terrace/zones/hvac-zone-north' },
-                    { text: 'Acoustic Zone Night', link: '/en/examples/green-terrace/zones/acoustic-zone-night' }
+                    { text: 'Acoustic Zone Night', link: '/en/examples/green-terrace/zones/acoustic-zone-night' },
+                    { text: 'Acoustic Zone Type', link: '/en/examples/green-terrace/zone-types/acoustic-zone-night' },
+                    { text: 'Fire Zone Type ZL-IV', link: '/en/examples/green-terrace/zone-types/fire-zone-zl-iv' },
+                    { text: 'HVAC Zone Type', link: '/en/examples/green-terrace/zone-types/hvac-zone-residential' },
+                    { text: 'HVAC System Type (MVHR)', link: '/en/examples/green-terrace/system-types/hvac-residential-mvhr' },
+                    { text: 'HVAC System Instance', link: '/en/examples/green-terrace/systems/sys-hvac-01' },
+                    { text: 'Heat Pump (Asset Type)', link: '/en/examples/green-terrace/asset-types/bosch-heat-pump-7000i' },
+                    { text: 'Heat Pump HP-01 (Asset)', link: '/en/examples/green-terrace/assets/ai-hp-01' },
+                    { text: 'Level 01', link: '/en/examples/green-terrace/levels/level-01' }
                   ]
                 }
               ]
@@ -529,7 +537,15 @@ export default defineConfig({
                     { text: 'Korytarz', link: '/pl/przyklady/zielony-taras/przestrzenie/korytarz' },
                     { text: 'Strefa Pożarowa ZL-IV', link: '/pl/przyklady/zielony-taras/strefy/strefa-pozarowa-zl-iv' },
                     { text: 'Strefa HVAC Północ', link: '/pl/przyklady/zielony-taras/strefy/strefa-hvac-polnoc' },
-                    { text: 'Strefa Akustyczna Noc', link: '/pl/przyklady/zielony-taras/strefy/strefa-akustyczna-noc' }
+                    { text: 'Strefa Akustyczna Noc', link: '/pl/przyklady/zielony-taras/strefy/strefa-akustyczna-noc' },
+                    { text: 'Typ Strefy Akustycznej', link: '/pl/przyklady/zielony-taras/typy-stref/strefa-akustyczna-noc' },
+                    { text: 'Typ Strefy Pożarowej ZL-IV', link: '/pl/przyklady/zielony-taras/typy-stref/strefa-pozarowa-zl-iv' },
+                    { text: 'Typ Strefy HVAC', link: '/pl/przyklady/zielony-taras/typy-stref/strefa-hvac-mieszkalna' },
+                    { text: 'Typ Systemu HVAC (MVHR)', link: '/pl/przyklady/zielony-taras/typy-systemow/hvac-mieszkalny-mvhr' },
+                    { text: 'Instancja Systemu HVAC', link: '/pl/przyklady/zielony-taras/systemy/sys-hvac-01' },
+                    { text: 'Pompa Ciepła (Typ Zasobu)', link: '/pl/przyklady/zielony-taras/typy-zasobow/pompa-ciepla-bosch-7000i' },
+                    { text: 'Pompa Ciepła HP-01 (Zasób)', link: '/pl/przyklady/zielony-taras/zasoby/ai-hp-01' },
+                    { text: 'Poziom 01', link: '/pl/przyklady/zielony-taras/poziomy/poziom-01' }
                   ]
                 }
               ]

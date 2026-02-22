@@ -101,6 +101,31 @@ python bim-sync/markdown-to-ifc.py wall-type-a.md
 - Aktualizacja specyfikacji materiałowych
 - Dodawanie danych zgodności z przepisami
 
+### SBM → IFC (Generowanie)
+
+Generowanie prawidłowego pliku IFC4 ze skompilowanych danych SBM JSON, możliwego do otwarcia w dowolnej przeglądarce IFC:
+
+```bash
+# Wygeneruj IFC z danych SBM
+python bim-sync/sbm-to-ifc.py \
+  --input build/green-terrace/sbm.json \
+  --output build/green-terrace/green-terrace.ifc
+```
+
+**Co generuje:**
+- Hierarchia przestrzenna: IfcProject → IfcSite → IfcBuilding → IfcBuildingStorey
+- IfcSpace z geometrią wielokąta (z danych `geometry.outline`)
+- IfcWall wzdłuż granic pomieszczeń (ściany wewnętrzne/zewnętrzne wykrywane automatycznie)
+- IfcSlab — płyta podłogowa pokrywająca obrys kondygnacji
+- IfcDoor + IfcOpeningElement dla połączeń między przestrzeniami
+- IfcZone grupujące przestrzenie, zestawy właściwości (Pset_SBM_Space, Pset_SBM_Zone)
+
+**Przypadki użycia:**
+- Wizualizacja danych przestrzennych SBM w 3D
+- Walidacja układów pomieszczeń i sąsiedztw
+- Generowanie IFC do koordynacji z narzędziami BIM
+- Szybkie prototypowanie przed szczegółowym modelowaniem BIM
+
 ---
 
 ## Wsparcie Obiektów IFC

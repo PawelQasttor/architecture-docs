@@ -97,6 +97,31 @@ python bim-sync/markdown-to-ifc.py wall-type-a.md
 - Sync material specifications
 - Update compliance data
 
+### SBM → IFC (Generate)
+
+Generate a valid IFC4 file from compiled SBM JSON data, viewable in any IFC viewer:
+
+```bash
+# Generate IFC from SBM data
+python bim-sync/sbm-to-ifc.py \
+  --input build/green-terrace/sbm.json \
+  --output build/green-terrace/green-terrace.ifc
+```
+
+**What it generates:**
+- Spatial hierarchy: IfcProject → IfcSite → IfcBuilding → IfcBuildingStorey
+- IfcSpace with polygon-extruded geometry (from `geometry.outline` data)
+- IfcWall elements along room boundaries (interior/exterior auto-detected)
+- IfcSlab floor element covering the storey footprint
+- IfcDoor + IfcOpeningElement for connections between spaces
+- IfcZone grouping spaces, property sets (Pset_SBM_Space, Pset_SBM_Zone)
+
+**Use cases:**
+- Visualize SBM spatial data in 3D
+- Validate room layouts and adjacencies
+- Generate IFC for coordination with BIM tools
+- Quick prototyping before detailed BIM modeling
+
 ## IFC Entity Support
 
 The standard includes comprehensive documentation for common IFC entities:

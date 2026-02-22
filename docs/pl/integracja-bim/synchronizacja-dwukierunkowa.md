@@ -176,9 +176,53 @@ git tag -a v2.3 -m "Dokumentacja modelu BIM v2.3"
 
 ---
 
-## Przebieg 2: Markdown -> BIM *(Przyszla wersja)*
+## Przebieg 2: SBM → IFC (Generowanie)
 
-Aktualizacja wlasciwosci modelu BIM na podstawie specyfikacji markdown.
+Generowanie prawidłowego pliku IFC4 ze skompilowanych danych SBM JSON. Umożliwia wizualizację danych przestrzennych SBM w dowolnej przeglądarce IFC (BIMvision, BlenderBIM, openifcviewer.com).
+
+### Krok 1: Kompilacja danych SBM
+
+Upewnij się, że dane SBM zawierają informacje o geometrii przestrzeni:
+
+```json
+{
+  "geometry": {
+    "outline": [[0, 0], [4.03, 0], [4.03, 3.60], [0, 3.60]],
+    "elevation": 0.0
+  }
+}
+```
+
+### Krok 2: Generowanie IFC
+
+```bash
+python bim-sync/sbm-to-ifc.py \
+  --input build/green-terrace/sbm.json \
+  --output build/green-terrace/green-terrace.ifc
+```
+
+### Krok 3: Podgląd wyniku
+
+Otwórz wygenerowany plik `.ifc` w:
+- **BIMvision** (darmowy, Windows): https://bimvision.eu/
+- **BlenderBIM** (darmowy, wieloplatformowy): https://blenderbim.org/
+- **Open IFC Viewer** (przeglądarka): https://openifcviewer.com/
+
+**Wygenerowane elementy:**
+- IfcSpace z geometrią wielokąta (pomieszczenia)
+- IfcWall (ściany wewnętrzne 0,12m, zewnętrzne 0,20m, wykrywane automatycznie)
+- IfcSlab (płyta podłogowa)
+- IfcDoor + IfcOpeningElement (z danych sąsiedztwa)
+- IfcZone (grupowanie przestrzeni)
+- Zestawy właściwości (Pset_SBM_Space, Pset_SBM_Zone)
+
+Bez danych `geometry.outline` przestrzenie są generowane jako proste prostopadłościany na podstawie `designArea`.
+
+---
+
+## Przebieg 3: Markdown → BIM *(Przyszła wersja)*
+
+Aktualizacja właściwości modelu BIM na podstawie specyfikacji markdown.
 
 ### Koncepcja
 
