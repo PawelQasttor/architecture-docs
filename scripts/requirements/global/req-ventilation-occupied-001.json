@@ -1,0 +1,67 @@
+{
+  "id": "REQ-VENTILATION-OCCUPIED-001",
+  "entityType": "requirement",
+  "requirementName": "Minimum ventilation rate for occupied spaces",
+  "requirementType": "performance",
+  "countryScope": "global",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["sleeping_space", "bedroom", "living_space", "living_room", "office", "classroom", "meeting_room"]
+  },
+
+  "metric": "fresh_air_rate_per_person",
+  "operator": ">=",
+  "value": 30,
+  "unit": "m3/h/person",
+  "tolerance": 2,
+
+  "verification": {
+    "method": "calculation",
+    "tool": "HVAC design calculations or CO2 monitoring",
+    "standard": "EN_16798-1",
+    "phase": ["design_development", "operation"],
+    "frequency": "design_once_operation_continuous",
+    "responsible": "hvac_engineer"
+  },
+
+  "technicalBasis": [
+    {
+      "standard": "EN_16798-1:2019",
+      "section": "6.3.2",
+      "description": "Ventilation for buildings - Indoor environmental parameters for design - Ventilation rates"
+    },
+    {
+      "standard": "ASHRAE_62.1",
+      "section": "6.2",
+      "description": "Ventilation for Acceptable Indoor Air Quality - Residential spaces"
+    },
+    {
+      "standard": "WHO_IAQ_Guidelines",
+      "section": "Ventilation",
+      "description": "WHO guidelines for indoor air quality"
+    }
+  ],
+
+  "alternativeMetrics": [
+    {
+      "metric": "co2_concentration",
+      "operator": "<=",
+      "value": 1000,
+      "unit": "ppm",
+      "description": "Alternative metric: CO2 level as proxy for ventilation adequacy"
+    },
+    {
+      "metric": "air_change_rate",
+      "operator": ">=",
+      "value": 0.5,
+      "unit": "ACH",
+      "description": "Minimum air changes per hour for residential spaces"
+    }
+  ],
+
+  "rationale": "Adequate ventilation (30 m³/h per person) ensures good indoor air quality by diluting pollutants and maintaining CO2 levels below 1000 ppm. This corresponds to EN 16798-1 Category II (medium level of expectation).",
+
+  "version": "1.0.0",
+  "tags": ["ventilation", "air_quality", "performance", "global"]
+}

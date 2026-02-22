@@ -1,0 +1,50 @@
+{
+  "id": "REQ-DAYLIGHT-SLEEPING-001",
+  "entityType": "requirement",
+  "requirementName": "Minimum daylight factor for sleeping spaces",
+  "requirementType": "performance",
+  "countryScope": "global",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["sleeping_space", "bedroom"]
+  },
+
+  "metric": "daylight_factor",
+  "operator": ">=",
+  "value": 2.0,
+  "unit": "%",
+  "tolerance": 0.1,
+
+  "verification": {
+    "method": "simulation",
+    "tool": "DIVA, Ladybug, Radiance, or equivalent",
+    "standard": "EN_17037",
+    "phase": ["schematic", "design_development"],
+    "frequency": "once",
+    "responsible": "lighting_designer"
+  },
+
+  "technicalBasis": [
+    {
+      "standard": "EN_17037:2018",
+      "section": "5.2",
+      "description": "Daylight in Buildings - Minimum target illuminance for bedrooms"
+    },
+    {
+      "standard": "BREEAM_International",
+      "section": "Hea 01",
+      "description": "Visual comfort - Daylighting"
+    },
+    {
+      "standard": "WELL_v2",
+      "section": "L03",
+      "description": "Circadian lighting design - Daylight exposure"
+    }
+  ],
+
+  "rationale": "Adequate natural daylight in sleeping spaces supports circadian rhythm regulation, improves sleep quality, and enhances occupant wellbeing. A minimum daylight factor of 2% ensures sufficient natural light during daytime hours.",
+
+  "version": "1.0.0",
+  "tags": ["daylight", "performance", "wellbeing", "global"]
+}

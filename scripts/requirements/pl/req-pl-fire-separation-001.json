@@ -1,0 +1,93 @@
+{
+  "id": "REQ-PL-FIRE-SEPARATION-001",
+  "entityType": "requirement",
+  "requirementName": "Fire separation for zone ZL-IV per WT 2021",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "zone",
+    "zoneTypes": ["fire"]
+  },
+
+  "metric": "fire_resistance_rating",
+  "operator": ">=",
+  "value": "REI_60",
+  "unit": "minutes",
+
+  "verification": {
+    "method": "certification",
+    "tool": "Fire resistance certificates for walls and doors",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction"],
+    "frequency": "once_per_element_type",
+    "responsible": "fire_safety_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 234",
+      "article": "ust. 1",
+      "description": "Oddzielenie przeciwpożarowe stref pożarowych",
+      "fullText": "Strefy pożarowe w budynkach o wysokości > 12 m powinny być oddzielone ścianami i stropami o klasie odporności ogniowej REI 60.",
+      "effectiveDate": "2021-09-20"
+    },
+    {
+      "regulation": "WT_2021",
+      "section": "§ 235",
+      "article": "ust. 2",
+      "description": "Odporność ogniowa drzwi",
+      "fullText": "Drzwi w ścianach oddzielenia przeciwpożarowego powinny mieć klasę odporności ogniowej EI 30."
+    },
+    {
+      "regulation": "Prawo_budowlane",
+      "section": "Art. 5",
+      "article": "ust. 1 pkt 4",
+      "description": "Bezpieczeństwo pożarowe",
+      "fullText": "Obiekt budowlany powinien być zaprojektowany i wykonany w sposób zapewniający bezpieczeństwo pożarowe."
+    }
+  ],
+
+  "technicalBasis": [
+    {
+      "standard": "PN-EN_13501-2",
+      "section": "Fire classification",
+      "description": "Fire classification of construction products and building elements - Part 2: Classification using data from fire resistance tests"
+    },
+    {
+      "standard": "PN-EN_1991-1-2",
+      "section": "Eurocode 1",
+      "description": "Actions on structures exposed to fire"
+    }
+  ],
+
+  "componentRequirements": {
+    "walls": {
+      "rating": "REI 60",
+      "description": "Ściany oddzielenia przeciwpożarowego - odporność ogniowa, integralność, izolacyjność przez 60 minut"
+    },
+    "floors": {
+      "rating": "REI 60",
+      "description": "Stropy oddzielenia przeciwpożarowego - odporność ogniowa, integralność, izolacyjność przez 60 minut"
+    },
+    "doors": {
+      "rating": "EI 30",
+      "description": "Drzwi w ścianach oddzielenia - integralność i izolacyjność przez 30 minut",
+      "additionalRequirements": ["self_closing", "smoke_seals"]
+    }
+  },
+
+  "zoneClassification": {
+    "ZL-I": "High fire load (> 2000 MJ/m²) - commercial, industrial",
+    "ZL-II": "Medium-high fire load (1000-2000 MJ/m²)",
+    "ZL-III": "Medium fire load (500-1000 MJ/m²)",
+    "ZL-IV": "Low fire load (< 500 MJ/m²) - residential",
+    "ZL-V": "Very low fire load (< 100 MJ/m²) - non-combustible"
+  },
+
+  "rationale": "Kategoria ZL-IV (niskie obciążenie ogniowe) jest typowa dla budynków mieszkalnych. Oddzielenie przeciwpożarowe REI 60 zapewnia wystarczający czas na bezpieczną ewakuację mieszkańców zgodnie z wymaganiami WT 2021 § 234.",
+
+  "version": "1.0.0",
+  "tags": ["fire_safety", "poland", "wt_2021", "zl-iv", "regulatory"]
+}

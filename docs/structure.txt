@@ -1,0 +1,1969 @@
+Below is a JSON process map with:
+
+scope_type: "global" vs "poland_specific" (Poland-only steps are typically regulatory, permitting, mandated formats, official registers, and legally required roles/approvals)
+
+each process split into micro-steps with inputs, outputs, roles, systems, and dependencies
+
+“missing candidates” are naturally the ones you don’t already have in your structure (e.g., change control, QA gates, as-builts, FM handover, BIM execution plan, risk register, document control)
+
+{
+  "meta": {
+    "version": "1.0",
+    "domain": "architecture_research_and_delivery_process_map",
+    "granularity": "micro",
+    "classification_rule": {
+      "global": "Process is generally the same regardless of country laws (methods, design logic, coordination, QA, information management).",
+      "poland_specific": "Process depends on Polish law, Polish administrative bodies, Polish mandatory documents, or Polish required roles/procedures."
+    }
+  },
+  "core_controls": {
+    "governance": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "GOV-001",
+          "name": "Project kickoff and governance setup",
+          "steps": [
+            {
+              "id": "GOV-001-01",
+              "name": "Define project objectives and success metrics",
+              "inputs": ["client_brief"],
+              "outputs": ["success_metrics", "objectives_statement"],
+              "roles": ["client", "lead_architect", "project_manager"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "GOV-001-02",
+              "name": "Define roles and responsibilities (RACI)",
+              "inputs": ["stakeholder_list"],
+              "outputs": ["raci_matrix"],
+              "roles": ["project_manager"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "GOV-001-03",
+              "name": "Create project communication plan",
+              "inputs": ["stakeholder_list"],
+              "outputs": ["comms_plan"],
+              "roles": ["project_manager"],
+              "systems": ["email", "chat", "calendar"]
+            },
+            {
+              "id": "GOV-001-04",
+              "name": "Set decision log and meeting cadence",
+              "inputs": ["comms_plan"],
+              "outputs": ["decision_log", "meeting_schedule"],
+              "roles": ["project_manager"],
+              "systems": ["docs_repository", "calendar"]
+            }
+          ]
+        },
+        {
+          "id": "GOV-002",
+          "name": "Document control and information management",
+          "steps": [
+            {
+              "id": "GOV-002-01",
+              "name": "Create folder structure and naming conventions",
+              "inputs": ["project_code", "org_standards"],
+              "outputs": ["folder_structure", "naming_standard"],
+              "roles": ["bim_manager", "project_manager"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "GOV-002-02",
+              "name": "Define revisioning rules (WIP/Shared/Published/Archived)",
+              "inputs": ["org_standards"],
+              "outputs": ["revisioning_policy"],
+              "roles": ["bim_manager"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "GOV-002-03",
+              "name": "Define approval gates and sign-off workflow",
+              "inputs": ["raci_matrix"],
+              "outputs": ["approval_workflow"],
+              "roles": ["lead_architect", "project_manager"],
+              "systems": ["dms", "ticketing"]
+            },
+            {
+              "id": "GOV-002-04",
+              "name": "Set audit trail rules (who/what/when/why)",
+              "inputs": ["approval_workflow"],
+              "outputs": ["audit_policy"],
+              "roles": ["project_manager"],
+              "systems": ["dms"]
+            }
+          ]
+        },
+        {
+          "id": "GOV-003",
+          "name": "Change control (scope, design, budget, schedule)",
+          "steps": [
+            {
+              "id": "GOV-003-01",
+              "name": "Define change request template",
+              "inputs": ["org_standards"],
+              "outputs": ["change_request_template"],
+              "roles": ["project_manager"],
+              "systems": ["ticketing", "docs_repository"]
+            },
+            {
+              "id": "GOV-003-02",
+              "name": "Log change request",
+              "inputs": ["change_request"],
+              "outputs": ["change_log_entry"],
+              "roles": ["project_manager"],
+              "systems": ["ticketing"]
+            },
+            {
+              "id": "GOV-003-03",
+              "name": "Impact analysis (cost/time/risk/permits)",
+              "inputs": ["change_log_entry", "current_design"],
+              "outputs": ["impact_report"],
+              "roles": ["lead_architect", "cost_consultant", "engineers"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "GOV-003-04",
+              "name": "Approve/reject change and update baselines",
+              "inputs": ["impact_report"],
+              "outputs": ["approved_change", "updated_baselines"],
+              "roles": ["client", "project_manager"],
+              "systems": ["ticketing", "dms"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "phase_0_pre_design_research": {
+    "site_and_context": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "RES-001",
+          "name": "Collect site data",
+          "steps": [
+            {
+              "id": "RES-001-01",
+              "name": "Acquire base map / site boundaries",
+              "inputs": ["site_identifier"],
+              "outputs": ["site_boundary_data"],
+              "roles": ["surveyor", "architect"],
+              "systems": ["gis", "dms"]
+            },
+            {
+              "id": "RES-001-02",
+              "name": "Photographic and video site survey",
+              "inputs": ["site_access"],
+              "outputs": ["site_photo_set", "site_video_set"],
+              "roles": ["architect"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "RES-001-03",
+              "name": "Topography and levels capture",
+              "inputs": ["site_access"],
+              "outputs": ["topography_model", "spot_levels"],
+              "roles": ["surveyor"],
+              "systems": ["cad", "bim", "dms"]
+            },
+            {
+              "id": "RES-001-04",
+              "name": "Existing utilities and connections inventory",
+              "inputs": ["utility_info_requests"],
+              "outputs": ["utilities_inventory"],
+              "roles": ["engineers", "architect"],
+              "systems": ["dms", "email"]
+            }
+          ]
+        },
+        {
+          "id": "RES-002",
+          "name": "Climate, sun, wind, noise, and environment analysis",
+          "steps": [
+            {
+              "id": "RES-002-01",
+              "name": "Sun path and overshadowing analysis",
+              "inputs": ["site_boundary_data", "context_mass_model"],
+              "outputs": ["sun_study_report"],
+              "roles": ["architect"],
+              "systems": ["bim", "simulation_tools"]
+            },
+            {
+              "id": "RES-002-02",
+              "name": "Wind exposure and comfort assessment (high-level)",
+              "inputs": ["context_data"],
+              "outputs": ["wind_notes"],
+              "roles": ["architect", "consultant_optional"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "RES-002-03",
+              "name": "Noise sources and sensitive receptors mapping",
+              "inputs": ["site_visit_notes", "traffic_data_optional"],
+              "outputs": ["noise_map", "mitigation_notes"],
+              "roles": ["architect", "acoustic_consultant_optional"],
+              "systems": ["gis", "docs_repository"]
+            },
+            {
+              "id": "RES-002-04",
+              "name": "Ground and soil risks (high-level geotechnical screening)",
+              "inputs": ["historic_maps_optional", "known_risks"],
+              "outputs": ["geo_risk_notes"],
+              "roles": ["architect", "geotechnical_consultant_optional"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        },
+        {
+          "id": "RES-003",
+          "name": "Stakeholder and operational needs discovery",
+          "steps": [
+            {
+              "id": "RES-003-01",
+              "name": "Identify user groups and personas",
+              "inputs": ["client_inputs"],
+              "outputs": ["user_personas"],
+              "roles": ["architect", "client"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "RES-003-02",
+              "name": "Interview stakeholders (structured questionnaire)",
+              "inputs": ["user_personas", "questionnaire_template"],
+              "outputs": ["interview_notes"],
+              "roles": ["architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "RES-003-03",
+              "name": "Translate needs into functional program (room list + adjacencies)",
+              "inputs": ["interview_notes"],
+              "outputs": ["functional_program", "adjacency_diagram"],
+              "roles": ["architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "RES-003-04",
+              "name": "Define operational constraints (hours, flows, security, maintenance)",
+              "inputs": ["functional_program"],
+              "outputs": ["operational_constraints"],
+              "roles": ["architect", "facility_manager_optional"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        }
+      ]
+    },
+    "poland_regulatory_inputs": {
+      "scope_type": "poland_specific",
+      "processes": [
+        {
+          "id": "PL-RES-001",
+          "name": "Planning and zoning verification (MPZP / WZ)",
+          "steps": [
+            {
+              "id": "PL-RES-001-01",
+              "name": "Check if MPZP applies to the plot",
+              "inputs": ["plot_id"],
+              "outputs": ["mpzp_status"],
+              "roles": ["architect", "planning_specialist_optional"],
+              "systems": ["municipality_portals", "dms"]
+            },
+            {
+              "id": "PL-RES-001-02",
+              "name": "Extract MPZP requirements into constraints list",
+              "inputs": ["mpzp_document"],
+              "outputs": ["planning_constraints"],
+              "roles": ["architect"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "PL-RES-001-03",
+              "name": "If no MPZP: initiate WZ decision path (if applicable)",
+              "inputs": ["plot_id", "concept_intent"],
+              "outputs": ["wz_application_package_draft"],
+              "roles": ["architect", "client"],
+              "systems": ["dms"]
+            }
+          ]
+        },
+        {
+          "id": "PL-RES-002",
+          "name": "Collect Polish formal maps and registers (as applicable)",
+          "steps": [
+            {
+              "id": "PL-RES-002-01",
+              "name": "Obtain map for design purposes (mapa do celów projektowych)",
+              "inputs": ["plot_id"],
+              "outputs": ["mdcp_map"],
+              "roles": ["surveyor", "architect"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "PL-RES-002-02",
+              "name": "Verify land and mortgage register / plot legal status (KW)",
+              "inputs": ["plot_id_optional"],
+              "outputs": ["legal_status_notes"],
+              "roles": ["client", "legal_optional", "architect_optional"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "PL-RES-002-03",
+              "name": "Check conservation/heritage constraints (if applicable)",
+              "inputs": ["plot_location"],
+              "outputs": ["heritage_constraints_notes"],
+              "roles": ["architect"],
+              "systems": ["dms"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "phase_1_concept_design": {
+    "concept": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "CON-001",
+          "name": "Concept options generation",
+          "steps": [
+            {
+              "id": "CON-001-01",
+              "name": "Create massing options",
+              "inputs": ["planning_constraints", "site_boundary_data", "functional_program"],
+              "outputs": ["massing_options"],
+              "roles": ["architect"],
+              "systems": ["bim", "cad"]
+            },
+            {
+              "id": "CON-001-02",
+              "name": "Validate options against key constraints",
+              "inputs": ["massing_options", "operational_constraints"],
+              "outputs": ["options_validation_matrix"],
+              "roles": ["architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "CON-001-03",
+              "name": "Select preferred option with client",
+              "inputs": ["options_validation_matrix"],
+              "outputs": ["preferred_option_decision"],
+              "roles": ["client", "architect"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        },
+        {
+          "id": "CON-002",
+          "name": "Concept-level coordination",
+          "steps": [
+            {
+              "id": "CON-002-01",
+              "name": "Early structural feasibility check",
+              "inputs": ["preferred_option_model"],
+              "outputs": ["structural_notes"],
+              "roles": ["structural_engineer"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "CON-002-02",
+              "name": "Early MEP feasibility check",
+              "inputs": ["preferred_option_model"],
+              "outputs": ["mep_notes"],
+              "roles": ["mep_engineers"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "CON-002-03",
+              "name": "Fire strategy outline (high-level)",
+              "inputs": ["preferred_option_model", "occupancy_assumptions"],
+              "outputs": ["fire_strategy_outline"],
+              "roles": ["fire_consultant_optional", "architect"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        }
+      ]
+    },
+    "poland_compliance_checks": {
+      "scope_type": "poland_specific",
+      "processes": [
+        {
+          "id": "PL-CON-001",
+          "name": "Initial compliance pass vs Polish technical requirements (WT) and Building Law flow",
+          "steps": [
+            {
+              "id": "PL-CON-001-01",
+              "name": "Translate WT constraints into checklist (project-specific)",
+              "inputs": ["building_type", "concept_parameters"],
+              "outputs": ["wt_checklist"],
+              "roles": ["architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "PL-CON-001-02",
+              "name": "Run early checks: distances, daylighting, fire separations (as relevant)",
+              "inputs": ["preferred_option_model", "wt_checklist"],
+              "outputs": ["early_compliance_notes"],
+              "roles": ["architect", "consultants_optional"],
+              "systems": ["bim", "docs_repository"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "phase_2_design_development": {
+    "design_development": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "DD-001",
+          "name": "Develop coordinated design",
+          "steps": [
+            {
+              "id": "DD-001-01",
+              "name": "Refine plans/sections/elevations",
+              "inputs": ["preferred_option_model", "early_compliance_notes"],
+              "outputs": ["dd_drawings_set"],
+              "roles": ["architect"],
+              "systems": ["bim", "cad"]
+            },
+            {
+              "id": "DD-001-02",
+              "name": "Update coordinated BIM model",
+              "inputs": ["dd_drawings_set"],
+              "outputs": ["dd_bim_model"],
+              "roles": ["architect", "bim_manager"],
+              "systems": ["bim", "cde"]
+            },
+            {
+              "id": "DD-001-03",
+              "name": "Clash detection and issue tracking",
+              "inputs": ["dd_bim_model", "discipline_models"],
+              "outputs": ["clash_report", "issue_log"],
+              "roles": ["bim_manager", "discipline_leads"],
+              "systems": ["bim_coordination", "ticketing"]
+            },
+            {
+              "id": "DD-001-04",
+              "name": "Resolve issues and re-run coordination",
+              "inputs": ["issue_log"],
+              "outputs": ["resolved_issue_log", "updated_models"],
+              "roles": ["architect", "engineers"],
+              "systems": ["ticketing", "bim"]
+            }
+          ]
+        },
+        {
+          "id": "DD-002",
+          "name": "Specifications and materials strategy",
+          "steps": [
+            {
+              "id": "DD-002-01",
+              "name": "Define material palette and performance targets",
+              "inputs": ["client_preferences", "operational_constraints"],
+              "outputs": ["materials_schedule_draft"],
+              "roles": ["architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "DD-002-02",
+              "name": "Draft outline specification",
+              "inputs": ["materials_schedule_draft"],
+              "outputs": ["outline_spec"],
+              "roles": ["architect", "spec_writer_optional"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        },
+        {
+          "id": "DD-003",
+          "name": "Cost and value engineering loop",
+          "steps": [
+            {
+              "id": "DD-003-01",
+              "name": "Prepare quantities (high-level)",
+              "inputs": ["dd_bim_model"],
+              "outputs": ["qty_estimate"],
+              "roles": ["cost_consultant", "architect"],
+              "systems": ["bim", "cost_tool"]
+            },
+            {
+              "id": "DD-003-02",
+              "name": "Compare to budget and identify deltas",
+              "inputs": ["qty_estimate", "budget"],
+              "outputs": ["cost_variance_report"],
+              "roles": ["cost_consultant", "client", "architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "DD-003-03",
+              "name": "Propose alternatives and approve changes",
+              "inputs": ["cost_variance_report"],
+              "outputs": ["ve_options", "approved_ve_changes"],
+              "roles": ["architect", "client", "engineers"],
+              "systems": ["docs_repository", "ticketing"]
+            }
+          ]
+        }
+      ]
+    },
+    "poland_formal_design_outputs": {
+      "scope_type": "poland_specific",
+      "processes": [
+        {
+          "id": "PL-DD-001",
+          "name": "Prepare documentation package aligned to Polish permitting expectations (as applicable)",
+          "steps": [
+            {
+              "id": "PL-DD-001-01",
+              "name": "Identify required formal attachments and statements",
+              "inputs": ["project_type", "authority_path"],
+              "outputs": ["permit_attachment_list"],
+              "roles": ["architect", "legal_optional"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "PL-DD-001-02",
+              "name": "Collect required signatures/authorizations (role-dependent)",
+              "inputs": ["permit_attachment_list"],
+              "outputs": ["signed_documents_set"],
+              "roles": ["authorized_designers", "client"],
+              "systems": ["dms", "esign_optional"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "phase_3_technical_design_and_construction_docs": {
+    "technical_docs": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "TD-001",
+          "name": "Produce construction drawings",
+          "steps": [
+            {
+              "id": "TD-001-01",
+              "name": "Detail key assemblies (envelope, structure interfaces, wet areas)",
+              "inputs": ["dd_bim_model", "outline_spec"],
+              "outputs": ["detail_drawings"],
+              "roles": ["architect"],
+              "systems": ["bim", "cad"]
+            },
+            {
+              "id": "TD-001-02",
+              "name": "Finalize schedules (doors, finishes, equipment)",
+              "inputs": ["dd_bim_model"],
+              "outputs": ["final_schedules"],
+              "roles": ["architect"],
+              "systems": ["bim", "docs_repository"]
+            },
+            {
+              "id": "TD-001-03",
+              "name": "Issue for internal QA review",
+              "inputs": ["drawing_package_draft"],
+              "outputs": ["qa_review_request"],
+              "roles": ["project_manager"],
+              "systems": ["ticketing", "dms"]
+            },
+            {
+              "id": "TD-001-04",
+              "name": "QA checks (coordination, dimensions, consistency, references)",
+              "inputs": ["drawing_package_draft", "qa_checklist"],
+              "outputs": ["qa_issues_list"],
+              "roles": ["qa_reviewer", "lead_architect"],
+              "systems": ["ticketing"]
+            },
+            {
+              "id": "TD-001-05",
+              "name": "Resolve QA issues and freeze revision",
+              "inputs": ["qa_issues_list"],
+              "outputs": ["issued_drawing_package_revision"],
+              "roles": ["architect"],
+              "systems": ["dms"]
+            }
+          ]
+        },
+        {
+          "id": "TD-002",
+          "name": "Tender support (if applicable)",
+          "steps": [
+            {
+              "id": "TD-002-01",
+              "name": "Answer bidder RFIs",
+              "inputs": ["rfi_questions"],
+              "outputs": ["rfi_responses"],
+              "roles": ["architect", "engineers"],
+              "systems": ["ticketing", "email"]
+            },
+            {
+              "id": "TD-002-02",
+              "name": "Issue addenda / revisions",
+              "inputs": ["rfi_responses", "change_requests"],
+              "outputs": ["tender_addenda"],
+              "roles": ["project_manager", "architect"],
+              "systems": ["dms"]
+            }
+          ]
+        }
+      ]
+    },
+    "poland_permitting": {
+      "scope_type": "poland_specific",
+      "processes": [
+        {
+          "id": "PL-TD-001",
+          "name": "Permitting path execution (building permit / notification / other as applicable)",
+          "steps": [
+            {
+              "id": "PL-TD-001-01",
+              "name": "Select legal pathway and required forms (authority-specific)",
+              "inputs": ["project_parameters", "planning_constraints"],
+              "outputs": ["permitting_path_selection"],
+              "roles": ["architect", "client", "legal_optional"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "PL-TD-001-02",
+              "name": "Prepare final permit submission package",
+              "inputs": ["issued_drawing_package_revision", "signed_documents_set"],
+              "outputs": ["permit_submission_package"],
+              "roles": ["architect"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "PL-TD-001-03",
+              "name": "Submit to authority and track status",
+              "inputs": ["permit_submission_package"],
+              "outputs": ["submission_confirmation", "status_log"],
+              "roles": ["client", "architect_optional"],
+              "systems": ["authority_portal_optional", "docs_repository"]
+            },
+            {
+              "id": "PL-TD-001-04",
+              "name": "Respond to authority comments / requests for supplementation",
+              "inputs": ["authority_feedback"],
+              "outputs": ["supplement_package", "updated_status_log"],
+              "roles": ["architect", "engineers_optional"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "PL-TD-001-05",
+              "name": "Receive decision and archive legally relevant artifacts",
+              "inputs": ["authority_decision"],
+              "outputs": ["permit_decision_archived", "permit_conditions_list"],
+              "roles": ["client", "architect"],
+              "systems": ["dms"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "phase_4_construction_and_site_support": {
+    "construction_support": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "CS-001",
+          "name": "Site queries and submittals",
+          "steps": [
+            {
+              "id": "CS-001-01",
+              "name": "Log site RFI",
+              "inputs": ["contractor_question"],
+              "outputs": ["rfi_ticket"],
+              "roles": ["contractor", "project_manager"],
+              "systems": ["ticketing"]
+            },
+            {
+              "id": "CS-001-02",
+              "name": "Analyze and coordinate response",
+              "inputs": ["rfi_ticket", "contract_docs"],
+              "outputs": ["draft_response"],
+              "roles": ["architect", "engineers"],
+              "systems": ["ticketing", "dms"]
+            },
+            {
+              "id": "CS-001-03",
+              "name": "Issue response and update documents if needed",
+              "inputs": ["draft_response"],
+              "outputs": ["issued_response", "revision_if_needed"],
+              "roles": ["lead_architect"],
+              "systems": ["dms", "ticketing"]
+            }
+          ]
+        },
+        {
+          "id": "CS-002",
+          "name": "Site inspections and nonconformance handling",
+          "steps": [
+            {
+              "id": "CS-002-01",
+              "name": "Plan inspection schedule",
+              "inputs": ["construction_program"],
+              "outputs": ["inspection_schedule"],
+              "roles": ["architect", "contract_administrator_optional"],
+              "systems": ["calendar"]
+            },
+            {
+              "id": "CS-002-02",
+              "name": "Perform inspection and capture evidence",
+              "inputs": ["site_access"],
+              "outputs": ["inspection_report", "photo_evidence"],
+              "roles": ["architect"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "CS-002-03",
+              "name": "Log nonconformance (NCR) if found",
+              "inputs": ["inspection_report"],
+              "outputs": ["ncr_ticket_optional"],
+              "roles": ["architect", "contractor"],
+              "systems": ["ticketing"]
+            },
+            {
+              "id": "CS-002-04",
+              "name": "Verify corrective action closure",
+              "inputs": ["ncr_ticket_optional"],
+              "outputs": ["ncr_closed_optional"],
+              "roles": ["architect"],
+              "systems": ["ticketing"]
+            }
+          ]
+        }
+      ]
+    },
+    "poland_construction_formalities": {
+      "scope_type": "poland_specific",
+      "processes": [
+        {
+          "id": "PL-CS-001",
+          "name": "Polish formal roles and site documentation (as applicable)",
+          "steps": [
+            {
+              "id": "PL-CS-001-01",
+              "name": "Align with legally required site roles (role-dependent)",
+              "inputs": ["permit_conditions_list"],
+              "outputs": ["site_roles_alignment_notes"],
+              "roles": ["client", "architect_optional"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "PL-CS-001-02",
+              "name": "Support required official records and sign-offs (if required)",
+              "inputs": ["site_events", "inspection_reports"],
+              "outputs": ["formal_records_updates_optional"],
+              "roles": ["authorized_roles"],
+              "systems": ["dms"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "phase_5_handover_and_lifecycle": {
+    "handover": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "HO-001",
+          "name": "As-built and O&M handover",
+          "steps": [
+            {
+              "id": "HO-001-01",
+              "name": "Collect as-built markups from contractors",
+              "inputs": ["contractor_asbuilt_inputs"],
+              "outputs": ["asbuilt_markups"],
+              "roles": ["contractor", "architect_optional"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "HO-001-02",
+              "name": "Update record drawings / as-built model",
+              "inputs": ["asbuilt_markups"],
+              "outputs": ["record_drawings", "asbuilt_model_optional"],
+              "roles": ["architect", "bim_manager"],
+              "systems": ["bim", "cad"]
+            },
+            {
+              "id": "HO-001-03",
+              "name": "Compile O&M manuals and asset register",
+              "inputs": ["supplier_docs", "equipment_schedules"],
+              "outputs": ["om_manuals", "asset_register"],
+              "roles": ["contractor", "facility_manager_optional"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "HO-001-04",
+              "name": "Handover training session",
+              "inputs": ["om_manuals"],
+              "outputs": ["training_record"],
+              "roles": ["contractor", "facility_manager"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        },
+        {
+          "id": "HO-002",
+          "name": "Post-occupancy evaluation (POE)",
+          "steps": [
+            {
+              "id": "HO-002-01",
+              "name": "Define POE metrics (comfort, energy, usability)",
+              "inputs": ["success_metrics"],
+              "outputs": ["poe_plan"],
+              "roles": ["architect", "client"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "HO-002-02",
+              "name": "Collect feedback and performance data",
+              "inputs": ["poe_plan"],
+              "outputs": ["poe_dataset"],
+              "roles": ["facility_manager", "architect_optional"],
+              "systems": ["forms", "bms_optional"]
+            },
+            {
+              "id": "HO-002-03",
+              "name": "Create lessons learned and update standards",
+              "inputs": ["poe_dataset"],
+              "outputs": ["lessons_learned", "updated_templates"],
+              "roles": ["architect", "org_quality_lead"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        }
+      ]
+    },
+    "poland_completion": {
+      "scope_type": "poland_specific",
+      "processes": [
+        {
+          "id": "PL-HO-001",
+          "name": "Polish completion and occupancy procedures (as applicable)",
+          "steps": [
+            {
+              "id": "PL-HO-001-01",
+              "name": "Identify required completion notifications/approvals",
+              "inputs": ["permit_decision_archived", "permit_conditions_list"],
+              "outputs": ["completion_requirements_list"],
+              "roles": ["client", "architect_optional"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "PL-HO-001-02",
+              "name": "Prepare required completion package",
+              "inputs": ["record_drawings", "inspection_reports", "completion_requirements_list"],
+              "outputs": ["completion_submission_package"],
+              "roles": ["client", "authorized_roles_optional"],
+              "systems": ["dms"]
+            },
+            {
+              "id": "PL-HO-001-03",
+              "name": "Submit and archive confirmations/decisions",
+              "inputs": ["completion_submission_package"],
+              "outputs": ["occupancy_confirmation_archived_optional"],
+              "roles": ["client"],
+              "systems": ["dms"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "cross_cutting_quality_and_risk": {
+    "qa": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "QA-001",
+          "name": "QA checklists and gate reviews",
+          "steps": [
+            {
+              "id": "QA-001-01",
+              "name": "Create phase-specific QA checklists",
+              "inputs": ["org_standards", "project_type"],
+              "outputs": ["qa_checklists"],
+              "roles": ["qa_reviewer", "lead_architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "QA-001-02",
+              "name": "Run gate review (Concept/DD/TD/Issue)",
+              "inputs": ["deliverables", "qa_checklists"],
+              "outputs": ["gate_review_report"],
+              "roles": ["qa_reviewer"],
+              "systems": ["ticketing", "dms"]
+            },
+            {
+              "id": "QA-001-03",
+              "name": "Track and close QA actions",
+              "inputs": ["gate_review_report"],
+              "outputs": ["qa_actions_closed"],
+              "roles": ["architect", "engineers"],
+              "systems": ["ticketing"]
+            }
+          ]
+        }
+      ]
+    },
+    "risk": {
+      "scope_type": "global",
+      "processes": [
+        {
+          "id": "RISK-001",
+          "name": "Risk management loop",
+          "steps": [
+            {
+              "id": "RISK-001-01",
+              "name": "Create risk register",
+              "inputs": ["project_parameters"],
+              "outputs": ["risk_register"],
+              "roles": ["project_manager", "lead_architect"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "RISK-001-02",
+              "name": "Assess risk likelihood/impact",
+              "inputs": ["risk_register"],
+              "outputs": ["risk_scores"],
+              "roles": ["project_team"],
+              "systems": ["docs_repository"]
+            },
+            {
+              "id": "RISK-001-03",
+              "name": "Assign mitigation actions and owners",
+              "inputs": ["risk_scores"],
+              "outputs": ["mitigation_plan"],
+              "roles": ["project_manager"],
+              "systems": ["ticketing"]
+            },
+            {
+              "id": "RISK-001-04",
+              "name": "Review risks periodically",
+              "inputs": ["mitigation_plan"],
+              "outputs": ["risk_register_updated"],
+              "roles": ["project_manager"],
+              "systems": ["docs_repository"]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "likely_missing_areas_to_check_in_your_structure": [
+    {
+      "name": "Change control (formal CR workflow)",
+      "scope_type": "global",
+      "why_it_matters": "Without it, scope creep and permit-impact changes become untraceable."
+    },
+    {
+      "name": "Document control with audit trail + revision states (WIP/Shared/Published)",
+      "scope_type": "global",
+      "why_it_matters": "Architectural projects fail on version confusion more often than on design."
+    },
+    {
+      "name": "QA gate reviews with checklists per phase",
+      "scope_type": "global",
+      "why_it_matters": "Reduces downstream RFIs, rework, and liability."
+    },
+    {
+      "name": "Risk register loop (including permit/authority risk)",
+      "scope_type": "global",
+      "why_it_matters": "Makes unknowns explicit and manageable."
+    },
+    {
+      "name": "Handover + asset register + POE feedback into standards",
+      "scope_type": "global",
+      "why_it_matters": "Completes lifecycle and enables ‘building history’/maintenance vision."
+    },
+    {
+      "name": "Poland: MPZP/WZ pathway explicitly modeled",
+      "scope_type": "poland_specific",
+      "why_it_matters": "This drives feasibility and timeline in Poland."
+    },
+    {
+      "name": "Poland: formal completion/occupancy procedures modeled separately",
+      "scope_type": "poland_specific",
+      "why_it_matters": "Often forgotten until the end; causes delays and stress."
+    }
+  ]
+}
+
+If you paste your current research structure (even rough bullets), I’ll:
+
+mark exactly what’s missing vs this reference,
+
+keep your naming, and
+
+output a cleaned diff-style JSON (your structure + missing nodes inserted, with scope_type flags).
+
+anything else that is missing? you can add it separatly as json just inform where it should be in the structure
+
+Yes — the previous structure already covers the core architectural workflow, but if your goal is a true lifecycle digital-twin / AI-processable architecture dataset, there are still several important domains typically missing from traditional architectural breakdowns.
+
+These are things architects do indirectly or consultants handle — but if you’re building a unified structured knowledge model (which I suspect you are), they must exist as explicit processes.
+
+Below are additional JSON blocks you should insert into the structure.
+Each block includes "insert_after" so you know exactly where in your hierarchy it belongs.
+
+1) BIM EXECUTION & DATA STANDARDS (CRITICAL — usually missing)
+
+Architectural workflows normally list drawings, not information management.
+But modern projects run on structured data exchange — without this you cannot automate.
+
+Add after: core_controls/governance
+
+{
+  "insert_after": "core_controls/governance",
+  "block": {
+    "name": "bim_and_information_management",
+    "scope_type": "global",
+    "processes": [
+      {
+        "id": "BIM-001",
+        "name": "BIM Execution Plan (BEP) definition",
+        "steps": [
+          {
+            "id": "BIM-001-01",
+            "name": "Define model uses (design, coordination, quantities, FM)",
+            "outputs": ["model_uses_definition"]
+          },
+          {
+            "id": "BIM-001-02",
+            "name": "Define LOD/LOI requirements per phase",
+            "outputs": ["lod_matrix"]
+          },
+          {
+            "id": "BIM-001-03",
+            "name": "Define naming and classification system",
+            "outputs": ["classification_standard"]
+          },
+          {
+            "id": "BIM-001-04",
+            "name": "Define data exchange formats (IFC, COBie, PDFs)",
+            "outputs": ["exchange_protocol"]
+          }
+        ]
+      },
+      {
+        "id": "BIM-002",
+        "name": "Common Data Environment setup",
+        "steps": [
+          {
+            "id": "BIM-002-01",
+            "name": "Create WIP/Shared/Published/Archive areas"
+          },
+          {
+            "id": "BIM-002-02",
+            "name": "Define transmittal procedure"
+          },
+          {
+            "id": "BIM-002-03",
+            "name": "Define issue tracking workflow"
+          }
+        ]
+      }
+    ]
+  }
+}
+2) SUSTAINABILITY / ENERGY / LIFE-CYCLE CARBON
+
+This is not just energy cert — it’s now part of EU taxonomy and future permits.
+
+Insert after: phase_0_pre_design_research/site_and_context
+
+{
+  "insert_after": "phase_0_pre_design_research/site_and_context",
+  "block": {
+    "name": "environmental_and_sustainability_analysis",
+    "scope_type": "global",
+    "processes": [
+      {
+        "id": "ENV-001",
+        "name": "Operational energy modeling",
+        "steps": [
+          {"id": "ENV-001-01", "name": "Define occupancy profiles"},
+          {"id": "ENV-001-02", "name": "Create thermal zoning"},
+          {"id": "ENV-001-03", "name": "Run energy simulation"},
+          {"id": "ENV-001-04", "name": "Optimize envelope and systems"}
+        ]
+      },
+      {
+        "id": "ENV-002",
+        "name": "Embodied carbon assessment",
+        "steps": [
+          {"id": "ENV-002-01", "name": "Extract material quantities from BIM"},
+          {"id": "ENV-002-02", "name": "Apply EPD datasets"},
+          {"id": "ENV-002-03", "name": "Calculate CO2 footprint"},
+          {"id": "ENV-002-04", "name": "Propose reduction strategies"}
+        ]
+      },
+      {
+        "id": "ENV-003",
+        "name": "Water management and runoff analysis",
+        "steps": [
+          {"id": "ENV-003-01", "name": "Impervious area calculation"},
+          {"id": "ENV-003-02", "name": "Retention requirement analysis"},
+          {"id": "ENV-003-03", "name": "Stormwater mitigation strategy"}
+        ]
+      }
+    ]
+  }
+}
+3) HEALTH, WELLBEING & HUMAN FACTORS (very often ignored but legally relevant indirectly)
+
+Lighting and radiation belong here conceptually.
+
+Insert after: phase_1_concept_design/concept
+
+{
+  "insert_after": "phase_1_concept_design/concept",
+  "block": {
+    "name": "human_health_and_comfort",
+    "scope_type": "global",
+    "processes": [
+      {
+        "id": "HLT-001",
+        "name": "Daylight autonomy and glare analysis",
+        "steps": [
+          {"id": "HLT-001-01", "name": "Simulate daylight levels"},
+          {"id": "HLT-001-02", "name": "Evaluate glare probability"},
+          {"id": "HLT-001-03", "name": "Adjust openings and shading"}
+        ]
+      },
+      {
+        "id": "HLT-002",
+        "name": "Indoor environmental quality",
+        "steps": [
+          {"id": "HLT-002-01", "name": "Ventilation rate validation"},
+          {"id": "HLT-002-02", "name": "Thermal comfort simulation"},
+          {"id": "HLT-002-03", "name": "Material emission selection"}
+        ]
+      },
+      {
+        "id": "HLT-003",
+        "name": "Electromagnetic and radiation exposure review",
+        "steps": [
+          {"id": "HLT-003-01", "name": "Identify EMF sources"},
+          {"id": "HLT-003-02", "name": "Evaluate exposure zones"},
+          {"id": "HLT-003-03", "name": "Mitigation layout planning"}
+        ]
+      }
+    ]
+  }
+}
+4) PROCUREMENT & CONTRACT STRATEGY (often forgotten but affects design!)
+
+Insert after: phase_2_design_development/design_development
+
+{
+  "insert_after": "phase_2_design_development/design_development",
+  "block": {
+    "name": "procurement_strategy",
+    "scope_type": "global",
+    "processes": [
+      {
+        "id": "PRC-001",
+        "name": "Select delivery model",
+        "steps": [
+          {"id": "PRC-001-01", "name": "Compare DBB / Design-Build / EPC"},
+          {"id": "PRC-001-02", "name": "Assess risk distribution"},
+          {"id": "PRC-001-03", "name": "Define contract structure"}
+        ]
+      },
+      {
+        "id": "PRC-002",
+        "name": "Tender evaluation",
+        "steps": [
+          {"id": "PRC-002-01", "name": "Technical compliance review"},
+          {"id": "PRC-002-02", "name": "Price normalization"},
+          {"id": "PRC-002-03", "name": "Clarification interviews"}
+        ]
+      }
+    ]
+  }
+}
+5) DIGITAL BUILDING / SMART BUILDING / BMS / IOT (very important for future maintenance)
+
+Insert after: phase_4_construction_and_site_support
+
+{
+  "insert_after": "phase_4_construction_and_site_support",
+  "block": {
+    "name": "digital_building_and_iot",
+    "scope_type": "global",
+    "processes": [
+      {
+        "id": "IOT-001",
+        "name": "Sensor strategy definition",
+        "steps": [
+          {"id": "IOT-001-01", "name": "Define measurable KPIs"},
+          {"id": "IOT-001-02", "name": "Place sensors in BIM"},
+          {"id": "IOT-001-03", "name": "Define data retention policy"}
+        ]
+      },
+      {
+        "id": "IOT-002",
+        "name": "BMS integration",
+        "steps": [
+          {"id": "IOT-002-01", "name": "Define communication protocols"},
+          {"id": "IOT-002-02", "name": "Create asset IDs mapping"},
+          {"id": "IOT-002-03", "name": "Link BIM to facility systems"}
+        ]
+      }
+    ]
+  }
+}
+6) BUILDING HISTORY & CONTINUOUS OPERATION (TRUE LIFECYCLE — MOST IMPORTANT FOR AI)
+
+Insert after: phase_5_handover_and_lifecycle
+
+{
+  "insert_after": "phase_5_handover_and_lifecycle",
+  "block": {
+    "name": "building_operational_lifecycle",
+    "scope_type": "global",
+    "processes": [
+      {
+        "id": "OPS-001",
+        "name": "Maintenance planning",
+        "steps": [
+          {"id": "OPS-001-01", "name": "Create maintenance schedule per asset"},
+          {"id": "OPS-001-02", "name": "Assign responsibility matrix"},
+          {"id": "OPS-001-03", "name": "Define inspection intervals"}
+        ]
+      },
+      {
+        "id": "OPS-002",
+        "name": "Operational incident tracking",
+        "steps": [
+          {"id": "OPS-002-01", "name": "Log faults"},
+          {"id": "OPS-002-02", "name": "Analyze root causes"},
+          {"id": "OPS-002-03", "name": "Update building knowledge base"}
+        ]
+      },
+      {
+        "id": "OPS-003",
+        "name": "Renovation and retrofit decision loop",
+        "steps": [
+          {"id": "OPS-003-01", "name": "Performance monitoring"},
+          {"id": "OPS-003-02", "name": "Upgrade feasibility analysis"},
+          {"id": "OPS-003-03", "name": "Trigger redesign cycle"}
+        ]
+      }
+    ]
+  }
+}
+What you now have (conceptually)
+
+You now cover the full real building lifecycle:
+
+Governance
+
+Research
+
+Concept
+
+Design
+
+Permits
+
+Construction
+
+Handover
+
+Operation
+
+Renovation (loops back to concept)
+
+Most architectural frameworks stop at step 6–7.
+
+Your structure now becomes:
+
+Not a project documentation structure → but a building knowledge system
+
+If you want, next I can:
+
+convert all blocks into one merged JSON schema
+
+or design a database schema (Postgres) matching it for your AI ingestion system (this is usually the real next step)
+
+if we build a new documentation standard, purely based on text + json or other machine format what is the best way to make it usable for bim and digital twins, to save work instead of add more and to sustain single source of truth?
+
+Great question — and this is exactly the point where most “digitalization of architecture” initiatives fail.
+
+They try to replace drawings with data.
+But BIM never worked that way.
+
+The winning approach is:
+
+Don’t replace BIM with text/JSON.
+Make text/JSON the authoritative semantic layer that generates and controls BIM.
+
+So the goal is NOT:
+
+JSON documentation
+
+The goal is:
+
+A structured knowledge graph that drives models, drawings, schedules, FM and digital twin from one source.
+
+Below is the architecture that actually works in practice.
+
+1. The Core Principle — Split Geometry From Meaning
+
+A building contains two fundamentally different types of information:
+
+Type	Example	Changes often?	Needed by
+Geometry	wall thickness, door position	YES	designers, contractors
+Semantics (intent)	this is a fire compartment wall EI60	NO	law, FM, AI, twin
+
+BIM today mixes them → causes chaos.
+
+Instead you build:
+
+SOURCE OF TRUTH = SEMANTIC BUILDING MODEL (SBM)
+BIM = derived view
+Drawings = derived view
+Schedules = derived view
+Digital Twin = live runtime state
+
+So JSON is not a file format.
+
+It becomes the legal meaning layer of the building.
+
+2. The 3-Layer Building Model (this is the key)
+
+You need a stack — not one format.
+
+Layer A — Semantic Building Model (authoritative)
+
+Human + machine readable
+Stable across lifecycle
+
+This replaces “descriptive text in technical description”.
+
+Example:
+
+{
+  "space": "Bedroom_01",
+  "type": "sleeping_space",
+  "required_daylight_factor": 2.0,
+  "occupancy": 2,
+  "acoustic_class": "B",
+  "fire_zone": "ZL_IV",
+  "thermal_setpoint": {
+    "winter": 21,
+    "summer": 24
+  }
+}
+
+Notice:
+No geometry.
+Only rules and meaning.
+
+This survives 80 years of building life.
+
+Layer B — Parametric BIM Layer (generated / synchronized)
+
+Revit/Archicad/IFC model is just a geometric implementation of Layer A.
+
+Instead of editing BIM manually:
+
+SBM → constraint engine → BIM
+
+Example:
+
+room requires daylight ≥2%
+→ window area auto-computed
+→ if geometry changed → validation fails
+
+BIM becomes a compiler target.
+
+Layer C — Runtime Digital Twin Layer (operational state)
+
+Sensors update only the runtime layer:
+
+{
+  "space": "Bedroom_01",
+  "current_temperature": 25.3,
+  "co2": 1400,
+  "comfort_violation": true
+}
+
+Twin does NOT edit BIM.
+Twin validates against SBM.
+
+3. How This Saves Work Instead of Adding Work
+
+The trick:
+Architects already describe buildings in text.
+
+You are not adding work.
+You are structuring the text they already write.
+
+Traditional workflow:
+
+Text description
+→ redraw into BIM
+→ rewrite into permit
+→ rewrite into FM manuals
+→ rewrite into BMS configuration
+
+New workflow:
+
+Write once → structured → auto-propagate everywhere
+4. What Must Be Stored In The Semantic Layer
+
+Not elements.
+Not geometry.
+
+Only intent, performance and relationships.
+
+Correct
+
+function
+
+constraints
+
+performance requirements
+
+ownership
+
+lifecycle responsibility
+
+regulations
+
+classification
+
+allowed operations
+
+Wrong
+
+coordinates
+
+line lengths
+
+mesh
+
+polygons
+
+Geometry is ephemeral.
+
+5. The Real Single Source of Truth
+
+The mistake most BIM standards make:
+They store objects.
+
+You must store rules about objects.
+
+Instead of:
+
+Wall W01 thickness 24cm
+
+Store:
+
+External wall thermal resistance ≥ X
+Fire separation ≥ EI60
+Acoustic ≥ Rw50
+
+Then ANY geometry that satisfies it is valid.
+
+This unlocks:
+
+automatic redesign
+
+regulation validation
+
+generative planning
+
+AI reasoning
+
+renovation safety
+
+6. How Systems Connect
+                ┌──────────────┐
+                │ Semantic Model│
+                │  (JSON/Graph)│
+                └──────┬───────┘
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+   BIM Generator   Regulation AI   FM/Twin Engine
+      (IFC)         (validator)      (runtime)
+        ▼                              ▼
+   Drawings                     Sensors / BMS
+
+Nobody edits BIM directly anymore.
+
+7. Practical Authoring Format (important)
+
+Do NOT make architects edit raw JSON.
+
+They will never adopt it.
+
+Use:
+
+Markdown + structured blocks
+
+Example:
+
+## Room: Bedroom 01
+Function: sleeping
+Occupancy: 2 persons
+
+[performance]
+daylight >= 2%
+acoustic = class B
+temperature = 21-24C
+
+[fire]
+zone = ZL_IV
+evacuation_distance <= 10m
+
+Parser → JSON → graph.
+
+Human friendly
+Machine strict
+
+8. What Makes It Digital Twin Ready
+
+Most digital twins fail because they attach sensors to geometry.
+
+You attach sensors to semantic entities.
+
+Not:
+
+sensor in room_123_ifc_guid
+
+But:
+
+sensor monitors "sleeping_space"
+
+Now renovation, remodeling, IFC change — twin survives.
+
+9. The Missing Piece Everyone Ignores
+
+You must introduce:
+
+A Building Knowledge Compiler
+
+Like TypeScript → JavaScript
+
+You need:
+
+Semantic → validated → compiled → BIM/Docs/FM/Twin
+
+Without compiler:
+It becomes documentation.
+
+With compiler:
+It becomes infrastructure.
+
+10. The Mental Shift
+
+You are not building:
+
+structured documentation
+
+You are building:
+
+a programming language for buildings
+
+BIM then becomes the renderer.
+
+If you want, next step I can design:
+
+the minimal semantic schema (v0.1)
+
+or the compiler pipeline (how it would actually run in practice)
+
+yes please
+
+Perfect — below is a minimal-but-real v0.1 semantic schema plus a compiler pipeline that makes it usable for BIM + digital twins without adding work and with a single source of truth.
+
+No web browsing needed here because this is architecture/design (not “latest facts”).
+
+1) Semantic Building Model v0.1
+Design goals
+
+Architect-editable (via Markdown + blocks, not raw JSON)
+
+Stable across lifecycle (works after remodels)
+
+Compilable into:
+
+BIM properties (Revit/Archicad/IFC property sets)
+
+Drawing schedules (doors, finishes, equipment)
+
+Compliance checks (rules)
+
+FM/twin asset register (IDs, service intervals)
+
+No geometry stored here.
+
+Entity types (minimum set)
+
+Project
+
+Site
+
+Building
+
+Level
+
+Zone (fire zone, acoustic zone, security zone, HVAC zone)
+
+Space (rooms/areas)
+
+System (HVAC, electrical, water, BMS)
+
+AssetType + AssetInstance (boiler model vs specific serial-number device)
+
+Requirement (rules/constraints)
+
+Document (links, decisions, approvals)
+
+Relation (connects everything)
+
+JSON schema (practical, not perfect “JSON Schema spec”)
+
+This is a usable canonical shape:
+
+{
+  "sbm_version": "0.1",
+  "project": {
+    "id": "PRJ-2026-001",
+    "name": "Example Building",
+    "country": "PL",
+    "language": "pl",
+    "units": { "length": "mm", "area": "m2", "temp": "C" }
+  },
+  "taxonomy": {
+    "space_types": ["sleeping_space", "office", "circulation", "wet_room"],
+    "zone_types": ["fire", "acoustic", "security", "hvac"],
+    "asset_categories": ["hvac", "electrical", "plumbing", "safety", "it"]
+  },
+  "entities": {
+    "sites": [
+      { "id": "SITE-01", "name": "Plot A", "location": { "city": "Warsaw" } }
+    ],
+    "buildings": [
+      { "id": "BLD-01", "site_id": "SITE-01", "name": "Building A", "usage": "residential" }
+    ],
+    "levels": [
+      { "id": "LVL-00", "building_id": "BLD-01", "name": "Ground", "order": 0 }
+    ],
+    "zones": [
+      { "id": "ZONE-FIRE-01", "building_id": "BLD-01", "type": "fire", "label": "ZL_IV" }
+    ],
+    "spaces": [
+      {
+        "id": "SP-001",
+        "building_id": "BLD-01",
+        "level_id": "LVL-00",
+        "name": "Bedroom 01",
+        "space_type": "sleeping_space",
+        "zone_ids": ["ZONE-FIRE-01"],
+        "tags": ["private", "heated"],
+        "requirements": ["REQ-DAYLIGHT-001", "REQ-ACOUSTIC-001"]
+      }
+    ],
+    "systems": [
+      { "id": "SYS-HVAC-01", "building_id": "BLD-01", "type": "hvac", "name": "Ventilation" }
+    ],
+    "asset_types": [
+      {
+        "id": "AT-HVAC-AHU-01",
+        "category": "hvac",
+        "name": "Air Handling Unit",
+        "manufacturer_optional": null,
+        "properties_template": {
+          "service_interval_months": 6,
+          "expected_lifetime_years": 15
+        }
+      }
+    ],
+    "asset_instances": [
+      {
+        "id": "AI-AHU-01",
+        "asset_type_id": "AT-HVAC-AHU-01",
+        "system_id": "SYS-HVAC-01",
+        "located_in_space_id": "SP-001",
+        "identifiers": { "serial_optional": null, "tag": "AHU-01" },
+        "requirements": ["REQ-IEQ-CO2-001"]
+      }
+    ],
+    "requirements": [
+      {
+        "id": "REQ-DAYLIGHT-001",
+        "name": "Daylight minimum",
+        "scope": { "entity_type": "space", "space_types": ["sleeping_space"] },
+        "type": "performance",
+        "metric": "daylight_factor_percent",
+        "operator": ">=",
+        "value": 2.0,
+        "country_scope": "global",
+        "verification": { "method": "simulation", "phase": "concept_or_dd" }
+      },
+      {
+        "id": "REQ-ACOUSTIC-001",
+        "name": "Acoustic class",
+        "scope": { "entity_type": "space", "space_types": ["sleeping_space"] },
+        "type": "performance",
+        "metric": "acoustic_class",
+        "operator": "==",
+        "value": "B",
+        "country_scope": "global",
+        "verification": { "method": "consultant_report", "phase": "dd_or_td" }
+      },
+      {
+        "id": "REQ-IEQ-CO2-001",
+        "name": "CO2 upper limit",
+        "scope": { "entity_type": "space", "space_ids": ["SP-001"] },
+        "type": "operational",
+        "metric": "co2_ppm",
+        "operator": "<=",
+        "value": 1000,
+        "country_scope": "global",
+        "verification": { "method": "sensor", "phase": "operation" }
+      }
+    ],
+    "documents": [
+      {
+        "id": "DOC-001",
+        "title": "Client brief",
+        "type": "brief",
+        "links": [{ "label": "pdf", "uri": "dms://project/brief.pdf" }],
+        "applies_to": [{ "entity_type": "project", "id": "PRJ-2026-001" }]
+      }
+    ]
+  }
+}
+Why this works
+
+Spaces and assets are semantic anchors.
+
+Requirements are reusable and can be compiled into checks.
+
+Country specificity is handled in each requirement via:
+
+country_scope: global | poland_specific
+
+2) Authoring method that saves work
+
+You don’t want architects writing the JSON above.
+
+They write Markdown with structured blocks, your system parses it.
+
+Example file: spaces/Bedroom_01.md
+
+# Space: Bedroom 01
+id: SP-001
+building: BLD-01
+level: LVL-00
+type: sleeping_space
+zones: [ZONE-FIRE-01]
+tags: [private, heated]
+
+[requirements]
+- REQ-DAYLIGHT-001
+- REQ-ACOUSTIC-001
+
+Benefits:
+
+looks like normal documentation
+
+strict IDs give you determinism
+
+parser generates the SBM JSON
+
+3) The “Building Knowledge Compiler” pipeline
+Inputs
+
+Markdown documents (human maintained)
+
+Optional: tables (CSV) for bulk space schedules
+
+Optional: BIM exports (IFC/Revit schedule export) as geometry source
+
+Compiler stages
+
+Parse
+
+read Markdown blocks → JSON entities
+
+validate unique IDs and references
+
+Normalize
+
+enforce canonical units
+
+normalize enums (space types etc.)
+
+auto-generate missing stable IDs (if allowed)
+
+Validate
+
+schema validation
+
+referential integrity checks
+
+requirement applicability checks (space types etc.)
+
+Enrich
+
+compute derived info:
+
+space → zones
+
+zone → building
+
+create “compliance checklist” from requirements
+
+attach jurisdiction packages (Poland pack) if project.country=PL
+
+Compile targets
+
+BIM target: generate property sets / schedules mapping
+
+Docs target: generate “technical description” drafts, schedules tables
+
+FM target: asset register, maintenance plan
+
+Twin target: runtime template (sensor bindings)
+
+Diff + Sync
+
+compare current BIM export vs compiled intent
+
+output:
+
+“violations” list
+
+“patch set” suggestions (what changed)
+
+Outputs
+
+sbm.json (single source of truth)
+
+bim_mapping.json
+
+compliance_report.json
+
+asset_register.json
+
+twin_runtime_schema.json
+
+4) How it connects to BIM without extra work
+One-way authority (recommended)
+
+Architects edit SBM docs
+
+BIM is checked against SBM, not the other way
+
+Property mapping (key idea)
+
+You map SBM fields to BIM parameters:
+
+Example mapping:
+
+{
+  "space_mapping": {
+    "sbm_space_id": "Revit.Room.Parameter.SBM_ID",
+    "space_type": "Revit.Room.Parameter.SBM_SPACE_TYPE",
+    "zone_fire": "Revit.Room.Parameter.SBM_FIRE_ZONE"
+  },
+  "asset_mapping": {
+    "asset_instance_id": "Revit.FamilyInstance.Parameter.SBM_ASSET_ID",
+    "service_interval_months": "Revit.FamilyInstance.Parameter.SERVICE_INTERVAL"
+  }
+}
+
+Then:
+
+BIM schedules can be generated from these parameters
+
+IFC exports keep them as property sets
+
+FM gets stable IDs for decades
+
+5) How it becomes digital-twin ready
+
+Twin binds sensors to SBM IDs, not IFC GUIDs.
+
+Your runtime event looks like:
+
+{
+  "timestamp": "2026-02-20T21:30:00+01:00",
+  "entity_ref": { "type": "space", "id": "SP-001" },
+  "metrics": { "co2_ppm": 1400, "temperature_c": 25.3 }
+}
+
+Your engine checks against requirements:
+
+REQ-IEQ-CO2-001 violated → raise ticket, trigger ventilation, log incident.
+
+This survives renovations because the semantic identity remains stable even if geometry changes.
+
+6) Poland-specific vs global — how to handle cleanly
+
+Do not hardcode Poland rules into your main model.
+
+Use “jurisdiction packs”:
+
+requirements/global/*.json
+
+requirements/pl/*.json
+
+Then during compile:
+
+include global always
+
+include PL pack if project.country == "PL"
+
+Each requirement has:
+
+country_scope
+
+legal_basis (optional field you can add later)
+
+verification_method and phase
+
+So your engine can say:
+
+“this is a universal design requirement”
+
+“this is a Polish compliance requirement”
+
+7) What I’d do next (concrete)
+
+If you want the fastest real-world adoption:
+
+Define IDs + minimal entity set (spaces, zones, assets, requirements)
+
+Create Markdown authoring templates
+
+Create compiler validator (even simple Node/Python)
+
+Add BIM mapping for Revit/IFC properties
+
+Add diff report between BIM export and SBM
+
+If you tell me what BIM tooling you target first (Revit? Archicad? IFC-first?), I’ll give you:
+
+the exact folder standard
+
+minimal templates
+
+and a v0.1 “jurisdiction pack” approach that keeps it clean for Poland + other countries later.

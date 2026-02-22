@@ -1,0 +1,191 @@
+% Architecture Documentation Standard - LaTeX Template
+% Professional PDF export for architectural documentation
+% Supports Polish characters (UTF-8)
+
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(papersize)$$papersize$paper,$endif$]{article}
+
+% Packages
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage[normalem]{ulem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{parskip}
+
+% Polish language support
+\usepackage[polish]{babel}
+\usepackage{polski}
+
+% Page geometry
+\geometry{
+  $if(geometry)$
+    $geometry$
+  $else$
+    a4paper,
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm
+  $endif$
+}
+
+% Colors
+\definecolor{archblue}{RGB}{44,90,160}
+\definecolor{archgray}{RGB}{100,100,100}
+\definecolor{lightgray}{RGB}{240,240,240}
+
+% Hyperlinks
+\hypersetup{
+  unicode=true,
+  pdfborder={0 0 0},
+  breaklinks=true,
+  colorlinks=true,
+  linkcolor=archblue,
+  citecolor=archblue,
+  urlcolor=archblue
+}
+
+% Headers and Footers
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\fancyhead[L]{$if(project-name)$$project-name$$else$Architecture Documentation$endif$}
+\fancyhead[R]{$if(document-reference)$$document-reference$$endif$}
+\fancyfoot[L]{$if(author)$$author$$endif$}
+\fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{$if(date)$$date$$else$\today$endif$}
+
+% Title page
+\title{
+  \vspace{-2cm}
+  \Large\textbf{$title$}
+  $if(subtitle)$\\[0.5cm]\large$subtitle$$endif$
+}
+
+$if(author)$
+\author{$author$}
+$endif$
+
+$if(date)$
+\date{$date$}
+$else$
+\date{\today}
+$endif$
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{archblue}}
+  {\thesection}
+  {1em}
+  {}
+  [\titlerule]
+
+\titleformat{\subsection}
+  {\large\bfseries\color{archblue}}
+  {\thesubsection}
+  {1em}
+  {}
+
+% Table formatting
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% Custom commands
+\newcommand{\checkmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+% Code blocks
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{lightgray},
+  columns=fullflexible
+}
+
+% Document metadata box
+\newcommand{\docmetadata}{
+  \noindent\fbox{%
+    \parbox{\textwidth}{%
+      \begin{tabular}{ll}
+        $if(document-type)$\textbf{Document Type:} & $document-type$ \\$endif$
+        $if(document-reference)$\textbf{Reference:} & $document-reference$ \\$endif$
+        $if(version)$\textbf{Version:} & $version$ \\$endif$
+        $if(date)$\textbf{Date:} & $date$ \\$endif$
+        $if(author)$\textbf{Author:} & $author$ \\$endif$
+        $if(project-name)$\textbf{Project:} & $project-name$ \\$endif$
+        $if(bim-lod)$\textbf{BIM LOD:} & $bim-lod$ \\$endif$
+      \end{tabular}%
+    }%
+  }
+  \vspace{1cm}
+}
+
+\begin{document}
+
+% Title page
+$if(title-page)$
+\maketitle
+\thispagestyle{empty}
+
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+\newpage
+$endif$
+
+% Document metadata
+$if(show-metadata)$
+\docmetadata
+$endif$
+
+% Table of contents
+$if(toc)$
+{
+  \setcounter{tocdepth}{$toc-depth$}
+  \tableofcontents
+  \newpage
+}
+$endif$
+
+% Main content
+$body$
+
+% Signature page
+$if(signatures)$
+\newpage
+\section*{Approvals and Signatures}
+
+\vspace{2cm}
+
+\begin{tabular}{p{5cm}p{5cm}p{4cm}}
+  \textbf{Role} & \textbf{Name} & \textbf{Date} \\
+  \hline
+  & & \\[2cm]
+  $for(signatures)$
+  $signatures.role$ & $signatures.name$ & \rule{3cm}{0.4pt} \\[2cm]
+  $endfor$
+\end{tabular}
+$endif$
+
+\end{document}

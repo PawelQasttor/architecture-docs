@@ -1,0 +1,836 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://architecture-docs.example.com/schemas/sbm-v0.1.json",
+  "title": "Semantic Building Model",
+  "description": "Schema for Semantic Building Model v0.1 - defines building entities, relationships, and requirements. Supports type/instance pattern for efficient specification of repeating elements.",
+  "version": "0.1.3",
+
+  "type": "object",
+  "required": ["sbm_version", "project", "entities"],
+  "properties": {
+    "sbm_version": {
+      "type": "string",
+      "const": "0.1",
+      "description": "SBM schema version"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this SBM was generated"
+    },
+    "compiler": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "mode": { "type": "string", "enum": ["development", "production"] }
+      }
+    },
+    "project": {
+      "type": "object",
+      "required": ["id", "name", "country"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^PRJ-[A-Z0-9-]+$",
+          "description": "Project identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Project name"
+        },
+        "country": {
+          "type": "string",
+          "pattern": "^[A-Z]{2}$",
+          "description": "ISO 3166-1 alpha-2 country code"
+        },
+        "language": {
+          "type": "string",
+          "pattern": "^[a-z]{2}$",
+          "description": "ISO 639-1 language code"
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "city": { "type": "string" },
+            "address": { "type": "string" },
+            "coordinates": {
+              "type": "object",
+              "properties": {
+                "lat": { "type": "number" },
+                "lon": { "type": "number" }
+              }
+            }
+          }
+        },
+        "units": {
+          "type": "object",
+          "properties": {
+            "length": { "type": "string", "default": "mm" },
+            "area": { "type": "string", "default": "m2" },
+            "volume": { "type": "string", "default": "m3" },
+            "temperature": { "type": "string", "default": "C" }
+          }
+        }
+      }
+    },
+    "entities": {
+      "type": "object",
+      "properties": {
+        "buildings": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/building" }
+        },
+        "levels": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/level" }
+        },
+        "zone_types": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/zone_type" },
+          "description": "Zone type definitions (templates for zone instances)"
+        },
+        "zones": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/zone" }
+        },
+        "space_types": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/space_type" },
+          "description": "Space type definitions (templates for space instances)"
+        },
+        "spaces": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/space" }
+        },
+        "system_types": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/system_type" },
+          "description": "System type definitions (templates for system instances)"
+        },
+        "systems": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/system" }
+        },
+        "asset_types": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/asset_type" },
+          "description": "Asset type definitions (templates/product specifications)"
+        },
+        "asset_instances": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/asset_instance" }
+        },
+        "requirements": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/requirement" }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "totalEntities": { "type": "integer" },
+        "entitiesByType": { "type": "object" },
+        "complianceStatus": { "type": "object" }
+      }
+    }
+  },
+
+  "definitions": {
+    "building": {
+      "type": "object",
+      "required": ["id", "entityType", "name", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^BLD-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "building" },
+        "name": { "type": "string" },
+        "siteId": { "type": "string" },
+        "usage": { "type": "string" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "level": {
+      "type": "object",
+      "required": ["id", "entityType", "name", "buildingId", "order", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^LVL-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "level" },
+        "name": { "type": "string" },
+        "buildingId": { "type": "string" },
+        "order": { "type": "integer" },
+        "elevation": { "type": "number" },
+        "height": { "type": "number" },
+        "unit": { "type": "string" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+      }
+    },
+
+    "zone_type": {
+      "type": "object",
+      "required": ["id", "entityType", "typeName", "zoneType", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^ZT-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "zone_type" },
+        "typeName": { "type": "string", "description": "Human-readable type name" },
+        "zoneType": {
+          "type": "string",
+          "enum": ["fire", "acoustic", "hvac", "security", "lighting", "thermal", "access_control"]
+        },
+        "description": { "type": "string" },
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Requirements that apply to all instances of this type"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Type-level properties (standard for this zone type)"
+        },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "zone": {
+      "type": "object",
+      "required": ["id", "entityType", "zoneName", "zoneType", "buildingId", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^ZONE-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "zone" },
+        "zoneName": { "type": "string" },
+        "zoneTypeId": {
+          "type": "string",
+          "description": "Optional reference to zone_type for template properties"
+        },
+        "zoneType": {
+          "type": "string",
+          "enum": ["fire", "acoustic", "hvac", "security", "lighting", "thermal", "access_control"]
+        },
+        "buildingId": { "type": "string" },
+        "levelIds": { "type": "array", "items": { "type": "string" } },
+        "spaceIds": { "type": "array", "items": { "type": "string" } },
+        "requirements": { "type": "array", "items": { "type": "string" } },
+        "requirementOverrides": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Additional requirements beyond those from zone type"
+        },
+        "properties": { "type": "object" },
+        "ifcMapping": { "$ref": "#/definitions/ifcMapping" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "space_type": {
+      "type": "object",
+      "required": ["id", "entityType", "typeName", "spaceType", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^ST-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "space_type" },
+        "typeName": {
+          "type": "string",
+          "description": "Human-readable type name (e.g., 'Standard Bedroom - Type A')"
+        },
+        "spaceType": {
+          "type": "string",
+          "enum": [
+            "sleeping_space", "bedroom", "living_space", "living_room", "dining_space",
+            "dining_room", "kitchen", "bathroom", "wet_room", "corridor", "staircase",
+            "storage", "technical", "office", "meeting_room", "open_office", "break_room",
+            "elevator_lobby", "entrance", "classroom", "retail", "healthcare", "assembly"
+          ],
+          "description": "Base functional space category"
+        },
+        "description": { "type": "string" },
+        "accessibilityLevel": {
+          "type": "string",
+          "enum": ["standard", "mobility", "visual", "hearing", "full"],
+          "default": "standard",
+          "description": "Accessibility classification for this space type. Inherited by all instances unless overridden."
+        },
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Requirements that apply to ALL instances of this type"
+        },
+        "finishes": {
+          "type": "object",
+          "properties": {
+            "floor": { "type": "string" },
+            "walls": { "type": "string" },
+            "ceiling": { "type": "string" },
+            "door": { "type": "string" },
+            "window": { "type": "string" }
+          },
+          "description": "Standard finishes for this space type"
+        },
+        "equipment": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string" },
+              "description": { "type": "string" },
+              "specification": { "type": "string" },
+              "quantity": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "description": "Standard equipment list for this type"
+        },
+        "occupancyProfile": {
+          "type": "object",
+          "properties": {
+            "maxOccupants": { "type": "integer", "minimum": 0 },
+            "bedCount": { "type": "integer", "minimum": 0, "description": "Number of beds/sleeping positions (for residential/healthcare spaces)" },
+            "usagePattern": { "type": "string" },
+            "hoursPerDay": { "type": "number", "minimum": 0, "maximum": 24 },
+            "daysPerWeek": { "type": "integer", "minimum": 0, "maximum": 7 }
+          },
+          "description": "Typical occupancy profile for this space type"
+        },
+        "typicalArea": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "number", "minimum": 0 },
+            "max": { "type": "number", "minimum": 0 },
+            "typical": { "type": "number", "minimum": 0 },
+            "unit": { "type": "string", "default": "m2" }
+          },
+          "description": "Area range guidance for this type"
+        },
+        "typicalHeight": {
+          "type": "object",
+          "properties": {
+            "min": { "type": "number", "minimum": 0 },
+            "typical": { "type": "number", "minimum": 0 },
+            "unit": { "type": "string", "default": "m" }
+          },
+          "description": "Height range guidance for this type"
+        },
+        "environmentalConditions": {
+          "type": "object",
+          "properties": {
+            "temperatureRange": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" },
+                "unit": { "type": "string", "default": "C" }
+              }
+            },
+            "humidityRange": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number", "minimum": 0, "maximum": 100 },
+                "max": { "type": "number", "minimum": 0, "maximum": 100 }
+              }
+            },
+            "ventilationRate": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "number", "minimum": 0 },
+                "unit": { "type": "string", "description": "e.g., 'ACH', 'm3/h', 'm3/h/person'" }
+              }
+            },
+            "pressurization": {
+              "type": "string",
+              "enum": ["positive", "negative", "neutral"],
+              "description": "Air pressure relative to adjacent spaces (critical for healthcare/cleanrooms)"
+            },
+            "cleanlinessClass": {
+              "type": "string",
+              "description": "ISO 14644 cleanroom class or equivalent (e.g., 'ISO 7', 'ISO 5')"
+            }
+          },
+          "description": "Environmental conditions template for this space type"
+        },
+        "electricalSafetyGroup": {
+          "type": "string",
+          "enum": ["standard", "group_0", "group_1", "group_2"],
+          "default": "standard",
+          "description": "IEC 60364-7-710 medical electrical safety classification. group_0=no medical equipment, group_1=medical non-life-critical, group_2=life-critical (OR, ICU)"
+        },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "space": {
+      "type": "object",
+      "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^SP-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "space" },
+        "spaceName": { "type": "string" },
+        "spaceTypeId": {
+          "type": "string",
+          "description": "Optional reference to space_type for template properties. If specified, instance inherits requirements, finishes, equipment, and occupancy profile from the type."
+        },
+        "spaceType": {
+          "type": "string",
+          "enum": [
+            "sleeping_space", "bedroom", "living_space", "living_room", "dining_space",
+            "dining_room", "kitchen", "bathroom", "wet_room", "corridor", "staircase",
+            "storage", "technical", "office", "meeting_room", "open_office", "break_room",
+            "elevator_lobby", "entrance", "classroom", "retail", "healthcare", "assembly"
+          ],
+          "description": "Space functional category. Can be inherited from spaceTypeId or specified directly."
+        },
+        "roomNumber": {
+          "type": "string",
+          "description": "Human-readable room number from architectural drawings (e.g., '0.06.1', '2.46'). Distinct from machine-readable id."
+        },
+        "accessibilityLevel": {
+          "type": "string",
+          "enum": ["standard", "mobility", "visual", "hearing", "full"],
+          "default": "standard",
+          "description": "Accessibility classification for this space instance. Overrides space type default if set."
+        },
+        "parentSpaceId": {
+          "type": "string",
+          "description": "Reference to parent space for dependent sub-spaces (e.g., bathroom attached to bedroom). Compiler auto-computes childSpaceIds on parent."
+        },
+        "departmentId": {
+          "type": "string",
+          "description": "Functional department or unit grouping (e.g., 'DEPT-OIOM', 'DEPT-SPA', 'DEPT-ADMIN')."
+        },
+        "buildingId": { "type": "string" },
+        "levelId": { "type": "string" },
+        "zoneIds": { "type": "array", "items": { "type": "string" } },
+        "designArea": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Actual designed area for this instance (overrides or complements type guidance)"
+        },
+        "designHeight": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Actual designed height for this instance"
+        },
+        "designVolume": { "type": "number", "minimum": 0 },
+        "unit": { "type": "string" },
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Requirements for this space. If spaceTypeId is used, these are merged with type requirements."
+        },
+        "requirementOverrides": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Additional requirements beyond those from space type (explicit override list)"
+        },
+        "occupancy": {
+          "type": "object",
+          "properties": {
+            "maxOccupants": { "type": "integer", "minimum": 0 },
+            "bedCount": { "type": "integer", "minimum": 0, "description": "Number of beds/sleeping positions. Distinct from maxOccupants (fire safety capacity)." },
+            "usagePattern": { "type": "string" },
+            "hoursPerDay": { "type": "number", "minimum": 0, "maximum": 24 },
+            "daysPerWeek": { "type": "integer", "minimum": 0, "maximum": 7 }
+          },
+          "description": "Instance-specific occupancy (overrides type if both present)"
+        },
+        "finishOverrides": {
+          "type": "object",
+          "description": "Override specific finishes from space type (e.g., different flooring in one room)"
+        },
+        "environmentalConditions": {
+          "type": "object",
+          "properties": {
+            "temperatureRange": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" },
+                "unit": { "type": "string", "default": "C" }
+              }
+            },
+            "humidityRange": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number", "minimum": 0, "maximum": 100 },
+                "max": { "type": "number", "minimum": 0, "maximum": 100 }
+              }
+            },
+            "ventilationRate": {
+              "type": "object",
+              "properties": {
+                "value": { "type": "number", "minimum": 0 },
+                "unit": { "type": "string" }
+              }
+            },
+            "pressurization": {
+              "type": "string",
+              "enum": ["positive", "negative", "neutral"]
+            },
+            "cleanlinessClass": { "type": "string" }
+          },
+          "description": "Instance-specific environmental conditions (overrides type if present)"
+        },
+        "electricalSafetyGroup": {
+          "type": "string",
+          "enum": ["standard", "group_0", "group_1", "group_2"],
+          "default": "standard",
+          "description": "IEC 60364-7-710 medical electrical safety classification. Overrides type default if set."
+        },
+        "regulatoryReferences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code"],
+            "properties": {
+              "code": { "type": "string", "description": "Regulation/standard code (e.g., 'WT 2021', 'PN-B-02151-3')" },
+              "section": { "type": "string", "description": "Section or paragraph (e.g., '§ 132', 'Table 1')" },
+              "description": { "type": "string", "description": "What this regulation requires for this space" },
+              "status": {
+                "type": "string",
+                "enum": ["applicable", "compliant", "non_compliant", "waiver_granted", "not_applicable"],
+                "description": "Compliance status of this regulation for this space"
+              }
+            }
+          },
+          "description": "Building code and regulatory references applicable to this space"
+        },
+        "lifecycleState": {
+          "type": "string",
+          "enum": ["planned", "design", "under_construction", "operational", "renovation", "decommissioned"],
+          "description": "Current lifecycle phase of this space"
+        },
+        "maintenanceZone": { "type": "string" },
+        "accessRestrictions": { "type": "string" },
+        "adjacentSpaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "relationship"],
+            "properties": {
+              "id": { "type": "string" },
+              "relationship": {
+                "type": "string",
+                "enum": ["shares_wall", "connects_via_door", "above", "below"]
+              }
+            }
+          },
+          "description": "Instance-specific spatial adjacencies"
+        },
+        "ifcMapping": { "$ref": "#/definitions/ifcMapping" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "system_type": {
+      "type": "object",
+      "required": ["id", "entityType", "typeName", "systemCategory", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^SYT-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "system_type" },
+        "typeName": {
+          "type": "string",
+          "description": "Human-readable type name (e.g., 'Standard HVAC System - Residential')"
+        },
+        "systemCategory": {
+          "type": "string",
+          "enum": ["hvac", "electrical", "plumbing", "fire_safety", "security", "communication", "bms", "renewable_energy"]
+        },
+        "description": { "type": "string" },
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Requirements that apply to all instances of this system type"
+        },
+        "typicalPerformance": {
+          "type": "object",
+          "description": "Typical performance characteristics for this system type"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": { "type": "string" },
+              "description": { "type": "string" },
+              "specification": { "type": "string" },
+              "quantity": { "type": "integer" }
+            }
+          },
+          "description": "Standard components for this system type"
+        },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "system": {
+      "type": "object",
+      "required": ["id", "entityType", "systemName", "systemCategory", "buildingId", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^SYS-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "system" },
+        "systemName": { "type": "string" },
+        "systemTypeId": {
+          "type": "string",
+          "description": "Optional reference to system_type for template properties"
+        },
+        "systemType": {
+          "type": "string",
+          "description": "Descriptive system type (can be inherited from systemTypeId)"
+        },
+        "systemCategory": {
+          "type": "string",
+          "enum": ["hvac", "electrical", "plumbing", "fire_safety", "security", "communication", "bms", "renewable_energy"]
+        },
+        "buildingId": { "type": "string" },
+        "servedZoneIds": { "type": "array", "items": { "type": "string" } },
+        "servedSpaceIds": { "type": "array", "items": { "type": "string" } },
+        "assetInstanceIds": { "type": "array", "items": { "type": "string" } },
+        "requirements": { "type": "array", "items": { "type": "string" } },
+        "requirementOverrides": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Additional requirements beyond those from system type"
+        },
+        "performance": {
+          "type": "object",
+          "description": "Instance-specific performance data (overrides type if both present)"
+        },
+        "ifcMapping": { "$ref": "#/definitions/ifcMapping" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "asset_type": {
+      "type": "object",
+      "required": ["id", "entityType", "typeName", "category", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^AT-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "asset_type" },
+        "typeName": {
+          "type": "string",
+          "description": "Product/asset type name (e.g., 'Bosch ABC-123 Heat Pump')"
+        },
+        "category": {
+          "type": "string",
+          "description": "Asset category (e.g., 'hvac', 'electrical', 'plumbing', 'fire_safety')"
+        },
+        "description": { "type": "string" },
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer name"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model number/designation"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Manufacturer product code"
+        },
+        "specifications": {
+          "type": "object",
+          "description": "Technical specifications for this asset type"
+        },
+        "performanceData": {
+          "type": "object",
+          "description": "Performance characteristics (capacity, efficiency, etc.)"
+        },
+        "maintenanceProfile": {
+          "type": "object",
+          "properties": {
+            "serviceIntervalMonths": { "type": "integer", "minimum": 0 },
+            "expectedLifetimeYears": { "type": "integer", "minimum": 0 },
+            "warrantyYears": { "type": "integer", "minimum": 0 },
+            "sparePartsRequired": { "type": "array", "items": { "type": "string" } },
+            "maintenanceProcedures": { "type": "array", "items": { "type": "string" } }
+          },
+          "description": "Standard maintenance profile for this asset type"
+        },
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Requirements for all instances of this asset type"
+        },
+        "cost": {
+          "type": "object",
+          "properties": {
+            "purchasePrice": { "type": "number" },
+            "installationCost": { "type": "number" },
+            "currency": { "type": "string" }
+          }
+        },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "asset_instance": {
+      "type": "object",
+      "required": ["id", "entityType", "assetName", "buildingId", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^AI-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "asset_instance" },
+        "assetName": { "type": "string" },
+        "assetTypeId": {
+          "type": "string",
+          "description": "Reference to asset_type for product specifications and maintenance profile"
+        },
+        "systemId": { "type": "string" },
+        "buildingId": { "type": "string" },
+        "locatedInSpaceId": { "type": "string" },
+        "identifiers": {
+          "type": "object",
+          "properties": {
+            "tag": { "type": "string", "description": "Asset tag (e.g., 'HP-001')" },
+            "serial": { "type": "string", "description": "Serial number" },
+            "barcode": { "type": "string", "description": "QR code or barcode identifier" }
+          },
+          "description": "Instance-specific identifiers"
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Manufacturer (can be inherited from assetTypeId)"
+        },
+        "model": {
+          "type": "string",
+          "description": "Model (can be inherited from assetTypeId)"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product code (can be inherited from assetTypeId)"
+        },
+        "installationData": {
+          "type": "object",
+          "properties": {
+            "installationDate": { "type": "string", "format": "date" },
+            "installedBy": { "type": "string" },
+            "commissioningDate": { "type": "string", "format": "date" }
+          },
+          "description": "Instance-specific installation data"
+        },
+        "maintenanceData": {
+          "type": "object",
+          "properties": {
+            "lastServiceDate": { "type": "string", "format": "date" },
+            "nextServiceDate": { "type": "string", "format": "date" },
+            "serviceIntervalMonths": { "type": "integer", "minimum": 0 },
+            "expectedLifetimeYears": { "type": "integer", "minimum": 0 },
+            "warrantyYears": { "type": "integer", "minimum": 0 },
+            "sparePartsRequired": { "type": "array", "items": { "type": "string" } }
+          },
+          "description": "Instance-specific maintenance data (overrides type if present)"
+        },
+        "requirements": { "type": "array", "items": { "type": "string" } },
+        "ifcMapping": { "$ref": "#/definitions/ifcMapping" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "requirement": {
+      "type": "object",
+      "required": ["id", "entityType", "requirementName", "requirementType", "countryScope", "scope", "metric", "operator", "value", "verification", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^REQ-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "requirement" },
+        "requirementName": { "type": "string" },
+        "requirementType": {
+          "type": "string",
+          "enum": ["performance", "dimensional", "operational", "regulatory", "safety", "functional"]
+        },
+        "countryScope": {
+          "type": "string",
+          "enum": ["global", "poland_specific", "eu_specific"]
+        },
+        "scope": {
+          "type": "object",
+          "required": ["entityType"],
+          "properties": {
+            "entityType": { "type": "string" },
+            "spaceTypes": { "type": "array", "items": { "type": "string" } },
+            "spaceIds": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "metric": { "type": "string" },
+        "operator": {
+          "type": "string",
+          "enum": [">=", "<=", "==", ">", "<", "!=", "in_range"]
+        },
+        "value": {
+          "oneOf": [
+            { "type": "number" },
+            { "type": "string" },
+            { "type": "boolean" },
+            {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+              }
+            }
+          ]
+        },
+        "unit": { "type": "string" },
+        "tolerance": { "type": "number" },
+        "verification": {
+          "type": "object",
+          "required": ["method", "phase"],
+          "properties": {
+            "method": {
+              "type": "string",
+              "enum": ["simulation", "calculation", "measurement", "inspection", "testing", "certification", "sensor"]
+            },
+            "tool": { "type": "string" },
+            "standard": { "type": "string" },
+            "phase": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["concept", "schematic", "design_development", "construction_documentation", "construction", "as_built", "operation"]
+              }
+            },
+            "frequency": { "type": "string" },
+            "responsible": { "type": "string" }
+          }
+        },
+        "legalBasis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "regulation": { "type": "string" },
+              "section": { "type": "string" },
+              "article": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "technicalBasis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "standard": { "type": "string" },
+              "section": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "ifcMapping": {
+      "type": "object",
+      "properties": {
+        "ifcEntity": { "type": "string" },
+        "globalId": { "type": "string" },
+        "objectType": { "type": "string" }
+      }
+    }
+  }
+}

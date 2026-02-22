@@ -1,0 +1,1108 @@
+
+strona tytu³owa 
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ZAWARTOŒÆ OPRACOWANIA 
+
+1. Strona tytu³owa …………………………………………………………….…....strona 1
+2. Zawartoœæ opracowania ...............................…………………………...…..…...strona 2
+3. Oœwiadczenie projektanta i sprawdzaj¹cego ………………………………...strona 3
+4. Dokumenty projektanta i sprawdzaj¹cego ………………………………....strony 4-7
+3. Opis techniczny ...................................……………………………....…..…...strony 8- 
+5. Rysunki……………………………………………………………….……….strony 53 -83
+
+* Rys. Nr  R.01-  Rzut  piwnicy- rozbiórki ..……………………….….....….. skala 1:200
+* Rys. Nr  R.02-  Rzut  parteru- rozbiórki .………………………………….. skala 1:200
+* Rys. Nr  R.03-  Rzut  I piêtra- rozbiórki.……….………………………..…..skala 1:200
+* Rys. Nr  R.04 - Rzut  poddasza- rozbiórki ..…………………..……….….. skala 1:200
+* Rys. Nr A.1 -   Rzut  piwnicy – projekt..…………….……………   …..….. skala 1:100
+* Rys. Nr A.1a - Rzut  piwnicy – wymiarowanie ….…………………..….. skala 1:100
+* Rys. Nr A.1b - Rzut  piwnicy – sufity podwieszone  ………………..….. skala 1:200
+* Rys. Nr A.2 -  Rzut  parteru- projekt .…………………………………..….. skala 1:100
+* Rys. Nr A.2a - Rzut  parteru- wymiarowanie..………………………..….. skala 1:100
+* Rys. Nr A.2b - Rzut  parteru – sufity podwieszone  ………………..….. skala 1:200
+* Rys. Nr A.3 -  Rzut  I piêtra- projekt ...……….……skala 1:100 
+* Rys. Nr A.3a-  Rzut  I piêtra- wymiarowanie.…………………….….....…skala 1:100
+* Rys. Nr A.3b - Rzut  I piêtra – sufity podwieszone  ………………..….. skala 1:200
+* Rys. Nr A.4 -  Rzut  poddasza- projekt ..……………………...………..….. skala 1:100
+* Rys. Nr A.4a - Rzut  poddasza- wymiarowanie.……….…...………..….. skala 1:100
+* Rys. Nr A.4b - Rzut poddasza – sufity podwieszone  ………………..….. skala 1:200
+* Rys. Nr A.5 -  Rzut  wiêŸby dachowej – projekt………. ...…...……......…..skala 1:200
+* Rys. Nr A.6 -  Rzut  dachu- projekt ...…...…………………………..…..…..skala 1:200
+* Rys. Nr A.7 -  Przekrój A-A – projekt..………………………….....……… skala 1:100
+* Rys. Nr A.8 -  Przekrój B-B -  projekt…………………...……………....…..skala 1:200
+* Rys. Nr A.9 -  Rzut pomieszczeñ Mini Spa.………………………..…..…..skala 1:200
+* Rys. Nr A.9a - Przekrój C1-C1 (Mini Spa) projekt…….. …....………...…  skala 1:200
+* Rys. Nr A.9b - Przekrój C2-C2 (Mini Spa) projekt…….. …...…...……..…  skala 1:200
+* Rys. Nr A.9b - Przekrój C3-C3 (Mini Spa) projekt…….. …...………..…  skala 1:200
+* Rys. Nr A.10.1 -  Klatka schodowa K1…………..……………………….…... skala 1:200
+* Rys. Nr A.10.2 -  Klatka schodowa K2…………..……………………….…... skala 1:200
+* Rys. Nr A.10.3 -  Klatka schodowa K3…………..……………………….…... skala 1:200
+* Rys. Nr A.10.4 -  Klatka schodowa K4…………..……………………….…... skala 1:200
+* Rys. Nr A.10.5 -  Klatka schodowa K5…………..……………………….…... skala 1:200
+* Rys. Nr A.10.6 -  Klatka schodowa K6…………..……………………….…... skala 1:200
+* Rys. Nr A.10.7- Schody zewnêtrze wejœcia g³ównego
+* Rys. Nr A.10.8- Schody zewnêtrze do klatek schodowych
+* Rys. Nr A.10.9- Mur oporowy i schody  zewnêtrzne na taras piwnicy
+* Rys. Nr A.11.1-   DŸwig osobowy…………..……………………….…... skala 1:200
+* Rys. Nr A.11.2 -  DŸwig ³ó¿kowy…………..……………………….…... skala 1:200
+* Rys. Nr A.11.3 -  DŸwig towarowy…………..……………………….…... skala 1:200
+* Rys. Nr A.12.1-  Rzut piwnicy- strefy po¿arowe  ……………………...……skala 1:200
+* Rys. Nr A.12.2 -  Rzut parter- strefy po¿arowe  ……………………...………skala 1:200
+* Rys. Nr A.12.3 -  Rzut I piêtra- strefy po¿arowe  ……………………...……..skala 1:200
+* Rys. Nr A.12.4-   Rzut II piêtra- strefy po¿arowe  …………………...……..skala 1:200
+* Rys. Nr A.13.1 -  Elewacje- projekt kolorystyki .……………………….…... skala 1:200
+* Rys. Nr A.13.2 -  Elewacje- projekt kolorystyki …..…………………...……  skala 1:100
+* Rys. Nr A.13.3 -  Elewacje- projekt kolorystyki .……………………….…... skala 1:200
+* Rys. Nr A.13.4 -  Elewacje- projekt kolorystyki .……………………….…... skala 1:200
+* Rys. Nr A.13.5 -  Elewacje- projekt kolorystyki .……………………….…... skala 1:200
+* Rys. Nr A.13.6 -  Elewacje- projekt kolorystyki .……………………….…... skala 1:200
+* Rys. Nr A.13.7 -  Elewacje- projekt kolorystyki .……………………….…... skala 1:200
+* Rys. Nr A.13.8 -  Elewacje- projekt kolorystyki .……………………….…... skala 1:200
+* Rys. Nr A.13.9 -  Elewacja  frontowa- detale 
+* Rys. Nr A.13.10 -  Detal obramowania okien i drzwi w podcieniu 
+* Rys. Nr A.14.1- Zestawienie klap p-po¿ 
+* Rys. Nr A.14.2- Zestawienia okien PCV
+* Rys. Nr A.14.3- Zestawienia okien przeciwpo¿arowych i oddymiaj¹cych 
+* Rys. Nr A.14.3- Zestawienia drzwi balkonowych 
+* Rys. Nr A.15.1- Zestawienia drzwi zewnêtrznych 
+* Rys. Nr A.15.2- Zestawienia drzwi wewnêtrznych 
+* Rys. Nr A.15.3- Zestawienia drzwi wewnêtrznych PCV
+* Rys. Nr A.15.4- Zestawienia drzwi wewnêtrznych p-po¿
+* Rys. Nr A.16.1-Zestawienie œcianek przeszklonych  W1, WS
+* Rys. Nr A.16.2-Zestawienie œcianek przeszklonych  W2, W10, W7  
+* Rys. Nr A.16.3-Zestawienie œcianek przeszklonych  W3, W4, W8, W5, W6, W9
+* Rys. Nr A.17-  Detal daszku nad wejœciem 
+* Rys. Nr A.18- Zestawienie balustrad  i porêczy zewnêtrznych 
+* Rys. Nr A.20- Zestawienie balustrad i porêczy wewnêtrznych 
+* Rys. Nr A.22 - Przekroje przez pochylnie projekt……..……………....…  skala 1:200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                  Bydgoszcz 30.07.2023r
+       
+
+
+
+
+
+                                                                OŒWIADCZENIE
+
+Niniejszym oœwiadczamy, ¿e projekt techniczno- wykonawczy Przebudowy i rozbudowy budynku dawnego Zak³adu Leczniczego  na Dom Seniora wraz ze zmian¹ sposobu jego u¿ytkowania na dzia³ce nr 352/7 obrêb Kowanówko przy ul. Mi³owody 2 w Kowanówku gmina Oborniki zosta³ opracowany zgodnie z zawart¹ umow¹, przepisami prawa budowlanego i rozporz¹dzeñ wykonawczych, wspó³czesn¹ wiedz¹ techniczn¹ oraz jest kompletny z punktu widzenia celu, jakiemu ma s³u¿yæ. 
+
+
+Imiê i NazwiskoNr uprawnieñ budowlanych PODPIS  Projektant architektury
+  arch. Ludmi³a Magdañska
+
+
+WBPP- NB-7210/159/82 
+ bez ograniczeñ 
+
+
+
+Sprawdzaj¹cy architektury 
+mgr.in¿. arch. Gra¿yna 
+Czarczyñska –Kaja 
+
+
+UAN-KZ-7210/132/86 
+bez ograniczeñ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    OPIS TECHNICZNY        
+do  projektu techniczno- wykonawczego architektury Rozbudowy i przebudowy budynku dawnego Zak³adu leczniczego na Dom Seniora wraz ze zmian¹ sposobu jego u¿ytkowania  na dzia³ce  nr 352/7 przy ul. Mi³owody 2 w Kowanówku gmina Oborniki.
+
+
+                        1. INWESTOR:    PRO- REHA INVEST Sp. z o.o.
+                                                         ul. Pi³sudskiego 62, 64-600 Oborniki.
+
+          2. ADRES INWESTYCJI :  64-600 Kowanówko (gmina Oborniki) ul. Mi³owody 2 
+                                                Dzia³ka Nr 352/7 obrêb Kowanówko. 
+                                                W³aœciciel dzia³ki- Skarb Pañstwa. 
+                                                Wieczysty u¿ytkownik: PRO- REHA INVEST Sp. z o.o.
+
+              3. PODSTAWA OPRACOWANIA:
+* umowa z dnia 29.09.2021r, 
+* pe³nomocnictwo Inwestora, 
+* Warunki zabudowy zn.PLP.6730.17.2023 z dnia 12.06.2023r,  
+* Decyzja WPWIS w Poznaniu zn. DN-NS.9011.336.2022 z dnia 21.07.2022r w sprawie zgody na odstêpstwo dla oœwietlenia pomieszczeñ, 
+* Decyzja WPWIS w Poznaniu zn. DN-NS.9011.336.2022 z dnia 21.06.2022r w sprawie zgody na odstêpstwo dla pod³ogi znajduj¹cej siê poni¿ej poziomu terenu, 
+* Decyzja WPWIS w Poznaniu zn. DN-NS.9011.1026.2022 z dnia 22.09.2022r w sprawie zgody na odstêpstwo dla okien o powierzchni mniejszej ni¿ 1/8 pod³ogi, 
+* Postanowienie WK WPSP w Poznaniu zn. WZ.52840.268.3.2022. MB z dnia 26.09.2022r w sprawie Ekspertyzy bezpieczeñstwa po¿arowego budynku,
+* Postanowienie WK WPSP w Poznaniu zn. WZ.52840.268.4.2022. MB z dnia 26.09.2022r w sprawie hydrantów zewnêtrznych, 
+* Wytyczne WUOZ w Poznaniu zn. Po.WN.5183.528.2.2022 z dnia 11.03.2022r., 
+* Wytyczne WUOZ w Poznaniu zn. Po.WN.5183.3525.4.2022 z dnia 15.09.2022r., 
+* Pozwolenie WUOZ w Poznaniu Nr 233/2023/A z dnia 16.05.2023 na prowadzenie robót budowlanych na obszarze wpisanym do rejestru zabytków, 
+* Warunki techniczne PWIK w Obornikach zn. 02974/2022/DT z dnia 07.02.2022 w sprawie zasilania w wodê i odprowadzania œcieków sanitarnych,
+* Pismo PWIK w Obornikach z dnia 07.06.2022 w sprawie hydrantów zewnêtrznych, 
+* Pismo Burmistrza Miasta oborniki zn. IN.7021.7.3.2022 z dnia 28.02.2022r w sprawie braku sieci kanalizacji deszczowej, 
+* Warunki techniczne ENEA Operator  w Poznaniu zn. 11558/2022/OD5/RR2  z dnia 09.03.2022 w sprawie zasilania w energiê elektryczn¹, 
+* uzgodnienie ZUDP w Obornikach zn. GK.6630.178.2023 z dnia 06.07.2023r., 
+* wypisy z rejestru gruntów,
+* inwentaryzacja budowlana i fotograficzna obiektu oraz wizja lokalna w terenie, 
+* mapa sytuacyjno- wysokoœciowa do celów projektowych,
+* Ustawa z dnia 7 lipca 1994 r. - Prawo budowlane (tekst pierwotny: Dz.U. 1994 nr 89 poz. 414; tekst jednolity: Dz.U. 2020 r, poz. 1333) oraz Rozporz¹dzenia wydane na jego podstawie, 
+*  Rozporz¹dzenie Ministra Rozwoju z dnia 11 wrzeœnia 2020 r. w sprawie szczegó³owego zakresu i formy projektu budowlanego (Dz. U 2020, poz. 1609),
+*  Rozporz¹dzenie Ministra Rozwoju i Technologii z dnia 20 grudnia 2021r w sprawie szczegó³owego zakresu i formy dokumentacji projektowej, specyfikacji technicznych wykonania i odbioru robót budowlanych oraz programu funkcjonalno-u¿ytkowego.
+
+                 4. OPIS STANU ISTNIEJ¥CEGO BUDYNKU
+
+Przedmiotem przebudowy, rozbudowy i zmiany sposobu u¿ytkowania jest nieczynny od kilku lat budynek dawnego Zak³adu Leczniczego (obecnie nieczynnego, funkcjonuj¹cego do roku 2006), zakwalifikowany w-g PKOB do kategorii 1130: „Budynki zbiorowego zamieszkania”
+
+Zosta³ on wybudowany w po³owie XIX wieku, a nastêpnie przebudowany  w latach 20-tych XX wieku przebudowany wed³ug projektu poznañskiego architekta Adama Ballenstedta i w latach 50-tych XX wieku. 
+Jego bry³a dotrwa³a do dnia dzisiejszego w formie niemal niezmienionej. 
+
+Budynek ten znajduje siê na obszarze historycznego uk³adu urbanistycznego ruralistycznego zespo³u budowlanego  i Parku sanatoryjnego „Mi³owody” (krajobrazowego) wpisanego do ewidencji zabytków województwa wielkopolskiego  Decyzj¹ nr rej. 1964/A decyzj¹ z dnia 16 listopada 1984 r.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Budynek dawnego szpitala- widok w roku 2021
+
+Budynek ten (podlegaj¹cy przebudowie) wpisany zosta³ do Gminnego rejestru zabytków Gminy Oborniki Decyzj¹ l.dz. SOZ-4151/1378/30R/03 z dnia 11.07.2003r .
+
+Posiada on obecnie 3 kondygnacje nadziemne (³¹cznie z poddaszem nieu¿ytkowym)  oraz 4 niepo³¹czone i niepowi¹zane  ze sob¹ zespo³y piwnic; 3 mniejsze piwnice znajduj¹ siê w naro¿nikach budynku, natomiast 4 piwnica zosta³a zlokalizowana pod skrzyd³em B i jest doœwietlona przez studnie okalaj¹ce ca³y ten segment. 
+
+            Strukturê budynku mo¿na podzieliæ na:
+* czêœæ frontow¹ z pó³nocno – zachodni¹ elewacj¹ frontow¹, wzd³u¿ której poprowadzona jest droga dojazdowa,
+* odchodz¹ce od niego  trzy skrzyd³a tworz¹ce dwa wewnêtrzne dziedziñce otwarte w kierunku po³udniowo – wschodnim.
+
+Na podstawie wizji lokalnej oraz analizy struktury budynku mo¿na przypuszczaæ, ¿e koñcowe segmenty skrzyde³ A i C (nazewnictwo wed³ug za³¹czonego do koncepcji schematu) oraz prawie ca³e skrzyd³o B zosta³y dobudowane w ramach rozbudowy z pocz¹tku XX wieku. 
+W tym czasie najprawdopodobniej zosta³y zamurowane równie¿ podcienie w skrzyd³ach A i C i przebudowano hol wejœciowy. W wymurowanej  œcianie pod ³ukami wstawiono okna z wysokim parapetem. 
+W skrzydle B znajduj¹ siê niefunkcjonuj¹ce dŸwigi: towarowy (prawdopodobnie kuchenny) oraz osobowy z maszynowni¹ umieszczon¹ w najwy¿szym elemencie budynku – w wie¿yczce, o maksymalnej wysokoœci oko³o 20m. 
+
+4.1. Dane ogólne - STAN ISTNIEJ¥CY
+* d³ugoœæ budynku- ok. 48,09m,
+* szerokoœæ budynku- ok. 87,60m,
+* wysokoœæ budynku- ok. 14,13m (od poziomu terenu do kalenicy, bez wie¿yczki),
+* iloœæ kondygnacji nadziemnych: 3 (w tym poddasze nieu¿ytkowe)
+* iloœæ kondygnacji podziemnych: 1 (czêœciowe podpiwniczenia)
+* powierzchnia zabudowy istniej¹ca: ok. 2267m2
+* kubatura istniej¹ca- oko³o 28.000m3
+
+  4.2. Konstrukcja - STAN ISTNIEJ¥CY
+* fundamenty budynku: betonowe  oraz (czêœciowo) ceglane i kamienne,
+* œciany piwnic – ceglane i betonowe o zró¿nicowanej gruboœci, bez izolacji przeciwwilgociowej,  
+* œciany zewnêtrzne- murowane z ceg³y ceramicznej pe³nej na zaprawie cementowo-wapiennej o zró¿nicowanej gruboœci, bez  izolacji termicznej, bez wieñców, 
+* œciany zewnêtrzne – murowane z ceg³y ceramicznej pe³nej i ceg³y dziurawki na zaprawie cementowo-wapiennej o zró¿nicowanej gruboœci, bez izolacji przeciwwilgociowej, bez wieñców,
+* s³upy- w œcianach: murowane z ceg³y pe³nej oraz wolnostoj¹ce ¿elbetowe, wylewane na mokro , o wymiarach 44x44cm, 
+* belki noœne-  ¿elbetowe, wylewane na mokro,  
+* nadpro¿a- brak, 
+* stropy masywne typu Kleina na belkach stalowych oraz typu Forstera. Strop nad drug¹ kondygnacj¹ – Kleina typu lekkiego. Noœnoœæ stropów-1,5 kN/m2, 
+* klatki schodowe – schody zabiegowe, ¿elbetowe, ob³o¿one lastrykiem (balustrada metalowa, porêcze drewniane),
+* wiêŸba dachowa - konstrukcja drewniana, ciesielska. Dach wielospadowy, oparty na s³upkach drewnianych (15 x 15 cm) oraz mur³atach, bez œcianki kolankowej). W skrzydle œrodkowym niewysoka wie¿yczka kryta he³mem z latarni¹. Stan techniczny wiêŸby- dobry, lokalne œlady zawilgocenia i ogniska próchnicy w belkach koszowych. 
+
+Konstrukcja budynku w stanie technicznym ogólnym- dobrym, z lokalnymi uszkodzeniami. 
+
+
+
+
+ 4.2. Elementy wykoñczeniowe - STAN ISTNIEJ¥CY:
+
+* œcianki dzia³owe- murowane z ceg³y ceramicznej pe³nej i ceg³y dziurawki na zaprawie cementowo-wapiennej o zró¿nicowanej gruboœci,
+* kominy- murowane z ceg³y ceramicznej pe³nej na zaprawie cementowo-wapiennej, nieotynkowane, 
+* okna i okna balkonowe- drewniane zespolone, czêœciowo skrzynkowe, czêœciowo z profili pcv (wspó³czesne) - w stanie technicznym z³ym, do wymiany,
+* drzwi wewnêtrzne (p³ycinowe) i zewnêtrzne (drewniane)- w stanie technicznym z³ym (do wymiany),
+* pokrycie dachu- dachówka ceramiczna karpiówka podwójna- w stanie technicznym z³ym,. Okna dachowe: czêœciowo lukarny (kaferki), czêœciowo wole oczka)- w stanie technicznym z³ym, 
+* posadzki wewnêtrzne– zró¿nicowane w zale¿noœci od funkcji pomieszczenia: w piwnicach betonowe, lastryko, i p³ytki ceramiczne, na parterze i piêtrze: lastryko, parkiety, p³ytki ceramiczne i wyk³adziny, na poddaszu i strychu: pod³ogi drewniane,
+* posadzka w  podcieniu frontowym- wylewka betonowa niewykoñczona, 
+* wykoñczenie podestów i stopni schodów zewnêtrznych-  wylewka betonowa i lastrico wylewane
+* tynki wewnêtrzne kat. III. W sanitariatach i ³azienkach p³ytki ceramiczne na œcianach- w stanie technicznym z³ym (do wymiany), 
+* tynk  zewnêtrzny- cementowo wapienny drobnoziarnisty- w stanie technicznym œrednim  (czêœciowo do wymiany). 
+* opierzenia rynny i rury spustowe  z blachy ocynkowanej- w stanie technicznym z³ym (do wymiany), 
+* instalacje wewnêtrzne w budynku: w chwili obecnej nie funkcjonuj¹ instalacje: elektryczna, wodoci¹gowa, kanalizacyjna, c.o., telefoniczna, wiêkszoœæ przewodów i kabli zosta³a zdemontowana lub rozkradziona. 
+
+Elewacje budynku dawnego sanatorium posiadaj¹ zachowany (w ró¿nym stanie technicznym) detal architektoniczny w postaci: obramowañ okiennych i drzwiowych, lizen, pilastrów, gzymsów, g³owic ozdobnych na pilastrach, itp. Na lizenach, w obrêbie parapetów okiennych i obramieñ okiennych elewacji budynku wystêpujê poziome dekoracyjne ryflowania w tynku. W partiach coko³owych budynku- w podcieniach arkadowych elewacji pó³nocno-zachodniej widoczne s¹ -na fragmentach- wtórnie zatynkowania dawnego kamiennego coko³u.
+
+ 4.3. Geotechniczne warunki posadowienia budynku:
+Dla w/w inwestycji opracowano w styczniu kwietniu 2022 roku Opiniê goetechniczn¹ o gruntach- zgodnie z któr¹ na w/w terenie wystêpuj¹:
+* od powierzchni terenu do g³êb. 0,15 m p.p.t. wystêpuje przypowierzchniowa warstwa trylinki,
+* w otworze geotechnicznym  nr 1 poni¿ej w-w warstwy do g³êb. 2,8 m p.p.t. udokumentowano grunty antropogeniczne wykszta³cone w postaci nasypów budowlanych,
+* na ca³ym obszarze badañ poni¿ej w-w gruntów antropogenicznych do g³êbokoœci rozpoznania ( 4,0 ÷ 7,0 m p.p.t.) zalegaj¹ naprzemiennie grunty mineralne niespoiste wykszta³cone w postaci piasków œrednioziarnistych, piasków gruboziarnistych oraz pospó³ek jak i grunty mineralne spoiste wykszta³cone w postaci piasków gliniastych oraz glin piaszczystych.
+
+Warstwy geotechniczne, udokumentowanych gruntów w pakietach, prezentuj¹ siê nastêpuj¹co: 
+*   Pakiet I holoceñskie grunty antropogeniczne udokumentowane w postaci nasypów budowlanych [nB] zbudowanych z piasków œrednioziarnistych z domieszk¹ ¿wirów. W obrêbie pakietu wydzielono jedn¹ warstwê geotechniczn¹, która kszta³tuje siê nastêpuj¹co: I nB (Ps, ¯) IS ~ 0,96,
+*   Pakiet II plejstoceñskie grunty mineralne niespoiste udokumentowane w postaci piasków œrednioziarnistych z domieszk¹ ¿wirów [grMSa], piasków gruboziarnistych [CSa] oraz pospó³ek [saGr],
+*   Pakiet III plejstoceñskie grunty mineralne spoiste udokumentowane w postaci piasków gliniastych przewarstwionych piaskami œrednioziarnistymi [simSa] oraz glin piaszczystych [saSi]; przypisane zgodnie z [P7] do grupy genetycznej „B”.
+
+Wody gruntowe zosta³y nawiercone w otworze geotechnicznym nr 1 w postaci zwierciad³a swobodnego stabilizuj¹cego siê na g³êb. 2,5 m p.p.t. oraz w otworze geotechnicznym nr 2 w postaci zwierciad³a napiêtego nawierconego na g³êb. 2,4 m p.p.t., ustabilizowanego na g³êb. 0,05 m p.p.t.
+
+
+  5. OPIS  PRZEBUDOWY I ROZBUDOWY BUDYNKU DOMU SENIORA
+
+Projekt architektoniczno- budowlany dotyczy przebudowy, rozbudowy dawnego  Zak³adu Leczniczego  na Dom Seniora w Kowanówku wraz ze zmian¹ sposobu u¿ytkowania.
+
+5.1. Zamierzony sposób u¿ytkowania budynku:
+Budynek po przebudowie zapewni ca³odobow¹ opiekê osobom  w podesz³ym wieku. Zosta³ on zaplanowany dla 100 pensjonariuszy przebywaj¹cych w nim jednoczeœnie, dla których zaplanowano ³¹cznie 71 jednostek mieszkalnych.
+
+5.2. Projektowana technologia funkcjonowania budynku:
+W projektowanym (prywatnym) Domu Seniora przewiduje siê pobyt osób starszych (w wieku 50+ lat), chodz¹cych (lub poruszaj¹cych siê na wózku inwalidzkim), samodzielnych i sprawnych intelektualnie z lekkimi chorobami  typowymi dla wieku starszego- nie wymagaj¹cymi codziennego dozoru medycznego.  Nie bêdzie to „Dom opieki” typu socjalnego- przeznaczony dla osób niesamodzielnych, ob³o¿nie chorych lub z ciê¿kimi i przewlek³ymi chorobami wymagaj¹cymi sta³ej, intensywnej opieki lekarskiej i pielêgniarskiej. Pensjonariuszami Domu Seniora bêd¹ osoby starsze- ale sprawne i kontaktowe. 
+Projektuje siê:
+* miejsce przyjmowania pensjonariuszy- do tego celu przewidziano usytuowan¹ naprzeciw wejœcia g³ównego recepcjê typu hotelowego z poczekalni¹ oraz  pomieszczenia administracyjne (biuro zarz¹dcy nr 0.41.2, sekretariat nr 0.41.1 ) na parterze budynku z jego centralnym miejscu,
+*  iloœæ pomieszczeñ mieszkalnych- wynosi ³¹cznie 71 sztuk, w tym: 
+
+TYP POKOJULICZBA POKOILICZBA MIEJSC%POKÓJ JEDNOOSOBOWY  z ³azienk¹   35  35  49,30%POKÓJ DWUOSOBOWY  z ³azienk¹   21  42  29,58%POKÓJ JEDNOOSOBOWY + NN z ³azienk¹   5  5  7,04%POKÓJ DWUOSOBOWY + NN z ³azienk¹   2  4  2,82%POKÓJ GOŒCINNY JEDNOOSOBOWY z ³azienk¹   2  2  2,82%POKÓJ GOŒCINNY DWUOSOBOWY z ³azienk¹   2  4  2,82%APARTAMENT DWUOSOBOWY (2-pokojowy) z ³azienk¹   4  8  5,63%£¥CZNIE:  71  100  
+* pomieszczenia towarzysz¹ce: 
+Na parterze budynku przewidziano nastêpuj¹ce pomieszczenia ogólnodostêpne dla pensjonariuszy: kaplicê, bibliotekê, pokój telewizyjno- prasowy, pokój odwiedzin indywidualnych z aneksem kuchennym (14,6m2). 
+W ka¿dym zespole mieszkalnym (korytarz z kilku/kilkunastoma pokojami mieszkalnymi) przewidziano: pokój telewizyjny z aneksem kuchennym, pokój opiekuna oraz pomieszczenie porz¹dkowe dla sprz¹taczek.
+Na II piêtrze (dostêpnym tak¿e wind¹) przewidziano 2 gabinety lekarskie, gabinet zabiegowy, 2 gabinety rehabilitacyjne indywidualne oraz 2 pokoje æwiczeñ  indywidualnych i fizjoterapii (grupowej).
+W (s¹siednim) budynku nr 2 zorganizowana bêdzie sala na warsztaty tematyczne dla pensjonariuszy.
+
+                    a) Opieka medyczna i pielêgniarska: 
+Gabinety lekarskie- znajdowaæ siê bêd¹ na kondygnacji poddasza dostêpnej z klatek schodowych i windy przystosowanej dla osób niepe³nosprawnych . Przewiduje siê 2 wielofunkcyjne gabinety lekarskie- w których (w oznaczonych dniach i godzinach, cyklicznie)  przyjmowaæ bêd¹ lekarze: internista, okulista, gastrolog, psycholog, psychiatra, socjolog, itp. (wed³ug potrzeb) z którymi Dom Seniora podpisze umowy- zlecenia. Lekarze bêd¹ mogli tak¿e odwiedzaæ -w pokojach mieszkalnych- osoby chore (czasowo) w pokojach mieszkalnych. Nie przewiduje siê prowadzenia z gabinetach lekarskich ¿adnych  zabiegów medycznych za wyj¹tkiem standardowych badañ oglêdzinowych lub badania wzroku.
+W Domu Seniora zatrudnione bêd¹ na sta³e 3 pielêgniarki pracuj¹ce w systemie pracy 2-zmianowym (dy¿ury 12 godzinne). W pracy gabinecie zabiegowym na II pietrze przewiduje siê wykonywanie przez pielêgniarkê zastrzyków (zleconych przez lekarza), pobierania krwi do analizy (w-g zlecenia od lekarza) zmiany opatrunków, itp.
+W ka¿dej wydzielone czêœci mieszkalnej przewiduje siê dla pokój dla opiekuna osób starszych (³¹cznie 6 pokoi). Dla bie¿¹cej obs³ugi osób starszych zatrudnione bêd¹ na sta³e 18 opiekunów pracuj¹cych w systemie pracy 2-zmianowym (dy¿ury 12 godzinne). 
+W budynku na kondygnacji I piêtra, przy gabinecie lekarskim zaprojektowano pomieszczenie Post Mortem - na krótkotrwa³e przetrzymanie zw³ok do czasu przybycia lekarza, wydania dokumentu  zgonu oraz ich odbioru przez rodzinê lub Zak³ad Pogrzebowy.
+
+W przypadku stwierdzenia zachorowania pensjonariusza na chorobê zakaŸn¹:
+* przez lekarza wezwanego do Domu Seniora wraz z karetk¹ pogotowia –osoba chora zostanie od razu przetransportowana do szpitala zakaŸnego lub na oddzia³ zakaŸny szpitala ogólnego (poza Dom Seniora), 
+* przez lekarza zatrudnionego przez  Dom Seniora - osoba chora zostanie odizolowana od reszty osób w jednym z gabinetów lekarskich (na I piêtrze lub na poddaszu) i stamt¹d zabrana wezwan¹ karetk¹ pogotowia do szpitala zakaŸnego lub na oddzia³ zakaŸny szpitala ogólnego (poza Dom Seniora),
+* w przypadku wyst¹pienie ogniska epidemii (jak przy Covid-19) ca³y Dom Seniora bêdzie wyizolowany na okres kwarantanny. Zamkniête te¿ zostan¹ wszystkie pomieszczenia ogólnodostêpne (SPA, sale æwiczeñ, itp.), a posi³ki -w indywidualnych szczelnych pakietach przygotowanych przez firmê cateringow¹- dostarczane bêd¹ pensjonariuszom bezpoœrednio do pokoi mieszkalnych.  Zu¿yte naczynia (zapakowane w szczelne worki) bêd¹ odbierane z izolowanych czêœci budynku i sk³adowane w zewnêtrznym magazynie odpadów medycznych. 
+
+Leki- przechowywane bêd¹ w gabinecie zabiegowym lub w pokojach opiekunów – wydawane pensjonariuszom pod ich kontrol¹. 
+Leki przeterminowane bêd¹ odbierane od pensjonariuszy przez pielêgniarkê, gromadzone z chronionym magazynie lekarstw, a nastêpnie zadawane (zbiorczo) do najbli¿szego punktu utylizacji.
+Zu¿yte leki, opatrunki, i inne pozosta³oœci medyczne (w iloœciach ok. 100kg rocznie) bêd¹ czasowo sk³adowane w przeznaczonych do tego pojemnikach hermetycznych w magazynie odpadów medycznych (w lodówce), a nastêpnie bêd¹ one odbierane przez wyspecjalizowan¹ firmê i przewo¿one do spalarni odpadów medycznych w Poznaniu.
+
+                b) Rehabilitacja: 
+* Pomieszczenia do æwiczeñ  indywidualnych i fizjoterapii ruchowej (tak¿e grupowej pod nadzorem fizjoterapeuty) wyposa¿one w maty gimnastyczne, drabinki przyœcienne, wyci¹g stacjonarny dolny i górny, rowerki, bie¿nie elektryczne , porêcze do æwiczeñ i wyci¹gania  oraz drobny sprzêt: pi³ki, gumy do æwiczeñ itp - znajdowaæ siê bêd¹ na kondygnacji II piêtra. Nie bêd¹ w nich wykonywane ¿adne zabiegi wymagaj¹ce specjalistycznego wyposa¿enia instalacyjnego pomieszczeñ,  Pomieszczenie to bêdzie dostêpne dla indywidualnych æwicz¹cych- codziennie, a w okreœlonych dniach i godzinach – planowane bêd¹ æwiczenia grupowe pod nadzorem wykwalifikowanego rehabilitanta. ¯adne z w/w urz¹dzeñ ani sprzêt-  nie bêdzie emitowaæ ha³asu, drgañ ani promieniowania. W dwóch pomieszczeniach rehabilitacyjnych na II piêtrze znajdowaæ siê bêd¹ sto³y do masa¿u prowadzonego w-g zaleceñ lekarza lub wyboru pensjonariusza - przez profesjonalnego rehabilitanta zatrudnionego na zlecenie przez Dom Seniora (w okreœlonych dniach i godzinach).Domu Seniora zatrudnionych bêdzie 4  rehabilitantów pracuj¹cych w dni robocze, zamiennie w godzinach  9.00- 17.00.
+Ponadto dla osób przebywaj¹cych z Domu Seniora zaprojektowano tak¿e terenow¹ tzw. „si³owniê zewnêtrzn¹” (do u¿ytku indywidualnego),  z urz¹dzeniami treningowymi: do æwiczeñ miêœni r¹k i nóg, bie¿ni¹, drabinkami,  dr¹¿kami wielofunkcyjnymi, itp.      
+     c) Czêœæ rekreacyjna – SPA
+W piwnicy  projektuje siê tak¿e czêœæ rekreacyjn¹ zawieraj¹c¹: wanny z hydromasa¿em dla 10 osób, tê¿niê i saunê oraz miejsca do wypoczynku, natryski oraz szatnie (mêsk¹ i damsk¹) z ³azienkami przystosowanymi do potrzeb osób niepe³nosprawnych. Poziom posadzki po³¹czony z g³ównym poziomem piwnicy -2,96m.
+Dla jacuzzi - w s¹siaduj¹cymi z nim pomieszczeniami zaprojektowano profesjonaln¹ stacjê uzdatniania wody- w projekcie technologicznym.         
+
+                d) Czêœæ gastronomiczna: 
+Projektuje siê pe³ne wy¿ywienia dla pensjonariuszy Domu Seniora realizowane w formie cateringu (dowozu z zewn¹trz) i uzupe³niane (np. œwie¿e pieczywo, œwie¿e warzywa i owoce) na zapleczu kuchennym (w przygotowalni wstêpnej i zasadniczej) zlokalizowanym w poziomie piwnicy. Wydawanie posi³ków przewiduje siê w formie „szwedzkiego sto³u”,  w 2 turach, w jadalni przewidzianej dla 58 osób jednoczeœnie, do której zapewniony jest- z ka¿dej kondygnacji- dojazd wind¹ osobow¹ przystosowan¹ dla osób niepe³nosprawnych.
+Posi³ki dla osób chorych (czasowo) bêd¹ im dostarczane – przez personel pomocniczy- do pokoi.
+W wypadku zaistnienia w budynku epidemii (stref izolowanych) posi³ki dla osób w nich przebywaj¹cych dostarczane bêd¹ (przez catering zewnêtrzny) w formie spakowanej, w jednorazowych pojemnikach z zastosowaniem jednorazowych naczyñ. Posi³ki te bêd¹ mog³y byæ podgrzewane z aneksach kuchennych znajduj¹cych siê w ka¿dym (wydzielonym) segmencie mieszkalnym w pokojach telewizyjnych. W takim przypadku zu¿yte naczynia z izolowanej czêœci budynku pakowane bêd¹ worki foliowe, wi¹zane szczelnie i wynoszone do magazynu odpadów medycznych zaprojektowanego przy œmietnikach (na zewn¹trz budynku).
+Przy zapleczu kuchennym zaprojektowano: pomieszczenie z  pojemniki z odpadkami ze zmywalni- do ich czasowego przetrzymania. Odpadki te bêd¹ nastêpnie gromadzone w œmietniku znajduj¹cym siê przy budynku Domu Seniora i odbierane okresowo przez wyspecjalizowan¹ firmê dzia³aj¹c¹ na zlecenie Gminy.
+           e) Pomieszczenia sanitarne: 
+* pomieszczenia sanitarne ogólnodostêpne (poza pokojami mieszkalnymi) przystosowane dla osób z niepe³nosprawnoœciami  przewidziano: przy jadalni w piwnicy, w szatni damskiej i mêskiej dla strefy SPA, w strefie SPA w piwnicy, na parterze w holu g³ównym przy rejestracji, na II piêtrze przy pomieszczeniach rehabilitacyjnych i gabinetach lekarskich i zabiegowych. 
+Na I pietrze budynku przewidziano tak¿e jeden sanitariat (pokój k¹pielowy) przystosowany do mycia/k¹pieli osób niechodz¹cych  (dla osób okresowo chorych, bowiem w w/w prywatnym Domu Seniora nie przewiduje siê sta³ego pobytu osób niechodz¹cych),
+* pomieszczenia dla pracowników (socjalne i sanitarne).
+
+W budynku zaprojektowano zaplecze socjalne dla pracowników -dla nastêpuj¹cej struktury zatrudnienia:
+  Liczba    pracowników   GASTRONOMIA -pracownicy   5  RECEPCJA  2  STREFA MINI SPA  2  PERSONEL SPRZ¥TAJ¥CY  6  PERSONEL PORZ¥DKOWY / SERWISOWY  4  ADMINISTRACJA  10  PIELÊGNIARKI / PIELÊGNIARZE / OPIEKUNOWIE  18  REHABILITANCI / FIZJOTERAPEUCI  2  LEKARZE  2  £¥CZNIE  51
+  W budynku znajdowaæ siê bêd¹ nastêpuj¹ce pomieszczenia dla 
+  pracowników:
+* dla personelu administracyjnego (do 8 osób) – wspólny sanitariat w czêœci administracyjnej na parterze. Czeœæ personelu administracyjnego pracowaæ bêdzie w budynku nr 2, gdzie tak¿e zaprojektowano dla nich sanitariaty damskie i mêskie,
+* dla personelu medycznego opiekuñczego - pomieszczenie socjalne oraz szatnie damskie i mêskie wraz z sanitariatem i natryskiem- na parterze, 
+* dla personelu medycznego budynku - pomieszczenie socjalne oraz szatnia damska i mêska (wspólna)wraz z sanitariatem i natryskiem- na kondygnacji II piêtra, 
+* dla personelu pomocniczego sprz¹taj¹cego- pomieszczenie socjalne oraz szatnie damska i mêska (wspólna) wraz z sanitariatem i natryskiem- na parterze, 
+* dla personelu kuchennego- pomieszczenie socjalne oraz szatnia ogólna wraz z sanitariatem i natryskiem- w piwnicy, przy zapleczu kuchennym,
+* dla personelu ogrodowego- pomieszczenie socjalne oraz szatnia  ogólna wraz z sanitariatem i natryskiem w budynku mieszkalno- technicznym nr 2A, 2B.
+
+               f) Utrzymanie czystoœci: 
+* utrzymanie czystoœci w budynku: na ka¿dej kondygnacji budynku przewidziano pomieszczenia porz¹dkowe dla sprz¹taczek. Na kondygnacji poddasza przewidziano magazyn bielizny ogólnej brudnej (poœciel, rêczniki, zas³ony, firany, obrusy, odzie¿ ochronna pracowników, itp.) czystej (jak wy¿ej)- która oddawana bêdzie na zewn¹trz- do profesjonalnej pralni przemys³owej (i stamt¹d odbierane: wyprana i wyprasowana),
+* na kondygnacji poddasza przewidziano tak¿e pomieszczenia: pralni, suszarni, prasowalni do indywidualnego u¿ytku przez pensjonariuszy (utrzymania czystoœci ich dzie¿y osobistej) lub wykonywanej przez personel zak³adowy przez 3 -4 pracowników obs³ugi pracuj¹cych w dni robocze w godzinach 8.00- 16.00, 
+* dezynfekcja obiektu i jego czêœci polegaæ bêdzie na cyklicznym sprz¹taniu ca³ego budynku i poszczególnych pomieszczeñ (jak w hotelach) na sucho i na mokro, przez „zak³adowy”  personel sprz¹taj¹cy, zmianach poœcieli, rêczników, itp.  W obiekcie znajdowaæ siê bêd¹ tak¿e 2 lampy dezynfekcyjne przenoœne, które bêd¹ wykorzystywane lokalnie w przypadku koniecznoœci wykonanie dezynfekcji jakiegoœ pomieszczenia (np. w przypadku wyst¹pienia zachorowania zakaŸnego).
+ 5.3. Informacja o zgodzie na odstêpstwo od przepisów techniczno-budowlanych
+Dla niniejszej inwestycji opracowano ekspertyzy techniczne  oraz uzyskano zgody na odstêpstwa:
+a) Decyzja WPWIS w Poznaniu zn. DN-NS.9011.336.2022 z dnia 21.07.2022r w sprawie zgody na odstêpstwo dla oœwietlenia pomieszczeñ, 
+b) Decyzja WPWIS w Poznaniu zn. DN-NS.9011.336.2022 z dnia 21.06.2022r w sprawie zgody na odstêpstwo dla pod³ogi znajduj¹cej siê poni¿ej poziomu terenu, 
+c) Decyzja WPWIS w Poznaniu zn. DN-NS.9011.1026.2022 z dnia 22.09.2022r w sprawie zgody na odstêpstwo dla okien o powierzchni mniejszej ni¿ 1/8 pod³ogi, 
+d) Postanowienie WK WPSP w Poznaniu zn. WZ.52840.268.3.2022. MB z dnia 26.09.2022r w- zgoda na odstêpstwa od warunków technicznych i przepisów z zakresie ochrony przeciwpo¿arowej budynku, 
+e) Postanowienie WK WPSP w Poznaniu zn. WZ.52840.268.4.2022. MB z dnia 26.09.2022r- zgoda na odstêpstwo dla hydrantów zewnêtrznych i drogi po¿arowej.
+
+5.4. Opis projektowanej przebudowy i rozbudowy Domu Seniora
+
+W ramach planowanej rozbudowy i przebudowy budynku na potrzeby Domu Seniora zak³ada siê nastêpuj¹ce roboty budowlane i instalacyjne:
+* pozostawienie istniej¹cej powierzchni zabudowy, za wyj¹tkiem niewielkich zmian w zakresie powierzchni zabudowy zespo³y MINI SPA,
+* pozostawienie bez zmian bry³y budynku, jego wysokoœci, uk³adu dachów i ich kszta³tu, 
+* wprowadzenie funkcji u¿ytkowych podstawowych do kondygnacji poddasza (obecnie nieu¿ytkowego), 
+* wprowadzenie do budynku nowej funkcji i nowych pomieszczeñ, 
+* wprowadzenie do budynku 2 dŸwigów wewnêtrznych : dŸwigu ³ó¿kowego ³¹cz¹cego piwnice u¿ytkowe, parter i I piêtro oraz  dŸwigu osobowego przystosowanego dla osób niepe³nosprawnych- ³¹cz¹cego piwnice u¿ytkowe, parter, I piêtro i poddasze u¿ytkowe,
+* wprowadzenie do budynku 2 dŸwigów zewnêtrznych: dŸwigu towarowego 500kg z poziomu terenu do piwnicy: dla kuchni oraz podnoœnika dla wózków inwalidzkich z poziomu terenu na parter przy wejœciu g³ównym do budynku, 
+* podzia³ budynku na strefy po¿arowe – zgodne z obowi¹zuj¹cymi przepisami,
+* przebudowê i powiêkszenie obu fos skrzyd³a B- od strony elewacji po³udniowo – zachodniej (wprowadzenie tarasu ziemnego przy jadalni i Mini SPA oraz skarpy ze schodami zewnêtrznymi), 
+* otwarciu podcieni w skrzyd³ach A i C od strony dziedziñców i zlokalizowaniu w nich ogólnodostêpnych stref relaksu.
+
+5.5. Forma architektoniczna budynku
+
+Dla planowanej inwestycji wydana zosta³a przez Burmistrza Miasta Oborniki-Decyzj¹ o warunkach zabudowy i zagospodarowania terenu.
+
+W wyniku planowanej przebudowy i rozbudowy nie ulegnie zmianie zabytkowa bry³a budynku dawnego szpitala- zachowana zostanie obecna forma architektoniczna: d³ugoœæ, szerokoœæ, wysokoœæ oraz powierzchnia zabudowy- za wyj¹tkiem niewielkiej zmiany zabudowy czêœci piwnicznej przewidzianej na strefê SPA. 
+Projektuje siê tak¿e przebudowê i powiêkszenie obu fos przy skrzydle B- od strony elewacji po³udniowo – zachodniej oraz wprowadzenie skarpy (obroœniête trawami i krzewami) ze schodami zewnêtrznymi na wy¿szy poziom terenu. 
+Wzd³u¿ tej elewacji na poziomie piwnicy przewidziano salê gastronomiczn¹ powi¹zan¹ z tarasem zewnêtrznym- co w okresie letnim-  poprawi komfort spo¿ywania posi³ków i po³¹czy funkcjonalnie piwnicê z zewnêtrzn¹ stref¹ zieleni oraz ze strefa niewielkiego SPA, które równie¿ znajduje siê w piwnicy skrzyd³a B.
+Podjêto decyzjê o otwarciu podcieni w skrzyd³ach A i C od strony dziedziñców i zlokalizowaniu w nich ogólnodostêpnych stref relaksu / ogrodów zimowych z fasadami harmonijkowymi.
+
+Dla w/w budynku planuje siê: 
+* likwidacjê wspó³czesnej, ¿elbetowej, czêœciowo zadaszonej rampy zjazdowej (dostawczej) s³u¿¹cej dla odstaw produktów do czêœci kuchennej szpitala,
+* ods³oniêcie (odtworzenie) zamurowanych wtórnie podcieni arkadowych w skrzyd³ach budynku,
+* naprawy i odtworzenia  elementów historycznych na elewacjach budynku, 
+* ods³oniêcie œcian piwnicy (jadalni i strefy SPA) dla doœwietlenie pomieszczeñ,
+* wykonanie nowych murków oporowych przy oknach piwnicznych i przy tarasie jadalni (w piwnicy), 
+* wybudowanie (przy nich) tarasów rekreacyjnych  oraz wynikaj¹cej z tego- zmiany linii i nachylenia skarp przy tych œcianach,
+* likwidacjê czêœci okien œciennych,
+* wprowadzenie nowych okien po³aciowych oddymiaj¹cych PCV lub stalowych w kolorze jasnego br¹zu (zbli¿onym do koloru dachówki), 
+* wybudowanie podnoœnika dla osób niepe³nosprawnych na elewacji frontowej budynku, 
+* wybudowanie windy towarowej 500kg dla kuchni, na elewacji ogrodowej budynku, 
+* pozostawienie istniej¹cych  balustrad z tralek przy tarasach i ich uzupe³nienie na schodach wejœcia g³ównego, 
+* wykonanie nowych balustrad stalowych  przy tarasach i na balkonach, 
+* wymiany w ca³oœci dachówki ceramicznej karpiówki na now¹ w kolorze ceglanym, 
+Prace budowlane na obiekcie prowadzone bêd¹ pod nadzorem konserwatorskim.
+
+     5.6. Dane ogólne budynku o przebudowie:
+* d³ugoœæ budynku- ok. 48,09m,
+* szerokoœæ budynku- ok. 87,60m,
+* wysokoœæ budynku- ok. 14,13m (od poziomu terenu do kalenicy, bez wie¿yczki)
+* iloœæ kondygnacji nadziemnych: 3 (w tym poddasze nieu¿ytkowe)
+* iloœæ kondygnacji podziemnych: 1 (czêœciowe podpiwniczenia)
+* powierzchnia zabudowy projektowana: 2267m2
+* powierzchnia u¿ytkowa projektowania: 5324,76m2, w tym:
+* piwnica – 818,00m2 
+* parter – 1562,67m2
+* I piêtro - 1785,32m2
+* II piêtro (poddasze) – 1158,77m2
+* powierzchnia u¿ytkowa projektowania: 5324,76m2, w tym:
+* powierzchnia mieszkalna (pokoje z ³azienkami)–……1739,43m2 
+* powierzchnia zaplecza kuchennego i jadalni  - …….….227,59m2
+* powierzchnia kompleksu SPA- ……………………….…125,00m2
+* powierzchnia opieki medycznej-……………………..     375,43m2 
+* powierzchnia ogólnodostêpna ……………………….… 371,67m2 
+* powierzchnia magazynowa (bez mag. fizjoterapii)- ….....295,71m2
+* powierzchnia pomocnicza-……………………………….180,30m2 
+* powierzchnia techniczna-………………………….……...147,39m2
+* powierzchnia komunikacji.-……………………….…....1862,52m2
+* kubatura projektowana- oko³o 28.000m3. 
+                                            Uwaga: 
+* zestawienia pomieszczeñ na poszczególnych kondygnacjach budynku znajduj¹ siê w za³¹czonych tabelach
+
+        5.7. ZESTAWIENIE POMIESZCZEÑ I ICH POWIERZCHNI: 
+
+5.8.  DOSTÊPNOŒÆ BUDYNKU DLA OSÓB NIEPE£NOSPRAWNYCH
+
+Projektowany budynek Domu Seniora bêdzie w pe³ni dostêpny dla osób niepe³nosprawnych, tak¿e ruchowo. 
+£¹cznie przewidziano w nim 7 pokoi dostosowanych do „NN”, mog¹cych pomieœciæ 9 pensjonariuszy (zaprojektowane na parterze) oraz wszystkie pomieszczenia ogólnodostêpne, na wszystkich kondygnacjach- przystosowane dla w/w osób.
+Zaprojektowano 2 dŸwigi (³ó¿kowy i osobowy) przystosowane dla osób niepe³nosprawnych (tak¿e niewidz¹cych i nies³ysz¹cych) oraz pomieszczenia komunikacyjne o odpowiedniej szerokoœci, drzwi ze œwiat³em przejœcia minimum 100cm, które umo¿liwiaj¹ swobodne poruszanie siê po budynku osób na wózkach inwalidzkich. 
+W celu umo¿liwienia poruszania siê po ca³ym budynku osobom poruszaj¹cym siê na wózkach inwalidzkich w czêœci frontowej na poziomie  parteru, na odcinkach pomiêdzy skrzyd³ami A i B oraz B i C przewiduje siê tak¿e podniesienie poziomu pod³ogi oraz drzwi i okien w podcieniach elewacji frontowej. 
+
+       6. OPIS PROJEKTOWANEJ KONSTRUKCJI:
+
+W budynku- w zwi¹zku z jego przebudow¹ i rozbudow¹ o Min Spa-projektuje siê wykonanie nastêpuj¹cych (nowych) elementów konstrukcyjnych. 
+
+a) Dla zespo³u pomieszczeñ SPA:
+* pod pomieszczeniami Mini Spa (pomieszczeniem g³ównym, pomieszczeniami sanitarnymi)- szczelna wanna ¿elbetowa wylewana na mokro z betonu C25/30 W10, stal AIIIN,  gr.30cm z izolacj¹ przeciwwilgociow¹ ciê¿k¹,
+        Uwaga:
+* z uwagi na wyskoki poziom wód gruntowych prace ziemne nale¿y wykonywaæ z nale¿yt¹ starannoœci¹, przerwy robocze i dylatacje zabezpieczyæ taœmami water stop np. Sika Woterbar, pêczniej¹ce gumy polimerowe, uszczelnienia na bezie bentonitu. 
+* dobór systemu zaproponuje wykonawca i uzyska pozytywn¹ opiniê projektanta,
+* przed przyst¹pieniem do prac fundamentowych nale¿y obni¿yæ poziom wód gruntowych np. za pomoc¹ ig³ofiltrów,
+* œciany zewnêtrzne ¿elbetowe SPA gr. 25cm z betonu C25/30 W10, stal AIIIN,
+* s³upy ¿elbetowe 30x30cm z betonu C25/30 W10, stal AIIIN,
+* strop ¿elbetowy SPA gr. 20cm z betonu C25/30, stal AIIIN,
+* p³yta ¿elbetowa jacuzzi gr. 15cm z betonu C25/30, stal AIIIN,
+* podchwycenia istniej¹cych œcian noœnych w miejscach obni¿enia posadzek- ¿elbetowe, wylewane na mokro odcinkowo (odcinki nie d³u¿sze ni¿ 1,0m) z betonu C25/30 W10, stal AIIIN, wszystkie przerwy w betonowaniu zabezpieczyæ taœmami water stop,
+* podchwycenia istniej¹cych œcian noœnych w miejscach obni¿enia posadzek Mini Spa (do poziomu -3,440m)  ¿elbetowe, z betonu C25/30, W10, stal AIIIN, wylewane na mokro odcinkowo (odcinki nie d³u¿sze ni¿ 1,0m), wszystkie przerwy w betonowaniu zabezpieczyæ taœmami water stop.
+
+b) dla szybów windowych
+* wykonanie nowych szybów windowych w centralnej czêœci obiektu,
+* szyb w konstrukcji murowanej z ceg³y pe³nej gr. 25cm, podszybie i  œciany do poziomu piwnicy ¿elbetowe,
+* posadowienie na p³ycie fundamentowej ¿elbetowej gr. 30cm. P³yty podszybia- ¿elbetowe gr. 25cm,
+* beton podszybia i œcian do poziomu piwnicy z uwagi na wysoki poziom wód gruntowych C25/30 W10, stal AIIIN. Beton pozosta³ych elementów konstrukcyjnych windy C25/30,
+* na po³¹czeniu p³yty fundamentowej i œcian podszybia wykonaæ water stopy,
+* posadowienie windy ³ó¿kowej wykonaæ na tym samym poziomie co windy osobowej (-4,34m ) podrzucie wype³niæ zagêszczonym piaskiem œrednim Is =0,98 do poziomu -1,06m i wykonaæ p³ytê betonow¹ gr. 20cm zbrojon¹ zbrojeniem rozproszonym.
+* w naro¿nikach œcian - rdzenie ¿elbetowe 25x25cm- spiête co kondygnacjê belkami które równie¿ bêd¹ s³u¿y³y jako nadpro¿a drzwiowe, 
+* œciany istniej¹ce w pobli¿u szybów windowy nale¿y pod³apaæ odcinkowo do poziomu – 4,34m , odcinki nie d³u¿sze ni¿ 1,0m, wszystkie przerwy w betonowaniu zabezpieczyæ taœmami water stop,
+* przed przyst¹pieniem do prac fundamentowych nale¿y obni¿yæ poziom wód gruntowych np. za pomoc¹ ig³ofiltrów. Prêty zbrojeniowe nowo projektowanych elementów konstrukcyjnych wklejaæ w œciany istniej¹ce na ¿ywicê epoksydow¹ .
+* wykonanie nowego szybu windowego kuchennego zewnêtrznego ¿elbetowego. P³yta fundamentowa gr. 30cm , œciany gr. 20cm, p³yta nadszybia gr 25cm.  Beton podszybia i œcian do poziomu piwnicy z uwagi na wysoki poziom wód gruntowych C25/30 W10, stal AIIIN. Beton pozosta³ych elementów C25/30.b 
+
+c) dla pozosta³ych czêœci budynku:
+* wzmocnienie stropu nad I parterem w czêœci centralnej budynku wykonuj¹c now¹ p³ytê ¿elbetow¹  gr. 5cm z betonu C20/25 W miejscu usuniêtych istniej¹cych warstw stropowych. Dla wyrównania poziomu stropu pod p³yt¹ ¿elbetow¹ u³o¿yæ styropian pod³ogowy twardy. 
+* murki oporowe zewnêtrzne:
+* przy oknach piwnicy- ¿elbetowe murki oporowe gr. 20cm z betonu C20/25 W8, stal AIIIN,
+* przy zejœciu zewnêtrznym do piwnicy i tarasie piwnicy - ¿elbetowe murki oporowe gr. 20cm z betonu C20/25 W8, stal AIIIN,
+* przy schodach zewnêtrznych wejœcia g³ównego ¿elbetowe murki gr. 30cm z betonu C22/25 zbrojone dwiema siatkami ?8cm 15cm ze stali AIIIN ,
+* wymiany stalowe w œcianach noœnych– w miejscach projektowanych otwaræ i nowych otworów drzwiowych zaprojektowano wymiany – dwuteowniki stalowe ze stali S235 osadzanych na zaprawie drobnoziarnistej niekurczliwej, z obudow¹ p-po¿ w klasie EI120. 
+
+7. Opis projektowanego wykoñczenia budynku:
+
+      5.5.1. Projektowanie œcianki:
+* nowe œcianki dzia³owe i zamurowania w œciankach dzia³owych (w piwnicy)  -z ceg³y dziurawki lub bloczków betonowych gr. 12,0cm na zaprawie cementowo- wapiennej z obustronnym tynkiem cementowo- wapiennych, g³adzonym. Œcianki dzia³owe- murowane do wysokoœci stropu w³aœciwego. 
+* Na wy¿szych kondygnacjach dopuszcza siê wykonanie œcianek dzia³owych w technologii lekkiej- z p³yt GKF na konstrukcji stalowej z wype³nieniem we³n¹ mineraln¹- z zachowaniem wymaganej klasy odpornoœci ogniowej (EI). Dla œcianek lekkich- w miejscach monta¿u urz¹dzeñ lub wyposa¿enie- zastosowaæ wzmocnienia konstrukcyjne, 
+* w miejscach oznaczonych na rysunku (dla pomieszczeñ technicznych) œcianki murowane- w klasie min. EI60 z obustronnym tynkiem cementowo- wapiennych,
+* œcianki pe³ne klatek schodowych: systemowe, lekkie GKF na konstrukcji stalowej (systemowe), w klasie min. EI60, 
+* œcianki pe³ne obudowuj¹ce drogi ewakuacyjne- w klasie min. EI30,
+* œcianki przeszklone klatek schodowych: aluminiowe, w klasie min. EI60 (systemowe), z atestem p-po¿., malowane fabrycznie w kolorze RAL 7047, 
+* œcianki przeszklone przedsionków oraz pomieszczenia Mini Spa- aluminiowe, pojedyñczo szklone szk³em bezpiecznym, w klasie EI30, w kolorze RAL 7047, 
+* œcianka przeszklona sauny – drewniana, w naturalny kolorze, podwójnie szklona  z pustk¹ powietrzn¹ (systemowa dla sauny), 
+* wype³nienie zbêdnych przepustów instalacyjnych przez przegrody oddzielenia po¿arowego ceg³¹ pe³n¹ gr.12cm z obustronnym tynkiem cementowo- wapiennym, 
+                             UWAGA:
+*   wszystkie elementy wykoñczeniowe budynku oraz  elementy obudów szachtów instalacyjnych spe³niaæ musz¹ wymagania ochrony przeciwpo¿arowej budynku, opisane w pkt. 13 niniejszej dokumentacji.
+
+      5.5.2. Przewody wentylacyjne:
+*         w budynku pozostaj¹ bez zmian istniej¹ce przewody wentylacji grawitacyjnej, wyprowadzone ponad dach w formie kominków wentylacyjnych, 
+*         projektuje siê dobudowê nowych przewodów wentylacji grawitacyjnej dla wszystkich pomieszczeñ sanitarnych, biurowych, magazynowych, itp. Przewody wentylacyjne typowe kszta³tki betonowe o wymiarach zewnêtrznych 20x25cm (kana³ pojedynczy), 25x40cm (kana³ podwójny, wyprowadzone ponad dach na wysokoœæ min. 60cm (1,0m od po³aci dachowej), otwarte na przestrza³, zakoñczone czapk¹ betonowa gr. min 5,0cm, ocieplone we³n¹ mineraln¹ gr 6,0cm,
+*         nawiew œwie¿ego powietrza do pomieszczeñ mieszkalnych i biurowych odbywaæ siê bêdzie przez nawiewniki okienne, a wywiew przez indywidualne przewody wentylacji grawitacyjnej (tak¿e nowe) lub poœrednio- przez indywidualne przewody wentylacyjne umieszczone w ³azienkach  (dla pokoi mieszkalnych), 
+*         wentylacja mechaniczna wywiewna i klimatyzacja projektowania jest dla wybranych pomieszczeñ: kuchni, jadalni, kaplicy, biblioteki z czyteln¹, œwietlicy, pomieszczeñ rehabilitacyjnych (na poddaszu) oraz pomieszczeñ sanitarnych dla pracowników (na parterze).
+
+              5.5.3. Tynki wewnêtrzne:
+* dla wszystkich pomieszczeñ: dla œcian i sufitów- nowe tynki cementowo- wapienne,  wykoñczone na g³adko mas¹ do g³adzi gipsowych. W pomieszczeniach SPA- tynki dla pomieszczeñ o wysokiej wilgotnoœci powietrza, 
+* dla nowych œcian murowanych: wykonanie tynków cementowo- wapiennych gr.1,5cm kategorii III, wykoñczonych na g³adko mas¹ do g³adzi gipsowych, produkowan¹ na bazie m¹czki anhydrytowej z wype³niaczami oraz dodatkami modyfikuj¹cym. Dopuszcza siê obudowê œcian p³ytami GKF gr.1,25cm, 
+* dla wszystkich pomieszczeñ (poza przestrzeni¹ powy¿ej sufitów podwieszonych)- wykonanie bruzd w œcianach dla instalacji elektrycznych. Bruzdy zakryte nowym tynkiem.
+
+5.5.4. Projektowane izolacje:
+
+          a)  Izolacje przeciwwilgociowe i przeciwwodne:
+*     dla œcian nowych- izolacja pozioma 2 x papa asfaltowa na lepiku lub - masa izolacyjna na bazie cementu (typu Hydrostop), 
+*     wykonanie izolacji pow³okowej przeciwwilgociowej pionowej zasypywanych œcian piwnic i murków oporowych - mas¹ izolacyjn¹ na bazie cementu (typu Hyrdostop) oraz ich os³ona foli¹ kube³kow¹,
+*     dla posadzek pomieszczeñ SPA- izolacja przeciwwodna ciê¿ka (z uwagi na wysoki poziom wody gruntowej) z 3 warstw papy asfaltowej izolacyjnej lub typu Hydrostop, 
+*     izolacja 2 niecek jaccuzi oraz podszybia dŸwigów(z uwagi na wysoki poziom wody gruntowej) - szczelna wanna ¿elbetowa, beton wodoszczelny W8, C30/37, stal AIIIN  + masa izolacyjna na bazie cementu (typu Hyrdostop), 
+*     izolacja posadzek na gruncie: 2 warstwy papy asfaltowej izolacyjnej na lepiku asfaltowym z wywiniêciem na œciany na h=15cm,
+*     izolacja posadzek w pomieszczeniach mokrych na pozosta³ych kondygnacjach (sanitariaty, pomieszczenia socjalne i porz¹dkowe) elastyczna, p³ynna folia uszczelniaj¹ca na bazie dyspersji tworzywa sztucznego (przygotowana jak do uk³adania ceramicznych ok³adzin œciennych), wywiniêta na œciany na wysokoœæ15 cm,
+      UWAGA:  
+
+*     nale¿y stosowaæ system wraz z wtapianymi taœmami naro¿nymi i  ko³nierzami ochronnymi na przejœciach rur, armatury, przepustów i kratek  œciekowych,
+*      nie projektuje siê wykonania izolacji poziomej istniej¹cych œcian piwnicy i parteru- z uwagi na brak zgody na w/w prace ze strony WUOZ w Poznaniu,
+*      izolacja pionowa œcian natrysków do wysokoœci 2,0m- foli¹ w p³ynie po³¹czon¹ z izolacj¹ poziom¹ posadzki, 
+                                  UWAGA:  
+*     wszystkie izolacje poziome i pionowe œcian i posadzek powinny byæ po³¹czone miêdzy sob¹ w sposób zapewniaj¹cy szczelnoœæ wszystkich p³aszczyzn poziomych i pionowych,
+
+*     na po³aciach dachowych dachów istniej¹cych: dachówka ceramiczna karpiówka (w kolorze ceglanym naturalnym) uk³adana podwójnie w koronkê + 2 x folia jednostronnie paroprzepuszczalna, 
+*     na po³aci dachowej pomieszczenia Mini Spa-  1 x folia paroizolacyjna + 2x papa asfaltowa izolacyjna podk³adowa, modyfikowana SBS, termozgrzewalna, elastomerowa, o pamiêci kszta³tu, znosz¹ce wyginanie na zimno w temperaturze do –25°C i wytrzyma³a na temperaturê dodatni¹ do +100°C oraz 1 x papa asfaltowa izolacyjna samoprzylepna wierzchniego krycia modyfikowana elastomerem (HT), wzmocniona w³óknin¹ poliestrow¹ (KTP)  o pamiêci kszta³tu, znosz¹ce wyginanie na zimno w temperaturze  do –25°C i wytrzyma³e na temperaturê dodatni¹ do +100°C ,
+*     w korycie dachowym: izolacja jak wy¿ej + 2 x papa asfaltowa izolacyjna wierzchniego krycia
+
+   UWAGA: 
+*  wszelkie materia³y do wykonania pokrycia dachowego powinny odpowiadaæ wymaganiom zawartym w normach polskich lub aprobatach technicznych ITB dopuszczaj¹cych dany materia³ do powszechnego stosowania w budownictwie,
+* robót nie nale¿y wykonywaæ ich w warunkach szkodliwego oddzia³ywania czynników atmosferycznych, takich jak temperatura poni¿ej +5°C lub +10°C, rosa, opady deszczu lub œniegu, oblodzenie oraz wiatr utrudniaj¹cy krycie,
+* do wykonywania pokryæ papowych przyst¹piæ: 
+* po sprawdzeniu zgodnoœci wykonania pod³o¿a zgodnie z dokumentacj¹ techniczn¹ oraz wymaganiami szczegó³owymi dla pod³o¿a,
+* po zakoñczeniu robót budowlanych towarzysz¹cych wykonywanych na powierzchni po³aci (osadzenie systemowych odp³ywów, przesmarowanie pokryw kominów, malowanie tynków kominów), 
+* papê termozgrzewaln¹ wierzchniego krycia gr. 5,2mm zgrzewaæ na ca³ej powierzchni do pod³o¿a. Zak³ady boczne o szerokoœci pasa bez posypki mineralnej zgrzaæ tak, aby w spoinie wyst¹pi³ wyp³yw bitumu o szer. 0,5 – 1,0cm. Zak³ady czo³owe zgrzewaæ na szerokoœci 15cm, po uprzednim przetopieniu powierzchni i wciœniêciu posypki w bitum,
+* na œcianach i innych powierzchniach pionowych wykonywane obróbki z papy termozgrzewalnej powinna byæ wyprowadzona minimum 50 mm ponad warstwê poprzedni¹ i ostatnia warstwa winna byæ zamocowana listw¹ dociskow¹ z blachy ocynkowanej na ko³ki do danego elementu, listwê nale¿y wpuœciæ w tynk i uszczelniæ mas¹ bitumiczn¹ od góry. 
+
+b) Izolacje termiczne:
+  Projektuje siê wykonanie termoizolacji dla pomieszczeñ ogrzewanych:
+*     œcian zewnêtrznych  w pomieszczeniach u¿ytkowych na wszystkich kondygnacjach (od œrodka)-  z p³yt ze sztywnej pianki poliizocyjanurowej (PIR) pokrytej obustronnie ok³adzinami paroizolacyjnymi i p³yt¹ gipsowo-kartonow¹ Eurothane gr. 5,0cm  (? = 0,022 W/mK), reakcja na ogieñ B1d0 w-g  EN 13501-1,
+*      œcian zewnêtrznych  korytarzy na wszystkich kondygnacjach (od œrodka)-  z betonu komórkowego MULTIPOR Xella gr.6,0cm  (? = 0,040 W/mK), reakcja na ogieñ A1 w-g  EN 13501-1, lub  izolacja Alutherm® Quatro gr.1,0cm (? = 0,002 W/mK), reakcja na ogieñ B1 w-g  EN 13501-1,+ p³yta GKF EI30 – mocowane do œcian na wkrêty, 
+*     œcian zewnêtrznych Mini Spa zag³êbionych w gruncie – styropian ekstrudowany  np. XPS 300 (z atestem na kontakt z gruntem) gr. 16,0cm                      (? = 0,034 W/mK) + os³ona z folii kube³kowej, Uc(max) =0,2W/m2K,        
+*     œcian bocznych okien mansardowych poddasza- we³na mineralna twarda gr. 16,0cm  (? = 0,034 W/mK) + tynk strukturalny, 
+*     œcian wewnêtrznych piwnicy (oddzielaj¹cych pomieszczenia nieogrzewane) w p³ytami z we³ny mineralnej gr. 10,0cm na konstrukcji aluminiowej +obudowa p³ytami GKF w wersji wodoodpornej (?= 0,036W/m2K),
+*      posadzek na gruncie: styropianem  estrudowanym wodoodpornym XPS gr.6,0cm (? = 0,35W/m2K), Uc(max) =0,266W/m2K,      
+*     posadzek poddasza u¿ytkowego- we³na mineralna twarda w p³ytach o zró¿nicowanej gruboœci od 27,0cm do 4,0cm pomiêdzy istniej¹cymi podwalinami (dodatkowo- jako wype³nienie przestrzeni pomiêdzy nimi), 
+*      dachu wielospadowego- we³na mineralna  ISOVER gr.22cm                                            (?= 0,033W/(m2K),  U= 0,15W/(m2K),            
+*     œcian mansardowych : we³n¹ mineraln¹ gr.16,0cm (?= 0,032W/(m2K),                              U= 0,2W/(m2K)
+*     dachu skoœnego wielospadowego i dachu nad Mini Spa- we³na mineralna                       gr. 22,0cm , (?= 0,032W/(m2K), U= 0,15W/(m2K)
+
+            c) Izolacje akustyczne w posadzkach miêdzykondygnacyjnych:
+- w posadzkach miêdzykondygnacyjnych- styropian gr.4,0cm,
+- w posadzce poddasza (pomiêdzy podwalinami)- we³na mineralna twarda
+   o gr. od 4,0cm do 30,0cm.
+
+d) Izolacje przeciwpo¿arowe:   
+*     wiêŸby dachowej- izolacja pow³okowa (malowanie) wszystkich elementów (podwalin, s³upów, belek, krokwi, itp.) do trudnozapalnoœci + 1 x GKF (EI30),
+*     po³aci dachowych od strony pomieszczenia- malowanie jak wy¿ej+ 1 x GKF (EI30),
+*      belek stalowych nadpro¿y w œcianach istniej¹cych (dla nowych nadpro¿y)- obudowa p³ytami p-po¿ (np. Promat) do klasy EI120 dla œcian noœnych oraz do klasy EI30 dla œcianek dzia³owych zlokalizowanych wzd³u¿ dróg ewakuacyjnych, 
+*     dla wszystkich przepustów instalacyjnych o przekroju wiêkszym ni¿ 40mm- z piwnicy oraz z pomieszczeñ technicznych stanowi¹cych odrêbne strefy po¿arowe do innych pomieszczeñ -systemowe, typowe obejmy pêczniej¹ce pod wp³ywem temperatury lub wype³niacze pêczniej¹ce pod wp³ywem temperatury- dostêpne w handlu
+*        dla istniej¹cych porêczy drewnianych w klatkach schodowych-  malowanie farb¹ ochronn¹  wewnêtrznego stosowania przeznaczon¹  dla elementów drewnianych - do uzyskania trudnozapalnoœci,
+     Uwaga: 
+-   wy¿ej wymienione zabezpieczenia  nale¿y wykonaæ w certyfikowanym
+                                               systemie  zabezpieczeñ p-po¿ dopuszczonym do stosowania na rynku
+                                               polskim i UE.
+
+e)  Izolacje antykorozyjne elementów stalowych: 
+      Dla elementów stalowych- czyszczenie metod¹ strumieniowo-œciern¹, do stopnia Sa 21/2   w/g PN- ISO 8501-1: 1996 - malowanie;
+*      farb¹ antykorozyjn¹, dwusk³adnikow¹, podk³adow¹ typu o gruboœæ 60?m, k³adzion¹ 1- krotnie,
+*      farb¹ nawierzchniow¹,k³adzion¹ 2 -krotnie o gruboœci 50?m,  
+*      ³¹czna gruboœæ pow³ok malarskich- 110-120?m.
+
+  5.5.5. Wykoñczenie wewnêtrzne budynku:
+
+           a) Malowanie œcian wewnêtrznych:
+*     w miejscach widocznych zacieków i uszkodzeñ- wykonanie odgrzybiana œcian,
+*     wed³ug wykazu zawartego w tabeli pomieszczeñ,,
+
+          b) Wyk³adziny œcienne:
+* dla pomieszczeñ zaplecza kuchennego (do sufitu podwieszonego)- p³ytki ceramiczne œcienne na h=2,05m, 
+* dla pomieszczeñ sanitarnych ogólnodostêpnych  i w SPA-  p³ytki ceramiczne œcienne na h=2,05m, 
+* dla pomieszczeñ sanitarnych w zespo³ach mieszkalnych oraz dla szatni dla pracowników z zapleczem sanitarnym- bezfugowa wielowarstwowa, odporna na dzia³anie mikroorganizmów wyk³adzina PCV do wysokoœci h=2,05m, 
+* dla brudowników i pom. sprz¹taczek oraz kabin natryskowych- bezfugowa wielowarstwowawa wyk³adzina œcienna PCV (jak wy¿ej) na ca³¹ wysokoœæ pomieszczenia (do sufitu podwieszonego),
+* dla pom. socjalnych- p³ytki ceramiczne lub panele szklane pomiêdzy szafkami kuchennymi, 
+
+   c)  Sufity podwieszone:
+*     sufity podwieszone w pomieszczeniach ogólnodostêpnych (w miejscach oznaczonych na rysunkach): z akustycznych p³yt mineralnych, demontowalne, modu³owe 60x60cm,  na konstrukcji aluminiowej- spe³niaj¹ce wymagania ochrony przeciwpo¿arowej budynku- wykonane z materia³u co najmniej niezapalnego, niekapi¹cego i nie odpadaj¹cego pod wp³ywem ognia (musz¹ byæ spe³nione wszystkie z tych wymagañ), klasa reakcji na ogieñ odpowiadaj¹ca klasie niezapalnoœci; min. klasa A2-s2.
+*      sufity podwieszone na drogach ewakuacyjnych- systemowe, w klasie EI30  (certyfikowane),
+*      sufity podwieszone w pomieszczeniach SPA, szatniach, pomieszczeniach  sanitarnych i socjalnych, brudownikach, pom. sprz¹taczek-  j.w, wodoodporne na ruszcie aluminiowym, malowane farbami o podwy¿szonej wytrzyma³oœci na wilgoæ.
+*      podkonstrukcja sufitów podwieszanych- stalowa lub aluminiowa, systemowa, na drogach ewakuacyjnych- systemowa, w klasie EI30, 
+
+     Uwaga : 
+*     sufity podwieszone spe³niaæ musz¹ wymagania ochrony przeciwpo¿arowej budynku, opisane w pkt. 13 niniejszej dokumentacji (niepalne, niekapi¹ce, itp.),
+*      podkonstrukcja nowych sufitów podwieszanych- stalowa lub aluminiowa, systemowa,
+*      wszystkie sufity podwieszone- demontowalne z uwagi na ukryte za nimi instalacje, 
+*       przy ofertowaniu nale¿y uwzglêdniæ wzmocnienia konstrukcyjne do monta¿u opraw oœwietleniowych w tych sufitach,
+*    we wszystkich typach sufitów podwieszonych wymagana jest lokalizacja systemowych w³azów rewizyjnych, umo¿liwiaj¹cych dostêp do wszystkich urz¹dzeñ technicznych, wymagaj¹cych okresowych rewizji i konserwacji,
+
+     d) Posadzki
+*     istniej¹ce posadzki na gruncie  podlegaj¹ usuniêciu w ca³oœci (z uwagi na brak izolacji przeciwwilgociowej i termicznej). Nowe posadzki- z izolacj¹ termiczna o wspó³czynniku Uc(max) =0,30W/m2K
+*     posadzki projektowane- w-g wykazu w tabeli.
+*     dla wszystkich posadzek- cokoliki o wysokoœci min.10cm,
+*    posadzki w pomieszczeniach porz¹dkowych i sanitarnych ogólnodostêpnych - z wpustami pod³ogowymi, z nachyleniem min.1% w kierunku wpustów. Górny poziom posadzki przyj¹æ w/g jej rzêdnej na wejœciu do pomieszczenia,
+*     w serwerowni- posadzka  antyelektrostatyczna, systemowa, certyfikowana dla serwerowni i pomieszczeñ DATA CENTER.
+
+         ZESTAWIENIE POMIESZCZEÑ I ICH WYKOÑCZENIA:
+Nazwa pomieszczeniaPosadzki - Œciany Sufity - malowane w kolorze bia³ym Klatki schodoweposadzka  z wysokiej jakoœci p³ytek gres  antypoœlizgowych,  IV klasa œcieralnoœci, farba lateksowa odporna na szorowaniefarba akrylowaPomieszczenia techniczne:  rozdzielnia elektryczna, UPS, magazyny techniczne, pomieszczenia uzdatniania wodyp³ytki gres  IV klasa œcieralnoœci, antypoœlizgowe 
+farba lateksowa odporna na szorowanie, farba akrylowaPomieszczenia magazynu odpadów medycznych p³ytki gres  IV klasa œcieralnoœci, antypoœlizgowe 
+P³ytki ceramiczne œcienne lub wyk³adzina œcienna PCV na ca³¹ wysokoœæ pomieszczenia   farba akrylowaPrzedsionki, hol g³ówny, recepcja, poczekalnia,  komunikacja ogólnodostêpna, jadalnia, kaplica, biblioteka, czytelnia, ,posadzka  z wysokiej jakoœci p³ytek gres  antypoœlizgowych IV klasa œcieralnoœci. (mrozoodpornych w wiatro³apach),farba lateksowa odporna na szorowanie, sufit powieszony z p³yt prasowanych we³ny mineralnej-  malowany  farb¹ akrylow¹ w kolorze bia³ymPomieszczenia SPA,posadzka  z wysokiej jakoœci p³ytek gres  antypoœlizgowych  IV klasa œcieralnoœci.farba dla pomieszczeñ o podwy¿szonej wilgotnoœci, sufit powieszony z p³yt prasowanych we³ny mineralnej-  malowany  farb¹ dla  pomieszczeñ o podwy¿szonej wilgotnoœci-  w kolorze bia³ymZespo³y mieszkalne, wyk³adzina dywanowa- niepalna  w p³ytkach  przeznaczona dla obiektów u¿ytecznoœci publicznej, farba lateksowa odporna na szorowanie, sufit powieszony z p³yt prasowanych we³ny mineralnejPokoje biurowe,wyk³adzina dywanowa niepalna lub trudno zapalna  z coko³em 10cm, o wysokiej  wytrzyma³oœci na œcieranie i uszkodzenia mechaniczne, przeznaczona dla obiektów u¿ytecznoœci publicznejfarba akrylowa odporna na zmywanie, sufit powieszony z p³yt prasowanych we³ny mineralnej-  malowany  farb¹ akrylow¹ w kolorze bia³ymPokoje lekarskie, pokoje pielêgniarek, fizjoterapii, Post Mortem, kompaktowe winylowa wyk³adzina homogeniczne,  jednorodna o gruboœci 2mm,  grupa œcieralnoœci P, klasa u¿ytkowa 34/43,  zapewniaj¹ca ³atwe czyszczenie, odpornoœæ na poœlizg R10. P³ytki ceramiczne przy umywalkach w pasie 1,0m dooko³a + farba akrylowa odporna na zmywanie, sufit powieszony z p³yt prasowanych we³ny mineralnej-  malowany  farb¹ akrylow¹ w kolorze bia³ymPomieszczeni zaplecza kuchennego posadzka betonowa malowana farb¹ epoksydow¹, utwardzona, zmywalna, niepyl¹ca, P³ytki ceramiczne œcienne lub wyk³adzina œcienna PCV do wysokoœci sufitu podwieszonego, powy¿ej malowane farb¹ akrylow¹,  farba akrylowa w kolorze bia³ymPomieszczenia socjalne kompaktowe winylowa wyk³adzina homogeniczne,  jednorodna o gruboœci 2mm,  grupa œcieralnoœci P, klasa u¿ytkowa 34/43,  zapewniaj¹ca ³atwe czyszczenie, odpornoœæ na poœlizg R10. P³ytki ceramiczne w pasie szafek kuchennych + farba akrylowa odporna na zmywanie, sufit powieszony z p³yt prasowanych we³ny mineralnej-  malowany  farb¹ akrylow¹ w kolorze bia³ymSanitariaty w zespo³ach mieszkalnych i dla pracowników p³ytki ceramiczne pod³ogowe antypoœligowe, IV klasa œcieralnoœcip³ytki ceramiczne lub wyk³adzina œcienna PCV do sufitu podwieszonego, powy¿ej malowane farb¹ akrylow¹, sufit powieszony, modu³owy wodoodporny, kolor bia³y, Sanitariaty ogólnodostêpne p³ytki ceramiczne pod³ogowe antypoœligowe, IV klasa œcieralnoœcip³ytki ceramiczne  do sufitu podwieszonego, powy¿ej malowane farb¹ akrylow¹, sufit powieszony, modu³owy wodoodporny, kolor bia³y, Pomieszczenia sprz¹taczek, pomieszczenia porz¹dkowe, p³ytki gres  IV klasa œcieralnoœci, antypoœlizgowe , kolor jednolity jasny szary, p³ytki ceramiczne lub wyk³adzina œcienna PCV do wys. sufitu podwieszonego, powy¿ej malowane farb¹ akrylow¹- kolor bia³ysufit powieszony z p³yt prasowanych we³ny mineralnej-  malowany  farb¹ akrylow¹ w kolorze bia³ymSzatnie dla pracowników i dla SPA, p³ytki ceramiczne pod³ogowe antypoœlizgowe, IV klasa œcieralnoœci, kolor jednolity jasny szary, p³ytki ceramiczne lub wyk³adzina œcienna PCV do wys. sufitu podwieszonego, powy¿ej malowane farb¹ akrylow¹- kolor bia³ysufit powieszony z p³yt prasowanych we³ny mineralnej-  malowany  farb¹ akrylow¹ w kolorze bia³ymSale æwiczeñwyk³adzina elastomerowo-poliuretanowa  dla obiektów sportowych o w³asnoœciach samogasn¹cych w p³ytkach typu puzzle.   malowane farb¹ akrylow¹- kolor bia³ysufit powieszony z p³yt prasowanych we³ny mineralnej + strop ukoœny-  malowany  farb¹ akrylow¹ w kolorze bia³ymSerwerownia Posadzka typu Data Centermalowane farb¹ akrylow¹- kolor bia³ysufit powieszony z p³yt prasowanych we³ny mineralnej + strop ukoœny-  malowany  farb¹ akrylow¹ w kolorze bia³ym
+UWAGA:
+. dla wszystkich posadzek w pomieszczeniach mokrych-  wykonanie izolacji przeciwwilgociowej,
+. dla wszystkich posadzek- cokoliki o wysokoœci min. 10,0cm, 
+.  wykoñczenie korytarza, powierzchni œcian, pod³óg- w jednolitych barwach, bez wzorów, 
+
+      5.5.7. Okna:
+* okna i drzwi balkonowe: PCV lub drewniane, podwójnie szklone szk³em zespolonym o izolacyjnoœci termicznej U(max) ?0,90W/m2K . Okna oznaczone w projekcie wewnêtrznych instalacji wentylacji mechanicznej- z nawiewnikami wentylacyjnymi w ramie okiennej.  Kolor - bia³y. Okucia uchylno- rozwieralne (dla okien i drzwi balkonowych) umo¿liwiaj¹ce rozszczelnienie okna, wyposa¿one w nawiewniki higrosterowalne (z mo¿liwoœci¹ blokady w pozycji minimalnego, sta³ego dop³ywu powietrza). Okna i drzwi balkonowe w miejscu istniej¹cych okien stylizowanych historycznych - z poprzeczk¹ poziom¹ i s³upkiem œrodkowym pionowym- w-g indywidualnego wykonania (nawi¹zuj¹ce do okien istniej¹cych), 
+* okna i drzwi balkonowe na granicy stref po¿arowych: stalowe, nieotwieralne, w klasie EI60, podwójnie szklone szk³em zespolonym o izolacyjnoœci termicznej U(max) ?0,90W/m2K, systemowe,  w kolorze bia³ym , a w podcieniach parteru na elewacji frontowej- w kolorze ciemny orzech (br¹zowym), 
+* okna oddymiajace i napowietrzaj¹ce  dla klatek schodowych- stalowe podwójnie szklone szk³em zespolonym o izolacyjnoœci termicznej U(max) ?0,90W/m2K, systemowe, certyfikowane przystosowane do funkcji oddymiania, w kolorze bia³ym ,
+* klapy oddymiaj¹ce dla klatek schodowych– systemowe, z modu³ow¹ podstaw¹ wykonan¹, z owiewkami, o  stopniu izolacyjnoœci termicznej do 0,9W/(m?K), o odpornoœci na dzia³anie wysokiej temperatury 300 °C, z pewnoœci¹ dzia³ania pod obci¹¿eniem œniegiem- 750 N/m2, 800 N/m2 lub 950 N/m2 , kopu³a z poliwêglanu litego. Klapy z funkcj¹ wy³azu dachowego, malowane fabrycznie w kolorze jasnego br¹zu, zbli¿onym do koloru dachówki, systemowe, certyfikowane, 
+* systemy sterowania oddymianiem dla klap i okien:
+*   automatyczny - poprzez bezpiecznik termiczny w klapie,
+*   rêczny – poprzez  u¿ycie rêcznego przycisku oddymiania RPO,
+*   automatyczny poprzez sygna³ SSP-  zewnêtrzny impuls z systemu sygnalizacji po¿aru (SSP) przesy³any do elektromagnesu zainstalowanego w skrzynce alarmowej,
+* okna dachowe (naœwietla) dla pomieszczenia  SPA: czterospadowe lub kopu³kowe podwójnie szklone szk³em zespolonym o izolacyjnoœci termicznej U(max) ?1,1W/m2K, w kolorze bia³ym ,
+* parapety okienne wewnêtrzne- z PCV bia³e, 
+* parapety zewnêtrzne- z blachy tytan-cynk w naturalnym kolorze, 
+
+       5.5.8. Drzwi:
+             a) drzwi zewnêtrzne:
+* wejœciowe do budynku (wejœcie g³ówne, wejœcia boczne, wejœcia do zaplecza kuchennego w piwnicy) drewniane  czêœciowo przeszklone (podwójnie szklone szk³em zespolonym) o izolacyjnoœci termicznej U(max) ?0,90W/m2K, malowane lakierem niekryj¹cym (widoczne s³oje) w kolorze naturalnym ciemnego br¹zu (zbli¿onym do RAL 8028).
+* drzwi zewnêtrzne do 6 klatek schodowych pe³ni¹ funkcjê jej napowietrzania i wyposa¿one s¹ w:
+        -    elektrozaczep rewersyjny (dzia³aj¹cy na przerwê pr¹dow¹- dla ich
+             otwarcia przez system SSP),
+        -    samozamykacz zewnêtrzny,
+        -    na obu skrzyd³ach napêd- si³owniki uniwersalne DDS54/500 
+             (1/4A, 24V DS)
+        -     zamek  elektromotoryczny Assa Abloy
+Uwaga: 
+* drzwi zewnêtrzne do 6 klatek schodowych z uwagi na ich funkcjê oddymiaj¹c¹ wymagaj¹ zapewnienia 10cm przestrzeni górnej dla monta¿u mechanizmu ich automatycznego otwarcia przez system SSP po alarmie po¿arowym II stopnia.
+
+b) drzwi wewnêtrzne:
+* stolarka i œlusarka drzwiowa:
+* drzwi wewnêtrzne- drewniane, p³ycinowe wzmocnione konstrukcyjnie, kompletne z oœcie¿nic¹, okleinowane (skrzyd³a i oœcie¿nice) w kolorze naturalnego drewna, 
+* drzwi do pomieszczeñ sanitarnych i socjalnych- j. wy¿ej, ze szczelin¹ wentylacyjn¹ doln¹,
+* drzwi z korytarzy do pomieszczeñ mieszkalnych i gabinetów- jak wy¿ej, o podwy¿szonej izolacyjnoœci akustycznej (R´A1=35dB), 
+* drzwi wewnêtrzne w czêœci kuchennej- PCV,  pe³ne, wzmocnione konstrukcyjnie, kompletne z oœcie¿nic¹, w kolorze bia³ym, 
+* do wszystkich pomieszczeñ technicznych: drzwi stalowe, pe³ne, nieocieplone, EI60 (systemowe) dodatkowo z  klas¹ dymoszczelnoœci Sm  z samozamykaczami, w kolorze RAL 7047 (Jasny szary),
+* drzwi wewnêtrzne do klatek schodowych: aluminiowe , przeszklone, nieocieplone, EIS30 (systemowe), z  klas¹ dymoszczelnoœci Sm  z samozamykaczami  w kolorze RAL 7047 (Jasny szary),
+* w korytarzu frontowym na II piêtrze- drzwi dymoszczelne, systemowe, aluminiowe , przeszklone, nieocieplone, w kolorze  RAL 7047 (Jasny szary)
+             UWAGA: 
+*  na rysunkach oznaczono wymagan¹  szerokoœæ otworu drzwiowego oraz przyjêto dla nich oœcie¿nice o szerokoœci po 5cmlub 10cm po ka¿dej stronie,
+* œwiat³o otworu w murze dostosowaæ do wybranego przez wykonawcê rodzaju drzwi i ich oœcie¿nic. Je¿eli oœcie¿nice bêd¹ szersze ni¿ 5cmlub 10cm- otwór w murze nale¿y powiêkszyæ odpowiednio. Rodzaj montowanych drzwi i szerokoœæ ich oœcie¿nic nale¿y znaæ przez wykonaniem dla nich otworu œciennego, 
+* wszystkie drzwi z odbojnikami, 
+* wspó³czynnik izolacyjnoœci akustycznej dla drzwi do pomieszczeñ mieszkalnych i  biurowych powinien wynosiæ  min. Rw=30dB,
+* nie dopuszcza siê stosowania progów, drzwi wahad³owych i zamków mog¹cych powodowaæ zaczepianie siê o nie,
+* wszystkie drzwi w klasie EI60 i EI30 i dymoszczelnie znajduj¹ce siê na korytarzach i w przechodnich klatkach schodowych – przystosowane do funkcjonowania w pozycji „stale otwartej”. Ich zamkniêcie zostanie zrealizowane przez system SSP przy zadzia³aniu alarmu po¿arowego II stopnia.
+* przed zamówieniem nowych drzwi u producenta nale¿y bezwzglêdnie sprawdziæ w projektach wykonawczych systemów KD (kontroli dostêpu) i SSWiN (sygnalizacji w³amania), które posiadaj¹ klauzulê  „niejawn¹”- które drzwi zewnêtrzne musz¹ byæ przystosowane do monta¿u (w nich) kontraktonów dla w/w systemów bezpieczeñstwa, 
+
+         5.5.9. Dachy:
+ Istniej¹cy kszta³t dachu pozostaje bez zmian. Projektuje siê na nim:
+* wymianê – na fragmentach- istniej¹cej wiêŸby dachowej z wykonaniem nowych wymianów- dla monta¿u klap oddymiaj¹cych,
+* zabezpieczenie przeciwpo¿arowe ca³ej wiêŸby dachowej drewnianej, 
+* wyprowadzenie ponad dach nowych przewodów wentylacyjnych prefabrykowanych ocieplonych we³na mineraln¹ gr 6,0cm, 
+* wykonanie pokrycia dachu g³ównego, daszków nam mansardami i lukarnami  z dachówki karpiówki w kolorze ceglanym uk³adanej podwójnie w koronkê, 
+* wykonanie nowych œcianek bocznych mansard okiennych- lekkich, z wykoñczonych od œrodka 2 x GKF + we³na mineralna twarda gr. 16,0cm  + tynk strukturalny w kolorze œcian budynku,  
+* wykonanie nowego pokrycia dachowego z blachy tytan-cynk gr. 0,6 na dachach wie¿yczek, 
+* wykonanie nowej instalacji odgromowej- wed³ug projektu bran¿owego, 
+* monta¿ – na dachach- systemowych uchwytów dla mocowania lin asekuracyjnych dla pracy ludzi na dachu (monta¿ do kominów morowanych lub do krokwi dachowych), 
+
+ Istniej¹cy kszta³t dachu ni¿szego nad zabudowanymi wnêkami  (na I piêtrze) pozostaje bez zmian.  Projektuje siê na nim:
+* wymianê s³upków oraz istniej¹cej podwaliny na now¹ drewnian¹ 14x16cm, 
+* wymianê krokwi dachowych na nowe, drewniane 25x8cm, 
+* zabezpieczenie przeciwpo¿arowe ca³ej wiêŸby dachowej drewnianej, 
+* monta¿ (do spodu) p³yty GKF EI30, 
+* wykonanie izolacji z folii jednostronnie paroszczelnej, 
+* wykonanie izolacji termicznej dachu z we³ny mineralnej gr. 25,0cm, 
+* wykonanie izolacji z folii jednostronnie paroszczelnej, 
+* wykonanie deskowania pe³nego – deski gr.2,5cm, 
+* wykonanie pokrycia dachu z blachy tytan-cynk uk³adanej na r¹bek, 
+* wykonanie nowej instalacji odgromowej- wed³ug projektu bran¿owego, 
+* monta¿ – na dachach- systemowych uchwytów dla mocowania lin asekuracyjnych dla pracy ludzi na dachu (monta¿ do kominów morowanych lub do krokwi dachowych), 
+
+ Istniej¹cy kszta³t  dachu wie¿yczek (nad II piêtrem) pozostaje bez zmian.  Projektuje siê na nim:
+* zabezpieczenie przeciwpo¿arowe ca³ej wiêŸby dachowej drewnianej, 
+* monta¿ (do spodu) p³yty GKF EI30, 
+* wykonanie deskowania pe³nego – deski gr.2,5cm, 
+* wykonanie pokrycia dachu z blachy tytan-cynk uk³adanej na r¹bek, 
+* wykonanie nowej instalacji odgromowej- wed³ug projektu bran¿owego, 
+* monta¿ – na dachach- systemowych uchwytów dla mocowania lin asekuracyjnych dla pracy ludzi na dachu (monta¿ do kominów morowanych lub do krokwi dachowych), 
+
+     5.5.10. Inne elementy wykoñczenia budynku:
+* balustrady wewnêtrzne- stalowe, o wysokoœci min. 110cm, stalowe, malowane proszkowo, fabrycznie w kolorze szarego be¿u- RAL 7036. Pochwyty balustrad- drewniane, 
+* porêcze- stalowe,  stalowe, malowane proszkowo,  fabrycznie w kolorze szarego be¿u- RAL 7036  z pochwytem drewnianym,
+* drabinki stalowe wewnêtrzne- malowane w kolorze RAL 7036, 
+* skrzynki pocztowe- ze stali nierdzewnej malowanej proszkowo- zgodne z PN-EN 13724:2005,  malowane w kolorze RAL 7036, 
+* wycieraczki: 
+* wewnêtrzne: maty wycieraczek miêkkie, typowe, systemowe, w obni¿eniach w posadzkach, 
+* zewnêtrzne- stalowe, typowe, w obni¿eniach w posadzkach, 
+* elementy stalowe: istniej¹ce, przewidziane do zachowania: czyszczenie elementów stalowych metod¹ strumieniowo-œciern¹, do stopnia Sa 21/2   w/g PN- ISO 8501-1: 1996 oraz malowanie;
+* farb¹ antykorozyjn¹, dwusk³adnikow¹, podk³adow¹ typu o gruboœæ 60?m, k³adzion¹ 1- krotnie, w kolorze RAL 1036
+* farb¹ nawierzchniow¹,k³adzion¹ 2 -krotnie, o gruboœci 50?m,  
+* ³¹czna gruboœæ pow³ok malarskich- 110-120?m.
+
+ 6. Urz¹dzenia dŸwigowe:
+     6.1. W budynku projektuje siê 2 urz¹dzenia dŸwigowe wewnêtrzne:
+a) windê osobowo- ³ó¿kow¹ szpitaln¹ elektryczn¹, 2 przystankow¹ (³¹cz¹c¹ kondygnacje parteru i I piêtra), otwierana dwustronnie- na przestrza³ z funkcj¹ jazdy szpitalnej. Wymiary szybu- 3060x2030mm (z uwzglêdnieniem tynków gr. 15mm na œcianach murowanych- od wnêtrza szybu). Nadszybie o wysokoœci- 4750mm (od posadzki ostatniego przystanku). Podszybie 1125mm od poziomu 0,00 do jego dna-  ¿elbetowe wylewana na mokro (uwaga: lokalizacja poni¿ej lustra wód gruntowych).  Szyb wentylowany mechanicznie. Kabina o wymiarach 1300x2400x2100mm, wykonana ze stali nierdzewnej, drzwi 1200x200mm teleskopowe.
+DŸwig: UdŸwig- 1500kg, 15 osób, prêdkoœæ 1,0m.s, drzwi – bez klasy EI (szt.4) z zabezpieczeniem œwietlnym, moc silnika- 13,6kW, zasilania TN-S( 3L+PE+N), 400V, 50Hz, 230V, falownik rekrutacyjny, alarm w kabinie, intercom, telefon, informacja g³osowa w kabinie, panel dla osób niewidz¹cych, oœwietlenie LED, alarm na dachu kabiny. DŸwig sterowany przez system SSP- funkcja zjazdu na parter przy zadzia³aniu alarmu po¿arowego II stopnia.  DŸwig referencyjny: Schindler 5000 o zmniejszonej szerokoœci szybu
+
+b) windê osobow¹, elektryczna,  4 przystankowa,  obs³uguj¹c¹ wszystkie kondygnacje w budynku, otwierana jednostronne, dostosowan¹ dla osób niepe³nosprawnych (na wózkach inwalidzkich) i do przewozu do 8 osób. Wymiary szybu- 1800x1630mm (z uwzglêdnieniem tynków gr. 15mm na œcianach murowanych- od wnêtrza szybu) Nadszybie o wysokoœci- 2900mm (od posadzki ostatniego przystanku). Podszybie-1100mm od poziomu 0,00m do jego dna-  ¿elbetowe wylewana na mokro (uwaga: lokalizacja poni¿ej lustra wód gruntowych). Szyb wentylowany mechanicznie, bez maszynowni. Kabina o wymiarach 1100x1400x2139mm, wykonana ze stali nierdzewnej, drzwi 900x200mm teleskopowe.
+DŸwig: UdŸwig- 630kg, 8 osób, prêdkoœæ 1,0m/s, drzwi – bez klasy EI (szt.4) z zabezpieczeniem œwietlnym, moc silnika- 4,6kW, zasilanie TN-S (3L+PE+N), 400V, 50Hz, 230V, falownik rekrutacyjny, alarm w kabinie,  intercom, telefon, informacja g³osowa w kabinie, panel dla osób niewidz¹cych, oœwietlenie LED, alarm na dachu kabiny. DŸwig sterowany przez system SSP- funkcja zjazdu na parter przy zadzia³aniu alarmu po¿arowego II stopnia.  DŸwig referencyjny: Schindler  3000 o zmniejszonej szerokoœci szybu
+
+6.2. Ponadto w budynku projektuje siê:
+
+> podnoœnik zewnêtrzny dla osób na wózkach inwalidzkich umo¿liwiaj¹cy wjazd z poziomu terenu na poziom parteru do pomieszczenia holu g³ównego i recepcji. Podnoœnik: elektryczno- œrubowy, o udŸwigu Q= 385kg (3 osoby), wersja przelotowa (naprzeciw siebie), ze stali ocynkowanej malowanej proszkowo w
+kolorze RAL 7036, œcianki boczne ze szk³a bezpiecznego, platforma 1400x 1110mm., z opcj¹ sterowania zdalnego (z recepcji za pomoc¹ SMS), telefon, 
+                           Podnoœnik referencyjny: JURA 14.10 . 
+
+> windê (podnoœnik zewnêtrzny towarowy dla kuchni) elektryczno- œrubowy o udŸwigu Q= 300kg, wersja przelotowa (drzwi naprzeciw siebie), ze stali nierdzewnej , œcianki boczne ¿elbetowe, przystanki- sztuk 2. Wymiary szybu 1400x1120mm, nadszybie-2500mm (od zaczepów monta¿owych), maszynownia górna w szybie, podszybie 260mm. Wymiary kabiny- 1000x1000x1200mm, drzwi wychylne 1000x1200mm, zasilanie TN-S (3L+PE+N), 400V, 50Hz, 230V, 
+
+7. WYKOÑCZENIE ZEWNÊTRZNE BUDYNKU
+
+Zabytkowe elewacje remontowanego budynku Domu Seniora posiadaj¹ zachowany (w ró¿nym stanie technicznym) detal architektoniczny w postaci: obramowañ okiennych i drzwiowych, lizen, pilastrów, gzymsów, g³owic ozdobnych na pilastrach, itp. Na lizenach, w obrêbie parapetów okiennych i obramieñ okiennych elewacji budynku wystêpujê poziome dekoracyjne ryflowania w tynku. W/w elementy podlegaj¹ ochronie konserwatorskiej. 
+
+W partiach coko³owych budynku- w podcieniach arkadowych elewacji pó³nocno-zachodniej widoczne s¹ (na fragmentach) wtórnie zatynkowania dawnego kamiennego coko³u (nie widoczny jest natomiast ca³y detal tego coko³u). Powy¿sze tynki (tam, gdzie zakrywaj¹ one kamienne wykoñczenie pierwotne) nale¿y usun¹æ, ods³oniæ i wyremontowaæ pierwotny wygl¹d coko³u. 
+
+Co do zasady- nale¿y z wszystkich elewacji budynku usun¹æ wtórne elementy (wykonane w kolejnych remontach i modernizacjach), ods³oniæ historyczne, pierwotne ich wykoñczenie-  przywracaj¹c zbytkowi jego pierwotny wygl¹d. 
+
+W chwili obecnej wszystkie elewacje budynku nie posiadaj¹ ¿adnych termoizolacji. Jego œciany zewnêtrzne wykoñczone zosta³y tynkiem cementowo- wapiennym, o nieokreœlonym (obecnie) kolorze.     
+
+         7.1. Zakres prac rozbiórkowych zewnêtrznych w budynku obejmuje:
+* likwidacjê studzienek przyokiennych na wszystkich elewacjach,
+* likwidacjê zamurowaæ podcieni w bocznych skrzyd³ach budynku,
+* likwidacjê ramy zjazdowej dostawczej do pomieszczeñ dawnej kuchni (do piwnicy), 
+* likwidacja wtórnych, wspó³czesnych elementów wystroju zewnêtrznego budynku, w tym balustrad, 
+* skucie pozosta³oœci po posadzkach na tarasach  ,
+* demonta¿ stopnic lastricowych na schodach zewnêtrznych, 
+* demonta¿ drzwi zewnêtrznych, 
+* demonta¿ wszystkich okien (œciennych i dachowych mansardowych), 
+* demonta¿ elementów stalowych na œcianach elewacyjnych i na dachu, 
+* demonta¿ pokrycia dachowego z dachówki karpiówki , lat i kont³at oraz istniej¹cej izolacji termicznej  dachów (w ca³oœci).
+
+    7.2. Zakres projektowanych prac remontowych na elewacji i dachach budynku obejmuje:
+* wykonanie prac naprawczych dla tynków zewnêtrznych (skucie tynków odparzonych lub spêkanych i ich odtworzenie, naprawa spêkañ drobnych), 
+* uzupe³nienie tynków (tam, gdzie ich brakuje). Nowe tynki posiadaæ winny strukturê i granulacjê zbli¿on¹ do tynków istniej¹cych (musz¹ tworzyæ na elewacji jednorodne wykoñczenie), 
+* wykonanie nowych tynków cementowo- wapiennych na œcianach piwnicy w miejscu wyburzonych studzienek podokiennych (na styku likwidowanych œcianek prostopad³ych) oraz na œcianach projektowanych,
+* dla pomieszczeñ nieogrzewanych w piwnicy: wykonanie tynku cementowo- wapiennego+ wykonanie nowej  izolacji pow³okowej przeciwwilgociowej pionowej zasypywanych œcian - mas¹ izolacyjn¹ na bazie cementu (typu Hydrostop) oraz ich os³ona foli¹ kube³kow¹,
+* dla pomieszczeñ  ogrzewanych Mini Spa: wykonanie tynku cementowo- wapiennego+  izolacji pow³okowej przeciwwilgociowej pionowej œcian- mas¹ izolacyjn¹ na bazie cementu (typu Hydrostop) + izolacji termicznej ze styropianu ekstrudowanego (dopuszczonego do kontaktu z gruntem) + ich os³ona foli¹ kube³kow¹,
+* zasypanie wykopów po likwidowanych studzienkach przyokiennych z zagêszczeniem gruntu do Ip= 0,99, 
+* wybudowanie nowych murków ¿elbetowych gr. 25cm  oraz ich zaizolowanych od strony gruntu mas¹ izolacyjn¹ na bazie cementu (typu Hydrostop)+ os³ona foli¹ kube³kow¹. Od strony widocznej- tynk strukturalny drobnoziarnisty (jak na œcianach) 
+* malowanie elewacji budynku:
+* cokó³ i œciany wy¿szych kondygnacji- paroprzepuszczalny tynk renowacyjny, drobnoziarnisty w kolorze szarym (nawi¹zuj¹cy do istniej¹cego koloru elewacji), np.  farba z palety KEIM  EXCLUSIV farba nr 9490 (jasny szary) .
+* fragmenty œcian kondygnacji nadziemnych, sztukateria elewacyjna- paroprzepuszczalny tynk renowacyjny, g³adki w kolorze jasnym szarym, np. farba z palety KEIM  EXCLUSIV – farba nr 9595 (bardzo jasny szary- rozbielony), 
+
+Uwaga: 
+*  dobór kolorystyki i tonacji farb elewacyjnych podlega odrêbnemu uzgodnieniu (na etapie robót budowlanych) z WUOZ w Poznaniu, 
+
+* wykonanie posadzek: w podcieniach na elewacji frontowej i elewacji bocznych oraz na tarasie poziomu piwnicy (przy jadalni):   z kostki betonowej kwadratowej uszlachetnionej naturalnym kruszywem (kwarc, jasny granit- który wydobywany jest na powierzchniê w procesie p³ukania) w kolorze jasnym szarym, o wymiarach 16x16cm  20x20cm lub 25x25cm   - uk³adanej w prostych rzêdach oraz  krawê¿niki betonowe w kolorze jasnym szarym- zlicowane z poziomem chodnika 
+* demonta¿ - na schodach zewnêtrznych przy wejœciach do budynku i na tarasy- istniej¹cych (zniszczonych) stopni prefabrykowanych z betonu wykoñczonego lastrico wylewanym oraz oraz wykonanie  nowych stopni schodów zewnêtrznych w ok³adzinie z p³yt granitowych p³omieniowanych, gr. 6,0cm (1 stopieñ- 1 p³yta, max. 2 elementy na jednym stopniu),
+* wykonanie nowych posadzek tarasów parteru z p³ytek granitowych p³ominiowanych szarych 120x60cm , gr. 6,0cm, 
+* wykonanie nowych posadzek z p³ytek gres szarych 60x60cm , antypoœlizgowych mrozoodporny na balkonach I piêtra. Kolor p³ytek zbli¿ony do koloru œcian (jasny szary) + fugi- w kolorze p³ytek (efekt pod³ogi jednorodnej). 
+
+
+
+
+
+
+
+
+Przyk³adowy wzór p³ytek gres na balkony (kolor jasny szary, faktura g³adka) 
+
+
+
+
+
+* monta¿ nowych okien w kolorze bia³ym,
+* monta¿ nowych okien oddymiaj¹cych po³aciowych w kolorze jasnego br¹zu (zbli¿onym do koloru dachówki), 
+* monta¿ drzwi zewnêtrzne do klatek schodowych i do piwnicy: drewnianych z czêœciowym przeszkleniem w kolorze naturalnym ciemnym, zbli¿onym do                            RAL 8028,
+* monta¿ parapetów zewnêtrznych w blachy tytan-cynk w naturalnym kolorze, 
+* nowe balustrady zewnêtrzne malowane fabrycznie w kolorze szarym jasnym-                              RAL 7047. Pochwyty balustrad- drewniane, 
+* nowe obróbki blacharskie: okapów, koszy, kominów, murów ogniowych i attyk, wy³azów kominiarskich, rur wentylacyjnych, itp- z blachy tytan-cynk, w kolorze naturalnym, 
+* nowe obróbki blacharskie dla balkonów- szerokie opierzenie, przykrywaj¹ce w ca³oœci krawêdzie boczne p³yt z blachy tytan-cynk w kolorze naturalnym,
+* nowe- pozosta³e drobne elementy stalowe na elewacjach  (skrzynki instalacyjne, uchwyty do flag, itp.)- malowane w kolorze RAL 7035 (zbli¿onym do koloru tynku), 
+* nowe opaski wokó³ budynku o szerokoœci 50cm- z gresu o granulacji 8-10mm w kolorze szarym.
+
+8.  WYPOSA¯ENIE BUDYNKU
+         Opracowywany budynek nie posiada ¿adnych czynnych  instalacji wewnêtrznych, zachowa³y siê w stanie szcz¹tkowym fragmenty rur wodoci¹gowych i kanalizacyjnych.
+         Projektowanym Ÿród³em ciep³a dla budynku bêdzie nowa kot³ownia gazowa  istniej¹cy  zlokalizowany w wyodrêbnionym budynku mieszkalno- technicznym.
+         Projektuje siê: 
+a)   wewnêtrzne i zewnêtrzne instalacje wody zimnej i instalacji p-po¿ ,
+b)   stacjê uzdatniania wody dla Mini Spa, 
+c)   wewnêtrzne instalacje ciep³ej wody u¿ytkowej,
+d)  wewnêtrzne instalacje kanalizacji technologicznej dla kuchni, 
+e)  wewnêtrzne i zewnêtrzne instalacje kanalizacji sanitarnej  ogólnobudynkowej, 
+f)  zewnêtrzne instalacje kanalizacji deszczowej,
+g)  wewnêtrzne instalacje wentylacji  nawiewno – wywiewnej mechanicznej dla wybranych pomieszczeñ, 
+h)  wentylacji grawitacyjnej, 
+i)  wewnêtrzne instalacje klimatyzacji - dla wybranych pomieszczeñ, 
+j) wewnêtrzne instalacje c.o.,
+k)  wewnêtrzne instalacje elektryczne,
+l)  instalacja KPIA dla rozdzielni c.o, 
+m) indywidualne instalacje oddymiania 6 klatek schodowych, 
+n) wewnêtrzne instalacje systemu sygnalizacji po¿aru (SSP), 
+o) wewnêtrzne instalacje systemu monitoringu (CCTV), 
+p)  wewnêtrzne instalacje systemu video-domofonów,
+q) wewnêtrzne instalacje  okablowania strukturalnego LAN,  
+r)  instalacjê Cyfrowej Telewizji Naziemnej i Satelitarnej.
+
+Szczegó³owy opis w/w instalacji znajduje siê w projektach techniczno- wykonawczych bran¿owych.
+
+                
+9. OCHRONA PO¯AROWA BUDYNKU:
+
+  9.1 Dane ogólne do projektu budynku Domu Seniora: 
+*    d³ugoœæ budynku-      ok. 48,09m,
+*    szerokoœæ budynku-   ok. 87,60m,
+*     wysokoœæ budynku-   ok. 14,13m (od poziomu terenu do kalenicy, bez 
+                                       wie¿yczki), budynek œredniowysoki, 
+*    wysokoœæ wie¿yczki-  ok. 21,98m,
+*    iloœæ kondygnacji nadziemnych: 3 (w tym poddasze u¿ytkowe)
+*    iloœæ kondygnacji podziemnych: 1 (czêœciowe podpiwniczenia u¿ytkowe). 
+*    powierzchnia po¿arowa budynku: 7005,00m2, w tym:
+*   strefa A- zachodnie skrzyd³o DS – 2060m2,  
+*   strefa B- czeœæ œrodkowa- 3700m2 (przekroczona dopuszczalna               wielkoœæ strefy) ,
+*   strefa C- skrzyd³o wschodnie- 1245m2.
+Dopuszczalna powierzchnia strefy po¿arowej w budynku œredniowysokim zaliczonym do kategorii ZL II zagro¿enia ludzi wynosi 3500 m2. Wymaganie jest spe³nione, za wyj¹tkiem strefy B, której powierzchnia po¿arowa wyniesie 3700m2 i bêdzie wiêksza o 200m2 od powierzchni dopuszczalnej- na co uzyskano zgodê KW PSP w Poznaniu (Postanowienie zn WZ.52840.268.3.2022.MB z dnia 26.09.2022) .
+
+     9.2 Kwalifikacja po¿arowa budynku:
+a) Kategoria zagro¿enia ludzi. 
+  Budynek Domu Seniora zalicza siê do kategorii zagro¿enia ludzi ZL II. 
+  W obiekcie znajdowaæ siê bêdzie ³¹cznie 100 ³ó¿ek, w tym:
+- parter –    27  ³ó¿ek w pokojach pensjonariuszy,
+- I piêtro –  62 ³ó¿ek w pokojach pensjonariuszy,
+- II piêtro - 10 ³ó¿ek w pokojach pensjonariuszy.
+b) Klasa odpornoœci ogniowej. 
+Jako obiekt œredniowysoki , który powinien spe³niaæ nastêpuj¹ce wymagania klasy odpornoœci ogniowej:
+*    g³ówna konstrukcja noœna – R 120;
+*    stropy – REI 60;
+*    œciany wewnêtrzne – EI 30;
+*    œciany zewnêtrzne –  EI 60;
+*    konstrukcja dachu –  R 30: 
+*     przekrycie dachu –   RE 30.
+Elementy budynku powinny byæ nie rozprzestrzeniaj¹ce ognia (NRO). Wymagania te zostan¹ w budynku spe³nione za wyj¹tkiem drewnianej konstrukcji dachu, która nie bêdzie posiada³a klasy R30.
+
+Wymagane elementy oddzielenia przeciwpo¿arowego:
+      -  œciany i stropy oddzielenia przeciwpo¿arowego                 –   REI 120
+      -  przejœcia i przepusty                                                                 –   EI 120
+       - klapy przeciwpo¿arowe w przewodach wentylacyjnych   –  EIS 120
+       - drzwi i zamkniêcia                                                                    –  EI 60
+W budynku przewiduje siê jedno pomieszczenie: jadalni¹ w poziomie piwnicy, które mo¿e byæ przeznaczone dla jednoczesnego przebywania wiêcej ni¿ 50-ciu osób jednoczeœnie. 
+c) Zagro¿enie wybuchem pomieszczeñ oraz przestrzeni zewnêtrznych.
+W budynku nie wystêpuj¹ pomieszczenia, które mog¹ powodowaæ zagro¿enie wybuchem. 
+d) Podzia³ na strefy po¿arowe: 
+Budynek Domu Seniora o powierzchni po¿arowej wynosz¹cej ³¹cznie  7005,00m2- zosta³ podzielony na nastêpuj¹ce strefy po¿arowe: 
+                                 -  strefa A- zachodnie skrzyd³o DS – 2060m2,  
+                                 -  strefa B- czeœæ œrodkowa- 3700m2 (przekr. dopuszczalna wielkoœæ strefy),
+                       -  strefa C- skrzyd³o wschodnie- 1245m2.
+Schemat podzia³u na strefy po¿arowe oraz zestawienie powierzchni poszczególnych stref przedstawiono w czêœci rysunkowej.
+Przy wydzieleniu po¿arowym strefy po¿arowej nale¿y uwzglêdniæ nastêpuj¹ce  warunki:
+* przepusty instalacyjne w elementach oddzielenia przeciwpo¿arowego powinny mieæ klasê odpornoœci ogniowej (EI120) wymagan¹ dla tych elementów. Dopuszcza siê nieinstalowanie przepustów dla pojedynczych rur instalacji wodnych, kanalizacyjnych i ogrzewczych, wprowadzanych przez œciany i stropy do pomieszczeñ higieniczno- sanitarnych,
+* przepusty instalacyjne w elementach oddzielenia przeciwpo¿arowego powinny mieæ klasê odpornoœci ogniowej (EI120) wymagan¹ dla tych elementów. Dopuszcza siê nieinstalowanie przepustów dla pojedynczych rur instalacji wodnych, kanalizacyjnych i ogrzewczych, wprowadzanych przez œciany i stropy do pomieszczeñ higieniczno- sanitarnych,
+* przepusty instalacyjne o œrednicy powy¿ej 4 cm w œcianach i stropach, dla których jest wymagana klasa odpornoœci ogniowej co najmniej E I60 lub R E I60, powinny mieæ klasê odpornoœci ogniowej (EI) tych elementów,
+* przejœcia instalacji przez zewnêtrzne œciany budynku, znajduj¹ce siê poni¿ej poziomu terenu, powinny byæ zabezpieczone przed mo¿liwoœci¹ przenikania gazu do wnêtrza budynku,
+* przewody wentylacyjne i klimatyzacyjne w miejscu przejœcia przez elementy oddzielenia przeciwpo¿arowego powinny byæ wyposa¿one w przeciwpo¿arowe klapy odcinaj¹ce o klasie odpornoœci ogniowej EIS60 i EIS120,
+* przewody wentylacyjne i klimatyzacyjne prowadzone przez strefê po¿arow¹, której nie obs³uguj¹, powinny byæ obudowane elementami o klasie odpornoœci ogniowej wymagan¹ dla tych elementów oddzielenia przeciwpo¿arowego tych stref po¿arowych z uwagi na kryterium szczelnoœci ogniowej, izolacyjnoœci ogniowej i dymoszczelnoœci EIS lub powinny posiadaæ klapy odcinaj¹ce,
+* zastosowane do zabezpieczenia przeciwpo¿arowego przejœæ instalacyjnych i przepustów systemy powinny posiadaæ dopuszczenie do stosowania w postaci Certyfikatów Zgodnoœci ITB i wykonane zostan¹ zgodnie z opisem zawartym w odpowiednich Aprobatach Technicznych.
+
+e)  Wystrój wnêtrz
+W obiekcie wystêpowaæ bêd¹ materia³y charakterystyczne dla wystroi pomieszczeñ biurowych.
+Œciany i sufity podwieszone na drogach ewakuacyjnych- w klasie min. EI30.
+Elementy wykoñczenia wnêtrz jak równie¿ posadzki, które bêd¹ wykonane z materia³ów palnych, maj¹ spe³niaæ wymagania reakcji na ogieñ w euroklasie- co najmniej C/Cf l–s1/s2 (niedymi¹ce, nietoksyczne) a w obszarach korytarzy co najmniej C/Cfl–s1. W przypadku podwieszanych sufitów- co najmniej A2-s1,d0. Sufity podwieszone nale¿y wykonywaæ z materia³ów niepalnych lub niezapalnych, niekapi¹cych i nieodpadaj¹cych pod wp³ywem ognia. 
+W budynku zabronione jest: 
+* stosowanie do wykoñczenia wnêtrz materia³ów i wyrobów ³atwo zapalnych, których produkty rozk³adu termicznego s¹ bardzo toksyczne lub intensywnie dymi¹ce,
+* stosowania materia³ów ³atwo zapalnych na drogach komunikacji ogólnej, s³u¿¹cych celom ewakuacji (za ³atwo zapalne uwa¿a siê materia³y, których w³aœciwoœci okreœlone s¹ w badaniach zgodnie z Polskimi Normami odnosz¹cymi siê do zapalnoœci i rozprzestrzeniania p³omienia przez wyroby w³ókiennicze, nie spe³niaj¹ co najmniej jednego z kryteriów: ti ? 4s, ts ? 30s, nie nastêpuje przepalenie trzeciej nitki, nie wystêpuj¹ p³on¹ce krople),
+* stosowania w pomieszczeniach magazynowych wyk³adzin pod³ogowych ³atwo zapalnych,
+* sk³adowanie materia³ów palnych na drogach komunikacji ogólnej s³u¿¹cych ewakuacji lub umieszczanie na tych drogach w sposób zmniejszaj¹cy ich szerokoœæ albo wysokoœæ poni¿ej wymaganej wartoœci (wystêpuj¹ce na korytarzach miejsca i elementy wypoczynkowe nie zawê¿aj¹ wymaganej szerokoœci drogi komunikacji ogólnej  s³u¿¹cych ewakuacji),
+* palne elementy wystroju wnêtrz budynku, przez które lub obok których s¹ prowadzone przewody ogrzewcze, wentylacyjne, dymowe lub spalinowe, powinny byæ zabezpieczone przed mo¿liwoœci¹ zapalenia lub zwêglenia.
+
+f) Obci¹¿enie ogniowe: dla strefy  PM maksymalna gêstoœæ obci¹¿enia ogniowego                                                  Q ? 500 MJ/m2.
+g) ewakuacja z budynku: 
+Na poszczególnych kondygnacjach przewiduje siê pobyt maksymalnej liczy osób w iloœciach: 
+a) piwnica- ³¹cznie 80 osób (sala jadalniana wraz z zapleczem dla ³¹cznie 60 osób, czêœæ rekreacyjna z szatniami dla ³¹cznie 20 osób),
+b) parter- ³¹cznie 79 osób (19 jednostek mieszkalnych wraz z pokojami telewizyjnymi i goœcinnymi dla ³¹cznie 23 osób, czêœæ wypoczynkowa dla ³¹cznie 50 osób, czêœæ administracyjna i pokoje medyczne dla ³¹cznie 6 osób),
+c) I Piêtro- ³¹cznie 66 osób (44 jednostki mieszkalne wraz z pokojami telewizyjnymi i goœcinnymi dla ³¹cznie 63 osób, pokoje medyczne dla ³¹cznie 3 osób, 
+d) II Piêtro – ³¹cznie 35 osób (8 jednostek mieszkalne wraz z pokojami telewizyjnymi i goœcinnymi dla ³¹cznie 10 osób, gabinety medyczne, sale rehabilitacyjne i æwiczeñ dla ³¹cznie 20 osób, pralnia- 5 osób).
+
+W  budynku znajduje siê 7 ewakuacyjnych klatek schodowych, z których 6 prowadzi na zewn¹trz (siódma klatka schodowa ³¹czy nieu¿ytkowe poddasze z kondygnacj¹ II piêtra).
+Pionowe i poziome d³ugoœci dróg ewakuacyjnych s¹ czêœciowo przekroczone- na co uzyskano zgodê KW PSP w Poznaniu (Postanowienie zn WZ.52840.268.3.2022.MB z dnia 26.09.2022). Klatki schodowe nie spe³niaj¹ nastêpuj¹cych wymagañ warunków technicznych: 
+
+        a) klatka schodowa K1 (2-biegowa, ³¹cz¹ca piwnice, parter i I piêtro)- w strefie A:
+-  rzeczywista (istniej¹ca) minimalna  szerokoœæ biegu – ………..…...0,95m,
+-  rzeczywista (istniej¹ca) minimalna szerokoœæ spocznika- ……….... 1,30m,
+-  rzeczywista (istniej¹ca) maksymaln¹ wysokoœæ stopni – zgodne z przepisami
+
+       b) klatka schodowa K2 (2-biegowa, zabiegowa w kierunku piwnicy, ³¹cz¹ca piwnice, 
+                                           parter i I piêtro, II piêtro) w strefie A:
+-  rzeczywista (istniej¹ca) minimalna  szerokoœæ biegu – ………..…...0,90m,
+-  rzeczywista (istniej¹ca) minimalna szerokoœæ spocznika- ……….... 1,10m,
+-  rzeczywista (istniej¹ca) maksymaln¹ wysokoœæ stopni -  zgodne z przepisami
+
+    c) klatka schodowa K3 (2-biegowa, ³¹cz¹ca piwnice, parter i I piêtro, II piêtro)
+         w strefie B:
+-  rzeczywista (istniej¹ca) minimalna  szerokoœæ biegu – ………..…...0,92m,
+-  rzeczywista (istniej¹ca) minimalna szerokoœæ spocznika- ……….... 0,95m,
+-  rzeczywista (istniej¹ca) maksymaln¹ wysokoœæ stopni -  zgodne z przepisami
+
+     d) klatka schodowa K4 (2-biegowa, ³¹cz¹ca piwnice, parter i I piêtro) w strefie C:
+-  rzeczywista (istniej¹ca) minimalna  szerokoœæ biegu – ………..…...1,00m,
+-  rzeczywista (istniej¹ca) minimalna szerokoœæ spocznika- ……….... 1,30m,
+-  rzeczywista (istniej¹ca) maksymaln¹ wysokoœæ stopni - zgodne z przepisami
+
+                   e) klatka schodowa K5 (2-biegowa, ³¹cz¹ca parter i I piêtro, II piêtro) w strefie C:
+-  rzeczywista (istniej¹ca) minimalna  szerokoœæ biegu – ………..…...0,92m,
+-  rzeczywista (istniej¹ca) minimalna szerokoœæ spocznika- ……….... 1,00m,
+-  rzeczywista (istniej¹ca) maksymaln¹ wysokoœæ stopni - zgodne z przepisami
+
+                  f) klatka schodowa K6 (2-biegowa, ³¹cz¹ca parter i I piêtro) w strefie B:
+-  rzeczywista (istniej¹ca) minimalna  szerokoœæ biegu –zgodna z przepisami, 
+-  rzeczywista (istniej¹ca) minimalna szerokoœæ spocznika-zgodna z przepisami, 
+-  rzeczywista (istniej¹ca) maksymaln¹ wysokoœæ stopni - zgodne z przepisami
+
+                   g) klatka schodowa K7 (2-biegowa, ³¹cz¹ca II piêtro z poddaszem nieu¿ytkowym) 
+   w strefie B:
+-  rzeczywista (istniej¹ca) minimalna  szerokoœæ biegu – ………..…...0,65m,
+-  rzeczywista (istniej¹ca) min. szerokoœæ spocznika- brak (schody zabiegowe)
+-  rzeczywista (istniej¹ca) maksymaln¹ wysokoœæ stopni - zgodne z przepisami
+Na powy¿sze niezgodnoœci z przepisami uzyskano zgodê KW PSP w Poznaniu (Postanowienie zn WZ.52840.268.3.2022.MB z dnia 26.09.2022). 
+
+ 9.3.  Dobór urz¹dzeñ przeciwpo¿arowych w obiekcie:
+ Budynek wyposa¿ony bêdzie w nastêpuj¹ce urz¹dzenia (instalacje) przeciwpo¿arowe:
+* system sygnalizacji po¿arowej (SSP), którego urz¹dzenia sygnalizacyjno-alarmowe po³¹czone s¹ z Miejsk¹ Stra¿¹ Po¿arn¹ w Obornikach,
+* instalacjê wodoci¹gow¹ przeciwpo¿arow¹ z hydrantami wewnêtrznymi 25 z wê¿em pó³sztywnym- obejmuj¹c¹ swoim zasiêgiem ca³a powierzchniê chronion¹,
+* awaryjne oœwietlenie ewakuacyjne, spe³niaj¹ce wymagania Polskiej Normy PN-EN 1838:2005 „Zastosowania oœwietlenia- Oœwietlenie awaryjne” -oœwietlenie projektuje na wszystkich drogach ewakuacyjnych niezale¿nie od oœwietlenia œwiat³em dziennym; oœwietlenie powinno uruchamiaæ siê automatycznie w przypadku zaniku napiêcia podstawowego nie póŸniej ni¿ 2 sek., dzia³aæ przez co najmniej 1 godzinê oraz zapewniaæ osi¹gniêcie œredniego natê¿enia oœwietlenia na pod³odze wzd³u¿ œrodkowej linii drogi ewakuacyjnej nie mniejsze ni¿ 1Lx. Jeœli urz¹dzenia przeciwpo¿arowe nie znajduj¹ siê na drodze ewakuacyjnej ani w strefie otwartej, to powinny one byæ tak oœwietlone, aby natê¿enie oœwietlenia na pod³odze w ich pobli¿u wynosi³o co najmniej 5Lx.; wszystkie oprawy awaryjne powinny spe³niaæ wymagania Polskiej Normy oraz posiadaæ w tym zakresie œwiadectwa dopuszczenia CNBOP,
+* przeciwpo¿arowy wy³¹cznik pr¹du z certyfikatem CNBOP.
+
+Monta¿ urz¹dzeñ przeciwpo¿arowych w obiekcie bêdzie zrealizowany w oparciu o dokumentacjê techniczna (projekty) uzgodnione przez rzeczoznawcê                                                     d/s. zabezpieczeñ przeciwpo¿arowych.
+
+   9.11. Oddymianie klatek schodowych: 
+
+Zgodnie z Polsk¹ Norm¹ [5] wymagana powierzchnia czynna klap dymowych powinna wynosiæ 5% powierzchni rzutu poziomego pod³ogi klatki schodowej nie mniej ni¿ 1m2. Zgodnie z PN [5] otwory powietrza dolotowego mog¹ stanowiæ drzwi z klatek schodowych otwierane na zewn¹trz budynku oraz okna na parterze (geometryczna powierzchnia otworów wlotowych powietrza powinna byæ co najmniej o 30% wiêksza ni¿ geometryczna powierzchnia klapy dymowej - mog¹ stanowiæ okna i drzwi  w dolnej czêœci pomieszczenia lub klatki schodowej, które w razie po¿aru dadz¹ siê otworzyæ od zewn¹trz)- wymaganie bêdzie spe³nione dla klatek schodowych nr  2 i 5:
+
+* Klatka nr 1 – powierzchnia oddymiania i napowietrzania zgodna z przepisami:
+* wymagana minimalna powierzchnia czynna oddymiania dla klatki:1,00m2
+* projektowana powierzchnia okna 1 oddymiaj¹cego OD1 (na ostatnim spoczniku 60cm nad posadzk¹) uchylnego do 48o -wynosi- 1,574m2,
+* wymagana powierzchnia napowietrzania 1,547m2
+* projektowana powierzchnia napowietrzania przez drzwi na parterze: 2,62m2.
+* okna- z uwagi na zabytkowy charakter budynku- nie bêd¹ posiada³y œwiadectwa dopuszczenia dla funkcji oddymiania; wymagania nie spe³ni usytuowanie okien dostosowanych do oddymiania- na co uzyskano zgodê KW PSP w Poznaniu (Postanowienie zn WZ.52840.268.3.2022.MB z dnia 26.09.2022),
+
+* Klatka nr 2 – powierzchnia oddymiania i napowietrzania zgodna z przepisami:
+* wymagana minimalna powierzchnia czynna oddymiania dla klatki:1,00m2,
+* projektowana powierzchnia geometryczna klapy oddymi¹cej z owiewkami o wymiarach 140x140m2:= 1,96m2,
+* projektowana powierzchnia czynna klapy oddymiaj¹cej z owiewkami- 1,00m2,
+* wymagana powierzchnia napowietrzania 1,00x1,30=1,30m2
+* projektowana powierzchnia napowietrzania przez drzwi na parterze: 2,71m2,
+
+* Klatka nr 3 – powierzchnia oddymiania i napowietrzania zgodna z przepisami:
+* wymagana minimalna powierzchnia czynna oddymiania dla klatki: 1,00m2
+* projektowana powierzchnia geometryczna klapy oddymiaj¹cej z owiewkami o wymiarach 140x140m2:= 1,96m2,
+* projektowana powierzchnia czynna klapy oddymiaj¹cej z owiewkami- 1,00m2,
+* wymagana powierzchnia napowietrzania 1,96x1,30=2,54m2, 
+* projektowana powierzchnia napowietrzania przez drzwi na parterze: 2,76m2.
+
+
+* Klatka nr 4 – powierzchnia oddymiania i napowietrzania zgodna z przepisami:
+* wymagana minimalna powierzchnia czynna oddymiania dla klatki:1,47m2 (7,5%),
+* projektowana powierzchnia okna  oddymiaj¹cego  OD1 (na ostatnim spoczniku 60 cm nad posadzk¹),1,574, uchylnego do 48o ,
+* wymagana powierzchnia napowietrzania 1,574m2,
+* projektowana powierzchnia napowietrzania przez drzwi na parterze: 2,62m2,
+* okna- z uwagi na zabytkowy charakter budynku- nie bêd¹ posiada³y œwiadectwa dopuszczenia dla funkcji oddymiania; wymagania nie spe³ni usytuowanie okien dostosowanych do oddymiania-  na co uzyskano zgodê KW PSP w Poznaniu (Postanowienie zn WZ.52840.268.3.2022.MB z dnia 26.09.2022) 
+
+* Klatka nr 5 – powierzchnia oddymiania i napowietrzania zgodna z przepisami:
+* wymagana minimalna powierzchnia czynna oddymiania dla klatki:1,00m2
+* projektowana powierzchnia geometryczna klapy oddymiaj¹cej z owiewkami o wymiarach 140x140m2= 1,96m2,
+* projektowana powierzchnia czynna klapy oddymiaj¹cej z owiewkami -1,00m2
+* wymagana powierzchnia napowietrzania 1,96x1,30= 2,54m2
+* projektowana powierzchnia napowietrzania przez drzwi na parterze: 3,18m2,
+
+* Klatka nr 6 – powierzchnia oddymiania i napowietrzania zgodna z przepisami:
+* wymagana minimalna powierzchnia czynna oddymiania dla klatki (7,5%)= 2,72m2
+* projektowana powierzchnia 2 okien oddymiaj¹cych OD2 (na ostatnim spoczniku, 60 cm nad posadzk¹)- 2 x 1,96m2-= 3,93m2,  uchylnego do 48o .
+* wymagana powierzchnia napowietrzania – 3,93m2
+* projektowana powierzchnia napowietrzania przez drzwi na parterze= 3,57m2,
+* projektowana powierzchnia napowietrzania przez okno OD3na parterze =1,82m2
+* ³¹czna powierzchnia napowietrzania= 4,837m2, 
+* z uwagi na zabytkowy charakter budynku- nie bêd¹ posiada³y œwiadectwa dopuszczenia dla funkcji oddymiania; wymagania nie spe³ni usytuowanie okien dostosowanych do oddymiania-  na co uzyskano zgodê KW PSP w Poznaniu (Postanowienie zn WZ.52840.268.3.2022.MB z dnia 26.09.2022) ,
+
+* Klatka nr 7
+* w zwi¹zku z brakiem mo¿liwoœci zapewnienia oddymiania grawitacyjnego klatki schodowej  K7 (która prowadzi z poddasza nieu¿ytkowego na II piêtro i nie ma po³¹czenia ze œcian¹ zewnêtrzna ani z drzwiami zewnêtrznymi) – w/w wymaganie nie bêdzie spe³nione: nie projektuje siê jej oddymiania- na co uzyskano zgodê KW PSP w Poznaniu (Postanowienie zn WZ.52840.268.3.2022.MB z dnia 26.09.2022) .
+
+   9.12. Zaopatrzenie w wodê do zewnêtrznego gaszenia po¿aru.
+Minimalnie wymagane zaopatrzenie w wodê do zewnêtrznego gaszenia po¿aru wynosi 20 l/s. 
+
+   9.13. Drogi po¿arowe.
+Dla Domu Seniora zaprojektowano drogê po¿arow¹ prowadz¹c¹ wzd³u¿ jego elewacji frontowej i posiadaj¹c¹ dwa niezale¿ne wyjazdy bramowe na drogi publiczne (gminne). 
+
+ 9.14. Odstêpstwa od wymagañ technicznych i przeciwpo¿arowych:
+Dla w/w inwestycji opracowana zosta³a w 2022 roku przez Rzeczoznawcê p. Adama Biernackiego Ekspertyza techniczna bezpieczeñstwa po¿arowego budynku , dla której zosta³o wydane Postanowienie uzgadniaj¹ce KW PSP w Poznaniu zn.  WZ.52840.268.3.2022.MB z dnia 26.09.2022r- dopuszczaj¹ce niezgodnoœci z przepisami budowlanymi w budynku Domu Seniora okreœlone w w/w Ekspertyzie, pod warunkiem:
+* wyposa¿enia budynku w system SSP z zapewnieniem ca³kowitej ochrony oraz pod³¹czeniem systemu w ramach monitoringu po¿arowego ze stanowiskiem kierowania KP PSP w Obornikach,
+* oddzielenie klatek schodowych d piwnic drzwiami w klasie EIS60,
+* zamkniêcia wyjœcia z klatki K7 na poddasze  drzwiami w klasie EIS30,
+* wykonania drogi po¿arowej gruntowej ¿wirowej wzd³u¿ elewacji ogrodowej umo¿liwiaj¹cej prowadzenie akcji ratowniczej,
+oraz Postanowienie uzgadniaj¹ce KW PSP w Poznaniu zn. WZ.52840.268.4.2022.MB z dnia 26.09.2022r- w którym okreœlono warunek 
+* wyposa¿enia budynku w gaœnice ABC – 2kg œrodka gaœniczego na ka¿de 50m2 powierzchni u¿ytkowej.
+
+   10. DANE ENERGETYCZNE BUDYNKU:
+         Œciany zewnêtrzne budynku- z uwagi na zabytkowy charakter budynku nie bêd¹ odpowiadaæ wymaganiom izolacyjnoœci cieplnej Rozporz¹dzenia Dz. U. nr 201 poz 1238 z  06.11.2008r.
+          Wymogi  izolacyjnoœci dla pozosta³ych przegród budowlanych- zaprojektowano w/g PN-91/B-02020 oraz Rozporz¹dzenia Ministra Infrastruktury z dn. 06.11.2008 w sprawie metodologii obliczania charakterystyki energetycznej budynku i lokalu mieszkalnego lub czêœci budynku stanowi¹cej samodzieln¹ czêœæ techniczno- u¿ytkow¹ oraz sposobu sporz¹dzania i wzorów œwiadectw ich  charakterystyki energetycznych. Opis przyjêtych rozwi¹zañ- w tabeli poni¿ej. 
+
+                                    10.1 Zestawienie przegród i ich wspó³czynników:
+                                                                      a) ŒCIANY 
+L.pRodzaj przegrody                           Warstwy przegrody 1Œciany zewnêtrzne poni¿ej poziomu terenu – dla pomieszczeñ ogrzewanych - folia kube³kowa (os³onowa) 
+- styropian ektrudowany gr. 16,0cm 
+- dwusk³adnikowa dyspersyjna masa asfaltowo – kauczukowa
+    gr. 5mm
+- masa gruntuj¹ca,
+- tynku cementowo- wapienny gr 1,5cm
+- œciana murowana istniej¹ca o zró¿nicowanej gruboœci,                                  
+                                                                            U max.= 0,20W/m2K2Œciany zewnêtrzne pomieszczeñ u¿ytkowych - tynk cementowo- wapienny gr 1,5cm,
+- œciana murowana istniej¹ca o zró¿nicowanej gruboœci,   
+- (od œrodka) p³yty PIR gr. 5,0cm z p³yt¹ ogniochronn¹ 
+- tynk cienkowarstwowy g³adki
+U max.= 0,35W/m2K3Œciany zewnêtrzne korytarzy - tynk cementowo- wapienny gr 1,5cm,
+- œciana murowana istniej¹ca o zró¿nicowanej gruboœci,   
+- (od œrodka) p³yty MULTIPOR gr. 5,0cm 
+- tynk cienkowarstwowy g³adki
+U max.= 0,54W/m2K4Œciany wewnêtrzne  pomiêdzy pomieszczeniami ogrzewanymi i nieogrzewanymi- tynk cementowo- wapienny gr 1,5cm,
+- œciana murowana istniej¹ca o zró¿nicowanej gruboœci,   
+- (od œrodka) we³na mineralna  gr. 10,0cm 
+- tynk cienkowarstwowy g³adki
+U max.= 0,30W/m2K5Œciany mansardowe na poddaszu - tynk strukturalny gr 1,5cm,
+-  we³na mineralna gr. 16,0cm 
+-  p³yty 2 x GKF
+U max.= 0,20W/m2K6Pozosta³e œcianyU- nie wymagane                                              b) OKNA, DRZWI 
+L.pRodzaj przegrodyWarstwy przegrody 7Okna i drzwi balkonowe     Nowe, PVC, podwójnie szklone szk³em zespolonym o izolacyjnoœci termicznej U(max) ?0,90W/m2K. 
+8Drzwi zewnêtrzne       Nowe, drewniane, ocieplone U(max) ?1,30W/m2K. 
+                                         c) POSADZKI i STROPY 
+L.pRodzaj przegrodyWarstwy przegrody                                              Posadzki na gruncie:9Pomieszczenia  na gruncie dla wszystkich pomieszczañ ogrzewanych -  posadzka w³aœciwa- 2,0cm, 
+-  szlichta cementowa- 6,0cm
+-  styropian XPS gr. 8,0cm na ca³ej powierzchni,
+-  izolacja przeciwwilgociowa- 2x papa termozgrzewalna,
+- posadzka betonowa- 10,0cm, 
+- pod³o¿e gruntowe istniej¹ce 
+                                                                                        U = 0,30W/m2K                                                 Kondygnacje  nadziemne 10Mieszkania,  pozosta³e pomieszczenia-  wyk³adzina PCV lub panele pod³ogowe
+-  szlichta cementowa- 4,0cm
+- izolacja akustyczna- 4,0cm,
+- folia w p³ynie dla pomieszczeñ mokrych 
+- wylewka samopoziomuj¹ca
+- strop ceglany Kleina
+                                                                           U = nie wymagany11Klatka schodowa - p³ytki gress IV antypoœlizgowe         
+                                                                           U = nie wymagany12Strop pod nieogrzewanym poddaszem -  we³na mineralna w matach  gr.22cm 
+- strop ceglany Kleina / strop drewniany 
+- tynk cementowo- wapienny  
+                                                                                         U = 0,25W/m2K                                   
+                             e)  DACHY 
+L.pRodzaj przegrodyWarstwy przegrody 10Dach p³aski nad Mini Spa - 1 x papa asfaltowa wierzchniego krycia
+- 2 x papa asfaltowa izolacyjna podk³adowa
+- szlichta cementowa- 4cm, 
+- we³na mineralna twarda  gr. 22cm  + warstwa spadkowa 5%, 
+- strop ¿elbetowy
+- tynk cementowo- wapienny 1,5cm, 
+- sufit powieszony
+                                                                                     U =0,15W/m2K11Dach skoœny wielospadowy - dachówka karpiówka podwójnie w koronkê 
+- we³na mineralna w p³ytach gr. 22cm pomiêdzy krokwiami,
+- od wewn¹trz: p³yty 1 x GKF (EI30)
+                                                                               U = max. 0,15W/m2K 
+10.2.   Zapotrzebowanie budynku mieszkalno- technicznego na ciep³o wynosi:
+* na potrzeby c.o. Q= 700,00 kW, 
+* na potrzeby c.t. Q= 100,00 kW- zima, Q= 0,0 kW-  lato  
+* na c.w.u.     Qhœr= 100 kW
+* na c.w.u.     Qhmax= 200,0 kW
+                                                                                Ogó³em Q = 900,0kW
+
+            12. UWAGI OGÓLNE
+*    niniejszy tom wchodzi w sk³ad pe³no bran¿owego projektu budowlanego i dotyczy czêœci architektonicznej. Projekt zawsze winien byæ rozpatrywany jako ca³oœæ, 
+*    wszystkie elementy budowlane i rozwi¹zania systemowe  wbudowane w obiekt powinny posiadaæ aktualne atesty, certyfikaty i œwiadectwa dopuszczenia do zastosowania na terenie polski i UE,  
+*   ca³oœæ dokumentacji projektowej podlega ochronie w zakresie praw autorskich i pokrewnych. Po wydaniu decyzji o pozwoleniu na budowê oraz po zaakceptowaniu przez przedstawiciela wykonawstwa przedmiotowej dokumentacji, wprowadzenie jakichkolwiek zmian wymaga pisemnego uzgodnienia z autorami projektu,
+*   realizacjê budowy nale¿y prowadziæ pod sta³ym nadzorem projektantów,
+*   zmiany przyjêtych rozwi¹zañ projektowych, nie wchodz¹ce w zakres nadzorów autorskich,  bêd¹ przedmiotem oddzielnego opracowania.
+
+                                                                                                       Opracowa³:   
+
+Dom Seniora w Kowanówku PION   Sp. z.o.o.Projekt techniczno- wykonawczy  architektury30.07.2023
+
+
+                                                                                                                                                                            42/46
+

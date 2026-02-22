@@ -1,0 +1,64 @@
+{
+  "id": "REQ-THERMAL-COMFORT-001",
+  "entityType": "requirement",
+  "requirementName": "Thermal comfort range for occupied spaces",
+  "requirementType": "operational",
+  "countryScope": "global",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["sleeping_space", "bedroom", "living_space", "living_room", "dining_space", "office", "classroom"]
+  },
+
+  "metric": "operative_temperature",
+  "operator": "in_range",
+  "value": {
+    "min": 20,
+    "max": 26
+  },
+  "unit": "C",
+  "tolerance": 0.5,
+
+  "verification": {
+    "method": "sensor",
+    "tool": "BMS temperature sensors",
+    "standard": "EN_16798-1",
+    "phase": ["operation"],
+    "frequency": "continuous",
+    "responsible": "fm_manager"
+  },
+
+  "technicalBasis": [
+    {
+      "standard": "EN_16798-1:2019",
+      "section": "6.4.2",
+      "description": "Indoor environmental input parameters - Thermal environment"
+    },
+    {
+      "standard": "ASHRAE_55",
+      "section": "5.3",
+      "description": "Thermal Environmental Conditions for Human Occupancy"
+    },
+    {
+      "standard": "ISO_7730",
+      "section": "Predicted Mean Vote",
+      "description": "Ergonomics of the thermal environment - PMV and PPD indices"
+    }
+  ],
+
+  "optimalRange": {
+    "heating_season": {
+      "min": 20,
+      "max": 24
+    },
+    "cooling_season": {
+      "min": 23,
+      "max": 26
+    }
+  },
+
+  "rationale": "Maintaining operative temperature within 20-26°C ensures thermal comfort for the majority of occupants (PPD < 10%). This range aligns with EN 16798-1 Category II (normal level of expectation) for residential and office buildings.",
+
+  "version": "1.0.0",
+  "tags": ["thermal", "comfort", "operational", "global"]
+}

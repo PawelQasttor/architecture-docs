@@ -1,0 +1,17 @@
+# BIM Sync Dependencies
+# Python packages for IFC parsing and markdown generation
+
+# IFC parsing and manipulation
+ifcopenshell>=0.7.0
+
+# YAML processing for frontmatter
+pyyaml>=6.0
+
+# Markdown generation
+python-markdown>=3.4.0
+
+# Date/time handling
+python-dateutil>=2.8.0
+
+# Optional: Advanced IFC utilities
+# ifcopenshell-python>=0.7.0

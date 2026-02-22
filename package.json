@@ -1,0 +1,40 @@
+{
+  "name": "architecture-docs",
+  "version": "1.0.0",
+  "description": "AI-ready documentation standard for Polish architects",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "validate": "node scripts/validate-frontmatter.js",
+    "validate:examples": "node scripts/validate-frontmatter.js docs/en/examples/",
+    "extract:json": "node scripts/extract-frontmatter-to-json.mjs docs docs/public/json",
+    "extract:examples": "node scripts/extract-frontmatter-to-json.mjs docs/en/examples docs/public/json/examples",
+    "sbm:compile": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL --verbose",
+    "sbm:validate": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL --verbose",
+    "sbm:clean": "node -e \"import('fs').then(fs=>fs.promises.rm('build',{recursive:true,force:true}).then(()=>console.log('Build cleaned')))\"",
+    "build:all": "npm run extract:json && npm run sbm:compile && npm run docs:build"
+  },
+  "keywords": [
+    "architecture",
+    "documentation",
+    "BIM",
+    "IFC",
+    "AI",
+    "markdown"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "js-yaml": "^4.1.1",
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.28"
+  },
+  "dependencies": {
+    "ajv": "^8.18.0",
+    "ajv-formats": "^3.0.1"
+  }
+}

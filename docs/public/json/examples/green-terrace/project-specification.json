@@ -1,0 +1,65 @@
+{
+  "_metadata": {
+    "sourceFile": "green-terrace\\project-specification.md",
+    "extractedAt": "2026-02-20T22:56:48.009Z",
+    "format": "yaml-frontmatter"
+  },
+  "documentType": "project_specification",
+  "projectName": "Residential Building Green Terrace",
+  "projectLocation": "Warsaw, Poland",
+  "projectPhase": "construction_documentation",
+  "buildingClassification": {
+    "category": "A",
+    "type": "residential_multi_family",
+    "description": "Apartment building"
+  },
+  "buildingData": {
+    "height": 18.5,
+    "floors": 6,
+    "grossFloorArea": 1800,
+    "usableArea": 1620,
+    "dwellingUnits": 18,
+    "estimatedOccupants": 54
+  },
+  "regulatoryCompliance": [
+    {
+      "regulation": "Prawo_budowlane",
+      "articles": [
+        "Art. 5",
+        "Art. 20",
+        "Art. 34"
+      ]
+    },
+    {
+      "standard": "WT_2021",
+      "sections": [
+        "§ 328",
+        "§ 234",
+        "§ 55",
+        "§ 206",
+        "§ 132"
+      ]
+    },
+    {
+      "standard": "PN-EN_1996"
+    },
+    {
+      "standard": "PN-EN_1992"
+    }
+  ],
+  "bimLOD": "LOD_400",
+  "version": "2.0.0",
+  "lastReviewed": "2026-02-20",
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "lead_architect",
+      "license": "IARP 5678"
+    },
+    {
+      "name": "Piotr Kowalski",
+      "role": "structural_engineer",
+      "license": "PZITB 1234"
+    }
+  ]
+}

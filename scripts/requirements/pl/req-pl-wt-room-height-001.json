@@ -1,0 +1,67 @@
+{
+  "id": "REQ-PL-WT-ROOM-HEIGHT-001",
+  "entityType": "requirement",
+  "requirementName": "Minimum room height per WT 2021",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["sleeping_space", "bedroom", "living_space", "living_room", "dining_space", "dining_room", "kitchen"]
+  },
+
+  "metric": "room_height_clear",
+  "operator": ">=",
+  "value": 2.50,
+  "unit": "m",
+  "tolerance": 0.02,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Laser distance meter or measuring tape",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction", "as_built"],
+    "frequency": "once_per_room_type",
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 132",
+      "article": "ust. 1",
+      "description": "Wysokość pomieszczeń mieszkalnych",
+      "fullText": "Wysokość pomieszczeń mieszkalnych w budynkach mieszkalnych nie może być mniejsza niż 2,50 m, a w budynkach użyteczności publicznej - nie mniejsza niż 3,00 m.",
+      "effectiveDate": "2021-09-20"
+    },
+    {
+      "regulation": "Prawo_budowlane",
+      "section": "Art. 7",
+      "article": "ust. 1 pkt 1",
+      "description": "Wymagania podstawowe dotyczące budynków",
+      "fullText": "Budynek jako całość oraz jego poszczególne części wraz z urządzeniami technicznymi powinien być projektowany i budowany w sposób określony w przepisach, w tym techniczno-budowlanych."
+    }
+  ],
+
+  "technicalBasis": [
+    {
+      "standard": "PN-ISO_9836",
+      "section": "Height measurement",
+      "description": "Polish standard for building height measurements"
+    }
+  ],
+
+  "exceptions": [
+    {
+      "condition": "attic_conversions",
+      "modifiedValue": 2.20,
+      "description": "W pomieszczeniach mieszkalnych znajdujących się w poddaszu użytkowym dopuszcza się wysokość 2,20 m na co najmniej 50% powierzchni",
+      "legalReference": "WT 2021 § 132 ust. 2"
+    }
+  ],
+
+  "rationale": "Minimalna wysokość 2,50 m zapewnia odpowiednią kubaturę pomieszczenia na osobę, właściwą cyrkulację powietrza oraz komfort psychologiczny mieszkańców. Wymaganie wynika z polskich warunków technicznych (WT 2021).",
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "residential"]
+}

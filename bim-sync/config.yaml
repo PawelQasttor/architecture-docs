@@ -1,0 +1,153 @@
+# BIM Sync Configuration
+# Defines how IFC entities map to markdown documentation
+
+# IFC Entity Mappings
+entity_mappings:
+
+  # Wall entities
+  IfcWall:
+    document_type: "element_specification"
+    element_type: "wall"
+    markdown_template: "../templates/markdown/element-specification.md"
+    extract_properties:
+      - Pset_WallCommon.LoadBearing
+      - Pset_WallCommon.IsExternal
+      - Pset_WallCommon.FireRating
+      - Pset_WallCommon.ThermalTransmittance
+      - Pset_WallCommon.AcousticRating
+      - Pset_WallCommon.Reference
+    extract_quantities:
+      - Qto_WallBaseQuantities.Length
+      - Qto_WallBaseQuantities.Width
+      - Qto_WallBaseQuantities.Height
+      - Qto_WallBaseQuantities.GrossVolume
+      - Qto_WallBaseQuantities.NetVolume
+    extract_materials: true
+    extract_layers: true
+
+  # Slab entities
+  IfcSlab:
+    document_type: "element_specification"
+    element_type: "slab"
+    markdown_template: "../templates/markdown/element-specification.md"
+    extract_properties:
+      - Pset_SlabCommon.LoadBearing
+      - Pset_SlabCommon.IsExternal
+      - Pset_SlabCommon.FireRating
+      - Pset_SlabCommon.ThermalTransmittance
+      - Pset_SlabCommon.AcousticRating
+      - Pset_SlabCommon.Reference
+      - Pset_SlabCommon.PitchAngle
+    extract_quantities:
+      - Qto_SlabBaseQuantities.Length
+      - Qto_SlabBaseQuantities.Width
+      - Qto_SlabBaseQuantities.GrossArea
+      - Qto_SlabBaseQuantities.NetArea
+      - Qto_SlabBaseQuantities.GrossVolume
+    extract_materials: true
+    extract_layers: true
+
+  # Window entities
+  IfcWindow:
+    document_type: "element_specification"
+    element_type: "window"
+    markdown_template: "../templates/markdown/element-specification.md"
+    extract_properties:
+      - Pset_WindowCommon.Reference
+      - Pset_WindowCommon.FireRating
+      - Pset_WindowCommon.AcousticRating
+      - Pset_WindowCommon.ThermalTransmittance
+      - Pset_WindowCommon.GlazingAreaFraction
+      - Pset_WindowCommon.IsExternal
+    extract_quantities:
+      - Qto_WindowBaseQuantities.Width
+      - Qto_WindowBaseQuantities.Height
+      - Qto_WindowBaseQuantities.Area
+    extract_materials: true
+    extract_layers: false
+
+  # Door entities
+  IfcDoor:
+    document_type: "element_specification"
+    element_type: "door"
+    markdown_template: "../templates/markdown/element-specification.md"
+    extract_properties:
+      - Pset_DoorCommon.Reference
+      - Pset_DoorCommon.FireRating
+      - Pset_DoorCommon.AcousticRating
+      - Pset_DoorCommon.ThermalTransmittance
+      - Pset_DoorCommon.IsExternal
+      - Pset_DoorCommon.HandicapAccessible
+    extract_quantities:
+      - Qto_DoorBaseQuantities.Width
+      - Qto_DoorBaseQuantities.Height
+      - Qto_DoorBaseQuantities.Area
+    extract_materials: true
+    extract_layers: false
+
+# Output Settings
+output:
+  # Where to write markdown files
+  output_directory: "../docs/generated/"
+
+  # File naming pattern
+  # Available variables: {entity_type}, {object_type}, {guid}, {reference}
+  filename_pattern: "{entity_type}-{reference}.md"
+
+  # Overwrite existing files?
+  overwrite_existing: false
+
+  # Create subdirectories by entity type?
+  subdirectories: true
+
+# Frontmatter Settings
+frontmatter:
+  # Always include these fields
+  required_fields:
+    - documentType
+    - ifcMapping
+    - bimLOD
+    - version
+    - lastReviewed
+
+  # Default values if not found in IFC
+  defaults:
+    bimLOD: "LOD_400"
+    version: "1.0.0"
+    documentType: "element_specification"
+
+# Regulatory Compliance
+# Map IFC properties to regulatory requirements
+regulatory_mappings:
+  thermal_performance:
+    ifc_property: "Pset_WallCommon.ThermalTransmittance"
+    regulation: "WT_2021"
+    section: "§ 328"
+    max_value: 0.20
+    unit: "W/(m²·K)"
+
+  fire_resistance:
+    ifc_property: "Pset_WallCommon.FireRating"
+    regulation: "WT_2021"
+    section: "§ 234"
+    required_value: "REI 60"  # Depends on building height
+
+# Material Layer Processing
+materials:
+  # Include material thermal properties
+  include_thermal_properties: true
+
+  # Include material fire properties
+  include_fire_properties: true
+
+  # Extract layer thickness
+  extract_thickness: true
+
+  # Extract layer order
+  extract_order: true
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  log_file: "sync.log"
+  console_output: true

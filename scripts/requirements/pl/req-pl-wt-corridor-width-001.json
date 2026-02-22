@@ -1,0 +1,73 @@
+{
+  "id": "REQ-PL-WT-CORRIDOR-WIDTH-001",
+  "entityType": "requirement",
+  "requirementName": "Minimum corridor width per WT 2021",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["corridor", "staircase"]
+  },
+
+  "metric": "corridor_clear_width",
+  "operator": ">=",
+  "value": 1.20,
+  "unit": "m",
+  "tolerance": 0.02,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Measuring tape or laser distance meter",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction", "as_built"],
+    "frequency": "once_per_corridor_section",
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 69",
+      "article": "ust. 1",
+      "description": "Szerokość komunikacji poziomej",
+      "fullText": "Szerokość korytarzy i ciągów komunikacyjnych w budynkach mieszkalnych wielorodzinnych powinna wynosić co najmniej 1,20 m w świetle.",
+      "effectiveDate": "2021-09-20"
+    },
+    {
+      "regulation": "WT_2021",
+      "section": "§ 271",
+      "article": "ust. 1",
+      "description": "Drogi ewakuacyjne",
+      "fullText": "Szerokość dróg ewakuacyjnych powinna być dostosowana do liczby osób mogących z nich korzystać."
+    }
+  ],
+
+  "technicalBasis": [
+    {
+      "standard": "PN-EN_1991-1-1",
+      "section": "Obciążenia użytkowe",
+      "description": "Eurocode 1: Actions on structures - Densities, self-weight, imposed loads"
+    }
+  ],
+
+  "contextualRequirements": {
+    "accessibility": {
+      "metric": "corridor_clear_width",
+      "operator": ">=",
+      "value": 1.50,
+      "description": "Dla budynków z wymaganiami dostępności (WT 2021 § 55) szerokość powinna wynosić co najmniej 1,50 m dla swobodnego poruszania się wózków inwalidzkich"
+    },
+    "high_occupancy": {
+      "metric": "corridor_clear_width",
+      "operator": ">=",
+      "value": 1.80,
+      "description": "Dla budynków o zwiększonym obciążeniu (> 100 osób na kondygnacji) szerokość powinna być zwiększona"
+    }
+  },
+
+  "rationale": "Minimalna szerokość korytarza 1,20 m zapewnia bezpieczną ewakuację oraz swobodny ruch mieszkańców. Jest to wymaganie minimalne dla budynków mieszkalnych wielorodzinnych zgodnie z WT 2021.",
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "safety", "accessibility"]
+}

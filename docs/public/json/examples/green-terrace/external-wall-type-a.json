@@ -1,0 +1,77 @@
+{
+  "_metadata": {
+    "sourceFile": "green-terrace\\external-wall-type-a.md",
+    "extractedAt": "2026-02-20T22:56:48.004Z",
+    "format": "yaml-frontmatter"
+  },
+  "documentType": "element_specification",
+  "elementType": "external_wall",
+  "elementReference": "EW-01",
+  "projectName": "Residential Building Green Terrace",
+  "ifcMapping": {
+    "ifcEntity": "IfcWallStandardCase",
+    "objectType": "ExternalWall_TypeA",
+    "globalId": "3vB2YO$rLBxv3VxEu2LPxQ",
+    "materialLayerSet": "ExternalWall_TypeA_Layers"
+  },
+  "bimLOD": "LOD_400",
+  "regulatoryCompliance": [
+    {
+      "regulation": "Prawo_budowlane",
+      "article": "Art. 5",
+      "requirement": "Safe and durable construction",
+      "status": "compliant"
+    },
+    {
+      "regulation": "Prawo_budowlane",
+      "article": "Art. 34",
+      "requirement": "Complete technical specification",
+      "status": "compliant"
+    },
+    {
+      "standard": "WT_2021",
+      "section": "§ 328",
+      "requirement": "U-value ≤ 0.20 W/(m²·K)",
+      "status": "compliant"
+    },
+    {
+      "standard": "WT_2021",
+      "section": "§ 234",
+      "requirement": "Fire rating REI 60 (building height 18.5m)",
+      "status": "compliant"
+    },
+    {
+      "standard": "PN-EN_1996",
+      "description": "Masonry structures design",
+      "status": "verified"
+    }
+  ],
+  "thermalPerformance": {
+    "calculatedUValue": 0.18,
+    "maxAllowedUValue": 0.2,
+    "unit": "W/(m²·K)",
+    "status": "compliant",
+    "margin": 0.02,
+    "calculationMethod": "PN-EN ISO 6946"
+  },
+  "fireResistance": {
+    "requiredRating": "REI 60",
+    "designRating": "REI 90",
+    "testCertificate": "FR2024-1234",
+    "status": "compliant"
+  },
+  "acousticPerformance": {
+    "soundInsulation": 55,
+    "unit": "dB",
+    "testCertificate": "AC2024-5678"
+  },
+  "version": "1.5.0",
+  "lastReviewed": "2026-02-20",
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

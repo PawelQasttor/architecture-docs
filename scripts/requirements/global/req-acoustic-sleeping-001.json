@@ -1,0 +1,60 @@
+{
+  "id": "REQ-ACOUSTIC-SLEEPING-001",
+  "entityType": "requirement",
+  "requirementName": "Acoustic insulation for sleeping spaces (Class B)",
+  "requirementType": "performance",
+  "countryScope": "global",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["sleeping_space", "bedroom"]
+  },
+
+  "metric": "airborne_sound_insulation",
+  "operator": ">=",
+  "value": 52,
+  "unit": "dB",
+  "tolerance": 1,
+
+  "verification": {
+    "method": "testing",
+    "tool": "Sound level meter per ISO 140-4",
+    "standard": "ISO_140-4",
+    "phase": ["construction", "as_built"],
+    "frequency": "once_per_partition_type",
+    "responsible": "acoustic_engineer"
+  },
+
+  "technicalBasis": [
+    {
+      "standard": "ISO_140-4:1998",
+      "section": "Field measurements",
+      "description": "Measurement of sound insulation in buildings - Airborne sound insulation between rooms"
+    },
+    {
+      "standard": "EN_12354-1",
+      "section": "Estimation methods",
+      "description": "Building acoustics - Estimation of acoustic performance"
+    },
+    {
+      "standard": "WHO_Guidelines",
+      "section": "Night Noise",
+      "description": "WHO guidelines recommend <30 dB(A) for sleep protection"
+    }
+  ],
+
+  "additionalMetrics": [
+    {
+      "metric": "impact_sound_insulation",
+      "operator": "<=",
+      "value": 53,
+      "unit": "dB",
+      "description": "Impact sound (footfall) from spaces above"
+    }
+  ],
+
+  "rationale": "Acoustic Class B provides enhanced acoustic comfort suitable for sleeping spaces in residential buildings. Airborne sound insulation R'w ≥ 52 dB protects against noise from adjacent apartments and internal sources.",
+
+  "version": "1.0.0",
+  "tags": ["acoustic", "performance", "comfort", "global"]
+}

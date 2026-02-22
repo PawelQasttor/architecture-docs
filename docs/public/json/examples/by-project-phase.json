@@ -1,0 +1,23 @@
+{
+  "unknown": [
+    {
+      "sourceFile": "green-terrace\\external-wall-type-a.md",
+      "documentType": "element_specification",
+      "bimLOD": "LOD_400"
+    }
+  ],
+  "construction_documentation": [
+    {
+      "sourceFile": "green-terrace\\project-specification.md",
+      "documentType": "project_specification",
+      "bimLOD": "LOD_400"
+    }
+  ],
+  "design_development": [
+    {
+      "sourceFile": "green-terrace\\spaces\\bedroom-01.md",
+      "documentType": "space",
+      "bimLOD": "LOD_300"
+    }
+  ]
+}

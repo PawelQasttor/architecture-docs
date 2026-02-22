@@ -1,0 +1,347 @@
+# Building
+
+A **Building** represents the top-level container for all building documents. It provides project-level metadata, location information, and regulatory context.
+
+## Purpose
+
+Buildings define:
+- Project identification and metadata
+- Geographic location and climate data
+- Regulatory jurisdiction (country, region)
+- Building classification and use type
+- Project phase and completion status
+
+## Required Fields
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `id` | string | Unique building identifier | `"BLD-01"` |
+| `entityType` | string | Must be `"building"` | `"building"` |
+| `documentType` | string | Must be `"building"` | `"building"` |
+| `buildingName` | string | Human-readable name | `"Green Terrace Apartments"` |
+| `buildingType` | string | Building use type (see enum below) | `"residential_multifamily"` |
+| `country` | string | ISO 3166-1 alpha-2 country code | `"PL"` |
+| `version` | string | Semantic version | `"1.0.0"` |
+
+## Optional Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `projectId` | string | Project identifier |
+| `address` | object | Street address |
+| `location` | object | Geographic coordinates |
+| `climateZone` | string | Climate classification |
+| `grossFloorArea` | number | Total GFA in m² |
+| `numberOfLevels` | number | Total number of levels |
+| `numberOfUnits` | number | Residential units (if applicable) |
+| `occupancyType` | string | Occupancy classification |
+| `constructionType` | string | Building construction type |
+| `yearBuilt` | number | Year of construction/completion |
+| `projectPhase` | string | Current project phase |
+| `certifications` | array | Green building certifications |
+| `ifcMapping` | object | IFC mapping |
+| `tags` | array | Free-form classification tags |
+
+## Building Types (Enum)
+
+```typescript
+type BuildingType =
+  | "residential_single_family"
+  | "residential_multifamily"
+  | "residential_mixed_use"
+  | "office"
+  | "retail"
+  | "industrial"
+  | "warehouse"
+  | "educational"
+  | "healthcare"
+  | "hospitality"
+  | "assembly"
+  | "government"
+  | "mixed_use";
+```
+
+## Example: Markdown Source
+
+**File:** `docs/en/examples/green-terrace/building.md`
+
+```markdown
+---
+documentType: "building"
+entityType: "building"
+id: "BLD-01"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+projectId: "PRJ-GREEN-TERRACE-2026"
+buildingName: "Green Terrace Apartments"
+buildingType: "residential_multifamily"
+
+country: "PL"
+address:
+  street: "ul. Słoneczna 42"
+  city: "Warsaw"
+  postalCode: "00-001"
+  region: "Mazowieckie"
+
+location:
+  latitude: 52.2297
+  longitude: 21.0122
+  elevation: 100
+  elevationUnit: "m"
+
+climateZone: "Dfb"  # Köppen classification
+grossFloorArea: 4850
+numberOfLevels: 4
+numberOfUnits: 32
+
+occupancyType: "R-2"  # IBC classification
+constructionType: "Type_VA"
+yearBuilt: 2026
+
+certifications:
+  - name: "BREEAM"
+    level: "Very Good"
+    status: "in_progress"
+  - name: "LEED"
+    level: "Silver"
+    status: "planned"
+
+ifcMapping:
+  ifcEntity: "IfcBuilding"
+  globalId: "3K4hJ1$rMCxv2WxEt1LNxQ"
+  objectType: "Residential"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "multifamily"
+  - "sustainable"
+  - "warsaw"
+---
+
+# Building: Green Terrace Apartments
+
+Sustainable multifamily residential building in Warsaw city center.
+
+## Project Overview
+
+- **Location:** Warsaw, Mazowieckie, Poland
+- **Type:** Residential multifamily (32 units)
+- **Gross Floor Area:** 4,850 m²
+- **Levels:** 4 above grade, 1 basement
+- **Completion:** Q3 2026
+
+## Sustainability
+
+- **BREEAM:** Very Good (in progress)
+- **LEED:** Silver (planned)
+- **Energy:** Nearly Zero Energy Building (nZEB) per WT 2021
+- **Renewables:** Rooftop solar PV (50 kWp)
+
+## Regulatory Context
+
+- **Country:** Poland
+- **Jurisdiction:** City of Warsaw
+- **Building code:** WT 2021 (Warunki Techniczne)
+- **Planning:** MPZP approval received 2025-11-15
+```
+
+## Example: Compiled JSON
+
+**Output:** `build/green-terrace/sbm.json` (excerpt)
+
+```json
+{
+  "entities": {
+    "buildings": [
+      {
+        "documentType": "building",
+        "entityType": "building",
+        "id": "BLD-01",
+        "projectId": "PRJ-GREEN-TERRACE-2026",
+        "buildingName": "Green Terrace Apartments",
+        "buildingType": "residential_multifamily",
+        "country": "PL",
+        "address": {
+          "street": "ul. Słoneczna 42",
+          "city": "Warsaw",
+          "postalCode": "00-001",
+          "region": "Mazowieckie"
+        },
+        "location": {
+          "latitude": 52.2297,
+          "longitude": 21.0122,
+          "elevation": 100,
+          "elevationUnit": "m"
+        },
+        "climateZone": "Dfb",
+        "grossFloorArea": 4850,
+        "numberOfLevels": 4,
+        "numberOfUnits": 32,
+        "occupancyType": "R-2",
+        "constructionType": "Type_VA",
+        "yearBuilt": 2026,
+        "projectPhase": "design_development",
+        "certifications": [
+          {
+            "name": "BREEAM",
+            "level": "Very Good",
+            "status": "in_progress"
+          },
+          {
+            "name": "LEED",
+            "level": "Silver",
+            "status": "planned"
+          }
+        ],
+        "ifcMapping": {
+          "ifcEntity": "IfcBuilding",
+          "globalId": "3K4hJ1$rMCxv2WxEt1LNxQ",
+          "objectType": "Residential"
+        },
+        "version": "1.0.0",
+        "tags": ["residential", "multifamily", "sustainable", "warsaw"]
+      }
+    ]
+  }
+}
+```
+
+## Jurisdiction Pack Loading
+
+The `country` field triggers **jurisdiction pack loading**:
+
+```javascript
+// Building defines country
+{
+  "country": "PL"  // ISO 3166-1 alpha-2 code
+}
+
+// Compiler automatically loads:
+// - scripts/requirements/global/ (always)
+// - scripts/requirements/pl/ (because country = "PL")
+```
+
+**Supported country codes:**
+- `PL` → Poland (WT 2021, Prawo budowlane)
+- `DE` → Germany (DIN, EnEV) - future
+- `GB` → United Kingdom (Building Regulations) - future
+- `US` → United States (IBC, ASHRAE) - future
+- `FR` → France (RT 2020) - future
+
+## BIM Mapping
+
+Buildings map to **IfcBuilding** entities:
+
+| SBM Field | Revit Parameter | IFC Property |
+|-----------|-----------------|--------------|
+| `id` | `SBM_Entity_ID` | `Pset_SBM_Building.SBM_ID` |
+| `buildingName` | `Building Name` | `Name` |
+| `buildingType` | `SBM_Building_Type` | `Pset_SBM_Building.BuildingType` |
+| `country` | `SBM_Country` | `Pset_SBM_Building.Country` |
+| `grossFloorArea` | `Gross Building Area` | `Pset_BuildingCommon.GrossPlannedArea` |
+| `numberOfLevels` | `Number of Storeys` | `Pset_BuildingCommon.NumberOfStoreys` |
+| `yearBuilt` | `Year Constructed` | `Pset_BuildingCommon.YearOfConstruction` |
+
+## Climate Zone Classification
+
+Use Köppen climate classification:
+
+| Zone | Description | Examples |
+|------|-------------|----------|
+| `Dfb` | Humid continental, warm summer | Warsaw, Moscow, Montreal |
+| `Cfb` | Oceanic, warm summer | London, Paris, Brussels |
+| `Csa` | Mediterranean, hot summer | Athens, Rome, Lisbon |
+| `BSk` | Cold semi-arid | Denver, Madrid interior |
+| `Dfc` | Subarctic | Helsinki, Stockholm |
+
+Climate zone affects:
+- Heating/cooling degree days
+- Insulation requirements (WT 2021 § 328)
+- Renewable energy potential
+- Weatherproofing strategies
+
+## Occupancy Type
+
+Use IBC (International Building Code) occupancy classifications:
+
+| Code | Description | Examples |
+|------|-------------|----------|
+| `R-2` | Multifamily residential | Apartments, dormitories |
+| `R-1` | Residential transient | Hotels, motels |
+| `B` | Business | Offices, banks |
+| `M` | Mercantile | Retail stores, markets |
+| `A-1` | Assembly, fixed seats | Theaters, concert halls |
+| `E` | Educational | Schools, universities |
+| `I-2` | Institutional, medical | Hospitals, nursing homes |
+
+Occupancy type affects:
+- Fire safety requirements
+- Egress requirements
+- Accessibility requirements
+- MEP system design
+
+## Construction Type
+
+Use IBC construction type classification:
+
+| Type | Description | Fire Resistance |
+|------|-------------|-----------------|
+| `Type_IA` | Fire-resistive, non-combustible | High |
+| `Type_IB` | Fire-resistive, non-combustible | High |
+| `Type_IIA` | Non-combustible | Moderate |
+| `Type_IIB` | Non-combustible | Low |
+| `Type_IIIA` | Ordinary, protected combustible | Moderate |
+| `Type_IIIB` | Ordinary, unprotected combustible | Low |
+| `Type_VA` | Wood frame, protected | Moderate |
+| `Type_VB` | Wood frame, unprotected | Low |
+
+## Certifications
+
+Track green building certifications:
+
+```yaml
+certifications:
+  - name: "BREEAM"
+    level: "Very Good"
+    status: "in_progress"
+    assessor: "BRE Global"
+    targetScore: 65
+
+  - name: "LEED"
+    version: "v4.1 BD+C"
+    level: "Silver"
+    status: "planned"
+    targetPoints: 55
+
+  - name: "WELL"
+    version: "v2"
+    level: "Gold"
+    status: "design_review"
+```
+
+## Compilation Report Integration
+
+Building metadata populates compliance report header:
+
+```json
+{
+  "projectMetadata": {
+    "projectId": "PRJ-GREEN-TERRACE-2026",
+    "buildingName": "Green Terrace Apartments",
+    "country": "PL",
+    "jurisdiction": "WT_2021",
+    "projectPhase": "design_development",
+    "bimLOD": "LOD_300",
+    "complianceDate": "2026-02-20"
+  }
+}
+```
+
+## See Also
+
+- **[Level](/en/documentation/entities/level)** - Buildings contain levels
+- **[Space](/en/documentation/entities/space)** - Spaces belong to buildings
+- **[Compiler Guide](/en/documentation/compiler/)** - Building-level compilation
+- **[Jurisdiction Packs](/en/documentation/compiler/)** - Country-specific requirements

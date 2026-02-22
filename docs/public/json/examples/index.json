@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-02-20T22:56:47.998Z",
+  "totalDocuments": 3,
+  "documents": [
+    {
+      "file": "green-terrace\\external-wall-type-a.json",
+      "documentType": "element_specification",
+      "projectPhase": "unknown",
+      "title": "External Wall - Type A"
+    },
+    {
+      "file": "green-terrace\\project-specification.json",
+      "documentType": "project_specification",
+      "projectPhase": "construction_documentation",
+      "title": "Project Specification: Residential Building \"Green Terrace\""
+    },
+    {
+      "file": "green-terrace\\spaces\\bedroom-01.json",
+      "documentType": "space",
+      "projectPhase": "design_development",
+      "title": "Basic Properties"
+    }
+  ]
+}
