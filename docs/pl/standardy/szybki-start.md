@@ -12,8 +12,22 @@ Na koniec będziesz mieć dwa połączone dokumenty i jasny obraz tego, jak dzia
 
 **Oto gotowy plik, który stworzysz:**
 
-```markdown
-spaces/bedroom-01.md
+```yaml
+# Plik: spaces/bedroom-01.md
+---
+documentType: "space"
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+designArea: 14.5
+designHeight: 2.70
+requirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+---
+
+# Pomieszczenie: Sypialnia 01
+
+Standardowa sypialnia z oknem od strony północnej.
 ```
 
 **A oto co kompilator z niego wygeneruje:**
@@ -72,21 +86,35 @@ To wszystko, czego potrzebujesz. Żadnych plików konfiguracyjnych, żadnych nar
 
 ## Krok 2: Utwórz kartę pomieszczenia
 
-Utwórz nowy plik w lokalizacji `spaces/bedroom-01.md` i wklej następującą zawartość:
+::: tip Nowość: Dziedziczenie właściwości (v0.1.4)
+Najpierw zdefiniuj wspólne właściwości w `levels/level-01.md`:
+```yaml
+---
+id: "LVL-01"
+levelName: "Poziom 01"
+typicalCeilingHeight: 2.70  # Wszystkie pomieszczenia dziedziczą
+typicalFinishes:
+  floor: "Deska inżynierska dębowa"
+  walls: "Farba biała"
+---
+```
+:::
+
+Następnie utwórz plik `spaces/bedroom-01.md` (tylko unikalne dane):
 
 ```markdown
 ---
 documentType: "space"
 entityType: "space"
 id: "SP-BLD-01-L01-001"
-spaceName: "Bedroom 01"
+spaceName: "Sypialnia 01"
 spaceType: "sleeping_space"
 buildingId: "BLD-01"
-levelId: "LVL-01"
+levelId: "LVL-01"  # Dziedziczy wysokość sufitu i wykończenia z poziomu
 zoneIds:
   - "ZONE-FIRE-ZL-IV"
 designArea: 14.5
-designHeight: 2.70
+# designHeight: 2.70  ← DZIEDZICZONE z level-01.md
 unit: "m"
 requirements:
   - "REQ-PL-WT-ROOM-HEIGHT-001"
@@ -100,12 +128,16 @@ tags:
 
 Standardowa sypialnia na pierwszym piętrze z oknem od strony północnej.
 
+::: tip Dziedziczy z poziomu
+Zobacz `levels/level-01.md` dla wysokości sufitu i wykończeń.
+:::
+
 ## Parametry projektowe
 
 | Parametr | Wartość | Jednostka |
 |----------|---------|-----------|
 | Powierzchnia podłogi | 14.5 | m² |
-| Wysokość w świetle | 2.70 | m |
+| Wysokość w świetle | 2.70 (dziedziczone) | m |
 | Powierzchnia okna | 3.2 | m² |
 
 ## Wymagania

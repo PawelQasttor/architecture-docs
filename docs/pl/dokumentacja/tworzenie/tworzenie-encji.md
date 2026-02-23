@@ -52,7 +52,7 @@ node scripts/compiler/index.mjs compile \
 
 ## Tworzenie kondygnacji
 
-Kondygnacje organizują przestrzenie w pionie.
+Kondygnacje organizują przestrzenie w pionie i definiują **typowe właściwości**, które kaskadowo przekazują się do wszystkich przestrzeni na tym piętrze.
 
 ### Kiedy tworzyć
 
@@ -63,7 +63,7 @@ Kondygnacje organizują przestrzenie w pionie.
 
 **1. Utwórz plik:** `levels/level-01.md`
 
-**2. Dodaj dane kondygnacji:**
+**2. Dodaj dane kondygnacji z właściwościami dziedziczonymi:**
 ```yaml
 ---
 documentType: "level"
@@ -80,6 +80,32 @@ elevationUnit: "m"
 levelHeight: 3.20
 levelHeightUnit: "m"
 
+# Dziedziczenie właściwości (v0.1.4) - Zdefiniuj raz, dziedź we wszystkich przestrzeniach
+typicalCeilingHeight: 2.70
+typicalFinishes:
+  floor: "Deska inżynierska dębowa 3-warstwowa 15mm"
+  walls: "Farba akrylowa biała RAL 9010"
+  ceiling: "Farba akrylowa biała RAL 9010"
+  baseboard: "Listwa MDF biała 80mm"
+
+typicalEnvironmentalConditions:
+  temperatureRange:
+    min: 20.0
+    max: 24.0
+    unit: "C"
+  humidityRange:
+    min: 40
+    max: 60
+  ventilationRate:
+    value: 0.5
+    unit: "ACH"
+  pressurization: "neutral"
+
+levelRequirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+  - "REQ-LEVEL-FIRE-RATING"
+  - "REQ-LEVEL-ACOUSTIC-B"
+
 grossFloorArea: 1250
 areaUnit: "m2"
 
@@ -92,11 +118,22 @@ version: "1.0.0"
 - `levelHeight` to wysokość od podłogi do podłogi (nie wysokość sufitu)
 - Numeracja kondygnacji: Parter = 0, Piwnica = -1, Pierwsze piętro = 1
 
+**NOWOŚĆ w v0.1.4: Właściwości dziedziczone**
+- `typicalCeilingHeight` - Wszystkie przestrzenie na tym poziomie dziedziczą jako `designHeight` (chyba że jawnie nadpisane)
+- `typicalFinishes` - Wszystkie przestrzenie dziedziczą te wykończenia (chyba że nadpisane przez `finishOverrides`)
+- `typicalEnvironmentalConditions` - Wszystkie przestrzenie dziedziczą ustawienia HVAC (chyba że jawnie określone)
+- `levelRequirements` - Scalane z wymaganiami przestrzeni (nie zastępowane)
+
+**Kiedy definiować typowe właściwości:**
+- ✅ **Tak, jeśli 80%+ pomieszczeń ma tę samą wartość** (np. wszystkie sypialnie mają sufit 2,70m)
+- ✅ **Tak, dla standardowych pięter mieszkalnych/biurowych** (spójne wykończenia na piętrze)
+- ❌ **Nie, jeśli każde pomieszczenie jest inne** (piętra wielofunkcyjne z różnymi wysokościami)
+
 ---
 
 ## Tworzenie przestrzeni
 
-Przestrzenie to pomieszczenia i obszary funkcjonalne.
+Przestrzenie to pomieszczenia i obszary funkcjonalne. **Większość właściwości dziedziczy z kondygnacji** - określaj tylko to, co jest inne.
 
 ### Kiedy tworzyć
 
@@ -110,11 +147,27 @@ Przestrzenie to pomieszczenia i obszary funkcjonalne.
 - **Komunikacyjne:** `corridor`, `staircase`, `elevator_lobby`
 - **Pomocnicze:** `storage`, `technical`
 
-### Przykład krok po kroku: Sypialnia
+### Wzorzec dziedziczenia właściwości (v0.1.4)
+
+::: tip Zasada kluczowa: Nie powtarzaj się
+Jeśli właściwość jest taka sama dla większości pomieszczeń na piętrze, zdefiniuj ją **raz na kondygnacji** - wszystkie przestrzenie dziedziczą automatycznie.
+:::
+
+**Matryca decyzyjna:**
+
+| Właściwość | Definiować na kondygnacji? | Nadpisać w przestrzeni? |
+|-----------|---------------------------|------------------------|
+| Wysokość sufitu (2.70m dla wszystkich sypialni) | ✅ Tak (`typicalCeilingHeight`) | Tylko jeśli inna (np. łazienka 2.40m) |
+| Wykończenia (dąb dla wszystkich) | ✅ Tak (`typicalFinishes`) | Tylko jeśli inne (np. płytki w łazience) |
+| Warunki środowiskowe (20-24°C) | ✅ Tak (`typicalEnvironmentalConditions`) | Tylko jeśli inne (np. serwerownia) |
+| Powierzchnia | ❌ Nie | ✅ Zawsze określ (unikalne dla pokoju) |
+| Przypisania stref | ❌ Nie | ✅ Określ per pomieszczenie (różne) |
+
+### Przykład krok po kroku: Sypialnia (z dziedziczeniem)
 
 **1. Utwórz plik:** `spaces/bedroom-01.md`
 
-**2. Zdefiniuj przestrzeń:**
+**2. Zdefiniuj przestrzeń (tylko dane specyficzne dla instancji):**
 ```yaml
 ---
 documentType: "space"
@@ -127,8 +180,11 @@ spaceType: "sleeping_space"
 buildingId: "BLD-01"
 levelId: "LVL-01"
 
+# Dane przestrzenne specyficzne dla instancji
 designArea: 14.5
-designHeight: 2.70
+# designHeight: 2.70  ← DZIEDZICZONE z LVL-01.typicalCeilingHeight
+# finishes ← DZIEDZICZONE z LVL-01.typicalFinishes
+# environmentalConditions ← DZIEDZICZONE z LVL-01.typicalEnvironmentalConditions
 designVolume: 39.15
 unit: "m"
 
@@ -152,14 +208,18 @@ tags:
   - "sleeping"
 ---
 
-# Bedroom 01
+# Sypialnia 01
 
-Standard bedroom with north-facing window.
+Standardowa sypialnia z oknem od strony północnej.
 
-## Requirements
-- Minimum daylight factor 2%
-- Acoustic Class B insulation
-- Room height ≥ 2.50 m (WT 2021 § 132)
+::: tip Dziedziczy z kondygnacji
+Zobacz `levels/level-01.md` dla dziedziczonej wysokości sufitu, wykończeń, warunków środowiskowych i wymagań bazowych.
+:::
+
+## Wymagania
+- Minimalny współczynnik oświetlenia dziennego 2%
+- Izolacja akustyczna klasy B
+- Wysokość pomieszczenia ≥ 2,50 m (WT 2021 § 132)
 ```
 
 **3. Skompiluj, aby zweryfikować relacje:**
@@ -181,6 +241,56 @@ Oczekiwane wyjście:
   "SP-BLD-01-L01-001"
 ]
 ```
+
+---
+
+### Przykład nadpisania: Łazienka (inny sufit i wykończenia)
+
+Gdy przestrzeń potrzebuje **innych wartości** niż wartości domyślne z kondygnacji, użyj jawnych właściwości lub `finishOverrides`:
+
+**1. Utwórz plik:** `spaces/bathroom-01.md`
+
+**2. Nadpisz to, co jest inne:**
+```yaml
+---
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-002"
+
+spaceName: "Łazienka 01"
+spaceType: "bathroom"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+
+designArea: 4.2
+designHeight: 2.40  # ← NADPISANIE: Obniżony sufit (nie 2.70m z kondygnacji)
+
+# Nadpisanie wykończeń (łazienka potrzebuje płytek, nie dębu z kondygnacji)
+finishOverrides:
+  floor: "Płytki ceramiczne 30x60 antypoślizgowe"
+  walls: "Płytki ceramiczne 30x60 połysk"
+  # ceiling: farba biała ← DZIEDZICZONE z kondygnacji
+  # baseboard: listwa MDF biała ← DZIEDZICZONE z kondygnacji
+
+# environmentalConditions ← DZIEDZICZONE z kondygnacji (20-24°C jest OK)
+
+version: "1.0.0"
+---
+
+# Łazienka 01
+
+::: tip Dziedziczy z kondygnacji (częściowo)
+Zobacz `levels/level-01.md` - dziedziczy wykończenie sufitu, warunki środowiskowe.
+Nadpisania: wysokość sufitu (2.40m), wykończenia podłogi/ścian (płytki ceramiczne).
+:::
+```
+
+**Rezultat:**
+- Wysokość sufitu: 2.40m (nadpisane)
+- Podłoga: Płytki ceramiczne (nadpisane)
+- Ściany: Płytki ceramiczne (nadpisane)
+- Sufit: Farba biała (dziedziczone z kondygnacji)
+- Warunki środowiskowe: 20-24°C (dziedziczone z kondygnacji)
 
 ---
 

@@ -1,12 +1,129 @@
 # Quick Start: Your First Space Document
 
-::: tip 5-Minute Guide
-Create your first building document and see the standard in action.
-:::
+## The Problem You Already Know
+
+If you've worked on a building project before, you know this frustration:
+
+- **Room specifications scattered everywhere** — some in AutoCAD text notes, some in a Word document, some in an Excel spreadsheet, some in emails you can't find anymore
+- **Information gets out of sync** — the drawings show 2.70m ceiling height, but the specs document says 2.80m, and nobody knows which one is correct
+- **The same data entered five times** — you type room area into AutoCAD, then Excel, then Word, then email it to the mechanical engineer, then the builder asks again
+- **Compliance mysteries** — three weeks before the permit deadline, you discover nobody documented which rooms are in which fire zone
+- **The vanishing maintenance manual** — two years after handover, the facility manager calls: "Where's the boiler serial number?" and you have no idea which folder it's in
+
+**If this sounds familiar, this standard is built for you.**
+
+---
+
+## Why This Matters (What You Gain)
+
+Switching to structured documentation isn't about learning new software. It's about solving problems that cost you time and money on every project:
+
+| Problem You Face Today | How SBM Solves It |
+|------------------------|-------------------|
+| **"Which rooms need fire doors?"** | Search all space files for `zoneIds: ZONE-FIRE-ZL-IV`. Done in 2 seconds. No manual checking. |
+| **"Did we document the boiler serial number?"** | Every asset has a file. If `boiler-01.md` exists, it has the serial number. If it doesn't exist, you know it's missing. |
+| **"The specs say 2.80m but the drawing shows 2.70m"** | Impossible. One file, one height value. Export to BIM, export to PDF — same number everywhere. |
+| **"The contractor is asking about bedroom finishes again"** | Send them `bedroom-01.md`. One file, all info: area, height, finishes, equipment, compliance status. |
+| **"Where's the as-built documentation?"** | Same files you created in concept phase. You've been updating them through construction. They're already as-built. |
+| **"We need to redo the fire compliance report"** | Run the compiler. It reads all zone files, checks all spaces, generates the report automatically. 5 minutes, not 5 days. |
+
+**Time saved per project:** Architects report 20-40% less time spent on documentation and coordination when information lives in one structured place.
+
+---
+
+## What This Changes
+
+Imagine if every room, every fire zone, every piece of equipment lived in **one simple text file** that:
+
+- ✅ **You can edit with any text editor** — no special software required, works with Notepad, VS Code, or anything you already use
+- ✅ **Stores in Google Drive or Dropbox** — just folders and files, like you already work
+- ✅ **Humans can read** — looks like a document with tables and descriptions
+- ✅ **Computers can read** — the same file feeds into Revit, compliance reports, equipment registers, and maintenance systems
+- ✅ **Stays consistent automatically** — if Bedroom 01 says it's in Fire Zone ZL-IV, and that zone doesn't exist, the system tells you
+- ✅ **Grows with your project** — start with a rough room list in the concept phase, add details as you go, finish with a complete as-built record
+
+**One file. One truth. No synchronization headaches.**
+
+This is what the **Semantic Building Model (SBM)** standard does. You write simple text files following a clear structure. Those files serve architects, engineers, contractors, inspectors, and facility managers — all from the same source.
+
+---
+
+## Before and After: A Real Example
+
+### The Old Way (What You Might Do Now)
+
+**Documenting Bedroom 01 across multiple tools:**
+
+1. **AutoCAD drawing** — geometry, dimensions, room tag "1.01"
+2. **Excel room schedule** — area, height, finishes (separate file)
+3. **Word specification** — fire rating requirements, acoustic requirements (separate file)
+4. **Email to MEP engineer** — "Bedroom 01 needs heating, see attached room schedule" (another copy of the data)
+5. **Handover folder** — maintenance manual mentions "bedrooms on first floor" but no link to specific rooms
+
+**Result:** 5 places storing overlapping information. Change the ceiling height? Update 5 files. Find the fire rating? Open 3 files and hope they agree.
+
+### The New Way (With SBM)
+
+**Define common properties once in `levels/level-01.md`:**
+
+```yaml
+---
+id: "LVL-01"
+levelName: "Level 01"
+typicalCeilingHeight: 2.70  # All rooms inherit this
+typicalFinishes:
+  floor: "Oak engineered"
+  walls: "Paint white"
+---
+```
+
+**Then create `spaces/bedroom-01.md` (only unique data):**
+
+```markdown
+---
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+levelId: "LVL-01"  # Inherits ceiling height, finishes from level
+designArea: 14.5
+zoneIds: ["ZONE-FIRE-ZL-IV"]
+---
+
+# Space: Bedroom 01
+
+Standard bedroom, north-facing window, fire zone ZL-IV.
+See `level-01.md` for ceiling height and finishes.
+```
+
+**Result:**
+- ✅ The same file feeds AutoCAD (via IFC import)
+- ✅ The same file generates the room schedule automatically
+- ✅ The same file shows fire zone assignment (linked to the zone document)
+- ✅ The MEP engineer reads the same file (no email attachments)
+- ✅ The facility manager finds maintenance info linked from this file
+- ✅ **NEW:** 50 bedrooms inherit ceiling height from level - change once, update all
+
+**One source. One truth. Six uses. 90% less repetition.**
+
+---
+
+## Think of It Like...
+
+| Familiar Tool | How SBM Relates |
+|---------------|-----------------|
+| **AutoCAD layers** | Just like layers organize geometry, SBM document types organize information. Spaces in one folder, fire zones in another, equipment in another. |
+| **Excel spreadsheet** | Each room could be a row in Excel. With SBM, each room is its own file. Edit one without opening a massive spreadsheet. Search, filter, version control. |
+| **Google Docs** | You write text that humans read. But unlike a blank Word doc, the computer can also extract structured data (area, height, zone assignment) automatically. |
+| **Folders on your computer** | That's exactly what this is. A folder called `spaces/`, another called `zones/`, filled with `.md` text files. No database, no proprietary format. |
+
+---
 
 ## What You'll Create
 
-In this guide, you will create a **Space document** -- a bedroom -- described with structured YAML metadata inside a Markdown file. Spaces are the fundamental building blocks of the **Semantic Building Model (SBM)**. Every room, corridor, and area in a building is represented as a Space document.
+In this guide, you will create a **Space document** — a bedroom — described in a simple text file. Spaces are the fundamental building blocks of the **Semantic Building Model (SBM)**. Every room, corridor, and area in a building gets one file.
+
+::: tip New in v0.1.1: Type/Instance Pattern
+For projects with many similar spaces, you can use **Space Types** to define specifications once and reference them from instances. This guide shows the standalone approach. See [Type/Instance Pattern](#next-steps-type-instance-pattern) below for advanced usage.
+:::
 
 ::: tip New in v0.1.1: Type/Instance Pattern
 For projects with many similar spaces, you can use **Space Types** to define specifications once and reference them from instances. This guide shows the standalone approach. See [Type/Instance Pattern](#next-steps-type-instance-pattern) below for advanced usage.
@@ -38,14 +155,21 @@ One source file. Two audiences -- humans and machines.
 
 ---
 
-## Prerequisites
+## What You Need to Get Started
 
-- **A text editor** -- VS Code, Sublime Text, Notepad++, or anything you are comfortable with
-- **Node.js** (optional) -- only needed if you want to run the SBM compiler for validation
-- **Basic familiarity with Markdown** -- headings, lists, tables, and code blocks
+**The bare minimum (all you really need):**
+- **Any text editor** — even Windows Notepad works. If you've edited a `.txt` file, you can do this.
+- **A folder on your computer** — or Google Drive, Dropbox, network share, anywhere you store files.
 
-::: info No Special Tools Required
-The standard is built on plain-text Markdown. You do not need any proprietary software or plugins to get started.
+**Nice to have (but not required):**
+- **VS Code or Notepad++** — free text editors with better formatting (but Notepad is fine)
+- **Node.js** — only needed if you want automated validation (you can skip this for now)
+
+**Do you need to know Markdown?**
+Not really. If you've ever written a Word document with **bold text**, headings, or bullet lists, you already know 90% of what Markdown does. We'll show you the rest as we go.
+
+::: info No Special Software Required
+This standard uses **plain text files** (`.md` extension). No AutoCAD plugin. No Revit add-in. No proprietary software. Just text files in folders — the most future-proof format that exists.
 :::
 
 ---
@@ -70,7 +194,11 @@ my-project/
 └── requirements/
 ```
 
-That is all you need. No configuration files, no build tools -- just folders and Markdown files.
+That's it. No configuration files, no build tools, no database setup — just folders and text files.
+
+::: info This Should Feel Familiar
+This is exactly how you probably organize AutoCAD files already: one folder for floor plans, one for sections, one for details. Same idea, but for documentation instead of drawings.
+:::
 
 ---
 
@@ -119,9 +247,9 @@ A standard bedroom on the first floor with north-facing window.
 - Acoustic insulation Class B
 ```
 
-### Understanding the YAML Fields
+### Understanding the Fields (The Table at the Top)
 
-Each field in the frontmatter serves a specific purpose:
+The content between the `---` markers is called **frontmatter** — think of it as a structured table that both you and the computer can read. Each field serves a specific purpose:
 
 | Field | Purpose | Example |
 |-------|---------|---------|
@@ -140,13 +268,13 @@ Each field in the frontmatter serves a specific purpose:
 
 ---
 
-## Step 3: Understand the Structure
+## Step 3: Understand the Structure (Two Parts, One File)
 
-Every document file has two distinct parts:
+Look at the file you just created. It has two parts — but they're in the same file, so they can never get out of sync:
 
-### YAML Frontmatter (Machine-Readable)
+### Part 1: Structured Data (Between the `---` Markers)
 
-The content between the `---` markers is structured YAML metadata. This is what the SBM compiler, AI agents, and BIM software read. It follows a strict schema so that tools can reliably extract building data.
+This is the table-like section at the top. Think of it like filling out a form:
 
 ```yaml
 ---
@@ -157,9 +285,16 @@ designArea: 14.5
 ---
 ```
 
-### Markdown Body (Human-Readable)
+**Who reads this part:**
+- The computer (to generate BIM parameters, compliance reports, equipment lists)
+- AI tools (to answer questions like "which rooms are taller than 3 meters?")
+- You (when you need to quickly check the assigned zone or area)
 
-Everything after the closing `---` is standard Markdown. This is what architects, engineers, and clients read. It provides context, explanations, and visual tables that make sense to people.
+**Why it's structured:** So software can reliably find information. If every file puts area in the same field, a script can collect all areas automatically. No hunting through paragraphs.
+
+### Part 2: Human-Readable Description (After the `---`)
+
+This is normal text, just like a Word document:
 
 ```markdown
 # Space: Bedroom 01
@@ -167,8 +302,16 @@ Everything after the closing `---` is standard Markdown. This is what architects
 A standard bedroom on the first floor with north-facing window.
 ```
 
+**Who reads this part:**
+- Architects (to understand design intent)
+- Engineers (to see context and constraints)
+- Contractors (to understand what they're building)
+- Clients (to review and approve)
+
+**Why it matters:** Numbers in a table don't tell the whole story. The narrative explains *why* the room is 14.5m² (minimum bedroom size per regulations) or *why* the window faces north (afternoon sun avoidance).
+
 ::: tip The Core Principle
-Write once, serve both humans and machines. The YAML frontmatter and the Markdown body live in a single file. There is no duplication, no synchronization burden, and no drift between what the machine knows and what the human reads.
+**Write once, serve everyone.** The structured data and the human description live in a single file. You edit one place. Everyone — people and computers — reads the same truth. No duplication, no synchronization burden, no drift.
 :::
 
 ---
@@ -231,7 +374,16 @@ Building (BLD-01)
         └── Requirement: Room Height WT 2021
 ```
 
-This is the **Semantic Building Model (SBM)** in action. Every room, zone, system, and requirement is a structured document that references other documents by ID. As you add more files -- more rooms, more zones, MEP systems, equipment -- the graph grows.
+This is the **Semantic Building Model (SBM)** in action. Every room, zone, system, and requirement is a structured document that references other documents by ID. As you add more files — more rooms, more zones, MEP systems, equipment — the graph grows.
+
+**Why this matters:**
+
+Imagine you have 50 bedrooms. All of them reference `ZONE-FIRE-ZL-IV`. Later, the fire inspector says Zone ZL-IV needs upgraded fire doors.
+
+- **The old way:** Search through 50 room specs (Word docs? Excel rows? AutoCAD notes?) to find which rooms are affected.
+- **With SBM:** Open `fire-zone-zl-iv.md`. The system already knows which rooms reference it. Update the zone file with the new requirement. Done.
+
+The connections work both ways automatically. You never lose track of what's linked to what.
 
 ### What the Compiler Produces
 
@@ -338,4 +490,35 @@ You have created your first space document and connected it to a fire zone. Here
 
 ::: tip Keep Going
 The best way to learn the standard is to model a real room from a project you are working on. Pick a space, create the file, and connect it to a zone. The structure will start to feel natural very quickly.
+:::
+
+---
+
+## What If I Get Stuck?
+
+**"This feels overwhelming."**
+Start small. Model one room. Just one. Use the template above, change the room name and area, save the file. That's it. You don't need to do zones, systems, or compliance on day one.
+
+**"I don't understand YAML/frontmatter/Markdown."**
+You don't need to. Copy the template, change the values (room name, area, height), and save. The structure is already there. You're just filling in the blanks, like a form.
+
+**"What if I make a mistake?"**
+Text files are very forgiving. Save a backup copy (or use Git if you know it). Try something. If it breaks, you can always go back. The worst that happens is a file won't validate — and the compiler will tell you exactly what's wrong.
+
+**"How do I know if I'm doing it right?"**
+If you can answer these questions by opening one file, you're doing it right:
+- What's the area of Bedroom 01?
+- Which fire zone is it in?
+- What's the minimum height requirement?
+
+If the answers are all in `bedroom-01.md`, you've succeeded.
+
+**"Do I have to learn the whole standard at once?"**
+No. Start with spaces. Add zones when you need them. Add systems when the MEP engineer asks for specs. Add equipment during construction. The standard grows with your project.
+
+**"Can I mix this with my current workflow?"**
+Absolutely. Keep using AutoCAD for drawings. Keep using Word for contracts. Use SBM for structured documentation. Export SBM data to IFC and import into Revit when you're ready. It's additive, not replacement.
+
+::: info You're Not Alone
+Thousands of architects started exactly where you are: comfortable with AutoCAD, unfamiliar with structured documentation. Within one project, it becomes second nature. The time savings start immediately.
 :::

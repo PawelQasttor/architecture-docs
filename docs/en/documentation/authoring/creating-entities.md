@@ -52,7 +52,7 @@ node scripts/compiler/index.mjs compile \
 
 ## Creating Levels
 
-Levels organize spaces vertically.
+Levels organize spaces vertically and define **typical properties** that cascade to all spaces on that floor.
 
 ### When to Create
 
@@ -63,7 +63,7 @@ Levels organize spaces vertically.
 
 **1. Create file:** `levels/level-01.md`
 
-**2. Add level data:**
+**2. Add level data with inheritable properties:**
 ```yaml
 ---
 documentType: "level"
@@ -80,6 +80,32 @@ elevationUnit: "m"
 levelHeight: 3.20
 levelHeightUnit: "m"
 
+# Property Inheritance (v0.1.4) - Define once, inherit in all spaces
+typicalCeilingHeight: 2.70
+typicalFinishes:
+  floor: "Oak engineered 3-layer 15mm"
+  walls: "Acrylic paint white RAL 9010"
+  ceiling: "Acrylic paint white RAL 9010"
+  baseboard: "MDF white baseboard 80mm"
+
+typicalEnvironmentalConditions:
+  temperatureRange:
+    min: 20.0
+    max: 24.0
+    unit: "C"
+  humidityRange:
+    min: 40
+    max: 60
+  ventilationRate:
+    value: 0.5
+    unit: "ACH"
+  pressurization: "neutral"
+
+levelRequirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+  - "REQ-LEVEL-FIRE-RATING"
+  - "REQ-LEVEL-ACOUSTIC-B"
+
 grossFloorArea: 1250
 areaUnit: "m2"
 
@@ -92,11 +118,22 @@ version: "1.0.0"
 - `levelHeight` is floor-to-floor height (not ceiling height)
 - Level numbering: Ground = 0, Basement = -1, First floor = 1
 
+**NEW in v0.1.4: Inheritable Properties**
+- `typicalCeilingHeight` - All spaces on this level inherit this as `designHeight` (unless explicitly overridden)
+- `typicalFinishes` - All spaces inherit these finishes (unless overridden via `finishOverrides`)
+- `typicalEnvironmentalConditions` - All spaces inherit HVAC settings (unless explicitly specified)
+- `levelRequirements` - Merged with space-specific requirements (not replaced)
+
+**When to define typical properties:**
+- ✅ **Yes, if 80%+ of rooms share the same value** (e.g., all bedrooms have 2.70m ceiling)
+- ✅ **Yes, for standard residential/office floors** (consistent finishes across floor)
+- ❌ **No, if every room is different** (mixed-use floors with varied ceiling heights)
+
 ---
 
 ## Creating Spaces
 
-Spaces are rooms and functional areas.
+Spaces are rooms and functional areas. **Most properties inherit from the level** - only specify what's different.
 
 ### When to Create
 
@@ -110,11 +147,27 @@ Spaces are rooms and functional areas.
 - **Circulation:** `corridor`, `staircase`, `elevator_lobby`
 - **Support:** `storage`, `technical`
 
-### Step-by-Step Example: Bedroom
+### Property Inheritance Pattern (v0.1.4)
+
+::: tip Key Principle: Don't Repeat Yourself
+If a property is the same for most rooms on the floor, define it **once at the level** - all spaces inherit automatically.
+:::
+
+**Decision Matrix:**
+
+| Property | Define at Level? | Override in Space? |
+|----------|-----------------|-------------------|
+| Ceiling height (2.70m for all bedrooms) | ✅ Yes (`typicalCeilingHeight`) | Only if different (e.g., bathroom 2.40m) |
+| Finishes (oak floor for all rooms) | ✅ Yes (`typicalFinishes`) | Only if different (e.g., bathroom tile) |
+| Environmental (20-24°C residential) | ✅ Yes (`typicalEnvironmentalConditions`) | Only if different (e.g., server room) |
+| Floor area | ❌ No | ✅ Always specify (unique per room) |
+| Zone assignments | ❌ No | ✅ Specify per room (varies) |
+
+### Step-by-Step Example: Bedroom (Using Inheritance)
 
 **1. Create file:** `spaces/bedroom-01.md`
 
-**2. Define space:**
+**2. Define space (only instance-specific data):**
 ```yaml
 ---
 documentType: "space"
@@ -127,8 +180,11 @@ spaceType: "sleeping_space"
 buildingId: "BLD-01"
 levelId: "LVL-01"
 
+# Instance-specific spatial data
 designArea: 14.5
-designHeight: 2.70
+# designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight
+# finishes ← INHERITED from LVL-01.typicalFinishes
+# environmentalConditions ← INHERITED from LVL-01.typicalEnvironmentalConditions
 designVolume: 39.15
 unit: "m"
 
@@ -140,7 +196,7 @@ zoneIds:
 requirements:
   - "REQ-DAYLIGHT-SLEEPING-001"
   - "REQ-ACOUSTIC-SLEEPING-001"
-  - "REQ-PL-WT-ROOM-HEIGHT-001"
+  # REQ-PL-WT-ROOM-HEIGHT-001 ← MERGED from LVL-01.levelRequirements
 
 occupancy:
   maxOccupants: 2
@@ -155,6 +211,10 @@ tags:
 # Bedroom 01
 
 Standard bedroom with north-facing window.
+
+::: tip Inherits from Level
+See `levels/level-01.md` for inherited ceiling height, finishes, environmental conditions, and base requirements.
+:::
 
 ## Requirements
 - Minimum daylight factor 2%
@@ -181,6 +241,56 @@ Expected output:
   "SP-BLD-01-L01-001"
 ]
 ```
+
+---
+
+### Override Example: Bathroom (Different Ceiling & Finishes)
+
+When a space needs **different values** from the level defaults, use explicit properties or `finishOverrides`:
+
+**1. Create file:** `spaces/bathroom-01.md`
+
+**2. Override what's different:**
+```yaml
+---
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-002"
+
+spaceName: "Bathroom 01"
+spaceType: "bathroom"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+
+designArea: 4.2
+designHeight: 2.40  # ← OVERRIDE: Dropped ceiling (not 2.70m from level)
+
+# Override finishes (bathroom needs tile, not oak from level)
+finishOverrides:
+  floor: "Ceramic tiles 30x60 non-slip"
+  walls: "Ceramic tiles 30x60 glossy"
+  # ceiling: white paint ← INHERITED from level
+  # baseboard: MDF white ← INHERITED from level
+
+# environmentalConditions ← INHERITED from level (20-24°C is fine)
+
+version: "1.0.0"
+---
+
+# Bathroom 01
+
+::: tip Inherits from Level (Partially)
+See `levels/level-01.md` - inherits ceiling finish, environmental conditions.
+Overrides: ceiling height (2.40m), floor/wall finishes (ceramic tile).
+:::
+```
+
+**Result:**
+- Ceiling height: 2.40m (overridden)
+- Floor: Ceramic tile (overridden)
+- Walls: Ceramic tile (overridden)
+- Ceiling: White paint (inherited from level)
+- Environmental: 20-24°C (inherited from level)
 
 ---
 
