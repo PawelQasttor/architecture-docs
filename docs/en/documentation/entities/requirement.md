@@ -1,4 +1,18 @@
-# Requirement
+# Requirement (Rules & Regulations)
+
+## What This Is
+
+A **Requirement** file documents one rule that your building must follow. Examples: "Bedroom ceiling height must be >= 2.50m" (WT 2021), "Living room needs minimum 2% daylight factor" (EN 17037).
+
+::: tip For Architects
+**Problem:** Inspector asks "Does this bedroom meet WT 2021 §132 height requirement?"
+
+**Old way:** Hunt through specifications, hope you documented it, manually check if 2.70m >= 2.50m.
+
+**With requirements:** The system automatically checks every bedroom against `REQ-PL-WT-ROOM-HEIGHT-001` and tells you pass/fail. **No manual checking.**
+
+**One requirement file = automatic compliance checking for every relevant room.**
+:::
 
 A **Requirement** defines a performance, regulatory, or design rule that documents must satisfy. Requirements drive compliance checking, verification planning, and digital twin runtime monitoring.
 
@@ -26,6 +40,24 @@ Requirements specify:
 | `unit` | string | Measurement unit | `"%"`, `"m"`, `"dB"`, `"°C"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+::: tip For Architects: What These Required Fields Mean
+- **id**: Requirement identifier (e.g., `REQ-PL-WT-ROOM-HEIGHT-001`)
+- **requirementName**: Plain English description ("Minimum room height per WT 2021")
+- **requirementType**: Category — `performance`, `dimensional`, `regulatory`, `safety`
+- **metric**: What you're measuring (e.g., `height`, `daylight_factor`, `fire_resistance`)
+- **operator**: How to compare — `>=` (greater than or equal), `<=` (less than or equal), `==` (equals), `range` (between min and max)
+- **value**: Target value (e.g., `2.5` for 2.50m) or range (e.g., `{min: 20, max: 26}` for temperature)
+- **unit**: What unit (e.g., `"m"` for meters, `"%"` for percentage, `"°C"` for Celsius)
+
+**Example:** Room height >= 2.50m becomes:
+```yaml
+metric: "height"
+operator: ">="
+value: 2.5
+unit: "m"
+```
+:::
+
 ## Optional Fields
 
 | Field | Type | Description |
@@ -37,6 +69,23 @@ Requirements specify:
 | `technicalBasis` | array | Technical standard references (EN, ISO, ASHRAE) |
 | `description` | string | Detailed explanation |
 | `tags` | array | Free-form classification tags |
+
+::: tip For Architects: Which Optional Fields Matter Most?
+
+**For permit compliance:**
+- **legalBasis** — Which law/regulation (e.g., WT 2021 §132, Prawo Budowlane Art. 5)
+- **scope** — Which rooms this applies to (e.g., only bedrooms, only residential spaces)
+- **description** — Plain explanation for inspectors
+
+**For design verification:**
+- **verification** — How to check this (simulation, calculation, inspection)
+- **technicalBasis** — Which technical standard (e.g., EN 17037, ISO 140-4)
+
+**For compliance reports:**
+- **countryScope** — "poland_specific" (loads only for Polish projects) or "global" (always loads)
+
+**Most common:** Just add `legalBasis` and `scope`. The system handles the rest.
+:::
 
 ## Requirement Types (Enum)
 
@@ -51,7 +100,46 @@ type RequirementType =
   | "sustainability"; // Environmental performance targets
 ```
 
-## Example: Global Requirement (Markdown Source)
+## Example 1: Simple Requirement (Minimal)
+
+**The simplest requirement — room height minimum:**
+
+```yaml
+File: requirements/pl/room-height-min.json
+
+{
+  "id": "REQ-PL-WT-ROOM-HEIGHT-001",
+  "entityType": "requirement",
+  "documentType": "requirement",
+  "requirementName": "Minimum room height per WT 2021",
+  "requirementType": "dimensional",
+
+  "metric": "height",
+  "operator": ">=",
+  "value": 2.5,
+  "unit": "m",
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 132",
+      "article": "Minimum room height"
+    }
+  ],
+
+  "version": "1.0.0"
+}
+```
+
+**What this does:**
+- Every room that references `REQ-PL-WT-ROOM-HEIGHT-001` is automatically checked
+- If room height < 2.5m → **FAIL**
+- If room height >= 2.5m → **PASS**
+- Compliance report generated automatically
+
+---
+
+## Example 2: Global Requirement (With Technical Standards)
 
 **File:** `scripts/requirements/global/req-daylight-sleeping-001.json`
 

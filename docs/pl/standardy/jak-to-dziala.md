@@ -44,8 +44,8 @@ Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: pomieszcz
 | **Budynek** | Cały obiekt budowlany | "Zielony Taras, ul. Słoneczna 45, Warszawa" |
 | **Kondygnacja** | Jedno piętro | "Parter, +0,00 m" |
 | **Pomieszczenie** | Pokój lub obszar funkcjonalny | "Sypialnia 01, 14,5 m², wysokość 2,70 m" |
-| **Strefa** | Grupa pomieszczeń z wspólną regułą | "Strefa pożarowa ZL-IV, kondygnacje 1-6" |
-| **Wymaganie** | Przepis do spełnienia | "Wysokość pomieszczenia >= 2,50 m wg WT 2021 §132" |
+| **Strefa** | Grupa pomieszczeń o wspólnej charakterystyce | "Strefa pożarowa ZL-IV, kondygnacje 1-6" |
+| **Wymaganie** | Konkretny przepis prawny do spełnienia | "Wysokość pomieszczenia >= 2,50 m wg WT 2021 §132" |
 | **Instalacja** | System techniczny budynku | "Ogrzewanie centralne, kocioł gazowy, grzejniki" |
 | **Urządzenie** | Konkretny zainstalowany produkt | "Vaillant ecoTEC plus 306, nr seryjny #12345" |
 

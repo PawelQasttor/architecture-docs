@@ -75,14 +75,17 @@ def create_extruded_polygon(model, body_context, outline_2d, height):
     Args:
         model: IFC model
         body_context: Body representation context
-        outline_2d: list of (x, y) tuples defining the polygon
+        outline_2d: list of (x, y) tuples defining the polygon in meters
         height: extrusion height in meters
 
     Returns:
         IfcShapeRepresentation
+
+    Note:
+        Converts meter coordinates to millimeters to match project units
     """
-    # Close the polygon: first point == last point
-    pts_3d = [(float(p[0]), float(p[1]), 0.0) for p in outline_2d]
+    # Convert meters to millimeters and close the polygon
+    pts_3d = [(float(p[0]) * 1000.0, float(p[1]) * 1000.0, 0.0) for p in outline_2d]
     pts_3d.append(pts_3d[0])
 
     ifc_pts = [model.createIfcCartesianPoint(p) for p in pts_3d]
@@ -95,7 +98,8 @@ def create_extruded_polygon(model, body_context, outline_2d, height):
     placement = model.createIfcAxis2Placement3D(origin, z_dir, x_dir)
 
     direction = model.createIfcDirection((0.0, 0.0, 1.0))
-    solid = model.createIfcExtrudedAreaSolid(profile, placement, direction, float(height))
+    # Convert height from meters to millimeters
+    solid = model.createIfcExtrudedAreaSolid(profile, placement, direction, float(height) * 1000.0)
 
     rep = model.createIfcShapeRepresentation(body_context, "Body", "SweptSolid", [solid])
     return rep
@@ -115,7 +119,8 @@ def create_ifc_model(sbm):
         "root.create_entity", model, ifc_class="IfcProject", name=project_name
     )
 
-    # Units - metric (meters)
+    # Units - metric (millimeters)
+    # Note: ifcopenshell API functions auto-convert, but manual geometry creation needs mm
     ifcopenshell.api.run("unit.assign_unit", model)
 
     # Geometric representation context
@@ -227,11 +232,11 @@ def create_ifc_model(sbm):
             prod_rep = model.createIfcProductDefinitionShape(None, None, [rep])
             ifc_space.Representation = prod_rep
 
-            # Place at correct elevation
+            # Place at correct elevation (convert meters to millimeters)
             matrix = [
                 [1.0, 0.0, 0.0, 0.0],
                 [0.0, 1.0, 0.0, 0.0],
-                [0.0, 0.0, 1.0, elevation],
+                [0.0, 0.0, 1.0, elevation * 1000.0],
                 [0.0, 0.0, 0.0, 1.0],
             ]
             ifcopenshell.api.run(
@@ -506,7 +511,7 @@ def create_ifc_model(sbm):
                     representation=opening_rep,
                 )
 
-                # Position opening on the wall
+                # Position opening on the wall (API handles meter-to-mm conversion)
                 wp1, wp2 = target_ek
                 angle = wall_angle(wp1, wp2)
                 cos_a = math.cos(angle)

@@ -1,4 +1,18 @@
-# Building
+# Building (Project Information)
+
+## What This Is
+
+A **Building** file contains project-level information: building name, address, area, number of floors. You create **one building file per project**.
+
+::: tip For Architects
+**Problem:** Basic project information scattered across title blocks, cover sheets, Excel summaries.
+
+**Old way:** Update building name in 6 different places when client changes project name.
+
+**With building file:** Change once in `building.md` — all reports, room schedules, and documentation update automatically.
+
+**One building file = all project metadata in one place.**
+:::
 
 A **Building** represents the top-level container for all building documents. It provides project-level metadata, location information, and regulatory context.
 
@@ -23,6 +37,16 @@ Buildings define:
 | `country` | string | ISO 3166-1 alpha-2 country code | `"PL"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+::: tip For Architects: What These Required Fields Mean
+- **id**: Building identifier (e.g., `BLD-01`)
+- **buildingName**: Project name ("Green Terrace Apartments")
+- **buildingType**: Use type — `residential_multifamily`, `office`, `retail`, `healthcare`
+- **country**: Country code — `PL` (Poland), `DE` (Germany), `GB` (UK), `US` (USA)
+- **version**: Track changes
+
+**You only NEED these 5 fields.** The country code automatically loads the right building codes (WT 2021 for Poland, Building Regulations for UK, etc.).
+:::
+
 ## Optional Fields
 
 | Field | Type | Description |
@@ -41,6 +65,27 @@ Buildings define:
 | `certifications` | array | Green building certifications |
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
+
+::: tip For Architects: Which Optional Fields Matter Most?
+
+**For permit submission:**
+- **address** — Street address, city, postal code
+- **grossFloorArea** — Total GFA in m²
+- **numberOfLevels** — How many floors
+- **numberOfUnits** — Number of apartments/units (for residential)
+- **occupancyType** — Occupancy classification (R-2, B, M, etc.)
+- **constructionType** — Construction type (Type_VA, Type_IIA, etc.)
+
+**For energy compliance:**
+- **climateZone** — Climate classification (affects insulation requirements)
+- **certifications** — BREEAM, LEED, WELL targets
+
+**For location/context:**
+- **location** — GPS coordinates (latitude, longitude)
+- **yearBuilt** — Year of construction
+
+**Most common:** Just fill address, gross floor area, number of levels. The rest can be added later as needed.
+:::
 
 ## Building Types (Enum)
 
@@ -61,7 +106,43 @@ type BuildingType =
   | "mixed_use";
 ```
 
-## Example: Markdown Source
+## Example 1: Your First Building File (Minimal)
+
+**The simplest building file to get started:**
+
+```markdown
+File: building.md
+
+---
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Green Terrace Apartments"
+buildingType: "residential_multifamily"
+country: "PL"
+version: "1.0.0"
+
+# For permit submission
+address:
+  street: "ul. Słoneczna 42"
+  city: "Warsaw"
+  postalCode: "00-001"
+grossFloorArea: 4850
+numberOfLevels: 4
+numberOfUnits: 32
+---
+
+# Green Terrace Apartments
+
+32-unit residential building in Warsaw.
+4 levels, 4,850 m² GFA.
+```
+
+**That's it.** You can add energy certifications, climate zone, and GPS coordinates later.
+
+---
+
+## Example 2: Complete Building (Full Details)
 
 **File:** `docs/en/examples/green-terrace/building.md`
 

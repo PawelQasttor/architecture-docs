@@ -1,6 +1,20 @@
-# Karta Urządzenie
+# Instancja Zasobu (Dokumentacja Urządzeń)
 
-**Instancja Zasobu** reprezentuje konkretne urządzenie fizyczne z danymi konserwacyjnymi, informacjami gwarancyjnymi i monitoringiem operacyjnym. Instancje zasob&oacute;w umożliwiają zarządzanie obiektem, integrację z CMMS oraz monitoring w czasie rzeczywistym przez Cyfrowego Bliźniaka.
+## Czym To Jest
+
+**Plik Instancji Zasobu** dokumentuje jedno urządzenie fizyczne. Przykłady: „Centrala wentylacyjna 01 (Serial: SR11-2026-04782)", „Winda 1A".
+
+::: tip Dla Architektów
+**Problem:** Zarządca obiektu pyta „Kiedy kończy się gwarancja na AHU-01?" lub „Jakie filtry trzeba zamówić?"
+
+**Stary sposób:** Szukaj w dokumentacji powykonawczej, sprawdzaj instrukcje O&M, e-mail do wykonawcy branży sanitarnej.
+
+**Z instancjami zasobów:** Otwórz `assets/ai-ahu-01.md` — data gwarancji, części zamienne, harmonogram konserwacji w jednym pliku. **Bez szukania.**
+
+**Jeden plik urządzenia = wszystkie info (gwarancja, konserwacja, specyfikacja) śledzone automatycznie.**
+:::
+
+**Instancja Zasobu** reprezentuje konkretne urządzenie fizyczne z danymi konserwacyjnymi, informacjami gwarancyjnymi i monitoringiem operacyjnym. Instancje zasobów umożliwiają zarządzanie obiektem, integrację z CMMS oraz monitoring w czasie rzeczywistym przez Cyfrowego Bliźniaka.
 
 ## Przeznaczenie
 
@@ -25,6 +39,17 @@ Instancje zasob&oacute;w śledzą:
 | `buildingId` | string | ID budynku nadrzędnego | `"BLD-01"` |
 | `version` | string | Wersja semantyczna | `"1.0.0"` |
 
+::: tip Dla Architektów: Co Oznaczają Te Wymagane Pola
+- **id**: Identyfikator urządzenia (np. `AI-AHU-01`)
+- **assetName**: Jak to nazywasz („Centrala wentylacyjna 01", „Winda 1A")
+- **assetType**: Kategoria urządzenia — `ahu`, `pump`, `elevator`, `fire_alarm_panel`
+- **systemId**: Do którego systemu MEP to należy (np. `SYS-HVAC-01`)
+- **buildingId**: Który budynek
+- **version**: Śledź zmiany
+
+**Potrzebujesz TYLKO tych 6 pól.** Reszta (gwarancja, konserwacja, specyfikacja) jest opcjonalna, ale przydatna dla zarządzania obiektem.
+:::
+
 ## Pola Opcjonalne
 
 | Pole | Typ | Opis |
@@ -47,7 +72,30 @@ Instancje zasob&oacute;w śledzą:
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
-## Kategorie Typ&oacute;w Zasob&oacute;w
+::: tip Dla Architektów: Które Pola Opcjonalne Są Najważniejsze?
+
+**Dla przekazania do zarządzania (najważniejsze):**
+- **manufacturer** + **modelNumber** + **serialNumber** — Identyfikacja dokładnego urządzenia
+- **installationDate** + **warrantyExpiry** — Śledzenie gwarancji
+- **maintenanceSchedule** — Kiedy serwisować urządzenie (kwartalne wymianyfiltry, roczne przeglądy)
+- **assetTag** — Fizyczna etykieta na urządzeniu (dla kodów QR)
+
+**Dla śledzenia kosztów:**
+- **cost** — Koszty zakupu i instalacji
+- **expectedLifespan** — Jak długo do wymiany
+
+**Dla części zamiennych:**
+- **spareParts** — Jakie części trzymać na magazynie (filtry, paski, itp.)
+- **supplier** — Do kogo zadzwonić po serwis
+
+**Dla zgodności energetycznej:**
+- **specifications** — Specyfikacja techniczna (moc, zużycie energii)
+- **energyRating** — Klasa efektywności energetycznej
+
+**Większość architektów wypełnia tylko:** producent, model, numer seryjny, data instalacji, gwarancja. Resztę wypełnia zespół zarządzania obiektem.
+:::
+
+## Kategorie Typów Zasobów
 
 ```typescript
 // Urządzenia HVAC
@@ -93,7 +141,42 @@ type VerticalTransportAssetType =
   | "escalator";       // Schody ruchome
 ```
 
-## Przykład: Źr&oacute;dło Markdown
+## Przykład 1: Pierwszy Plik Urządzenia (Minimalny)
+
+**Najprostszy plik urządzenia dla przekazania:**
+
+```markdown
+Plik: assets/ai-ahu-01.md
+
+---
+id: "AI-AHU-01"
+entityType: "asset_instance"
+documentType: "asset_instance"
+assetName: "Centrala wentylacyjna 01"
+assetType: "ahu"
+systemId: "SYS-HVAC-01"
+buildingId: "BLD-01"
+version: "1.0.0"
+
+# Dla przekazania do zarządzania
+manufacturer: "Systemair"
+modelNumber: "Topvex SR11 EL"
+serialNumber: "SR11-2026-04782"
+installationDate: "2026-08-15"
+warrantyExpiry: "2028-08-15"
+---
+
+# Centrala wentylacyjna 01
+
+Centrala dachowa obsługująca strefę północną.
+Gwarancja kończy się 2028-08-15.
+```
+
+**To wszystko.** Zespół zarządzania może dodać harmonogramy konserwacji i części zamienne później.
+
+---
+
+## Przykład 2: Pełne Urządzenie (Wszystkie Szczegóły)
 
 **Plik:** `docs/en/examples/green-terrace/assets/ai-ahu-01.md`
 

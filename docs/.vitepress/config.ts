@@ -21,10 +21,17 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Home', link: '/' },
-          { text: 'Documentation', link: '/en/documentation/overview' },
-          { text: 'Getting Started', link: '/en/standards/quick-start' },
           {
-            text: 'Workflow Phases',
+            text: 'Get Started',
+            items: [
+              { text: '🚀 Quick Start (5 min)', link: '/en/standards/quick-start' },
+              { text: '🧭 How It Works', link: '/en/standards/how-it-works' },
+              { text: 'Complete Workflow', link: '/en/standards/document-structure' }
+            ]
+          },
+          { text: 'Examples', link: '/en/examples/' },
+          {
+            text: '8 Project Phases',
             items: [
               { text: '1. Project Initiation', link: '/en/phases/initiation' },
               { text: '2. Concept Design (LOD 100)', link: '/en/phases/concept' },
@@ -37,23 +44,25 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Project Controls',
+            text: 'Learn the System',
             items: [
-              { text: 'Project Management', link: '/en/project-management/' },
-              { text: 'Quality Assurance', link: '/en/quality/' },
-              { text: 'Building Operations', link: '/en/operations/' }
+              { text: 'Document Types', link: '/en/documentation/entities/' },
+              { text: 'Templates', link: '/en/templates/' },
+              { text: 'BIM Integration', link: '/en/bim-integration/' },
+              { text: 'System Overview', link: '/en/documentation/overview' }
             ]
           },
           {
             text: 'Reference',
             items: [
-              { text: 'Regulations', link: '/en/regulations/' },
-              { text: 'BIM Integration', link: '/en/bim-integration/' },
+              { text: 'Polish Regulations', link: '/en/regulations/' },
+              { text: 'Project Management', link: '/en/project-management/' },
+              { text: 'Quality Assurance', link: '/en/quality/' },
+              { text: 'Building Operations', link: '/en/operations/' },
               { text: 'Sustainability', link: '/en/sustainability/' },
               { text: 'Tools & Guides', link: '/en/guides/' }
             ]
-          },
-          { text: 'Examples', link: '/en/examples/' }
+          }
         ],
         sidebar: {
           '/en/documentation/': [
@@ -293,10 +302,17 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Strona główna', link: '/pl/' },
-          { text: 'Dokumentacja', link: '/pl/dokumentacja/przeglad' },
-          { text: 'Jak zacząć', link: '/pl/standardy/szybki-start' },
           {
-            text: 'Fazy Projektu',
+            text: 'Jak Zacząć',
+            items: [
+              { text: '🚀 Szybki Start (5 min)', link: '/pl/standardy/szybki-start' },
+              { text: '🧭 Jak to działa', link: '/pl/standardy/jak-to-dziala' },
+              { text: 'Kompletny przepływ pracy', link: '/pl/standardy/struktura-dokumentu' }
+            ]
+          },
+          { text: 'Przykłady', link: '/pl/przyklady/' },
+          {
+            text: '8 Faz Projektu',
             items: [
               { text: '1. Rozpoczęcie Projektu', link: '/pl/fazy/rozpoczecie' },
               { text: '2. Projekt Koncepcyjny (LOD 100)', link: '/pl/fazy/koncepcja' },
@@ -309,23 +325,25 @@ export default defineConfig({
             ]
           },
           {
-            text: 'Kontrola Projektu',
+            text: 'Poznaj System',
             items: [
-              { text: 'Zarządzanie Projektem', link: '/pl/zarzadzanie-projektem/' },
-              { text: 'Zapewnienie Jakości', link: '/pl/jakosc/' },
-              { text: 'Eksploatacja Budynku', link: '/pl/eksploatacja/' }
+              { text: 'Rodzaje kart', link: '/pl/dokumentacja/encje/' },
+              { text: 'Szablony', link: '/pl/szablony/' },
+              { text: 'Integracja BIM', link: '/pl/integracja-bim/' },
+              { text: 'Przegląd systemu', link: '/pl/dokumentacja/przeglad' }
             ]
           },
           {
             text: 'Materiały Pomocnicze',
             items: [
-              { text: 'Przepisy', link: '/pl/przepisy/' },
-              { text: 'Integracja BIM', link: '/pl/integracja-bim/' },
+              { text: 'Polskie Przepisy', link: '/pl/przepisy/' },
+              { text: 'Zarządzanie Projektem', link: '/pl/zarzadzanie-projektem/' },
+              { text: 'Zapewnienie Jakości', link: '/pl/jakosc/' },
+              { text: 'Eksploatacja Budynku', link: '/pl/eksploatacja/' },
               { text: 'Zrównoważone budownictwo', link: '/pl/zrownowazonosc/' },
               { text: 'Narzędzia i Przewodniki', link: '/pl/przewodniki/' }
             ]
-          },
-          { text: 'Przykłady', link: '/pl/przyklady/' }
+          }
         ],
         sidebar: {
           '/pl/dokumentacja/': [

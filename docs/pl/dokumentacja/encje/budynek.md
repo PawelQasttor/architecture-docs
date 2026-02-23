@@ -1,4 +1,18 @@
-# Karta Budynek
+# Budynek (Informacje o Projekcie)
+
+## Czym To Jest
+
+**Plik Budynku** zawiera informacje o projekcie: nazwa budynku, adres, powierzchnia, liczba kondygnacji. Tworzysz **jeden plik budynku na projekt**.
+
+::: tip Dla Architektów
+**Problem:** Podstawowe informacje o projekcie rozproszone po tabelach tytułowych, stronach tytułowych, zestawieniach Excel.
+
+**Stary sposób:** Aktualizuj nazwę budynku w 6 różnych miejscach gdy klient zmienia nazwę projektu.
+
+**Z plikiem budynku:** Zmień raz w `building.md` — wszystkie raporty, zestawienia pomieszczeń i dokumentacja aktualizują się automatycznie.
+
+**Jeden plik budynku = wszystkie metadane projektu w jednym miejscu.**
+:::
 
 **Budynek** reprezentuje kontener najwyższego poziomu dla wszystkich kart budynkowych. Dostarcza metadane na poziomie projektu, informacje o lokalizacji i kontekst regulacyjny.
 
@@ -23,6 +37,16 @@ Budynki definiują:
 | `country` | string | Kod kraju ISO 3166-1 alpha-2 | `"PL"` |
 | `version` | string | Wersja semantyczna | `"1.0.0"` |
 
+::: tip Dla Architektów: Co Oznaczają Te Wymagane Pola
+- **id**: Identyfikator budynku (np. `BLD-01`)
+- **buildingName**: Nazwa projektu („Green Terrace Apartments")
+- **buildingType**: Typ użytkowania — `residential_multifamily`, `office`, `retail`, `healthcare`
+- **country**: Kod kraju — `PL` (Polska), `DE` (Niemcy), `GB` (UK), `US` (USA)
+- **version**: Śledź zmiany
+
+**Potrzebujesz TYLKO tych 5 pól.** Kod kraju automatycznie ładuje właściwe przepisy budowlane (WT 2021 dla Polski, Building Regulations dla UK, itp.).
+:::
+
 ## Pola Opcjonalne
 
 | Pole | Typ | Opis |
@@ -38,11 +62,32 @@ Budynki definiują:
 | `constructionType` | string | Typ konstrukcji budynku |
 | `yearBuilt` | number | Rok budowy/oddania |
 | `projectPhase` | string | Bieżąca faza projektu |
-| `certifications` | array | Certyfikaty zr&oacute;wnoważonego budownictwa |
+| `certifications` | array | Certyfikaty zrównoważonego budownictwa |
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
-## Typy Budynk&oacute;w (Wyliczenie)
+::: tip Dla Architektów: Które Pola Opcjonalne Są Najważniejsze?
+
+**Dla pozwolenia na budowę:**
+- **address** — Adres: ulica, miasto, kod pocztowy
+- **grossFloorArea** — Całkowita PUM w m²
+- **numberOfLevels** — Liczba kondygnacji
+- **numberOfUnits** — Liczba lokali/mieszkań (dla budynków mieszkalnych)
+- **occupancyType** — Klasyfikacja użytkowania (R-2, B, M, itp.)
+- **constructionType** — Typ konstrukcji (Type_VA, Type_IIA, itp.)
+
+**Dla zgodności energetycznej:**
+- **climateZone** — Klasyfikacja klimatyczna (wpływa na wymagania izolacyjne)
+- **certifications** — Cele BREEAM, LEED, WELL
+
+**Dla lokalizacji/kontekstu:**
+- **location** — Współrzędne GPS (szerokość, długość geograficzna)
+- **yearBuilt** — Rok budowy
+
+**Najczęściej:** Po prostu wypełnij adres, PUM, liczbę kondygnacji. Resztę można dodać później w razie potrzeby.
+:::
+
+## Typy Budynków (Wyliczenie)
 
 ```typescript
 type BuildingType =
@@ -61,7 +106,43 @@ type BuildingType =
   | "mixed_use";
 ```
 
-## Przykład: Źr&oacute;dło Markdown
+## Przykład 1: Pierwszy Plik Budynku (Minimalny)
+
+**Najprostszy plik budynku na start:**
+
+```markdown
+Plik: building.md
+
+---
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Green Terrace Apartments"
+buildingType: "residential_multifamily"
+country: "PL"
+version: "1.0.0"
+
+# Dla pozwolenia na budowę
+address:
+  street: "ul. Słoneczna 42"
+  city: "Warsaw"
+  postalCode: "00-001"
+grossFloorArea: 4850
+numberOfLevels: 4
+numberOfUnits: 32
+---
+
+# Green Terrace Apartments
+
+Budynek mieszkalny 32-mieszkaniowy w Warszawie.
+4 kondygnacje, 4 850 m² PUM.
+```
+
+**To wszystko.** Certyfikaty energetyczne, strefę klimatyczną i współrzędne GPS można dodać później.
+
+---
+
+## Przykład 2: Pełny Budynek (Wszystkie Szczegóły)
 
 **Plik:** `docs/en/examples/green-terrace/building.md`
 

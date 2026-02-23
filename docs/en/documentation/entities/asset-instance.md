@@ -1,4 +1,18 @@
-# Asset Instance
+# Asset Instance (Equipment Documentation)
+
+## What This Is
+
+An **Asset Instance** file documents one piece of physical equipment. Examples: "Air Handling Unit 01 (Serial: SR11-2026-04782)", "Elevator 1A".
+
+::: tip For Architects
+**Problem:** Facilities manager asks "When does the warranty expire on AHU-01?" or "What filters do we need to order?"
+
+**Old way:** Hunt through equipment submittal files, check O&M manuals, email mechanical contractor.
+
+**With asset instances:** Open `assets/ai-ahu-01.md` — warranty date, spare parts, maintenance schedule all in one file. **No hunting.**
+
+**One asset file = all equipment info (warranty, maintenance, specs) tracked automatically.**
+:::
 
 An **Asset Instance** represents a specific piece of physical equipment with maintenance data, warranty information, and operational monitoring. Asset instances enable facilities management, CMMS integration, and digital twin runtime monitoring.
 
@@ -25,6 +39,17 @@ Asset instances track:
 | `buildingId` | string | Parent building ID | `"BLD-01"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+::: tip For Architects: What These Required Fields Mean
+- **id**: Equipment identifier (e.g., `AI-AHU-01`)
+- **assetName**: What you call it ("Air Handling Unit 01", "Elevator 1A")
+- **assetType**: Equipment category — `ahu`, `pump`, `elevator`, `fire_alarm_panel`
+- **systemId**: Which MEP system this belongs to (e.g., `SYS-HVAC-01`)
+- **buildingId**: Which building
+- **version**: Track changes
+
+**You only NEED these 6 fields.** The rest (warranty, maintenance, specs) are optional but useful for facilities management.
+:::
+
 ## Optional Fields
 
 | Field | Type | Description |
@@ -46,6 +71,29 @@ Asset instances track:
 | `energyRating` | string | Energy efficiency rating |
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
+
+::: tip For Architects: Which Optional Fields Matter Most?
+
+**For handover to facilities (most important):**
+- **manufacturer** + **modelNumber** + **serialNumber** — Identify exact equipment
+- **installationDate** + **warrantyExpiry** — Track warranties
+- **maintenanceSchedule** — When to service equipment (quarterly filter changes, annual inspections)
+- **assetTag** — Physical label on equipment (for QR codes)
+
+**For cost tracking:**
+- **cost** — Purchase and installation costs
+- **expectedLifespan** — How long before replacement
+
+**For replacement parts:**
+- **spareParts** — What parts to keep in stock (filters, belts, etc.)
+- **supplier** — Who to call for service
+
+**For energy compliance:**
+- **specifications** — Technical specs (capacity, power consumption)
+- **energyRating** — Energy efficiency class
+
+**Most architects only fill:** manufacturer, model, serial number, installation date, warranty. Facilities team fills the rest.
+:::
 
 ## Asset Type Categories
 
@@ -93,7 +141,42 @@ type VerticalTransportAssetType =
   | "escalator";       // Escalator
 ```
 
-## Example: Markdown Source
+## Example 1: Your First Asset File (Minimal)
+
+**The simplest equipment file for handover:**
+
+```markdown
+File: assets/ai-ahu-01.md
+
+---
+id: "AI-AHU-01"
+entityType: "asset_instance"
+documentType: "asset_instance"
+assetName: "Air Handling Unit 01"
+assetType: "ahu"
+systemId: "SYS-HVAC-01"
+buildingId: "BLD-01"
+version: "1.0.0"
+
+# For facilities handover
+manufacturer: "Systemair"
+modelNumber: "Topvex SR11 EL"
+serialNumber: "SR11-2026-04782"
+installationDate: "2026-08-15"
+warrantyExpiry: "2028-08-15"
+---
+
+# Air Handling Unit 01
+
+Rooftop HVAC unit serving north zone.
+Warranty expires 2028-08-15.
+```
+
+**That's it.** Facilities team can add maintenance schedules and spare parts later.
+
+---
+
+## Example 2: Complete Asset (Full Details)
 
 **File:** `docs/en/examples/green-terrace/assets/ai-ahu-01.md`
 

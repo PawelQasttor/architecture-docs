@@ -1,53 +1,175 @@
-# Overview
+# Building Information in Text Files
 
-The **Semantic Building Model (SBM)** is a structured, machine-readable format for defining building intent, requirements, and relationships throughout the entire building lifecycle.
+## The Problem This Solves
 
-## What is SBM?
+When you document a building project, information ends up scattered:
 
-SBM separates **semantic intent** (what the building should do) from **geometric implementation** (how it looks in BIM). This creates a single source of truth that:
+- **Room dimensions** → AutoCAD
+- **Room schedule** → Excel
+- **Fire ratings** → Word specification
+- **Equipment specs** → Email threads
+- **Maintenance info** → ??? (good luck finding it 2 years later)
 
-- Survives design changes and renovations
-- Drives BIM, compliance reports, asset registers, and digital twins
-- Enables AI reasoning about buildings
-- Maintains regulatory traceability
+Change a ceiling height? Update 5 different files and hope you don't miss one.
 
-## The Three Layers
+**This standard fixes that.** Every room, every fire zone, every piece of equipment gets **one text file** containing everything about it.
+
+::: tip For Architects
+Think of it like this: Instead of spreading room information across CAD, Excel, and Word, you have **one file per room**. That file is both a readable document (for humans) and structured data (for computers).
+:::
+
+---
+
+## What Is the Semantic Building Model (SBM)?
+
+**Simple version:** A way to organize building information in text files so both humans and computers can read it.
+
+**Longer version:** Every room, zone, system, and piece of equipment is described in a simple text file with two parts:
+
+1. **Structured table** (at the top) — Easy for computers to read
+2. **Normal text** (below) — Easy for humans to read
+
+The same file serves:
+- ✅ Architects (readable documentation)
+- ✅ BIM software (Revit parameters, IFC properties)
+- ✅ Inspectors (compliance reports)
+- ✅ Facility managers (maintenance schedules)
+
+---
+
+## How It Works (The Simple Version)
+
+### Step 1: You Write Text Files
+
+Create one file per room in a folder:
+
+```
+my-project/
+├── spaces/
+│   ├── bedroom-01.md
+│   ├── bedroom-02.md
+│   └── kitchen-01.md
+├── zones/
+│   └── fire-zone-zl-iv.md
+└── requirements/
+    └── room-height-min.md
+```
+
+### Step 2: Each File Has Two Parts
+
+**Part 1: Structured data** (top of file — like filling out a form)
+
+```yaml
+---
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+designArea: 14.5
+designHeight: 2.70
+zoneIds: ["ZONE-FIRE-ZL-IV"]
+---
+```
+
+**Part 2: Human description** (rest of file — like a Word document)
+
+```markdown
+# Bedroom 01
+
+Standard bedroom with north-facing window.
+Meets WT 2021 minimum height (2.50m) with 20cm margin.
+```
+
+### Step 3: The System Checks Your Work (Optional)
+
+Run a validation tool (we call it the "compiler" but don't worry about that name). It:
+
+- ✅ Checks if Bedroom 01 references a fire zone that actually exists
+- ✅ Verifies ceiling height meets the requirement (2.70m >= 2.50m minimum)
+- ✅ Finds broken links before they become problems
+
+### Step 4: Get Automatic Outputs
+
+The same files generate:
+
+| Output | What It Does | Use Case |
+|--------|--------------|----------|
+| **BIM parameters** | Populates Revit/ArchiCAD properties | Design coordination |
+| **Compliance report** | Shows which rooms pass/fail regulations | Permit submission |
+| **Equipment register** | Lists all installed equipment with maintenance schedules | Facility management |
+| **Room schedules** | Excel-style tables of all rooms | Documentation |
+
+**One source. Multiple outputs. Zero re-entering data.**
+
+---
+
+## The Three Layers (For Reference)
+
+Don't worry about understanding this diagram now. It shows how information flows:
 
 ```
 ┌─────────────────────────────────────┐
-│ Layer 1: Semantic Building Model   │  ← Source of Truth
-│ (Markdown + YAML → JSON)            │     (Intent, Rules, Requirements)
+│ Layer 1: Your Text Files           │  ← You write these
+│ (One file per room/zone/system)     │
 └──────────────┬──────────────────────┘
-               │ Compiler
+               │ Validation tool checks them
                ▼
 ┌─────────────────────────────────────┐
-│ Layer 2: BIM (Revit/ArchiCAD/IFC)  │  ← Compiled Output
-│ (Geometry + Properties)             │     (Design Implementation)
+│ Layer 2: BIM Model (Revit/ArchiCAD)│  ← Receives parameters
+│ (Geometry + Properties)             │     from your text files
 └──────────────┬──────────────────────┘
-               │ Runtime
+               │ Building operates
                ▼
 ┌─────────────────────────────────────┐
-│ Layer 3: Digital Twin (Sensors)    │  ← Operational State
-│ (Live Monitoring + BMS)             │     (Performance Validation)
+│ Layer 3: Live Building              │  ← Uses equipment info
+│ (Sensors + Maintenance)             │     for operations
 └─────────────────────────────────────┘
 ```
 
+**Key point:** You only work in Layer 1 (text files). Layers 2 and 3 use data from your files.
+
+---
+
+## 11 Types of Building Information
+
+The standard defines **11 document types**. Each one describes a different aspect of your building:
+
+| Type | What You're Describing | Example |
+|------|----------------------|---------|
+| **Building** | The whole building | "Green Terrace, ul. Słoneczna 45, Warsaw" |
+| **Level** | A floor | "Ground floor, +0.00m" |
+| **Space** | A room | "Bedroom 01, 14.5m², 2.70m height" |
+| **Space Type** | Template for similar rooms | "Standard bedroom template (use for all bedrooms)" |
+| **Zone** | Group of rooms sharing a characteristic | "Fire zone ZL-IV covering levels 1-6" |
+| **Zone Type** | Template for zone configurations | "Fire zone ZL-IV standard (residential building)" |
+| **System** | Building installation | "Central heating system with gas boiler" |
+| **System Type** | Template for MEP systems | "Residential HVAC with heat recovery" |
+| **Asset Instance** | Specific equipment | "Boiler #12345, installed 2024-03-15" |
+| **Asset Type** | Product specification | "Vaillant ecoTEC plus 306 (generic spec)" |
+| **Requirement** | Regulation to meet | "Room height >= 2.50m per WT 2021 §132" |
+
+::: tip Templates vs Actual Things
+**Types** = Templates (define specs once)
+**Instances** = Actual things (reference template, add location)
+
+If you have 20 identical bedrooms, create **1 Space Type** (template) and **20 Space instances** (actual rooms).
+Update the template → all 20 rooms update automatically. **26-33% less documentation.**
+:::
+
+---
+
 ## Key Principles
 
-### 1. Human-Friendly Authoring
+### 1. Human-Friendly Writing
 
-Architects write **Markdown** with structured YAML frontmatter:
+You write in normal Markdown with a structured table at the top. If you can edit a text file, you can do this.
+
+**Example:** A bedroom file
 
 ```markdown
 ---
-documentType: "space"
-entityType: "space"
 id: "SP-BLD-01-L01-001"
 spaceName: "Bedroom 01"
-spaceType: "sleeping_space"
 designArea: 14.5
 designHeight: 2.70
-unit: "m"
 requirements:
   - "REQ-DAYLIGHT-SLEEPING-001"
   - "REQ-PL-WT-ROOM-HEIGHT-001"
@@ -55,162 +177,132 @@ requirements:
 
 # Space: Bedroom 01
 
-Standard bedroom with north-facing window...
+Standard bedroom with north-facing window.
+Floor: oak, Walls: painted white, Ceiling: smooth finish.
 ```
 
-### 2. Machine-Compilable
+### 2. Automatic Consistency Checking
 
-The compiler transforms Markdown → JSON → compilation targets:
+The validation tool reads all your files and checks:
 
+- ✅ Does Bedroom 01 reference a fire zone that exists?
+- ✅ Does the 2.70m ceiling meet the 2.50m requirement?
+- ✅ Are there any broken links between files?
+
+**Result:** Catches mistakes before construction, not during inspection.
+
+### 3. Works Worldwide (But Knows Polish Rules)
+
+The system automatically loads regulations based on your project location:
+
+- **Poland:** WT 2021, Prawo budowlane load automatically
+- **Other countries:** Add files for Germany (`/requirements/de/`), France (`/requirements/fr/`), etc.
+- **Global standards:** EN, ISO, ASHRAE available regardless of location
+
+---
+
+## What You Get (Outputs)
+
+### 1. BIM Parameters
+
+**What it is:** Data file that Revit/ArchiCAD can import
+
+**Use case:** Instead of manually entering room areas into Revit, import them from your text files. One click, all parameters populated.
+
+### 2. Compliance Report
+
+**What it is:** Shows which rooms pass/fail regulatory requirements
+
+**Example:**
 ```
-Markdown documents
-    ↓ (Parse)
-Raw JSON documents
-    ↓ (Normalize)
-Enriched SBM graph
-    ↓ (Validate)
-Validated SBM
-    ↓ (Compile)
-├─→ BIM mapping
-├─→ Compliance report
-├─→ Asset register
-└─→ Digital twin schema
-```
+Bedroom 01: ✅ PASS
+- Height: 2.70m (>= 2.50m required by WT 2021 §132)
+- Daylight: 3.2m² window (meets requirement)
 
-### 3. Jurisdiction-Aware
-
-Requirements automatically load based on project country:
-
-- **Global requirements**: Daylight, thermal comfort, ventilation (EN, ISO, ASHRAE)
-- **Poland requirements**: WT 2021, Prawo budowlane (automatically loaded when `project.country = "PL"`)
-- **Other countries**: Add `/requirements/de/`, `/requirements/fr/`, etc.
-
-## Document Types
-
-SBM defines **core document types** with **type/instance pattern** support (v0.1.1+):
-
-| Document Type | Purpose | Example ID |
-|-------------|---------|------------|
-| **Space Type** | Space templates (repeating rooms) | `ST-BEDROOM-STANDARD-A` |
-| **Space** | Rooms and functional areas | `SP-BLD-01-L01-001` |
-| **Zone Type** | Zone templates (standard configurations) | `ZT-FIRE-ZL-IV` |
-| **Zone** | Fire, acoustic, HVAC, security zones | `ZONE-FIRE-ZL-IV` |
-| **System Type** | System templates (standard MEP configs) | `SYT-HVAC-RESIDENTIAL` |
-| **System** | MEP systems (HVAC, electrical, plumbing) | `SYS-HVAC-01` |
-| **Asset Type** | Product specifications (equipment templates) | `AT-BOSCH-HP-300` |
-| **Asset Instance** | Physical equipment with maintenance data | `AI-AHU-01` |
-| **Requirement** | Performance and regulatory rules | `REQ-DAYLIGHT-SLEEPING-001` |
-| **Building** | Building-level metadata | `BLD-01` |
-| **Level** | Floor/storey information | `LVL-01` |
-
-### Type/Instance Pattern (v0.1.1+)
-
-**Types** define specifications once. **Instances** reference types and add location/context:
-
-```markdown
-# Space Type (template - define once)
----
-id: "ST-BEDROOM-STANDARD-A"
-requirements: [REQ-1, REQ-2, REQ-3]
-finishes: {floor, walls, ceiling}
-equipment: [smoke detector, thermostat]
----
-
-# Space Instance (reference type)
----
-id: "SP-BLD-01-L01-001"
-spaceTypeId: "ST-BEDROOM-STANDARD-A"  # ← Inherits all specs
-designArea: 14.5  # Instance-specific data
----
+Bedroom 02: ❌ FAIL
+- Height: 2.40m (< 2.50m required by WT 2021 §132)
 ```
 
-**Benefits:** 26-33% reduction in documentation for repeating elements.
+**Use case:** Attach to permit application, show inspector during approval
 
-## Compilation Targets
+### 3. Equipment Register
 
-The compiler generates **4 practical outputs**:
+**What it is:** List of all installed equipment with maintenance schedules
 
-### 1. BIM Mapping (`bim_mapping.json`)
+**Example:**
+```
+Boiler HP-01 (Vaillant ecoTEC plus 306)
+- Location: Basement, Room 0.01
+- Serial: 12345-67890
+- Installed: 2024-03-15
+- Next service: 2025-03-15 (annual checkup)
+```
 
-- Revit shared parameters
-- IFC property sets (Pset_SBM_Space, Pset_SBM_Zone, etc.)
-- Parameter mapping rules (SBM → Revit → IFC)
+**Use case:** Hand to facility manager at building handover. They know what equipment exists, where it is, when to service it.
 
-**Use cases:** Import parameters into Revit, configure IFC exports, populate properties via Dynamo
+### 4. Digital Twin Schema
 
-### 2. Compliance Report (`compliance_report.json`)
+**What it is:** Connects building sensors to rooms
 
-- Requirements grouped by regulation (WT 2021, Prawo budowlane, EN standards)
-- Space-by-space compliance checks
-- Verification status and methods
-- Poland WT 2021 section breakdown (§ 132, § 234, § 69, etc.)
+**Use case:** Temperature sensor in Bedroom 01 logs data. The system knows "this sensor belongs to Bedroom 01" and can check if temperature meets requirements.
 
-**Use cases:** Permit submission documentation, regulatory audits, compliance dashboards
+---
 
-### 3. Asset Register (`asset_register.json`)
-
-- Asset inventory with maintenance schedules
-- 24-month maintenance calendar
-- Spare parts inventory
-- CMMS-ready export (Maximo, SAP PM compatible)
-
-**Use cases:** Facilities management, maintenance planning, lifecycle cost analysis
-
-### 4. Digital Twin Schema (`twin_schema.json`)
-
-- Sensor bindings (space → sensors)
-- BMS integration (BACnet device registry, point mapping)
-- Runtime requirement evaluation rules
-- IoT device registry
-
-**Use cases:** BMS configuration, digital twin deployment, real-time compliance monitoring
-
-## Workflow Integration
+## When You Use This In Your Project
 
 ### Design Phase
-
-1. Architect creates space documents in Markdown
-2. Compiler validates against requirements
-3. BIM mapping populates Revit parameters
-4. Compliance report checks WT 2021 sections
+1. You create space files in Markdown (one file per room)
+2. Validation tool checks if you meet WT 2021 requirements
+3. Export BIM parameters to Revit
+4. Generate compliance report for permit submission
 
 ### Construction Phase
+1. Update files with as-built measurements
+2. Add equipment files when boiler/HVAC units installed
+3. Record serial numbers and installation dates
+4. Compliance report tracks what's been verified
 
-1. As-built measurements update space documents
-2. Asset instances added during equipment installation
-3. Serial numbers and tags recorded
-4. Compliance report tracks verification completion
+### Operation Phase (After Handover)
+1. Facility manager has equipment register with maintenance schedules
+2. Building sensors linked to room IDs
+3. Maintenance events tracked against original specifications
+4. Equipment lifecycle recorded from installation to replacement
 
-### Operation Phase
-
-1. Digital twin binds sensors to space IDs
-2. Real-time monitoring validates requirements
-3. Maintenance calendar triggers service events
-4. Asset register tracks equipment lifecycle
-
-## Backward Compatibility
-
-SBM coexists with legacy document types:
-
-- `element_specification` (e.g., external wall specifications)
-- `project_specification` (project metadata)
-
-Both formats compile into the same `sbm.json` output.
+---
 
 ## Getting Started
 
-1. **[Document Types Reference](/en/documentation/entities/)** - Learn about spaces, zones, requirements
-2. **[Authoring Guide](/en/documentation/authoring/)** - Write your first Markdown document
-3. **[Compiler Guide](/en/documentation/compiler/)** - Run the compilation pipeline
-4. **[Examples](/en/examples/)** - See the Green Terrace example project
+**Choose your path:**
 
-## Version
+| I want to... | Go here |
+|-------------|---------|
+| **Understand what types of files to create** | [Document Types](/en/documentation/entities/) |
+| **Create my first file** | [Quick Start](/en/standards/quick-start) |
+| **See a complete example** | [Green Terrace Building](/en/examples/green-terrace/) |
+| **Use ready-made templates** | [Templates](/en/templates/) |
+| **Learn about validation** | [Compiler Guide](/en/documentation/compiler/) |
 
-**Current version:** SBM v0.1.3
+---
 
-- JSON schema: `sbm-schema-v0.1.json`
-- Compiler: `v0.1.0` (type resolution support pending)
-- **v0.1.3 (2026-02-22):** Environmental conditions, electrical safety groups (IEC 60364-7-710), regulatory references, lifecycle state
-- **v0.1.2 (2026-02-22):** Room numbers, accessibility levels, parent/child spaces, departments, bed count
-- **v0.1.1 (2026-02-22):** Added type/instance pattern for spaces, zones, systems, assets
-- **v0.1.0:** First stable release with core document types
+## Current Version
+
+**SBM v0.1.3** (2026-02-22)
+
+Recent additions:
+- Environmental conditions (temperature, humidity, air quality)
+- Electrical safety groups (IEC 60364-7-710)
+- Regulatory reference tracking
+- Building lifecycle states
+- Room numbers, accessibility levels, parent/child spaces
+- Template system (Space Types, Zone Types, System Types, Asset Types)
+
+**What changed:** More fields to track real-world project data. If you're just starting, ignore these advanced features until you need them.
+
+::: tip Start Simple
+You don't need to use every field. Start with:
+- Room name, area, height
+- One fire zone
+- One requirement (height minimum)
+
+That's enough for your first file. Add complexity as your project needs it.
+:::

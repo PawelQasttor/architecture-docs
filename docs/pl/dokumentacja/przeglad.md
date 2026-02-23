@@ -1,191 +1,310 @@
-# Przegląd
+# Informacje o Budynku w Plikach Tekstowych
 
-**Semantyczny Model Budynku (SBM)** to ustrukturyzowany, odczytywalny maszynowo format definiowania intencji budynku, wymagań i relacji w całym cyklu życia budynku.
+## Problem, Który To Rozwiązuje
 
-## Czym jest SBM?
+Kiedy dokumentujesz projekt budowlany, informacje kończą rozrzucone:
 
-SBM oddziela **intencję semantyczną** (co budynek powinien robić) od **implementacji geometrycznej** (jak wygląda w BIM). Tworzy to jedno źródło prawdy, które:
+- **Wymiary pomieszczeń** → AutoCAD
+- **Zestawienie pomieszczeń** → Excel
+- **Odporności ogniowe** → Specyfikacja Word
+- **Specyfikacje wyposażenia** → Wątki e-mailowe
+- **Informacje o konserwacji** → ??? (powodzenia w odnalezieniu ich po 2 latach)
 
-- Przetrwa zmiany projektowe i renowacje
-- Napędza BIM, raporty zgodności, rejestry zasobów i cyfrowe bliźniaki
-- Umożliwia rozumowanie AI o budynkach
-- Zapewnia śledzenie zgodności regulacyjnej
+Zmieniasz wysokość pomieszczenia? Aktualizuj 5 różnych plików i miej nadzieję, że niczego nie pominiesz.
 
-## Trzy warstwy
+**Ten standard to naprawia.** Każde pomieszczenie, każda strefa pożarowa, każde urządzenie ma **jeden plik tekstowy** zawierający wszystko o nim.
+
+::: tip Dla Architektów
+Pomyśl o tym w ten sposób: Zamiast rozsiewać informacje o pomieszczeniu między CAD, Excel i Word, masz **jeden plik na pomieszczenie**. Ten plik jest jednocześnie czyteln
+
+ym dokumentem (dla ludzi) i danymi strukturalnymi (dla komputerów).
+:::
+
+---
+
+## Czym Jest Semantyczny Model Budynku (SBM)?
+
+**Prosta wersja:** Sposób na organizację informacji o budynku w plikach tekstowych, tak aby zarówno ludzie, jak i komputery mogły je czytać.
+
+**Dłuższa wersja:** Każde pomieszczenie, strefa, instalacja i urządzenie jest opisane w prostym pliku tekstowym z dwiema częściami:
+
+1. **Tabela danych** (u góry) — Łatwa do odczytania przez komputery
+2. **Normalny tekst** (poniżej) — Łatwy do odczytania przez ludzi
+
+Ten sam plik służy:
+- ✅ Architektom (czytelna dokumentacja)
+- ✅ Oprogramowaniu BIM (parametry Revit, właściwości IFC)
+- ✅ Inspektorom (raporty zgodności)
+- ✅ Zarządcom (harmonogramy konserwacji)
+
+---
+
+## Jak To Działa (Prosta Wersja)
+
+### Krok 1: Piszesz Pliki Tekstowe
+
+Tworzysz jeden plik na pomieszczenie w folderze:
+
+```
+moj-projekt/
+├── spaces/
+│   ├── sypialnia-01.md
+│   ├── sypialnia-02.md
+│   └── kuchnia-01.md
+├── zones/
+│   └── strefa-pozarowa-zl-iv.md
+└── requirements/
+    └── wysokosc-min.md
+```
+
+### Krok 2: Każdy Plik Ma Dwie Części
+
+**Część 1: Dane strukturalne** (góra pliku — jak wypełnianie formularza)
+
+```yaml
+---
+id: "SP-BLD-01-L01-001"
+spaceName: "Sypialnia 01"
+designArea: 14.5
+designHeight: 2.70
+zoneIds: ["ZONE-FIRE-ZL-IV"]
+---
+```
+
+**Część 2: Opis dla ludzi** (reszta pliku — jak dokument Word)
+
+```markdown
+# Sypialnia 01
+
+Standardowa sypialnia z oknem od strony północnej.
+Spełnia minimum WT 2021 (2,50m) z marginesem 20cm.
+```
+
+### Krok 3: System Sprawdza Twoją Pracę (Opcjonalne)
+
+Uruchom narzędzie walidacyjne (nazywamy je "kompilatorem", ale nie przejmuj się tą nazwą). Ono:
+
+- ✅ Sprawdza, czy Sypialnia 01 odwołuje się do strefy pożarowej, która faktycznie istnieje
+- ✅ Weryfikuje, czy wysokość pomieszczenia spełnia wymaganie (2,70m >= 2,50m minimum)
+- ✅ Znajduje zerwane linki zanim staną się problemem
+
+### Krok 4: Otrzymujesz Automatyczne Wyniki
+
+Te same pliki generują:
+
+| Wynik | Co Robi | Zastosowanie |
+|-------|---------|--------------|
+| **Parametry BIM** | Wypełnia właściwości Revit/ArchiCAD | Koordynacja projektu |
+| **Raport zgodności** | Pokazuje, które pomieszczenia przechodzą/nie przechodzą przepisów | Złożenie pozwolenia |
+| **Rejestr wyposażenia** | Listuje wszystkie zainstalowane urządzenia z harmonogramami konserwacji | Zarządzanie obiektem |
+| **Zestawienia pomieszczeń** | Tabele w stylu Excel wszystkich pomieszczeń | Dokumentacja |
+
+**Jedno źródło. Wiele wyników. Zero przepisywania danych.**
+
+---
+
+## Trzy Warstwy (Do Wiadomości)
+
+Nie martw się o zrozumienie tego diagramu teraz. Pokazuje, jak przepływają informacje:
 
 ```
 ┌─────────────────────────────────────┐
-│ Warstwa 1: Semantyczny Model       │  ← Źródło prawdy
-│ Budynku (Markdown + YAML → JSON)   │     (Intencja, Reguły, Wymagania)
+│ Warstwa 1: Twoje Pliki Tekstowe    │  ← Ty je piszesz
+│ (Jeden plik na pomieszczenie/strefę)│
 └──────────────┬──────────────────────┘
-               │ Kompilator
+               │ Narzędzie walidacyjne je sprawdza
                ▼
 ┌─────────────────────────────────────┐
-│ Warstwa 2: BIM (Revit/ArchiCAD/IFC)│  ← Skompilowane wyjście
-│ (Geometria + Właściwości)           │     (Implementacja projektu)
+│ Warstwa 2: Model BIM (Revit/ArchiCAD)│ ← Otrzymuje parametry
+│ (Geometria + Właściwości)           │    z Twoich plików
 └──────────────┬──────────────────────┘
-               │ Runtime
+               │ Budynek działa
                ▼
 ┌─────────────────────────────────────┐
-│ Warstwa 3: Cyfrowy Bliźniak        │  ← Stan operacyjny
-│ (Czujniki) (Monit. + BMS)          │     (Walidacja wydajności)
+│ Warstwa 3: Żywy Budynek             │  ← Wykorzystuje info
+│ (Czujniki + Konserwacja)            │     o wyposażeniu
 └─────────────────────────────────────┘
 ```
 
-## Kluczowe zasady
+**Kluczowa kwestia:** Pracujesz tylko w Warstwie 1 (pliki tekstowe). Warstwy 2 i 3 wykorzystują dane z Twoich plików.
 
-### 1. Tworzenie przyjazne dla człowieka
+---
 
-Architekci piszą **Markdown** ze strukturalnym nagłówkiem YAML:
+## 11 Typów Informacji o Budynku
+
+Standard definiuje **11 typów kart**. Każdy opisuje inny aspekt Twojego budynku:
+
+| Typ | Co Opisujesz | Przykład |
+|-----|--------------|----------|
+| **Budynek** | Cały budynek | "Zielony Taras, ul. Słoneczna 45, Warszawa" |
+| **Kondygnacja** | Piętro | "Parter, +0,00m" |
+| **Pomieszczenie** | Pokój | "Sypialnia 01, 14,5m², wysokość 2,70m" |
+| **Typ Przestrzeni** | Szablon dla podobnych pomieszczeń | "Standardowy szablon sypialni (użyj dla wszystkich sypialni)" |
+| **Strefa** | Grupa pomieszczeń o wspólnej charakterystyce | "Strefa pożarowa ZL-IV, kondygnacje 1-6" |
+| **Typ Strefy** | Szablon dla konfiguracji stref | "Standard strefy pożarowej ZL-IV (budynek mieszkalny)" |
+| **Instalacja** | System budynku | "Centralne ogrzewanie z kotłem gazowym" |
+| **Typ Systemu** | Szablon dla instalacji MEP | "Mieszkalna instalacja HVAC z odzyskiem ciepła" |
+| **Urządzenie** | Konkretne wyposażenie | "Kocioł #12345, zainstalowany 2024-03-15" |
+| **Typ Zasobu** | Specyfikacja produktu | "Vaillant ecoTEC plus 306 (specyfikacja ogólna)" |
+| **Wymaganie** | Przepis do spełnienia | "Wysokość pomieszczenia >= 2,50m wg WT 2021 §132" |
+
+::: tip Szablony vs Konkretne Rzeczy
+**Typy** = Szablony (definiuj specyfikacje raz)
+**Instancje** = Konkretne rzeczy (odwołują się do szablonu, dodają lokalizację)
+
+Jeśli masz 20 identycznych sypialni, stwórz **1 Typ Przestrzeni** (szablon) i **20 Przestrzeni** (konkretne pomieszczenia).
+Zaktualizuj szablon → wszystkie 20 pokoi aktualizuje się automatycznie. **26-33% mniej dokumentacji.**
+:::
+
+---
+
+## Kluczowe Zasady
+
+### 1. Przyjazne Pisanie Dla Człowieka
+
+Piszesz w normalnym Markdown z tabelą danych u góry. Jeśli potrafisz edytować plik tekstowy, poradzisz sobie.
+
+**Przykład:** Plik sypialni
 
 ```markdown
 ---
-documentType: "space"
-entityType: "space"
 id: "SP-BLD-01-L01-001"
-spaceName: "Bedroom 01"
-spaceType: "sleeping_space"
+spaceName: "Sypialnia 01"
 designArea: 14.5
 designHeight: 2.70
-unit: "m"
 requirements:
   - "REQ-DAYLIGHT-SLEEPING-001"
   - "REQ-PL-WT-ROOM-HEIGHT-001"
 ---
 
-# Space: Bedroom 01
+# Pomieszczenie: Sypialnia 01
 
-Standard bedroom with north-facing window...
+Standardowa sypialnia z oknem od północy.
+Podłoga: dąb, Ściany: malowane na biało, Sufit: gładki.
 ```
 
-### 2. Kompilowalność maszynowa
+### 2. Automatyczne Sprawdzanie Spójności
 
-Kompilator przekształca Markdown → JSON → cele kompilacji:
+Narzędzie walidacyjne czyta wszystkie Twoje pliki i sprawdza:
 
+- ✅ Czy Sypialnia 01 odwołuje się do strefy pożarowej, która istnieje?
+- ✅ Czy 2,70m sufitu spełnia wymaganie 2,50m?
+- ✅ Czy są jakieś zerwane linki między plikami?
+
+**Rezultat:** Wychwytuje błędy przed budową, nie podczas inspekcji.
+
+### 3. Działa Na Całym Świecie (Ale Zna Polskie Przepisy)
+
+System automatycznie ładuje przepisy na podstawie lokalizacji projektu:
+
+- **Polska:** WT 2021, Prawo budowlane ładują się automatycznie
+- **Inne kraje:** Dodaj pliki dla Niemiec (`/requirements/de/`), Francji (`/requirements/fr/`), itd.
+- **Standardy globalne:** EN, ISO, ASHRAE dostępne niezależnie od lokalizacji
+
+---
+
+## Co Otrzymujesz (Wyniki)
+
+### 1. Parametry BIM
+
+**Czym to jest:** Plik danych, który Revit/ArchiCAD może zaimportować
+
+**Zastosowanie:** Zamiast ręcznie wpisywać powierzchnie pomieszczeń do Revit, importuj je z plików tekstowych. Jedno kliknięcie, wszystkie parametry wypełnione.
+
+### 2. Raport Zgodności
+
+**Czym to jest:** Pokazuje, które pomieszczenia przechodzą/nie przechodzą wymagań przepisów
+
+**Przykład:**
 ```
-Karty Markdown
-    ↓ (Parsowanie)
-Surowe karty JSON
-    ↓ (Normalizacja)
-Wzbogacony graf SBM
-    ↓ (Walidacja)
-Zwalidowany SBM
-    ↓ (Kompilacja)
-├─→ Mapowanie BIM
-├─→ Raport zgodności
-├─→ Rejestr zasobów
-└─→ Schemat cyfrowego bliźniaka
+Sypialnia 01: ✅ PRZESZŁO
+- Wysokość: 2,70m (>= 2,50m wymagane przez WT 2021 §132)
+- Światło dzienne: 3,2m² okno (spełnia wymaganie)
+
+Sypialnia 02: ❌ NIE PRZESZŁO
+- Wysokość: 2,40m (< 2,50m wymagane przez WT 2021 §132)
 ```
 
-### 3. Świadomość jurysdykcji
+**Zastosowanie:** Dołącz do wniosku o pozwolenie, pokaż inspektorowi podczas zatwierdzenia
 
-Wymagania ładowane są automatycznie na podstawie kraju projektu:
+### 3. Rejestr Wyposażenia
 
-- **Wymagania globalne**: Nasłonecznienie, komfort cieplny, wentylacja (EN, ISO, ASHRAE)
-- **Wymagania dla Polski**: WT 2021, Prawo budowlane (ładowane automatycznie gdy `project.country = "PL"`)
-- **Inne kraje**: Dodaj `/requirements/de/`, `/requirements/fr/`, itd.
+**Czym to jest:** Lista wszystkich zainstalowanych urządzeń z harmonogramami konserwacji
 
-## Typy kart
+**Przykład:**
+```
+Kocioł HP-01 (Vaillant ecoTEC plus 306)
+- Lokalizacja: Piwnica, Pomieszczenie 0.01
+- Nr seryjny: 12345-67890
+- Zainstalowany: 2024-03-15
+- Następny serwis: 2025-03-15 (przegląd roczny)
+```
 
-SBM definiuje **7 podstawowych typów kart**:
+**Zastosowanie:** Przekaż zarządcy przy odbiorze budynku. Wie, jakie wyposażenie istnieje, gdzie jest, kiedy je serwisować.
 
-| Typ karty | Przeznaczenie | Przykładowy ID |
-|-----------|---------------|----------------|
-| **Przestrzeń** | Pomieszczenia i obszary funkcjonalne | `SP-BLD-01-L01-001` |
-| **Strefa** | Strefy pożarowe, akustyczne, HVAC, bezpieczeństwa | `ZONE-FIRE-ZL-IV` |
-| **Instalacja** | Systemy MEP (HVAC, elektryczny, hydrauliczny) | `SYS-HVAC-01` |
-| **Urządzenie** | Fizyczne urządzenia z danymi konserwacyjnymi | `AI-AHU-01` |
-| **Wymaganie** | Reguły wydajnościowe i regulacyjne | `REQ-DAYLIGHT-SLEEPING-001` |
-| **Budynek** | Metadane na poziomie budynku | `BLD-01` |
-| **Kondygnacja** | Informacje o piętrze/kondygnacji | `LVL-01` |
+### 4. Schemat Cyfrowego Bliźniaka
 
-> **Uwaga terminologiczna:** W standardzie SBM każdy zapis dokumentujący element budynku (przestrzeń, strefę, wymaganie itd.) nazywamy **kartą**.
+**Czym to jest:** Łączy czujniki budynku z pomieszczeniami
 
-## Cele kompilacji
+**Zastosowanie:** Czujnik temperatury w Sypialni 01 loguje dane. System wie "ten czujnik należy do Sypialni 01" i może sprawdzić, czy temperatura spełnia wymagania.
 
-Kompilator generuje **4 praktyczne wyniki**:
+---
 
-### 1. Mapowanie BIM (`bim_mapping.json`)
+## Kiedy Używasz Tego W Swoim Projekcie
 
-- Współdzielone parametry Revit
-- Zestawy właściwości IFC (Pset_SBM_Space, Pset_SBM_Zone, itd.)
-- Reguły mapowania parametrów (SBM → Revit → IFC)
+### Faza Projektowa
+1. Tworzysz pliki przestrzeni w Markdown (jeden plik na pomieszczenie)
+2. Narzędzie walidacyjne sprawdza, czy spełniasz wymagania WT 2021
+3. Eksportujesz parametry BIM do Revit
+4. Generujesz raport zgodności do złożenia pozwolenia
 
-**Przypadki użycia:** Import parametrów do Revit, konfiguracja eksportów IFC, wypełnianie właściwości przez Dynamo
+### Faza Budowy
+1. Aktualizujesz pliki pomiarami powykonawczymi
+2. Dodajesz pliki wyposażenia, gdy kocioł/HVAC są instalowane
+3. Rejestrujesz numery seryjne i daty instalacji
+4. Raport zgodności śledzi, co zostało zweryfikowane
 
-### 2. Raport Zgodności (`compliance_report.json`)
+### Faza Eksploatacji (Po Odbiorze)
+1. Zarządca ma rejestr wyposażenia z harmonogramami konserwacji
+2. Czujniki budynku połączone z ID pomieszczeń
+3. Zdarzenia konserwacyjne śledzone względem oryginalnych specyfikacji
+4. Cykl życia wyposażenia rejestrowany od instalacji do wymiany
 
-- Wymagania pogrupowane według regulacji (WT 2021, Prawo budowlane, normy EN)
-- Kontrole zgodności przestrzeń po przestrzeni
-- Status weryfikacji i metody
-- Podział sekcji WT 2021 dla Polski (§ 132, § 234, § 69, itd.)
+---
 
-**Przypadki użycia:** Dokumentacja do pozwolenia na budowę, audyty regulacyjne, panele zgodności
+## Pierwsze Kroki
 
-### 3. Rejestr Zasobów (`asset_register.json`)
+**Wybierz swoją ścieżkę:**
 
-- Inwentarz zasobów z harmonogramami konserwacji
-- 24-miesięczny kalendarz konserwacji
-- Inwentarz części zamiennych
-- Eksport gotowy do CMMS (kompatybilny z Maximo, SAP PM)
+| Chcę... | Idź tutaj |
+|---------|-----------|
+| **Zrozumieć, jakie typy plików tworzyć** | [Typy Kart](/pl/dokumentacja/encje/) |
+| **Stworzyć mój pierwszy plik** | [Szybki Start](/pl/standardy/szybki-start) |
+| **Zobaczyć kompletny przykład** | [Budynek Zielony Taras](/pl/przyklady/zielony-taras/) |
+| **Użyć gotowych szablonów** | [Szablony](/pl/szablony/) |
+| **Dowiedzieć się o walidacji** | [Przewodnik Kompilatora](/pl/dokumentacja/kompilator/) |
 
-**Przypadki użycia:** Zarządzanie obiektami, planowanie konserwacji, analiza kosztów cyklu życia
+---
 
-### 4. Schemat Cyfrowego Bliźniaka (`twin_schema.json`)
+## Aktualna Wersja
 
-- Powiązania czujników (przestrzeń → czujniki)
-- Integracja BMS (rejestr urządzeń BACnet, mapowanie punktów)
-- Reguły ewaluacji wymagań w czasie rzeczywistym
-- Rejestr urządzeń IoT
+**SBM v0.1.3** (2026-02-22)
 
-**Przypadki użycia:** Konfiguracja BMS, wdrożenie cyfrowego bliźniaka, monitorowanie zgodności w czasie rzeczywistym
+Najnowsze dodatki:
+- Warunki środowiskowe (temperatura, wilgotność, jakość powietrza)
+- Grupy bezpieczeństwa elektrycznego (IEC 60364-7-710)
+- Śledzenie odniesień do przepisów
+- Stany cyklu życia budynku
+- Numery pomieszczeń, poziomy dostępności, przestrzenie nadrzędne/podrzędne
+- System szablonów (Typy Przestrzeni, Typy Stref, Typy Systemów, Typy Zasobów)
 
-## Integracja z procesem pracy
+**Co się zmieniło:** Więcej pól do śledzenia danych z rzeczywistych projektów. Jeśli dopiero zaczynasz, ignoruj te zaawansowane funkcje, dopóki ich nie potrzebujesz.
 
-### Faza projektowa
+::: tip Zacznij Prosto
+Nie musisz używać każdego pola. Zacznij od:
+- Nazwa pomieszczenia, powierzchnia, wysokość
+- Jedna strefa pożarowa
+- Jedno wymaganie (minimum wysokości)
 
-1. Architekt tworzy karty przestrzeni w Markdown
-2. Kompilator waliduje względem wymagań
-3. Mapowanie BIM wypełnia parametry Revit
-4. Raport zgodności sprawdza sekcje WT 2021
-
-### Faza budowy
-
-1. Pomiary powykonawcze aktualizują karty przestrzeni
-2. Urządzenia dodawane podczas montażu
-3. Numery seryjne i tagi rejestrowane
-4. Raport zgodności śledzi postęp weryfikacji
-
-### Faza eksploatacji
-
-1. Cyfrowy bliźniak wiąże czujniki z ID przestrzeni
-2. Monitorowanie w czasie rzeczywistym waliduje wymagania
-3. Kalendarz konserwacji wyzwala zdarzenia serwisowe
-4. Rejestr zasobów śledzi cykl życia urządzeń
-
-## Kompatybilność wsteczna
-
-SBM współistnieje ze starszymi typami dokumentów:
-
-- `element_specification` (np. specyfikacje ścian zewnętrznych)
-- `project_specification` (metadane projektu)
-
-Oba formaty kompilują się do tego samego wyjścia `sbm.json`.
-
-## Pierwsze kroki
-
-1. **[Referencja typów kart](/pl/dokumentacja/encje/)** - Poznaj przestrzenie, strefy, wymagania
-2. **[Przewodnik tworzenia](/pl/dokumentacja/tworzenie/)** - Napisz swoją pierwszą kartę Markdown
-3. **[Przewodnik kompilatora](/pl/dokumentacja/kompilator/)** - Uruchom potok kompilacji
-4. **[Przykłady](/pl/przyklady/)** - Zobacz przykładowy projekt Green Terrace
-
-## Wersja
-
-**Aktualna wersja:** SBM v0.1.3
-
-- Schemat JSON: `sbm-schema-v0.1.json`
-- Kompilator: `v0.1.0`
-- **v0.1.3 (2026-02-22):** Warunki środowiskowe, grupy bezpieczeństwa elektrycznego (IEC 60364-7-710), odniesienia regulacyjne, stan cyklu życia
-- **v0.1.2 (2026-02-22):** Numery pomieszczeń, poziomy dostępności, przestrzenie nadrzędne/podrzędne, departamenty, liczba łóżek
-- **v0.1.1 (2026-02-22):** Wzorzec typ/instancja dla przestrzeni, stref, systemów, zasobów
-- **v0.1.0:** Pierwsze stabilne wydanie z podstawowymi typami kart
+To wystarczy na pierwszy plik. Dodaj złożoność, gdy Twój projekt tego potrzebuje.
+:::

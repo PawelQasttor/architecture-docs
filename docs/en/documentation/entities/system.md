@@ -1,4 +1,18 @@
-# System
+# System (MEP Systems Documentation)
+
+## What This Is
+
+A **System** file documents one MEP system (HVAC, electrical, plumbing, fire safety). Examples: "HVAC System 01 serving north bedrooms", "Electrical distribution panel 1A".
+
+::: tip For Architects
+**Problem:** MEP consultant asks "What rooms does the HVAC system serve?" or "What's the cooling capacity for the north zone?"
+
+**Old way:** Hunt through MEP drawings, check room schedules, email back and forth with MEP engineer.
+
+**With systems:** Open `systems/sys-hvac-01.md` — it lists all served rooms, capacities, requirements. **MEP coordination in one file.**
+
+**One system file = all served rooms, equipment, and requirements automatically tracked.**
+:::
 
 A **System** represents a building technical system (HVAC, electrical, plumbing, fire safety) that contains and coordinates multiple asset instances. Systems enable lifecycle management, energy analysis, and operational monitoring.
 
@@ -23,6 +37,16 @@ Systems define:
 | `buildingId` | string | Parent building ID | `"BLD-01"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+::: tip For Architects: What These Required Fields Mean
+- **id**: System identifier (e.g., `SYS-HVAC-01`)
+- **systemName**: What you call it ("HVAC System North Zone", "Electrical Panel 1A")
+- **systemCategory**: Type — `hvac`, `electrical`, `plumbing`, `fire_safety`
+- **buildingId**: Which building
+- **version**: Track changes
+
+**You only NEED these 5 fields.** The system automatically tracks which rooms and equipment this system serves (you don't manually list them).
+:::
+
 ## Optional Fields
 
 | Field | Type | Description |
@@ -44,6 +68,26 @@ Systems define:
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
 
+::: tip For Architects: Which Optional Fields Matter Most?
+
+**For MEP coordination (most important):**
+- **servedZoneIds** — Which zones/fire zones this system serves
+- **servedSpaceIds** — Which rooms this system serves
+- **capacity** — System capacity (cooling/heating kW, electrical kW, water flow L/min)
+- **requirements** — Performance requirements this system must meet
+
+**For permit/energy compliance:**
+- **efficiency** — COP, SEER, EER ratings for HVAC
+- **energySource** — What powers it (electricity, gas, solar)
+- **designCriteria** — Design parameters (air change rate, temperature setpoints)
+
+**For facilities management:**
+- **maintenanceSchedule** — When to service equipment
+- **controlStrategy** — How it's controlled (BMS, local, manual)
+
+**Note:** `assetInstanceIds` is **automatically computed**. You don't list equipment here — equipment lists the system, and the system tracks the reverse relationship.
+:::
+
 ## System Categories (Enum)
 
 ```typescript
@@ -59,7 +103,41 @@ type SystemCategory =
   | "renewable_energy"; // Solar PV, wind, geothermal
 ```
 
-## Example: Markdown Source
+## Example 1: Your First System File (Minimal)
+
+**The simplest HVAC system for MEP coordination:**
+
+```markdown
+File: systems/sys-hvac-01.md
+
+---
+id: "SYS-HVAC-01"
+entityType: "system"
+documentType: "system"
+systemName: "HVAC System North Zone"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+version: "1.0.0"
+
+# For MEP coordination
+servedZoneIds:
+  - "ZONE-HVAC-NORTH"
+capacity:
+  cooling: 85
+  heating: 75
+  unit: "kW"
+---
+
+# HVAC System North Zone
+
+Heat pump system serving north zone bedrooms and living rooms.
+```
+
+**That's it.** When equipment references `SYS-HVAC-01`, it automatically appears in this system's equipment list.
+
+---
+
+## Example 2: Complete System (Full Details)
 
 **File:** `docs/en/examples/green-terrace/systems/sys-hvac-01.md`
 

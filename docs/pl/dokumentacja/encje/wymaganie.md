@@ -1,6 +1,20 @@
-# Karta Wymaganie
+# Wymaganie (Reguły i Przepisy)
 
-**Wymaganie** definiuje regułę wydajnościową, regulacyjną lub projektową, kt&oacute;rą karty muszą spełniać. Wymagania napędzają sprawdzanie zgodności, planowanie weryfikacji oraz monitorowanie w czasie rzeczywistym przez Cyfrowego Bliźniaka.
+## Czym To Jest
+
+**Plik Wymagania** dokumentuje jedną regułę, której Twój budynek musi przestrzegać. Przykłady: „Wysokość sufitu w sypialni musi być >= 2,50m" (WT 2021), „Salon wymaga minimum 2% współczynnika doświetlenia" (EN 17037).
+
+::: tip Dla Architektów
+**Problem:** Inspektor pyta „Czy ta sypialnia spełnia wymaganie WT 2021 §132 dotyczące wysokości?"
+
+**Stary sposób:** Szukaj w specyfikacjach, miej nadzieję że to udokumentowałeś, ręcznie sprawdzaj czy 2,70m >= 2,50m.
+
+**Z wymaganiami:** System automatycznie sprawdza każdą sypialnię względem `REQ-PL-WT-ROOM-HEIGHT-001` i mówi Ci zaliczone/niezaliczone. **Bez ręcznego sprawdzania.**
+
+**Jeden plik wymagania = automatyczne sprawdzanie zgodności dla każdego odpowiedniego pomieszczenia.**
+:::
+
+**Wymaganie** definiuje regułę wydajnościową, regulacyjną lub projektową, którą dokumenty muszą spełniać. Wymagania napędzają sprawdzanie zgodności, planowanie weryfikacji oraz monitorowanie w czasie rzeczywistym przez Cyfrowego Bliźniaka.
 
 ## Przeznaczenie
 
@@ -23,8 +37,26 @@ Wymagania określają:
 | `metric` | string | Mierzalna metryka | `"daylight_factor"` |
 | `operator` | string | Operator por&oacute;wnania | `">="`, `"<="`, `"=="`, `"range"` |
 | `value` | number/object | Wartość docelowa lub zakres | `2.0` lub `{ "min": 20, "max": 26 }` |
-| `unit` | string | Jednostka miary | `"%"`, `"m"`, `"dB"`, `"&deg;C"` |
+| `unit` | string | Jednostka miary | `"%"`, `"m"`, `"dB"`, `"°C"` |
 | `version` | string | Wersja semantyczna | `"1.0.0"` |
+
+::: tip Dla Architektów: Co Oznaczają Te Wymagane Pola
+- **id**: Identyfikator wymagania (np. `REQ-PL-WT-ROOM-HEIGHT-001`)
+- **requirementName**: Opis po polsku („Minimalna wysokość pomieszczenia wg WT 2021")
+- **requirementType**: Kategoria — `performance`, `dimensional`, `regulatory`, `safety`
+- **metric**: Co mierzysz (np. `height`, `daylight_factor`, `fire_resistance`)
+- **operator**: Jak porównać — `>=` (większe lub równe), `<=` (mniejsze lub równe), `==` (równa się), `range` (pomiędzy min i max)
+- **value**: Wartość docelowa (np. `2.5` dla 2,50m) lub zakres (np. `{min: 20, max: 26}` dla temperatury)
+- **unit**: Jaka jednostka (np. `"m"` dla metrów, `"%"` dla procentów, `"°C"` dla stopni Celsjusza)
+
+**Przykład:** Wysokość pomieszczenia >= 2,50m staje się:
+```yaml
+metric: "height"
+operator: ">="
+value: 2.5
+unit: "m"
+```
+:::
 
 ## Pola Opcjonalne
 
@@ -35,15 +67,32 @@ Wymagania określają:
 | `verification` | object | Metoda weryfikacji, narzędzia, faza, osoba odpowiedzialna |
 | `legalBasis` | array | Odniesienia prawne (rozporządzenie, paragraf, artykuł) |
 | `technicalBasis` | array | Odniesienia do norm technicznych (EN, ISO, ASHRAE) |
-| `description` | string | Szczeg&oacute;łowe wyjaśnienie |
+| `description` | string | Szczegółowe wyjaśnienie |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
+
+::: tip Dla Architektów: Które Pola Opcjonalne Są Najważniejsze?
+
+**Dla zgodności z pozwoleniem:**
+- **legalBasis** — Która ustawa/rozporządzenie (np. WT 2021 §132, Prawo Budowlane Art. 5)
+- **scope** — Których pomieszczeń to dotyczy (np. tylko sypialni, tylko przestrzeni mieszkalnych)
+- **description** — Prosty opis dla inspektorów
+
+**Dla weryfikacji projektu:**
+- **verification** — Jak to sprawdzić (symulacja, obliczenia, pomiar)
+- **technicalBasis** — Która norma techniczna (np. EN 17037, ISO 140-4)
+
+**Dla raportów zgodności:**
+- **countryScope** — „poland_specific" (ładuje tylko dla polskich projektów) lub „global" (zawsze ładowane)
+
+**Najczęściej:** Po prostu dodaj `legalBasis` i `scope`. System zajmie się resztą.
+:::
 
 ## Typy Wymagań (Wyliczenie)
 
 ```typescript
 type RequirementType =
   | "performance"     // Cele wydajności funkcjonalnej
-  | "dimensional"     // Ograniczenia wymiar&oacute;w, wysokości, szerokości
+  | "dimensional"     // Ograniczenia wymiarów, wysokości, szerokości
   | "regulatory"      // Wymagania zgodności prawnej
   | "design"          // Standardy i wytyczne projektowe
   | "operational"     // Wymagania operacyjne w czasie użytkowania
@@ -51,7 +100,44 @@ type RequirementType =
   | "sustainability"; // Cele wydajności środowiskowej
 ```
 
-## Przykład: Wymaganie Globalne (Źr&oacute;dło Markdown)
+## Przykład 1: Proste Wymaganie (Minimalne)
+
+**Najprostsze wymaganie — minimalna wysokość pomieszczenia:**
+
+```yaml
+Plik: requirements/pl/room-height-min.json
+
+{
+  "id": "REQ-PL-WT-ROOM-HEIGHT-001",
+  "entityType": "requirement",
+  "documentType": "requirement",
+  "requirementName": "Minimalna wysokość pomieszczenia wg WT 2021",
+  "requirementType": "dimensional",
+
+  "metric": "height",
+  "operator": ">=",
+  "value": 2.5,
+  "unit": "m",
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 132",
+      "article": "Minimalna wysokość pomieszczenia"
+    }
+  ],
+
+  "version": "1.0.0"
+}
+```
+
+**Co to robi:**
+- Każde pomieszczenie, które odwołuje się do `REQ-PL-WT-ROOM-HEIGHT-001` jest automatycznie sprawdzane
+- Jeśli wysokość pomieszczenia < 2,5m → **NIEZALICZONE**
+- Jeśli wysokość pomieszczenia >= 2,5m → **ZALICZONE**
+- Raport zgodności generowany automatycznie
+
+---
 
 **Plik:** `scripts/requirements/global/req-daylight-sleeping-001.json`
 

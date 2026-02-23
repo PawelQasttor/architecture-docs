@@ -1,6 +1,20 @@
-# Karta Instalacja
+# System (Dokumentacja Instalacji MEP)
 
-**System** reprezentuje techniczny system budynkowy (HVAC, elektryczny, hydrauliczny, ochrony przeciwpożarowej), kt&oacute;ry zawiera i koordynuje wiele instancji zasob&oacute;w. Systemy umożliwiają zarządzanie cyklem życia, analizę energetyczną i monitoring operacyjny.
+## Czym To Jest
+
+**Plik Systemu** dokumentuje jedną instalację MEP (HVAC, elektryczną, hydrauliczną, ochrony przeciwpożarowej). Przykłady: „System HVAC 01 obsługujący północne sypialnie", „Rozdzielnica elektryczna 1A".
+
+::: tip Dla Architektów
+**Problem:** Konsultant MEP pyta „Które pomieszczenia obsługuje system HVAC?" lub „Jaka jest moc chłodnicza dla strefy północnej?"
+
+**Stary sposób:** Szukaj na rysunkach MEP, sprawdzaj zestawienia pomieszczeń, wymiana e-maili z inżynierem MEP.
+
+**Z systemami:** Otwórz `systems/sys-hvac-01.md` — wyświetla wszystkie obsługiwane pomieszczenia, moce, wymagania. **Koordynacja MEP w jednym pliku.**
+
+**Jeden plik systemu = wszystkie obsługiwane pomieszczenia, urządzenia i wymagania automatycznie śledzone.**
+:::
+
+**System** reprezentuje techniczny system budynkowy (HVAC, elektryczny, hydrauliczny, ochrony przeciwpożarowej), który zawiera i koordynuje wiele instancji zasobów. Systemy umożliwiają zarządzanie cyklem życia, analizę energetyczną i monitoring operacyjny.
 
 ## Przeznaczenie
 
@@ -23,6 +37,16 @@ Systemy definiują:
 | `buildingId` | string | ID budynku nadrzędnego | `"BLD-01"` |
 | `version` | string | Wersja semantyczna | `"1.0.0"` |
 
+::: tip Dla Architektów: Co Oznaczają Te Wymagane Pola
+- **id**: Identyfikator systemu (np. `SYS-HVAC-01`)
+- **systemName**: Jak to nazywasz („System HVAC Strefa Północna", „Rozdzielnica 1A")
+- **systemCategory**: Typ — `hvac`, `electrical`, `plumbing`, `fire_safety`
+- **buildingId**: Który budynek
+- **version**: Śledź zmiany
+
+**Potrzebujesz TYLKO tych 5 pól.** System automatycznie śledzi, które pomieszczenia i urządzenia obsługuje ten system (nie wypisujesz ich ręcznie).
+:::
+
 ## Pola Opcjonalne
 
 | Pole | Typ | Opis |
@@ -44,7 +68,27 @@ Systemy definiują:
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
-## Kategorie System&oacute;w (Wyliczenie)
+::: tip Dla Architektów: Które Pola Opcjonalne Są Najważniejsze?
+
+**Dla koordynacji MEP (najważniejsze):**
+- **servedZoneIds** — Które strefy/strefy pożarowe obsługuje ten system
+- **servedSpaceIds** — Które pomieszczenia obsługuje ten system
+- **capacity** — Moc systemu (chłodzenie/ogrzewanie kW, elektryczna kW, przepływ wody L/min)
+- **requirements** — Wymagania wydajnościowe, które system musi spełnić
+
+**Dla pozwolenia/zgodności energetycznej:**
+- **efficiency** — Współczynniki COP, SEER, EER dla HVAC
+- **energySource** — Co zasila system (prąd, gaz, słońce)
+- **designCriteria** — Parametry projektowe (krotność wymiany powietrza, nastawy temperatury)
+
+**Dla zarządzania obiektem:**
+- **maintenanceSchedule** — Kiedy serwisować urządzenia
+- **controlStrategy** — Jak jest sterowany (BMS, lokalnie, ręcznie)
+
+**Uwaga:** `assetInstanceIds` jest **obliczane automatycznie**. Nie wypisujesz tu urządzeń — urządzenia wskazują system, a system śledzi relację odwrotną.
+:::
+
+## Kategorie Systemów (Wyliczenie)
 
 ```typescript
 type SystemCategory =
@@ -59,7 +103,41 @@ type SystemCategory =
   | "renewable_energy"; // Fotowoltaika, wiatr, geotermia
 ```
 
-## Przykład: Źr&oacute;dło Markdown
+## Przykład 1: Pierwszy Plik Systemu (Minimalny)
+
+**Najprostszy system HVAC dla koordynacji MEP:**
+
+```markdown
+Plik: systems/sys-hvac-01.md
+
+---
+id: "SYS-HVAC-01"
+entityType: "system"
+documentType: "system"
+systemName: "System HVAC Strefa Północna"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+version: "1.0.0"
+
+# Dla koordynacji MEP
+servedZoneIds:
+  - "ZONE-HVAC-NORTH"
+capacity:
+  cooling: 85
+  heating: 75
+  unit: "kW"
+---
+
+# System HVAC Strefa Północna
+
+System pompy ciepła obsługujący sypialnie i salony w strefie północnej.
+```
+
+**To wszystko.** Gdy urządzenia odwołują się do `SYS-HVAC-01`, automatycznie pojawiają się na liście urządzeń tego systemu.
+
+---
+
+## Przykład 2: Pełny System (Wszystkie Szczegóły)
 
 **Plik:** `docs/en/examples/green-terrace/systems/sys-hvac-01.md`
 

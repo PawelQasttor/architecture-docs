@@ -1,4 +1,18 @@
-# Zone
+# Zone (Grouping Rooms By Rules)
+
+## What This Is
+
+A **Zone** groups rooms that share a common characteristic. The most common example: a **fire zone** groups all rooms that share the same fire safety classification.
+
+::: tip For Architects
+**Problem:** The building inspector asks "Which rooms are in Fire Zone ZL-IV?"
+
+**Old way:** Hunt through drawings, check room schedules, hope you didn't miss any.
+
+**With zones:** Open `zones/fire-zone-zl-iv.md` — it automatically lists all rooms that reference it.
+
+**One zone file = all rooms in that zone automatically tracked.**
+:::
 
 A **Zone** groups spaces by functional criteria (fire safety, HVAC, acoustic treatment, security access). Zones enable regulatory compliance tracking and building system design.
 
@@ -23,6 +37,16 @@ Zones define:
 | `buildingId` | string | Parent building ID | `"BLD-01"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+::: tip For Architects: What These Required Fields Mean
+- **id**: Zone identifier (e.g., `ZONE-FIRE-ZL-IV`)
+- **zoneName**: What you call it ("Fire Zone ZL-IV", "HVAC Zone North")
+- **zoneType**: Category — `fire`, `hvac`, `acoustic`, `security`, `maintenance`
+- **buildingId**: Which building
+- **version**: Track changes
+
+**You only NEED these 5 fields.** The system automatically tracks which rooms are in this zone (you don't manually list them).
+:::
+
 ## Optional Fields
 
 | Field | Type | Description |
@@ -42,6 +66,26 @@ Zones define:
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
 
+::: tip For Architects: Which Optional Fields Matter Most?
+
+**For fire zones (permit submission):**
+- **zoneClassification** — e.g., "ZL-IV" (Polish fire classification)
+- **fireRating** — e.g., "REI 60" (wall/floor fire resistance)
+- **requirements** — Which fire safety regulations apply
+- **levelIds** — Which floors this zone covers (e.g., [LVL-01, LVL-02, LVL-03])
+
+**For HVAC zones (MEP coordination):**
+- **hvacSystemId** — Which HVAC system serves this zone
+- **levelIds** — Which floors
+- **requirements** — Temperature/ventilation requirements
+
+**For acoustic zones:**
+- **acousticClass** — e.g., "Class B" (insulation requirement)
+- **requirements** — Acoustic performance requirements
+
+**Note:** `spaceIds` is **automatically computed**. You don't list rooms here — they list the zone, and the system tracks the reverse relationship.
+:::
+
 ## Zone Types (Enum)
 
 ```typescript
@@ -57,7 +101,43 @@ type ZoneType =
   | "electrical";   // Electrical distribution zones
 ```
 
-## Example: Markdown Source
+## Example 1: Your First Zone File (Minimal)
+
+**The simplest fire zone for permit submission:**
+
+```markdown
+File: zones/fire-zone-zl-iv.md
+
+---
+id: "ZONE-FIRE-ZL-IV"
+entityType: "zone"
+documentType: "zone"
+zoneName: "Fire Zone ZL-IV"
+zoneType: "fire"
+buildingId: "BLD-01"
+version: "1.0.0"
+
+# For permit compliance
+zoneClassification: "ZL-IV"
+fireRating: "REI 60"
+levelIds:
+  - "LVL-01"
+  - "LVL-02"
+  - "LVL-03"
+---
+
+# Fire Zone ZL-IV
+
+Residential fire zone covering levels 1-3.
+Fire resistance: REI 60 walls and floors.
+Fire doors: EI 30.
+```
+
+**That's it.** When rooms reference `ZONE-FIRE-ZL-IV`, they automatically appear in this zone's room list.
+
+---
+
+## Example 2: Complete Fire Zone (Full Details)
 
 **File:** `docs/en/examples/green-terrace/zones/fire-zone-zl-iv.md`
 

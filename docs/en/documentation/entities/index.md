@@ -1,114 +1,278 @@
-# Document Types
+# Document Types: What Files Do You Need?
 
-SBM defines structured document types that represent different aspects of a building. Each document type has a specific purpose and set of required fields.
+## The Question You're Asking
 
-## Core Document Types
+"I want to document my building project. What files do I create?"
 
-### Spatial Document Types
+This page answers that. There are **11 types of files** you can create. Each type describes a different aspect of your building.
 
-- **[Space](/en/documentation/entities/space)** - Rooms and functional areas (instances)
-- **[Space Type](/en/documentation/entities/space-type)** - Space templates for repeating room types
-- **[Zone](/en/documentation/entities/zone)** - Functional zones (fire, acoustic, HVAC, security)
-- **[Zone Type](/en/documentation/entities/zone-type)** - Zone templates for standard zone configurations
-- **[Level](/en/documentation/entities/level)** - Building floors/storeys
-- **[Building](/en/documentation/entities/building)** - Building-level metadata
+::: tip You Don't Need All 11 Types
+Most projects start with 3-4 types:
+- **Spaces** (rooms)
+- **Zones** (fire zones, acoustic zones)
+- **Requirements** (regulations like minimum ceiling height)
+- **Building** (project metadata)
 
-### Technical Document Types
+That's enough to get started. Add other types when you need them.
+:::
 
-- **[System](/en/documentation/entities/system)** - MEP systems (HVAC, electrical, plumbing, fire safety)
-- **[System Type](/en/documentation/entities/system-type)** - System templates for standard configurations
-- **[Asset Instance](/en/documentation/entities/asset-instance)** - Physical equipment with maintenance data
-- **[Asset Type](/en/documentation/entities/asset-type)** - Product specifications and templates
+---
 
-### Governance Document Types
+## The 11 Document Types (Organized By What They Describe)
 
-- **[Requirement](/en/documentation/entities/requirement)** - Performance and regulatory rules
+### **Describing Spaces (Where People Are)**
 
-## Document Type Hierarchy
+| Type | When You Use It | Example File |
+|------|----------------|--------------|
+| **[Space](/en/documentation/entities/space)** | Every room, corridor, area | `spaces/bedroom-01.md` |
+| **[Space Type](/en/documentation/entities/space-type)** | Template for similar rooms (e.g., "standard bedroom") | `space-types/standard-bedroom.md` |
+| **[Level](/en/documentation/entities/level)** | Each floor in your building | `levels/ground-floor.md` |
+| **[Building](/en/documentation/entities/building)** | The whole building | `buildings/green-terrace.md` |
+
+**Start here:** If you're new, begin with **Space** (one file per room). Add **Level** and **Building** when you have multiple floors or buildings.
+
+---
+
+### **Describing Rules & Groupings**
+
+| Type | When You Use It | Example File |
+|------|----------------|--------------|
+| **[Zone](/en/documentation/entities/zone)** | Group of rooms sharing a characteristic (fire zone, acoustic zone, HVAC zone) | `zones/fire-zone-zl-iv.md` |
+| **[Zone Type](/en/documentation/entities/zone-type)** | Template for zone configurations | `zone-types/fire-zl-iv-standard.md` |
+| **[Requirement](/en/documentation/entities/requirement)** | A regulation or rule that must be met | `requirements/height-minimum-250cm.md` |
+
+**When you need zones:** Permit submission (fire zones required), MEP coordination (HVAC zones), acoustic design
+
+---
+
+### **Describing Systems & Equipment**
+
+| Type | When You Use It | Example File |
+|------|----------------|--------------|
+| **[System](/en/documentation/entities/system)** | A building installation (heating, ventilation, plumbing) | `systems/central-heating.md` |
+| **[System Type](/en/documentation/entities/system-type)** | Template for MEP system configurations | `system-types/residential-hvac-mvhr.md` |
+| **[Asset Instance](/en/documentation/entities/asset-instance)** | A specific installed piece of equipment | `assets/boiler-hp-01.md` |
+| **[Asset Type](/en/documentation/entities/asset-type)** | Product specification (model, performance, maintenance) | `asset-types/vaillant-ecotec-306.md` |
+
+**When you need these:** Construction phase (equipment being installed), handover (facility manager needs asset register)
+
+---
+
+## How Files Connect To Each Other
+
+Files reference each other using IDs. Think of it like hyperlinks between documents:
 
 ```
-Project
-  └─ Building
-      ├─ Level
-      │   └─ Space (instance) → references Space Type (template)
-      │       ├─ Child Space (parentSpaceId → parent)
-      │       └─ Asset Instance → references Asset Type (product spec)
-      ├─ Zone (instance) → references Zone Type (template)
-      └─ System (instance) → references System Type (template)
-          └─ Asset Instance → references Asset Type
+Building (Green Terrace)
+  └─ Level (Ground Floor)
+      └─ Space (Bedroom 01)
+          ├─ belongs to Zone (Fire Zone ZL-IV)
+          ├─ must meet Requirement (height >= 2.50m)
+          └─ contains Asset (Radiator RAD-01)
 ```
 
-### Type/Instance Pattern
+**Example:** Bedroom 01's file says "I'm in Fire Zone ZL-IV". The system automatically updates Fire Zone ZL-IV to say "Bedroom 01 is in me". You only write the link once; the reverse link is computed automatically.
 
-SBM v0.1.1 introduces a **type/instance pattern** to eliminate repetition:
+---
 
-- **Types** (templates): Define specifications once (e.g., "Standard Bedroom Type A")
-- **Instances** (occurrences): Reference the type and add location/context data
+## Templates vs Actual Things (Type/Instance Pattern)
 
-**Benefits:**
-- ✅ Define requirements, finishes, equipment once
-- ✅ Guaranteed consistency across similar spaces
-- ✅ Update one type file → affects all instances
-- ✅ 26-33% reduction in documentation for repeating elements
+This is **optional** but very useful if you have many similar rooms.
 
-## Common Fields
+### The Problem
 
-All document types share these common fields:
+You have 20 bedrooms. All need:
+- Same minimum height (2.50m)
+- Same daylight requirement
+- Same fire door specification
+- Same smoke detector
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | string | ✅ | Unique identifier (hierarchical format) |
-| `entityType` | string | ✅ | Document type name |
-| `documentType` | string | ✅ | Document type (usually same as entityType) |
-| `version` | string | ✅ | Semantic version (e.g., "1.0.0") |
-| `tags` | array | ❌ | Free-form tags for classification |
-| `ifcMapping` | object | ❌ | IFC mapping |
+**Old way:** Write those specs 20 times (once per bedroom file)
+**New way:** Write specs once in a **Type** file, reference it from 20 **Instance** files
 
-## ID Naming Conventions
+### The Solution
 
-SBM uses hierarchical, human-readable IDs:
+**Step 1: Create Space Type** (template - define once)
 
-| Document Type | Format | Example |
-|--------|--------|---------|
-| Building | `BLD-{sequence}` | `BLD-01` |
-| Level | `LVL-{sequence}` | `LVL-01` |
+```markdown
+File: space-types/standard-bedroom.md
+---
+id: "ST-BEDROOM-STANDARD-A"
+requirements:
+  - "REQ-HEIGHT-MIN-250"
+  - "REQ-DAYLIGHT-SLEEPING"
+  - "REQ-FIRE-DOOR-EI30"
+equipment:
+  - "Smoke detector"
+  - "Radiator"
+---
+
+# Space Type: Standard Bedroom A
+
+All residential bedrooms follow this specification.
+```
+
+**Step 2: Create 20 Space Instances** (reference the template)
+
+```markdown
+File: spaces/bedroom-01.md
+---
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+spaceTypeId: "ST-BEDROOM-STANDARD-A"  # ← Inherits all specs from template!
+designArea: 14.5  # Instance-specific: actual area
+levelId: "LVL-01"  # Instance-specific: which floor
+---
+
+# Bedroom 01
+
+North-facing bedroom on ground floor.
+```
+
+**Result:**
+- ✅ Define specs once (in the Type file)
+- ✅ Update Type → all 20 bedrooms update automatically
+- ✅ **26-33% less documentation** for projects with repeating rooms
+
+**When to use types:** Projects with >5 similar rooms/zones/systems
+
+---
+
+## File Naming (How IDs Work)
+
+Every file needs a unique ID. Here's the pattern:
+
+| Document Type | ID Format | Example |
+|--------------|-----------|---------|
+| **Building** | `BLD-{number}` | `BLD-01` |
+| **Level** | `LVL-{number}` | `LVL-01` (ground floor) |
+| **Space** | `SP-{building}-{level}-{number}` | `SP-BLD-01-L01-001` |
 | **Space Type** | `ST-{descriptor}` | `ST-BEDROOM-STANDARD-A` |
-| Space | `SP-{building}-{level}-{sequence}` | `SP-BLD-01-L01-001` |
+| **Zone** | `ZONE-{type}-{descriptor}` | `ZONE-FIRE-ZL-IV` |
 | **Zone Type** | `ZT-{descriptor}` | `ZT-FIRE-ZL-IV` |
-| Zone | `ZONE-{type}-{descriptor}` | `ZONE-FIRE-ZL-IV` |
-| **System Type** | `SYT-{descriptor}` | `SYT-HVAC-RESIDENTIAL` |
-| System | `SYS-{category}-{sequence}` | `SYS-HVAC-01` |
-| **Asset Type** | `AT-{descriptor}` | `AT-BOSCH-HP-300` |
-| Asset Instance | `AI-{type}-{sequence}` | `AI-AHU-01` |
-| Requirement | `REQ-{scope}-{descriptor}-{sequence}` | `REQ-DAYLIGHT-SLEEPING-001` |
+| **System** | `SYS-{category}-{number}` | `SYS-HVAC-01` |
+| **System Type** | `SYT-{descriptor}` | `SYT-HVAC-RESIDENTIAL-MVHR` |
+| **Asset Instance** | `AI-{type}-{number}` | `AI-HP-01` (heat pump 01) |
+| **Asset Type** | `AT-{descriptor}` | `AT-VAILLANT-ECOTEC-306` |
+| **Requirement** | `REQ-{scope}-{descriptor}-{number}` | `REQ-PL-WT-HEIGHT-001` |
 
-## Relationships
+::: tip Why These IDs?
+- **Human-readable:** `SP-BLD-01-L01-001` means "Space in Building 01, Level 01, number 001"
+- **Sortable:** Files sort logically (all Level 01 spaces group together)
+- **Traceable:** You can see building/level/sequence from the ID alone
+:::
 
-Documents reference each other via IDs:
+---
+
+## Fields Every File Has
+
+No matter which type, every file includes these basic fields:
 
 ```yaml
-# Space references Zone, Level, Building, Requirements
-space:
-  id: "SP-BLD-01-L01-001"
-  buildingId: "BLD-01"
-  levelId: "LVL-01"
-  zoneIds: ["ZONE-FIRE-ZL-IV", "ZONE-HVAC-NORTH"]
-  requirements: ["REQ-DAYLIGHT-SLEEPING-001"]
-
-# Zone references Building (reverse relationship computed automatically)
-zone:
-  id: "ZONE-FIRE-ZL-IV"
-  buildingId: "BLD-01"
-  spaceIds: []  # Auto-computed by compiler
+---
+id: "SP-BLD-01-L01-001"  # Unique identifier
+entityType: "space"  # What type of file this is
+documentType: "space"  # Usually same as entityType
+version: "1.0.0"  # Semantic version (increment when you update)
+tags: ["residential", "sleeping"]  # Optional: labels for filtering
+---
 ```
 
-The compiler automatically computes **reverse relationships**:
-- `space.zoneIds` → `zone.spaceIds`
-- `space.parentSpaceId` → `space.childSpaceIds`
-- `asset.systemId` → `system.assetInstanceIds`
+**Why versions?** Track changes over time. `1.0.0` = initial design, `1.1.0` = minor update, `2.0.0` = major redesign
 
-## Next Steps
+---
 
-- **[Space](/en/documentation/entities/space)** - Learn about room/area document types
-- **[Requirement](/en/documentation/entities/requirement)** - Learn about rules and constraints
-- **[Authoring Guide](/en/documentation/authoring/)** - Create your first document
+## Your Next Steps
+
+**Choose based on what you want to do:**
+
+| I want to... | Go here |
+|-------------|---------|
+| **Document all rooms in my project** | [Space documentation](/en/documentation/entities/space) |
+| **Set up fire zones for permit** | [Zone documentation](/en/documentation/entities/zone) |
+| **Track building regulations** | [Requirement documentation](/en/documentation/entities/requirement) |
+| **Document MEP systems** | [System documentation](/en/documentation/entities/system) |
+| **Track installed equipment** | [Asset documentation](/en/documentation/entities/asset-instance) |
+| **See all 11 types with examples** | Scroll down to see the complete list below |
+
+---
+
+## Complete List of All 11 Document Types
+
+Click any type to see detailed documentation:
+
+### Spatial
+1. **[Building](/en/documentation/entities/building)** - Building-level metadata (name, address, classification)
+2. **[Level](/en/documentation/entities/level)** - Floor information (elevation, gross area)
+3. **[Space](/en/documentation/entities/space)** - Rooms and functional areas (bedrooms, offices, corridors)
+4. **[Space Type](/en/documentation/entities/space-type)** - Templates for repeating room types
+
+### Zoning
+5. **[Zone](/en/documentation/entities/zone)** - Functional groupings (fire, acoustic, HVAC, security)
+6. **[Zone Type](/en/documentation/entities/zone-type)** - Templates for standard zone configurations
+
+### Technical Systems
+7. **[System](/en/documentation/entities/system)** - MEP systems (HVAC, electrical, plumbing)
+8. **[System Type](/en/documentation/entities/system-type)** - Templates for standard system configurations
+9. **[Asset Instance](/en/documentation/entities/asset-instance)** - Physical equipment (boilers, pumps, sensors)
+10. **[Asset Type](/en/documentation/entities/asset-type)** - Product specifications and templates
+
+### Governance
+11. **[Requirement](/en/documentation/entities/requirement)** - Performance and regulatory rules (height minimums, fire ratings, daylight)
+
+---
+
+## How References Work (Behind The Scenes)
+
+When you write a Space file, you reference other files by ID:
+
+```yaml
+---
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+buildingId: "BLD-01"  # Which building
+levelId: "LVL-01"  # Which floor
+zoneIds:  # Which zones
+  - "ZONE-FIRE-ZL-IV"
+  - "ZONE-HVAC-NORTH"
+requirements:  # Which regulations
+  - "REQ-HEIGHT-MIN-250"
+---
+```
+
+The system automatically computes **reverse relationships**:
+
+- You write: `bedroom-01.md` says "I'm in Zone FIRE-ZL-IV"
+- System computes: `fire-zone-zl-iv.md` gets updated to say "Bedroom 01 is in me"
+
+**Result:** You never manually maintain "which spaces are in this zone" — it's computed from the space files.
+
+---
+
+## Common Questions
+
+**"Do I need to create all 11 types?"**
+No. Start with 3-4 types (Space, Zone, Requirement, Building). Add others when you need them.
+
+**"What if I have 50 identical bedrooms?"**
+Use the Type/Instance pattern. Create 1 Space Type (template), 50 Space instances (actual rooms).
+
+**"Can I add my own custom fields?"**
+Yes. The schema is extensible. Add custom fields in a `properties` object.
+
+**"What if I make a mistake in the ID?"**
+The validation tool will tell you if you reference an ID that doesn't exist. Fix it before it becomes a problem.
+
+**"How do I know which type to use?"**
+Ask: "Am I describing a physical room?" → **Space**
+"Am I describing a group of rooms?" → **Zone**
+"Am I describing equipment?" → **Asset Instance**
+"Am I describing a rule?" → **Requirement**
+
+---
+
+::: tip Ready to Create Your First File?
+Go to the [Quick Start](/en/standards/quick-start) to create your first Space file in 5 minutes.
+
+Or browse [Templates](/en/templates/) to copy-paste ready-made examples.
+:::

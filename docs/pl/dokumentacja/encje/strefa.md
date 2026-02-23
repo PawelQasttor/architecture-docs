@@ -1,6 +1,20 @@
-# Karta Strefa
+# Strefa (Grupowanie Pomieszczeń Według Reguł)
 
-**Strefa** grupuje przestrzenie według kryteri&oacute;w funkcjonalnych (ochrona przeciwpożarowa, HVAC, obr&oacute;bka akustyczna, kontrola dostępu). Strefy umożliwiają śledzenie zgodności regulacyjnej i projektowanie system&oacute;w budynkowych.
+## Czym To Jest
+
+**Strefa** grupuje pomieszczenia, które mają wspólną charakterystykę. Najczęstszy przykład: **strefa pożarowa** grupuje wszystkie pomieszczenia, które mają tę samą klasyfikację bezpieczeństwa pożarowego.
+
+::: tip Dla Architektów
+**Problem:** Inspektor budowlany pyta "Które pomieszczenia są w Strefie Pożarowej ZL-IV?"
+
+**Stary sposób:** Przeszukuj rysunki, sprawdzaj zestawienia pomieszczeń, miej nadzieję, że niczego nie pominąłeś.
+
+**Ze strefami:** Otwórz `zones/strefa-pozarowa-zl-iv.md` — automatycznie listuje wszystkie pomieszczenia, które się do niej odwołują.
+
+**Jeden plik strefy = wszystkie pomieszczenia w tej strefie automatycznie śledzone.**
+:::
+
+**Strefa** grupuje przestrzenie według kryteriów funkcjonalnych (ochrona przeciwpożarowa, HVAC, obróbka akustyczna, kontrola dostępu). Strefy umożliwiają śledzenie zgodności regulacyjnej i projektowanie systemów budynkowych.
 
 ## Przeznaczenie
 
@@ -22,6 +36,16 @@ Strefy definiują:
 | `zoneType` | string | Typ funkcjonalny (patrz wyliczenie poniżej) | `"fire"` |
 | `buildingId` | string | ID budynku nadrzędnego | `"BLD-01"` |
 | `version` | string | Wersja semantyczna | `"1.0.0"` |
+
+::: tip Dla Architektów: Co Oznaczają Te Wymagane Pola
+- **id**: Identyfikator strefy (np. `ZONE-FIRE-ZL-IV`)
+- **zoneName**: Jak to nazywasz ("Strefa Pożarowa ZL-IV", "Strefa HVAC Północ")
+- **zoneType**: Kategoria — `fire`, `hvac`, `acoustic`, `security`, `maintenance`
+- **buildingId**: Który budynek
+- **version**: Śledź zmiany
+
+**Potrzebujesz TYLKO tych 5 pól.** System automatycznie śledzi, które pomieszczenia są w tej strefie (nie wypisujesz ich ręcznie).
+:::
 
 ## Pola Opcjonalne
 

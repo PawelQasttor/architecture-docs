@@ -44,8 +44,8 @@ When you write a document, you're describing something specific: a room, a fire 
 | **Building** | The whole building | "Green Terrace, ul. Sloneczna 45, Warsaw" |
 | **Level** | A floor or storey | "Ground floor, +0.00m" |
 | **Space** | A room or area | "Bedroom 01, 14.5 m², 2.70m height" |
-| **Zone** | A group of rooms sharing a rule | "Fire zone ZL-IV covering floors 1-6" |
-| **Requirement** | A regulation that must be met | "Room height >= 2.50m per WT 2021 §132" |
+| **Zone** | A group of rooms sharing a common characteristic | "Fire zone ZL-IV covering floors 1-6" |
+| **Requirement** | A specific regulation that must be met | "Room height >= 2.50m per WT 2021 §132" |
 | **System** | A building installation | "Central heating, gas boiler, radiators" |
 | **Asset** | A specific installed product | "Vaillant ecoTEC plus 306, serial #12345" |
 
