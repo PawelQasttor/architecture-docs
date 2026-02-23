@@ -25,19 +25,18 @@ npm install
 ```
 
 This installs the compiler dependencies:
-- `gray-matter` - YAML frontmatter parsing
-- `ajv` - JSON Schema validation
-- `fast-glob` - File pattern matching
+- `js-yaml` - YAML frontmatter parsing
+- `ajv` / `ajv-formats` - JSON Schema validation
 
 ### 3. Verify Installation
 
 ```bash
-node scripts/compiler/index.mjs --version
+node scripts/compiler/index.mjs version
 ```
 
 Expected output:
 ```
-SBM Compiler v0.1.0
+Semantic Building Model Compiler v0.2.0
 ```
 
 ## Your First Compilation
@@ -49,18 +48,29 @@ Let's compile the included Green Terrace example project.
 The example project is located at:
 ```
 docs/en/examples/green-terrace/
-├── building.md
+├── project-specification.md
 ├── levels/
 │   └── level-01.md
 ├── spaces/
 │   ├── bedroom-01.md
 │   ├── bedroom-02.md
-│   └── living-room-01.md
+│   └── corridor.md
 ├── zones/
 │   ├── fire-zone-zl-iv.md
+│   ├── acoustic-zone-night.md
 │   └── hvac-zone-north.md
-└── systems/
-    └── sys-hvac-01.md
+├── zone-types/
+│   ├── fire-zone-zl-iv.md
+│   ├── acoustic-zone-night.md
+│   └── hvac-zone-residential.md
+├── systems/
+│   └── sys-hvac-01.md
+├── system-types/
+│   └── hvac-residential-mvhr.md
+├── assets/
+│   └── ai-hp-01.md
+└── asset-types/
+    └── bosch-heat-pump-7000i.md
 ```
 
 ### Step 2: Run the Compiler
@@ -84,52 +94,44 @@ node scripts/compiler/index.mjs compile \
 
 Expected console output:
 ```
-🚀 SBM Compiler v0.1.0
+ℹ️  Semantic Building Model Compiler v0.2.0
+ℹ️  Input: docs/en/examples/green-terrace
+ℹ️  Output: build/green-terrace
+ℹ️  Country: PL
+ℹ️  Phase: 3
 
-📂 Input:  docs/en/examples/green-terrace
-📂 Output: build/green-terrace
-🌍 Country: PL
+📍 Stage 1: Parse
+✅ Parsed 16 entities
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📍 Stage 2: Normalize, Enrich & Resolve Inheritance
+✅ Normalized 3 spaces, 3 zones, 7 requirements
 
-STAGE 1: PARSE
-🔍 Scanning for entity files...
-✓ Found 3 spaces, 2 zones, 1 system, 1 building, 1 level
+📍 Stage 3: Validate
+✅ Validation passed - no errors
 
-STAGE 2: NORMALIZE & ENRICH
-🔍 Loading jurisdiction pack...
-✓ Loaded 4 global requirements
-✓ Loaded 3 PL-specific requirements
-✓ Auto-computed reverse relationships
+📍 Stage 3.5: Quality Summaries
+✅ Quality: avg completeness 1, 21 entities analyzed
 
-STAGE 3: VALIDATE
-✓ JSON Schema validation passed
-✓ Referential integrity checks passed
-✓ Business rules validation passed
+📍 Stage 4: Compile Targets
+✅ Generated 5 compilation targets
+✅ Generated: build/green-terrace/sbm.json
+✅ Generated: build/green-terrace/quality_report.json
+...
 
-STAGE 4: COMPILE TARGETS
-✓ Generated BIM mapping (12.5 KB)
-✓ Generated compliance report (45.3 KB)
-✓ Generated asset register (8.2 KB)
-✓ Generated digital twin schema (15.7 KB)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-✅ Compilation complete in 0.12s
-
-📦 Outputs:
-   build/green-terrace/sbm.json
-   build/green-terrace/bim_mapping.json
-   build/green-terrace/compliance_report.json
-   build/green-terrace/asset_register.json
-   build/green-terrace/twin_schema.json
+✨ Compilation complete in 0.13s
+✅ Phase readiness: Project is ready to advance to Phase 4
 ```
 
 ### Step 4: Inspect the Outputs
 
 **Canonical SBM:**
 ```bash
-cat build/green-terrace/sbm.json
+node -e "const s = require('./build/green-terrace/sbm.json'); console.log('Version:', s.sbm_version, '| Entities:', Object.keys(s.entities).join(', '))"
+```
+
+**Quality Report (summary):**
+```bash
+node -e "const q = require('./build/green-terrace/quality_report.json'); console.log('Phase readiness:', q.phaseReadiness.summary); console.log('Safety audit:', q.safetyAudit.totalFields, 'fields,', q.safetyAudit.verified, 'verified')"
 ```
 
 **Compliance Report (summary):**
@@ -137,289 +139,158 @@ cat build/green-terrace/sbm.json
 node -e "console.log(JSON.stringify(require('./build/green-terrace/compliance_report.json').summary, null, 2))"
 ```
 
-Expected output:
-```json
-{
-  "totalRequirements": 7,
-  "globalRequirements": 4,
-  "polandSpecificRequirements": 3,
-  "verified": 5,
-  "pendingVerification": 2,
-  "complianceRate": 71.4
-}
-```
-
-## Common Workflows
-
-### Validate Without Compiling
-
-Check for errors without generating outputs:
-
-```bash
-node scripts/compiler/index.mjs compile \
-  --input docs/en/examples/green-terrace \
-  --country PL \
-  --validate-only
-```
-
-### Generate Specific Targets Only
-
-Only generate BIM mapping and compliance report:
-
-```bash
-node scripts/compiler/index.mjs compile \
-  --input docs/en/examples/green-terrace \
-  --output build/green-terrace \
-  --country PL \
-  --targets bim,compliance
-```
-
-### Watch Mode (Development)
-
-Automatically recompile when files change:
-
-```bash
-# Using nodemon (install first: npm install -g nodemon)
-nodemon --watch docs/en/examples/green-terrace \
-  --exec "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL"
-```
-
 ## Understanding Compiler Output
 
 ### 1. sbm.json (Canonical Model)
 
-The validated, enriched building model:
+The validated, enriched building model with provenance tracking:
 
 ```json
 {
-  "version": "0.1",
-  "metadata": {
-    "compiledAt": "2026-02-20T14:32:15Z",
-    "compiler": "SBM Compiler v0.1.0",
-    "projectId": "PRJ-GREEN-TERRACE-2026",
-    "country": "PL"
+  "sbm_version": "0.2",
+  "compiler": { "version": "0.2.0", "mode": "production" },
+  "project": {
+    "id": "PRJ-GREEN-TERRACE-2026",
+    "name": "Residential Building Green Terrace",
+    "country": "PL",
+    "phase": 3
   },
   "entities": {
-    "buildings": [ {...} ],
-    "levels": [ {...} ],
-    "spaces": [ {...} ],
-    "zones": [ {...} ],
-    "systems": [ {...} ],
-    "assetInstances": [ {...} ],
-    "requirements": [ {...} ]
+    "levels": [...],
+    "spaces": [...],      // Each with _quality block
+    "zones": [...],
+    "systems": [...],
+    "zone_types": [...],  // Type templates
+    "system_types": [...],
+    "asset_types": [...]
   }
 }
 ```
 
-**Use this for:**
-- AI/LLM queries about the building
-- Custom analysis scripts
-- Integration with other tools
+Spaces include inherited values with provenance:
+```json
+{
+  "id": "SP-BLD-01-L01-001",
+  "designHeight": 2.7,
+  "designHeight_meta": {
+    "confidence": "specified",
+    "resolution": "inherited",
+    "inheritedFrom": "LVL-01",
+    "inheritedField": "typicalCeilingHeight"
+  },
+  "_quality": {
+    "totalFields": 26,
+    "completeness": 1.0,
+    "lowestConfidence": "specified"
+  }
+}
+```
 
-### 2. bim_mapping.json
+### 2. quality_report.json <Badge type="tip" text="v0.2.0" />
 
-Revit and IFC property mappings:
+Data quality audit:
 
 ```json
 {
-  "revitSharedParameters": {
-    "file": "SBM_SharedParameters.txt",
-    "groups": [
-      {
-        "name": "SBM_Identification",
-        "parameters": [
-          { "name": "SBM_Space_ID", "dataType": "Text" },
-          { "name": "SBM_Zone_ID", "dataType": "Text" }
-        ]
-      }
-    ]
+  "phaseReadiness": {
+    "currentPhase": 3,
+    "ready": true,
+    "summary": "Project is ready to advance to Phase 4"
   },
-  "customPropertySets": [
+  "safetyAudit": {
+    "totalFields": 3,
+    "verified": 3,
+    "unverified": 0
+  },
+  "recommendations": [
     {
-      "name": "Pset_SBM_Space",
-      "applicableTo": "IfcSpace",
-      "properties": [...]
+      "priority": "high",
+      "message": "269 field(s) have values but no provenance tracking",
+      "action": "Add _meta annotations with confidence level and source reference"
     }
   ]
 }
 ```
 
-**Use this for:**
-- Importing parameters into Revit
-- Configuring IFC exports
-- Dynamo/Grasshopper scripts
+### 3-6. Other Targets
 
-### 3. compliance_report.json
+See [Compiler Overview](/en/documentation/compiler/) for details on `bim_mapping.json`, `compliance_report.json`, `asset_register.json`, and `twin_schema.json`.
 
-Regulatory compliance tracking:
+## Phase Gate Workflow
 
-```json
-{
-  "polandSpecificCompliance": {
-    "regulation": "WT_2021",
-    "sections": [
-      {
-        "section": "§ 132",
-        "description": "Wysokość pomieszczeń",
-        "requirements": [...],
-        "status": "compliant"
-      }
-    ]
-  },
-  "spaceComplianceDetails": [...]
-}
+Use the `--phase` option to enforce data quality standards:
+
+```bash
+# Phase 3 (design development) - permissive
+node scripts/compiler/index.mjs compile \
+  --input project/ --output build/ --phase 3
+
+# Phase 5 (construction docs) - strict
+# Will ERROR if any field has 'assumed' confidence
+node scripts/compiler/index.mjs compile \
+  --input project/ --output build/ --phase 5
+
+# Phase 7 (as-built) - strictest
+# Will ERROR if safety-critical fields have 'estimated' confidence
+node scripts/compiler/index.mjs compile \
+  --input project/ --output build/ --phase 7
 ```
-
-**Use this for:**
-- Permit submissions
-- Compliance dashboards
-- Regulatory audits
-
-### 4. asset_register.json
-
-Facilities management data:
-
-```json
-{
-  "assetInventory": [...],
-  "maintenanceCalendar": [
-    {
-      "month": "2026-03",
-      "tasks": [
-        {
-          "assetId": "AI-AHU-01",
-          "taskName": "Replace air filters",
-          "scheduledDate": "2026-03-15"
-        }
-      ]
-    }
-  ],
-  "sparePartsInventory": [...]
-}
-```
-
-**Use this for:**
-- CMMS import (Maximo, SAP PM)
-- Maintenance planning
-- Lifecycle cost analysis
-
-### 5. twin_schema.json
-
-Digital twin configuration:
-
-```json
-{
-  "spaceSensorBindings": [
-    {
-      "entityId": "SP-BLD-01-L01-001",
-      "sensors": [
-        {
-          "sensorType": "temperature",
-          "dataPoint": "AI-SP-BLD-01-L01-001-TEMP",
-          "thresholds": { "min": 18, "max": 26 }
-        }
-      ]
-    }
-  ],
-  "runtimeEvaluationRules": [...]
-}
-```
-
-**Use this for:**
-- BMS configuration
-- IoT sensor deployment
-- Real-time compliance monitoring
 
 ## Troubleshooting
 
 ### Error: "No entities found in input directory"
 
-**Problem:** Compiler can't find Markdown files
+**Solution:** Verify input path is correct, files have `.md` extension, and contain YAML frontmatter with `documentType` field.
 
-**Solution:**
-- Verify input path is correct
-- Ensure files have `.md` extension
-- Check that files contain YAML frontmatter with `entityType` field
+### Schema validation errors
 
-### Error: "Missing required field: spaceType"
+**Solution:** Check entity documentation for required fields. Common missing fields:
+- Level: `buildingId`, `version`
+- Space: `buildingId`, `levelId`, `version`
+- All entities: `id`, `entityType`
 
-**Problem:** Entity missing required fields
+### Warning: "Field has 'specified' confidence but no source reference"
 
-**Solution:**
-- Check entity documentation for required fields
-- Add missing fields to YAML frontmatter
-- Example:
-  ```yaml
-  ---
-  entityType: "space"
-  spaceType: "bedroom"  # Add this
-  ---
-  ```
+**Solution:** Add `source` and `sourceRef` to the field's `_meta`:
+```yaml
+designArea: 30.45
+designArea_meta:
+  confidence: specified
+  source: "ARCH-001"
+  sourceRef: "Room schedule, page 12"
+```
 
-### Error: "Invalid reference: ZONE-FIRE-001 (does not exist)"
+### Phase gate errors at Phase 5+
 
-**Problem:** Entity references non-existent ID
-
-**Solution:**
-- Check that referenced entity exists
-- Verify ID spelling matches exactly
-- Entity must be in input directory
-
-### Warning: "Requirement REQ-DAYLIGHT-001 not found (may be in jurisdiction pack)"
-
-**Problem:** Space references requirement that isn't loaded
-
-**Solution:**
-- Requirement might be in jurisdiction pack for different country
-- Add custom requirement to project
-- Or remove reference if not needed
-
-### Performance Issues
-
-**Problem:** Compilation takes too long
-
-**Solution:**
-- Use `--targets` to generate only needed outputs
-- Split large projects into sub-projects
-- Use incremental compilation (future feature)
-
-## Next Steps
-
-Now that you've successfully compiled your first project:
-
-1. **[Understand the Pipeline](/en/documentation/compiler/pipeline)** - Learn how each stage works
-2. **[Create Your Own Entities](/en/documentation/authoring/)** - Start authoring semantic entities
-3. **[Explore Compilation Targets](/en/documentation/compiler/pipeline)** - Deep dive into each output format
-4. **[Add Custom Requirements](/en/documentation/authoring/creating-entities)** - Create project-specific rules
+**Solution:** Either verify the data (upgrade from `assumed` to `specified` with a source reference) or compile at a lower phase while data is still being collected.
 
 ## Development Workflow
 
-Recommended workflow for working with the compiler:
-
 ```bash
 # 1. Create/modify entities
-vim docs/en/examples/my-project/spaces/bedroom-01.md
+vim project/spaces/bedroom-01.md
 
-# 2. Validate changes
+# 2. Compile and check quality
 node scripts/compiler/index.mjs compile \
-  --input docs/en/examples/my-project \
-  --country PL \
-  --validate-only
+  --input project/ --output build/ \
+  --country PL --verbose
 
-# 3. If valid, generate full outputs
+# 3. Review quality report
+node -e "const q = require('./build/quality_report.json'); \
+  console.log(q.phaseReadiness.summary); \
+  q.recommendations.forEach(r => console.log(r.priority, '-', r.message))"
+
+# 4. Fix issues flagged by quality report
+
+# 5. Advance phase when ready
 node scripts/compiler/index.mjs compile \
-  --input docs/en/examples/my-project \
-  --output build/my-project \
-  --country PL \
-  --verbose
-
-# 4. Review outputs
-cat build/my-project/compliance_report.json | jq '.summary'
+  --input project/ --output build/ \
+  --phase 5 --country PL
 ```
 
-## Getting Help
+## Next Steps
 
-- **Documentation:** [Compiler Overview](/en/documentation/compiler/)
-- **Examples:** See `docs/en/examples/green-terrace/`
-- **Issues:** Report bugs at GitHub Issues
-- **Community:** Join discussions on GitHub Discussions
+1. **[Understand the Pipeline](/en/documentation/compiler/pipeline)** - Learn how each stage works
+2. **[Data Provenance Guide](/en/guides/data-provenance)** - How to track data sources with `_meta`
+3. **[Create Your Own Entities](/en/documentation/authoring/)** - Start authoring semantic entities
+4. **[Entity Types](/en/documentation/entities/)** - All 11 entity types and 4 type templates

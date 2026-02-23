@@ -64,6 +64,7 @@ async function parseFile(filePath, inputDir) {
   const validTypes = [
     'space', 'zone', 'system', 'asset_instance', 'requirement',
     'building', 'level',
+    'space_type', 'zone_type', 'system_type', 'asset_type',
     'element_specification', 'project_specification'
   ];
 

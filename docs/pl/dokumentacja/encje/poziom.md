@@ -626,8 +626,38 @@ LVL-ROOF:
   description: "Mechanical penthouse and rooftop access"
 ```
 
+## Proweniencja dziedziczenia (v0.2.0)
+
+**NOWOŚĆ w v0.2.0:** Gdy kompilator rozwiązuje odziedziczone wartości z poziomu do przestrzeni, adnotuje skompilowane dane wyjściowe ze śledzeniem proweniencji.
+
+### Jak działa proweniencja dziedziczenia
+
+```yaml
+# Skompilowane dane wyjściowe dla Przestrzeni 3.25
+designHeight: 3.00
+designHeight_meta:
+  confidence: specified
+  resolution: inherited
+  inheritedFrom: "LVL-KPCPULM-D-PIETRO-02"
+  inheritedField: "typicalCeilingHeight"
+  source: "PULM-PW-04.05.11"
+  sourceRef: "sekcja 4.1.2.4"
+```
+
+Pole `resolution` informuje, jak wartość została uzyskana:
+
+| Rozwiązanie | Znaczenie |
+|------------|-----------|
+| `explicit` | Wartość ustawiona bezpośrednio na przestrzeni |
+| `inherited` | Wartość z pól `typical*` tego poziomu |
+| `type_default` | Wartość z szablonu Typu Przestrzeni |
+| `merged` | Wymagania scalone z wielu źródeł |
+
+Pełny przewodnik: [Proweniencja danych](/pl/przewodniki/proweniencja-danych)
+
 ## Zobacz Także
 
 - **[Karta Budynek](/pl/dokumentacja/encje/budynek)** - Kondygnacje należą do budynk&oacute;w
 - **[Karta Przestrzeń](/pl/dokumentacja/encje/przestrzen)** - Przestrzenie należą do kondygnacji
+- **[Proweniencja danych](/pl/przewodniki/proweniencja-danych)** - Pełny przewodnik śledzenia źródeł danych
 - **Mapowanie BIM** - Mapowanie Poziom-IFC

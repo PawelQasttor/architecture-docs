@@ -649,8 +649,81 @@ LVL-ROOF:
   description: "Mechanical penthouse and rooftop access"
 ```
 
+## Inheritance Provenance (v0.2.0)
+
+**NEW in v0.2.0:** When the compiler resolves inherited values from level to space, it annotates the compiled output with provenance tracking.
+
+### How Inheritance Provenance Works
+
+When a space inherits `typicalCeilingHeight` from its level, the compiled output records exactly where the value came from:
+
+```yaml
+# Compiled output for Space 3.25 (patient room)
+designHeight: 3.00
+designHeight_meta:
+  confidence: specified
+  resolution: inherited
+  inheritedFrom: "LVL-KPCPULM-D-PIETRO-02"
+  inheritedField: "typicalCeilingHeight"
+  source: "PULM-PW-04.05.11"
+  sourceRef: "sekcja 4.1.2.4"
+```
+
+The `resolution` field tells you how the value was obtained:
+
+| Resolution | Meaning |
+|-----------|---------|
+| `explicit` | Value set directly on the space |
+| `inherited` | Value came from this level's `typical*` fields |
+| `type_default` | Value came from the space's Space Type template |
+| `merged` | Requirements merged from multiple sources |
+
+### Level-Level Provenance
+
+Level properties themselves should carry `_meta` annotations:
+
+```yaml
+typicalCeilingHeight: 3.00
+typicalCeilingHeight_meta:
+  confidence: specified
+  source: "PULM-PW-04.05.11"
+  sourceRef: "sekcja 4.1.2.4 -- II piętro, sale chorych"
+```
+
+When a space inherits this value, the source reference chains through: you can trace `Space.designHeight` -> `Level.typicalCeilingHeight` -> source document section.
+
+### Duplication Detection
+
+The compiler detects when a space explicitly sets a value that matches what it would inherit:
+
+```
+WARNING: designHeight on SPC-xxx (3.00m) matches inherited value from LVL-xxx.
+Consider removing to use inheritance and reduce duplication.
+```
+
+### Requirement Merge Provenance
+
+When requirements are merged from level + space type + space, the compiled output tracks all sources:
+
+```yaml
+requirements: ["REQ-HEIGHT-MIN", "REQ-FIRE-RATING", "REQ-DAYLIGHT"]
+requirements_meta:
+  confidence: specified
+  resolution: merged
+  mergedFrom:
+    - entityId: "LVL-02"
+      field: "levelRequirements"
+    - entityId: "ST-BEDROOM-STANDARD"
+      field: "requirements"
+    - entityId: "SP-BLD-01-L02-001"
+      field: "requirements"
+```
+
+For the full provenance guide, see [Data Provenance Guide](/en/guides/data-provenance).
+
 ## See Also
 
 - **[Building](/en/documentation/entities/building)** - Levels belong to buildings
 - **[Space](/en/documentation/entities/space)** - Spaces belong to levels
+- **[Data Provenance Guide](/en/guides/data-provenance)** - Full guide to tracking data sources
 - **[Compiler Guide](/en/documentation/compiler/)** - Level-to-IFC mapping

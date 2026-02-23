@@ -984,9 +984,100 @@ lifecycleState: "design"
 
 This enables filtering spaces by phase - useful for phased construction projects and portfolio management.
 
+## Data Provenance (v0.2.0)
+
+**NEW in v0.2.0:** Every field on a space can have a companion `_meta` annotation tracking where the data came from.
+
+### Why This Matters
+
+In a real Polish hospital project, a CT room's radiation shielding was documented as 2.0 mm Pb when the source document specified 0.3 mm Pb -- a 7x error that is safety-critical. Without provenance, there was no way to tell which values came from the source document and which were guessed.
+
+### Field-Level Annotations
+
+For any field `X`, add `X_meta` with confidence and source:
+
+```yaml
+designArea: 30.45
+designArea_meta:
+  confidence: specified
+  source: "PULM-PW-04.05.11"
+  sourceRef: "sekcja 4.1.2.2, tabela pomieszczeń parter"
+```
+
+### Confidence Levels
+
+| Level | Label | When to use |
+|-------|-------|------------|
+| 1 | `measured` | As-built survey verified |
+| 2 | `calculated` | Derived from measured data |
+| 3 | `specified` | From authoritative document |
+| 4 | `estimated` | Professional judgment |
+| 5 | `assumed` | Placeholder, no source |
+| 6 | `unknown` | Value not available (use with `null`) |
+
+### Explicitly Unknown Values
+
+When a value is not available in any source, use `null` with `confidence: unknown`:
+
+```yaml
+designHeight: null
+designHeight_meta:
+  confidence: unknown
+  note: "Not specified per-room. Level typical: 3.30m available via inheritance."
+```
+
+This is better than guessing. The compiler tracks unknown fields in the quality summary and can inherit from the level if applicable.
+
+### Entity Sources
+
+Declare the documents your space data came from:
+
+```yaml
+sources:
+  - id: "PULM-PW-04.05.11"
+    title: "Opis techniczny do projektu wykonawczego"
+    type: architectural_description
+    date: "2011-05-04"
+```
+
+### Compiler Quality Summary
+
+The compiler generates a `_quality` block on each compiled space:
+
+```json
+{
+  "_quality": {
+    "totalFields": 14,
+    "fieldsByConfidence": {
+      "specified": 8,
+      "estimated": 2,
+      "assumed": 3,
+      "unknown": 1
+    },
+    "completeness": 0.93,
+    "lowestConfidence": "assumed",
+    "warnings": [
+      "3 fields have 'assumed' confidence -- require verification before phase 5"
+    ]
+  }
+}
+```
+
+### Phase Gate Rules
+
+| Phase | Rule |
+|-------|------|
+| 1-3 | All confidence levels accepted |
+| 4 | Warning for `assumed` fields |
+| 5+ | Error for `assumed` on required fields |
+| 7+ | Error for `estimated` on safety-critical fields |
+
+For the full provenance guide with examples and migration instructions, see [Data Provenance Guide](/en/guides/data-provenance).
+
 ## See Also
 
 - **[Space Type](/en/documentation/entities/space-type)** - Create reusable space templates
 - **[Zone](/en/documentation/entities/zone)** - Group spaces into functional zones
 - **[Requirement](/en/documentation/entities/requirement)** - Define space requirements
+- **[Data Provenance Guide](/en/guides/data-provenance)** - Full guide to tracking data sources
 - **[Authoring Template](/en/documentation/authoring/)** - Space Markdown template

@@ -286,17 +286,26 @@ Boiler HP-01 (Vaillant ecoTEC plus 306)
 
 ## Current Version
 
-**SBM v0.1.3** (2026-02-22)
+**SBM v0.2.0** (2026-02-23)
 
-Recent additions:
-- Environmental conditions (temperature, humidity, air quality)
-- Electrical safety groups (IEC 60364-7-710)
-- Regulatory reference tracking
-- Building lifecycle states
-- Room numbers, accessibility levels, parent/child spaces
-- Template system (Space Types, Zone Types, System Types, Asset Types)
+**New in v0.2.0 -- Data Provenance:**
+- **Field-level `_meta` annotations** -- track confidence, source, and who extracted each data point
+- **6-level confidence scale** -- measured, calculated, specified, estimated, assumed, unknown
+- **Inheritance provenance** -- compiler tracks whether a value was explicit, inherited from level, or from space type
+- **Entity quality summaries** -- compiler generates completeness and confidence statistics per entity
+- **Phase gate enforcement** -- assumed data blocked after Construction Docs phase; estimated data blocked for safety-critical fields after As-Built phase
 
-**What changed:** More fields to track real-world project data. If you're just starting, ignore these advanced features until you need them.
+**Why:** A real hospital project showed that without provenance, fabricated data (radiation shielding documented as 2.0 mm Pb when the source says 0.3 mm Pb) is indistinguishable from verified data. The provenance model makes every data point traceable.
+
+**Learn more:** [Data Provenance Guide](/en/guides/data-provenance)
+
+Previous versions:
+- v0.1.4 (2026-02-23): Property inheritance (Level -> Space)
+- v0.1.3 (2026-02-22): Environmental conditions, electrical safety groups, regulatory references, lifecycle states
+- v0.1.2 (2026-02-22): Room numbers, accessibility levels, parent/child spaces, departments
+- v0.1.1 (2026-02-22): Type/instance pattern (Space Types, Zone Types, System Types, Asset Types)
+
+**What changed:** If you're just starting, ignore provenance until you have data from real sources. Start with rooms, zones, and requirements.
 
 ::: tip Start Simple
 You don't need to use every field. Start with:

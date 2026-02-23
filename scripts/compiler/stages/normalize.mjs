@@ -4,6 +4,8 @@
  * - Normalize units to canonical form (mm, m2, m3, °C)
  * - Auto-generate missing IDs (deterministic)
  * - Compute derived relationships
+ * - Resolve type→instance inheritance (Space Type → Space, etc.)
+ * - Resolve level→space property inheritance
  * - Inject jurisdiction pack (Poland requirements if country=PL)
  */
 
@@ -43,6 +45,10 @@ function groupEntitiesByType(entities) {
     systems: [],
     asset_instances: [],
     requirements: [],
+    space_types: [],
+    zone_types: [],
+    system_types: [],
+    asset_types: [],
     other: [] // For legacy document types
   };
 
@@ -63,6 +69,14 @@ function groupEntitiesByType(entities) {
       grouped.asset_instances.push(normalizeEntity(entity));
     } else if (type === 'requirement') {
       grouped.requirements.push(normalizeEntity(entity));
+    } else if (type === 'space_type') {
+      grouped.space_types.push(normalizeEntity(entity));
+    } else if (type === 'zone_type') {
+      grouped.zone_types.push(normalizeEntity(entity));
+    } else if (type === 'system_type') {
+      grouped.system_types.push(normalizeEntity(entity));
+    } else if (type === 'asset_type') {
+      grouped.asset_types.push(normalizeEntity(entity));
     } else {
       // Legacy types (element_specification, project_specification)
       grouped.other.push(normalizeEntity(entity));
@@ -118,6 +132,282 @@ function computeRelationships(grouped) {
 }
 
 /**
+ * Set a field on an entity via inheritance, adding _meta provenance.
+ * Only sets the field if the entity doesn't already have an explicit value.
+ *
+ * @param {object} entity - Target entity
+ * @param {string} field - Field name to set
+ * @param {*} value - Value to inherit
+ * @param {string} resolution - 'type_default' or 'inherited'
+ * @param {string} fromId - Source entity ID
+ * @param {string} fromField - Source field name (may differ from target field)
+ * @returns {boolean} Whether the field was inherited
+ */
+function inheritField(entity, field, value, resolution, fromId, fromField) {
+  // Skip if entity already has an explicit value
+  if (entity[field] !== undefined && entity[field] !== null) {
+    return false;
+  }
+
+  // Skip if inherited value is undefined or null
+  if (value === undefined || value === null) {
+    return false;
+  }
+
+  entity[field] = value;
+  entity[`${field}_meta`] = {
+    confidence: 'specified',
+    resolution,
+    inheritedFrom: fromId,
+    inheritedField: fromField || field
+  };
+
+  return true;
+}
+
+/**
+ * Resolve type→instance inheritance
+ *
+ * For each instance with a typeId, copy type template fields
+ * to the instance if not explicitly set.
+ */
+function resolveTypeInheritance(grouped, logger) {
+  let inherited = 0;
+
+  // Space Type → Space
+  if (grouped.spaces.length > 0 && grouped.space_types.length > 0) {
+    const typeMap = new Map(grouped.space_types.map(t => [t.id, t]));
+
+    for (const space of grouped.spaces) {
+      const typeId = space.spaceTypeId;
+      if (!typeId) continue;
+
+      const spaceType = typeMap.get(typeId);
+      if (!spaceType) {
+        logger.warn(`Space ${space.id} references unknown space type: ${typeId}`);
+        continue;
+      }
+
+      // Inheritable fields from Space Type
+      const typeFields = [
+        'designArea', 'designHeight', 'spaceType',
+        'electricalSafetyGroup', 'accessibilityLevel'
+      ];
+
+      for (const field of typeFields) {
+        if (inheritField(space, field, spaceType[field], 'type_default', typeId, field)) {
+          inherited++;
+        }
+      }
+
+      // Inherit nested objects (finishes, environmentalConditions, occupancy)
+      for (const objField of ['finishes', 'environmentalConditions', 'occupancy']) {
+        if (spaceType[objField] && !space[objField]) {
+          space[objField] = { ...spaceType[objField] };
+          space[`${objField}_meta`] = {
+            confidence: 'specified',
+            resolution: 'type_default',
+            inheritedFrom: typeId,
+            inheritedField: objField
+          };
+          inherited++;
+        }
+      }
+
+      // Merge requirements (type requirements added, not replaced)
+      if (spaceType.requirements && Array.isArray(spaceType.requirements)) {
+        if (!space.requirements) space.requirements = [];
+        const existing = new Set(space.requirements);
+        const added = [];
+        for (const reqId of spaceType.requirements) {
+          if (!existing.has(reqId)) {
+            space.requirements.push(reqId);
+            added.push(reqId);
+          }
+        }
+        if (added.length > 0) {
+          space[`requirements_meta`] = {
+            confidence: 'specified',
+            resolution: 'merged',
+            mergedFrom: [
+              { source: space.id, type: 'explicit' },
+              { source: typeId, type: 'type_default', added }
+            ]
+          };
+          inherited++;
+        }
+      }
+    }
+  }
+
+  // Zone Type → Zone
+  if (grouped.zones.length > 0 && grouped.zone_types.length > 0) {
+    const typeMap = new Map(grouped.zone_types.map(t => [t.id, t]));
+
+    for (const zone of grouped.zones) {
+      const typeId = zone.zoneTypeId;
+      if (!typeId) continue;
+
+      const zoneType = typeMap.get(typeId);
+      if (!zoneType) {
+        logger.warn(`Zone ${zone.id} references unknown zone type: ${typeId}`);
+        continue;
+      }
+
+      for (const field of ['zoneCategory', 'regulatoryBasis']) {
+        if (inheritField(zone, field, zoneType[field], 'type_default', typeId, field)) {
+          inherited++;
+        }
+      }
+    }
+  }
+
+  // System Type → System
+  if (grouped.systems.length > 0 && grouped.system_types.length > 0) {
+    const typeMap = new Map(grouped.system_types.map(t => [t.id, t]));
+
+    for (const system of grouped.systems) {
+      const typeId = system.systemTypeId;
+      if (!typeId) continue;
+
+      const systemType = typeMap.get(typeId);
+      if (!systemType) {
+        logger.warn(`System ${system.id} references unknown system type: ${typeId}`);
+        continue;
+      }
+
+      for (const field of ['systemCategory', 'designLifeYears']) {
+        if (inheritField(system, field, systemType[field], 'type_default', typeId, field)) {
+          inherited++;
+        }
+      }
+    }
+  }
+
+  // Asset Type → Asset Instance
+  if (grouped.asset_instances.length > 0 && grouped.asset_types.length > 0) {
+    const typeMap = new Map(grouped.asset_types.map(t => [t.id, t]));
+
+    for (const asset of grouped.asset_instances) {
+      const typeId = asset.assetTypeId;
+      if (!typeId) continue;
+
+      const assetType = typeMap.get(typeId);
+      if (!assetType) {
+        logger.warn(`Asset ${asset.id} references unknown asset type: ${typeId}`);
+        continue;
+      }
+
+      for (const field of ['manufacturer', 'modelNumber', 'expectedLifeYears']) {
+        if (inheritField(asset, field, assetType[field], 'type_default', typeId, field)) {
+          inherited++;
+        }
+      }
+    }
+  }
+
+  if (inherited > 0) {
+    logger.debug(`Resolved ${inherited} type→instance inherited fields`);
+  }
+
+  return grouped;
+}
+
+/**
+ * Resolve level→space property inheritance
+ *
+ * Levels can define typical values that spaces inherit:
+ * - typicalCeilingHeight → designHeight
+ * - typicalFinishes → finishes
+ * - typicalEnvironmentalConditions → environmentalConditions
+ * - levelRequirements → requirements (merged)
+ */
+function resolveLevelInheritance(grouped, logger) {
+  if (grouped.spaces.length === 0 || grouped.levels.length === 0) {
+    return grouped;
+  }
+
+  let inherited = 0;
+  const levelMap = new Map(grouped.levels.map(l => [l.id, l]));
+
+  for (const space of grouped.spaces) {
+    const levelId = space.levelId;
+    if (!levelId) continue;
+
+    const level = levelMap.get(levelId);
+    if (!level) {
+      logger.warn(`Space ${space.id} references unknown level: ${levelId}`);
+      continue;
+    }
+
+    // typicalCeilingHeight → designHeight
+    if (inheritField(space, 'designHeight', level.typicalCeilingHeight, 'inherited', levelId, 'typicalCeilingHeight')) {
+      inherited++;
+    }
+
+    // typicalFinishes → finishes
+    if (level.typicalFinishes && !space.finishes) {
+      space.finishes = { ...level.typicalFinishes };
+      space.finishes_meta = {
+        confidence: 'specified',
+        resolution: 'inherited',
+        inheritedFrom: levelId,
+        inheritedField: 'typicalFinishes'
+      };
+      inherited++;
+    }
+
+    // typicalEnvironmentalConditions → environmentalConditions
+    if (level.typicalEnvironmentalConditions && !space.environmentalConditions) {
+      space.environmentalConditions = { ...level.typicalEnvironmentalConditions };
+      space.environmentalConditions_meta = {
+        confidence: 'specified',
+        resolution: 'inherited',
+        inheritedFrom: levelId,
+        inheritedField: 'typicalEnvironmentalConditions'
+      };
+      inherited++;
+    }
+
+    // levelRequirements → requirements (MERGED, not replaced)
+    if (level.levelRequirements && Array.isArray(level.levelRequirements)) {
+      if (!space.requirements) space.requirements = [];
+      const existing = new Set(space.requirements);
+      const added = [];
+      for (const reqId of level.levelRequirements) {
+        if (!existing.has(reqId)) {
+          space.requirements.push(reqId);
+          added.push(reqId);
+        }
+      }
+      if (added.length > 0) {
+        // Merge with existing _meta if type inheritance already set it
+        const existingMeta = space.requirements_meta;
+        const sources = existingMeta?.mergedFrom
+          ? [...existingMeta.mergedFrom, { source: levelId, type: 'inherited', added }]
+          : [
+            { source: space.id, type: 'explicit' },
+            { source: levelId, type: 'inherited', added }
+          ];
+
+        space.requirements_meta = {
+          confidence: 'specified',
+          resolution: 'merged',
+          mergedFrom: sources
+        };
+        inherited++;
+      }
+    }
+  }
+
+  if (inherited > 0) {
+    logger.debug(`Resolved ${inherited} level→space inherited fields`);
+  }
+
+  return grouped;
+}
+
+/**
  * Extract project metadata from entities
  */
 function extractProjectMetadata(entities, options) {
@@ -129,6 +419,7 @@ function extractProjectMetadata(entities, options) {
       id: projectSpec.id || 'PRJ-UNKNOWN',
       name: projectSpec.projectName || 'Unnamed Project',
       country: options.country || 'PL',
+      phase: options.phase || projectSpec.phase || 3,
       language: projectSpec.language || 'pl',
       location: projectSpec.location || {},
       units: {
@@ -145,6 +436,7 @@ function extractProjectMetadata(entities, options) {
     id: 'PRJ-UNKNOWN',
     name: 'Unnamed Project',
     country: options.country || 'PL',
+    phase: options.phase || 3,
     language: 'pl',
     units: {
       length: 'mm',
@@ -168,7 +460,13 @@ export async function normalize(rawEntities, options, logger) {
 
   // Group entities by type
   let grouped = groupEntitiesByType(rawEntities);
-  logger.debug(`Grouped: ${grouped.spaces.length} spaces, ${grouped.zones.length} zones, ${grouped.requirements.length} requirements`);
+  logger.debug(`Grouped: ${grouped.spaces.length} spaces, ${grouped.zones.length} zones, ${grouped.requirements.length} requirements, ${grouped.space_types.length} space types`);
+
+  // Resolve type→instance inheritance (before relationships, so inherited fields participate)
+  grouped = resolveTypeInheritance(grouped, logger);
+
+  // Resolve level→space inheritance (after type, so type values take priority over level)
+  grouped = resolveLevelInheritance(grouped, logger);
 
   // Compute derived relationships
   grouped = computeRelationships(grouped);
@@ -176,7 +474,7 @@ export async function normalize(rawEntities, options, logger) {
 
   // Extract project metadata
   const project = extractProjectMetadata(rawEntities, options);
-  logger.debug(`Project: ${project.name} (${project.country})`);
+  logger.debug(`Project: ${project.name} (${project.country}, phase ${project.phase})`);
 
   // Load jurisdiction pack (global + country-specific requirements)
   const jurisdictionRequirements = await loadJurisdictionPack(options, logger);
@@ -205,7 +503,11 @@ export async function normalize(rawEntities, options, logger) {
       ...(grouped.spaces.length > 0 && { spaces: grouped.spaces }),
       ...(grouped.systems.length > 0 && { systems: grouped.systems }),
       ...(grouped.asset_instances.length > 0 && { asset_instances: grouped.asset_instances }),
-      ...(grouped.requirements.length > 0 && { requirements: grouped.requirements })
+      ...(grouped.requirements.length > 0 && { requirements: grouped.requirements }),
+      ...(grouped.space_types.length > 0 && { space_types: grouped.space_types }),
+      ...(grouped.zone_types.length > 0 && { zone_types: grouped.zone_types }),
+      ...(grouped.system_types.length > 0 && { system_types: grouped.system_types }),
+      ...(grouped.asset_types.length > 0 && { asset_types: grouped.asset_types })
     },
     metadata: {
       totalEntities: rawEntities.length,
@@ -216,7 +518,11 @@ export async function normalize(rawEntities, options, logger) {
         spaces: grouped.spaces.length,
         systems: grouped.systems.length,
         asset_instances: grouped.asset_instances.length,
-        requirements: grouped.requirements.length
+        requirements: grouped.requirements.length,
+        space_types: grouped.space_types.length,
+        zone_types: grouped.zone_types.length,
+        system_types: grouped.system_types.length,
+        asset_types: grouped.asset_types.length
       }
     }
   };

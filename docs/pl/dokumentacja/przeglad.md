@@ -288,17 +288,26 @@ Kocioł HP-01 (Vaillant ecoTEC plus 306)
 
 ## Aktualna Wersja
 
-**SBM v0.1.3** (2026-02-22)
+**SBM v0.2.0** (2026-02-23)
 
-Najnowsze dodatki:
-- Warunki środowiskowe (temperatura, wilgotność, jakość powietrza)
-- Grupy bezpieczeństwa elektrycznego (IEC 60364-7-710)
-- Śledzenie odniesień do przepisów
-- Stany cyklu życia budynku
-- Numery pomieszczeń, poziomy dostępności, przestrzenie nadrzędne/podrzędne
-- System szablonów (Typy Przestrzeni, Typy Stref, Typy Systemów, Typy Zasobów)
+**Nowość w v0.2.0 -- Proweniencja danych:**
+- **Adnotacje `_meta` na poziomie pól** -- śledzenie pewności, źródła i kto wyekstrahował każdy punkt danych
+- **6-poziomowa skala pewności** -- measured, calculated, specified, estimated, assumed, unknown
+- **Proweniencja dziedziczenia** -- kompilator śledzi, czy wartość była jawna, odziedziczona z poziomu czy z typu przestrzeni
+- **Podsumowania jakości encji** -- kompilator generuje statystyki kompletności i pewności per encja
+- **Bramki fazowe** -- dane `assumed` blokowane po fazie Projektu Wykonawczego; dane `estimated` blokowane dla pól krytycznych po fazie Powykonawczej
 
-**Co się zmieniło:** Więcej pól do śledzenia danych z rzeczywistych projektów. Jeśli dopiero zaczynasz, ignoruj te zaawansowane funkcje, dopóki ich nie potrzebujesz.
+**Dlaczego:** Rzeczywisty projekt szpitalny pokazał, że bez proweniencji sfabrykowane dane (osłona radiologiczna 2,0 mm Pb zamiast 0,3 mm Pb ze źródła) są nie do odróżnienia od zweryfikowanych danych.
+
+**Więcej informacji:** [Przewodnik po proweniencji danych](/pl/przewodniki/proweniencja-danych)
+
+Poprzednie wersje:
+- v0.1.4 (2026-02-23): Dziedziczenie właściwości (Kondygnacja -> Przestrzeń)
+- v0.1.3 (2026-02-22): Warunki środowiskowe, grupy bezpieczeństwa elektrycznego, referencje przepisów, stany cyklu życia
+- v0.1.2 (2026-02-22): Numery pomieszczeń, poziomy dostępności, przestrzenie nadrzędne/podrzędne, działy
+- v0.1.1 (2026-02-22): Wzorzec typ/instancja (Typy Przestrzeni, Typy Stref, Typy Systemów, Typy Zasobów)
+
+**Co się zmieniło:** Jeśli dopiero zaczynasz, ignoruj proweniencję, dopóki nie masz danych z rzeczywistych źródeł. Zacznij od pomieszczeń, stref i wymagań.
 
 ::: tip Zacznij Prosto
 Nie musisz używać każdego pola. Zacznij od:

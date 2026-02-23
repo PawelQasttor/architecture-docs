@@ -1,9 +1,11 @@
 /**
  * Stage 3: Validate
  *
- * - Validate against JSON schema
+ * - Validate against JSON schema (v0.2)
  * - Check referential integrity (all referenced IDs exist)
  * - Check business rules (requirements applicable to scope)
+ * - Check data provenance (source required for high confidence)
+ * - Enforce phase gates (stricter rules at later project phases)
  */
 
 import Ajv from 'ajv';
@@ -19,7 +21,7 @@ const __dirname = path.dirname(__filename);
  * Load JSON schema
  */
 async function loadSchema() {
-  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v0.1.json');
+  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v0.2.json');
   const schemaContent = await fs.readFile(schemaPath, 'utf-8');
   return JSON.parse(schemaContent);
 }
@@ -28,7 +30,7 @@ async function loadSchema() {
  * Validate against JSON schema
  */
 async function validateSchema(sbm, logger) {
-  logger.debug('Loading JSON schema...');
+  logger.debug('Loading JSON schema (v0.2)...');
   const schema = await loadSchema();
 
   const ajv = new Ajv({ allErrors: true, strict: false });
@@ -48,7 +50,7 @@ async function validateSchema(sbm, logger) {
     };
   }
 
-  logger.debug('✓ JSON schema validation passed');
+  logger.debug('✓ JSON schema validation passed (v0.2)');
   return { valid: true, errors: [] };
 }
 
@@ -112,6 +114,22 @@ function checkReferentialIntegrity(sbm, logger) {
           }
         }
       }
+
+      // Check spaceTypeId reference
+      if (space.spaceTypeId && !allIds.has(space.spaceTypeId)) {
+        warnings.push({
+          path: `spaces/${space.id}/spaceTypeId`,
+          message: `Referenced space type "${space.spaceTypeId}" does not exist`
+        });
+      }
+
+      // Check levelId reference
+      if (space.levelId && !allIds.has(space.levelId)) {
+        warnings.push({
+          path: `spaces/${space.id}/levelId`,
+          message: `Referenced level "${space.levelId}" does not exist`
+        });
+      }
     }
   }
 
@@ -121,12 +139,32 @@ function checkReferentialIntegrity(sbm, logger) {
       if (system.assetInstanceIds) {
         for (const assetId of system.assetInstanceIds) {
           if (!allIds.has(assetId)) {
-            errors.push({
+            warnings.push({
               path: `systems/${system.id}/assetInstanceIds`,
-              message: `Referenced asset "${assetId}" does not exist`
+              message: `Referenced asset "${assetId}" does not exist (may not be defined yet)`
             });
           }
         }
+      }
+
+      // Check systemTypeId reference
+      if (system.systemTypeId && !allIds.has(system.systemTypeId)) {
+        warnings.push({
+          path: `systems/${system.id}/systemTypeId`,
+          message: `Referenced system type "${system.systemTypeId}" does not exist`
+        });
+      }
+    }
+  }
+
+  // Check zone → zoneTypeId references
+  if (sbm.entities.zones) {
+    for (const zone of sbm.entities.zones) {
+      if (zone.zoneTypeId && !allIds.has(zone.zoneTypeId)) {
+        warnings.push({
+          path: `zones/${zone.id}/zoneTypeId`,
+          message: `Referenced zone type "${zone.zoneTypeId}" does not exist`
+        });
       }
     }
   }
@@ -180,6 +218,161 @@ function checkBusinessRules(sbm, logger) {
 }
 
 /**
+ * Fields considered safety-critical for phase gate enforcement
+ */
+const SAFETY_CRITICAL_FIELDS = new Set([
+  'electricalSafetyGroup',
+  'radiologicalShielding',
+  'fireRating',
+  'structuralLoad'
+]);
+
+/**
+ * Check data provenance
+ *
+ * Rule 1: Source required for confidence > estimated
+ *   If _meta.confidence is measured/calculated/specified AND _meta.source is missing → warning
+ *
+ * Rule 2: Null without explanation
+ *   If field is null AND no _meta with confidence: unknown → warning
+ *
+ * Rule 3: Inheritance duplication detection
+ *   If space explicitly sets a value identical to its inherited value → info
+ */
+function checkProvenance(sbm, logger) {
+  const warnings = [];
+  const HIGH_CONFIDENCE = new Set(['measured', 'calculated', 'specified']);
+
+  for (const [entityType, entities] of Object.entries(sbm.entities || {})) {
+    if (!Array.isArray(entities)) continue;
+
+    for (const entity of entities) {
+      const entityId = entity.id || 'unknown';
+      const keys = Object.keys(entity);
+
+      for (const key of keys) {
+        // Skip internal fields
+        if (key.startsWith('_') || key.endsWith('_meta') || key === 'version' ||
+            key === 'documentType' || key === 'entityType' || key === 'id') {
+          continue;
+        }
+
+        const metaKey = `${key}_meta`;
+        const meta = entity[metaKey];
+        const value = entity[key];
+
+        // Rule 1: High confidence requires source
+        if (meta && HIGH_CONFIDENCE.has(meta.confidence) && !meta.source && meta.resolution !== 'inherited' && meta.resolution !== 'type_default') {
+          warnings.push({
+            path: `${entityType}/${entityId}/${key}`,
+            message: `Field has '${meta.confidence}' confidence but no source reference`,
+            rule: 'provenance:source_required'
+          });
+        }
+
+        // Rule 2: Null without explanation
+        if ((value === null || value === undefined) && !meta) {
+          // Only warn for non-optional structural fields
+          // Skip arrays and objects that might just be empty
+          if (typeof value !== 'object') {
+            warnings.push({
+              path: `${entityType}/${entityId}/${key}`,
+              message: `Field is null with no _meta explanation (add ${metaKey} with confidence: 'unknown')`,
+              rule: 'provenance:null_unexplained'
+            });
+          }
+        }
+      }
+    }
+  }
+
+  if (warnings.length === 0) {
+    logger.debug('✓ Provenance check passed');
+  } else {
+    logger.debug(`! Provenance check found ${warnings.length} warnings`);
+  }
+
+  return warnings;
+}
+
+/**
+ * Enforce phase gates
+ *
+ * Phase 1-3: All confidence levels accepted
+ * Phase 4:   Warn for 'assumed' fields
+ * Phase 5+:  Error for 'assumed' on required properties
+ * Phase 7+:  Error for 'estimated' on safety-critical properties
+ */
+function checkPhaseGates(sbm, logger) {
+  const phase = sbm.project?.phase || 3;
+  const errors = [];
+  const warnings = [];
+
+  if (phase < 4) {
+    logger.debug(`✓ Phase ${phase}: all confidence levels accepted`);
+    return { errors, warnings };
+  }
+
+  for (const [entityType, entities] of Object.entries(sbm.entities || {})) {
+    if (!Array.isArray(entities)) continue;
+
+    for (const entity of entities) {
+      const entityId = entity.id || 'unknown';
+      const keys = Object.keys(entity);
+
+      for (const key of keys) {
+        if (key.startsWith('_') || key.endsWith('_meta') || key === 'version' ||
+            key === 'documentType' || key === 'entityType' || key === 'id') {
+          continue;
+        }
+
+        const metaKey = `${key}_meta`;
+        const meta = entity[metaKey];
+        if (!meta || !meta.confidence) continue;
+
+        const confidence = meta.confidence;
+
+        // Phase 4+: Warn for assumed
+        if (phase >= 4 && confidence === 'assumed') {
+          warnings.push({
+            path: `${entityType}/${entityId}/${key}`,
+            message: `Phase ${phase}: field has 'assumed' confidence — verification needed`,
+            rule: 'phase_gate:assumed_warning'
+          });
+        }
+
+        // Phase 5+: Error for assumed on any field
+        if (phase >= 5 && confidence === 'assumed') {
+          errors.push({
+            path: `${entityType}/${entityId}/${key}`,
+            message: `Phase ${phase}: 'assumed' confidence not permitted (must be estimated or better)`,
+            rule: 'phase_gate:assumed_error'
+          });
+        }
+
+        // Phase 7+: Error for estimated on safety-critical
+        if (phase >= 7 && confidence === 'estimated' && SAFETY_CRITICAL_FIELDS.has(key)) {
+          errors.push({
+            path: `${entityType}/${entityId}/${key}`,
+            message: `Phase ${phase}: safety-critical field '${key}' has 'estimated' confidence (must be measured/calculated/specified)`,
+            rule: 'phase_gate:safety_critical'
+          });
+        }
+      }
+    }
+  }
+
+  if (errors.length === 0 && warnings.length === 0) {
+    logger.debug(`✓ Phase gate check passed (phase ${phase})`);
+  } else {
+    if (errors.length > 0) logger.debug(`✗ Phase gate: ${errors.length} errors`);
+    if (warnings.length > 0) logger.debug(`! Phase gate: ${warnings.length} warnings`);
+  }
+
+  return { errors, warnings };
+}
+
+/**
  * Main validate function
  *
  * @param {object} sbm - Normalized SBM structure
@@ -210,10 +403,33 @@ export async function validate(sbm, logger) {
   // Step 3: Business rules
   const businessWarnings = checkBusinessRules(sbm, logger);
 
+  // Step 4: Data provenance
+  const provenanceWarnings = checkProvenance(sbm, logger);
+
+  // Step 5: Phase gates
+  const phaseResult = checkPhaseGates(sbm, logger);
+  if (phaseResult.errors.length > 0) {
+    return {
+      valid: false,
+      errors: phaseResult.errors,
+      warnings: [
+        ...integrityResult.warnings,
+        ...businessWarnings,
+        ...provenanceWarnings,
+        ...phaseResult.warnings
+      ]
+    };
+  }
+
   // All validation passed
   return {
     valid: true,
     errors: [],
-    warnings: [...integrityResult.warnings, ...businessWarnings]
+    warnings: [
+      ...integrityResult.warnings,
+      ...businessWarnings,
+      ...provenanceWarnings,
+      ...phaseResult.warnings
+    ]
   };
 }

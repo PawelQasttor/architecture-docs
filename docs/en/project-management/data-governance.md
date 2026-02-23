@@ -250,32 +250,72 @@ Assign a confidence level to data based on how it was obtained:
 | 3 | **Specified** | Stated in formal project documents (brief, specs) | Client brief: "bedroom min. 14 m2" |
 | 4 | **Estimated** | Professional judgement, not formally documented | Architect estimate: "approximately 15 m2" |
 | 5 | **Assumed** | Placeholder pending confirmation | Default: standard bedroom = 14 m2 |
+| 6 | **Unknown** | Value not available, explicitly marked | Height not specified in any document |
 
-**In YAML frontmatter:**
+::: tip Schema Integration (v0.2.0)
+Starting with SBM v0.2.0, confidence levels are enforced in the JSON schema via the `fieldMeta` definition. Instead of a single `dataConfidence` object, each field gets a companion `_meta` annotation:
 
 ```yaml
 designArea: 14.5
-dataConfidence:
-  designArea: "specified"    # From client brief
-  designHeight: "measured"   # From site survey
-  maxOccupants: "assumed"    # Pending fire engineer input
+designArea_meta:
+  confidence: specified
+  source: "PULM-PW-04.05.11"
+  sourceRef: "sekcja 4.1.2.2, tabela pomieszczeń"
+  extractedBy: "Jan Kowalski"
+  extractedDate: "2026-01-20"
 ```
 
+This replaces the older `dataConfidence` and `dataSource` patterns with a per-field approach. See the [Data Provenance Guide](/en/guides/data-provenance) for full details.
+:::
+
 ::: warning
-Data at confidence level 4 (estimated) or 5 (assumed) must be flagged for verification before the project passes the relevant phase gate. No assumed data should remain after the Construction Documents phase.
+Data at confidence level 4 (estimated) or 5 (assumed) must be flagged for verification before the project passes the relevant phase gate. No assumed data should remain after the Construction Documents phase. The compiler enforces this automatically when `_meta` annotations are present.
 :::
 
 ## Data Traceability
 
-Every SBM entity should be traceable to its source. The `dataSource` field in YAML frontmatter links the entity back to the raw data.
+Every SBM entity should be traceable to its source.
 
-**Example: Tracing a space area value**
+### Entity-Level Sources (v0.2.0)
+
+Declare the documents used for an entity in the `sources` array:
 
 ```yaml
 ---
 id: "SP-BLD-01-L01-001"
 spaceName: "Bedroom 01"
+sources:
+  - id: "CLIENT-BRIEF-2026-01"
+    title: "Client Functional Program v2"
+    type: room_schedule
+    date: "2026-01-15"
+    author: "Client"
+    file: "raw-data/client-briefs/2026-01-15_client_functional-program-v2.pdf"
+---
+```
+
+### Field-Level Traceability (v0.2.0)
+
+Each field references its source via the `_meta` companion:
+
+```yaml
 designArea: 14.5
+designArea_meta:
+  confidence: specified
+  source: "CLIENT-BRIEF-2026-01"
+  sourceRef: "strona 12, tabela pomieszczeń"
+  extractedBy: "Jan Kowalski"
+  extractedDate: "2026-01-20"
+```
+
+This is more granular than entity-level attribution -- different fields may come from different sources (area from room schedule, height from site survey, equipment from manufacturer spec).
+
+### Legacy Format
+
+The older `dataSource` and `dataConfidence` fields from v0.1.x still work but are deprecated:
+
+```yaml
+# v0.1.x format (deprecated but still accepted)
 dataSource:
   type: "document"
   file: "raw-data/client-briefs/2026-01-15_client_functional-program-v2.pdf"
@@ -284,7 +324,14 @@ dataSource:
   extractedDate: "2026-01-20"
 dataConfidence:
   designArea: "specified"
----
+
+# v0.2.0 format (recommended)
+designArea_meta:
+  confidence: specified
+  source: "CLIENT-BRIEF-2026-01"
+  sourceRef: "strona 12"
+  extractedBy: "Jan Kowalski"
+  extractedDate: "2026-01-20"
 ```
 
 **Audit trail:** When data is updated, the previous source should be recorded in the version history:
@@ -296,9 +343,10 @@ version_history:
     date: "2026-06-15"
     author: "Anna Nowak"
     note: "Updated designArea from 14.5 to 14.32 based on as-built survey"
-    dataSource:
-      type: "survey"
-      file: "raw-data/site-surveys/point-clouds/2026-06-10_BLD-01_L01.las"
+    designArea_meta:
+      confidence: measured
+      source: "SURVEY-2026-06-10"
+      sourceRef: "LiDAR scan, room SP-001"
   - version: "1.0"
     date: "2026-01-20"
     author: "Jan Kowalski"
@@ -363,6 +411,7 @@ Use this checklist at project start and verify at each phase gate:
 
 ## Related Pages
 
+- [Data Provenance Guide](/en/guides/data-provenance) -- Per-field provenance annotations, confidence levels, and compiler enforcement
 - [Document Control](./document-control) -- File naming, versioning, and approval gates
 - [Governance](./governance) -- RACI matrix defining who captures and reviews data
 - [Change Management](./change-management) -- How data changes trigger change requests

@@ -883,8 +883,49 @@ lifecycleState: "design"
 ---
 ```
 
+## Proweniencja danych (v0.2.0)
+
+**NOWOŚĆ w v0.2.0:** Każde pole przestrzeni może mieć towarzyszącą adnotację `_meta` śledzącą źródło danych.
+
+### Dlaczego to ważne
+
+W rzeczywistym polskim projekcie szpitalnym osłona radiologiczna pracowni CT była udokumentowana jako 2,0 mm Pb, gdy dokument źródłowy określał 0,3 mm Pb -- 7-krotny błąd krytyczny dla bezpieczeństwa. Bez proweniencji nie było sposobu, aby odróżnić wartości ze źródła od zgadniętych.
+
+### Adnotacje na poziomie pól
+
+```yaml
+designArea: 30.45
+designArea_meta:
+  confidence: specified
+  source: "PULM-PW-04.05.11"
+  sourceRef: "sekcja 4.1.2.2, tabela pomieszczeń parter"
+```
+
+### Poziomy pewności
+
+| Poziom | Etykieta | Kiedy używać |
+|--------|----------|-------------|
+| 1 | `measured` | Pomiar zweryfikowany w terenie |
+| 2 | `calculated` | Obliczone z danych pomiarowych |
+| 3 | `specified` | Z dokumentu autorytatywnego |
+| 4 | `estimated` | Osąd profesjonalny |
+| 5 | `assumed` | Placeholder, brak źródła |
+| 6 | `unknown` | Wartość niedostępna (używaj z `null`) |
+
+### Jawnie nieznane wartości
+
+```yaml
+designHeight: null
+designHeight_meta:
+  confidence: unknown
+  note: "Nie określono dla pomieszczenia. Typowa wysokość poziomu: 3,30 m."
+```
+
+Pełny przewodnik: [Proweniencja danych](/pl/przewodniki/proweniencja-danych)
+
 ## Zobacz Także
 
 - **[Karta Strefa](/pl/dokumentacja/encje/strefa)** - Grupowanie przestrzeni w strefy funkcjonalne
 - **[Karta Wymaganie](/pl/dokumentacja/encje/wymaganie)** - Definiowanie wymagań dla przestrzeni
+- **[Proweniencja danych](/pl/przewodniki/proweniencja-danych)** - Pełny przewodnik śledzenia źródeł danych
 - **[Szablon Tworzenia](/pl/dokumentacja/tworzenie/)** - Szablon Markdown dla Przestrzeni

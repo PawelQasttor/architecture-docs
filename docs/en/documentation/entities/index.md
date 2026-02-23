@@ -249,6 +249,35 @@ The system automatically computes **reverse relationships**:
 
 ---
 
+## Data Quality & Provenance (v0.2.0)
+
+**NEW in v0.2.0:** Every field in every entity can carry provenance metadata -- where the data came from, how confident you are, and who verified it.
+
+### Why This Matters
+
+Without provenance, a radiation shielding value of 0.3 mm Pb (from the architect's specification) looks identical to 2.0 mm Pb (guessed by someone who never read the source). The SBM model cannot tell the difference.
+
+### How It Works
+
+For any field `X`, add a companion `X_meta`:
+
+```yaml
+designArea: 30.45
+designArea_meta:
+  confidence: specified        # measured/calculated/specified/estimated/assumed/unknown
+  source: "PULM-PW-04.05.11"  # which document
+  sourceRef: "sekcja 4.1.2.2"  # where in the document
+```
+
+The compiler uses `_meta` to:
+- Generate a **quality summary** per entity (how many fields are verified vs. assumed)
+- Enforce **phase gates** (no assumed data after Construction Docs phase)
+- Track **inheritance provenance** (did this value come from the level, the space type, or was it set explicitly?)
+
+**Learn more:** [Data Provenance Guide](/en/guides/data-provenance)
+
+---
+
 ## Common Questions
 
 **"Do I need to create all 11 types?"**

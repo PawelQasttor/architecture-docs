@@ -248,4 +248,4 @@ Instancje dziedziczą te wartości i mogą je nadpisywać (np. izolatka z podci�
 - **[Typ Strefy](/pl/dokumentacja/encje/typ-strefy)** - Szablony stref
 - **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony systemów
 - **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** - Szablony produktów/urządzeń
-- **Schema:** `sbm-schema-v0.1.json` - Definicja Typu Przestrzeni (linie 118-168)
+- **Schema:** `sbm-schema-v0.2.json` - Definicja Typu Przestrzeni

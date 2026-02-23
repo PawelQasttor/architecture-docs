@@ -238,6 +238,7 @@ export default defineConfig({
               text: 'Guides',
               items: [
                 { text: 'Overview', link: '/en/guides/' },
+                { text: 'Data Provenance', link: '/en/guides/data-provenance' },
                 { text: 'PDF Export', link: '/en/guides/pdf-export' },
                 { text: 'Starting a New Project', link: '/en/guides/new-project' },
                 { text: 'Existing Buildings', link: '/en/guides/existing-buildings' }
@@ -519,6 +520,7 @@ export default defineConfig({
               text: 'Przewodniki',
               items: [
                 { text: 'Przegląd', link: '/pl/przewodniki/' },
+                { text: 'Proweniencja danych', link: '/pl/przewodniki/proweniencja-danych' },
                 { text: 'Eksport PDF', link: '/pl/przewodniki/eksport-pdf' },
                 { text: 'Nowy projekt', link: '/pl/przewodniki/nowy-projekt' },
                 { text: 'Istniejące budynki', link: '/pl/przewodniki/istniejace-budynki' }
