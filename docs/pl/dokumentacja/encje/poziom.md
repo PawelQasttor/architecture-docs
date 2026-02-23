@@ -31,14 +31,39 @@ Poziomy definiują:
 | `levelNumber` | number | Numeryczny indeks poziomu (0 = parter, ujemne = podziemie) |
 | `levelHeight` | number | Wysokość kondygnacji (strop-strop) |
 | `levelHeightUnit` | string | Jednostka wysokości |
+| `typicalCeilingHeight` | number | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślna wysokość w świetle dla przestrzeni na tym poziomie |
+| `typicalFinishes` | object | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślne wykończenia (podłoga, ściany, sufit, listwy) |
+| `typicalEnvironmentalConditions` | object | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślne ustawienia HVAC (temperatura, wilgotność, wentylacja) |
+| `levelRequirements` | array | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Wymagania dotyczące wszystkich przestrzeni na tym poziomie |
 | `grossFloorArea` | number | Całkowita PUM dla tego poziomu |
 | `areaUnit` | string | Jednostka powierzchni |
 | `levelType` | string | Typ poziomu (patrz wyliczenie poniżej) |
-| `description` | string | Szczeg&oacute;łowy opis |
+| `description` | string | Szczegółowy opis |
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
-## Typy Poziom&oacute;w (Wyliczenie)
+::: tip Dla Architektów: Które Pola Opcjonalne Są Najważniejsze?
+
+**⭐ NOWOŚĆ: Właściwości Dziedziczone (v0.1.4) — Zdefiniuj raz, dziedzicz wszędzie!**
+
+Te pola automatycznie kaskadują do wszystkich pomieszczeń na tej kondygnacji:
+- **typicalCeilingHeight** — Domyślna wysokość sufitu (np. 2,70m) → wszystkie sypialnie dziedziczą
+- **typicalFinishes** — Standardowe wykończenia (podłoga dębowa, ściany malowane) → wszystkie pomieszczenia używają, chyba że nadpisane
+- **typicalEnvironmentalConditions** — Ustawienia HVAC (20-26°C, 30-60% wilgotność) → wszystkie pomieszczenia dziedziczą
+- **levelRequirements** — Wymagania ogólnokondygnacyjne → łączone z wymaganiami specyficznymi dla pomieszczenia
+
+**Dlaczego to ważne:** Zamiast określać wysokość sufitu 50 razy dla 50 pokoi, określasz to RAZ tutaj. Pomieszczenia dziedziczą automatycznie, chyba że potrzebują czegoś innego (łazienka z obniżonym sufitem na 2,40m).
+
+**Dla pozwolenia/zestawień powierzchni:**
+- **grossFloorArea** — Całkowita powierzchnia kondygnacji w m²
+- **levelHeight** — Wysokość kondygnacji (strop-strop) (np. 3,20m, różna od wysokości sufitu!)
+- **levelNumber** — Indeks numeryczny (0 = parter, ujemne = podziemie)
+- **levelType** — Kategoria: `ground`, `basement`, `typical`, `roof`
+
+**Uwaga:** `spaceIds` jest **obliczane automatycznie**. Nie wypisujesz tu pomieszczeń — pomieszczenia wskazują poziom, a system śledzi relację odwrotną.
+:::
+
+## Typy Poziomów (Wyliczenie)
 
 ```typescript
 type LevelType =
@@ -50,7 +75,252 @@ type LevelType =
   | "parking";      // Kondygnacja parkingowa
 ```
 
-## Przykład: Źr&oacute;dło Markdown
+## Dziedziczenie Właściwości (Poziom → Przestrzeń)
+
+**NOWOŚĆ w v0.1.4:** Poziomy mogą definiować typowe właściwości, które automatycznie kaskadują do wszystkich przestrzeni na tej kondygnacji. Eliminuje to powtórzenia — zdefiniuj wysokość sufitu raz, nie 50 razy.
+
+### Kolejność Rozwiązywania Dziedziczenia
+
+Gdy kompilator rozwiązuje właściwość dla przestrzeni:
+
+1. **Wartość jawna w przestrzeni** (najwyższy priorytet) — zawsze wygrywa
+2. **Szablon typu przestrzeni** — jeśli przestrzeń odwołuje się do `spaceTypeId`
+3. **Dziedziczenie z poziomu** — z `level.typicalCeilingHeight`, `level.typicalFinishes` itp.
+4. **Brak domyślnej** — ostrzeżenie walidacji, jeśli brak wymaganego pola
+
+### Przykład: Dziedziczenie Wysokości Sufitu
+
+```yaml
+# Poziom definiuje typową wysokość sufitu
+LVL-02:
+  id: "LVL-02"
+  levelName: "Kondygnacja 02"
+  elevation: 3.20
+  levelHeight: 3.00                 # strop-strop
+  typicalCeilingHeight: 2.70        # ← DOMYŚLNA dla wszystkich pomieszczeń na tej kondygnacji
+
+# Większość pomieszczeń dziedziczy automatycznie
+sypialnia-01:
+  id: "SP-BLD-01-L02-001"
+  levelId: "LVL-02"
+  # designHeight: 2.70  ← DZIEDZICZONE z poziomu, nie trzeba określać!
+
+sypialnia-02:
+  id: "SP-BLD-01-L02-002"
+  levelId: "LVL-02"
+  # designHeight: 2.70  ← DZIEDZICZONE z poziomu
+
+salon:
+  id: "SP-BLD-01-L02-003"
+  levelId: "LVL-02"
+  # designHeight: 2.70  ← DZIEDZICZONE z poziomu
+
+# Pomieszczenia wyjątkowe nadpisują
+lazienka-01:
+  id: "SP-BLD-01-L02-004"
+  levelId: "LVL-02"
+  designHeight: 2.40  # ← NADPISANIE: obniżony sufit dla kanałów
+```
+
+**Rezultat:** 3 pomieszczenia dziedziczą 2,70m automatycznie, tylko 1 pomieszczenie wymaga jawnego nadpisania.
+
+### Przykład: Dziedziczenie Wykończeń
+
+```yaml
+# Poziom definiuje typowe wykończenia
+LVL-02:
+  id: "LVL-02"
+  typicalFinishes:
+    floor: "deska_inzynierska_dab_naturalny"
+    walls: "farba_biala_matowa"
+    ceiling: "farba_biala_matowa"
+    baseboard: "mdf_bialy_120mm"
+
+# Większość pomieszczeń dziedziczy wykończenia
+sypialnia-01:
+  levelId: "LVL-02"
+  # Wszystkie wykończenia dziedziczone z poziomu
+
+sypialnia-02:
+  levelId: "LVL-02"
+  # Wszystkie wykończenia dziedziczone z poziomu
+
+# Łazienka nadpisuje tylko to, co się różni
+lazienka-01:
+  levelId: "LVL-02"
+  finishOverrides:
+    floor: "plytki_ceramiczne_300x600_szare"     # nadpisz tylko podłogę
+    walls: "plytki_ceramiczne_300x600_szare"     # nadpisz tylko ściany
+    # sufit i listwy dziedziczone z poziomu
+```
+
+**Skompilowane wyjście dla lazienka-01:**
+```json
+{
+  "id": "SP-BLD-01-L02-004",
+  "finishes": {
+    "floor": "plytki_ceramiczne_300x600_szare",  // z nadpisania
+    "walls": "plytki_ceramiczne_300x600_szare",  // z nadpisania
+    "ceiling": "farba_biala_matowa",             // dziedziczone z poziomu
+    "baseboard": "mdf_bialy_120mm"               // dziedziczone z poziomu
+  }
+}
+```
+
+### Przykład: Dziedziczenie Warunków Środowiskowych
+
+```yaml
+# Poziom definiuje typowe ustawienia HVAC
+LVL-02:
+  typicalEnvironmentalConditions:
+    temperatureRange:
+      min: 20
+      max: 26
+      unit: "C"
+    humidityRange:
+      min: 30
+      max: 60
+    ventilationRate:
+      value: 30
+      unit: "m3/h/osoba"
+
+# Wszystkie pomieszczenia mieszkalne dziedziczą te ustawienia
+sypialnia-01:
+  levelId: "LVL-02"
+  # environmentalConditions dziedziczone z poziomu
+
+# Serwerownia nadpisuje
+serwerownia:
+  levelId: "LVL-02"
+  environmentalConditions:    # całkowite nadpisanie
+    temperatureRange:
+      min: 18
+      max: 22
+      unit: "C"
+    humidityRange:
+      min: 40
+      max: 50
+```
+
+### Przykład: Łączenie Wymagań
+
+```yaml
+# Wymagania ogólnokondygnacyjne (dotyczą WSZYSTKICH pomieszczeń)
+LVL-02:
+  levelRequirements:
+    - "REQ-PL-WT-ROOM-HEIGHT-001"      # min 2,50m sufit
+    - "REQ-FIRE-FLOOR-RATING-REI-60"   # REI 60 strop
+
+# Pomieszczenie dodaje specyficzne wymagania
+sypialnia-01:
+  levelId: "LVL-02"
+  requirements:
+    - "REQ-DAYLIGHT-SLEEPING-001"      # doświetlenie dla sypialni
+
+# Skompilowane: połączone wymagania
+# sypialnia-01 ma WSZYSTKIE TRZY wymagania:
+# 1. REQ-PL-WT-ROOM-HEIGHT-001 (z poziomu)
+# 2. REQ-FIRE-FLOOR-RATING-REI-60 (z poziomu)
+# 3. REQ-DAYLIGHT-SLEEPING-001 (z przestrzeni)
+```
+
+---
+
+## Przykład 1: Pierwszy Plik Poziomu (Minimalny)
+
+**Najprostszy plik poziomu — parter:**
+
+```markdown
+Plik: levels/level-01.md
+
+---
+id: "LVL-01"
+entityType: "level"
+documentType: "level"
+levelName: "Kondygnacja 01 (Parter)"
+buildingId: "BLD-01"
+elevation: 0.0
+elevationUnit: "m"
+version: "1.0.0"
+
+# Dla pozwolenia/zestawień
+levelNumber: 0
+levelHeight: 3.20
+grossFloorArea: 1250
+---
+
+# Kondygnacja 01: Parter
+
+Kondygnacja wejściowa główna z holem i lokalami mieszkalnymi.
+```
+
+**To wszystko.** Gdy pomieszczenia odwołują się do `LVL-01`, automatycznie pojawiają się na liście pomieszczeń tej kondygnacji.
+
+---
+
+## Przykład 2: Poziom z Właściwościami Dziedziczonymi (Zalecane)
+
+**Zdefiniuj typowe właściwości raz — wszystkie pomieszczenia dziedziczą:**
+
+```markdown
+Plik: levels/level-02.md
+
+---
+id: "LVL-02"
+entityType: "level"
+documentType: "level"
+levelName: "Kondygnacja 02"
+buildingId: "BLD-01"
+elevation: 3.20
+elevationUnit: "m"
+version: "1.0.0"
+
+levelNumber: 1
+levelHeight: 3.00
+grossFloorArea: 1200
+
+# ⭐ Właściwości dziedziczone (NOWOŚĆ v0.1.4)
+typicalCeilingHeight: 2.70    # Wszystkie pomieszczenia dziedziczą to jako designHeight
+typicalFinishes:
+  floor: "deska_inzynierska_dab_naturalny"
+  walls: "farba_biala_matowa"
+  ceiling: "farba_biala_matowa"
+  baseboard: "mdf_bialy_120mm"
+
+typicalEnvironmentalConditions:
+  temperatureRange:
+    min: 20
+    max: 26
+    unit: "C"
+  humidityRange:
+    min: 30
+    max: 60
+
+levelRequirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+  - "REQ-FIRE-FLOOR-RATING-REI-60"
+---
+
+# Kondygnacja 02: Typowa Kondygnacja Mieszkalna
+
+Standardowa kondygnacja mieszkalna z 8 lokalami.
+
+Wszystkie pomieszczenia na tej kondygnacji automatycznie otrzymują:
+- Wysokość sufitu 2,70m (chyba że nadpisane)
+- Podłoga dębowa i ściany malowane (chyba że nadpisane)
+- Zakres temperatury 20-26°C
+- Wymagania ogólnokondygnacyjne (odporność ogniowa, minimalna wysokość)
+
+Tylko pomieszczenia wymagające czegoś innego (jak łazienki z płytkami ceramicznymi) określają nadpisania.
+```
+
+**Korzyść:** Zamiast określać wysokość sufitu i wykończenia w 40 plikach pomieszczeń, określasz raz tutaj. Oszczędza 90% powtórzeń.
+
+---
+
+## Przykład 3: Pełny Poziom (Wszystkie Szczegóły)
+
+**Plik:** `docs/en/examples/green-terrace/levels/level-01.md`
 
 **Plik:** `docs/en/examples/green-terrace/levels/level-01.md`
 

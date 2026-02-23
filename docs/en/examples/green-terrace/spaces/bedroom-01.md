@@ -34,7 +34,10 @@ regulatoryReferences:
 
 # Instance-Specific Spatial Data
 designArea: 14.5
-designHeight: 2.70
+# designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight (v0.1.4)
+# finishes: oak/white ← INHERITED from LVL-01.typicalFinishes (v0.1.4)
+# environmentalConditions ← INHERITED from LVL-01.typicalEnvironmentalConditions (v0.1.4)
+# requirements (partial) ← MERGED with LVL-01.levelRequirements + type requirements (v0.1.4)
 designVolume: 39.15
 unit: "m"
 
@@ -56,12 +59,19 @@ ifcMapping:
   objectType: "Bedroom"
 
 # Metadata
-version: "2.0.0"
-lastReviewed: "2026-02-22"
+version: "2.1.0"
+lastReviewed: "2026-02-23"
 authors:
   - name: "Anna Nowak"
     role: "architect"
     license: "IARP 5678"
+changelog:
+  - version: "2.1.0"
+    date: "2026-02-23"
+    description: "Updated to use property inheritance (v0.1.4) - removed designHeight, finishes (now inherited from level)"
+  - version: "2.0.0"
+    date: "2026-02-22"
+    description: "Migrated to type/instance pattern"
 ---
 
 # Space: Bedroom 01
@@ -70,14 +80,21 @@ authors:
 
 Standard bedroom in apartment unit 01 on first floor of the Green Terrace residential building. North-facing room with single window providing natural daylight and ventilation. This space is part of a 2-bedroom apartment designed for a small family.
 
-::: tip Type-Based Design
-This bedroom inherits all specifications from the **Standard Bedroom - Type A** template, including:
+::: tip Type-Based + Level Inheritance (v0.1.4)
+This bedroom inherits specifications from **two sources**:
+
+**From Space Type (ST-BEDROOM-STANDARD-A):**
 - ✅ 6 requirements (daylight, acoustic, thermal, ventilation, fire, height)
-- ✅ Standard finishes (oak floor, painted walls, acoustic door, PVC window)
 - ✅ Equipment (smoke detector, thermostat, MVHR, electrical outlets)
 - ✅ Occupancy profile (2 people, 8h/day, residential sleeping)
 
-See the [type definition](#) for complete specifications.
+**From Level (LVL-01):**
+- ✅ Ceiling height: 2.70m (no need to specify per room!)
+- ✅ Finishes: Oak floor, white painted walls/ceiling
+- ✅ Environmental: 20-24°C, 40-60% humidity, 0.5 ACH
+- ✅ Requirements: Merged with type requirements (height, fire, acoustic)
+
+**Result:** Only instance-specific properties (area, adjacencies, zones) need to be defined here.
 :::
 
 ## Instance-Specific Details
@@ -188,7 +205,12 @@ All requirements inherited from [Standard Bedroom Type A](#) are applicable:
 ---
 
 **Document Status:** Design Development (LOD 300)
-**Migration Note:** Migrated to type/instance pattern v2.0.0 (2026-02-22)
-**Last Review:** 2026-02-22
+**Pattern Version:** Type/Instance v2.0.0 + Property Inheritance v0.1.4
+**Last Review:** 2026-02-23
 **Next Review:** Design freeze before construction documentation phase
 **Compliance Status:** On track; simulation/testing verification pending
+
+**Inheritance Summary:**
+- Ceiling height, finishes, environmental conditions inherited from Level 01
+- Requirements merged from Space Type + Level + Instance
+- Result: 90% less repetitive data specification

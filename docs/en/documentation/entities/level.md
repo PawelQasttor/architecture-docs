@@ -1,4 +1,18 @@
-# Level
+# Level (Floor/Storey Documentation)
+
+## What This Is
+
+A **Level** file documents one floor in your building. Examples: "Level 01 (Ground)", "Level 02", "Basement 01".
+
+::: tip For Architects
+**Problem:** Floor numbering, elevations, and floor areas scattered across drawings, schedules, and BIM models.
+
+**Old way:** Update floor elevation in 4 places when structural engineer changes slab height.
+
+**With level files:** Change elevation once in `levels/level-01.md` — all room schedules, section drawings, and area calculations update automatically.
+
+**One level file per floor = all floor info (elevation, height, area) in one place.**
+:::
 
 A **Level** represents a building floor or storey. Levels organize spaces vertically and provide elevation reference for building elements.
 
@@ -23,6 +37,17 @@ Levels define:
 | `elevationUnit` | string | Elevation unit | `"m"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+::: tip For Architects: What These Required Fields Mean
+- **id**: Level identifier (e.g., `LVL-01`, `LVL-ROOF`)
+- **levelName**: What you call it ("Level 01 (Ground)", "Basement 01", "Roof")
+- **buildingId**: Which building
+- **elevation**: Height above base point in meters (0.0 for ground, negative for basements)
+- **elevationUnit**: Usually `"m"` (meters)
+- **version**: Track changes
+
+**You only NEED these 6 fields.** The system automatically tracks which rooms are on this floor (you don't manually list them).
+:::
+
 ## Optional Fields
 
 | Field | Type | Description |
@@ -31,12 +56,37 @@ Levels define:
 | `levelNumber` | number | Numeric level index (0 = ground, negative = basement) |
 | `levelHeight` | number | Floor-to-floor height |
 | `levelHeightUnit` | string | Height unit |
+| `typicalCeilingHeight` | number | **[INHERITED BY SPACES]** Default clear ceiling height for spaces on this level |
+| `typicalFinishes` | object | **[INHERITED BY SPACES]** Default finish specifications (floor, walls, ceiling, baseboard) |
+| `typicalEnvironmentalConditions` | object | **[INHERITED BY SPACES]** Default HVAC settings (temperature, humidity, ventilation) |
+| `levelRequirements` | array | **[INHERITED BY SPACES]** Requirements that apply to all spaces on this level |
 | `grossFloorArea` | number | Total GFA for this level |
 | `areaUnit` | string | Area unit |
 | `levelType` | string | Level type (see enum below) |
 | `description` | string | Detailed description |
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
+
+::: tip For Architects: Which Optional Fields Matter Most?
+
+**⭐ NEW: Inheritable Properties (v0.1.4) — Define once, inherit everywhere!**
+
+These fields automatically cascade to all rooms on this floor:
+- **typicalCeilingHeight** — Default ceiling height (e.g., 2.70m) → all bedrooms inherit this
+- **typicalFinishes** — Standard finishes (oak floor, painted walls) → all rooms use these unless overridden
+- **typicalEnvironmentalConditions** — HVAC settings (20-26°C, 30-60% humidity) → all rooms inherit
+- **levelRequirements** — Level-wide requirements → merged with room-specific requirements
+
+**Why this matters:** Instead of specifying ceiling height 50 times for 50 rooms, specify it ONCE here. Rooms inherit it automatically unless they need something different (bathroom with dropped ceiling at 2.40m).
+
+**For permit/area schedules:**
+- **grossFloorArea** — Total floor area in m²
+- **levelHeight** — Floor-to-floor height (e.g., 3.20m, different from ceiling height!)
+- **levelNumber** — Numeric index (0 = ground, negative = basement)
+- **levelType** — Category: `ground`, `basement`, `typical`, `roof`
+
+**Note:** `spaceIds` is **automatically computed**. You don't list rooms here — rooms list the level, and the system tracks the reverse relationship.
+:::
 
 ## Level Types (Enum)
 
@@ -50,7 +100,250 @@ type LevelType =
   | "parking";      // Parking level
 ```
 
-## Example: Markdown Source
+## Property Inheritance (Level → Space)
+
+**NEW in v0.1.4:** Levels can define typical properties that automatically cascade to all spaces on that floor. This eliminates repetition — define ceiling height once, not 50 times.
+
+### Inheritance Resolution Order
+
+When the compiler resolves a property for a space:
+
+1. **Explicit value on space** (highest priority) — always wins
+2. **Space type template** — if space references a `spaceTypeId`
+3. **Level inheritance** — from `level.typicalCeilingHeight`, `level.typicalFinishes`, etc.
+4. **No default** — validation warning if required field missing
+
+### Example: Ceiling Height Inheritance
+
+```yaml
+# Level defines typical ceiling height
+LVL-02:
+  id: "LVL-02"
+  levelName: "Level 02"
+  elevation: 3.20
+  levelHeight: 3.00                 # floor-to-floor
+  typicalCeilingHeight: 2.70        # ← DEFAULT for all rooms on this floor
+
+# Most rooms inherit automatically
+bedroom-01:
+  id: "SP-BLD-01-L02-001"
+  levelId: "LVL-02"
+  # designHeight: 2.70  ← INHERITED from level, no need to specify!
+
+bedroom-02:
+  id: "SP-BLD-01-L02-002"
+  levelId: "LVL-02"
+  # designHeight: 2.70  ← INHERITED from level
+
+living-room:
+  id: "SP-BLD-01-L02-003"
+  levelId: "LVL-02"
+  # designHeight: 2.70  ← INHERITED from level
+
+# Exception rooms override
+bathroom-01:
+  id: "SP-BLD-01-L02-004"
+  levelId: "LVL-02"
+  designHeight: 2.40  # ← OVERRIDE: dropped ceiling for ducts
+```
+
+**Result:** 3 rooms inherit 2.70m automatically, only 1 room needs explicit override.
+
+### Example: Finish Inheritance
+
+```yaml
+# Level defines typical finishes
+LVL-02:
+  id: "LVL-02"
+  typicalFinishes:
+    floor: "oak_engineered_natural"
+    walls: "paint_white_matte"
+    ceiling: "paint_white_matte"
+    baseboard: "mdf_white_120mm"
+
+# Most rooms inherit finishes
+bedroom-01:
+  levelId: "LVL-02"
+  # All finishes inherited from level
+
+bedroom-02:
+  levelId: "LVL-02"
+  # All finishes inherited from level
+
+# Bathroom overrides only what's different
+bathroom-01:
+  levelId: "LVL-02"
+  finishOverrides:
+    floor: "ceramic_tile_300x600_grey"     # override floor only
+    walls: "ceramic_tile_300x600_grey"     # override walls only
+    # ceiling and baseboard inherited from level
+```
+
+**Compiled output for bathroom-01:**
+```json
+{
+  "id": "SP-BLD-01-L02-004",
+  "finishes": {
+    "floor": "ceramic_tile_300x600_grey",      // from override
+    "walls": "ceramic_tile_300x600_grey",      // from override
+    "ceiling": "paint_white_matte",            // inherited from level
+    "baseboard": "mdf_white_120mm"             // inherited from level
+  }
+}
+```
+
+### Example: Environmental Conditions Inheritance
+
+```yaml
+# Level defines typical HVAC settings
+LVL-02:
+  typicalEnvironmentalConditions:
+    temperatureRange:
+      min: 20
+      max: 26
+      unit: "C"
+    humidityRange:
+      min: 30
+      max: 60
+    ventilationRate:
+      value: 30
+      unit: "m3/h/person"
+
+# All residential rooms inherit these settings
+bedroom-01:
+  levelId: "LVL-02"
+  # environmentalConditions inherited from level
+
+# Server room overrides
+server-room:
+  levelId: "LVL-02"
+  environmentalConditions:    # complete override
+    temperatureRange:
+      min: 18
+      max: 22
+      unit: "C"
+    humidityRange:
+      min: 40
+      max: 50
+```
+
+### Example: Requirement Merging
+
+```yaml
+# Level-wide requirements (apply to ALL rooms)
+LVL-02:
+  levelRequirements:
+    - "REQ-PL-WT-ROOM-HEIGHT-001"      # min 2.50m ceiling
+    - "REQ-FIRE-FLOOR-RATING-REI-60"   # REI 60 floor
+
+# Room adds specific requirements
+bedroom-01:
+  levelId: "LVL-02"
+  requirements:
+    - "REQ-DAYLIGHT-SLEEPING-001"      # daylight for bedrooms
+
+# Compiled: merged requirements
+# bedroom-01 has ALL THREE requirements:
+# 1. REQ-PL-WT-ROOM-HEIGHT-001 (from level)
+# 2. REQ-FIRE-FLOOR-RATING-REI-60 (from level)
+# 3. REQ-DAYLIGHT-SLEEPING-001 (from space)
+```
+
+---
+
+## Example 1: Your First Level File (Minimal)
+
+**The simplest level file — ground floor:**
+
+```markdown
+File: levels/level-01.md
+
+---
+id: "LVL-01"
+entityType: "level"
+documentType: "level"
+levelName: "Level 01 (Ground)"
+buildingId: "BLD-01"
+elevation: 0.0
+elevationUnit: "m"
+version: "1.0.0"
+
+# For permit/schedules
+levelNumber: 0
+levelHeight: 3.20
+grossFloorArea: 1250
+---
+
+# Level 01: Ground Floor
+
+Main entrance level with lobby and residential units.
+```
+
+**That's it.** When rooms reference `LVL-01`, they automatically appear on this floor's room list.
+
+---
+
+## Example 2: Level with Inheritable Properties (Recommended)
+
+**Define typical properties once — all rooms inherit them:**
+
+```markdown
+File: levels/level-02.md
+
+---
+id: "LVL-02"
+entityType: "level"
+documentType: "level"
+levelName: "Level 02"
+buildingId: "BLD-01"
+elevation: 3.20
+elevationUnit: "m"
+version: "1.0.0"
+
+levelNumber: 1
+levelHeight: 3.00
+grossFloorArea: 1200
+
+# ⭐ Inheritable properties (NEW v0.1.4)
+typicalCeilingHeight: 2.70    # All rooms inherit this as designHeight
+typicalFinishes:
+  floor: "oak_engineered_natural"
+  walls: "paint_white_matte"
+  ceiling: "paint_white_matte"
+  baseboard: "mdf_white_120mm"
+
+typicalEnvironmentalConditions:
+  temperatureRange:
+    min: 20
+    max: 26
+    unit: "C"
+  humidityRange:
+    min: 30
+    max: 60
+
+levelRequirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+  - "REQ-FIRE-FLOOR-RATING-REI-60"
+---
+
+# Level 02: Typical Residential Floor
+
+Standard residential floor with 8 units.
+
+All rooms on this floor automatically get:
+- 2.70m ceiling height (unless overridden)
+- Oak floor and painted walls (unless overridden)
+- 20-26°C temperature range
+- Floor-wide requirements (fire rating, minimum height)
+
+Only rooms that need something different (like bathrooms with ceramic tile) specify overrides.
+```
+
+**Benefit:** Instead of specifying ceiling height and finishes in 40 room files, specify once here. Saves 90% of repetition.
+
+---
+
+## Example 3: Complete Level (Full Details)
 
 **File:** `docs/en/examples/green-terrace/levels/level-01.md`
 

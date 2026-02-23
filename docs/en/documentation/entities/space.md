@@ -1,4 +1,20 @@
-# Space
+# Space (Room Documentation)
+
+## What This Is
+
+A **Space** file documents one room or functional area in your building. Think of it as a digital room card that contains everything about that room: dimensions, fire zone assignment, compliance requirements, and equipment.
+
+::: tip For Architects
+Instead of maintaining room information across:
+- AutoCAD (geometry)
+- Excel (room schedule)
+- Word (specifications)
+- Email (coordination notes)
+
+...you create **one file per room**. That file is both a readable document and structured data.
+
+**Example:** `spaces/bedroom-01.md` contains everything about Bedroom 01 in one place.
+:::
 
 A **Space** represents a room or functional area within a building. Spaces are the primary spatial unit for design requirements, compliance checking, and operational monitoring.
 
@@ -33,6 +49,17 @@ Spaces define:
 | `levelId` | string | Parent level ID | `"LVL-01"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+::: tip For Architects: What These Required Fields Mean
+- **id**: Room identifier (like a drawing number, but for the room itself)
+- **spaceName**: What you call it ("Bedroom 01", "Kitchen", "Corridor A")
+- **spaceType**: Category from the list below (bedroom, office, corridor, etc.)
+- **buildingId**: Which building (important for multi-building projects)
+- **levelId**: Which floor (Ground floor = LVL-01, First floor = LVL-02, etc.)
+- **version**: Track changes (1.0.0 = first version, 1.1.0 = minor update)
+
+**You only NEED these 6 fields to create a valid space file.** Everything else is optional.
+:::
+
 ## Optional Fields
 
 | Field | Type | Description |
@@ -44,13 +71,15 @@ Spaces define:
 | `departmentId` | string | Functional department grouping (e.g., `"DEPT-SPA"`) |
 | `zoneIds` | array | Fire, HVAC, acoustic zone IDs |
 | `designArea` | number | Floor area (m²) |
-| `designHeight` | number | Clear height (m) |
+| `designHeight` | number | **[INHERITABLE v0.1.4]** Clear height (m) — inherits from `level.typicalCeilingHeight` if not specified |
 | `designVolume` | number | Volume (m³) |
 | `unit` | string | Measurement unit (`"m"`, `"mm"`) |
-| `requirements` | array | Requirement IDs (merged with type requirements) |
+| `finishes` | object | Floor, wall, ceiling finishes — inherits from `level.typicalFinishes` or space type |
+| `finishOverrides` | object | Override specific inherited finishes (only specify what's different) |
+| `requirements` | array | **[INHERITABLE v0.1.4]** Requirement IDs — merged with `level.levelRequirements` and type requirements |
 | `requirementOverrides` | array | Additional requirements beyond type |
 | `occupancy` | object | Occupancy data including `bedCount` (overrides type if present) |
-| `environmentalConditions` | object | Temperature, humidity, ventilation, pressurization |
+| `environmentalConditions` | object | **[INHERITABLE v0.1.4]** Temperature, humidity, ventilation — inherits from `level.typicalEnvironmentalConditions` if not specified |
 | `electricalSafetyGroup` | string | IEC 60364-7-710: `standard` / `group_0` / `group_1` / `group_2` |
 | `regulatoryReferences` | array | Building code references with compliance status |
 | `lifecycleState` | string | `planned` / `design` / `under_construction` / `operational` / `renovation` / `decommissioned` |
@@ -60,6 +89,38 @@ Spaces define:
 | `adjacentSpaces` | array | Adjacent space relationships |
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
+
+::: tip For Architects: Which Optional Fields Should You Use?
+
+**⭐ NEW: Property Inheritance (v0.1.4) — Don't repeat yourself!**
+
+These fields can be inherited from your Level (floor):
+- **designHeight** — If your level defines `typicalCeilingHeight: 2.70`, all rooms inherit 2.70m automatically
+- **finishes** — Standard floor/wall finishes defined once on level, inherited by all rooms
+- **environmentalConditions** — HVAC settings (temperature, humidity) from level
+- **requirements** — Level-wide requirements merged with room-specific ones
+
+**Only specify these fields when a room is DIFFERENT** (bathroom with 2.40m ceiling, server room with special temperature).
+
+**Start with these (most useful for permits and coordination):**
+- **designArea** — Room area in m² (required for room schedules)
+- **designHeight** — Ceiling height (or inherit from level!)
+- **zoneIds** — Which fire/acoustic/HVAC zones (required for permits)
+- **requirements** — Which regulations apply (or inherit from level!)
+
+**Add these when you have the information:**
+- **roomNumber** — Room number from your drawings (e.g., "1.01", "0.06")
+- **occupancy** — How many people, usage pattern (for MEP calculations)
+- **accessibilityLevel** — Accessibility requirements (standard, mobility, full)
+
+**Advanced fields (use when needed):**
+- **spaceTypeId** — Reference to template (if you have 20 identical bedrooms)
+- **parentSpaceId** — For nested spaces (bathroom inside bedroom)
+- **environmentalConditions** — Temperature, humidity requirements
+- **electricalSafetyGroup** — For healthcare/wet areas (IEC 60364-7-710)
+
+**You can add these fields gradually.** Start simple, add detail as your project progresses.
+:::
 
 ## Space Types (Enum)
 
@@ -90,7 +151,229 @@ type SpaceType =
   | "assembly";
 ```
 
-## Example: Markdown Source
+## Property Inheritance (Level → Space)
+
+**NEW in v0.1.4:** Spaces automatically inherit properties from their parent Level. This eliminates the need to specify the same ceiling height, finishes, and environmental conditions in every room file.
+
+### How Inheritance Works
+
+When you create a space, the compiler resolves properties in this order:
+
+1. **Explicit value in space file** (highest priority) — if you specify it here, this wins
+2. **Space Type template** — if space references `spaceTypeId`, inherits from type
+3. **Level inheritance** — from parent level's `typical*` properties
+4. **No default** — validation warning if required
+
+### Inheritable Properties
+
+| Space Property | Inherits From | When To Override |
+|----------------|---------------|------------------|
+| `designHeight` | `level.typicalCeilingHeight` | Dropped ceiling, double-height space |
+| `finishes` | `level.typicalFinishes` or space type | Bathroom (tile), server room (special flooring) |
+| `environmentalConditions` | `level.typicalEnvironmentalConditions` or space type | Server room (18-22°C), cold storage |
+| `requirements` | `level.levelRequirements` (merged) | Always merged, never overridden |
+
+### Example: Ceiling Height Inheritance
+
+Instead of this (BEFORE v0.1.4):
+```yaml
+# bedroom-01.md
+designHeight: 2.70
+
+# bedroom-02.md
+designHeight: 2.70
+
+# bedroom-03.md
+designHeight: 2.70
+
+# ... 47 more bedrooms with same 2.70m height
+```
+
+Do this (AFTER v0.1.4):
+```yaml
+# level-02.md (DEFINE ONCE)
+typicalCeilingHeight: 2.70
+
+# bedroom-01.md (INHERITS)
+levelId: "LVL-02"
+# designHeight inherited = 2.70m ✓
+
+# bedroom-02.md (INHERITS)
+levelId: "LVL-02"
+# designHeight inherited = 2.70m ✓
+
+# bathroom-01.md (OVERRIDE ONLY WHEN DIFFERENT)
+levelId: "LVL-02"
+designHeight: 2.40  # ← dropped ceiling, override inherited value
+```
+
+**Result:** 50 bedrooms inherit automatically, only 2 bathrooms need overrides. **96% reduction in repetition.**
+
+### Example: Finish Inheritance
+
+```yaml
+# level-02.md
+typicalFinishes:
+  floor: "oak_engineered_natural"
+  walls: "paint_white_matte"
+  ceiling: "paint_white_matte"
+
+# bedroom-01.md
+levelId: "LVL-02"
+# All finishes inherited from level ✓
+
+# bathroom-01.md (partial override)
+levelId: "LVL-02"
+finishOverrides:
+  floor: "ceramic_tile"  # ← only floor different
+  walls: "ceramic_tile"  # ← only walls different
+  # ceiling inherited from level ✓
+```
+
+**Compiled output for bathroom:**
+```json
+{
+  "finishes": {
+    "floor": "ceramic_tile",        // overridden
+    "walls": "ceramic_tile",        // overridden
+    "ceiling": "paint_white_matte"  // inherited from level
+  }
+}
+```
+
+### Example: Requirement Merging
+
+```yaml
+# level-02.md
+levelRequirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"    # min 2.50m
+  - "REQ-FIRE-FLOOR-RATING-REI-60" # REI 60 floor
+
+# bedroom-01.md
+levelId: "LVL-02"
+requirements:
+  - "REQ-DAYLIGHT-SLEEPING-001"    # daylight for bedrooms
+
+# Compiled: bedroom has ALL THREE requirements
+# 1. REQ-PL-WT-ROOM-HEIGHT-001 (from level)
+# 2. REQ-FIRE-FLOOR-RATING-REI-60 (from level)
+# 3. REQ-DAYLIGHT-SLEEPING-001 (from space)
+```
+
+### Combined Inheritance: Type + Level
+
+When a space uses BOTH `spaceTypeId` AND inherits from level:
+
+```yaml
+# Space Type (template for all bedrooms)
+ST-BEDROOM-STANDARD:
+  finishes:
+    floor: "carpet"
+    walls: "paint"
+  requirements:
+    - "REQ-BEDROOM-GENERAL"
+
+# Level (typical for floor)
+LVL-02:
+  typicalCeilingHeight: 2.70
+  levelRequirements:
+    - "REQ-LEVEL-FIRE-RATING"
+
+# Space (inherits from BOTH)
+bedroom-01:
+  levelId: "LVL-02"
+  spaceTypeId: "ST-BEDROOM-STANDARD"
+
+# Compiled result:
+{
+  "designHeight": 2.70,           // from level
+  "finishes": {
+    "floor": "carpet",            // from space type
+    "walls": "paint"              // from space type
+  },
+  "requirements": [
+    "REQ-BEDROOM-GENERAL",        // from space type
+    "REQ-LEVEL-FIRE-RATING"       // from level
+  ]
+}
+```
+
+**Resolution order when both type and level exist:**
+- **designHeight**: Space type first, then level, then explicit value
+- **finishes**: Space type first, then level, then finishOverrides
+- **requirements**: ALL MERGED (space type + level + explicit)
+
+---
+
+## Example 1: Your First Space File (Minimal)
+
+**The simplest possible space file** — just the 6 required fields:
+
+```markdown
+File: spaces/bedroom-01.md
+
+---
+id: "SP-BLD-01-L01-001"
+entityType: "space"
+documentType: "space"
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+version: "1.0.0"
+---
+
+# Bedroom 01
+
+Standard bedroom on ground floor.
+```
+
+**That's it.** This is a valid space file. You can add more details later.
+
+---
+
+## Example 2: Practical Space File (Permit-Ready)
+
+**Adding the fields you need for permit submission:**
+
+```markdown
+File: spaces/bedroom-01.md
+
+---
+id: "SP-BLD-01-L01-001"
+entityType: "space"
+documentType: "space"
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+version: "1.0.0"
+
+# Added for permit compliance
+designArea: 14.5
+designHeight: 2.70
+unit: "m"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"
+requirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+---
+
+# Bedroom 01
+
+Standard bedroom, ground floor, north-facing window.
+Floor area: 14.5 m², Clear height: 2.70 m.
+Fire zone ZL-IV. Meets WT 2021 minimum height (2.50 m).
+```
+
+**Use case:** This file now generates:
+- ✅ Room schedule entry (area, height)
+- ✅ Fire zone assignment (for permit drawings)
+- ✅ Compliance check (height vs. WT 2021 requirement)
+
+---
+
+## Example 3: Complete Space File (Full Details)
 
 **File:** `docs/en/examples/green-terrace/spaces/bedroom-01.md`
 
