@@ -125,6 +125,62 @@ function generateRevitSharedParameters(sbm) {
   };
   groups.push(metadataGroup);
 
+  // Group 5: SBM v0.3 Properties
+  const v03Group = {
+    name: "SBM_v03_Properties",
+    parameters: [
+      {
+        name: "SBM_RoomNumber",
+        guid: "e1f2a3b4-c5d6-4789-k0l1-m2n3o4p5q6r7",
+        dataType: "Text",
+        description: "Room number from architectural drawings",
+        visible: true,
+        userModifiable: true
+      },
+      {
+        name: "SBM_AccessibilityLevel",
+        guid: "f2a3b4c5-d6e7-4890-l1m2-n3o4p5q6r7s8",
+        dataType: "Text",
+        description: "Accessibility level",
+        visible: true,
+        userModifiable: true
+      },
+      {
+        name: "SBM_DepartmentId",
+        guid: "a3b4c5d6-e7f8-4901-m2n3-o4p5q6r7s8t9",
+        dataType: "Text",
+        description: "Functional department identifier",
+        visible: true,
+        userModifiable: true
+      },
+      {
+        name: "SBM_ElectricalSafetyGroup",
+        guid: "b4c5d6e7-f8a9-4012-n3o4-p5q6r7s8t9u0",
+        dataType: "Text",
+        description: "IEC 60364-7-710 electrical safety group",
+        visible: true,
+        userModifiable: true
+      },
+      {
+        name: "SBM_LifecycleState",
+        guid: "c5d6e7f8-a9b0-4123-o4p5-q6r7s8t9u0v1",
+        dataType: "Text",
+        description: "Lifecycle state",
+        visible: true,
+        userModifiable: false
+      },
+      {
+        name: "SBM_Pressurization",
+        guid: "d6e7f8a9-b0c1-4234-p5q6-r7s8t9u0v1w2",
+        dataType: "Text",
+        description: "Space pressurization type",
+        visible: true,
+        userModifiable: true
+      }
+    ]
+  };
+  groups.push(v03Group);
+
   return { groups };
 }
 
@@ -178,6 +234,42 @@ function generateIfcPropertySets(sbm) {
         name: "SBM_MaxOccupants",
         dataType: "IfcInteger",
         description: "Maximum occupancy count"
+      },
+      // v0.3 fields
+      {
+        name: "SBM_RoomNumber",
+        dataType: "IfcLabel",
+        description: "Room number from architectural drawings"
+      },
+      {
+        name: "SBM_AccessibilityLevel",
+        dataType: "IfcLabel",
+        description: "Accessibility level (standard/mobility/visual/hearing/full)"
+      },
+      {
+        name: "SBM_DepartmentId",
+        dataType: "IfcLabel",
+        description: "Functional department identifier"
+      },
+      {
+        name: "SBM_LifecycleState",
+        dataType: "IfcLabel",
+        description: "Lifecycle state (planned/design/under_construction/operational/renovation/decommissioned)"
+      },
+      {
+        name: "SBM_ElectricalSafetyGroup",
+        dataType: "IfcLabel",
+        description: "IEC 60364-7-710 electrical safety group (standard/group_0/group_1/group_2)"
+      },
+      {
+        name: "SBM_Pressurization",
+        dataType: "IfcLabel",
+        description: "Space pressurization type (positive/negative/neutral)"
+      },
+      {
+        name: "SBM_ShieldingRequired",
+        dataType: "IfcBoolean",
+        description: "Whether radiological or RF shielding is required"
       }
     ]
   };
@@ -357,6 +449,43 @@ function generateParameterMappings(sbm) {
           revitParameter: "Occupancy",
           ifcProperty: "Pset_SBM_Space.SBM_MaxOccupants",
           dataType: "integer"
+        },
+        // v0.3 mappings
+        {
+          sbmProperty: "roomNumber",
+          revitParameter: "Number",
+          ifcProperty: "Pset_SBM_Space.SBM_RoomNumber",
+          dataType: "string"
+        },
+        {
+          sbmProperty: "accessibilityLevel",
+          revitParameter: "SBM_AccessibilityLevel",
+          ifcProperty: "Pset_SBM_Space.SBM_AccessibilityLevel",
+          dataType: "string"
+        },
+        {
+          sbmProperty: "departmentId",
+          revitParameter: "SBM_DepartmentId",
+          ifcProperty: "Pset_SBM_Space.SBM_DepartmentId",
+          dataType: "string"
+        },
+        {
+          sbmProperty: "electricalSafetyGroup",
+          revitParameter: "SBM_ElectricalSafetyGroup",
+          ifcProperty: "Pset_SBM_Space.SBM_ElectricalSafetyGroup",
+          dataType: "string"
+        },
+        {
+          sbmProperty: "lifecycleState",
+          revitParameter: "SBM_LifecycleState",
+          ifcProperty: "Pset_SBM_Space.SBM_LifecycleState",
+          dataType: "string"
+        },
+        {
+          sbmProperty: "environmentalConditions.pressurization",
+          revitParameter: "SBM_Pressurization",
+          ifcProperty: "Pset_SBM_Space.SBM_Pressurization",
+          dataType: "string"
         }
       ]
     },
@@ -429,6 +558,33 @@ function generateParameterMappings(sbm) {
 }
 
 /**
+ * Detect which non-standard properties actually exist in project entities
+ */
+function detectDynamicProperties(sbm) {
+  const SKIP_FIELDS = new Set([
+    'id', 'documentType', 'entityType', 'version', '_quality', '_metadata'
+  ]);
+
+  const result = {};
+
+  for (const [entityType, entities] of Object.entries(sbm.entities || {})) {
+    if (!Array.isArray(entities) || entities.length === 0) continue;
+
+    const fieldSet = new Set();
+    for (const entity of entities) {
+      for (const key of Object.keys(entity)) {
+        if (!SKIP_FIELDS.has(key) && !key.endsWith('_meta') && !key.startsWith('_')) {
+          fieldSet.add(key);
+        }
+      }
+    }
+    result[entityType] = [...fieldSet].sort();
+  }
+
+  return result;
+}
+
+/**
  * Main BIM mapping generator
  *
  * @param {object} sbm - Semantic Building Model
@@ -447,8 +603,10 @@ export function generateBimMapping(sbm, logger) {
   const parameterMappings = generateParameterMappings(sbm);
   logger.debug(`Generated parameter mappings for ${Object.keys(parameterMappings.mappings).length} entity types`);
 
+  const dynamicProperties = detectDynamicProperties(sbm);
+
   const bimMapping = {
-    version: "0.1",
+    version: "0.2",
     generatedAt: new Date().toISOString(),
     targetPlatform: "revit_ifc",
     projectId: sbm.project.id,
@@ -465,6 +623,8 @@ export function generateBimMapping(sbm, logger) {
     },
 
     parameterMappings: parameterMappings.mappings,
+
+    dynamicProperties,
 
     instructions: {
       revit: [

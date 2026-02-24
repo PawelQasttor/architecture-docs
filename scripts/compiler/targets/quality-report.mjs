@@ -15,6 +15,17 @@
 const CONFIDENCE_ORDER = ['measured', 'calculated', 'specified', 'estimated', 'assumed', 'unknown'];
 
 /**
+ * Resolve a human-readable name for any entity type
+ */
+function resolveEntityName(entity) {
+  return entity.spaceName || entity.zoneName || entity.systemName
+    || entity.assetName || entity.levelName || entity.name
+    || entity.requirementName || entity.spaceTypeName
+    || entity.zoneTypeName || entity.systemTypeName || entity.assetTypeName
+    || entity.identifiers?.assetTag || entity.id;
+}
+
+/**
  * Generate per-entity quality cards
  */
 function generateEntityCards(sbm) {
@@ -30,7 +41,7 @@ function generateEntityCards(sbm) {
       cards.push({
         entityId: entity.id,
         entityType,
-        name: entity.spaceName || entity.zoneName || entity.systemName || entity.id,
+        name: resolveEntityName(entity),
         completeness: q.completeness,
         lowestConfidence: q.lowestConfidence,
         fieldsByConfidence: q.fieldsByConfidence,

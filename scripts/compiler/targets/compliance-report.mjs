@@ -5,7 +5,41 @@
  * - Poland: WT 2021 (Warunki Techniczne) compliance
  * - EU directives (if applicable)
  * - Global performance standards
+ * - Qualitative requirement checklists (v0.3)
  */
+
+/**
+ * Metric → space field resolver map
+ *
+ * Each entry maps a requirement metric to a function that extracts
+ * the comparable value from a space entity. Returns null if the
+ * value cannot be determined from design data (requires simulation/testing).
+ */
+const METRIC_TO_FIELD = {
+  'room_height_clear': (space) => space.designHeight,
+  'room_area_minimum': (space) => space.designArea,
+  'room_volume_minimum': (space) => space.designVolume,
+  'operative_temperature': (space) => {
+    const tr = space.environmentalConditions?.temperatureRange;
+    return tr ? tr.min : null;
+  },
+  'temperature': (space) => {
+    const tr = space.environmentalConditions?.temperatureRange;
+    return tr ? tr.min : null;
+  },
+  'relative_humidity': (space) => {
+    const hr = space.environmentalConditions?.humidityRange;
+    return hr ? hr.min : null;
+  },
+  'air_change_rate': (space) => space.environmentalConditions?.airChangesPerHour,
+  'fresh_air_rate_per_person': (space) => space.environmentalConditions?.freshAirPercentage,
+  'electrical_safety_group': (space) => space.electricalSafetyGroup,
+  'daylight_factor': () => null,
+  'airborne_sound_insulation': () => null,
+  'fire_resistance_rating': () => null,
+  'co2_level': () => null,
+  'illuminance': () => null
+};
 
 /**
  * Group requirements by regulation
@@ -20,7 +54,6 @@ function groupRequirementsByRegulation(requirements) {
 
   for (const req of requirements) {
     if (req.countryScope === 'poland_specific') {
-      // Check legal basis for specific regulations
       if (req.legalBasis) {
         const hasWT2021 = req.legalBasis.some(basis =>
           basis.regulation && basis.regulation.includes('WT_2021')
@@ -34,7 +67,7 @@ function groupRequirementsByRegulation(requirements) {
         } else if (hasPrawoBudowlane) {
           grouped.poland_prawo_budowlane.push(req);
         } else {
-          grouped.poland_wt_2021.push(req); // Default Poland-specific to WT 2021
+          grouped.poland_wt_2021.push(req);
         }
       } else {
         grouped.poland_wt_2021.push(req);
@@ -50,40 +83,9 @@ function groupRequirementsByRegulation(requirements) {
 }
 
 /**
- * Analyze requirement verification status
- */
-function analyzeVerificationStatus(requirements, entities) {
-  const summary = {
-    total: requirements.length,
-    verified: 0,
-    pendingVerification: 0,
-    notApplicable: 0
-  };
-
-  for (const req of requirements) {
-    // Check if requirement has been verified
-    // For Phase 3, we'll mark requirements that could be verified from design data
-    const canVerifyFromDesign = ['dimensional', 'performance'].includes(req.requirementType);
-    const requiresPhysicalTest = ['testing', 'measurement', 'certification'].includes(
-      req.verification?.method
-    );
-
-    if (canVerifyFromDesign && !requiresPhysicalTest) {
-      // Could potentially verify from current data
-      summary.verified++;
-    } else {
-      // Requires later-stage verification
-      summary.pendingVerification++;
-    }
-  }
-
-  return summary;
-}
-
-/**
  * Check space compliance with requirements
  */
-function checkSpaceCompliance(space, requirements, logger) {
+function checkSpaceCompliance(space, requirementMap, logger) {
   const results = [];
 
   if (!space.requirements || space.requirements.length === 0) {
@@ -91,10 +93,9 @@ function checkSpaceCompliance(space, requirements, logger) {
   }
 
   for (const reqId of space.requirements) {
-    const requirement = requirements.find(r => r.id === reqId);
+    const requirement = requirementMap.get(reqId);
 
     if (!requirement) {
-      // Requirement not found (may be in jurisdiction pack)
       results.push({
         requirementId: reqId,
         spaceId: space.id,
@@ -105,41 +106,107 @@ function checkSpaceCompliance(space, requirements, logger) {
       continue;
     }
 
-    // Check dimensional requirements
-    if (requirement.metric === 'room_height_clear' && space.designHeight) {
-      const compliant = checkOperator(
-        space.designHeight,
-        requirement.operator,
-        requirement.value
-      );
-
+    // Handle qualitative requirements (v0.3)
+    if (requirement.requirementType === 'qualitative' || requirement.acceptanceCriteria || requirement.evidenceRequired) {
       results.push({
         requirementId: reqId,
         requirementName: requirement.requirementName,
         spaceId: space.id,
         spaceName: space.spaceName,
-        metric: requirement.metric,
-        targetValue: requirement.value,
-        unit: requirement.unit,
-        measuredValue: space.designHeight,
-        operator: requirement.operator,
-        status: compliant ? 'compliant' : 'non-compliant',
-        margin: space.designHeight - requirement.value
+        status: 'review_required',
+        requirementType: 'qualitative',
+        acceptanceCriteria: requirement.acceptanceCriteria || [],
+        evidenceRequired: requirement.evidenceRequired || [],
+        note: 'Qualitative requirement — requires manual review of evidence'
       });
-    } else {
-      // Requirement applicable but cannot verify yet (needs jurisdiction pack or simulation)
+      continue;
+    }
+
+    // Numeric requirements: resolve metric to space field
+    if (!requirement.metric) {
       results.push({
         requirementId: reqId,
         requirementName: requirement.requirementName || reqId,
         spaceId: space.id,
         spaceName: space.spaceName,
         status: 'pending',
-        note: 'Verification pending (requires simulation, testing, or jurisdiction pack data)'
+        note: 'Requirement has no metric defined'
       });
+      continue;
     }
+
+    const resolver = METRIC_TO_FIELD[requirement.metric];
+    const spaceValue = resolver ? resolver(space) : undefined;
+
+    if (spaceValue == null) {
+      // Cannot resolve — need simulation, testing, or data not yet available
+      const reason = resolver
+        ? `Metric '${requirement.metric}' requires simulation or testing`
+        : `Unknown metric '${requirement.metric}' — no space field mapping`;
+      results.push({
+        requirementId: reqId,
+        requirementName: requirement.requirementName || reqId,
+        spaceId: space.id,
+        spaceName: space.spaceName,
+        metric: requirement.metric,
+        status: 'pending',
+        statusReason: reason,
+        note: 'Verification pending (requires simulation, testing, or data not yet available)'
+      });
+      continue;
+    }
+
+    // We have both a space value and a requirement target — check compliance
+    if (requirement.value == null || requirement.operator == null) {
+      results.push({
+        requirementId: reqId,
+        requirementName: requirement.requirementName || reqId,
+        spaceId: space.id,
+        spaceName: space.spaceName,
+        metric: requirement.metric,
+        measuredValue: spaceValue,
+        status: 'pending',
+        statusReason: 'Requirement has no target value or operator defined',
+        note: 'Cannot verify — requirement missing value/operator'
+      });
+      continue;
+    }
+
+    const compliant = checkOperator(spaceValue, requirement.operator, requirement.value);
+
+    const statusReason = compliant
+      ? `${requirement.metric}: ${spaceValue} ${requirement.operator} ${formatValue(requirement.value)} ${requirement.unit || ''}`
+      : `${requirement.metric}: ${spaceValue} does NOT satisfy ${requirement.operator} ${formatValue(requirement.value)} ${requirement.unit || ''}`;
+
+    results.push({
+      requirementId: reqId,
+      requirementName: requirement.requirementName,
+      spaceId: space.id,
+      spaceName: space.spaceName,
+      metric: requirement.metric,
+      targetValue: requirement.value,
+      unit: requirement.unit,
+      measuredValue: spaceValue,
+      operator: requirement.operator,
+      status: compliant ? 'compliant' : 'non-compliant',
+      statusReason,
+      margin: typeof spaceValue === 'number' && typeof requirement.value === 'number'
+        ? spaceValue - requirement.value
+        : null
+    });
   }
 
   return results;
+}
+
+/**
+ * Format a value for display (handles range objects)
+ */
+function formatValue(value) {
+  if (value && typeof value === 'object' && value.min != null) {
+    return `[${value.min}, ${value.max}]`;
+  }
+  return String(value);
 }
 
 /**
@@ -156,19 +223,58 @@ function checkOperator(value, operator, target) {
     case 'in_range':
       return value >= target.min && value <= target.max;
     default:
-      return null; // Unknown operator
+      return null;
   }
+}
+
+/**
+ * Analyze verification status from actual compliance results
+ */
+function analyzeVerificationStatus(complianceResults, totalRequirements) {
+  const verified = complianceResults.filter(r =>
+    r.status === 'compliant' || r.status === 'non-compliant'
+  ).length;
+  const pending = complianceResults.filter(r => r.status === 'pending').length;
+  const reviewRequired = complianceResults.filter(r => r.status === 'review_required').length;
+
+  return {
+    total: totalRequirements,
+    verified,
+    pendingVerification: pending,
+    reviewRequired,
+    notApplicable: 0
+  };
+}
+
+/**
+ * Determine worst status from a list
+ */
+function worstStatus(statuses) {
+  const order = ['non-compliant', 'pending', 'review_required', 'partial', 'compliant', 'not_applicable'];
+  for (const s of order) {
+    if (statuses.includes(s)) return s;
+  }
+  return 'not_applicable';
 }
 
 /**
  * Generate Poland WT 2021 compliance section
  */
-function generatePolandWT2021Compliance(requirements, spaces, logger) {
+function generatePolandWT2021Compliance(requirements, spaceComplianceResults, logger) {
   const wt2021Requirements = requirements.filter(r =>
     r.legalBasis?.some(basis => basis.regulation?.includes('WT_2021'))
   );
 
   logger.debug(`Found ${wt2021Requirements.length} WT 2021 requirements`);
+
+  // Build a lookup: requirementId → compliance results
+  const resultsByReq = new Map();
+  for (const result of spaceComplianceResults) {
+    if (!resultsByReq.has(result.requirementId)) {
+      resultsByReq.set(result.requirementId, []);
+    }
+    resultsByReq.get(result.requirementId).push(result);
+  }
 
   // Group by section
   const sections = {};
@@ -181,29 +287,47 @@ function generatePolandWT2021Compliance(requirements, spaces, logger) {
             section,
             description: basis.description || '',
             requirements: [],
-            status: 'compliant'
+            status: 'not_applicable'
           };
         }
+
+        const reqResults = resultsByReq.get(req.id) || [];
+        const reqStatuses = reqResults.map(r => r.status);
+        let reqStatus;
+        if (reqResults.length === 0) {
+          reqStatus = 'not_applicable';
+        } else {
+          reqStatus = worstStatus(reqStatuses);
+        }
+
         sections[section].requirements.push({
           id: req.id,
           requirementName: req.requirementName,
-          status: 'verified', // Placeholder - would check actual compliance
-          affectedEntities: spaces.filter(s =>
-            s.requirements?.includes(req.id)
-          ).length
+          status: reqStatus,
+          affectedEntities: reqResults.length,
+          compliant: reqResults.filter(r => r.status === 'compliant').length,
+          nonCompliant: reqResults.filter(r => r.status === 'non-compliant').length,
+          pending: reqResults.filter(r => r.status === 'pending').length
         });
       }
     }
   }
 
-  const overallStatus = Object.values(sections).every(s => s.status === 'compliant')
-    ? 'compliant'
-    : 'pending';
+  // Derive section status from its requirements
+  for (const section of Object.values(sections)) {
+    const reqStatuses = section.requirements.map(r => r.status);
+    section.status = worstStatus(reqStatuses);
+  }
+
+  const sectionValues = Object.values(sections);
+  const overallStatus = sectionValues.length > 0
+    ? worstStatus(sectionValues.map(s => s.status))
+    : 'not_applicable';
 
   return {
     regulation: "WT_2021",
     fullName: "Rozporządzenie Ministra Infrastruktury w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie",
-    sections: Object.values(sections),
+    sections: sectionValues,
     overallStatus
   };
 }
@@ -222,28 +346,31 @@ export function generateComplianceReport(sbm, logger) {
   const spaces = sbm.entities.spaces || [];
   const zones = sbm.entities.zones || [];
 
+  // Build requirement lookup map
+  const requirementMap = new Map(requirements.map(r => [r.id, r]));
+
   // Group requirements by regulation
   const groupedRequirements = groupRequirementsByRegulation(requirements);
   logger.debug(`Requirements: ${groupedRequirements.global.length} global, ${groupedRequirements.poland_wt_2021.length} Poland WT 2021`);
 
-  // Analyze verification status
-  const verificationSummary = analyzeVerificationStatus(requirements, sbm.entities);
-
   // Check space compliance
   const spaceComplianceResults = [];
   for (const space of spaces) {
-    const results = checkSpaceCompliance(space, requirements, logger);
+    const results = checkSpaceCompliance(space, requirementMap, logger);
     spaceComplianceResults.push(...results);
   }
 
   logger.debug(`Checked compliance for ${spaces.length} spaces: ${spaceComplianceResults.length} checks performed`);
+
+  // Analyze verification status from actual results
+  const verificationSummary = analyzeVerificationStatus(spaceComplianceResults, requirements.length);
 
   // Generate Poland-specific compliance (if applicable)
   let polandSpecificCompliance = null;
   if (sbm.project.country === 'PL') {
     polandSpecificCompliance = generatePolandWT2021Compliance(
       requirements,
-      spaces,
+      spaceComplianceResults,
       logger
     );
     logger.debug('Generated Poland WT 2021 compliance section');
@@ -254,11 +381,11 @@ export function generateComplianceReport(sbm, logger) {
     : 0;
 
   const complianceReport = {
-    version: "0.1",
+    version: "0.2",
     generatedAt: new Date().toISOString(),
     projectId: sbm.project.id,
     projectName: sbm.project.name,
-    projectPhase: sbm.entities.spaces?.[0]?.projectPhase || 'design_development',
+    projectPhase: sbm.project.phase || 3,
 
     summary: {
       totalRequirements: requirements.length,
@@ -268,6 +395,7 @@ export function generateComplianceReport(sbm, logger) {
         groupedRequirements.poland_prawo_budowlane.length,
       verified: verificationSummary.verified,
       pendingVerification: verificationSummary.pendingVerification,
+      reviewRequired: verificationSummary.reviewRequired,
       complianceRate: parseFloat(complianceRate),
       complianceChecksPerformed: spaceComplianceResults.length
     },
@@ -295,19 +423,23 @@ export function generateComplianceReport(sbm, logger) {
     spaceComplianceDetails: spaceComplianceResults,
 
     verificationPlan: {
-      currentPhase: sbm.entities.spaces?.[0]?.projectPhase || 'design_development',
+      currentPhase: sbm.project.phase || 3,
       verificationsCompleted: spaceComplianceResults.filter(r =>
         r.status === 'compliant' || r.status === 'non-compliant'
       ).length,
       verificationsPending: spaceComplianceResults.filter(r =>
         r.status === 'pending'
       ).length,
+      reviewRequired: spaceComplianceResults.filter(r =>
+        r.status === 'review_required'
+      ).length,
       nextSteps: [
         "Complete jurisdiction pack loading (Phase 4) to enable all requirement checks",
         "Run energy simulation for thermal performance verification",
         "Run daylight simulation for natural lighting verification",
         "Schedule acoustic testing during construction phase",
-        "Plan as-built verification measurements"
+        "Plan as-built verification measurements",
+        "Collect evidence for qualitative requirements"
       ]
     },
 
@@ -324,19 +456,17 @@ export function generateComplianceReport(sbm, logger) {
 function generateRecommendations(complianceResults, sbm) {
   const recommendations = [];
 
-  // Check for non-compliant items
   const nonCompliant = complianceResults.filter(r => r.status === 'non-compliant');
   if (nonCompliant.length > 0) {
     recommendations.push({
       priority: 'high',
       category: 'non-compliance',
-      message: `${nonCompliant.length} spaces have non-compliant requirements`,
+      message: `${nonCompliant.length} space-requirement checks are non-compliant`,
       action: 'Review and adjust design to meet minimum requirements',
-      affectedSpaces: nonCompliant.map(r => r.spaceId)
+      affectedSpaces: [...new Set(nonCompliant.map(r => r.spaceId))]
     });
   }
 
-  // Check for missing requirements
   const spacesWithoutRequirements = (sbm.entities.spaces || []).filter(s =>
     !s.requirements || s.requirements.length === 0
   );
@@ -346,11 +476,21 @@ function generateRecommendations(complianceResults, sbm) {
       category: 'missing-requirements',
       message: `${spacesWithoutRequirements.length} spaces have no requirements assigned`,
       action: 'Review space types and assign applicable requirements',
-      affectedSpaces: spacesWithoutRequirements.map(s => s.id)
+      affectedSpaces: spacesWithoutRequirements.slice(0, 20).map(s => s.id),
+      truncated: spacesWithoutRequirements.length > 20
     });
   }
 
-  // Check for pending verifications
+  const reviewRequired = complianceResults.filter(r => r.status === 'review_required');
+  if (reviewRequired.length > 0) {
+    recommendations.push({
+      priority: 'medium',
+      category: 'qualitative-review',
+      message: `${reviewRequired.length} qualitative requirements need manual evidence review`,
+      action: 'Collect and review evidence per acceptanceCriteria and evidenceRequired fields'
+    });
+  }
+
   const pending = complianceResults.filter(r => r.status === 'pending');
   if (pending.length > 0) {
     recommendations.push({

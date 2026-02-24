@@ -2,16 +2,72 @@
  * Compilation Target: Digital Twin Schema
  *
  * Generates digital twin integration artifacts:
- * - Sensor bindings (space → sensors)
+ * - Sensor bindings (space → sensors) derived from environmentalConditions & requirements
  * - BMS integration mappings
  * - Runtime requirement evaluation rules
  * - IoT device registry
  */
 
 /**
+ * Requirement metric → sensor type mapping
+ */
+const METRIC_TO_SENSOR = {
+  'operative_temperature': 'temperature',
+  'temperature': 'temperature',
+  'relative_humidity': 'humidity',
+  'co2_level': 'co2',
+  'co2_concentration': 'co2',
+  'illuminance': 'illuminance',
+  'daylight_factor': 'illuminance',
+  'air_change_rate': 'co2',
+  'fresh_air_rate_per_person': 'co2'
+};
+
+/**
+ * Default thresholds used when entity data provides no values
+ */
+const DEFAULT_THRESHOLDS = {
+  temperature: { min: 18, max: 26, optimal: { min: 20, max: 24 } },
+  humidity: { min: 30, max: 60, optimal: { min: 40, max: 50 } },
+  co2: { min: 400, max: 1000, optimal: { min: 400, max: 800 } },
+  illuminance: { min: 200, max: 1000, optimal: { min: 300, max: 500 } },
+  differential_pressure: { min: -50, max: 50 },
+  particle_count: { min: 0, max: 3520 }
+};
+
+/**
+ * Default sampling intervals in seconds
+ */
+const SAMPLING_INTERVALS = {
+  temperature: 300,
+  humidity: 300,
+  co2: 300,
+  illuminance: 600,
+  occupancy: 60,
+  motion: 5,
+  differential_pressure: 60,
+  particle_count: 300
+};
+
+/**
+ * Space types considered storage/technical (no occupancy sensor)
+ */
+const NON_OCCUPIED_TYPES = new Set([
+  'storage', 'technical', 'mechanical_room', 'electrical_room',
+  'generator_room', 'water_treatment', 'waste_management', 'server_room'
+]);
+
+/**
+ * Space types that benefit from motion detection
+ */
+const MOTION_TYPES = new Set([
+  'corridor', 'staircase', 'entrance', 'loading_dock', 'parking'
+]);
+
+/**
  * Generate sensor bindings for spaces
  */
-function generateSpaceSensorBindings(spaces, logger) {
+function generateSpaceSensorBindings(spaces, requirementMap, logger) {
   const bindings = [];
 
   for (const space of spaces) {
@@ -19,7 +75,7 @@ function generateSpaceSensorBindings(spaces, logger) {
       entityId: space.id,
       entityType: 'space',
       entityName: space.spaceName,
-      spaceType: space.spaceType,
+      spaceType: space.spaceType || null,
 
       // Location context
       buildingId: space.buildingId,
@@ -30,8 +86,7 @@ function generateSpaceSensorBindings(spaces, logger) {
       sensors: []
     };
 
-    // Determine required sensors based on space type and requirements
-    const requiredSensors = determineSensorsForSpace(space);
+    const requiredSensors = determineSensorsForSpace(space, requirementMap);
     spaceBinding.sensors = requiredSensors;
 
     bindings.push(spaceBinding);
@@ -42,113 +97,134 @@ function generateSpaceSensorBindings(spaces, logger) {
 }
 
 /**
- * Determine required sensors for a space
+ * Create a sensor object
  */
-function determineSensorsForSpace(space) {
+function makeSensor(type, space, thresholds, dataSource) {
+  const bacnetType = ['occupancy', 'motion'].includes(type) ? 'BI' : 'AI';
+  const unit = {
+    temperature: 'C', humidity: '%', co2: 'ppm', illuminance: 'lux',
+    occupancy: 'boolean', motion: 'boolean', differential_pressure: 'Pa',
+    particle_count: 'particles/m3'
+  }[type] || '';
+  const measurementType = {
+    temperature: 'air_temperature', humidity: 'relative_humidity',
+    co2: 'carbon_dioxide', illuminance: 'illuminance',
+    occupancy: 'presence', motion: 'motion_detected',
+    differential_pressure: 'pressure_differential',
+    particle_count: 'airborne_particles'
+  }[type] || type;
+
+  const sensor = {
+    sensorType: type,
+    sensorId: `${type.toUpperCase().replace('_', '-')}-${space.id}`,
+    location: space.spaceName,
+    measurementType,
+    unit,
+    samplingInterval: SAMPLING_INTERVALS[type] || 300,
+    protocol: 'BACnet',
+    dataPoint: `${bacnetType}-${space.id}-${type.toUpperCase().replace('_', '-')}`,
+    dataSource: dataSource || 'default'
+  };
+
+  if (thresholds) {
+    sensor.thresholds = thresholds;
+  }
+
+  return sensor;
+}
+
+/**
+ * Determine required sensors for a space — data-driven
+ *
+ * Sources (in priority order):
+ * 1. space.environmentalConditions — each present sub-field implies a sensor
+ * 2. space.requirements — look up each requirement; if metric maps to sensor, add it
+ * 3. Fallback — non-storage spaces get occupancy sensor
+ */
+function determineSensorsForSpace(space, requirementMap) {
   const sensors = [];
+  const addedTypes = new Set();
 
-  // Temperature sensor (all occupied spaces)
-  if (['sleeping_space', 'bedroom', 'living_space', 'living_room', 'office', 'classroom'].includes(space.spaceType)) {
-    sensors.push({
-      sensorType: 'temperature',
-      sensorId: `TEMP-${space.id}`,
-      location: space.spaceName,
-      measurementType: 'air_temperature',
-      unit: 'C',
-      samplingInterval: 300, // 5 minutes
-      thresholds: {
-        min: 18,
-        max: 26,
-        optimal: { min: 20, max: 24 }
-      },
-      protocol: 'BACnet',
-      dataPoint: `AI-${space.id}-TEMP`
-    });
+  function addSensor(type, thresholds, dataSource) {
+    if (addedTypes.has(type)) return;
+    addedTypes.add(type);
+    sensors.push(makeSensor(type, space, thresholds, dataSource));
   }
 
-  // Humidity sensor (bedrooms, bathrooms)
-  if (['sleeping_space', 'bedroom', 'bathroom', 'wet_room'].includes(space.spaceType)) {
-    sensors.push({
-      sensorType: 'humidity',
-      sensorId: `HUM-${space.id}`,
-      location: space.spaceName,
-      measurementType: 'relative_humidity',
-      unit: '%',
-      samplingInterval: 300,
-      thresholds: {
-        min: 30,
-        max: 60,
-        optimal: { min: 40, max: 50 }
-      },
-      protocol: 'BACnet',
-      dataPoint: `AI-${space.id}-HUM`
-    });
+  // Source 1: environmentalConditions
+  const env = space.environmentalConditions;
+  if (env) {
+    // Temperature
+    if (env.temperatureRange) {
+      const tr = env.temperatureRange;
+      addSensor('temperature', {
+        min: tr.min, max: tr.max,
+        optimal: { min: tr.min, max: tr.max }
+      }, 'environmentalConditions');
+    }
+
+    // Humidity
+    if (env.humidityRange) {
+      const hr = env.humidityRange;
+      addSensor('humidity', {
+        min: hr.min, max: hr.max,
+        optimal: { min: hr.min, max: hr.max }
+      }, 'environmentalConditions');
+    }
+
+    // Air quality (ACH or ventilation implies CO2 monitoring)
+    if (env.airChangesPerHour || env.ventilationRate) {
+      addSensor('co2', DEFAULT_THRESHOLDS.co2, 'environmentalConditions');
+    }
+
+    // Differential pressure
+    if (env.pressurization && env.pressurization !== 'neutral') {
+      const dpThresholds = env.pressureDifferentialPa
+        ? { target: env.pressureDifferentialPa, tolerance: 2, unit: 'Pa' }
+        : DEFAULT_THRESHOLDS.differential_pressure;
+      addSensor('differential_pressure', dpThresholds, 'environmentalConditions');
+    }
+
+    // Particle count (cleanroom/filtration)
+    if (env.filtrationClass || env.cleanlinessClass) {
+      addSensor('particle_count', DEFAULT_THRESHOLDS.particle_count, 'environmentalConditions');
+    }
   }
 
-  // CO2 sensor (occupied spaces)
-  if (['sleeping_space', 'bedroom', 'living_space', 'office', 'classroom', 'meeting_room'].includes(space.spaceType)) {
-    sensors.push({
-      sensorType: 'co2',
-      sensorId: `CO2-${space.id}`,
-      location: space.spaceName,
-      measurementType: 'carbon_dioxide',
-      unit: 'ppm',
-      samplingInterval: 300,
-      thresholds: {
-        min: 400,
-        max: 1000,
-        optimal: { min: 400, max: 800 }
-      },
-      protocol: 'BACnet',
-      dataPoint: `AI-${space.id}-CO2`
-    });
+  // Source 2: requirements
+  if (space.requirements && requirementMap) {
+    for (const reqId of space.requirements) {
+      const req = requirementMap.get(reqId);
+      if (!req || !req.metric) continue;
+
+      const sensorType = METRIC_TO_SENSOR[req.metric];
+      if (!sensorType) continue;
+
+      // Build thresholds from requirement value/operator
+      let thresholds = DEFAULT_THRESHOLDS[sensorType] || null;
+      if (req.value != null && req.operator) {
+        if (req.operator === 'in_range' && typeof req.value === 'object') {
+          thresholds = { min: req.value.min, max: req.value.max, optimal: req.value };
+        } else if (req.operator === '>=' || req.operator === '>') {
+          thresholds = { ...thresholds, min: req.value };
+        } else if (req.operator === '<=' || req.operator === '<') {
+          thresholds = { ...thresholds, max: req.value };
+        }
+      }
+
+      addSensor(sensorType, thresholds, 'requirement');
+    }
   }
 
-  // Occupancy sensor (all spaces except technical/storage)
-  if (!['storage', 'technical'].includes(space.spaceType)) {
-    sensors.push({
-      sensorType: 'occupancy',
-      sensorId: `OCC-${space.id}`,
-      location: space.spaceName,
-      measurementType: 'presence',
-      unit: 'boolean',
-      samplingInterval: 60, // 1 minute
-      protocol: 'BACnet',
-      dataPoint: `BI-${space.id}-OCC`
-    });
+  // Occupancy sensor for occupied spaces (unless storage/technical)
+  const st = space.spaceType || '';
+  if (!NON_OCCUPIED_TYPES.has(st)) {
+    addSensor('occupancy', null, env ? 'default' : 'none');
   }
 
-  // Motion sensor (corridors, staircases for safety)
-  if (['corridor', 'staircase', 'entrance'].includes(space.spaceType)) {
-    sensors.push({
-      sensorType: 'motion',
-      sensorId: `MOT-${space.id}`,
-      location: space.spaceName,
-      measurementType: 'motion_detected',
-      unit: 'boolean',
-      samplingInterval: 5, // 5 seconds
-      protocol: 'BACnet',
-      dataPoint: `BI-${space.id}-MOT`
-    });
-  }
-
-  // Light level sensor (spaces with daylight requirements)
-  if (['sleeping_space', 'bedroom', 'living_space', 'office', 'classroom'].includes(space.spaceType)) {
-    sensors.push({
-      sensorType: 'illuminance',
-      sensorId: `LUX-${space.id}`,
-      location: space.spaceName,
-      measurementType: 'illuminance',
-      unit: 'lux',
-      samplingInterval: 600, // 10 minutes
-      thresholds: {
-        min: 200,
-        max: 1000,
-        optimal: { min: 300, max: 500 }
-      },
-      protocol: 'BACnet',
-      dataPoint: `AI-${space.id}-LUX`
-    });
+  // Motion sensor for circulation spaces
+  if (MOTION_TYPES.has(st)) {
+    addSensor('motion', null, 'spaceType');
   }
 
   return sensors;
@@ -158,8 +234,6 @@ function determineSensorsForSpace(space) {
  * Generate BMS integration mappings
  */
 function generateBMSIntegration(sbm, spaceSensorBindings, logger) {
-  const systems = sbm.entities.systems || [];
-
   const integration = {
     controllerType: 'BACnet',
     networkConfiguration: {
@@ -174,7 +248,7 @@ function generateBMSIntegration(sbm, spaceSensorBindings, logger) {
 
   // Create device entries for sensor groups
   let deviceInstance = 1000;
-  const spacesPerController = 10; // Group spaces into controllers
+  const spacesPerController = 10;
 
   for (let i = 0; i < spaceSensorBindings.length; i += spacesPerController) {
     const controllerSpaces = spaceSensorBindings.slice(i, i + spacesPerController);
@@ -184,7 +258,8 @@ function generateBMSIntegration(sbm, spaceSensorBindings, logger) {
       deviceInstance: deviceInstance++,
       deviceName: `RC-${Math.floor(i / spacesPerController) + 1}`,
       spaces: controllerSpaces.map(s => s.entityId),
-      ipAddress: `192.168.1.${100 + Math.floor(i / spacesPerController)}`,
+      ipAddress: null,
+      ipNote: 'Assigned during BMS commissioning',
       protocol: 'BACnet/IP',
       status: 'planned'
     });
@@ -199,7 +274,7 @@ function generateBMSIntegration(sbm, spaceSensorBindings, logger) {
         spaceId: spaceBinding.entityId,
         spaceName: spaceBinding.entityName,
         objectType: getBACnetObjectType(sensor.sensorType),
-        objectInstance: null, // To be assigned during commissioning
+        objectInstance: null,
         description: `${sensor.measurementType} in ${spaceBinding.entityName}`,
         unit: sensor.unit,
         samplingInterval: sensor.samplingInterval
@@ -220,6 +295,8 @@ function getBACnetObjectType(sensorType) {
     'humidity': 'analog-input',
     'co2': 'analog-input',
     'illuminance': 'analog-input',
+    'differential_pressure': 'analog-input',
+    'particle_count': 'analog-input',
     'occupancy': 'binary-input',
     'motion': 'binary-input'
   };
@@ -239,7 +316,6 @@ function generateRequirementEvaluationRules(sbm, spaceSensorBindings, logger) {
       continue;
     }
 
-    // Find sensor bindings for this space
     const spaceBinding = spaceSensorBindings.find(b => b.entityId === space.id);
     if (!spaceBinding) {
       continue;
@@ -247,13 +323,10 @@ function generateRequirementEvaluationRules(sbm, spaceSensorBindings, logger) {
 
     for (const reqId of space.requirements) {
       const requirement = requirements.find(r => r.id === reqId);
-
-      // Skip if requirement not found (may be in jurisdiction pack)
       if (!requirement) {
         continue;
       }
 
-      // Generate evaluation rule if requirement is measurable via sensors
       const rule = generateEvaluationRule(requirement, space, spaceBinding);
       if (rule) {
         rules.push(rule);
@@ -269,23 +342,14 @@ function generateRequirementEvaluationRules(sbm, spaceSensorBindings, logger) {
  * Generate evaluation rule for a requirement
  */
 function generateEvaluationRule(requirement, space, spaceBinding) {
-  // Map requirement metrics to sensor types
-  const metricToSensor = {
-    'temperature': 'temperature',
-    'relative_humidity': 'humidity',
-    'co2_level': 'co2',
-    'illuminance': 'illuminance'
-  };
-
-  const sensorType = metricToSensor[requirement.metric];
+  const sensorType = METRIC_TO_SENSOR[requirement.metric];
   if (!sensorType) {
-    return null; // Cannot evaluate via sensors
+    return null;
   }
 
-  // Find matching sensor
   const sensor = spaceBinding.sensors.find(s => s.sensorType === sensorType);
   if (!sensor) {
-    return null; // No sensor available
+    return null;
   }
 
   return {
@@ -315,8 +379,8 @@ function generateEvaluationRule(requirement, space, spaceBinding) {
     evaluationSchedule: {
       frequency: 'continuous',
       samplingInterval: sensor.samplingInterval,
-      aggregation: 'average', // average, min, max, current
-      aggregationWindow: 3600 // 1 hour
+      aggregation: 'average',
+      aggregationWindow: 3600
     }
   };
 }
@@ -327,7 +391,6 @@ function generateEvaluationRule(requirement, space, spaceBinding) {
 function generateIoTDeviceRegistry(spaceSensorBindings, bmsIntegration, logger) {
   const devices = [];
 
-  // Extract all unique sensors
   const allSensors = spaceSensorBindings.flatMap(binding =>
     binding.sensors.map(sensor => ({
       ...sensor,
@@ -336,12 +399,11 @@ function generateIoTDeviceRegistry(spaceSensorBindings, bmsIntegration, logger) 
     }))
   );
 
-  // Group sensors by type and create device entries
   for (const sensor of allSensors) {
     devices.push({
       deviceId: sensor.sensorId,
       deviceType: sensor.sensorType,
-      manufacturer: 'TBD', // To be specified during procurement
+      manufacturer: 'TBD',
       model: 'TBD',
       firmwareVersion: '',
 
@@ -354,7 +416,7 @@ function generateIoTDeviceRegistry(spaceSensorBindings, bmsIntegration, logger) 
       connectivity: {
         protocol: sensor.protocol,
         dataPoint: sensor.dataPoint,
-        ipAddress: '', // To be assigned during installation
+        ipAddress: '',
         networkSegment: 'BMS-VLAN'
       },
 
@@ -364,7 +426,8 @@ function generateIoTDeviceRegistry(spaceSensorBindings, bmsIntegration, logger) 
         thresholds: sensor.thresholds || {}
       },
 
-      status: 'planned', // planned | installed | commissioned | operational | maintenance | faulty
+      dataSource: sensor.dataSource || 'default',
+      status: 'planned',
       installationDate: null,
       commissioningDate: null,
       lastMaintenanceDate: null,
@@ -391,7 +454,7 @@ export function generateDigitalTwinSchema(sbm, logger) {
   if (spaces.length === 0) {
     logger.debug('No spaces found - generating placeholder twin schema');
     return {
-      version: "0.1",
+      version: "0.2",
       generatedAt: new Date().toISOString(),
       projectId: sbm.project.id,
       projectName: sbm.project.name,
@@ -401,15 +464,25 @@ export function generateDigitalTwinSchema(sbm, logger) {
     };
   }
 
-  const spaceSensorBindings = generateSpaceSensorBindings(spaces, logger);
+  // Build requirement lookup map for sensor derivation
+  const requirements = sbm.entities.requirements || [];
+  const requirementMap = new Map(requirements.map(r => [r.id, r]));
+
+  const spaceSensorBindings = generateSpaceSensorBindings(spaces, requirementMap, logger);
   const bmsIntegration = generateBMSIntegration(sbm, spaceSensorBindings, logger);
   const evaluationRules = generateRequirementEvaluationRules(sbm, spaceSensorBindings, logger);
   const iotDeviceRegistry = generateIoTDeviceRegistry(spaceSensorBindings, bmsIntegration, logger);
 
   const totalSensors = spaceSensorBindings.reduce((sum, b) => sum + b.sensors.length, 0);
 
+  // Count sensors by type dynamically
+  const sensorsByType = {};
+  for (const d of iotDeviceRegistry) {
+    sensorsByType[d.deviceType] = (sensorsByType[d.deviceType] || 0) + 1;
+  }
+
   const twinSchema = {
-    version: "0.1",
+    version: "0.2",
     generatedAt: new Date().toISOString(),
     projectId: sbm.project.id,
     projectName: sbm.project.name,
@@ -417,14 +490,7 @@ export function generateDigitalTwinSchema(sbm, logger) {
     summary: {
       totalSpaces: spaces.length,
       totalSensors: totalSensors,
-      sensorsByType: {
-        temperature: iotDeviceRegistry.filter(d => d.deviceType === 'temperature').length,
-        humidity: iotDeviceRegistry.filter(d => d.deviceType === 'humidity').length,
-        co2: iotDeviceRegistry.filter(d => d.deviceType === 'co2').length,
-        occupancy: iotDeviceRegistry.filter(d => d.deviceType === 'occupancy').length,
-        motion: iotDeviceRegistry.filter(d => d.deviceType === 'motion').length,
-        illuminance: iotDeviceRegistry.filter(d => d.deviceType === 'illuminance').length
-      },
+      sensorsByType,
       evaluationRules: evaluationRules.length,
       bmsDevices: bmsIntegration.deviceRegistry.length
     },

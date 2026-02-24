@@ -9,6 +9,34 @@
  */
 
 /**
+ * Derive asset status from available entity data
+ */
+function deriveAssetStatus(asset) {
+  if (asset.lifecycleState) return asset.lifecycleState;
+  if (asset.installationData?.commissioningDate) return 'operational';
+  if (asset.installationData?.installationDate) return 'installed';
+  return 'planned';
+}
+
+/**
+ * Estimate maintenance duration from system category
+ */
+function estimateMaintenanceDuration(systemCategory) {
+  const durations = {
+    'hvac': '3-4 hours',
+    'electrical': '1-2 hours',
+    'plumbing': '1-2 hours',
+    'fire_safety': '2-3 hours',
+    'elevator': '4-6 hours',
+    'security': '1-2 hours',
+    'medical_gas': '2-3 hours',
+    'nurse_call': '1-2 hours',
+    'it_network': '1-2 hours'
+  };
+  return durations[systemCategory] || 'TBD';
+}
+
+/**
  * Generate asset inventory
  */
 function generateAssetInventory(assets, systems, spaces, logger) {
@@ -23,7 +51,7 @@ function generateAssetInventory(assets, systems, spaces, logger) {
 
     const inventoryItem = {
       assetId: asset.id,
-      assetName: asset.assetName,
+      assetName: asset.assetName || asset.identifiers?.assetTag || asset.id,
       assetType: asset.assetTypeId || 'Unknown',
 
       // System context
@@ -53,23 +81,26 @@ function generateAssetInventory(assets, systems, spaces, logger) {
       maintenance: {
         serviceIntervalMonths: asset.maintenanceData?.serviceIntervalMonths || 12,
         nextServiceDate: calculateNextServiceDate(
-          asset.maintenanceData?.serviceIntervalMonths || 12
+          asset.maintenanceData?.serviceIntervalMonths || 12,
+          asset.installationData?.installationDate
         ),
         expectedLifetimeYears: asset.maintenanceData?.expectedLifetimeYears || 15,
         endOfLifeDate: calculateEndOfLifeDate(
-          asset.maintenanceData?.expectedLifetimeYears || 15
+          asset.maintenanceData?.expectedLifetimeYears || 15,
+          asset.installationData?.installationDate
         ),
         warrantyYears: asset.maintenanceData?.warrantyYears || 2,
         warrantyExpiryDate: calculateWarrantyExpiry(
-          asset.maintenanceData?.warrantyYears || 2
+          asset.maintenanceData?.warrantyYears || 2,
+          asset.installationData?.installationDate
         ),
         sparePartsRequired: asset.maintenanceData?.sparePartsRequired || []
       },
 
       // Status
-      status: 'planned', // planned | installed | operational | maintenance | decommissioned
-      installationDate: null, // To be filled during construction
-      commissioningDate: null, // To be filled during handover
+      status: deriveAssetStatus(asset),
+      installationDate: asset.installationData?.installationDate || null,
+      commissioningDate: asset.installationData?.commissioningDate || null,
 
       // Requirements
       requirements: asset.requirements || [],
@@ -91,31 +122,36 @@ function generateAssetInventory(assets, systems, spaces, logger) {
 }
 
 /**
- * Calculate next service date
+ * Calculate next service date from a base date
  */
-function calculateNextServiceDate(intervalMonths) {
-  const now = new Date();
-  const nextService = new Date(now);
+function calculateNextServiceDate(intervalMonths, baseDate) {
+  const base = baseDate ? new Date(baseDate) : new Date();
+  const nextService = new Date(base);
   nextService.setMonth(nextService.getMonth() + intervalMonths);
+  // If calculated date is in the past, advance to next interval from now
+  const now = new Date();
+  while (nextService < now) {
+    nextService.setMonth(nextService.getMonth() + intervalMonths);
+  }
   return nextService.toISOString().split('T')[0];
 }
 
 /**
- * Calculate end of life date
+ * Calculate end of life date from a base date
  */
-function calculateEndOfLifeDate(lifetimeYears) {
-  const now = new Date();
-  const endOfLife = new Date(now);
+function calculateEndOfLifeDate(lifetimeYears, baseDate) {
+  const base = baseDate ? new Date(baseDate) : new Date();
+  const endOfLife = new Date(base);
   endOfLife.setFullYear(endOfLife.getFullYear() + lifetimeYears);
   return endOfLife.toISOString().split('T')[0];
 }
 
 /**
- * Calculate warranty expiry date
+ * Calculate warranty expiry date from a base date
  */
-function calculateWarrantyExpiry(warrantyYears) {
-  const now = new Date();
-  const expiry = new Date(now);
+function calculateWarrantyExpiry(warrantyYears, baseDate) {
+  const base = baseDate ? new Date(baseDate) : new Date();
+  const expiry = new Date(base);
   expiry.setFullYear(expiry.getFullYear() + warrantyYears);
   return expiry.toISOString().split('T')[0];
 }
@@ -150,7 +186,7 @@ function generateMaintenanceCalendar(inventory, logger) {
           systemName: a.systemName,
           locationSpaceName: a.locationSpaceName,
           serviceType: 'routine_maintenance',
-          estimatedDuration: '2 hours', // Placeholder
+          estimatedDuration: estimateMaintenanceDuration(a.systemCategory),
           priority: 'normal'
         }))
       });
@@ -360,7 +396,9 @@ export function generateAssetRegister(sbm, logger) {
       assetsByStatus: {
         planned: inventory.filter(a => a.status === 'planned').length,
         installed: inventory.filter(a => a.status === 'installed').length,
-        operational: inventory.filter(a => a.status === 'operational').length
+        operational: inventory.filter(a => a.status === 'operational').length,
+        maintenance: inventory.filter(a => a.status === 'maintenance').length,
+        decommissioned: inventory.filter(a => a.status === 'decommissioned').length
       }
     },
 
