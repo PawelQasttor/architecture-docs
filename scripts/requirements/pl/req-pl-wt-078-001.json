@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-078-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna powierzchnia łazienki 3.6 m2",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["bathroom"]
+  },
+
+  "metric": "room_area_minimum",
+  "operator": ">=",
+  "value": 3.6,
+  "unit": "m2",
+  "tolerance": 0.05,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Laser distance meter",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction", "as_built"],
+    "frequency": "once_per_room",
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 78",
+      "article": "ust. 1",
+      "description": "Minimalna powierzchnia łazienki",
+      "fullText": "Łazienka powinna mieć powierzchnię umożliwiającą zainstalowanie wanny lub kabiny prysznicowej, umywalki oraz swobodne korzystanie z tych urządzeń.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "residential", "bathroom"]
+}

@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-151-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna wentylacja kuchni 8 ACH",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["kitchen"]
+  },
+
+  "metric": "air_change_rate",
+  "operator": ">=",
+  "value": 8,
+  "unit": "ACH",
+  "tolerance": 0.5,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Anemometer or flow hood",
+    "standard": "WT_2021",
+    "phase": ["construction", "as_built"],
+    "frequency": "once_per_room_type",
+    "responsible": "hvac_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 151",
+      "article": "ust. 1",
+      "description": "Wentylacja kuchni",
+      "fullText": "Kuchnia z otwartym paleniskiem gazowym powinna miec wentylacje zapewniajaca co najmniej 8-krotna wymiane powietrza na godzine.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "wt_2021", "ventilation", "kitchen"]
+}

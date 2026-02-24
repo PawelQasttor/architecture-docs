@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-076-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna powierzchnia sypialni 9 m2",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["bedroom", "sleeping_space"]
+  },
+
+  "metric": "room_area_minimum",
+  "operator": ">=",
+  "value": 9.0,
+  "unit": "m2",
+  "tolerance": 0.05,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Laser distance meter",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction", "as_built"],
+    "frequency": "once_per_room",
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 76",
+      "article": "ust. 1",
+      "description": "Minimalna powierzchnia sypialni",
+      "fullText": "Pokój mieszkalny w mieszkaniu jednopokojowym powinien mieć powierzchnię nie mniejszą niż 16 m2; w mieszkaniu wielopokojowym jeden pokój powinien mieć powierzchnię nie mniejszą niż 16 m2, a pozostałe - nie mniejszą niż 9 m2.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "residential", "bedroom"]
+}

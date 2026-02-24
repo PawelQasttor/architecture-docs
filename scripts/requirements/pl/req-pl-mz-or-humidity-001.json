@@ -1,0 +1,43 @@
+{
+  "id": "REQ-PL-MZ-OR-HUMIDITY-001",
+  "entityType": "requirement",
+  "requirementName": "Wilgotnosc sali operacyjnej 30-60% RH",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["operating_room"]
+  },
+
+  "metric": "relative_humidity",
+  "operator": "in_range",
+  "value": { "min": 30, "max": 60 },
+  "unit": "%RH",
+
+  "verification": {
+    "method": "sensor",
+    "tool": "Calibrated hygrometer",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["construction", "as_built", "operation"],
+    "frequency": "continuous",
+    "responsible": "bms_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 2",
+      "description": "Wilgotnosc w salach operacyjnych",
+      "fullText": "Wilgotnosc wzgledna w sali operacyjnej powinna byc utrzymywana w zakresie 30-60%."
+    },
+    {
+      "regulation": "VDI_2167",
+      "section": "5.2",
+      "description": "Humidity requirements for cleanroom operating theatres"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "healthcare", "humidity", "operating_room"]
+}

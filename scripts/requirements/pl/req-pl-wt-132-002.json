@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-132-002",
+  "entityType": "requirement",
+  "requirementName": "Minimalna wysokosc pomieszczen w budynkach uzytecznosci publicznej 3.0 m",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["office", "patient_room", "examination_room", "laboratory", "pharmacy", "classroom", "meeting_room"]
+  },
+
+  "metric": "room_height_clear",
+  "operator": ">=",
+  "value": 3.0,
+  "unit": "m",
+  "tolerance": 0.02,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Laser distance meter",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction", "as_built"],
+    "frequency": "once_per_room_type",
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 132",
+      "article": "ust. 2",
+      "description": "Wysokosc pomieszczen w budynkach uzytecznosci publicznej",
+      "fullText": "Wysokosc pomieszczen w budynkach uzytecznosci publicznej nie moze byc mniejsza niz 3,00 m.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "public_building"]
+}

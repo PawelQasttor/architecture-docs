@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-077-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna powierzchnia kuchni 6 m2",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["kitchen"]
+  },
+
+  "metric": "room_area_minimum",
+  "operator": ">=",
+  "value": 6.0,
+  "unit": "m2",
+  "tolerance": 0.05,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Laser distance meter",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction", "as_built"],
+    "frequency": "once_per_room",
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 77",
+      "article": "ust. 1",
+      "description": "Minimalna powierzchnia kuchni",
+      "fullText": "Kuchnia powinna mieć powierzchnię nie mniejszą niż 6 m2. Dopuszcza się kuchnię o powierzchni mniejszej niż 6 m2 pod warunkiem zapewnienia odpowiedniej wentylacji.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "residential", "kitchen"]
+}

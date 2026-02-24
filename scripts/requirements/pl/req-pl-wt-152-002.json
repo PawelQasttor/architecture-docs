@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-152-002",
+  "entityType": "requirement",
+  "requirementName": "Minimalna wentylacja WC 4 ACH",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["wc", "toilet"]
+  },
+
+  "metric": "air_change_rate",
+  "operator": ">=",
+  "value": 4,
+  "unit": "ACH",
+  "tolerance": 0.5,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Anemometer or flow hood",
+    "standard": "WT_2021",
+    "phase": ["construction", "as_built"],
+    "frequency": "once_per_room_type",
+    "responsible": "hvac_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 152",
+      "article": "ust. 2",
+      "description": "Wentylacja ustepow",
+      "fullText": "Ustep (WC) powinien miec wentylacje mechaniczna lub grawitacyjna zapewniajaca co najmniej 4-krotna wymiane powietrza na godzine.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "wt_2021", "ventilation", "wc"]
+}

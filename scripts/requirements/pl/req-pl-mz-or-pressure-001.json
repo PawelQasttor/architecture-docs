@@ -1,0 +1,43 @@
+{
+  "id": "REQ-PL-MZ-OR-PRESSURE-001",
+  "entityType": "requirement",
+  "requirementName": "Nadcisnienie sali operacyjnej min 15 Pa",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["operating_room"]
+  },
+
+  "metric": "pressure_differential_pa",
+  "operator": ">=",
+  "value": 15,
+  "unit": "Pa",
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Differential pressure manometer",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["construction", "as_built", "operation"],
+    "frequency": "continuous",
+    "responsible": "hvac_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 2",
+      "description": "Nadcisnienie w salach operacyjnych",
+      "fullText": "Sala operacyjna klasy Ia powinna miec nadcisnienie co najmniej 15 Pa w stosunku do pomieszczen sasiednich."
+    },
+    {
+      "regulation": "EN_ISO_14644-4",
+      "section": "5.3",
+      "description": "Pressure differential requirements for cleanrooms"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["safety", "poland", "healthcare", "pressure", "operating_room", "cleanroom"]
+}

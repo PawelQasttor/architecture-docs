@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-078-002",
+  "entityType": "requirement",
+  "requirementName": "Minimalna powierzchnia WC 1.5 m2",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["wc", "toilet"]
+  },
+
+  "metric": "room_area_minimum",
+  "operator": ">=",
+  "value": 1.5,
+  "unit": "m2",
+  "tolerance": 0.05,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Laser distance meter",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction", "as_built"],
+    "frequency": "once_per_room",
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 78",
+      "article": "ust. 2",
+      "description": "Minimalna powierzchnia ustępu",
+      "fullText": "Ustęp (WC) powinien mieć powierzchnię umożliwiającą zainstalowanie miski ustępowej i umywalki oraz swobodne korzystanie z tych urządzeń.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "residential", "wc"]
+}

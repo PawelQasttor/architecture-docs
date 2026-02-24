@@ -1,0 +1,46 @@
+{
+  "id": "REQ-PL-WT-057-001",
+  "entityType": "requirement",
+  "requirementName": "Stosunek powierzchni okien do podlogi min 1:8 dla pomieszczen na pobyt ludzi",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["bedroom", "sleeping_space", "living_room", "living_space", "patient_room", "office", "classroom"]
+  },
+
+  "qualitativeDescription": "Pomieszczenia przeznaczone na pobyt ludzi powinny miec zapewnione oswietlenie swiatlem dziennym. Stosunek powierzchni okien do powierzchni podlogi powinien wynosic co najmniej 1:8.",
+  "acceptanceCriteria": [
+    "Window glazed area to floor area ratio minimum 1:8 (12.5%)",
+    "Measured as transparent glass area / room usable floor area",
+    "Window sill height maximum 1.10 m for habitable rooms",
+    "Obstructions and shading considered per EN 17037"
+  ],
+  "evidenceRequired": [
+    "Window schedule with glazed areas",
+    "Floor area measurements per room",
+    "Daylight calculation or simulation if marginal"
+  ],
+
+  "verification": {
+    "method": "calculation",
+    "standard": "WT_2021",
+    "phase": ["design_development"],
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 57",
+      "article": "ust. 1",
+      "description": "Oswietlenie dzienne pomieszczen",
+      "fullText": "Pomieszczenie przeznaczone na pobyt ludzi powinno miec zapewnione oswietlenie dzienne, dostosowane do jego przeznaczenia, ksztaltu i wielkosci.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "wt_2021", "daylight", "lighting"]
+}

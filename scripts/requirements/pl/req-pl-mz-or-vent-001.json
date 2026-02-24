@@ -1,0 +1,42 @@
+{
+  "id": "REQ-PL-MZ-OR-VENT-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna wentylacja sali operacyjnej 20 ACH",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["operating_room"]
+  },
+
+  "metric": "air_change_rate",
+  "operator": ">=",
+  "value": 20,
+  "unit": "ACH",
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Anemometer, particle counter per ISO 14644-3",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["construction", "as_built"],
+    "responsible": "hvac_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 2",
+      "description": "Wentylacja sal operacyjnych klasy Ia",
+      "fullText": "Sale operacyjne klasy Ia powinny miec wentylacje z filtracja HEPA zapewniajaca co najmniej 20-krotna wymiane powietrza na godzine."
+    },
+    {
+      "regulation": "EN_ISO_14644-1",
+      "section": "Annex A",
+      "description": "Cleanroom ventilation rates for ISO 5 classification"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["safety", "poland", "healthcare", "ventilation", "operating_room", "cleanroom"]
+}

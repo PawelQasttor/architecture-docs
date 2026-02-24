@@ -1,0 +1,41 @@
+{
+  "id": "REQ-PL-WT-152-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna wentylacja lazienki 6 ACH",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["bathroom"]
+  },
+
+  "metric": "air_change_rate",
+  "operator": ">=",
+  "value": 6,
+  "unit": "ACH",
+  "tolerance": 0.5,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Anemometer or flow hood",
+    "standard": "WT_2021",
+    "phase": ["construction", "as_built"],
+    "frequency": "once_per_room_type",
+    "responsible": "hvac_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 152",
+      "article": "ust. 1",
+      "description": "Wentylacja lazienki",
+      "fullText": "Lazienka powinna miec wentylacje mechaniczna lub grawitacyjna zapewniajaca co najmniej 6-krotna wymiane powietrza na godzine.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "wt_2021", "ventilation", "bathroom"]
+}

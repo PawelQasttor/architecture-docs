@@ -1,0 +1,43 @@
+{
+  "id": "REQ-PL-WT-057-002",
+  "entityType": "requirement",
+  "requirementName": "Stosunek powierzchni okien do podlogi min 1:12 dla kuchni",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["kitchen"]
+  },
+
+  "qualitativeDescription": "Kuchnie powinny miec oswietlenie swiatlem dziennym. Dopuszcza sie stosunek powierzchni okien do podlogi 1:12 (ok. 8%).",
+  "acceptanceCriteria": [
+    "Window glazed area to floor area ratio minimum 1:12 (8.3%)",
+    "Artificial lighting compensation required if below 1:8"
+  ],
+  "evidenceRequired": [
+    "Window schedule with glazed areas",
+    "Floor area measurements"
+  ],
+
+  "verification": {
+    "method": "calculation",
+    "standard": "WT_2021",
+    "phase": ["design_development"],
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 57",
+      "article": "ust. 2",
+      "description": "Oswietlenie dzienne kuchni",
+      "fullText": "Dopuszcza sie oswietlenie pomieszczen kuchennych wylacznie swiatlem sztucznym, jezeli maja one powierzchnie do 6 m2 i sa wyposazone w wentylacje mechaniczna.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "wt_2021", "daylight", "kitchen"]
+}

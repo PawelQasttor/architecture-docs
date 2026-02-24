@@ -1,0 +1,37 @@
+{
+  "id": "REQ-PL-MZ-PATIENT-ROOM-AREA-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna powierzchnia sali chorych 16 m2",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["patient_room"]
+  },
+
+  "metric": "room_area_minimum",
+  "operator": ">=",
+  "value": 16.0,
+  "unit": "m2",
+  "tolerance": 0.05,
+
+  "verification": {
+    "method": "measurement",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["design_development", "as_built"],
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 1",
+      "description": "Minimalna powierzchnia sali chorych jednoosobowej",
+      "fullText": "Sala chorych jednoosobowa - minimalna powierzchnia 16 m2. Sala chorych wieloosobowa - 8 m2 na jedno lozko."
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "healthcare", "patient_room"]
+}

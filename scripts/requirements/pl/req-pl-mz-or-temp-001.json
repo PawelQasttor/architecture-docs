@@ -1,0 +1,43 @@
+{
+  "id": "REQ-PL-MZ-OR-TEMP-001",
+  "entityType": "requirement",
+  "requirementName": "Temperatura sali operacyjnej 18-24 C",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["operating_room"]
+  },
+
+  "metric": "operative_temperature",
+  "operator": "in_range",
+  "value": { "min": 18, "max": 24 },
+  "unit": "C",
+
+  "verification": {
+    "method": "sensor",
+    "tool": "Calibrated temperature sensor per ISO 7726",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["construction", "as_built", "operation"],
+    "frequency": "continuous",
+    "responsible": "bms_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 2",
+      "description": "Temperatura w salach operacyjnych",
+      "fullText": "Temperatura w sali operacyjnej powinna byc regulowana w zakresie 18-24 C, z dokladnoscia +/- 1 C."
+    },
+    {
+      "regulation": "DIN_1946-4",
+      "section": "6.3",
+      "description": "Operating room temperature requirements per DIN 1946-4"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "healthcare", "temperature", "operating_room"]
+}

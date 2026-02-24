@@ -1,0 +1,38 @@
+{
+  "id": "REQ-PL-MZ-PATIENT-VENT-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna wentylacja sali chorych 6 ACH",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["patient_room"]
+  },
+
+  "metric": "air_change_rate",
+  "operator": ">=",
+  "value": 6,
+  "unit": "ACH",
+  "tolerance": 0.5,
+
+  "verification": {
+    "method": "measurement",
+    "tool": "Anemometer or flow hood",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["construction", "as_built"],
+    "responsible": "hvac_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 2",
+      "description": "Wentylacja sal chorych",
+      "fullText": "Sale chorych powinny miec wentylacje mechaniczna nawiewno-wywiewna zapewniajaca co najmniej 6-krotna wymiane powietrza na godzine."
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["performance", "poland", "healthcare", "ventilation", "patient_room"]
+}

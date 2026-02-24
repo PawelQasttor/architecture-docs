@@ -21,18 +21,19 @@ const METRIC_TO_FIELD = {
   'room_volume_minimum': (space) => space.designVolume,
   'operative_temperature': (space) => {
     const tr = space.environmentalConditions?.temperatureRange;
-    return tr ? tr.min : null;
+    return tr ? { min: tr.min, max: tr.max } : null;
   },
   'temperature': (space) => {
     const tr = space.environmentalConditions?.temperatureRange;
-    return tr ? tr.min : null;
+    return tr ? { min: tr.min, max: tr.max } : null;
   },
   'relative_humidity': (space) => {
     const hr = space.environmentalConditions?.humidityRange;
-    return hr ? hr.min : null;
+    return hr ? { min: hr.min, max: hr.max } : null;
   },
   'air_change_rate': (space) => space.environmentalConditions?.airChangesPerHour,
   'fresh_air_rate_per_person': (space) => space.environmentalConditions?.freshAirPercentage,
+  'pressure_differential_pa': (space) => space.environmentalConditions?.pressureDifferentialPa,
   'electrical_safety_group': (space) => space.electricalSafetyGroup,
   'daylight_factor': () => null,
   'airborne_sound_insulation': () => null,
@@ -48,6 +49,7 @@ function groupRequirementsByRegulation(requirements) {
   const grouped = {
     global: [],
     poland_wt_2021: [],
+    poland_rozp_mz: [],
     poland_prawo_budowlane: [],
     eu_directives: []
   };
@@ -58,12 +60,17 @@ function groupRequirementsByRegulation(requirements) {
         const hasWT2021 = req.legalBasis.some(basis =>
           basis.regulation && basis.regulation.includes('WT_2021')
         );
+        const hasRozpMZ = req.legalBasis.some(basis =>
+          basis.regulation && basis.regulation.includes('Rozp_MZ')
+        );
         const hasPrawoBudowlane = req.legalBasis.some(basis =>
           basis.regulation && basis.regulation.includes('Prawo_budowlane')
         );
 
         if (hasWT2021) {
           grouped.poland_wt_2021.push(req);
+        } else if (hasRozpMZ) {
+          grouped.poland_rozp_mz.push(req);
         } else if (hasPrawoBudowlane) {
           grouped.poland_prawo_budowlane.push(req);
         } else {
@@ -175,8 +182,8 @@ function checkSpaceCompliance(space, requirementMap, logger) {
     const compliant = checkOperator(spaceValue, requirement.operator, requirement.value);
 
     const statusReason = compliant
-      ? `${requirement.metric}: ${spaceValue} ${requirement.operator} ${formatValue(requirement.value)} ${requirement.unit || ''}`
-      : `${requirement.metric}: ${spaceValue} does NOT satisfy ${requirement.operator} ${formatValue(requirement.value)} ${requirement.unit || ''}`;
+      ? `${requirement.metric}: ${formatValue(spaceValue)} ${requirement.operator} ${formatValue(requirement.value)} ${requirement.unit || ''}`
+      : `${requirement.metric}: ${formatValue(spaceValue)} does NOT satisfy ${requirement.operator} ${formatValue(requirement.value)} ${requirement.unit || ''}`;
 
     results.push({
       requirementId: reqId,
@@ -221,6 +228,10 @@ function checkOperator(value, operator, target) {
     case '<': return value < target;
     case '!=': return value !== target;
     case 'in_range':
+      // Range-vs-range: if value is a range object, check containment
+      if (typeof value === 'object' && value.min != null && value.max != null) {
+        return value.min >= target.min && value.max <= target.max;
+      }
       return value >= target.min && value <= target.max;
     default:
       return null;
@@ -351,7 +362,7 @@ export function generateComplianceReport(sbm, logger) {
 
   // Group requirements by regulation
   const groupedRequirements = groupRequirementsByRegulation(requirements);
-  logger.debug(`Requirements: ${groupedRequirements.global.length} global, ${groupedRequirements.poland_wt_2021.length} Poland WT 2021`);
+  logger.debug(`Requirements: ${groupedRequirements.global.length} global, ${groupedRequirements.poland_wt_2021.length} Poland WT 2021, ${groupedRequirements.poland_rozp_mz.length} Poland Rozp. MZ`);
 
   // Check space compliance
   const spaceComplianceResults = [];
@@ -392,6 +403,7 @@ export function generateComplianceReport(sbm, logger) {
       globalRequirements: groupedRequirements.global.length,
       countrySpecificRequirements:
         groupedRequirements.poland_wt_2021.length +
+        groupedRequirements.poland_rozp_mz.length +
         groupedRequirements.poland_prawo_budowlane.length,
       verified: verificationSummary.verified,
       pendingVerification: verificationSummary.pendingVerification,
@@ -413,6 +425,12 @@ export function generateComplianceReport(sbm, logger) {
         verificationMethod: r.verification?.method
       })),
       polandWT2021: groupedRequirements.poland_wt_2021.map(r => ({
+        id: r.id,
+        name: r.requirementName,
+        type: r.requirementType,
+        legalBasis: r.legalBasis
+      })),
+      polandRozpMZ: groupedRequirements.poland_rozp_mz.map(r => ({
         id: r.id,
         name: r.requirementName,
         type: r.requirementType,

@@ -1,0 +1,46 @@
+{
+  "id": "REQ-PL-WT-181-001",
+  "entityType": "requirement",
+  "requirementName": "Oswietlenie awaryjne min 50 lux na drogach ewakuacyjnych",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["corridor", "staircase"]
+  },
+
+  "qualitativeDescription": "Drogi ewakuacyjne musza posiadac oswietlenie awaryjne zapewniajace co najmniej 50 lux na posadzce, wlaczajace sie w ciagu 5 sekund od zaniku zasilania podstawowego.",
+  "acceptanceCriteria": [
+    "Emergency lighting provides minimum 50 lux at floor level on evacuation routes",
+    "Activation within 5 seconds of mains power failure",
+    "Minimum 1 hour battery backup duration",
+    "Exit signs illuminated and visible from 30 m"
+  ],
+  "evidenceRequired": [
+    "Emergency lighting calculation report",
+    "Commissioning test certificates",
+    "Battery backup duration test results"
+  ],
+
+  "verification": {
+    "method": "testing",
+    "standard": "WT_2021",
+    "phase": ["construction", "as_built"],
+    "responsible": "electrical_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 181",
+      "article": "ust. 1",
+      "description": "Oswietlenie awaryjne drog ewakuacyjnych",
+      "fullText": "W budynkach, w ktorych zanik napiecia w elektroenergetycznej sieci zasilajacej moze spowodowac zagrozenie zycia lub zdrowia ludzi, nalezy stosowac oswietlenie awaryjne.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["safety", "poland", "wt_2021", "fire_safety", "emergency_lighting"]
+}

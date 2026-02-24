@@ -141,16 +141,16 @@ export function isRequirementApplicable(requirement, entity) {
     return false;
   }
 
-  // Check space types (if applicable)
-  if (requirement.scope.spaceTypes && entity.spaceType) {
-    if (!requirement.scope.spaceTypes.includes(entity.spaceType)) {
+  // Check space types (if requirement targets specific space types)
+  if (requirement.scope.spaceTypes && requirement.scope.spaceTypes.length > 0) {
+    if (!entity.spaceType || !requirement.scope.spaceTypes.includes(entity.spaceType)) {
       return false;
     }
   }
 
-  // Check zone types (if applicable)
-  if (requirement.scope.zoneTypes && entity.zoneType) {
-    if (!requirement.scope.zoneTypes.includes(entity.zoneType)) {
+  // Check zone types (if requirement targets specific zone types)
+  if (requirement.scope.zoneTypes && requirement.scope.zoneTypes.length > 0) {
+    if (!entity.zoneType || !requirement.scope.zoneTypes.includes(entity.zoneType)) {
       return false;
     }
   }

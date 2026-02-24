@@ -1,0 +1,44 @@
+{
+  "id": "REQ-PL-WT-264-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna szerokosc biegu schodow 1.1 m",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["staircase"]
+  },
+
+  "qualitativeDescription": "Szerokosc biegu schodow w klatce schodowej powinna wynosic co najmniej 1,10 m w swietle.",
+  "acceptanceCriteria": [
+    "Staircase flight clear width minimum 1.10 m measured between wall face and handrail inner edge",
+    "Handrails on both sides if width exceeds 1.5 m",
+    "Consistent riser height (max deviation 10 mm between steps)"
+  ],
+  "evidenceRequired": [
+    "As-built measurement report of staircase dimensions",
+    "Construction inspection protocol"
+  ],
+
+  "verification": {
+    "method": "measurement",
+    "standard": "WT_2021",
+    "phase": ["construction", "as_built"],
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 264",
+      "article": "ust. 1",
+      "description": "Szerokosc biegow schodow",
+      "fullText": "Szerokosc uzyteczna biegow i spocznikow schodow stanowiacych droge ewakuacyjna powinna byc nie mniejsza niz 1,10 m.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "wt_2021", "fire_safety", "staircase"]
+}

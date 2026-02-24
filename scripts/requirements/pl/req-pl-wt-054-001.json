@@ -1,0 +1,45 @@
+{
+  "id": "REQ-PL-WT-054-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna szerokosc drzwi dla osob niepelnosprawnych 0.9 m",
+  "requirementType": "regulatory",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["bathroom", "bedroom", "patient_room", "office", "corridor"]
+  },
+
+  "qualitativeDescription": "Drzwi w budynkach dostepnych dla osob niepelnosprawnych powinny miec szerokosc w swietle co najmniej 0,90 m.",
+  "acceptanceCriteria": [
+    "Door clear opening width minimum 0.90 m",
+    "Door threshold maximum 20 mm height",
+    "Door handles at 0.80-1.10 m height",
+    "Sufficient maneuvering space (1.50 m x 1.50 m) on both sides of door"
+  ],
+  "evidenceRequired": [
+    "As-built door schedule with measured widths",
+    "Accessibility audit report"
+  ],
+
+  "verification": {
+    "method": "measurement",
+    "standard": "WT_2021",
+    "phase": ["construction", "as_built"],
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 54",
+      "article": "ust. 1",
+      "description": "Dostepnosc budynkow dla osob niepelnosprawnych - drzwi",
+      "fullText": "Drzwi do pomieszczen przeznaczonych na pobyt ludzi oraz drzwi wejsciowe do budynku powinny miec szerokosc w swietle co najmniej 0,90 m.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["regulatory", "poland", "wt_2021", "accessibility"]
+}

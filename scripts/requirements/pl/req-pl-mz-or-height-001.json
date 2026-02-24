@@ -1,0 +1,37 @@
+{
+  "id": "REQ-PL-MZ-OR-HEIGHT-001",
+  "entityType": "requirement",
+  "requirementName": "Minimalna wysokosc sali operacyjnej 3.5 m",
+  "requirementType": "dimensional",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["operating_room"]
+  },
+
+  "metric": "room_height_clear",
+  "operator": ">=",
+  "value": 3.5,
+  "unit": "m",
+  "tolerance": 0.02,
+
+  "verification": {
+    "method": "measurement",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["design_development", "as_built"],
+    "responsible": "architect"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 1",
+      "description": "Minimalna wysokosc sali operacyjnej",
+      "fullText": "Sala operacyjna - minimalna wysokosc pomieszczenia 3,50 m w swietle."
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["dimensional", "poland", "healthcare", "operating_room"]
+}

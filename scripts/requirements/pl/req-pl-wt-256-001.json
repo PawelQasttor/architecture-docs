@@ -1,0 +1,45 @@
+{
+  "id": "REQ-PL-WT-256-001",
+  "entityType": "requirement",
+  "requirementName": "Maksymalna dlugosc drogi ewakuacyjnej 30 m",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["corridor", "staircase"]
+  },
+
+  "qualitativeDescription": "Dlugosc drogi ewakuacyjnej od najdalszego miejsca przebywania ludzi do wyjscia ewakuacyjnego nie moze przekraczac 30 m (60 m przy jednym kierunku ewakuacji w strefie ZL IV).",
+  "acceptanceCriteria": [
+    "Evacuation distance from furthest occupied point to nearest exit measured on floor plan",
+    "Maximum 30 m for multi-directional evacuation",
+    "Maximum 60 m for single-direction evacuation in ZL-IV zones",
+    "Dead-end corridors limited to 10 m"
+  ],
+  "evidenceRequired": [
+    "Marked evacuation plans with measured distances",
+    "Fire safety expert opinion (opinia rzeczoznawcy ds. zabezpieczen przeciwpozarowych)"
+  ],
+
+  "verification": {
+    "method": "calculation",
+    "standard": "WT_2021",
+    "phase": ["design_development", "construction"],
+    "responsible": "fire_safety_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "WT_2021",
+      "section": "§ 256",
+      "article": "ust. 1",
+      "description": "Dlugosci drog ewakuacyjnych",
+      "fullText": "Dlugosc dojscia ewakuacyjnego w strefie pozarowej ZL mierzona wzdluz osi drogi ewakuacyjnej nie powinna przekraczac w budynku wielokondygnacyjnym 30 m.",
+      "effectiveDate": "2021-09-20"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["safety", "poland", "wt_2021", "fire_safety", "evacuation"]
+}

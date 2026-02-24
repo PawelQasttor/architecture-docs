@@ -9,7 +9,7 @@
  * - Inject jurisdiction pack (Poland requirements if country=PL)
  */
 
-import { loadJurisdictionPack } from '../enrichers/jurisdiction-pack.mjs';
+import { loadJurisdictionPack, getApplicableRequirements } from '../enrichers/jurisdiction-pack.mjs';
 
 /**
  * Normalize a single entity
@@ -492,6 +492,45 @@ export async function normalize(rawEntities, options, logger) {
   grouped.requirements = Array.from(requirementMap.values());
 
   logger.debug(`Total requirements: ${grouped.requirements.length} (${grouped.requirements.length - jurisdictionRequirements.length} from Markdown + ${jurisdictionRequirements.length} from jurisdiction pack)`);
+
+  // Auto-assign jurisdiction requirements to spaces by scope matching
+  let autoAssigned = 0;
+  for (const space of grouped.spaces) {
+    const applicable = getApplicableRequirements(space, grouped.requirements);
+    if (applicable.length === 0) continue;
+
+    if (!space.requirements) space.requirements = [];
+    const existing = new Set(space.requirements);
+    const added = [];
+
+    for (const req of applicable) {
+      if (!existing.has(req.id)) {
+        space.requirements.push(req.id);
+        added.push(req.id);
+        autoAssigned++;
+      }
+    }
+
+    if (added.length > 0) {
+      const jurisdictionSource = { source: 'jurisdiction_pack', type: 'auto_scope', added };
+      const existingMeta = space.requirements_meta;
+      if (existingMeta?.mergedFrom) {
+        existingMeta.mergedFrom.push(jurisdictionSource);
+      } else {
+        space.requirements_meta = {
+          confidence: 'specified',
+          resolution: 'merged',
+          mergedFrom: [
+            { source: space.id, type: 'explicit' },
+            jurisdictionSource
+          ]
+        };
+      }
+    }
+  }
+  if (autoAssigned > 0) {
+    logger.debug(`Auto-assigned ${autoAssigned} jurisdiction requirement(s) to spaces by scope`);
+  }
 
   // Build normalized output structure
   const normalized = {

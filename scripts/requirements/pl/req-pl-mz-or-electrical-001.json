@@ -1,0 +1,43 @@
+{
+  "id": "REQ-PL-MZ-OR-ELECTRICAL-001",
+  "entityType": "requirement",
+  "requirementName": "Sala operacyjna - grupa bezpieczenstwa elektrycznego 2",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["operating_room"]
+  },
+
+  "metric": "electrical_safety_group",
+  "operator": "==",
+  "value": "group_2",
+  "unit": "IEC_group",
+
+  "verification": {
+    "method": "inspection",
+    "tool": "Electrical installation testing per IEC 60364-7-710",
+    "standard": "Rozp_MZ_2012",
+    "phase": ["construction", "as_built"],
+    "frequency": "once",
+    "responsible": "electrical_engineer"
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Rozp_MZ_2012",
+      "section": "Zal. 3",
+      "description": "Klasyfikacja pomieszczen medycznych - grupa 2",
+      "fullText": "Sale operacyjne, sale OIOM, sale porodowe i inne pomieszczenia w ktorych stosuje sie urzadzenia podtrzymujace zycie naleza do grupy 2 wg IEC 60364-7-710."
+    },
+    {
+      "regulation": "IEC_60364-7-710",
+      "section": "710.3",
+      "description": "Classification of medical locations - Group 2"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["safety", "poland", "healthcare", "electrical", "operating_room"]
+}
