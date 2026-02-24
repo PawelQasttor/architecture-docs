@@ -3,14 +3,57 @@ documentType: "space"
 entityType: "space"
 id: "SPC-KPCPULM-D-2-46"
 spaceName: "Sala operacyjna 1"
+spaceType: "operating_room"
 roomNumber: "2.46"
 buildingId: "BLD-KPCPULM-BLOK-D"
 levelId: "LVL-KPCPULM-D-PIETRO-01"
 departmentId: "DEPT-BLOK-OPERACYJNY"
+designArea: 45.85
 zoneIds:
   - "ZONE-FIRE-ZL-IV"
 lifecycleState: "planned"
 electricalSafetyGroup: "group_2"
+environmentalConditions:
+  temperatureRange:
+    min: 18
+    max: 24
+    unit: "C"
+  humidityRange:
+    min: 30
+    max: 60
+  airChangesPerHour: 20
+  freshAirPercentage: 100
+  filtrationClass: "HEPA H14"
+  pressurization: "positive"
+  pressureDifferentialPa: 15
+  laminarFlow: true
+  operatingRoomClass: "class_ia"
+  cleanlinessClass: "ISO 5"
+finishOverrides:
+  floor:
+    material: "seamless vinyl"
+    antimicrobial: true
+    seamless: true
+    coveBase: true
+    cleanability: "cleanroom"
+    chemicalResistance: "hospital-grade disinfectants"
+    slipResistance: "R10"
+  walls:
+    material: "HPL panel"
+    antimicrobial: true
+    seamless: true
+    cleanability: "cleanroom"
+  ceiling:
+    material: "laminar flow diffuser ceiling"
+    seamless: true
+    cleanability: "cleanroom"
+shielding:
+  radiological:
+    required: false
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 45
 version: "0.1.0"
 ---
 

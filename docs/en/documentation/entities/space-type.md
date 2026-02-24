@@ -32,6 +32,10 @@ Space Types define **template specifications** that apply to all instances:
 | `spaceType` | string | Functional category (see enum) | `"sleeping_space"` |
 | `version` | string | Semantic version | `"1.0.0"` |
 
+## Space Type Enum
+
+The `spaceType` field on a Space Type uses the same enumeration as the Space entity. In v0.3.0, this was expanded with 30 new values for healthcare and infrastructure. See the full list in [Space: Space Types (Enum)](/en/documentation/entities/space#space-types-enum).
+
 ## Template Fields
 
 These fields define the **template specifications** inherited by all instances:
@@ -40,12 +44,13 @@ These fields define the **template specifications** inherited by all instances:
 |-------|------|-------------|
 | `description` | string | Type description and purpose |
 | `requirements` | array | Requirement IDs that apply to ALL instances |
-| `finishes` | object | Standard finishes (floor, walls, ceiling, door, window) |
+| `finishes` | object | Standard finishes (floor, walls, ceiling, door, window) -- supports structured format (v0.3.0) |
 | `equipment` | array | Standard equipment list with specifications |
 | `accessibilityLevel` | string | Default accessibility: `standard` / `mobility` / `visual` / `hearing` / `full` |
 | `occupancyProfile` | object | Typical occupancy (maxOccupants, bedCount, usagePattern, hours) |
-| `environmentalConditions` | object | Temperature, humidity, ventilation, pressurization template |
+| `environmentalConditions` | object | Temperature, humidity, ventilation, pressurization template -- expanded in v0.3.0 |
 | `electricalSafetyGroup` | string | IEC 60364-7-710: `standard` / `group_0` / `group_1` / `group_2` |
+| `shielding` | object | Radiological, RF, and acoustic shielding requirements (v0.3.0) |
 | `typicalArea` | object | Area range guidance (min, max, typical in m²) |
 | `typicalHeight` | object | Height range guidance (min, typical in m) |
 | `tags` | array | Classification tags |
@@ -344,6 +349,169 @@ occupancyProfile:
 ```
 
 Instances inherit these values and can override them when needed (e.g., an isolation room with negative pressurization).
+
+## Structured Finishes (v0.3.0)
+
+**NEW in v0.3.0:** Finish fields now accept either a simple string (backward compatible) or a structured object with detailed material properties. The structured format is essential for healthcare, cleanroom, and industrial space types.
+
+### Simple Format (backward compatible)
+
+```yaml
+finishes:
+  floor: "oak_engineered_natural"
+  walls: "paint_white_matte"
+  ceiling: "paint_white_matte"
+```
+
+### Structured Format (v0.3.0)
+
+```yaml
+finishes:
+  floor:
+    material: "seamless vinyl"
+    productCode: "Tarkett iQ Granit SD"
+    fireClass: "Bfl-s1"
+    slipResistance: "R10"
+    antimicrobial: true
+    esdProtection: true
+    chemicalResistance: "hospital-grade disinfectants"
+    cleanability: "cleanroom"
+    coveBase: true
+    seamless: true
+  walls:
+    material: "HPL panel"
+    fireClass: "B-s1,d0"
+    antimicrobial: true
+    cleanability: "medical"
+    seamless: true
+  ceiling:
+    material: "sealed metal tile"
+    fireClass: "A2-s1,d0"
+    cleanability: "cleanroom"
+```
+
+### Structured Finish Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `material` | string | Material name (required in structured format) |
+| `productCode` | string | Manufacturer product code |
+| `fireClass` | string | Fire reaction class (e.g., "Bfl-s1", "A2-s1,d0") |
+| `slipResistance` | string | Slip resistance rating (e.g., "R10", "R11") |
+| `antimicrobial` | boolean | Whether the finish has antimicrobial properties |
+| `esdProtection` | boolean | Whether ESD protection is provided |
+| `chemicalResistance` | string | Chemical resistance level |
+| `cleanability` | enum | Cleaning regime: `standard` / `medical` / `cleanroom` |
+| `coveBase` | boolean | Rounded floor-wall junction required |
+| `seamless` | boolean | Finish must be seamless (no joints) |
+
+### Example: Operating Room Type with Structured Finishes
+
+```yaml
+---
+id: "ST-OR-CLASS-IA"
+entityType: "space_type"
+documentType: "space_type"
+typeName: "Operating Room - DIN 1946-4 Class Ia"
+spaceType: "operating_room"
+version: "1.0.0"
+
+electricalSafetyGroup: "group_2"
+
+finishes:
+  floor:
+    material: "seamless conductive vinyl"
+    fireClass: "Bfl-s1"
+    slipResistance: "R10"
+    antimicrobial: true
+    esdProtection: true
+    cleanability: "cleanroom"
+    coveBase: true
+    seamless: true
+  walls:
+    material: "stainless steel / HPL hybrid"
+    fireClass: "A2-s1,d0"
+    antimicrobial: true
+    cleanability: "cleanroom"
+    seamless: true
+  ceiling:
+    material: "sealed laminar flow canopy"
+    fireClass: "A2-s1,d0"
+    cleanability: "cleanroom"
+
+environmentalConditions:
+  temperatureRange: { min: 18, max: 24, unit: "C" }
+  humidityRange: { min: 30, max: 60 }
+  pressurization: "positive"
+  cleanlinessClass: "ISO 7"
+  airChangesPerHour: 20
+  freshAirPercentage: 100
+  filtrationClass: "HEPA H14"
+  pressureDifferentialPa: 15
+  laminarFlow: true
+  operatingRoomClass: "class_ia"
+
+shielding:
+  radiological:
+    required: false
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 50
+
+requirements:
+  - "REQ-OR-CLASS-IA-001"
+  - "REQ-FIRE-SEPARATION-OR"
+  - "REQ-HVAC-OR-LAMINAR"
+
+typicalArea:
+  min: 36.0
+  max: 55.0
+  typical: 42.0
+  unit: "m2"
+
+typicalHeight:
+  min: 2.80
+  typical: 3.00
+  unit: "m"
+---
+```
+
+## Expanded Environmental Conditions (v0.3.0)
+
+Space Types can now define 6 additional environmental condition fields for healthcare and cleanroom applications. These are inherited by all instances:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `airChangesPerHour` | number | Total ACH (per ASHRAE 170 for healthcare) |
+| `freshAirPercentage` | number (0-100) | Minimum % outside air. 100 = no recirculation |
+| `filtrationClass` | string | Air filtration class (e.g., "HEPA H14") |
+| `pressureDifferentialPa` | number | Pressure difference in Pa vs. corridor |
+| `laminarFlow` | boolean | Whether unidirectional airflow is required |
+| `operatingRoomClass` | enum | DIN 1946-4: `class_ia` / `class_ib` / `class_ii` / `not_applicable` |
+
+See [Space: Environmental Conditions](/en/documentation/entities/space#environmental-conditions) for the full reference and typical values by space type.
+
+## Shielding (v0.3.0)
+
+Space Types can define shielding requirements inherited by all instances. This covers radiological protection, RF shielding, and acoustic isolation.
+
+```yaml
+# Diagnostic imaging room type
+shielding:
+  radiological:
+    required: true
+    material: "lead sheet"
+    thicknessMm: 2.0
+    equivalentPbMm: 2.0
+    protectedDirections: ["walls", "floor", "ceiling", "door", "window"]
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 45
+```
+
+See [Space: Shielding](/en/documentation/entities/space#shielding-v0-3-0) for the full field reference.
 
 ## See Also
 

@@ -192,6 +192,52 @@ bathroom-01:
 }
 ```
 
+### Example: Structured Finishes on Level (v0.3.0)
+
+**NEW in v0.3.0:** Finish fields accept either simple strings or structured objects. Structured finishes are useful for healthcare levels where fire class, antimicrobial properties, and cleanability matter.
+
+```yaml
+# Hospital Level 03 - Operating Theatre Suite
+LVL-03:
+  id: "LVL-03"
+  levelName: "Level 03 (Operating Theatres)"
+  typicalFinishes:
+    floor:
+      material: "seamless vinyl"
+      productCode: "Tarkett iQ Granit SD"
+      fireClass: "Bfl-s1"
+      slipResistance: "R10"
+      antimicrobial: true
+      chemicalResistance: "hospital-grade disinfectants"
+      cleanability: "medical"
+      coveBase: true
+      seamless: true
+    walls:
+      material: "HPL panel"
+      fireClass: "B-s1,d0"
+      antimicrobial: true
+      cleanability: "medical"
+    ceiling:
+      material: "sealed metal tile"
+      fireClass: "A2-s1,d0"
+      cleanability: "medical"
+
+# Operating room overrides to cleanroom-grade
+or-01:
+  levelId: "LVL-03"
+  finishOverrides:
+    floor:
+      material: "seamless conductive vinyl"
+      esdProtection: true
+      cleanability: "cleanroom"  # upgrade from medical to cleanroom
+    ceiling:
+      material: "sealed laminar flow canopy"
+      cleanability: "cleanroom"
+    # walls inherited from level (medical grade HPL)
+```
+
+The structured format fields are documented in [Space Type: Structured Finishes](/en/documentation/entities/space-type#structured-finishes-v0-3-0).
+
 ### Example: Environmental Conditions Inheritance
 
 ```yaml
@@ -226,6 +272,54 @@ server-room:
       min: 40
       max: 50
 ```
+
+### Example: Expanded Environmental Conditions on Level (v0.3.0)
+
+**NEW in v0.3.0:** Six new fields for healthcare and cleanroom levels. These are inherited by all spaces on the level unless overridden.
+
+```yaml
+# Hospital Level 03 - Operating Theatre Suite
+LVL-03:
+  typicalEnvironmentalConditions:
+    temperatureRange: { min: 18, max: 24, unit: "C" }
+    humidityRange: { min: 30, max: 60 }
+    pressurization: "positive"
+    # v0.3.0 fields:
+    airChangesPerHour: 15            # baseline for surgical floor
+    freshAirPercentage: 100          # no recirculation
+    filtrationClass: "HEPA H13"      # baseline filtration
+    pressureDifferentialPa: 10       # vs. adjacent corridors
+
+# Operating rooms override to Class Ia standard
+or-01:
+  levelId: "LVL-03"
+  environmentalConditions:
+    temperatureRange: { min: 18, max: 24, unit: "C" }
+    humidityRange: { min: 30, max: 60 }
+    pressurization: "positive"
+    airChangesPerHour: 20            # higher than level baseline
+    freshAirPercentage: 100
+    filtrationClass: "HEPA H14"      # upgraded filtration
+    pressureDifferentialPa: 15       # higher pressure
+    laminarFlow: true                # laminar flow over surgical zone
+    operatingRoomClass: "class_ia"
+
+# Recovery rooms use level defaults (15 ACH, H13, +10 Pa)
+recovery-01:
+  levelId: "LVL-03"
+  # environmentalConditions inherited from level
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `airChangesPerHour` | number | Total ACH (per ASHRAE 170 for healthcare) |
+| `freshAirPercentage` | number (0-100) | Minimum % outside air. 100 = no recirculation |
+| `filtrationClass` | string | Air filtration class (e.g., "HEPA H14", "F9") |
+| `pressureDifferentialPa` | number | Pressure difference in Pa vs. corridor |
+| `laminarFlow` | boolean | Whether unidirectional airflow is required |
+| `operatingRoomClass` | enum | DIN 1946-4: `class_ia` / `class_ib` / `class_ii` / `not_applicable` |
+
+See [Space: Environmental Conditions](/en/documentation/entities/space#environmental-conditions) for the full reference and typical values by space type.
 
 ### Example: Requirement Merging
 

@@ -45,6 +45,11 @@ The `systemCategory` field must be one of these values:
 | `communication` | Data and communication networks | Structured cabling, Wi-Fi, telecom, AV |
 | `bms` | Building management systems | Controllers, sensors, actuators, software |
 | `renewable_energy` | Renewable energy systems | Solar PV, wind, geothermal, energy storage |
+| `medical_gas` | Medical gas distribution | O2 outlets, vacuum outlets, N2O manifolds, AGSS, zone valves |
+| `nurse_call` | Nurse call and patient alerts | Call stations, corridor lights, staff terminals |
+| `pneumatic_tube` | Pneumatic tube transport | Stations, blowers, diverters, carrier sensors |
+| `medical_waste` | Medical waste collection | Sharps containers, segregation bins, autoclaves |
+| `it_network` | IT network infrastructure | Patch panels, switches, Wi-Fi APs, server racks |
 
 ## Template Fields
 
@@ -104,6 +109,37 @@ components:
 - `surveillance` - CCTV cameras, DVR/NVR, monitors
 - `intrusion` - Motion sensors, door contacts, control panel
 - `intercom` - Entry stations, monitors, door release
+
+**Medical Gas Systems (v0.3.0):**
+- `manifold` - Gas manifolds, automatic changeover
+- `zone_valve` - Zone valve assemblies, area isolation
+- `outlet` - Wall-mounted gas outlets, pendant outlets
+- `alarm` - Area alarm panels, master alarm
+- `pipeline` - Distribution pipework, risers
+
+**Nurse Call Systems (v0.3.0):**
+- `call_station` - Patient call points, bed-head units
+- `display` - Corridor displays, room status indicators
+- `staff_terminal` - Staff base stations, handsets
+- `integration` - BMS, paging, mobile device integration
+
+**Pneumatic Tube Systems (v0.3.0):**
+- `station` - Send/receive stations, dual-direction
+- `blower` - Air blowers, compressors
+- `diverter` - Track diverters, routing switches
+- `carrier` - Carriers, carrier detection sensors
+
+**Medical Waste Systems (v0.3.0):**
+- `collection` - Collection points, segregation bins
+- `transport` - Collection trolleys, AGVs
+- `processing` - Autoclaves, shredders, compactors
+- `storage` - Interim storage, cold storage
+
+**IT Network Systems (v0.3.0):**
+- `cabling` - Structured cabling, fiber, copper
+- `switching` - Network switches, routers, firewalls
+- `wireless` - Wi-Fi access points, controllers
+- `server` - Server racks, UPS, cooling
 
 ## Typical Performance Object Structure
 
@@ -545,4 +581,4 @@ SYT-ELECTRICAL-FLOOR-STANDARD → LVL-01: SYS-ELEC-L01
 - **[Asset Instance](/en/documentation/entities/asset-instance)** - Equipment within systems
 - **[Space Type](/en/documentation/entities/space-type)** - Space templates (similar pattern)
 - **[Requirement](/en/documentation/entities/requirement)** - Requirements referenced by systems
-- **Schema:** `sbm-schema-v0.2.json` - System Type definition
+- **Schema:** `sbm-schema-v0.3.json` - System Type definition

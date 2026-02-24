@@ -126,6 +126,7 @@ These fields can be inherited from your Level (floor):
 
 ```typescript
 type SpaceType =
+  // Residential
   | "sleeping_space"
   | "bedroom"
   | "living_space"
@@ -135,21 +136,96 @@ type SpaceType =
   | "kitchen"
   | "bathroom"
   | "wet_room"
+  // Circulation
   | "corridor"
   | "staircase"
+  | "elevator_lobby"
+  | "entrance"
+  // Utility
   | "storage"
   | "technical"
+  // Commercial / Office
   | "office"
   | "meeting_room"
   | "open_office"
   | "break_room"
-  | "elevator_lobby"
-  | "entrance"
   | "classroom"
   | "retail"
   | "healthcare"
-  | "assembly";
+  | "assembly"
+  // v0.3.0 — Healthcare
+  | "operating_room"
+  | "icu"
+  | "patient_room"
+  | "examination_room"
+  | "treatment_room"
+  | "diagnostic_imaging"
+  | "laboratory"
+  | "sterilization"
+  | "pharmacy"
+  | "clean_room"
+  | "isolation_room"
+  | "nursing_station"
+  | "waiting_area"
+  | "emergency_room"
+  | "autopsy"
+  | "medical_storage"
+  | "decontamination"
+  // v0.3.0 — Infrastructure
+  | "server_room"
+  | "workshop"
+  | "loading_dock"
+  | "parking"
+  | "mechanical_room"
+  | "electrical_room"
+  | "generator_room"
+  | "water_treatment"
+  | "waste_management"
+  | "chapel"
+  | "cafeteria"
+  | "laundry"
+  | "reception";
 ```
+
+### Healthcare Space Types (v0.3.0)
+
+| Value | Description | Typical Requirements |
+|-------|-------------|---------------------|
+| `operating_room` | Surgical operating theatre | Class Ia/Ib/II per DIN 1946-4, laminar flow, positive pressure, shielding |
+| `icu` | Intensive care unit bed bay | Group 2 electrical, 6+ ACH, positive pressure |
+| `patient_room` | Standard patient room / ward | Group 1 electrical, 2+ ACH, neutral pressure |
+| `examination_room` | Outpatient examination room | Group 1 electrical, standard ventilation |
+| `treatment_room` | Treatment/procedure room | Group 1-2 electrical, enhanced ventilation |
+| `diagnostic_imaging` | X-ray, CT, MRI rooms | Radiological shielding, RF shielding (MRI) |
+| `laboratory` | Clinical or research laboratory | Fume extraction, negative pressure, chemical resistance |
+| `sterilization` | CSSD / sterilization department | Clean-dirty separation, positive pressure clean side |
+| `pharmacy` | Hospital pharmacy / compounding | Cleanroom for compounding, laminar flow hoods |
+| `clean_room` | ISO 14644 cleanroom | Filtration (HEPA), pressure cascade, gowning |
+| `isolation_room` | Airborne/contact isolation | Negative pressure, anteroom, HEPA exhaust |
+| `nursing_station` | Nurse work station | Open plan, visibility to patient rooms |
+| `waiting_area` | Patient/visitor waiting | Standard ventilation, accessible |
+| `emergency_room` | Emergency department treatment bay | Group 1-2 electrical, high ACH |
+| `autopsy` | Autopsy / mortuary suite | Strong negative pressure, HEPA exhaust |
+| `medical_storage` | Sterile/clean storage | Controlled environment, restricted access |
+| `decontamination` | Decontamination zone | Drainage containment, chemical resistance |
+
+### Infrastructure Space Types (v0.3.0)
+
+| Value | Description | Typical Requirements |
+|-------|-------------|---------------------|
+| `server_room` | IT server / data center room | 18-22 C, UPS, fire suppression, ESD flooring |
+| `workshop` | Maintenance / technical workshop | Extract ventilation, heavy-duty finishes |
+| `loading_dock` | Goods delivery area | Vehicle access, roller shutters |
+| `parking` | Vehicle parking area | CO monitoring, extract ventilation |
+| `mechanical_room` | Central plant / AHU room | Acoustic isolation, service access |
+| `electrical_room` | Main switchboard / transformer room | Fire rating, restricted access |
+| `generator_room` | Emergency generator room | Exhaust extraction, fuel storage compliance |
+| `water_treatment` | Water treatment plant room | Drainage, chemical storage |
+| `waste_management` | Waste sorting / compactor room | Wash-down finishes, ventilation |
+| `chapel` | Chapel / prayer room | Acoustic privacy |
+| `cafeteria` | Staff/public dining area | Kitchen extract, grease traps |
+| `laundry` | Central laundry facility | High humidity tolerance, drainage |
+| `reception` | Main reception / concierge desk | Accessible, security desk |
 
 ## Property Inheritance (Level → Space)
 
@@ -457,6 +533,132 @@ This space must satisfy:
 - **Acoustic Zone:** Night (enhanced acoustic protection)
 ```
 
+## Example 4: Operating Room with v0.3.0 Fields
+
+**A healthcare operating room using new v0.3.0 features** -- structured finishes, expanded environmental conditions, shielding, and directional adjacency:
+
+```markdown
+---
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L03-OR-01"
+spaceName: "Operating Room 01"
+spaceType: "operating_room"
+buildingId: "BLD-01"
+levelId: "LVL-03"
+departmentId: "DEPT-SURGERY"
+version: "1.0.0"
+
+designArea: 42.0
+designHeight: 3.00
+unit: "m"
+
+electricalSafetyGroup: "group_2"
+
+zoneIds:
+  - "ZONE-FIRE-ZL-II"
+  - "ZONE-CLEANROOM-OR"
+  - "ZONE-MED-ELEC-GROUP2"
+
+requirements:
+  - "REQ-OR-CLASS-IA-001"
+  - "REQ-FIRE-SEPARATION-OR"
+  - "REQ-HVAC-OR-LAMINAR"
+
+# Structured finishes (v0.3.0)
+finishes:
+  floor:
+    material: "seamless vinyl"
+    productCode: "Tarkett iQ Granit SD"
+    fireClass: "Bfl-s1"
+    slipResistance: "R10"
+    antimicrobial: true
+    esdProtection: true
+    chemicalResistance: "hospital-grade disinfectants"
+    cleanability: "cleanroom"
+    coveBase: true
+    seamless: true
+  walls:
+    material: "HPL panel"
+    fireClass: "B-s1,d0"
+    antimicrobial: true
+    cleanability: "medical"
+    seamless: true
+  ceiling:
+    material: "sealed laminar flow canopy"
+    fireClass: "A2-s1,d0"
+    cleanability: "cleanroom"
+
+# Expanded environmental conditions (v0.3.0)
+environmentalConditions:
+  temperatureRange: { min: 18, max: 24, unit: "C" }
+  humidityRange: { min: 30, max: 60 }
+  pressurization: "positive"
+  cleanlinessClass: "ISO 7"
+  airChangesPerHour: 20
+  freshAirPercentage: 100
+  filtrationClass: "HEPA H14"
+  pressureDifferentialPa: 15
+  laminarFlow: true
+  operatingRoomClass: "class_ia"
+
+# Shielding (v0.3.0)
+shielding:
+  radiological:
+    required: false
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 50
+
+# Expanded adjacency (v0.3.0)
+adjacentSpaces:
+  - id: "SP-BLD-01-L03-ANTEROOM-01"
+    relationship: "connects_via_airlock"
+    boundaryType: "airlock"
+    fireRating: "EI 60"
+  - id: "SP-BLD-01-L03-SCRUB"
+    relationship: "connects_via_door"
+    boundaryType: "interlock_door"
+  - id: "SP-BLD-01-L03-CSSD-CLEAN"
+    relationship: "clean_supply_to"
+    boundaryType: "pass_through_hatch"
+  - id: "SP-BLD-01-L03-DIRTY-CORR"
+    relationship: "dirty_return_from"
+    boundaryType: "pass_through_hatch"
+  - id: "SP-BLD-01-L03-OR-02"
+    relationship: "shares_wall"
+    boundaryType: "fire_wall"
+    fireRating: "REI 60"
+
+occupancy:
+  maxOccupants: 10
+  usagePattern: "healthcare_surgical"
+  hoursPerDay: 10
+  daysPerWeek: 5
+
+tags:
+  - "healthcare"
+  - "surgery"
+  - "cleanroom"
+  - "laminar-flow"
+---
+
+# Operating Room 01
+
+Class Ia operating room (DIN 1946-4) with laminar flow canopy.
+
+## Key Parameters
+
+- Floor area: 42.0 m², Clear height: 3.00 m
+- Electrical safety: Group 2 (IEC 60364-7-710)
+- HEPA H14 filtration, 20 ACH, 100% fresh air
+- Positive pressure +15 Pa vs. corridor
+- Seamless vinyl flooring with cove base, antimicrobial HPL walls
+```
+
+---
+
 ## Example: Compiled JSON
 
 **Output:** `build/green-terrace/sbm.json` (excerpt)
@@ -531,6 +733,52 @@ adjacentSpaces:
     relationship: "above"             # Space above
   - id: "SP-BLD-01-L00-001"
     relationship: "below"             # Space below
+```
+
+### v0.3.0 Relationship Values
+
+Nine new relationship types for healthcare and directional flow topology:
+
+| Relationship | Description | Typical Use |
+|-------------|-------------|-------------|
+| `connects_via_airlock` | Connected through an airlock/anteroom | Isolation rooms, cleanrooms |
+| `connects_via_pass_through` | Connected via pass-through hatch | CSSD dirty-to-clean, pharmacy |
+| `clean_supply_to` | Clean material supply route to this space | CSSD to operating theatre |
+| `dirty_return_from` | Dirty material return route from this space | OR to CSSD dirty reception |
+| `patient_flow_to` | Patient movement route to this space | ED triage to treatment bay |
+| `staff_flow_to` | Staff movement route to this space | Changing room to clean corridor |
+| `visitor_flow_to` | Visitor access route to this space | Lobby to visiting area |
+| `material_flow_to` | Material/goods transport route to this space | Loading dock to pharmacy store |
+| `vertical_shaft` | Connected via vertical shaft (risers, chutes) | MEP risers between floors |
+
+### v0.3.0 Boundary Fields
+
+Each adjacency item can now include optional `boundaryType` and `fireRating` fields:
+
+| Field | Type | Description | Values |
+|-------|------|-------------|--------|
+| `boundaryType` | string | Physical boundary type | `standard_wall`, `fire_wall`, `smoke_barrier`, `airlock`, `pass_through_hatch`, `interlock_door`, `pressure_barrier` |
+| `fireRating` | string | Fire resistance rating of the boundary | `"EI 30"`, `"REI 60"`, `"EI 90"` |
+
+```yaml
+# Healthcare adjacency example (v0.3.0)
+adjacentSpaces:
+  - id: "SP-BLD-01-L03-CORR-CLEAN"
+    relationship: "connects_via_door"
+    boundaryType: "interlock_door"
+    fireRating: "EI 30"
+  - id: "SP-BLD-01-L03-ANTEROOM"
+    relationship: "connects_via_airlock"
+    boundaryType: "airlock"
+    fireRating: "EI 60"
+  - id: "SP-BLD-01-L03-CSSD-CLEAN"
+    relationship: "clean_supply_to"
+    boundaryType: "pass_through_hatch"
+  - id: "SP-BLD-01-L03-CSSD-DIRTY"
+    relationship: "dirty_return_from"
+    boundaryType: "pass_through_hatch"
+  - id: "SP-BLD-01-L02-MECH"
+    relationship: "vertical_shaft"
 ```
 
 ## BIM Mapping
@@ -878,6 +1126,8 @@ This enables filtering and reporting by organizational unit without requiring a 
 
 The `environmentalConditions` object specifies temperature, humidity, ventilation, and air pressure requirements. Can be set on Space Type (template) and overridden per instance.
 
+### Core Fields
+
 ```yaml
 environmentalConditions:
   temperatureRange:
@@ -894,15 +1144,56 @@ environmentalConditions:
   cleanlinessClass: "ISO 7"   # ISO 14644 class
 ```
 
+### v0.3.0 Fields
+
+Six new fields for detailed air quality and pressure management, primarily for healthcare and cleanroom applications:
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `airChangesPerHour` | number | Total ACH (per ASHRAE 170 for healthcare) | `20` |
+| `freshAirPercentage` | number (0-100) | Minimum % of outside air in supply. 100 = no recirculation | `100` |
+| `filtrationClass` | string | Air filtration class | `"HEPA H14"` |
+| `pressureDifferentialPa` | number | Pressure difference in Pa vs. corridor. Positive = higher inside | `+15` |
+| `laminarFlow` | boolean | Whether unidirectional airflow is required over critical zone | `true` |
+| `operatingRoomClass` | enum | DIN 1946-4 classification: `class_ia` / `class_ib` / `class_ii` / `not_applicable` | `"class_ia"` |
+
+```yaml
+# Operating room with v0.3.0 fields
+environmentalConditions:
+  temperatureRange: { min: 18, max: 24, unit: "C" }
+  humidityRange: { min: 30, max: 60 }
+  pressurization: "positive"
+  cleanlinessClass: "ISO 7"
+  # v0.3.0 fields:
+  airChangesPerHour: 20
+  freshAirPercentage: 100
+  filtrationClass: "HEPA H14"
+  pressureDifferentialPa: 15
+  laminarFlow: true
+  operatingRoomClass: "class_ia"
+```
+
+### Operating Room Class (DIN 1946-4)
+
+| Class | Description | Laminar Flow | ACH | Use |
+|-------|-------------|-------------|-----|-----|
+| `class_ia` | Ultra-clean with laminar flow | Yes | 20+ | Joint replacement, cardiac surgery |
+| `class_ib` | Ultra-clean without laminar flow | No | 20+ | General surgery, C-section |
+| `class_ii` | Standard ventilation | No | 15+ | Outpatient procedures, endoscopy |
+| `not_applicable` | Not an operating room | N/A | N/A | All other spaces |
+
 **Typical values by space type:**
 
-| Space | Temperature | Humidity | Ventilation | Pressure |
-|-------|-------------|----------|-------------|----------|
-| Operating room | 18-24°C | 30-60% | 20 ACH | positive |
-| ICU ward | 20-24°C | 30-60% | 6 ACH | positive |
-| Patient room | 20-24°C | 30-70% | 2 ACH | neutral |
-| Residential bedroom | 18-22°C | 40-60% | 0.5 ACH | neutral |
-| Isolation room | 20-24°C | 30-60% | 12 ACH | negative |
+| Space | Temperature | Humidity | ACH | Fresh Air | Filtration | Pressure (Pa) |
+|-------|-------------|----------|-----|-----------|-----------|---------------|
+| Operating room (Ia) | 18-24°C | 30-60% | 20 | 100% | HEPA H14 | +15 |
+| Operating room (II) | 18-24°C | 30-60% | 15 | 100% | HEPA H13 | +10 |
+| ICU ward | 20-24°C | 30-60% | 6 | 100% | F9 | +2.5 |
+| Patient room | 20-24°C | 30-70% | 2 | -- | F7 | neutral |
+| Isolation (airborne) | 20-24°C | 30-60% | 12 | 100% | HEPA H14 | -2.5 |
+| Clean room ISO 7 | 20-22°C | 30-50% | 25 | -- | HEPA H14 | +15 |
+| Residential bedroom | 18-22°C | 40-60% | 0.5 | -- | -- | neutral |
+| Server room | 18-22°C | 40-50% | 10 | -- | -- | +5 |
 
 ## Electrical Safety Groups
 
@@ -983,6 +1274,58 @@ lifecycleState: "design"
 ```
 
 This enables filtering spaces by phase - useful for phased construction projects and portfolio management.
+
+## Shielding (v0.3.0)
+
+**NEW in v0.3.0:** The optional `shielding` object defines radiological protection, RF shielding, and acoustic isolation requirements. Essential for diagnostic imaging rooms (X-ray, CT, MRI), radiation therapy, and sensitive equipment spaces.
+
+### Shielding Fields
+
+| Sub-object | Field | Type | Description |
+|-----------|-------|------|-------------|
+| `radiological` | `required` | boolean | Whether radiological shielding is needed |
+| | `material` | string | Shielding material (e.g., "lead sheet", "barium plaster") |
+| | `thicknessMm` | number | Shielding thickness in mm |
+| | `equivalentPbMm` | number | Lead equivalent thickness in mm |
+| | `protectedDirections` | array | Which elements need shielding: `walls`, `floor`, `ceiling`, `door`, `window` |
+| `rfShielding` | `required` | boolean | Whether RF shielding is needed |
+| | `attenuationDb` | number | Required attenuation in dB |
+| | `frequencyRangeMhz` | string | Frequency range to shield (e.g., "10-300") |
+| `acousticIsolation` | `requiredRw` | number | Required weighted sound reduction index Rw in dB |
+| | `impactSoundLn` | number | Required impact sound level Ln,w in dB |
+
+### Example: Diagnostic Imaging Room
+
+```yaml
+shielding:
+  radiological:
+    required: true
+    material: "lead sheet"
+    thicknessMm: 2.5
+    equivalentPbMm: 2.0
+    protectedDirections: ["walls", "floor", "ceiling", "door", "window"]
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 45
+```
+
+### Example: MRI Room (RF + Acoustic)
+
+```yaml
+shielding:
+  radiological:
+    required: false
+  rfShielding:
+    required: true
+    attenuationDb: 100
+    frequencyRangeMhz: "10-300"
+  acousticIsolation:
+    requiredRw: 55
+    impactSoundLn: 48
+```
+
+---
 
 ## Data Provenance (v0.2.0)
 

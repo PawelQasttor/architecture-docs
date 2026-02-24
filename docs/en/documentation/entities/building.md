@@ -402,6 +402,91 @@ certifications:
     status: "design_review"
 ```
 
+## Departments (v0.3.0)
+
+**NEW in v0.3.0:** The project can define a `departments` array to organize spaces into functional departments. This is especially useful for hospitals, large office buildings, and institutional projects where spaces belong to organizational units.
+
+### Department Fields
+
+| Field | Type | Required | Description | Example |
+|-------|------|----------|-------------|---------|
+| `id` | string | Yes | Department identifier (DEPT-xxx) | `"DEPT-OIOM"` |
+| `name` | string | Yes | Department name | `"Intensive Care Unit"` |
+| `description` | string | No | Detailed description | `"12-bed ICU with isolation bays"` |
+| `levelIds` | array | No | Levels where department is located | `["LVL-02", "LVL-03"]` |
+| `headOfDepartment` | string | No | Department head name/role | `"Dr. Anna Kowalska"` |
+| `operatingHours` | string | No | Operating schedule | `"24/7"` |
+| `staffCount` | integer | No | Number of staff | `45` |
+
+### Example: Hospital Departments
+
+```yaml
+---
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Regional Hospital - Building D"
+buildingType: "healthcare"
+country: "PL"
+version: "1.0.0"
+
+departments:
+  - id: "DEPT-OIOM"
+    name: "Intensive Care Unit (OIOM)"
+    description: "12-bed ICU with 2 isolation bays"
+    levelIds: ["LVL-02"]
+    headOfDepartment: "Dr. Anna Kowalska"
+    operatingHours: "24/7"
+    staffCount: 45
+
+  - id: "DEPT-SURGERY"
+    name: "Surgery Department"
+    description: "6 operating rooms + recovery"
+    levelIds: ["LVL-03"]
+    headOfDepartment: "Dr. Piotr Nowak"
+    operatingHours: "Mon-Fri 07:00-19:00, emergency 24/7"
+    staffCount: 60
+
+  - id: "DEPT-RADIOLOGY"
+    name: "Radiology Department"
+    description: "X-ray, CT, MRI, fluoroscopy"
+    levelIds: ["LVL-01"]
+    operatingHours: "Mon-Fri 07:00-20:00, on-call 24/7"
+    staffCount: 25
+
+  - id: "DEPT-ADMIN"
+    name: "Administration"
+    description: "Hospital administration and records"
+    levelIds: ["LVL-01"]
+    operatingHours: "Mon-Fri 08:00-16:00"
+    staffCount: 15
+---
+
+# Regional Hospital - Building D
+
+Main clinical building with ICU, surgery, radiology, and admin departments.
+```
+
+### Referencing Departments from Spaces
+
+Spaces reference their department using the `departmentId` field:
+
+```yaml
+# An ICU patient room
+---
+id: "SP-BLD-01-L02-001"
+spaceName: "ICU Bay 01"
+spaceType: "icu"
+departmentId: "DEPT-OIOM"    # References the department defined on building
+levelId: "LVL-02"
+buildingId: "BLD-01"
+---
+```
+
+The compiler can then generate reports grouped by department, such as total area per department, staff-to-space ratios, and equipment inventories by department.
+
+---
+
 ## Compilation Report Integration
 
 Building metadata populates compliance report header:

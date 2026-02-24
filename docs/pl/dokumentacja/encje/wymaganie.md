@@ -34,27 +34,49 @@ Wymagania określają:
 | `documentType` | string | Musi być `"requirement"` | `"requirement"` |
 | `requirementName` | string | Nazwa czytelna dla ludzi | `"Minimum daylight factor for sleeping spaces"` |
 | `requirementType` | string | Typ (patrz wyliczenie poniżej) | `"performance"` |
-| `metric` | string | Mierzalna metryka | `"daylight_factor"` |
-| `operator` | string | Operator por&oacute;wnania | `">="`, `"<="`, `"=="`, `"range"` |
-| `value` | number/object | Wartość docelowa lub zakres | `2.0` lub `{ "min": 20, "max": 26 }` |
+| `metric` | string | **[v0.3.0: OPCJONALNE]** Mierzalna metryka | `"daylight_factor"` |
+| `operator` | string | **[v0.3.0: OPCJONALNE]** Operator por&oacute;wnania | `">="`, `"<="`, `"=="`, `"range"` |
+| `value` | number/object | **[v0.3.0: OPCJONALNE]** Wartość docelowa lub zakres | `2.0` lub `{ "min": 20, "max": 26 }` |
 | `unit` | string | Jednostka miary | `"%"`, `"m"`, `"dB"`, `"°C"` |
 | `version` | string | Wersja semantyczna | `"1.0.0"` |
+
+::: warning Zmiana w v0.3.0: Wymagania numeryczne i jakościowe
+Pola `metric`, `operator` i `value` są teraz **opcjonalne**. Wymagania mogą być:
+- **Numeryczne** (jak dotychczas) — z `metric`, `operator`, `value`
+- **Jakościowe** (NOWOŚĆ v0.3.0) — z `qualitativeDescription`, `acceptanceCriteria`, `evidenceRequired`
+
+Dodano nową wartość `requirementType`: `"qualitative"`.
+:::
 
 ::: tip Dla Architektów: Co Oznaczają Te Wymagane Pola
 - **id**: Identyfikator wymagania (np. `REQ-PL-WT-ROOM-HEIGHT-001`)
 - **requirementName**: Opis po polsku („Minimalna wysokość pomieszczenia wg WT 2021")
-- **requirementType**: Kategoria — `performance`, `dimensional`, `regulatory`, `safety`
-- **metric**: Co mierzysz (np. `height`, `daylight_factor`, `fire_resistance`)
-- **operator**: Jak porównać — `>=` (większe lub równe), `<=` (mniejsze lub równe), `==` (równa się), `range` (pomiędzy min i max)
-- **value**: Wartość docelowa (np. `2.5` dla 2,50m) lub zakres (np. `{min: 20, max: 26}` dla temperatury)
+- **requirementType**: Kategoria — `performance`, `dimensional`, `regulatory`, `safety`, `qualitative` (NOWOŚĆ v0.3.0)
+- **metric**: Co mierzysz (np. `height`, `daylight_factor`, `fire_resistance`) — **opcjonalne od v0.3.0**
+- **operator**: Jak porównać — `>=` (większe lub równe), `<=` (mniejsze lub równe), `==` (równa się), `range` (pomiędzy min i max) — **opcjonalne od v0.3.0**
+- **value**: Wartość docelowa (np. `2.5` dla 2,50m) lub zakres (np. `{min: 20, max: 26}` dla temperatury) — **opcjonalne od v0.3.0**
 - **unit**: Jaka jednostka (np. `"m"` dla metrów, `"%"` dla procentów, `"°C"` dla stopni Celsjusza)
 
-**Przykład:** Wysokość pomieszczenia >= 2,50m staje się:
+**Przykład numeryczny:** Wysokość pomieszczenia >= 2,50m staje się:
 ```yaml
 metric: "height"
 operator: ">="
 value: 2.5
 unit: "m"
+```
+
+**Przykład jakościowy (NOWOŚĆ v0.3.0):** Wymaganie organizacyjne bez wartości liczbowej:
+```yaml
+requirementType: "qualitative"
+qualitativeDescription: "Sala operacyjna musi mieć wydzielony ciąg czysty i brudny"
+acceptanceCriteria:
+  - "Ciąg czysty oddzielony od brudnego fizyczną barierą"
+  - "Personel wchodzi przez śluzę z przebieralnią"
+  - "Materiały czyste dostarczane osobnym korytarzem"
+evidenceRequired:
+  - "Zatwierdzony rysunek technologiczny"
+  - "Opinia sanitarno-epidemiologiczna"
+  - "Protokół odbioru technicznego"
 ```
 :::
 
@@ -68,6 +90,9 @@ unit: "m"
 | `legalBasis` | array | Odniesienia prawne (rozporządzenie, paragraf, artykuł) |
 | `technicalBasis` | array | Odniesienia do norm technicznych (EN, ISO, ASHRAE) |
 | `description` | string | Szczegółowe wyjaśnienie |
+| `qualitativeDescription` | string | **[NOWOŚĆ v0.3.0]** Opis wymagania jakościowego (zamiast metric/operator/value) |
+| `acceptanceCriteria` | array | **[NOWOŚĆ v0.3.0]** Kryteria akceptacji (lista warunków do spełnienia) |
+| `evidenceRequired` | array | **[NOWOŚĆ v0.3.0]** Wymagane dowody (dokumenty, protokoły, opinie) |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
 ::: tip Dla Architektów: Które Pola Opcjonalne Są Najważniejsze?
@@ -97,7 +122,8 @@ type RequirementType =
   | "design"          // Standardy i wytyczne projektowe
   | "operational"     // Wymagania operacyjne w czasie użytkowania
   | "safety"          // Wymagania bezpieczeństwa i higieny
-  | "sustainability"; // Cele wydajności środowiskowej
+  | "sustainability"  // Cele wydajności środowiskowej
+  | "qualitative";    // NOWOŚĆ v0.3.0: Wymagania jakościowe (bez wartości liczbowej)
 ```
 
 ## Przykład 1: Proste Wymaganie (Minimalne)
@@ -193,6 +219,84 @@ Plik: requirements/pl/room-height-min.json
   "tags": ["daylight", "performance", "global", "circadian_health"]
 }
 ```
+
+## Wzorce: Numeryczne vs Jakościowe (v0.3.0)
+
+Od wersji v0.3.0 wymagania mogą przyjmować dwie formy:
+
+### Wzorzec numeryczny (metric + operator + value)
+
+Wymaganie z mierzalną wartością docelową — system automatycznie sprawdza zgodność:
+
+```json
+{
+  "id": "REQ-OR-PRESSURE-001",
+  "entityType": "requirement",
+  "documentType": "requirement",
+  "requirementName": "Nadciśnienie sali operacyjnej",
+  "requirementType": "performance",
+  "metric": "pressure_differential",
+  "operator": ">=",
+  "value": 15,
+  "unit": "Pa",
+  "version": "1.0.0"
+}
+```
+
+### Wzorzec jakościowy (qualitativeDescription + acceptanceCriteria + evidenceRequired)
+
+Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
+
+```json
+{
+  "id": "REQ-OR-CLEAN-DIRTY-SEPARATION-001",
+  "entityType": "requirement",
+  "documentType": "requirement",
+  "requirementName": "Separacja ciągów czystych i brudnych w bloku operacyjnym",
+  "requirementType": "qualitative",
+
+  "qualitativeDescription": "Blok operacyjny musi zapewniać pełną separację ciągów czystych i brudnych zgodnie z wymaganiami sanitarno-epidemiologicznymi",
+
+  "acceptanceCriteria": [
+    "Materiały sterylne dostarczane wyłącznie ciągiem czystym",
+    "Odpady i brudna bielizna usuwane wyłącznie ciągiem brudnym",
+    "Personel wchodzi do sali przez śluzę z przebieralnią",
+    "Pacjent transportowany dedykowanym ciągiem pacjenckim",
+    "Brak krzyżowania się ciągów czystych i brudnych"
+  ],
+
+  "evidenceRequired": [
+    "Zatwierdzony rysunek technologiczny bloku operacyjnego",
+    "Opinia sanitarno-epidemiologiczna WSSE",
+    "Protokół odbioru technicznego",
+    "Schemat przepływów (clean/dirty flow diagram)"
+  ],
+
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["operating_room", "sterilization", "clean_room"]
+  },
+
+  "legalBasis": [
+    {
+      "regulation": "Dz.U. 2012 poz. 739",
+      "section": "§ 37",
+      "description": "Wymagania dla pomieszczeń bloku operacyjnego"
+    }
+  ],
+
+  "version": "1.0.0",
+  "tags": ["qualitative", "healthcare", "infection_control", "surgical"]
+}
+```
+
+**Kiedy używać wzorca jakościowego:**
+- Wymagania organizacyjne (separacja ciągów, procedury)
+- Wymagania dotyczące wyposażenia (obecność elementów bez wartości liczbowej)
+- Wymagania procedualne (szkolenia, certyfikacje personelu)
+- Wymagania estetyczne lub funkcjonalne trudne do zmierzenia
+
+---
 
 ## Przykład: Wymaganie Specyficzne dla Polski
 

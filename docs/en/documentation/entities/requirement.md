@@ -34,27 +34,56 @@ Requirements specify:
 | `documentType` | string | Must be `"requirement"` | `"requirement"` |
 | `requirementName` | string | Human-readable name | `"Minimum daylight factor for sleeping spaces"` |
 | `requirementType` | string | Type (see enum below) | `"performance"` |
+| `version` | string | Semantic version | `"1.0.0"` |
+
+### Conditional Fields (Numeric Requirements)
+
+These fields are **required for numeric requirements** but **optional since v0.3.0** (not needed for qualitative requirements):
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
 | `metric` | string | Measurable metric | `"daylight_factor"` |
 | `operator` | string | Comparison operator | `">="`, `"<="`, `"=="`, `"range"` |
 | `value` | number/object | Target value or range | `2.0` or `{ "min": 20, "max": 26 }` |
 | `unit` | string | Measurement unit | `"%"`, `"m"`, `"dB"`, `"°C"` |
-| `version` | string | Semantic version | `"1.0.0"` |
+
+### Qualitative Requirement Fields (v0.3.0)
+
+For non-numeric requirements (e.g., procedural rules, separation concepts), use these instead of metric/operator/value:
+
+| Field | Type | Description | Example |
+|-------|------|-------------|---------|
+| `qualitativeDescription` | string | Plain-text description of the requirement | `"Clean and dirty flows must not cross"` |
+| `acceptanceCriteria` | array of strings | Specific criteria that must be met | `["Separate corridors for clean/dirty", ...]` |
+| `evidenceRequired` | array of strings | Evidence needed for verification | `["Floor plan with flow arrows", ...]` |
 
 ::: tip For Architects: What These Required Fields Mean
 - **id**: Requirement identifier (e.g., `REQ-PL-WT-ROOM-HEIGHT-001`)
 - **requirementName**: Plain English description ("Minimum room height per WT 2021")
-- **requirementType**: Category — `performance`, `dimensional`, `regulatory`, `safety`
-- **metric**: What you're measuring (e.g., `height`, `daylight_factor`, `fire_resistance`)
-- **operator**: How to compare — `>=` (greater than or equal), `<=` (less than or equal), `==` (equals), `range` (between min and max)
-- **value**: Target value (e.g., `2.5` for 2.50m) or range (e.g., `{min: 20, max: 26}` for temperature)
-- **unit**: What unit (e.g., `"m"` for meters, `"%"` for percentage, `"°C"` for Celsius)
+- **requirementType**: Category -- `performance`, `dimensional`, `regulatory`, `safety`, `qualitative` (new in v0.3.0)
+- **metric**: What you're measuring (e.g., `height`, `daylight_factor`, `fire_resistance`). **Optional since v0.3.0** -- omit for qualitative requirements.
+- **operator**: How to compare -- `>=` (greater than or equal), `<=` (less than or equal), `==` (equals), `range` (between min and max). **Optional since v0.3.0**.
+- **value**: Target value (e.g., `2.5` for 2.50m) or range (e.g., `{min: 20, max: 26}` for temperature). **Optional since v0.3.0**.
+- **unit**: What unit (e.g., `"m"` for meters, `"%"` for percentage, `"°C"` for Celsius). **Optional since v0.3.0**.
 
-**Example:** Room height >= 2.50m becomes:
+**Example (numeric):** Room height >= 2.50m becomes:
 ```yaml
 metric: "height"
 operator: ">="
 value: 2.5
 unit: "m"
+```
+
+**Example (qualitative):** Clean/dirty separation becomes:
+```yaml
+requirementType: "qualitative"
+qualitativeDescription: "Clean and dirty material flows must not cross"
+acceptanceCriteria:
+  - "Separate corridors for clean and dirty transport"
+  - "Airlock between clean and dirty zones"
+evidenceRequired:
+  - "Floor plan with clean/dirty flow arrows"
+  - "Operational procedure document"
 ```
 :::
 
@@ -97,12 +126,69 @@ type RequirementType =
   | "design"          // Design standards and guidelines
   | "operational"     // Runtime operational requirements
   | "safety"          // Health and safety requirements
-  | "sustainability"; // Environmental performance targets
+  | "sustainability"  // Environmental performance targets
+  | "qualitative";    // Non-numeric, descriptive requirements (v0.3.0)
 ```
+
+## Example: Qualitative Requirement (v0.3.0)
+
+**For requirements that cannot be expressed as metric >= value**, use the qualitative type. This is common in healthcare (clean/dirty separation), infection control, and operational procedures.
+
+```yaml
+---
+id: "REQ-HC-CLEAN-DIRTY-SEPARATION-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Clean/dirty flow separation in CSSD"
+requirementType: "qualitative"
+
+# No metric, operator, or value needed!
+qualitativeDescription: >
+  Clean and dirty material flows within the Central Sterile Supply Department
+  must be physically separated to prevent cross-contamination. One-way workflow
+  from dirty reception through decontamination to clean packing and sterile storage.
+
+acceptanceCriteria:
+  - "Separate corridors for clean and dirty transport"
+  - "Physical barrier (wall with pass-through hatch) between dirty and clean zones"
+  - "Airlock or anteroom between decontamination and clean packing"
+  - "One-way workflow with no backtracking of dirty instruments through clean areas"
+  - "Separate staff changing areas for dirty and clean zones"
+
+evidenceRequired:
+  - "Floor plan with clean/dirty flow arrows and zone boundaries"
+  - "Operational workflow procedure document"
+  - "Infection control officer sign-off"
+
+scope:
+  entityType: "space"
+  spaceTypes: ["sterilization"]
+
+legalBasis:
+  - regulation: "EN ISO 17665-1"
+    section: "4.3"
+    description: "Sterilization workflow requirements"
+
+version: "1.0.0"
+tags: ["healthcare", "infection-control", "cssd", "qualitative"]
+---
+
+# Requirement: Clean/Dirty Flow Separation in CSSD
+
+Clean and dirty material flows must be physically separated.
+```
+
+**Key difference from numeric requirements:**
+- No `metric`, `operator`, `value`, or `unit` fields
+- Uses `qualitativeDescription` for the rule text
+- Uses `acceptanceCriteria` as a checklist of conditions to verify
+- Uses `evidenceRequired` to specify what documentation proves compliance
+
+---
 
 ## Example 1: Simple Requirement (Minimal)
 
-**The simplest requirement — room height minimum:**
+**The simplest requirement -- room height minimum:**
 
 ```yaml
 File: requirements/pl/room-height-min.json

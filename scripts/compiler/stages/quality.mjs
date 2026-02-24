@@ -21,7 +21,8 @@ const SAFETY_CRITICAL_FIELDS = new Set([
   'radiologicalShielding',
   'fireRating',
   'structuralLoad',
-  'pressurization'
+  'pressurization',
+  'shielding'
 ]);
 
 /**
@@ -29,7 +30,10 @@ const SAFETY_CRITICAL_FIELDS = new Set([
  */
 const SAFETY_CRITICAL_ENV_FIELDS = new Set([
   'pressurization',
-  'cleanlinessClass'
+  'cleanlinessClass',
+  'pressureDifferentialPa',
+  'filtrationClass',
+  'airChangesPerHour'
 ]);
 
 /**

@@ -200,8 +200,8 @@ function resolveTypeInheritance(grouped, logger) {
         }
       }
 
-      // Inherit nested objects (finishes, environmentalConditions, occupancy)
-      for (const objField of ['finishes', 'environmentalConditions', 'occupancy']) {
+      // Inherit nested objects (finishes, environmentalConditions, occupancy, shielding)
+      for (const objField of ['finishes', 'environmentalConditions', 'occupancy', 'shielding']) {
         if (spaceType[objField] && !space[objField]) {
           space[objField] = { ...spaceType[objField] };
           space[`${objField}_meta`] = {

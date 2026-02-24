@@ -100,8 +100,24 @@ type SystemCategory =
   | "lighting"          // Systemy sterowania oświetleniem
   | "communications"    // Dane, telefonia, audio-wideo
   | "vertical_transport" // Windy, schody ruchome
-  | "renewable_energy"; // Fotowoltaika, wiatr, geotermia
+  | "renewable_energy"  // Fotowoltaika, wiatr, geotermia
+  // Nowe wartości v0.3.0:
+  | "medical_gas"       // Gazy medyczne (tlen, podtlenek azotu, próżnia, sprężone powietrze)
+  | "nurse_call"        // System przyzywowy dla personelu medycznego
+  | "pneumatic_tube"    // Poczta pneumatyczna (transport próbek, leków)
+  | "medical_waste"     // System gospodarki odpadami medycznymi
+  | "it_network";       // Sieć informatyczna (LAN, WLAN, data center)
 ```
+
+### Nowe kategorie systemów (v0.3.0)
+
+| Wartość | Cel | Typowe komponenty |
+|---------|-----|-------------------|
+| `medical_gas` | Gazy medyczne | Centrala gazów, panele przyłóżkowe, reduktory, alarmy |
+| `nurse_call` | System przyzywowy | Przyciski przyzywowe, terminale, wyświetlacze, serwer |
+| `pneumatic_tube` | Poczta pneumatyczna | Stacje nadawcze/odbiorcze, rurociąg, dmuchawy, sterowanie |
+| `medical_waste` | Gospodarka odpadami medycznymi | Pojemniki, wagi, system śledzenia, dezynfekcja |
+| `it_network` | Sieć informatyczna | Przełączniki, routery, serwery, punkty dostępowe, okablowanie |
 
 ## Przykład 1: Pierwszy Plik Systemu (Minimalny)
 

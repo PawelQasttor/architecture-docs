@@ -34,6 +34,11 @@ Używaj Typów Systemów gdy masz **wiele podobnych systemów** (np. identyczne 
 | `communication` | Sieci danych i komunikacji | Okablowanie strukturalne, Wi-Fi, telekom, AV |
 | `bms` | Systemy zarządzania budynkiem | Sterowniki, czujniki, siłowniki, oprogramowanie |
 | `renewable_energy` | Systemy energii odnawialnej | Fotowoltaika, wiatr, geotermia, magazynowanie energii |
+| `medical_gas` | **[v0.3.0]** Gazy medyczne | Centrala gazów, panele przyłóżkowe, reduktory, alarmy |
+| `nurse_call` | **[v0.3.0]** System przyzywowy | Przyciski przyzywowe, terminale, wyświetlacze, serwer |
+| `pneumatic_tube` | **[v0.3.0]** Poczta pneumatyczna | Stacje nadawcze/odbiorcze, rurociąg, dmuchawy |
+| `medical_waste` | **[v0.3.0]** Odpady medyczne | Pojemniki, wagi, system śledzenia, dezynfekcja |
+| `it_network` | **[v0.3.0]** Sieć informatyczna | Przełączniki, routery, serwery, punkty dostępowe |
 
 ## Pola Szablonowe
 

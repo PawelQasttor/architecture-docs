@@ -70,16 +70,32 @@ Strefy definiują:
 
 ```typescript
 type ZoneType =
-  | "fire"          // Strefy pożarowe, kontrola dymu
-  | "hvac"          // Strefy termiczne HVAC
-  | "acoustic"      // Strefy obr&oacute;bki akustycznej
-  | "security"      // Strefy kontroli dostępu
-  | "maintenance"   // Strefy zarządzania obiektem
-  | "lighting"      // Strefy sterowania oświetleniem
-  | "ventilation"   // Strefy wentylacji naturalnej/mechanicznej
-  | "plumbing"      // Piony i dystrybucja hydrauliczna
-  | "electrical";   // Strefy dystrybucji elektrycznej
+  | "fire"                  // Strefy pożarowe, kontrola dymu
+  | "hvac"                  // Strefy termiczne HVAC
+  | "acoustic"              // Strefy obr&oacute;bki akustycznej
+  | "security"              // Strefy kontroli dostępu
+  | "maintenance"           // Strefy zarządzania obiektem
+  | "lighting"              // Strefy sterowania oświetleniem
+  | "ventilation"           // Strefy wentylacji naturalnej/mechanicznej
+  | "plumbing"              // Piony i dystrybucja hydrauliczna
+  | "electrical"            // Strefy dystrybucji elektrycznej
+  // Nowe wartości v0.3.0:
+  | "medical_electrical"    // Strefy bezpieczeństwa elektrycznego w medycynie
+  | "radiation_protection"  // Strefy ochrony radiologicznej
+  | "cleanroom"             // Strefy pomieszczeń czystych
+  | "infection_control"     // Strefy kontroli zakażeń
+  | "pressure_cascade";     // Strefy kaskady ciśnieniowej
 ```
+
+### Nowe typy stref (v0.3.0)
+
+| Wartość | Cel | Typowe zastosowanie |
+|---------|-----|---------------------|
+| `medical_electrical` | Strefy bezpieczeństwa elektrycznego w lokalizacjach medycznych wg IEC 60364-7-710 | Grupowanie pomieszczeń medycznych wg grupy bezpieczeństwa (Grupa 0/1/2) |
+| `radiation_protection` | Strefy ochrony radiologicznej | Pracownie RTG, CT, radioterapii, medycyny nuklearnej |
+| `cleanroom` | Strefy pomieszczeń czystych wg ISO 14644 | Sale operacyjne, laboratoria, apteki |
+| `infection_control` | Strefy kontroli zakażeń szpitalnych | Izolatki, oddziały zakaźne, strefy kwarantanny |
+| `pressure_cascade` | Strefy kaskady ciśnieniowej | Ciągi czyste → brudne w szpitalach, bloki operacyjne |
 
 ## Przykład: Źr&oacute;dło Markdown
 

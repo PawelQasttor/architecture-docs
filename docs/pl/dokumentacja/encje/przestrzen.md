@@ -65,18 +65,19 @@ Przestrzenie definiują:
 | `designHeight` | number | **[DZIEDZICZONE v0.1.4]** Wysokość w świetle (m) — dziedziczy z `Level.typicalCeilingHeight` |
 | `designVolume` | number | Objętość (m&sup3;) |
 | `unit` | string | Jednostka miary (`"m"`, `"mm"`) |
-| `finishes` | object | **[DZIEDZICZONE v0.1.4]** Wykończenia (podłoga, ściany, sufit) — dziedziczy z `Level.typicalFinishes` |
+| `finishes` | object | **[DZIEDZICZONE v0.1.4]** Wykończenia (podłoga, ściany, sufit) — dziedziczy z `Level.typicalFinishes`. **[v0.3.0]** Akceptuje string LUB obiekt strukturalny |
 | `requirements` | array | **[DZIEDZICZONE v0.1.4]** Identyfikatory wymagań — scalane z `Level.levelRequirements` |
 | `requirementOverrides` | array | Dodatkowe wymagania poza typem |
 | `occupancy` | object | Dane o użytkowaniu (maxOccupants, bedCount, usagePattern) |
-| `environmentalConditions` | object | **[DZIEDZICZONE v0.1.4]** Temperatura, wilgotność, wentylacja, ciśnienie — dziedziczy z `Level.typicalEnvironmentalConditions` |
+| `environmentalConditions` | object | **[DZIEDZICZONE v0.1.4]** Temperatura, wilgotność, wentylacja, ciśnienie — dziedziczy z `Level.typicalEnvironmentalConditions`. **[v0.3.0]** Rozszerzone o 6 nowych pól |
 | `electricalSafetyGroup` | string | IEC 60364-7-710: `standard` / `group_0` / `group_1` / `group_2` |
 | `regulatoryReferences` | array | Odniesienia do przepis&oacute;w z statusem zgodności |
 | `lifecycleState` | string | `planned` / `design` / `under_construction` / `operational` / `renovation` / `decommissioned` |
 | `finishOverrides` | object | Nadpisanie wybranych wykończeń z typu |
+| `shielding` | object | **[NOWOŚĆ v0.3.0]** Ekranowanie radiologiczne, RF i izolacja akustyczna |
 | `maintenanceZone` | string | Strefa konserwacji FM |
 | `accessRestrictions` | string | Poziom kontroli dostępu |
-| `adjacentSpaces` | array | Relacje sąsiadujących przestrzeni |
+| `adjacentSpaces` | array | Relacje sąsiadujących przestrzeni. **[v0.3.0]** Rozszerzone o nowe relacje i pola |
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
@@ -109,6 +110,7 @@ Przestrzenie definiują:
 
 ```typescript
 type SpaceType =
+  // Mieszkalne
   | "sleeping_space"
   | "bedroom"
   | "living_space"
@@ -118,21 +120,61 @@ type SpaceType =
   | "kitchen"
   | "bathroom"
   | "wet_room"
+  // Komunikacja
   | "corridor"
   | "staircase"
+  | "elevator_lobby"
+  | "entrance"
+  // Ogólne
   | "storage"
   | "technical"
   | "office"
   | "meeting_room"
   | "open_office"
   | "break_room"
-  | "elevator_lobby"
-  | "entrance"
   | "classroom"
   | "retail"
   | "healthcare"
-  | "assembly";
+  | "assembly"
+  // Opieka zdrowotna (NOWOŚĆ v0.3.0)
+  | "operating_room"
+  | "icu"
+  | "patient_room"
+  | "examination_room"
+  | "treatment_room"
+  | "diagnostic_imaging"
+  | "laboratory"
+  | "sterilization"
+  | "pharmacy"
+  | "clean_room"
+  | "isolation_room"
+  | "nursing_station"
+  | "waiting_area"
+  | "emergency_room"
+  | "autopsy"
+  | "medical_storage"
+  | "decontamination"
+  // Infrastruktura (NOWOŚĆ v0.3.0)
+  | "server_room"
+  | "workshop"
+  | "loading_dock"
+  | "parking"
+  | "mechanical_room"
+  | "electrical_room"
+  | "generator_room"
+  | "water_treatment"
+  | "waste_management"
+  | "chapel"
+  | "cafeteria"
+  | "laundry"
+  | "reception";
 ```
+
+::: tip Nowe typy przestrzeni w v0.3.0
+**Opieka zdrowotna (17 nowych typów):** Sale operacyjne, oddziały intensywnej terapii, sale pacjentów, gabinety badań, diagnostyka obrazowa, laboratoria, sterylizatornie, apteki, pomieszczenia czyste, izolatki, dyżurki pielęgniarek, poczekalnie, izby przyjęć, prosektoria, magazyny medyczne, dekontaminacja.
+
+**Infrastruktura (13 nowych typów):** Serwerownie, warsztaty, rampy załadunkowe, parkingi, maszynownie, rozdzielnie elektryczne, generatorownie, stacje uzdatniania wody, pomieszczenia gospodarki odpadami, kaplice, stołówki, pralnie, recepcje.
+:::
 
 ## Przykład 1: Twój Pierwszy Plik Przestrzeni (Minimalny)
 
@@ -360,7 +402,43 @@ adjacentSpaces:
     relationship: "above"             # Przestrzeń powyżej
   - id: "SP-BLD-01-L00-001"
     relationship: "below"             # Przestrzeń poniżej
+  # Nowe relacje v0.3.0:
+  - id: "SP-BLD-01-L01-AIRLOCK"
+    relationship: "connects_via_airlock"     # Połączone przez śluzę
+    boundaryType: "pressure_boundary"        # Typ granicy (NOWOŚĆ v0.3.0)
+    fireRating: "EI 60"                      # Odporność ogniowa (NOWOŚĆ v0.3.0)
+  - id: "SP-BLD-01-L01-PASS"
+    relationship: "connects_via_pass_through" # Połączone przez podajnik
+  - id: "SP-BLD-01-L01-CLEAN-CORR"
+    relationship: "clean_supply_to"           # Dostawa czysta do
+  - id: "SP-BLD-01-L01-DIRTY-CORR"
+    relationship: "dirty_return_from"         # Powrót brudny z
+  - id: "SP-BLD-01-L01-PATIENT-CORR"
+    relationship: "patient_flow_to"           # Przepływ pacjentów do
+  - id: "SP-BLD-01-L01-SHAFT"
+    relationship: "vertical_shaft"            # Szyb pionowy
 ```
+
+### Nowe typy relacji (v0.3.0)
+
+| Relacja | Opis | Typowe zastosowanie |
+|---------|------|---------------------|
+| `connects_via_airlock` | Połączone przez śluzę powietrzną | Sale operacyjne, pomieszczenia czyste, izolatki |
+| `connects_via_pass_through` | Połączone przez podajnik | Sterylizatornie, laboratoria |
+| `clean_supply_to` | Trasa dostawy czystej | Ciągi czyste w szpitalach |
+| `dirty_return_from` | Trasa powrotu brudnego | Ciągi brudne w szpitalach |
+| `patient_flow_to` | Przepływ pacjentów | Ciągi pacjenckie |
+| `staff_flow_to` | Przepływ personelu | Ciągi personelu medycznego |
+| `visitor_flow_to` | Przepływ odwiedzających | Ciągi odwiedzających |
+| `material_flow_to` | Przepływ materiałów | Logistyka szpitalna |
+| `vertical_shaft` | Szyb pionowy | Szyby instalacyjne, windowe |
+
+### Nowe pola relacji (v0.3.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `boundaryType` | string | Typ granicy: np. `"pressure_boundary"`, `"fire_boundary"`, `"acoustic_boundary"` |
+| `fireRating` | string | Odporność ogniowa przegrody: np. `"EI 30"`, `"EI 60"`, `"REI 120"` |
 
 ## Mapowanie BIM
 
@@ -797,17 +875,45 @@ environmentalConditions:
     unit: "ACH"              # Wymiany powietrza na godzinę
   pressurization: "positive"  # positive/negative/neutral
   cleanlinessClass: "ISO 7"
+  # Nowe pola v0.3.0:
+  airChangesPerHour: 20               # Wymiana powietrza na godzinę (liczba)
+  freshAirPercentage: 100             # Procent świeżego powietrza (0-100)
+  filtrationClass: "HEPA H14"         # Klasa filtracji
+  pressureDifferentialPa: 15          # Różnica ciśnień w Pa
+  laminarFlow: true                   # Przepływ laminarny (boolean)
+  operatingRoomClass: "class_ia"      # Klasa sali operacyjnej wg DIN 1946-4
 ```
+
+### Nowe pola warunków środowiskowych (v0.3.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `airChangesPerHour` | number | Wymiana powietrza na godzinę (ACH) |
+| `freshAirPercentage` | number | Procent świeżego powietrza (0-100) |
+| `filtrationClass` | string | Klasa filtracji (np. `"HEPA H14"`, `"F7"`, `"ISO ePM1 55%"`) |
+| `pressureDifferentialPa` | number | Różnica ciśnień w Paskalach |
+| `laminarFlow` | boolean | Czy wymagany jest przepływ laminarny |
+| `operatingRoomClass` | enum | Klasa sali operacyjnej wg DIN 1946-4: `class_ia` / `class_ib` / `class_ii` / `not_applicable` |
+
+### Klasy sali operacyjnej (DIN 1946-4)
+
+| Klasa | Opis | Zastosowanie |
+|-------|------|-------------|
+| `class_ia` | Przepływ laminarny, najwyższe wymagania | Operacje ortopedyczne, transplantacje |
+| `class_ib` | Przepływ laminarny, wysokie wymagania | Operacje kardiochirurgiczne, neurochirurgiczne |
+| `class_ii` | Przepływ turbulentny, standardowe wymagania | Operacje ogólnochirurgiczne |
+| `not_applicable` | Nie dotyczy | Pomieszczenia niechirurgiczne |
 
 **Typowe wartości wg typu przestrzeni:**
 
-| Przestrzeń | Temperatura | Wilgotność | Wentylacja | Ciśnienie |
-|------------|-------------|------------|------------|-----------|
-| Sala operacyjna | 18-24°C | 30-60% | 20 ACH | nadciśnienie |
-| Oddział OIOM | 20-24°C | 30-60% | 6 ACH | nadciśnienie |
-| Pok&oacute;j pacjenta | 20-24°C | 30-70% | 2 ACH | neutralne |
-| Sypialnia mieszkalna | 18-22°C | 40-60% | 0.5 ACH | neutralne |
-| Izolatka | 20-24°C | 30-60% | 12 ACH | podciśnienie |
+| Przestrzeń | Temperatura | Wilgotność | Wentylacja | Ciśnienie | Klasa filtracji | Przepływ laminarny |
+|------------|-------------|------------|------------|-----------|-----------------|-------------------|
+| Sala operacyjna Kl. Ia | 18-24°C | 30-60% | 20 ACH | +15 Pa | HEPA H14 | Tak |
+| Sala operacyjna Kl. II | 18-24°C | 30-60% | 15 ACH | +10 Pa | HEPA H13 | Nie |
+| Oddział OIOM | 20-24°C | 30-60% | 6 ACH | +5 Pa | F9 | Nie |
+| Pok&oacute;j pacjenta | 20-24°C | 30-70% | 2 ACH | neutralne | F7 | Nie |
+| Izolatka | 20-24°C | 30-60% | 12 ACH | -10 Pa | HEPA H13 | Nie |
+| Sypialnia mieszkalna | 18-22°C | 40-60% | 0.5 ACH | neutralne | F7 | Nie |
 
 ## Grupy Bezpieczeństwa Elektrycznego
 
@@ -881,6 +987,168 @@ Pole `lifecycleState` śledzi bieżącą fazę przestrzeni:
 spaceName: "Sypialnia 01"
 lifecycleState: "design"
 ---
+```
+
+## Ekranowanie (v0.3.0)
+
+**NOWOŚĆ w v0.3.0:** Opcjonalny obiekt `shielding` definiuje wymagania dotyczące ekranowania radiologicznego, RF i izolacji akustycznej. Kluczowy dla diagnostyki obrazowej, radioterapii, serwerowni i pomieszczeń wymagających izolacji akustycznej.
+
+```yaml
+shielding:
+  radiological:
+    required: true
+    material: "lead"
+    thicknessMm: 2.0
+    equivalentPbMm: 2.0
+    protectedDirections:
+      - "north"
+      - "east"
+      - "south"
+      - "west"
+      - "floor"
+      - "ceiling"
+  rfShielding:
+    required: true
+    attenuationDb: 100
+    frequencyRangeMhz:
+      min: 1
+      max: 300
+  acousticIsolation:
+    requiredRw: 55
+    impactSoundLn: 48
+```
+
+### Pola ekranowania radiologicznego
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `required` | boolean | Czy ekranowanie radiologiczne jest wymagane |
+| `material` | string | Materiał ekranujący (np. `"lead"`, `"barium_plaster"`, `"concrete"`) |
+| `thicknessMm` | number | Grubość materiału ekranującego w mm |
+| `equivalentPbMm` | number | Równoważnik ołowiu w mm Pb |
+| `protectedDirections` | array | Kierunki chronione (np. `["north", "east", "floor", "ceiling"]`) |
+
+### Pola ekranowania RF
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `required` | boolean | Czy ekranowanie RF jest wymagane |
+| `attenuationDb` | number | Wymagane tłumienie w dB |
+| `frequencyRangeMhz` | object | Zakres częstotliwości w MHz (`min`, `max`) |
+
+### Pola izolacji akustycznej
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `requiredRw` | number | Wymagana izolacyjność akustyczna właściwa Rw w dB |
+| `impactSoundLn` | number | Wymagany poziom dźwięku uderzeniowego Ln,w w dB |
+
+### Przykład: Sala operacyjna z ekranowaniem (v0.3.0)
+
+```yaml
+---
+id: "SP-BLD-01-L02-OR-01"
+entityType: "space"
+documentType: "space"
+spaceName: "Sala Operacyjna 01"
+spaceType: "operating_room"
+buildingId: "BLD-01"
+levelId: "LVL-02"
+departmentId: "DEPT-SURGERY"
+version: "1.0.0"
+
+designArea: 42.0
+designHeight: 3.00
+unit: "m"
+
+electricalSafetyGroup: "group_2"
+
+environmentalConditions:
+  temperatureRange:
+    min: 18
+    max: 24
+    unit: "C"
+  humidityRange:
+    min: 30
+    max: 60
+  pressurization: "positive"
+  cleanlinessClass: "ISO 7"
+  airChangesPerHour: 20
+  freshAirPercentage: 100
+  filtrationClass: "HEPA H14"
+  pressureDifferentialPa: 15
+  laminarFlow: true
+  operatingRoomClass: "class_ia"
+
+shielding:
+  radiological:
+    required: false
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 50
+    impactSoundLn: 53
+
+adjacentSpaces:
+  - id: "SP-BLD-01-L02-PREP-01"
+    relationship: "connects_via_airlock"
+    boundaryType: "pressure_boundary"
+    fireRating: "EI 60"
+  - id: "SP-BLD-01-L02-CLEAN-CORR"
+    relationship: "clean_supply_to"
+  - id: "SP-BLD-01-L02-DIRTY-CORR"
+    relationship: "dirty_return_from"
+  - id: "SP-BLD-01-L02-STAFF-CORR"
+    relationship: "staff_flow_to"
+
+finishes:
+  floor:
+    material: "PVC-CONDUCT-01"
+    seamless: true
+    antimicrobial: true
+    esdProtection: true
+    chemicalResistance: true
+    cleanability: "cleanroom"
+  walls:
+    material: "HPL-PANEL-SURGICAL"
+    seamless: true
+    antimicrobial: true
+    cleanability: "cleanroom"
+  ceiling:
+    material: "LAMINAR-FLOW-CEILING-01"
+    seamless: true
+    cleanability: "cleanroom"
+
+requirements:
+  - "REQ-OR-HVAC-CLASS-IA"
+  - "REQ-OR-ELECTRICAL-GROUP-2"
+  - "REQ-OR-LIGHTING-100KLUX"
+  - "REQ-OR-UPS-BACKUP"
+
+zoneIds:
+  - "ZONE-FIRE-SURGERY"
+  - "ZONE-HVAC-OR"
+  - "ZONE-CLEANROOM-ISO7"
+
+tags:
+  - "healthcare"
+  - "surgical"
+  - "class_ia"
+  - "laminar_flow"
+---
+
+# Sala Operacyjna 01
+
+Sala operacyjna klasy Ia z przepływem laminarnym dla operacji ortopedycznych.
+
+## Parametry
+
+- Powierzchnia: 42,0 m², Wysokość: 3,00 m
+- Klasa czystości: ISO 7, Klasa sali: Ia (DIN 1946-4)
+- Nadciśnienie: +15 Pa, Filtracja: HEPA H14
+- Wymiana powietrza: 20 ACH, 100% świeżego powietrza
+- Przepływ laminarny: Tak
+- Grupa bezpieczeństwa elektrycznego: Grupa 2 (IEC 60364-7-710)
 ```
 
 ## Proweniencja danych (v0.2.0)

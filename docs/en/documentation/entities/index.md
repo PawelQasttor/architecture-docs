@@ -278,6 +278,30 @@ The compiler uses `_meta` to:
 
 ---
 
+## v0.3.0 Changes
+
+SBM v0.3.0 adds comprehensive support for healthcare, infrastructure, and industrial building types. Here are the 9 changes:
+
+1. **spaceType enum expanded** -- 30 new values for healthcare (operating_room, icu, patient_room, etc.) and infrastructure (server_room, mechanical_room, parking, etc.). See [Space](/en/documentation/entities/space), [Space Type](/en/documentation/entities/space-type).
+
+2. **zoneType enum expanded** -- 5 new values: medical_electrical, radiation_protection, cleanroom, infection_control, pressure_cascade. See [Zone](/en/documentation/entities/zone), [Zone Type](/en/documentation/entities/zone-type).
+
+3. **Structured finishes** -- Finish fields now accept either a simple string OR a structured object with material, fireClass, slipResistance, antimicrobial, cleanability, and more. See [Space Type](/en/documentation/entities/space-type), [Space](/en/documentation/entities/space), [Level](/en/documentation/entities/level).
+
+4. **Environmental conditions expanded** -- 6 new fields: airChangesPerHour, freshAirPercentage, filtrationClass, pressureDifferentialPa, laminarFlow, operatingRoomClass (DIN 1946-4). See [Space](/en/documentation/entities/space), [Space Type](/en/documentation/entities/space-type), [Level](/en/documentation/entities/level).
+
+5. **Requirements flexibility** -- metric, operator, and value are now optional. New `qualitative` requirement type with qualitativeDescription, acceptanceCriteria, and evidenceRequired for non-numeric rules. See [Requirement](/en/documentation/entities/requirement).
+
+6. **Departments** -- New optional `departments` array on the project/building level with id, name, description, levelIds, headOfDepartment, operatingHours, staffCount. See [Building](/en/documentation/entities/building).
+
+7. **Adjacent spaces expanded** -- 9 new relationship values (connects_via_airlock, clean_supply_to, patient_flow_to, etc.) and new optional boundaryType and fireRating fields per adjacency item. See [Space](/en/documentation/entities/space).
+
+8. **Shielding** -- New optional `shielding` object for radiological protection, RF shielding, and acoustic isolation. See [Space](/en/documentation/entities/space), [Space Type](/en/documentation/entities/space-type).
+
+9. **System categories expanded** -- 5 new values: medical_gas, nurse_call, pneumatic_tube, medical_waste, it_network. See [System](/en/documentation/entities/system), [System Type](/en/documentation/entities/system-type).
+
+---
+
 ## Common Questions
 
 **"Do I need to create all 11 types?"**

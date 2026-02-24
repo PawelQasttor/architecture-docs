@@ -100,8 +100,24 @@ type SystemCategory =
   | "lighting"          // Lighting control systems
   | "communications"    // Data, voice, audio-visual
   | "vertical_transport" // Elevators, escalators
-  | "renewable_energy"; // Solar PV, wind, geothermal
+  | "renewable_energy"  // Solar PV, wind, geothermal
+  // v0.3.0 additions:
+  | "medical_gas"       // Medical gas distribution (O2, N2O, vacuum, compressed air)
+  | "nurse_call"        // Nurse call and patient alert systems
+  | "pneumatic_tube"    // Pneumatic tube transport systems
+  | "medical_waste"     // Medical waste collection and disposal systems
+  | "it_network";       // IT network infrastructure (structured cabling, Wi-Fi, servers)
 ```
+
+### Healthcare & Infrastructure System Categories (v0.3.0)
+
+| Category | Purpose | Typical Components |
+|----------|---------|-------------------|
+| `medical_gas` | Medical gas distribution for patient care | O2 outlets, vacuum outlets, N2O manifolds, AGSS, zone valves |
+| `nurse_call` | Patient-staff communication and alerts | Call stations, corridor lights, staff terminals, integration with BMS |
+| `pneumatic_tube` | Automated transport of samples and medications | Stations, blowers, diverters, carrier sensors |
+| `medical_waste` | Safe collection and disposal of clinical waste | Sharps containers, segregation bins, autoclaves, collection points |
+| `it_network` | Data network infrastructure | Patch panels, switches, Wi-Fi APs, server racks, UPS |
 
 ## Example 1: Your First System File (Minimal)
 
@@ -447,6 +463,31 @@ Systems map to **IfcSystem** entities and Revit MEP Systems:
 - **Types:** Fire alarm, sprinkler, smoke control, fire suppression
 - **Coverage:** Detection zones, sprinkler zones
 - **Standards:** EN 54, NFPA, WT 2021 § 234-235
+
+### Medical Gas Systems (v0.3.0)
+- **Types:** Oxygen, nitrous oxide, medical air, vacuum, AGSS
+- **Components:** Zone valve assemblies, manifolds, outlets, alarms
+- **Standards:** HTM 02-01 (UK), EN ISO 7396-1 (EU), NFPA 99 (US)
+
+### Nurse Call Systems (v0.3.0)
+- **Types:** Patient call, staff emergency, bathroom pull cord, bed exit
+- **Components:** Call stations, corridor displays, staff terminals, integration
+- **Standards:** HTM 08-03 (UK), EN 50134, VDE 0834 (DE)
+
+### Pneumatic Tube Systems (v0.3.0)
+- **Types:** Sample transport, pharmacy delivery, document transfer
+- **Components:** Stations, blowers, diverters, carrier detection sensors
+- **Capacity:** Carrier diameter (110-160mm), speed (5-8 m/s), throughput
+
+### Medical Waste Systems (v0.3.0)
+- **Types:** Sharps disposal, clinical waste, pharmaceutical waste, cytotoxic
+- **Components:** Segregation bins, collection trolleys, autoclaves, compactors
+- **Standards:** Directive 2008/98/EC, national clinical waste regulations
+
+### IT Network Systems (v0.3.0)
+- **Types:** Structured cabling, Wi-Fi, server infrastructure, PACS
+- **Components:** Patch panels, switches, Wi-Fi APs, server racks, UPS
+- **Standards:** EN 50173, TIA-942 (data centers), HIPAA (healthcare IT)
 
 ## Asset Register Integration
 

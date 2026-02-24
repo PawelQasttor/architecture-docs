@@ -44,6 +44,11 @@ Pole `zoneType` musi mieć jedną z następujących wartości:
 | `lighting` | Strefy oświetlenia | Poziomy natężenia, integracja światła dziennego, sterowanie |
 | `thermal` | Strefy termiczne | Wymagania izolacji, masa termiczna, kontrola zysków słonecznych |
 | `access_control` | Strefy ograniczonego dostępu | Poziomy bezpieczeństwa, metody uwierzytelniania, rejestrowanie |
+| `medical_electrical` | **[v0.3.0]** Strefy bezpieczeństwa elektrycznego medycznego | Grupa bezpieczeństwa IEC 60364-7-710, typ IT/TN |
+| `radiation_protection` | **[v0.3.0]** Strefy ochrony radiologicznej | Materiał ekranujący, grubość Pb, kierunki chronione |
+| `cleanroom` | **[v0.3.0]** Strefy pomieszczeń czystych | Klasa ISO 14644, klasa filtracji, wymiana powietrza |
+| `infection_control` | **[v0.3.0]** Strefy kontroli zakażeń | Reżim izolacji, typ wentylacji, procedury dekontaminacji |
+| `pressure_cascade` | **[v0.3.0]** Strefy kaskady ciśnieniowej | Różnica ciśnień Pa, kierunek przepływu, klasa filtracji |
 
 ## Pola Szablonowe
 

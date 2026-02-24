@@ -44,6 +44,11 @@ The `zoneType` field must be one of these values:
 | `lighting` | Lighting zones | Illuminance levels, daylight integration, controls |
 | `thermal` | Thermal zones | Insulation requirements, thermal mass, solar control |
 | `access_control` | Access restriction zones | Security levels, authentication methods, logging |
+| `medical_electrical` | IEC 60364-7-710 medical zones | Safety group (0/1/2), IT power supply, equipotential bonding |
+| `radiation_protection` | Radiological shielding zones | Shielding material, Pb equivalent, controlled area boundaries |
+| `cleanroom` | ISO 14644 cleanroom zones | ISO class, air changes, filtration, gowning |
+| `infection_control` | Infection prevention zones | Isolation type, PPE requirements, airflow direction |
+| `pressure_cascade` | Pressure gradient zones | Pressure differential (Pa), flow direction (clean-to-dirty) |
 
 ## Template Fields
 
@@ -136,6 +141,67 @@ properties:
   visitorManagement: true           # Visitor registration required?
   antiPassbackEnabled: true         # Prevent passback?
   evacuationOverride: true          # Emergency unlock on alarm?
+```
+
+### Medical Electrical Zone Properties (v0.3.0)
+
+```yaml
+properties:
+  safetyGroup: "group_2"              # IEC 60364-7-710 group
+  itPowerSupply: true                 # IT medical power supply required
+  switchoverTime: "0.5s"              # Max switchover time
+  equipotentialBonding: "medical"     # medical, supplementary
+  rcdMonitoring: true                 # RCD monitoring required
+```
+
+### Radiation Protection Zone Properties (v0.3.0)
+
+```yaml
+properties:
+  shieldingMaterial: "lead sheet"     # Primary shielding material
+  equivalentPbMm: 2.0                # Lead equivalent in mm
+  controlledArea: true                # Controlled radiation area
+  supervisedArea: false               # Supervised area boundary
+  dosimetryRequired: true             # Personal dosimetry required
+```
+
+### Cleanroom Zone Properties (v0.3.0)
+
+```yaml
+properties:
+  isoClass: "ISO 7"                   # ISO 14644 cleanroom class
+  airChangesPerHour: 25               # Required ACH
+  filtrationClass: "HEPA H14"         # Filtration requirement
+  gowningRequired: true               # Gowning/PPE required
+  pressureDifferentialPa: 15          # Pressure vs. adjacent space
+```
+
+### Infection Control Zone Properties (v0.3.0)
+
+```yaml
+properties:
+  isolationType: "airborne"           # airborne, contact, droplet
+  pressurization: "negative"          # Negative pressure for isolation
+  anteroomRequired: true              # Anteroom/airlock required
+  hepaExhaust: true                   # HEPA filter on exhaust
+  ppeRequirements: ["N95", "gown", "gloves", "face_shield"]
+```
+
+### Pressure Cascade Zone Properties (v0.3.0)
+
+```yaml
+properties:
+  cascadeDirection: "clean_to_dirty"  # Pressure gradient direction
+  pressureSteps:                      # Pressure at each step (Pa relative to reference)
+    - zone: "clean_corridor"
+      pressurePa: 15
+    - zone: "anteroom"
+      pressurePa: 10
+    - zone: "patient_room"
+      pressurePa: 5
+    - zone: "dirty_corridor"
+      pressurePa: 0
+  monitoringRequired: true            # Continuous pressure monitoring
 ```
 
 ## Example: Zone Type Definition
@@ -442,4 +508,4 @@ ZT-FIRE-ZL-IV → BLD-01: ZONE-FIRE-A, ZONE-FIRE-B
 - **[Space Type](/en/documentation/entities/space-type)** - Space templates (similar pattern)
 - **[System Type](/en/documentation/entities/system-type)** - System templates
 - **[Requirement](/en/documentation/entities/requirement)** - Requirements referenced by zones
-- **Schema:** `sbm-schema-v0.2.json` - Zone Type definition
+- **Schema:** `sbm-schema-v0.3.json` - Zone Type definition

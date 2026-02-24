@@ -90,16 +90,32 @@ Zones define:
 
 ```typescript
 type ZoneType =
-  | "fire"          // Fire compartments, smoke control
-  | "hvac"          // HVAC thermal zones
-  | "acoustic"      // Acoustic treatment zones
-  | "security"      // Access control zones
-  | "maintenance"   // Facilities management zones
-  | "lighting"      // Lighting control zones
-  | "ventilation"   // Natural/mechanical ventilation zones
-  | "plumbing"      // Plumbing risers and distribution
-  | "electrical";   // Electrical distribution zones
+  | "fire"                // Fire compartments, smoke control
+  | "hvac"                // HVAC thermal zones
+  | "acoustic"            // Acoustic treatment zones
+  | "security"            // Access control zones
+  | "maintenance"         // Facilities management zones
+  | "lighting"            // Lighting control zones
+  | "ventilation"         // Natural/mechanical ventilation zones
+  | "plumbing"            // Plumbing risers and distribution
+  | "electrical"          // Electrical distribution zones
+  // v0.3.0 additions:
+  | "medical_electrical"  // IEC 60364-7-710 medical electrical zones (Group 1/2)
+  | "radiation_protection" // Radiological shielding zones (X-ray, CT, gamma)
+  | "cleanroom"           // ISO 14644 cleanroom zones
+  | "infection_control"   // Infection control zones (isolation, barrier nursing)
+  | "pressure_cascade";   // Pressure cascade zones (clean→dirty gradient)
 ```
+
+### Healthcare Zone Types (v0.3.0)
+
+| Value | Purpose | Typical Properties |
+|-------|---------|-------------------|
+| `medical_electrical` | Electrical safety groupings per IEC 60364-7-710 | Safety group (0/1/2), IT power supply requirements |
+| `radiation_protection` | Radiological protection zones | Shielding material, Pb equivalent, controlled area boundaries |
+| `cleanroom` | ISO 14644 cleanroom classifications | ISO class, air changes, filtration, gowning requirements |
+| `infection_control` | Infection prevention and control zones | Isolation type (airborne/contact/droplet), PPE requirements |
+| `pressure_cascade` | Pressure relationships between connected spaces | Pressure differential (Pa), flow direction (clean-to-dirty) |
 
 ## Example 1: Your First Zone File (Minimal)
 

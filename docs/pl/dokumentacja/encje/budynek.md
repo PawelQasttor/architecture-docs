@@ -63,6 +63,7 @@ Budynki definiują:
 | `yearBuilt` | number | Rok budowy/oddania |
 | `projectPhase` | string | Bieżąca faza projektu |
 | `certifications` | array | Certyfikaty zrównoważonego budownictwa |
+| `departments` | array | **[NOWOŚĆ v0.3.0]** Działy/oddziały z lokalizacją i personelem |
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
@@ -419,6 +420,106 @@ Metadane budynku wypełniają nagł&oacute;wek raportu zgodności:
   }
 }
 ```
+
+## Działy / Oddziały (v0.3.0)
+
+**NOWOŚĆ w v0.3.0:** Opcjonalna tablica `departments` definiuje strukturę organizacyjną budynku. Każdy dział ma identyfikator, do którego odwołują się przestrzenie przez pole `departmentId`.
+
+### Struktura obiektu departamentu
+
+| Pole | Typ | Opis | Przykład |
+|------|-----|------|----------|
+| `id` | string | Unikalny identyfikator działu (format: `DEPT-XXX`) | `"DEPT-SURGERY"` |
+| `name` | string | Nazwa działu czytelna dla ludzi | `"Oddział Chirurgii"` |
+| `description` | string | Opis funkcji i zakresu działalności działu | `"Blok operacyjny z 4 salami"` |
+| `levelIds` | array | Identyfikatory kondygnacji zajmowanych przez dział | `["LVL-02", "LVL-03"]` |
+| `headOfDepartment` | string | Kierownik działu (imię i nazwisko lub stanowisko) | `"dr hab. Jan Kowalski"` |
+| `operatingHours` | string | Godziny pracy działu | `"24/7"` lub `"07:00-15:00"` |
+| `staffCount` | number | Liczba personelu przypisanego do działu | `45` |
+
+### Przykład: Szpital z oddziałami
+
+```yaml
+---
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Szpital Powiatowy w Krakowie"
+buildingType: "healthcare"
+country: "PL"
+version: "1.0.0"
+
+departments:
+  - id: "DEPT-SURGERY"
+    name: "Oddział Chirurgii Ogólnej"
+    description: "Blok operacyjny z 4 salami operacyjnymi i zapleczem"
+    levelIds: ["LVL-02"]
+    headOfDepartment: "dr hab. Jan Kowalski"
+    operatingHours: "07:00-19:00"
+    staffCount: 45
+
+  - id: "DEPT-ICU"
+    name: "Oddział Intensywnej Terapii"
+    description: "12-łóżkowy OIOM z wydzieloną izolatką"
+    levelIds: ["LVL-02"]
+    headOfDepartment: "dr Anna Nowak"
+    operatingHours: "24/7"
+    staffCount: 38
+
+  - id: "DEPT-EMERGENCY"
+    name: "Szpitalny Oddział Ratunkowy"
+    description: "SOR z triaż, salami zabiegowymi i poczekalniami"
+    levelIds: ["LVL-01"]
+    headOfDepartment: "dr Piotr Wiśniewski"
+    operatingHours: "24/7"
+    staffCount: 52
+
+  - id: "DEPT-RADIOLOGY"
+    name: "Zakład Diagnostyki Obrazowej"
+    description: "Pracownie CT, MRI, RTG, USG"
+    levelIds: ["LVL-01"]
+    headOfDepartment: "dr Maria Lewandowska"
+    operatingHours: "24/7"
+    staffCount: 22
+
+  - id: "DEPT-ADMIN"
+    name: "Administracja"
+    description: "Dyrekcja, kadry, księgowość, sekretariat"
+    levelIds: ["LVL-03"]
+    operatingHours: "07:30-15:30"
+    staffCount: 18
+---
+```
+
+### Odwoływanie się do działów z przestrzeni
+
+Przestrzenie odwołują się do działów za pomocą pola `departmentId`:
+
+```yaml
+# Sala operacyjna przypisana do Oddziału Chirurgii
+---
+id: "SP-BLD-01-L02-OR-01"
+spaceName: "Sala Operacyjna 01"
+spaceType: "operating_room"
+departmentId: "DEPT-SURGERY"
+levelId: "LVL-02"
+---
+
+# Sala OIOM przypisana do Oddziału Intensywnej Terapii
+---
+id: "SP-BLD-01-L02-ICU-01"
+spaceName: "Stanowisko OIOM 01"
+spaceType: "icu"
+departmentId: "DEPT-ICU"
+levelId: "LVL-02"
+---
+```
+
+**Korzyści:**
+- Grupowanie przestrzeni wg struktury organizacyjnej (nie tylko lokalizacyjnej)
+- Raportowanie powierzchni i wyposażenia per oddział
+- Śledzenie personelu i godzin pracy
+- Koordynacja przepływów pacjentów między oddziałami
 
 ## Zobacz Także
 

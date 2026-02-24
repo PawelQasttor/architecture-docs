@@ -27,7 +27,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '0.2.0';
+const VERSION = '0.3.0';
 
 // CLI argument parsing
 function parseArgs(args) {
@@ -112,7 +112,7 @@ async function compile(options) {
 
     // Build SBM structure
     const sbm = {
-      sbm_version: '0.2',
+      sbm_version: '0.3',
       generatedAt: new Date().toISOString(),
       compiler: {
         version: VERSION,
@@ -123,7 +123,7 @@ async function compile(options) {
 
     // Stage 3: Validate
     logger.stage(3, 'Validate');
-    logger.debug('Validating against JSON schema v0.2, checking integrity, provenance, and phase gates...');
+    logger.debug('Validating against JSON schema v0.3, checking integrity, provenance, and phase gates...');
     const validationResult = await validate(sbm, logger);
 
     if (validationResult.valid) {

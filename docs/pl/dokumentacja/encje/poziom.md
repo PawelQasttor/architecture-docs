@@ -32,8 +32,8 @@ Poziomy definiują:
 | `levelHeight` | number | Wysokość kondygnacji (strop-strop) |
 | `levelHeightUnit` | string | Jednostka wysokości |
 | `typicalCeilingHeight` | number | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślna wysokość w świetle dla przestrzeni na tym poziomie |
-| `typicalFinishes` | object | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślne wykończenia (podłoga, ściany, sufit, listwy) |
-| `typicalEnvironmentalConditions` | object | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślne ustawienia HVAC (temperatura, wilgotność, wentylacja) |
+| `typicalFinishes` | object | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślne wykończenia (podłoga, ściany, sufit, listwy). **[v0.3.0]** Akceptuje string LUB obiekt strukturalny |
+| `typicalEnvironmentalConditions` | object | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Domyślne ustawienia HVAC. **[v0.3.0]** Rozszerzone o 6 nowych pól |
 | `levelRequirements` | array | **[DZIEDZICZONE PRZEZ PRZESTRZENIE]** Wymagania dotyczące wszystkich przestrzeni na tym poziomie |
 | `grossFloorArea` | number | Całkowita PUM dla tego poziomu |
 | `areaUnit` | string | Jednostka powierzchni |
@@ -625,6 +625,101 @@ LVL-ROOF:
   levelHeight: 2.50
   description: "Mechanical penthouse and rooftop access"
 ```
+
+## Wykończenia strukturalne (v0.3.0)
+
+**NOWOŚĆ w v0.3.0:** Pole `typicalFinishes` (i `finishes` w przestrzeniach) akceptuje teraz ALBO prosty string, ALBO obiekt strukturalny z dodatkowymi właściwościami. Oba formaty są prawidłowe i mogą być mieszane.
+
+### Format prosty (string) — jak dotychczas
+
+```yaml
+typicalFinishes:
+  floor: "deska_inzynierska_dab_naturalny"
+  walls: "farba_biala_matowa"
+  ceiling: "farba_biala_matowa"
+  baseboard: "mdf_bialy_120mm"
+```
+
+### Format strukturalny (obiekt) — NOWOŚĆ v0.3.0
+
+```yaml
+typicalFinishes:
+  floor:
+    material: "PVC-MEDICAL-01"
+    productCode: "Tarkett iQ Optima 3242 860"
+    fireClass: "Bfl-s1"
+    slipResistance: "R10"
+    antimicrobial: true
+    chemicalResistance: true
+    cleanability: "medical"      # standard / medical / cleanroom
+    coveBase: true
+    seamless: true
+  walls:
+    material: "PAINT-ANTIMICROBIAL-01"
+    fireClass: "B-s1,d0"
+    antimicrobial: true
+    cleanability: "medical"
+  ceiling:
+    material: "CEILING-TILE-MEDICAL-01"
+    fireClass: "A2-s1,d0"
+    cleanability: "medical"
+```
+
+### Pola strukturalne wykończeń
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `material` | string | Identyfikator lub nazwa materiału |
+| `productCode` | string | Kod produktu producenta |
+| `fireClass` | string | Klasa reakcji na ogień (np. `"Bfl-s1"`) |
+| `slipResistance` | string | Klasa antypoślizgowości (np. `"R10"`) |
+| `antimicrobial` | boolean | Właściwości antybakteryjne |
+| `esdProtection` | boolean | Ochrona przed wyładowaniami elektrostatycznymi |
+| `chemicalResistance` | boolean | Odporność chemiczna |
+| `cleanability` | enum | Poziom czyszczenia: `standard` / `medical` / `cleanroom` |
+| `coveBase` | boolean | Wywijka (coving) |
+| `seamless` | boolean | Wykończenie bezszwowe |
+
+**Typowe zastosowania:** Szpitale i laboratoria (gdzie wymagane są konkretne klasy czyszczenia, właściwości antybakteryjne i odporność chemiczna), budynki z wymaganiami pożarowymi (klasy reakcji na ogień), pomieszczenia ESD (serwerownie, laboratoria elektroniczne).
+
+## Rozszerzone warunki środowiskowe (v0.3.0)
+
+**NOWOŚĆ w v0.3.0:** Pole `typicalEnvironmentalConditions` zostało rozszerzone o 6 nowych pól, szczególnie przydatnych dla budynków opieki zdrowotnej.
+
+```yaml
+typicalEnvironmentalConditions:
+  temperatureRange:
+    min: 20
+    max: 24
+    unit: "C"
+  humidityRange:
+    min: 30
+    max: 60
+  ventilationRate:
+    value: 2
+    unit: "ACH"
+  pressurization: "neutral"
+  # Nowe pola v0.3.0:
+  airChangesPerHour: 2                    # Wymiana powietrza na godzinę
+  freshAirPercentage: 50                  # Procent świeżego powietrza (0-100)
+  filtrationClass: "F7"                   # Klasa filtracji
+  pressureDifferentialPa: 0               # Różnica ciśnień w Pa
+  laminarFlow: false                      # Przepływ laminarny
+  operatingRoomClass: "not_applicable"    # Klasa sali operacyjnej wg DIN 1946-4
+```
+
+### Nowe pola
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `airChangesPerHour` | number | Wymiana powietrza na godzinę (ACH) |
+| `freshAirPercentage` | number | Procent świeżego powietrza (0-100) |
+| `filtrationClass` | string | Klasa filtracji (np. `"HEPA H14"`, `"F7"`) |
+| `pressureDifferentialPa` | number | Różnica ciśnień w Paskalach |
+| `laminarFlow` | boolean | Czy wymagany jest przepływ laminarny |
+| `operatingRoomClass` | enum | Klasa sali operacyjnej: `class_ia` / `class_ib` / `class_ii` / `not_applicable` |
+
+Wszystkie nowe pola są dziedziczone przez przestrzenie na danej kondygnacji, identycznie jak istniejące pola `typicalEnvironmentalConditions`.
 
 ## Proweniencja dziedziczenia (v0.2.0)
 

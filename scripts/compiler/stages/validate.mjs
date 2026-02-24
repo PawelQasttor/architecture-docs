@@ -1,7 +1,7 @@
 /**
  * Stage 3: Validate
  *
- * - Validate against JSON schema (v0.2)
+ * - Validate against JSON schema (v0.3)
  * - Check referential integrity (all referenced IDs exist)
  * - Check business rules (requirements applicable to scope)
  * - Check data provenance (source required for high confidence)
@@ -21,7 +21,7 @@ const __dirname = path.dirname(__filename);
  * Load JSON schema
  */
 async function loadSchema() {
-  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v0.2.json');
+  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v0.3.json');
   const schemaContent = await fs.readFile(schemaPath, 'utf-8');
   return JSON.parse(schemaContent);
 }
@@ -30,7 +30,7 @@ async function loadSchema() {
  * Validate against JSON schema
  */
 async function validateSchema(sbm, logger) {
-  logger.debug('Loading JSON schema (v0.2)...');
+  logger.debug('Loading JSON schema (v0.3)...');
   const schema = await loadSchema();
 
   const ajv = new Ajv({ allErrors: true, strict: false });
@@ -50,7 +50,7 @@ async function validateSchema(sbm, logger) {
     };
   }
 
-  logger.debug('✓ JSON schema validation passed (v0.2)');
+  logger.debug('✓ JSON schema validation passed (v0.3)');
   return { valid: true, errors: [] };
 }
 

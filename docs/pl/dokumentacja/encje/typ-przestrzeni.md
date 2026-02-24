@@ -40,17 +40,39 @@ Pola definiujące **specyfikacje szablonowe** dziedziczone przez wszystkie insta
 |------|-----|------|
 | `description` | string | Opis typu i cel |
 | `requirements` | array | ID wymagań stosowanych do WSZYSTKICH instancji |
-| `finishes` | object | Standardowe wykończenia (podłoga, ściany, sufit, drzwi, okno) |
+| `finishes` | object | Standardowe wykończenia (podłoga, ściany, sufit, drzwi, okno). **[v0.3.0]** Akceptuje string LUB obiekt strukturalny |
 | `equipment` | array | Standardowa lista wyposażenia ze specyfikacjami |
 | `accessibilityLevel` | string | Domyślna dostępność: `standard` / `mobility` / `visual` / `hearing` / `full` |
 | `occupancyProfile` | object | Typowe użytkowanie (maxOccupants, bedCount, usagePattern, hours) |
-| `environmentalConditions` | object | Szablon warunk&oacute;w środowiskowych (temperatura, wilgotność, wentylacja) |
+| `environmentalConditions` | object | Szablon warunk&oacute;w środowiskowych. **[v0.3.0]** Rozszerzone o 6 nowych pól |
 | `electricalSafetyGroup` | string | IEC 60364-7-710: `standard` / `group_0` / `group_1` / `group_2` |
+| `shielding` | object | **[NOWOŚĆ v0.3.0]** Ekranowanie radiologiczne, RF i izolacja akustyczna |
 | `typicalArea` | object | Wytyczne powierzchni (min, max, typowa w m²) |
 | `typicalHeight` | object | Wytyczne wysokości (min, typowa w m) |
 | `tags` | array | Tagi klasyfikacyjne |
 
+## Wyliczenie spaceType (v0.3.0)
+
+Pole `spaceType` w Typie Przestrzeni musi być jedną z wartości dozwolonych w [wyliczeniu SpaceType](/pl/dokumentacja/encje/przestrzen#typy-przestrzeni-wyliczenie). W v0.3.0 dodano 30 nowych wartości:
+
+**Opieka zdrowotna (17):** `operating_room`, `icu`, `patient_room`, `examination_room`, `treatment_room`, `diagnostic_imaging`, `laboratory`, `sterilization`, `pharmacy`, `clean_room`, `isolation_room`, `nursing_station`, `waiting_area`, `emergency_room`, `autopsy`, `medical_storage`, `decontamination`.
+
+**Infrastruktura (13):** `server_room`, `workshop`, `loading_dock`, `parking`, `mechanical_room`, `electrical_room`, `generator_room`, `water_treatment`, `waste_management`, `chapel`, `cafeteria`, `laundry`, `reception`.
+
 ## Struktura Obiektu Finishes
+
+**[v0.3.0]** Pola wykończeń akceptują teraz ALBO prosty string, ALBO obiekt strukturalny. Oba formaty są prawidłowe:
+
+### Format prosty (string)
+
+```yaml
+finishes:
+  floor: "MAT-FLOOR-OAK-01"
+  walls: "MAT-WALL-PAINT-WHITE"
+  ceiling: "MAT-CEILING-PAINT-WHITE"
+```
+
+### Format strukturalny (obiekt) — NOWOŚĆ v0.3.0
 
 ```yaml
 finishes:
@@ -72,6 +94,48 @@ finishes:
     size: "1200×1400mm"
     uValue: "0.9 W/(m²·K)"
 ```
+
+### Format strukturalny rozszerzony (dla opieki zdrowotnej)
+
+```yaml
+finishes:
+  floor:
+    material: "PVC-CONDUCT-01"
+    productCode: "Forbo Colorex SD 150-01"
+    fireClass: "Bfl-s1"
+    slipResistance: "R10"
+    antimicrobial: true
+    esdProtection: true
+    chemicalResistance: true
+    cleanability: "cleanroom"     # standard / medical / cleanroom
+    coveBase: true
+    seamless: true
+  walls:
+    material: "HPL-PANEL-SURGICAL"
+    fireClass: "B-s1,d0"
+    antimicrobial: true
+    cleanability: "cleanroom"
+    seamless: true
+  ceiling:
+    material: "LAMINAR-FLOW-CEILING-01"
+    cleanability: "cleanroom"
+    seamless: true
+```
+
+### Pola strukturalne wykończeń (v0.3.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `material` | string | Identyfikator lub nazwa materiału |
+| `productCode` | string | Kod produktu producenta |
+| `fireClass` | string | Klasa reakcji na ogień (np. `"Bfl-s1"`, `"B-s1,d0"`) |
+| `slipResistance` | string | Klasa antypoślizgowości (np. `"R10"`, `"R11"`) |
+| `antimicrobial` | boolean | Czy materiał ma właściwości antybakteryjne |
+| `esdProtection` | boolean | Czy materiał ma ochronę przed wyładowaniami elektrostatycznymi |
+| `chemicalResistance` | boolean | Czy materiał jest odporny chemicznie |
+| `cleanability` | enum | Poziom czyszczenia: `standard` / `medical` / `cleanroom` |
+| `coveBase` | boolean | Czy zastosowano wywijkę (coving) |
+| `seamless` | boolean | Czy wykończenie jest bezszwowe |
 
 ## Struktura Tablicy Equipment
 
@@ -224,7 +288,7 @@ Typy Przestrzeni mogą definiować szablonowe warunki środowiskowe i klasyfikac
 ---
 id: "ST-ICU-WARD-STANDARD"
 typeName: "Oddział OIOM - Standard"
-spaceType: "healthcare"
+spaceType: "icu"
 accessibilityLevel: "full"
 electricalSafetyGroup: "group_2"  # Sprzęt krytyczny dla życia
 
@@ -233,6 +297,13 @@ environmentalConditions:
   humidityRange: { min: 30, max: 60 }
   ventilationRate: { value: 6, unit: "ACH" }
   pressurization: "positive"
+  # Nowe pola v0.3.0:
+  airChangesPerHour: 6
+  freshAirPercentage: 100
+  filtrationClass: "F9"
+  pressureDifferentialPa: 5
+  laminarFlow: false
+  operatingRoomClass: "not_applicable"
 
 occupancyProfile:
   maxOccupants: 2
@@ -241,6 +312,58 @@ occupancyProfile:
 ```
 
 Instancje dziedziczą te wartości i mogą je nadpisywać (np. izolatka z podciśnieniem).
+
+### Nowe pola warunk&oacute;w środowiskowych (v0.3.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `airChangesPerHour` | number | Wymiana powietrza na godzinę |
+| `freshAirPercentage` | number | Procent świeżego powietrza (0-100) |
+| `filtrationClass` | string | Klasa filtracji (np. `"HEPA H14"`, `"F9"`) |
+| `pressureDifferentialPa` | number | Różnica ciśnień w Pa |
+| `laminarFlow` | boolean | Czy wymagany jest przepływ laminarny |
+| `operatingRoomClass` | enum | Klasa sali operacyjnej wg DIN 1946-4: `class_ia` / `class_ib` / `class_ii` / `not_applicable` |
+
+## Ekranowanie (v0.3.0)
+
+**NOWOŚĆ w v0.3.0:** Typy Przestrzeni mogą definiować szablonowe wymagania ekranowania dziedziczone przez wszystkie instancje. Kluczowe dla diagnostyki obrazowej, radioterapii i pomieszczeń MRI.
+
+```yaml
+# Przykład: Typ pracowni CT
+---
+id: "ST-DIAGNOSTIC-CT"
+typeName: "Pracownia CT - Standard"
+spaceType: "diagnostic_imaging"
+electricalSafetyGroup: "group_1"
+
+shielding:
+  radiological:
+    required: true
+    material: "lead"
+    thicknessMm: 2.0
+    equivalentPbMm: 2.0
+    protectedDirections:
+      - "north"
+      - "east"
+      - "south"
+      - "west"
+      - "floor"
+      - "ceiling"
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 45
+    impactSoundLn: 53
+---
+```
+
+Instancje dziedziczą ekranowanie z typu i mogą je nadpisywać (np. inna grubość ołowiu dla konkretnej pracowni).
+
+| Sekcja | Pola | Opis |
+|--------|------|------|
+| `radiological` | `required`, `material`, `thicknessMm`, `equivalentPbMm`, `protectedDirections` | Ekranowanie radiologiczne (ołów, beton barytowy) |
+| `rfShielding` | `required`, `attenuationDb`, `frequencyRangeMhz` | Ekranowanie RF (klatka Faradaya dla MRI) |
+| `acousticIsolation` | `requiredRw`, `impactSoundLn` | Izolacja akustyczna (Rw i Ln,w w dB) |
 
 ## Zobacz Również
 

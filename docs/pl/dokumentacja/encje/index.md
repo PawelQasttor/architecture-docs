@@ -271,6 +271,39 @@ Zapytaj: "Czy opisuję fizyczny pokój?" → **Pomieszczenie**
 
 ---
 
+## Zmiany w v0.3.0
+
+**SBM v0.3.0** wprowadza znaczące rozszerzenia dla budynków opieki zdrowotnej, infrastruktury i zaawansowanego modelowania danych. Oto podsumowanie zmian:
+
+### Nowe typy przestrzeni (30 nowych wartości)
+Rozszerzono wyliczenie `spaceType` o przestrzenie opieki zdrowotnej (`operating_room`, `icu`, `patient_room`, `examination_room`, `clean_room`, `isolation_room` i inne) oraz infrastrukturalne (`server_room`, `workshop`, `loading_dock`, `parking`, `mechanical_room` i inne). Szczegóły: [Przestrzeń](/pl/dokumentacja/encje/przestrzen) i [Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni).
+
+### Nowe typy stref (5 nowych wartości)
+Dodano `medical_electrical`, `radiation_protection`, `cleanroom`, `infection_control`, `pressure_cascade`. Szczegóły: [Strefa](/pl/dokumentacja/encje/strefa) i [Typ Strefy](/pl/dokumentacja/encje/typ-strefy).
+
+### Nowe kategorie systemów (5 nowych wartości)
+Dodano `medical_gas`, `nurse_call`, `pneumatic_tube`, `medical_waste`, `it_network`. Szczegóły: [Instalacja](/pl/dokumentacja/encje/system) i [Typ Systemu](/pl/dokumentacja/encje/typ-systemu).
+
+### Wykończenia strukturalne
+Pola wykończeń (`floor`, `walls`, `ceiling` itp.) akceptują teraz ALBO prosty string, ALBO obiekt strukturalny z: `material`, `productCode`, `fireClass`, `slipResistance`, `antimicrobial`, `esdProtection`, `chemicalResistance`, `cleanability`, `coveBase`, `seamless`. Szczegóły: [Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni), [Przestrzeń](/pl/dokumentacja/encje/przestrzen), [Kondygnacja](/pl/dokumentacja/encje/poziom).
+
+### Rozszerzone warunki środowiskowe
+6 nowych pól: `airChangesPerHour`, `freshAirPercentage`, `filtrationClass`, `pressureDifferentialPa`, `laminarFlow`, `operatingRoomClass`. Szczegóły: [Przestrzeń](/pl/dokumentacja/encje/przestrzen), [Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni), [Kondygnacja](/pl/dokumentacja/encje/poziom).
+
+### Ekranowanie (nowy obiekt)
+Nowy opcjonalny obiekt `shielding` z ekranowaniem radiologicznym, RF i izolacją akustyczną. Szczegóły: [Przestrzeń](/pl/dokumentacja/encje/przestrzen) i [Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni).
+
+### Wymagania jakościowe
+Pola `metric`, `operator`, `value` są teraz opcjonalne. Nowy typ `qualitative` z polami `qualitativeDescription`, `acceptanceCriteria`, `evidenceRequired`. Szczegóły: [Wymaganie](/pl/dokumentacja/encje/wymaganie).
+
+### Działy/Oddziały
+Nowa opcjonalna tablica `departments` w projekcie z polami: `id`, `name`, `description`, `levelIds`, `headOfDepartment`, `operatingHours`, `staffCount`. Szczegóły: [Budynek](/pl/dokumentacja/encje/budynek).
+
+### Rozszerzone relacje sąsiedztwa
+Nowe typy relacji: `connects_via_airlock`, `connects_via_pass_through`, `clean_supply_to`, `dirty_return_from`, `patient_flow_to`, `staff_flow_to`, `visitor_flow_to`, `material_flow_to`, `vertical_shaft`. Nowe pola: `boundaryType`, `fireRating`. Szczegóły: [Przestrzeń](/pl/dokumentacja/encje/przestrzen).
+
+---
+
 ::: tip Gotowy Stworzyć Swój Pierwszy Plik?
 Przejdź do [Szybki Start](/pl/standardy/szybki-start), aby stworzyć swój pierwszy plik Pomieszczenia w 5 minut.
 
