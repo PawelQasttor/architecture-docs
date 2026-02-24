@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strefa pożarowa ZL-IV - Kujawsko-Pomorskie Centrum Pulmonologii</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ── SIDEBAR ────────────────────────── */
+        .sidebar {
+            width: 420px;
+            min-width: 420px;
+            flex-shrink: 0;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px 15px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 13px;
+        }
+        .sidebar-title {
+            color: #60a5fa;
+            font-size: 1.15em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #334155;
+        }
+
+        /* ── NAV TREE ───────────────────────── */
+        .nav-tree {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-node {
+            position: relative;
+            margin: 1px 0;
+        }
+
+        /* Toggle arrow */
+        .toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 9px;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .toggle:hover { color: #e2e8f0; background: #334155; }
+        .toggle-spacer { display: inline-block; width: 20px; flex-shrink: 0; }
+
+        /* Expanded state */
+        .has-children:not(.collapsed) > .toggle {
+            transform: rotate(90deg);
+        }
+        .has-children.collapsed > .nav-tree {
+            display: none;
+        }
+
+        /* Links */
+        .nav-node a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .nav-node a:hover { color: #fff; background: #334155; }
+
+        /* Group labels (non-clickable) */
+        .nav-group-label {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+            padding: 8px 8px 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Depth indentation */
+        .nav-depth-0 > .nav-node { padding-left: 0; }
+        .nav-depth-1 > .nav-node { padding-left: 16px; }
+        .nav-depth-2 > .nav-node { padding-left: 32px; }
+        .nav-depth-3 > .nav-node { padding-left: 48px; }
+        .nav-depth-4 > .nav-node { padding-left: 64px; }
+
+        /* Depth-0 items (Inwestycja, Budynek) */
+        .nav-d0 > a {
+            font-weight: 700;
+            font-size: 1.05em;
+            color: #f1f5f9;
+            padding: 8px 10px;
+            background: #334155;
+            border-left: 3px solid #3b82f6;
+            margin: 4px 0;
+            width: calc(100% - 25px);
+        }
+        .nav-d0 > a:hover { background: #475569; }
+
+        /* Depth-1 items (Strefy, Levels, etc.) */
+        .nav-d1 > a {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .nav-d1.nav-group > .nav-group-label {
+            margin-top: 10px;
+        }
+
+        /* Depth-2 items (individual spaces, zones) */
+        .nav-d2 > a {
+            font-size: 0.92em;
+            color: #94a3b8;
+        }
+        .nav-d2 > a:hover { color: #e2e8f0; }
+
+        /* Header nav items (within-document) */
+        .nav-header > a {
+            font-size: 0.88em;
+            color: #64748b;
+            font-style: italic;
+        }
+        .nav-header > a:hover { color: #cbd5e1; }
+
+        /* ── CONTENT AREA ───────────────────── */
+        .content {
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+        h1 {
+            color: #1e293b;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #334155;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        h3 {
+            color: #475569;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        h4 {
+            color: #64748b;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        li { margin-bottom: 8px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        pre code { background: none; padding: 0; }
+
+        /* ── PRINT BUTTON ───────────────────── */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .print-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* ── INHERITANCE PANEL ──────────────── */
+        .inh-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 8px;
+            border-radius: 8px 0 0 8px;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 999;
+            writing-mode: vertical-rl;
+            letter-spacing: 1px;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+        }
+        .inh-toggle:hover { background: #2563eb; padding: 15px 12px; }
+
+        .inh-panel {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            border-left: 3px solid #3b82f6;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .inh-panel.open { right: 0; }
+        .inh-panel-header {
+            background: #1e293b;
+            color: white;
+            padding: 18px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .inh-panel-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .inh-panel-close:hover { opacity: 1; }
+        .inh-panel-body { padding: 20px; }
+        .inh-panel-body h4 {
+            color: #1e293b;
+            margin: 20px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 1em;
+        }
+        .inh-panel-body h4:first-child { margin-top: 0; }
+        .inh-row {
+            padding: 10px 12px;
+            background: #f8fafc;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            font-size: 0.9em;
+        }
+        .inh-row strong {
+            color: #334155;
+            display: block;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+        .inh-row .val { color: #1e293b; }
+        .inh-empty {
+            color: #94a3b8;
+            font-style: italic;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .inh-hint {
+            margin-top: 15px;
+            padding: 12px;
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            font-size: 0.85em;
+            border-radius: 0 6px 6px 0;
+            color: #1e40af;
+        }
+
+        /* ── PRINT / RESPONSIVE ─────────────── */
+        @media print {
+            .sidebar, .print-btn, .inh-toggle, .inh-panel { display: none; }
+            .content { padding: 20px; max-width: 100%; }
+        }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; max-height: 50vh; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="content">
+            <h1>Strefa: Strefa pożarowa ZL IV</h1><p><h2 id="section-2-informacje-podstawowe">Informacje podstawowe</h2><p><strong>Typ encji:</strong> Zone
+<strong>ID:</strong> ZONE-FIRE-ZL-IV
+<strong>Nazwa:</strong> Strefa pożarowa ZL IV
+<strong>Typ strefy:</strong> Fire Zone
+<strong>Budynek:</strong> <code>BLD-KPCPULM-BLOK-D</code></p><p><h2 id="section-2-opis">Opis</h2><p>Strefa pożarowa obejmująca cały budynek Bloku D (wszystkie kondygnacje od piwnic do III piętra). Klasyfikacja ZL IV oznacza budynek średniowysokie (wysokość max 25m), zlokalizowany w obszarze zurbanizowanym z dostępem do drogi pożarowej.</p><p><h2 id="section-2-klasyfikacja-poarowa">Klasyfikacja pożarowa</h2><p><h3 id="section-2-klasa-strefy-poarowej">Klasa strefy pożarowej</h3>
+<ul><li><strong>Oznaczenie:</strong> ZL IV</li>
+<li><strong>Wysokość budynku:</strong> ~15-17m (4 kondygnacje naziemne + piwnice)</li>
+<li><strong>Powierzchnia strefy:</strong> ~8 067 m² (powierzchnia całkowita)</li></p><p><h3 id="section-2-kategoria-zagroenia-ludzi">Kategoria zagrożenia ludzi</h3>
+<li><strong>ZL IV:</strong> Budynek opieki zdrowotnej (szpital)</li>
+<li><strong>Uwagi:</strong> Budynek z pacjentami o ograniczonej zdolności do samodzielnej ewakuacji (pacjenci leżący, OIOM, blok operacyjny)</li></p><p><h2 id="section-2-parametry-ochrony-poarowej">Parametry ochrony pożarowej</h2><p><h3 id="section-2-odporno-ogniowa-elementw-konstrukcyjnych">Odporność ogniowa elementów konstrukcyjnych</h3>
+<li><strong>Ściany zewnętrzne nośne:</strong> REI 60 (żelbet, bloczki SILKA z ociepleniem)</li>
+<li><strong>Ściany wewnętrzne nośne:</strong> REI 60 (żelbet, bloczki SILKA)</li>
+<li><strong>Stropy:</strong> REI 60 (stropy żelbetowe monolityczne)</li>
+<li><strong>Dach:</strong> RE 30 (konstrukcja drewniana lub stalowa, krycie papą)</li>
+<li><strong>Klatki schodowe (ściany):</strong> EI 60 (ściany oddzieleń pożarowych)</li>
+<li><strong>Drzwi klatek schodowych:</strong> EI 30 (drzwi dymoszczelne, samozamykacze)</li></p><p><h3 id="section-2-odlego-od-obiektw-ssiednich">Odległość od obiektów sąsiednich</h3>
+<li><strong>Budynek A (istniejący):</strong> połączony łącznikiem</li>
+<li><strong>Budynek C (istniejący):</strong> połączony łącznikiem</li>
+<li><strong>Droga pożarowa:</strong> 5,0m od budynku (plac manewrowy 20m × 20m)</li></p><p><h3 id="section-2-wymagania-dotyczce-drg-ewakuacyjnych">Wymagania dotyczące dróg ewakuacyjnych</h3><p><h4 id="section-2-drogi-ewakuacyjne-poziome">Drogi ewakuacyjne poziome</h4>
+<li><strong>Korytarze:</strong> szerokość min. 2,0m (spełnione: 2,5-3,0m)</li>
+<li><strong>Długość dojścia do wyjścia ewakuacyjnego:</strong> max 40m (dla ZL IV z pacjentami)</li></p><p><h4 id="section-2-drogi-ewakuacyjne-pionowe">Drogi ewakuacyjne pionowe</h4>
+<li><strong>Liczba klatek schodowych:</strong> 3 klatki (spełnia wymaganie minimum 2)</li>
+<li><strong>Typ klatek:</strong> klatki osłonięte (ściany EI 60, drzwi EI 30)</li>
+<li><strong>Szerokość biegów:</strong> min. 1,20m (spełnione: 1,50m)</li>
+<li><strong>Nadciśnienie w klatkach:</strong> system oddymiania z nadciśnieniem +50 Pa (aktywny przy pożarze)</li></p><p><h4 id="section-2-ewakuacja-pozioma">Ewakuacja pozioma</h4>
+<li><strong>Dla pacjentów leżących:</strong> ewakuacja pozioma do sąsiedniej strefy pożarowej (przez drzwi dymoszczelne EI 30)</li>
+<li><strong>Zasada:</strong> ewakuacja pacjentów leżących na tym samym poziomie do bezpiecznej strefy, a dopiero później ewakuacja pionowa (schodami lub dźwigami pożarowymi)</li></p><p><h3 id="section-2-dwigi">Dźwigi</h3><p><h4 id="section-2-dwigi-szpitalne">Dźwigi szpitalne</h4>
+<li><strong>Liczba:</strong> 3 dźwigi szpitalne</li>
+<li><strong>Funkcja pożarowa:</strong> dźwigi mogą być używane przez straż pożarną (sterowanie uprzywilejowane)</li>
+<li><strong>Szybkość:</strong> max 1,6 m/s</li>
+<li><strong>Nośność:</strong> 1600 kg (transport łóżek szpitalnych)</li></p><p><h4 id="section-2-wymagania-dwigw-poarowych">Wymagania dźwigów pożarowych</h4>
+<li><strong>Szyb dźwigowy:</strong> ściany REI 60</li>
+<li><strong>Drzwi szybu:</strong> EI 30 (dymoszczelne)</li>
+<li><strong>Zasilanie awaryjne:</strong> dźwigi przełączają się na zasilanie awaryjne (agregat) przy pożarze</li>
+<li><strong>Sterowanie:</strong> klucz strażacki (przejęcie sterowania przez straż pożarną)</li></p><p><h2 id="section-2-system-sygnalizacji-poarowej-ssp">System sygnalizacji pożarowej (SSP)</h2><p><h3 id="section-2-typ-systemu">Typ systemu</h3>
+<li><strong>System:</strong> Instalacja systemu sygnalizacji pożarowej (SSP) wg PN-EN 54</li>
+<li><strong>Centrala:</strong> centrala analogowo-adresowalna z wydrukiem zdarzeń</li>
+<li><strong>Zasięg:</strong> cały budynek (wszystkie kondygnacje)</li></p><p><h3 id="section-2-czujki">Czujki</h3>
+<li><strong>Korytarze, sale chorych:</strong> czujki optyczne dymu</li>
+<li><strong>Pomieszczenia techniczne (kotłownia):</strong> czujki temperatury</li>
+<li><strong>Kuchnie oddziałowe:</strong> czujki ciepła (unikanie fałszywych alarmów)</li>
+<li><strong>Blok operacyjny:</strong> czujki dymu (z opóźnieniem alarmu, aby uniknąć przerywania zabiegów)</li></p><p><h3 id="section-2-alarmy">Alarmy</h3>
+<li><strong>Sygnalizacja dźwiękowa:</strong> syreny w korytarzach, klatkach schodowych</li>
+<li><strong>Sygnalizacja świetlna:</strong> lampki stroboskopowe (dla osób niedosłyszących)</li>
+<li><strong>Przekaz do straży pożarnej:</strong> automatyczny (transmisja cyfrowa do PSP)</li></p><p><h3 id="section-2-sterowanie">Sterowanie</h3>
+<li><strong>Oddymianie klatek schodowych:</strong> automatyczne uruchomienie nadciśnienia +50 Pa</li>
+<li><strong>Sterowanie dźwigami:</strong> dźwigi jadą do poziomu parteru i otwierają drzwi (przejęcie przez straż)</li>
+<li><strong>Sterowanie drzwiami przeciwpożarowymi:</strong> zamknięcie drzwi dymoszczelnych (samozamykacze)</li></p><p><h2 id="section-2-system-oddymiania">System oddymiania</h2><p><h3 id="section-2-klatki-schodowe">Klatki schodowe</h3>
+<li><strong>Typ:</strong> system nadciśnieniowy +50 Pa (przy pożarze)</li>
+<li><strong>Wentylatory:</strong> wentylatory nadciśnieniowe na każdej klatce schodowej</li>
+<li><strong>Uruchomienie:</strong> automatyczne (SSP) lub ręczne (przyciski ROP - Ręcznych Ostrzegaczy Pożarowych)</li></p><p><h3 id="section-2-korytarze">Korytarze</h3>
+<li><strong>Typ:</strong> grawitacyjne oddymianie (klapy dymowe w sufitach, otwierane automatycznie)</li>
+<li><strong>Uruchomienie:</strong> automatyczne (SSP)</li></p><p><h2 id="section-2-hydranty-i-sprzt-ganiczy">Hydranty i sprzęt gaśniczy</h2><p><h3 id="section-2-hydranty-wewntrzne-hw">Hydranty wewnętrzne (HW)</h3>
+<li><strong>Lokalizacja:</strong> na każdej kondygnacji, w korytarzach (max co 30m)</li>
+<li><strong>Typ:</strong> hydranty 25mm z wężem półsztywnym 30m</li>
+<li><strong>Zasilanie:</strong> z hydroforni (piwnice, 0.34) + zbiornik wyrównawczy</li></p><p><h3 id="section-2-ganice">Gaśnice</h3>
+<li><strong>Typ:</strong> gaśnice proszkowe ABC 6kg, gaśnice CO₂ 5kg (pomieszczenia techniczne, serwerownia)</li>
+<li><strong>Lokalizacja:</strong> na każdej kondygnacji, przy wyjściach ewakuacyjnych, w pomieszczeniach technicznych</li>
+<li><strong>Rozstaw:</strong> max co 30m</li></p><p><h3 id="section-2-hydranty-zewntrzne">Hydranty zewnętrzne</h3>
+<li><strong>Lokalizacja:</strong> droga pożarowa od strony południowo-zachodniej</li>
+<li><strong>Typ:</strong> hydranty nadziemne DN 80</li>
+<li><strong>Zasięg:</strong> max 75m od budynku</li></p><p><h2 id="section-2-dostp-dla-stray-poarnej">Dostęp dla straży pożarnej</h2><p><h3 id="section-2-droga-poarowa">Droga pożarowa</h3>
+<li><strong>Lokalizacja:</strong> od strony południowo-zachodniej, wewnątrzszpitalna droga dojazdowa</li>
+<li><strong>Plac manewrowy:</strong> 20m × 20m w odległości 5,0m od budynku</li>
+<li><strong>Nośność:</strong> min. 10 ton/oś</li>
+<li><strong>Szerokość:</strong> min. 4,0m</li></p><p><h3 id="section-2-wejcia-dla-stray">Wejścia dla straży</h3>
+<li><strong>Główne wejście:</strong> od strony południowej (parter)</li>
+<li><strong>Dostęp do piwnic:</strong> od strony północno-wschodniej (dojazd techniczny)</li>
+<li><strong>Klatki schodowe:</strong> 3 klatki dostępne z zewnątrz (drzwi otwierane przez straż)</li></p><p><h2 id="section-2-przestrzenie-w-strefie">Przestrzenie w strefie</h2><p>Strefa obejmuje <strong>wszystkie kondygnacje</strong> budynku Bloku D:</p><p><h3 id="section-2-piwnice-lvl-kpcpulm-d-piwnica">Piwnice (LVL-KPCPULM-D-PIWNICA)</h3>
+<li>Powierzchnia: 996,63 m²</li>
+<li>51 pomieszczeń (0.1 - 0.51)</li>
+<li>Funkcje: prosektorium, pomieszczenia techniczne, szatnie, magazyny</li></p><p><h3 id="section-2-parter-lvl-kpcpulm-d-parter">Parter (LVL-KPCPULM-D-PARTER)</h3>
+<li>Powierzchnia: 1 487,70 m²</li>
+<li>63 pomieszczenia (1.1 - 1.63)</li>
+<li>Funkcje: diagnostyka obrazowa, sterylizacja, pomieszczenia techniczne</li></p><p><h3 id="section-2-i-pitro-lvl-kpcpulm-d-pietro-01">I Piętro (LVL-KPCPULM-D-PIETRO-01)</h3>
+<li>Powierzchnia: 1 497,03 m²</li>
+<li>92 pomieszczenia (2.1 - 2.92)</li>
+<li>Funkcje: OIOM, blok operacyjny, apteka</li></p><p><h3 id="section-2-ii-pitro-lvl-kpcpulm-d-pietro-02">II Piętro (LVL-KPCPULM-D-PIETRO-02)</h3>
+<li>Powierzchnia: 1 411,37 m²</li>
+<li>88 pomieszczeń (3.1 - 3.88)</li>
+<li>Funkcje: oddziały łóżkowe (2 oddziały, 65 łóżek)</li></p><p><h3 id="section-2-iii-pitro-lvl-kpcpulm-d-pietro-03">III Piętro (LVL-KPCPULM-D-PIETRO-03)</h3>
+<li>Powierzchnia: 1 367,60 m²</li>
+<li>88 pomieszczeń (4.1 - 4.88)</li>
+<li>Funkcje: oddziały łóżkowe (2 oddziały, 65 łóżek)</li></p><p><h2 id="section-2-wymagania-regulacyjne">Wymagania regulacyjne</h2><p><h3 id="section-2-przepisy-dot-ochrony-przeciwpoarowej">Przepisy dot. ochrony przeciwpożarowej</h3>
+<li><strong>Rozporządzenie Ministra Infrastruktury w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie</strong></li>
+<li><strong>PN-B-02851-1:</strong> Ochrona przeciwpożarowa budynków - Odporność ogniowa elementów konstrukcji</li>
+<li><strong>PN-EN 54:</strong> System sygnalizacji pożarowej</li></p><p><h3 id="section-2-przepisy-dot-budynkw-opieki-zdrowotnej">Przepisy dot. budynków opieki zdrowotnej</h3>
+<li><strong>Rozporządzenie Ministra Zdrowia w sprawie wymagań, jakim powinny odpowiadać pomieszczenia i urządzenia podmiotu wykonującego działalność leczniczą</strong></li>
+<li>Ewakuacja pozioma dla pacjentów leżących</li>
+<li>Drogi ewakuacyjne dostosowane do transportu łóżek szpitalnych</li></p><p><h2 id="section-2-instrukcje-i-procedury">Instrukcje i procedury</h2><p><h3 id="section-2-instrukcja-bezpieczestwa-poarowego-ibp">Instrukcja bezpieczeństwa pożarowego (IBP)</h3>
+<li>Dokument wymagany dla budynku (opracowany przez projektanta/inspektora ochrony przeciwpożarowej)</li>
+<li>Zawiera: zasady ewakuacji, rozmieszczenie sprzętu gaśniczego, schematy dróg ewakuacyjnych</li></p><p><h3 id="section-2-procedury-ewakuacji">Procedury ewakuacji</h3>
+<li><strong>Alarmu:</strong> sygnał dźwiękowy (syreny) + komunikat głosowy (opcjonalnie)</li>
+<li><strong>Ewakuacja personelu:</strong> przez klatki schodowe</li>
+<li><strong>Ewakuacja pacjentów leżących:</strong> ewakuacja pozioma → ewakuacja pionowa (jeśli konieczne)</li>
+<li><strong>Pacjenci OIOM i bloku operacyjnego:</strong> zabezpieczenie aparatury podtrzymującej życie, transport z aparaturą przenośną</li></p><p><h3 id="section-2-oznakowanie">Oznakowanie</h3>
+<li>Plany ewakuacyjne na każdej kondygnacji (przy wejściach do klatek schodowych)</li>
+<li>Znaki ewakuacyjne fotoluminescencyjne (kierunki ewakuacji)</li>
+<li>Oznakowanie hydrantów, gaśnic, ROP (Ręcznych Ostrzegaczy Pożarowych)</li></p><p><h2 id="section-2-stan-cyklu-ycia">Stan cyklu życia</h2><p><li><strong>Status:</strong> planned (projektowany)</li></p><p><h2 id="section-2-metadane">Metadane</h2><p><li><strong>Kategoria budynku:</strong> ZL (Zamieszkania Ludzi - budynek opieki zdrowotnej)</li>
+<li><strong>Wysokość budynku:</strong> ~15-17m (średniowysoki)</li>
+<li><strong>Najbliższa jednostka PSP:</strong> ~5km (centrum Bydgoszczy)</li>
+<li><strong>Data utworzenia:</strong> 2026-02-23</li>
+<li><strong>Wersja schematu SBM:</strong> v0.1.3</li></ul><p>---</p><p><strong>Uwagi:</strong> Strefa pożarowa ZL IV obejmuje cały budynek Bloku D. Ze względu na specyfikę szpitala (pacjenci leżący, blok operacyjny, OIOM) wymagana jest szczególna dbałość o drogi ewakuacyjne, system sygnalizacji pożarowej oraz procedury ewakuacji poziomej dla pacjentów o ograniczonej mobilności.
+</p>
+        </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Drukuj / PDF</button>
+
+    <button class="inh-toggle" id="inhToggle">Dziedziczenie</button>
+    <div class="inh-panel" id="inhPanel">
+        <div class="inh-panel-header">
+            <span>Właściwości Dziedziczone</span>
+            <span class="inh-panel-close" id="inhClose">&times;</span>
+        </div>
+        <div class="inh-panel-body" id="inhBody">
+            <p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ── TREE EXPAND/COLLAPSE ──
+        document.querySelectorAll('.toggle').forEach(function(icon) {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        document.querySelectorAll('.nav-node a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var li = this.parentElement;
+                if (li.classList.contains('has-children') && li.classList.contains('collapsed')) {
+                    li.classList.remove('collapsed');
+                    // Let navigation happen
+                }
+            });
+        });
+
+        // Start: expand depth 0, collapse everything else
+        document.querySelectorAll('.has-children').forEach(function(el) {
+            if (!el.classList.contains('nav-d0')) {
+                el.classList.add('collapsed');
+            } else {
+                el.classList.remove('collapsed');
+            }
+        });
+
+        // ── INHERITANCE PANEL ──
+        var inhToggle = document.getElementById('inhToggle');
+        var inhPanel = document.getElementById('inhPanel');
+        var inhClose = document.getElementById('inhClose');
+        var inhBody = document.getElementById('inhBody');
+        var isOpen = false;
+
+        inhToggle.addEventListener('click', function() {
+            isOpen = !isOpen;
+            inhPanel.classList.toggle('open', isOpen);
+            if (isOpen) updateInheritancePanel();
+        });
+
+        inhClose.addEventListener('click', function() {
+            isOpen = false;
+            inhPanel.classList.remove('open');
+        });
+
+        // Update panel based on which section is in view
+        var debounce = null;
+        window.addEventListener('scroll', function() {
+            if (!isOpen) return;
+            clearTimeout(debounce);
+            debounce = setTimeout(updateInheritancePanel, 150);
+        });
+
+        function updateInheritancePanel() {
+            var sections = document.querySelectorAll('.doc-section[data-inherited-height]');
+            var best = null;
+            var bestDist = Infinity;
+
+            sections.forEach(function(sec) {
+                var rect = sec.getBoundingClientRect();
+                var dist = Math.abs(rect.top);
+                if (rect.top < window.innerHeight && rect.bottom > 0 && dist < bestDist) {
+                    best = sec;
+                    bestDist = dist;
+                }
+            });
+
+            if (best) {
+                var h1 = best.querySelector('h1');
+                var name = h1 ? h1.textContent : 'Pomieszczenie';
+                var height = best.dataset.inheritedHeight;
+                var floor = best.dataset.inheritedFloor;
+                var walls = best.dataset.inheritedWalls;
+                var ceiling = best.dataset.inheritedCeiling;
+
+                var html = '<h4>' + name + '</h4>';
+                html += '<div class="inh-hint">Poniższe wartości są dziedziczone z dokumentu kondygnacji i obowiązują dla tego pomieszczenia, chyba że nadpisane powyżej.</div>';
+                html += '<h4>Z kondygnacji</h4>';
+
+                if (height) {
+                    html += '<div class="inh-row"><strong>Wysokość w świetle</strong><span class="val">' + height + '</span></div>';
+                }
+                if (floor) {
+                    html += '<div class="inh-row"><strong>Podłogi (typowe)</strong><span class="val">' + floor + '</span></div>';
+                }
+                if (walls) {
+                    html += '<div class="inh-row"><strong>Ściany (typowe)</strong><span class="val">' + walls + '</span></div>';
+                }
+                if (ceiling) {
+                    html += '<div class="inh-row"><strong>Sufity (typowe)</strong><span class="val">' + ceiling + '</span></div>';
+                }
+
+                if (!height && !floor && !walls && !ceiling) {
+                    html += '<p class="inh-empty">Brak danych o dziedziczeniu z kondygnacji.</p>';
+                }
+
+                inhBody.innerHTML = html;
+            } else {
+                inhBody.innerHTML = '<p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>';
+            }
+        }
+    });
+    </script>
+</body>
+</html>

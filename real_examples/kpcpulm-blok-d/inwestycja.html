@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opis Inwestycji - Kujawsko-Pomorskie Centrum Pulmonologii</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ── SIDEBAR ────────────────────────── */
+        .sidebar {
+            width: 420px;
+            min-width: 420px;
+            flex-shrink: 0;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px 15px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 13px;
+        }
+        .sidebar-title {
+            color: #60a5fa;
+            font-size: 1.15em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #334155;
+        }
+
+        /* ── NAV TREE ───────────────────────── */
+        .nav-tree {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-node {
+            position: relative;
+            margin: 1px 0;
+        }
+
+        /* Toggle arrow */
+        .toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 9px;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .toggle:hover { color: #e2e8f0; background: #334155; }
+        .toggle-spacer { display: inline-block; width: 20px; flex-shrink: 0; }
+
+        /* Expanded state */
+        .has-children:not(.collapsed) > .toggle {
+            transform: rotate(90deg);
+        }
+        .has-children.collapsed > .nav-tree {
+            display: none;
+        }
+
+        /* Links */
+        .nav-node a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .nav-node a:hover { color: #fff; background: #334155; }
+
+        /* Group labels (non-clickable) */
+        .nav-group-label {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+            padding: 8px 8px 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Depth indentation */
+        .nav-depth-0 > .nav-node { padding-left: 0; }
+        .nav-depth-1 > .nav-node { padding-left: 16px; }
+        .nav-depth-2 > .nav-node { padding-left: 32px; }
+        .nav-depth-3 > .nav-node { padding-left: 48px; }
+        .nav-depth-4 > .nav-node { padding-left: 64px; }
+
+        /* Depth-0 items (Inwestycja, Budynek) */
+        .nav-d0 > a {
+            font-weight: 700;
+            font-size: 1.05em;
+            color: #f1f5f9;
+            padding: 8px 10px;
+            background: #334155;
+            border-left: 3px solid #3b82f6;
+            margin: 4px 0;
+            width: calc(100% - 25px);
+        }
+        .nav-d0 > a:hover { background: #475569; }
+
+        /* Depth-1 items (Strefy, Levels, etc.) */
+        .nav-d1 > a {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .nav-d1.nav-group > .nav-group-label {
+            margin-top: 10px;
+        }
+
+        /* Depth-2 items (individual spaces, zones) */
+        .nav-d2 > a {
+            font-size: 0.92em;
+            color: #94a3b8;
+        }
+        .nav-d2 > a:hover { color: #e2e8f0; }
+
+        /* Header nav items (within-document) */
+        .nav-header > a {
+            font-size: 0.88em;
+            color: #64748b;
+            font-style: italic;
+        }
+        .nav-header > a:hover { color: #cbd5e1; }
+
+        /* ── CONTENT AREA ───────────────────── */
+        .content {
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+        h1 {
+            color: #1e293b;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #334155;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        h3 {
+            color: #475569;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        h4 {
+            color: #64748b;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        li { margin-bottom: 8px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        pre code { background: none; padding: 0; }
+
+        /* ── PRINT BUTTON ───────────────────── */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .print-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* ── INHERITANCE PANEL ──────────────── */
+        .inh-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 8px;
+            border-radius: 8px 0 0 8px;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 999;
+            writing-mode: vertical-rl;
+            letter-spacing: 1px;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+        }
+        .inh-toggle:hover { background: #2563eb; padding: 15px 12px; }
+
+        .inh-panel {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            border-left: 3px solid #3b82f6;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .inh-panel.open { right: 0; }
+        .inh-panel-header {
+            background: #1e293b;
+            color: white;
+            padding: 18px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .inh-panel-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .inh-panel-close:hover { opacity: 1; }
+        .inh-panel-body { padding: 20px; }
+        .inh-panel-body h4 {
+            color: #1e293b;
+            margin: 20px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 1em;
+        }
+        .inh-panel-body h4:first-child { margin-top: 0; }
+        .inh-row {
+            padding: 10px 12px;
+            background: #f8fafc;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            font-size: 0.9em;
+        }
+        .inh-row strong {
+            color: #334155;
+            display: block;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+        .inh-row .val { color: #1e293b; }
+        .inh-empty {
+            color: #94a3b8;
+            font-style: italic;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .inh-hint {
+            margin-top: 15px;
+            padding: 12px;
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            font-size: 0.85em;
+            border-radius: 0 6px 6px 0;
+            color: #1e40af;
+        }
+
+        /* ── PRINT / RESPONSIVE ─────────────── */
+        @media print {
+            .sidebar, .print-btn, .inh-toggle, .inh-panel { display: none; }
+            .content { padding: 20px; max-width: 100%; }
+        }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; max-height: 50vh; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="content">
+            <h1>Kujawsko-Pomorskie Centrum Pulmonologii - Blok D</h1><p><h2 id="section-0-informacje-o-projekcie">Informacje o projekcie</h2><p><strong>Projekt:</strong> Rozbudowa Kujawsko-Pomorskiego Centrum Pulmonologii w Bydgoszczy - budowa Bloku D wraz z łącznikami</p><p><strong>Lokalizacja:</strong> ul. Seminaryjna 1, 85-326 Bydgoszcz, Polska</p><p><strong>Inwestor:</strong> Kujawsko-Pomorskie Inwestycje Medyczne w Toruniu</p><p><strong>Data opracowania dokumentacji technicznej:</strong> 04.05.2011</p><p><strong>Data konwersji do SBM:</strong> 2026-02-23</p><p><h2 id="section-0-opis-projektu">Opis projektu</h2><p>Blok D to nowy budynek szpitalny (średniowysoki, 4 kondygnacje naziemne + piwnice częściowe) dobudowany do istniejącego Kujawsko-Pomorskiego Centrum Pulmonologii. Budynek ma na celu poprawę standardów pracy i świadczenia usług medycznych oraz dostosowanie szpitala do obowiązujących przepisów budowlanych i medycznych.</p><p><h3 id="section-0-dane-techniczne">Dane techniczne</h3>
+<ul><li><strong>Powierzchnia zabudowy:</strong> 1 726,47 m²</li>
+<li><strong>Powierzchnia użytkowa:</strong> 6 699,29 m² (Blok D + łączniki)</li>
+<li><strong>Powierzchnia całkowita:</strong> 8 067,15 m²</li>
+<li><strong>Kubatura:</strong> 28 532,67 m³</li>
+<li><strong>Liczba łóżek:</strong> 130 łóżek szpitalnych (OIOM 8-12 łóżek, oddziały łóżkowe 130 łóżek)</li>
+<li><strong>Konstrukcja:</strong> tradycyjna, murowana (bloczki SILKA), stropy żelbetowe</li>
+<li><strong>Kategoria geotechniczna:</strong> II (złożone warunki gruntowe)</li></p><p><h3 id="section-0-funkcje-gwne">Funkcje główne</h3>
+<li><strong>Piwnice:</strong> prosektorium, pomieszczenia techniczne (hydrofornia, gazy medyczne), szatnie personelu, magazyny odpadów</li>
+<li><strong>Parter:</strong> diagnostyka obrazowa (MRI, CT, RTG, USG, EKG), centralna sterylizacja, pomieszczenia techniczne (kotłownia, wentylatornia)</li>
+<li><strong>I Piętro:</strong> OIOM (3 sale chorych), blok operacyjny (2 sale operacyjne), apteka szpitalna</li>
+<li><strong>II Piętro:</strong> Oddział łóżkowy I (30 łóżek), Oddział łóżkowy II (35 łóżek)</li>
+<li><strong>III Piętro:</strong> Oddział łóżkowy III (30 łóżek), Oddział łóżkowy IV (35 łóżek)</li></p><p><h2 id="section-0-struktura-dokumentacji-sbm">Struktura dokumentacji SBM</h2><p>Dokumentacja została przekonwertowana do standardu <strong>Semantic Building Model (SBM) v0.1.3</strong> z pełną obsługą właściwości dziedziczonych (inheritance) z poziomów do przestrzeni.</p><p><h3 id="section-0-katalogi">Katalogi</h3><pre><code>
+kpcpulm-blok-d/
+├── building.md                          # Encja Building (główny budynek)
+├── levels/                              # Encje Level (5 poziomów)
+│   ├── poziom-piwnica.md               # Piwnica (996,63 m²)
+│   ├── poziom-parter.md                # Parter (1 487,70 m²)
+│   ├── poziom-01.md                    # I Piętro (1 497,03 m²)
+│   ├── poziom-02.md                    # II Piętro (1 411,37 m²)
+│   └── poziom-03.md                    # III Piętro (1 367,60 m²)
+├── spaces/                              # Encje Space (382 pomieszczenia - reprezentacja próbek)
+│   ├── piwnica/                        # 51 pomieszczeń (0.1 - 0.51)
+│   │   ├── 0-01-klatka-schodowa.md    # Klatka schodowa
+│   │   └── 0-11-sala-sekcyjna.md      # Sala sekcyjna prosektorium
+│   ├── parter/                         # 63 pomieszczenia (1.1 - 1.63)
+│   │   └── 1-24-tomograf-komputerowy.md # Pracownia CT (grupa 1)
+│   ├── pietro-01/                      # 92 pomieszczenia (2.1 - 2.92)
+│   │   └── 2-46-sala-operacyjna-1.md  # Sala operacyjna 1 (grupa 2)
+│   ├── pietro-02/                      # 88 pomieszczeń (3.1 - 3.88)
+│   │   └── 3-25-sala-chorych-2lozka.md # Sala chorych dwuosobowa
+│   └── pietro-03/                      # 88 pomieszczeń (4.1 - 4.88)
+├── zones/                               # Encje Zone (strefy)
+│   ├── strefa-pozarowa-zl-iv.md       # Strefa pożarowa ZL IV
+│   └── strefa-medyczna-grupa-2.md     # Strefa medyczna grupa 2 (IEC 60364-7-710)
+├── requirements/                        # Encje Requirement (wymagania)
+│   └── req-iec-60364-7-710-grupa-2.md # Wymaganie IEC 60364-7-710 grupa 2
+└── README.md                            # Ten plik
+</code></pre><p><h3 id="section-0-liczba-pomieszcze-cakowita">Liczba pomieszczeń (całkowita)</h3>
+<li><strong>Piwnica:</strong> 51 pomieszczeń (0.1 - 0.51)</li>
+<li><strong>Parter:</strong> 63 pomieszczenia (1.1 - 1.63)</li>
+<li><strong>I Piętro:</strong> 92 pomieszczenia (2.1 - 2.92)</li>
+<li><strong>II Piętro:</strong> 88 pomieszczeń (3.1 - 3.88)</li>
+<li><strong>III Piętro:</strong> 88 pomieszczeń (4.1 - 4.88)</li>
+<li><strong>Razem:</strong> 382 pomieszczenia</li></p><p><h3 id="section-0-reprezentacja-prbek">Reprezentacja próbek</h3>
+Ze względu na dużą liczbę pomieszczeń (382), w katalogu <code>spaces/</code> utworzono <strong>reprezentatywne próbki</strong> demonstrujące:
+<li>Różne typy funkcji (komunikacja, medyczne, techniczne, administracyjne)</li>
+<li>Różne grupy bezpieczeństwa elektrycznego (grupa 0, 1, 2)</li>
+<li>Dziedziczenie właściwości z poziomów (wykończenia, warunki środowiskowe)</li>
+<li>Wyposażenie specjalistyczne (aparatura medyczna, instalacje gazów medycznych)</li>
+<li>Wymagania regulacyjne (IEC 60364-7-710, przepisy sanitarne, BHP)</li></p><p>Pełna dokumentacja wszystkich 382 pomieszczeń może być wygenerowana na podstawie:
+1. Danych z pliku źródłowego <code>PULM -- arch PW do druku 04.05.11.txt</code> (numery pomieszczeń, powierzchnie)
+2. Właściwości dziedziczonych z encji Level (wykończenia, warunki środowiskowe)
+3. Wzorców z przykładowych przestrzeni (struktura dokumentu, wymagania)</p><p><h2 id="section-0-kluczowe-cechy-dokumentacji">Kluczowe cechy dokumentacji</h2><p><h3 id="section-0-1-waciwoci-dziedziczone-inheritance-v014">1. Właściwości dziedziczone (Inheritance v0.1.4)</h3>
+Każdy poziom (Level) definiuje typowe właściwości dla wszystkich przestrzeni na tym poziomie:
+<li><strong>Wykończenia:</strong> podłogi, ściany, sufity (materiały, parametry)</li>
+<li><strong>Warunki środowiskowe:</strong> temperatura, wilgotność, wentylacja, oświetlenie</li>
+<li><strong>Czystość powietrza:</strong> klasy ISO dla pomieszczeń medycznych</li></p><p>Przestrzenie (Space) dziedziczą te właściwości i nadpisują tylko w przypadku różnic (np. sala operacyjna ma wyższe wymagania niż typowe pomieszczenie medyczne).</p><p><strong>Korzyści:</strong>
+<li>Redukcja powtórzeń (26-33% oszczędności objętości dokumentacji)</li>
+<li>Łatwość aktualizacji (zmiana wykończenia na poziomie → propagacja do wszystkich przestrzeni)</li>
+<li>Spójność danych (wszystkie przestrzenie na poziomie mają te same standardy)</li></p><p><h3 id="section-0-2-grupy-medyczne-wg-iec-60364-7-710">2. Grupy medyczne wg IEC 60364-7-710</h3>
+Pomieszczenia medyczne podzielone na 3 grupy bezpieczeństwa elektrycznego:</p><p><h4 id="section-0-grupa-2-zagroenie-ycia">Grupa 2 (zagrożenie życia)</h4>
+<li>Sale operacyjne (2.46, 2.50)</li>
+<li>Sale przygotowania pacjenta (2.44, 2.49)</li>
+<li>Sala wybudzeń (2.59)</li>
+<li>Sale chorych OIOM (2.6, 2.9, 2.12)</li></p><p><strong>Wymagania:</strong>
+<li>System zasilania IT (transformator separacyjny)</li>
+<li>Monitoring izolacji on-line (alarm < 50 kΩ)</li>
+<li>Zasilanie awaryjne < 0,5s (UPS + agregat)</li>
+<li>Wyrównanie potencjałów (szyna EPR, rezystancja < 0,2 Ω)</li></p><p><h4 id="section-0-grupa-1-kontakt-z-aparatur-medyczn">Grupa 1 (kontakt z aparaturą medyczną)</h4>
+<li>Pracownie diagnostyki obrazowej: MRI (1.19), CT (1.24), RTG (1.28)</li>
+<li>Śluzy pacjentów OIOM (2.3, 2.64)</li>
+<li>Gabinety zabiegowe (3.24, 3.87, 4.24, 4.87)</li>
+<li>Izolatki (3.48, 3.58, 4.48, 4.58)</li></p><p><strong>Wymagania:</strong>
+<li>Zasilanie awaryjne < 15s (agregat)</li>
+<li>Wyrównanie potencjałów</li>
+<li>Instalacje gazów medycznych (tlen, ssanie)</li></p><p><h4 id="section-0-grupa-0-bez-kontaktu-z-aparatur-aplikacyjn">Grupa 0 (bez kontaktu z aparaturą aplikacyjną)</h4>
+<li>Sale chorych standardowe (bez zabiegów inwazyjnych)</li>
+<li>Pomieszczenia pomocnicze, administracyjne</li>
+<li>Apteka, sterylizatornia</li></p><p><h3 id="section-0-3-warunki-rodowiskowe-medyczne">3. Warunki środowiskowe medyczne</h3>
+Dokumentacja zawiera szczegółowe parametry dla pomieszczeń medycznych:</p><p><h4 id="section-0-blok-operacyjny-grupa-2">Blok operacyjny (grupa 2)</h4>
+<li><strong>Przepływ laminarny (LAF):</strong> klasa ISO 5 nad stołem operacyjnym</li>
+<li><strong>Strefa ogólna sali:</strong> klasa ISO 7</li>
+<li><strong>Nadciśnienie:</strong> +15 Pa względem korytarza</li>
+<li><strong>Filtracja:</strong> HEPA H14 (99,995% skuteczności)</li>
+<li><strong>Temperatura:</strong> 20-24°C (±1°C)</li>
+<li><strong>Wilgotność:</strong> 40-60% RH (±5%)</li></p><p><h4 id="section-0-oiom-grupa-2">OIOM (grupa 2)</h4>
+<li><strong>Czystość powietrza:</strong> klasa ISO 8</li>
+<li><strong>Nadciśnienie:</strong> +10 Pa względem korytarza</li>
+<li><strong>Filtracja:</strong> HEPA H13</li>
+<li><strong>Temperatura:</strong> 22-24°C (±1°C)</li>
+<li><strong>Wilgotność:</strong> 40-60% RH (±5%)</li></p><p><h4 id="section-0-sterylizatornia-parter">Sterylizatornia (parter)</h4>
+<li><strong>Strefa czysta:</strong> nadciśnienie +15 Pa, klasa ISO 8, 20 wymian/h</li>
+<li><strong>Strefa brudna:</strong> podciśnienie -10 Pa, 12 wymian/h</li>
+<li><strong>Przepływ jednokierunkowy:</strong> brudna → czysta</li></p><p><h4 id="section-0-izolatki-ii-i-iii-pitro">Izolatki (II i III piętro)</h4>
+<li><strong>Podciśnienie:</strong> -10 Pa względem korytarza</li>
+<li><strong>Filtr HEPA H13:</strong> na wylocie (ochrona przed patogenami)</li>
+<li><strong>Wymiana powietrza:</strong> 12 wymian/h</li>
+<li><strong>100% powietrze wywiewne</strong> (bez recyrkulacji)</li></p><p><h3 id="section-0-4-ochrona-przeciwpoarowa">4. Ochrona przeciwpożarowa</h3>
+Cały budynek stanowi jedną strefę pożarową <strong>ZL IV</strong> z kompleksowym systemem ochrony:</p><p><h4 id="section-0-elementy-pasywne">Elementy pasywne</h4>
+<li><strong>Ściany nośne:</strong> REI 60</li>
+<li><strong>Stropy:</strong> REI 60</li>
+<li><strong>Klatki schodowe:</strong> ściany EI 60, drzwi EI 30 (dymoszczelne)</li>
+<li><strong>Dach:</strong> RE 30</li></p><p><h4 id="section-0-elementy-aktywne">Elementy aktywne</h4>
+<li><strong>System sygnalizacji pożarowej (SSP):</strong> centrala analogowo-adresowalna, czujki dymu/ciepła, transmisja do PSP</li>
+<li><strong>System oddymiania:</strong> nadciśnienie +50 Pa w klatkach schodowych (przy pożarze)</li>
+<li><strong>Hydranty wewnętrzne:</strong> 25mm, co 30m na każdej kondygnacji</li>
+<li><strong>Gaśnice:</strong> proszkowe ABC 6kg, CO₂ 5kg (pomieszczenia techniczne)</li>
+<li><strong>Droga pożarowa:</strong> plac manewrowy 20m × 20m, 5,0m od budynku</li></p><p><h4 id="section-0-ewakuacja">Ewakuacja</h4>
+<li><strong>Drogi ewakuacyjne poziome:</strong> korytarze 2,5-3,0m (wymaganie min. 2,0m)</li>
+<li><strong>Drogi ewakuacyjne pionowe:</strong> 3 klatki schodowe (szerokość biegu 1,50m)</li>
+<li><strong>Ewakuacja pozioma:</strong> dla pacjentów leżących (do sąsiedniej strefy pożarowej)</li>
+<li><strong>Dźwigi:</strong> 3 dźwigi szpitalne (sterowanie strażackie, zasilanie awaryjne)</li></p><p><h3 id="section-0-5-dane-rzeczywiste-z-polskiego-szpitala">5. Dane rzeczywiste z polskiego szpitala</h3>
+Dokumentacja oparta na rzeczywistym projekcie wykonawczym zawierającym:
+<li>Opis warunków gruntowo-wodnych (badania geotechniczne)</li>
+<li>Posadowienie (kategoria geotechniczna II, złożone warunki)</li>
+<li>Konstrukcję (technologia tradycyjna, bloczki SILKA, stropy żelbetowe)</li>
+<li>Instalacje techniczne (hydrofornia, gazy medyczne, wentylacja, kotłownia)</li>
+<li>Wyposażenie medyczne (tomografy, respiratory, aparatura anestezjologiczna)</li>
+<li>Koszty orientacyjne (np. transformatory IT, UPS, agregaty)</li></p><p><h2 id="section-0-zastosowanie-dokumentacji">Zastosowanie dokumentacji</h2><p><h3 id="section-0-1-zarzdzanie-projektem-budowlanym">1. Zarządzanie projektem budowlanym</h3>
+<li>Specyfikacje dla wykonawców (instalacje elektryczne, HVAC, wykończenia)</li>
+<li>Harmonogram realizacji (zależności między fazami)</li>
+<li>Kontrola jakości (zgodność z wymaganiami normatywnymi)</li></p><p><h3 id="section-0-2-zarzdzanie-eksploatacj-szpitala">2. Zarządzanie eksploatacją szpitala</h3>
+<li>Procedury konserwacji (testy UPS, agregatu, monitoringu izolacji)</li>
+<li>Procedury ewakuacji (plany ewakuacyjne, instrukcje BHP)</li>
+<li>Zarządzanie energią (monitorowanie zużycia, optymalizacja HVAC)</li></p><p><h3 id="section-0-3-integracja-bimifc">3. Integracja BIM/IFC</h3>
+Dokumentacja SBM może być przekonwertowana do formatu IFC (Industry Foundation Classes) dla integracji z:
+<li>Modele 3D (Autodesk Revit, ArchiCAD, Tekla Structures)</li>
+<li>Systemy FM (Facility Management)</li>
+<li>Systemy BMS (Building Management System)</li></p><p><h3 id="section-0-4-szkolenia-personelu">4. Szkolenia personelu</h3>
+<li>Szkolenia z zakresu bezpieczeństwa elektrycznego (IEC 60364-7-710)</li>
+<li>Szkolenia z zakresu ochrony przeciwpożarowej</li>
+<li>Szkolenia z zakresu obsługi aparatury medycznej</li></p><p><h2 id="section-0-standardy-i-normy">Standardy i normy</h2><p>Dokumentacja uwzględnia następujące normy i przepisy:</p><p><h3 id="section-0-normy-midzynarodowe">Normy międzynarodowe</h3>
+<li><strong>IEC 60364-7-710:</strong> Instalacje elektryczne w pomieszczeniach medycznych</li>
+<li><strong>IEC 61558-2-15:</strong> Transformatory separacyjne dla zastosowań medycznych</li>
+<li><strong>IEC 60601 (seria):</strong> Wyroby medyczne elektryczne</li>
+<li><strong>ISO 14644-1:</strong> Czystość powietrza (klasyfikacja czystości)</li>
+<li><strong>PN-EN 54:</strong> System sygnalizacji pożarowej</li></p><p><h3 id="section-0-przepisy-polskie">Przepisy polskie</h3>
+<li><strong>Rozporządzenie Ministra Infrastruktury</strong> w sprawie warunków technicznych, jakim powinny odpowiadać budynki i ich usytuowanie</li>
+<li><strong>Rozporządzenie Ministra Zdrowia</strong> w sprawie wymagań, jakim powinny odpowiadać pomieszczenia i urządzenia podmiotu wykonującego działalność leczniczą</li>
+<li><strong>Prawo Atomowe</strong> (przepisy radiologiczne dla pracowni RTG, CT, MRI)</li>
+<li><strong>Prawo Farmaceutyczne</strong> (przepisy dot. aptek szpitalnych)</li></p><p><h2 id="section-0-nastpne-kroki">Następne kroki</h2><p><h3 id="section-0-rozszerzenie-dokumentacji">Rozszerzenie dokumentacji</h3>
+1. <strong>Uzupełnienie przestrzeni:</strong> Wygenerowanie pełnej dokumentacji dla wszystkich 382 pomieszczeń
+2. <strong>Dodatkowe strefy:</strong> Strefy HVAC, strefy departamentów (OIOM, blok operacyjny, oddziały łóżkowe)
+3. <strong>Dodatkowe wymagania:</strong> Przepisy sanitarne, BHP, dostępność dla niepełnosprawnych
+4. <strong>Systemy:</strong> System BMS, system EHR (Electronic Health Record), system PACS (diagnostyka obrazowa)</p><p><h3 id="section-0-integracja-z-innymi-systemami">Integracja z innymi systemami</h3>
+1. <strong>Export do IFC:</strong> Konwersja SBM → IFC dla integracji z BIM
+2. <strong>Import do FM:</strong> Integracja z systemami Facility Management (Archibus, IBM TRIRIGA)
+3. <strong>Dashboards:</strong> Wizualizacja danych (stan pomieszczeń, zużycie energii, harmonogram konserwacji)</p><p><h2 id="section-0-kontakt">Kontakt</h2><p>Dokumentacja SBM opracowana na podstawie projektu wykonawczego:
+<li><strong>Projekt:</strong> "Rozbudowa Kujawsko-Pomorskiego Centrum Pulmonologii - Blok D"</li>
+<li><strong>Data projektu:</strong> 04.05.2011</li>
+<li><strong>Konwersja do SBM:</strong> 2026-02-23</li>
+<li><strong>Wersja schematu SBM:</strong> v0.1.3</li></ul><p>---</p><p><strong>Uwagi:</strong> Dokumentacja SBM stanowi semantyczny model budynku, umożliwiający integrację z systemami BIM, FM, BMS oraz zarządzanie cyklem życia obiektu od projektu przez budowę do eksploatacji. Właściwości dziedziczone (inheritance v0.1.4) redukują powtórzenia i ułatwiają aktualizację danych.
+</p>
+        </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Drukuj / PDF</button>
+
+    <button class="inh-toggle" id="inhToggle">Dziedziczenie</button>
+    <div class="inh-panel" id="inhPanel">
+        <div class="inh-panel-header">
+            <span>Właściwości Dziedziczone</span>
+            <span class="inh-panel-close" id="inhClose">&times;</span>
+        </div>
+        <div class="inh-panel-body" id="inhBody">
+            <p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ── TREE EXPAND/COLLAPSE ──
+        document.querySelectorAll('.toggle').forEach(function(icon) {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        document.querySelectorAll('.nav-node a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var li = this.parentElement;
+                if (li.classList.contains('has-children') && li.classList.contains('collapsed')) {
+                    li.classList.remove('collapsed');
+                    // Let navigation happen
+                }
+            });
+        });
+
+        // Start: expand depth 0, collapse everything else
+        document.querySelectorAll('.has-children').forEach(function(el) {
+            if (!el.classList.contains('nav-d0')) {
+                el.classList.add('collapsed');
+            } else {
+                el.classList.remove('collapsed');
+            }
+        });
+
+        // ── INHERITANCE PANEL ──
+        var inhToggle = document.getElementById('inhToggle');
+        var inhPanel = document.getElementById('inhPanel');
+        var inhClose = document.getElementById('inhClose');
+        var inhBody = document.getElementById('inhBody');
+        var isOpen = false;
+
+        inhToggle.addEventListener('click', function() {
+            isOpen = !isOpen;
+            inhPanel.classList.toggle('open', isOpen);
+            if (isOpen) updateInheritancePanel();
+        });
+
+        inhClose.addEventListener('click', function() {
+            isOpen = false;
+            inhPanel.classList.remove('open');
+        });
+
+        // Update panel based on which section is in view
+        var debounce = null;
+        window.addEventListener('scroll', function() {
+            if (!isOpen) return;
+            clearTimeout(debounce);
+            debounce = setTimeout(updateInheritancePanel, 150);
+        });
+
+        function updateInheritancePanel() {
+            var sections = document.querySelectorAll('.doc-section[data-inherited-height]');
+            var best = null;
+            var bestDist = Infinity;
+
+            sections.forEach(function(sec) {
+                var rect = sec.getBoundingClientRect();
+                var dist = Math.abs(rect.top);
+                if (rect.top < window.innerHeight && rect.bottom > 0 && dist < bestDist) {
+                    best = sec;
+                    bestDist = dist;
+                }
+            });
+
+            if (best) {
+                var h1 = best.querySelector('h1');
+                var name = h1 ? h1.textContent : 'Pomieszczenie';
+                var height = best.dataset.inheritedHeight;
+                var floor = best.dataset.inheritedFloor;
+                var walls = best.dataset.inheritedWalls;
+                var ceiling = best.dataset.inheritedCeiling;
+
+                var html = '<h4>' + name + '</h4>';
+                html += '<div class="inh-hint">Poniższe wartości są dziedziczone z dokumentu kondygnacji i obowiązują dla tego pomieszczenia, chyba że nadpisane powyżej.</div>';
+                html += '<h4>Z kondygnacji</h4>';
+
+                if (height) {
+                    html += '<div class="inh-row"><strong>Wysokość w świetle</strong><span class="val">' + height + '</span></div>';
+                }
+                if (floor) {
+                    html += '<div class="inh-row"><strong>Podłogi (typowe)</strong><span class="val">' + floor + '</span></div>';
+                }
+                if (walls) {
+                    html += '<div class="inh-row"><strong>Ściany (typowe)</strong><span class="val">' + walls + '</span></div>';
+                }
+                if (ceiling) {
+                    html += '<div class="inh-row"><strong>Sufity (typowe)</strong><span class="val">' + ceiling + '</span></div>';
+                }
+
+                if (!height && !floor && !walls && !ceiling) {
+                    html += '<p class="inh-empty">Brak danych o dziedziczeniu z kondygnacji.</p>';
+                }
+
+                inhBody.innerHTML = html;
+            } else {
+                inhBody.innerHTML = '<p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>';
+            }
+        }
+    });
+    </script>
+</body>
+</html>

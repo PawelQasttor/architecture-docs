@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piętro I - Kujawsko-Pomorskie Centrum Pulmonologii</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ── SIDEBAR ────────────────────────── */
+        .sidebar {
+            width: 420px;
+            min-width: 420px;
+            flex-shrink: 0;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px 15px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 13px;
+        }
+        .sidebar-title {
+            color: #60a5fa;
+            font-size: 1.15em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #334155;
+        }
+
+        /* ── NAV TREE ───────────────────────── */
+        .nav-tree {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-node {
+            position: relative;
+            margin: 1px 0;
+        }
+
+        /* Toggle arrow */
+        .toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 9px;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .toggle:hover { color: #e2e8f0; background: #334155; }
+        .toggle-spacer { display: inline-block; width: 20px; flex-shrink: 0; }
+
+        /* Expanded state */
+        .has-children:not(.collapsed) > .toggle {
+            transform: rotate(90deg);
+        }
+        .has-children.collapsed > .nav-tree {
+            display: none;
+        }
+
+        /* Links */
+        .nav-node a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .nav-node a:hover { color: #fff; background: #334155; }
+
+        /* Group labels (non-clickable) */
+        .nav-group-label {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+            padding: 8px 8px 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Depth indentation */
+        .nav-depth-0 > .nav-node { padding-left: 0; }
+        .nav-depth-1 > .nav-node { padding-left: 16px; }
+        .nav-depth-2 > .nav-node { padding-left: 32px; }
+        .nav-depth-3 > .nav-node { padding-left: 48px; }
+        .nav-depth-4 > .nav-node { padding-left: 64px; }
+
+        /* Depth-0 items (Inwestycja, Budynek) */
+        .nav-d0 > a {
+            font-weight: 700;
+            font-size: 1.05em;
+            color: #f1f5f9;
+            padding: 8px 10px;
+            background: #334155;
+            border-left: 3px solid #3b82f6;
+            margin: 4px 0;
+            width: calc(100% - 25px);
+        }
+        .nav-d0 > a:hover { background: #475569; }
+
+        /* Depth-1 items (Strefy, Levels, etc.) */
+        .nav-d1 > a {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .nav-d1.nav-group > .nav-group-label {
+            margin-top: 10px;
+        }
+
+        /* Depth-2 items (individual spaces, zones) */
+        .nav-d2 > a {
+            font-size: 0.92em;
+            color: #94a3b8;
+        }
+        .nav-d2 > a:hover { color: #e2e8f0; }
+
+        /* Header nav items (within-document) */
+        .nav-header > a {
+            font-size: 0.88em;
+            color: #64748b;
+            font-style: italic;
+        }
+        .nav-header > a:hover { color: #cbd5e1; }
+
+        /* ── CONTENT AREA ───────────────────── */
+        .content {
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+        h1 {
+            color: #1e293b;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #334155;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        h3 {
+            color: #475569;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        h4 {
+            color: #64748b;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        li { margin-bottom: 8px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        pre code { background: none; padding: 0; }
+
+        /* ── PRINT BUTTON ───────────────────── */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .print-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* ── INHERITANCE PANEL ──────────────── */
+        .inh-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 8px;
+            border-radius: 8px 0 0 8px;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 999;
+            writing-mode: vertical-rl;
+            letter-spacing: 1px;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+        }
+        .inh-toggle:hover { background: #2563eb; padding: 15px 12px; }
+
+        .inh-panel {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            border-left: 3px solid #3b82f6;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .inh-panel.open { right: 0; }
+        .inh-panel-header {
+            background: #1e293b;
+            color: white;
+            padding: 18px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .inh-panel-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .inh-panel-close:hover { opacity: 1; }
+        .inh-panel-body { padding: 20px; }
+        .inh-panel-body h4 {
+            color: #1e293b;
+            margin: 20px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 1em;
+        }
+        .inh-panel-body h4:first-child { margin-top: 0; }
+        .inh-row {
+            padding: 10px 12px;
+            background: #f8fafc;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            font-size: 0.9em;
+        }
+        .inh-row strong {
+            color: #334155;
+            display: block;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+        .inh-row .val { color: #1e293b; }
+        .inh-empty {
+            color: #94a3b8;
+            font-style: italic;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .inh-hint {
+            margin-top: 15px;
+            padding: 12px;
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            font-size: 0.85em;
+            border-radius: 0 6px 6px 0;
+            color: #1e40af;
+        }
+
+        /* ── PRINT / RESPONSIVE ─────────────── */
+        @media print {
+            .sidebar, .print-btn, .inh-toggle, .inh-panel { display: none; }
+            .content { padding: 20px; max-width: 100%; }
+        }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; max-height: 50vh; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="content">
+            <h1>Poziom: I Piętro - Blok D</h1><p><h2 id="section-127-informacje-podstawowe">Informacje podstawowe</h2><p><strong>Typ encji:</strong> Level
+<strong>ID:</strong> LVL-KPCPULM-D-PIETRO-01
+<strong>Nazwa:</strong> I Piętro (First Floor)
+<strong>Budynek:</strong> <code>BLD-KPCPULM-BLOK-D</code>
+<strong>Numer poziomu:</strong> 1
+<strong>Rzędna:</strong> ~73,7-75,1 m n.p.m.</p><p><h2 id="section-127-opis">Opis</h2><p>Poziom I piętra zawiera najbardziej krytyczne funkcje medyczne: Oddział Anestezjologii i Intensywnej Terapii (OIOM) z 3 salami chorych, Blok Operacyjny z 2 salami operacyjnymi, oraz Aptekę Szpitalną. To poziom o najwyższych wymaganiach technicznych i instalacyjnych.</p><p><h2 id="section-127-dane-techniczne">Dane techniczne</h2><p><h3 id="section-127-powierzchnie">Powierzchnie</h3>
+<ul><li><strong>Powierzchnia użytkowa poziomu:</strong> 1 497,03 m²</li>
+<li><strong>Liczba pomieszczeń:</strong> 92 (2.1 - 2.92)</li></p><p><h3 id="section-127-wysokoci">Wysokości</h3>
+<li><strong>Wysokość kondygnacji:</strong> 4,50 m</li>
+<li><strong>Wysokość pomieszczeń w świetle:</strong></li>
+  - Sale operacyjne: 3,50 m
+  - Sale chorych OIOM: 3,20 m
+  - Pozostałe pomieszczenia medyczne: 3,00 m</p><p><h3 id="section-127-konstrukcja">Konstrukcja</h3>
+<li><strong>Ściany zewnętrzne:</strong> bloczki SILKA gr. 24cm, ocieplone wełną mineralną gr. 15cm</li>
+<li><strong>Ściany wewnętrzne konstrukcyjne:</strong> bloczki SILKA gr. 24cm</li>
+<li><strong>Ściany oddzielające sale operacyjne:</strong> wzmocnione akustycznie</li>
+<li><strong>Stropy:</strong> żelbetowe monolityczne</li></p><p><h2 id="section-127-waciwoci-dziedziczone-dla-przestrzeni">Właściwości dziedziczone dla przestrzeni</h2><p><h3 id="section-127-wykoczenie-typowe-oiom-blok-operacyjny-pomieszczenia-medyczne">Wykończenie typowe (OIOM, blok operacyjny - pomieszczenia medyczne)</h3><p><h4 id="section-127-podogi">Podłogi</h4>
+<li><strong>Materiał:</strong> wykładzina PCW przewodząca elektrostatycznie (sale operacyjne, OIOM) lub płytki ceramiczne (korytarze, pozostałe pomieszczenia)</li>
+<li><strong>Parametry:</strong></li>
+  - Bezspoinowa (sale operacyjne)
+  - Antypoślizgowa
+  - Klasa ścieralności IV
+  - Odporna na dezynfekcję (aldehydy, chlor)
+  - Antyelektrostatyczna (opór powierzchniowy 10⁴-10⁶ Ω)
+<li><strong>Uwagi:</strong> fugi epoksydowe (płytki), wykończenie cokolika bezprogowe</li></p><p><h4 id="section-127-ciany">Ściany</h4>
+<li><strong>Materiał:</strong></li>
+  - Sale operacyjne: płytki ceramiczne glazurowane do sufitu, naroża zaokrąglone
+  - OIOM sale chorych: płytki ceramiczne do wysokości 2,0m, powyżej tynk gładki, farba zmywalna
+  - Korytarze: tynk gładki, farba zmywalna, osłony antyzderz.
+<li><strong>Parametry:</strong></li>
+  - Jasne kolory (biały, kremowy, zielony pastelowy w bloku operacyjnym)
+  - Powierzchnia gładka, bezprzewodowa (sale operacyjne)
+  - Łatwość czyszczenia i dezynfekcji
+  - Odporność na uderzenia (korytarze)</p><p><h4 id="section-127-sufity">Sufity</h4>
+<li><strong>Materiał:</strong></li>
+  - Sale operacyjne: sufit podwieszany modułowy szczelny z panelami laminarnego przepływu powietrza (LAF) nad stołem operacyjnym
+  - OIOM: sufit podwieszany modułowy (płyty 60×60cm)
+  - Pozostałe: sufit podwieszany standardowy
+<li><strong>Parametry:</strong></li>
+  - Biały
+  - Klasa czystości medycznej
+  - Dostęp do instalacji (rewizje)
+  - Szyny sufitowe dla aparatury (sale operacyjne, OIOM)</p><p><h3 id="section-127-wykoczenie-apteki">Wykończenie apteki</h3><p><h4 id="section-127-podogi-apteka">Podłogi (apteka)</h4>
+<li><strong>Materiał:</strong> płytki ceramiczne lub tarkett medyczny</li>
+<li><strong>Parametry:</strong> łatwość czyszczenia, odporność chemiczna</li></p><p><h4 id="section-127-ciany-pracownie-apteczne">Ściany (pracownie apteczne)</h4>
+<li><strong>Materiał:</strong> płytki ceramiczne do wysokości 2,0m lub całkowicie (w zależności od funkcji)</li>
+<li><strong>Parametry:</strong> odporne na substancje chemiczne</li></p><p><h3 id="section-127-warunki-rodowiskowe">Warunki środowiskowe</h3><p><h4 id="section-127-temperatura">Temperatura</h4>
+<li><strong>Sale operacyjne:</strong> 20-24°C (regulowana indywidualnie, zgodnie z typem zabiegu)</li>
+<li><strong>Sale chorych OIOM:</strong> 22-24°C</li>
+<li><strong>Przygotowanie pacjenta, wybudzenia:</strong> 24-26°C</li>
+<li><strong>Korytarze bloku operacyjnego:</strong> 22-24°C</li>
+<li><strong>Apteka:</strong> 20-22°C (pracownie), 18-22°C (magazyny)</li></p><p><h4 id="section-127-wilgotno">Wilgotność</h4>
+<li><strong>Sale operacyjne:</strong> 40-60% RH (kontrolowana ściśle)</li>
+<li><strong>OIOM:</strong> 40-60% RH</li>
+<li><strong>Apteka:</strong> 40-60% RH (magazyny leków)</li></p><p><h4 id="section-127-wentylacja">Wentylacja</h4>
+<li><strong>Sale operacyjne:</strong></li>
+  - Nadciśnienie: +15 Pa względem korytarza
+  - Filtracja: HEPA (H14)
+  - Wymiana powietrza: 20-25 wymian/h
+  - Przepływ laminarny (LAF) nad stołem operacyjnym: klasa ISO 5
+  - 100% powietrze świeże (bez recyrkulacji)
+<li><strong>OIOM sale chorych:</strong></li>
+  - Nadciśnienie: +10 Pa względem korytarza
+  - Filtracja: HEPA (H13)
+  - Wymiana powietrza: 12-15 wymian/h
+<li><strong>Przygotowanie pacjenta, wybudzenia:</strong></li>
+  - Nadciśnienie: +10 Pa
+  - Filtracja: HEPA (H13)
+  - 12 wymian/h
+<li><strong>Korytarze bloku operacyjnego:</strong></li>
+  - Nadciśnienie: +5 Pa względem klatek schodowych
+  - Filtracja: F7
+  - 8-10 wymian/h
+<li><strong>Apteka:</strong></li>
+  - Preparatyka cytostatyków: podciśnienie -15 Pa, komora laminarna klasy II
+  - Pozostałe pomieszczenia: 6-8 wymian/h</p><p><h4 id="section-127-cinienie">Ciśnienie</h4>
+<li>Schemat kaskady ciśnień (blok operacyjny):</li>
+  - Sala operacyjna: +15 Pa
+  - Śluza materiałowa / przygotowanie lekarzy: +10 Pa
+  - Korytarz strefy czystej: +5 Pa
+  - Klatka schodowa: 0 Pa (referencja)
+  - Strona brudna bloku: -5 Pa</p><p><h4 id="section-127-owietlenie">Oświetlenie</h4>
+<li><strong>Naturalne:</strong> ograniczone (okna w korytarzach i pomieszczeniach pomocniczych)</li>
+<li><strong>Sztuczne:</strong></li>
+  - Sale operacyjne: oświetlenie ogólne 1000 lx, lampy operacyjne bezcieniowe 100 000 lx (pole operacyjne)
+  - OIOM: 500 lx (praca), 50 lx (noc, nad łóżkiem regulowane)
+  - Korytarze: 300 lx
+  - Apteka: 500 lx (pracownie), 300 lx (magazyny)</p><p><h3 id="section-127-czysto-powietrza">Czystość powietrza</h3>
+<li><strong>Sale operacyjne - strefa operacyjna (LAF):</strong> klasa ISO 5 (wg ISO 14644-1)</li>
+<li><strong>Sale operacyjne - strefa ogólna:</strong> klasa ISO 7</li>
+<li><strong>OIOM:</strong> klasa ISO 8</li>
+<li><strong>Korytarze bloku:</strong> klasa ISO 8</li>
+<li><strong>Apteka - preparatyka:</strong> klasa II komory LAF</li></p><p><h2 id="section-127-funkcje-gwne">Funkcje główne</h2><p><h3 id="section-127-oddzia-anestezjologii-i-intensywnej-terapii-oiom-39476-m">Oddział Anestezjologii i Intensywnej Terapii - OIOM (394,76 m²)</h3>
+<li>3 sale chorych (łącznie ~8-12 łóżek intensywnej terapii)</li>
+<li>Pokoje przygotowania pielęgniarek</li>
+<li>Pokoje lekarzy (anestezjolodzy, ordynator, oddzia łowa)</li>
+<li>Brudowniki, magazyny, pomieszczenia pomocnicze</li>
+<li>WC dla odwiedzających, WC dla personelu</li>
+<li>Śluza pacjentów (wejście kontrolowane)</li></p><p><h3 id="section-127-blok-operacyjny-52540-m">Blok operacyjny (525,40 m²)</h3>
+<li>2 sale operacyjne (45,85 m² i 43,55 m²)</li>
+<li>Sale przygotowania pacjenta (przed operacją)</li>
+<li>Sale przygotowania lekarzy (mycie chirurgiczne)</li>
+<li>Sala wybudzeń (35,48 m²)</li>
+<li>Śluza pacjentów (wejście i wyjście)</li>
+<li>Szatnie personelu (rozdzielone na damskie i męskie, z łazienkami)</li>
+<li>Magazyny sterylne, magazyn sprzętu i aparatury</li>
+<li>Strona brudna bloku (ekspedycja brudna, śluza)</li>
+<li>Pokoje administracyjne i socjalne</li>
+<li>Pomieszczenie podtlenku azotu (8,24 m²)</li></p><p><h3 id="section-127-apteka-szpitalna-27601-m-czciowo-w-bloku-c">Apteka szpitalna (276,01 m², częściowo w bloku C)</h3>
+<li>Ekspedycja z magazynem leków doustnych</li>
+<li>Magazyn płynów infuzyjnych i ampułek</li>
+<li>Receptura (przygotowanie leków)</li>
+<li>Preparatyka cytostatyków (komora laminarna klasy II)</li>
+<li>Pracownia żywienia dojelitowego</li>
+<li>Destylatornia</li>
+<li>Magazyny (opatrunki, jednorazówki)</li>
+<li>Pokoje opisów, pokój kierownika</li>
+<li>Pokój socjalny, łazienka</li>
+<li>Komora dostaw (dostawa farmaceutyków)</li></p><p><h2 id="section-127-strefy">Strefy</h2><p><h3 id="section-127-strefa-poarowa">Strefa pożarowa</h3>
+<li><strong>ID:</strong> <code>ZONE-FIRE-ZL-IV</code></li>
+<li><strong>Klasa:</strong> ZL IV</li></p><p><h3 id="section-127-strefy-medyczne-wg-iec-60364-7-710">Strefy medyczne wg IEC 60364-7-710</h3><p><h4 id="section-127-grupa-2-zagroenie-ycia-zabiegi-na-sercu-podtrzymanie-ycia">Grupa 2 (zagrożenie życia - zabiegi na sercu, podtrzymanie życia)</h4>
+<li>Sala operacyjna 1 (2.46)</li>
+<li>Sala operacyjna 2 (2.50)</li>
+<li>Przygotowanie chorego 1 (2.44)</li>
+<li>Przygotowanie chorego 2 (2.49)</li>
+<li>Sala wybudzeń (2.59)</li>
+<li>Sala chorych OIOM 1 (2.6)</li>
+<li>Sala chorych OIOM 2 (2.9)</li>
+<li>Sala chorych OIOM 3 (2.12)</li></p><p><strong>Wymagania grupa 2:</strong>
+<li>System zasilania IT (transformator separacyjny) z monitoringiem izolacji</li>
+<li>Zasilanie awaryjne z agregatu (przełączenie < 0,5s)</li>
+<li>UPS dla aparatury podtrzymującej życie</li>
+<li>Osobne obiegi dla każdej sali</li>
+<li>Wyrównanie potencjałów, szyna EPR</li></p><p><h4 id="section-127-grupa-1-kontakt-z-aparatur-medyczn-aplikacja-zewntrznawewntrzna">Grupa 1 (kontakt z aparaturą medyczną, aplikacja zewnętrzna/wewnętrzna)</h4>
+<li>Śluza pacjenta 1 (2.3)</li>
+<li>Śluza pacjenta 2 (2.64)</li></p><p><strong>Wymagania grupa 1:</strong>
+<li>Zasilanie awaryjne z agregatu (przełączenie < 15s)</li>
+<li>Wyrównanie potencjałów</li></p><p><h4 id="section-127-grupa-0-bez-kontaktu-z-aparatur-aplikacyjn">Grupa 0 (bez kontaktu z aparaturą aplikacyjną)</h4>
+<li>Apteka (wszystkie pomieszczenia)</li>
+<li>Pomieszczenia pomocnicze OIOM i bloku (pokoje lekarzy, magazyny, itp.)</li></p><p><h3 id="section-127-strefy-funkcjonalne">Strefy funkcjonalne</h3><p><h4 id="section-127-blok-operacyjny-strefy-czystoci">Blok operacyjny - strefy czystości:</h4>
+<li><strong>Strefa aseptyczna (ultra-czysta):</strong> sale operacyjne</li>
+<li><strong>Strefa czysta:</strong> korytarz wewnętrzny bloku, przygotowanie lekarzy, śluza materiałowa</li>
+<li><strong>Strefa brudna:</strong> strona brudna bloku, ekspedycja brudna</li>
+<li><strong>Przepływ:</strong> jednokierunkowy (czysta → brudna)</li></p><p><h4 id="section-127-oiom-strefy-dostpu">OIOM - strefy dostępu:</h4>
+<li><strong>Strefa intensywnej opieki:</strong> sale chorych (dostęp ograniczony)</li>
+<li><strong>Strefa wsparcia:</strong> pokoje lekarzy, przygotowania pielęgniarek</li>
+<li><strong>Strefa pomocnicza:</strong> magazyny, brudowniki</li></p><p><h2 id="section-127-dostp">Dostęp</h2><p><h3 id="section-127-blok-operacyjny">Blok operacyjny</h3>
+<li><strong>Dostęp pacjentów (czysta strona):</strong> śluza pacjentów (2.62), dźwig szpitalny</li>
+<li><strong>Dostęp personelu:</strong> szatnie (2.29-2.35), przejście przez śluzy</li>
+<li><strong>Dostęp materiałów sterylnych:</strong> śluza materiałowa (2.36)</li>
+<li><strong>Wyjście (brudna strona):</strong> śluza brudna (2.51, 2.54), ekspedycja (2.55)</li></p><p><h3 id="section-127-oiom">OIOM</h3>
+<li><strong>Dostęp pacjentów:</strong> śluza pacjentów (2.3), dźwig szpitalny</li>
+<li><strong>Dostęp odwiedzających:</strong> kontrolowany, wydzielona poczekalnia</li>
+<li><strong>Dostęp personelu:</strong> przez korytarz główny</li></p><p><h3 id="section-127-apteka">Apteka</h3>
+<li><strong>Dostęp personelu:</strong> przez korytarz główny, klatka schodowa</li>
+<li><strong>Dostęp dostaw:</strong> komora dostaw (2.86), dźwig towarowy</li>
+<li><strong>Ekspedycja leków:</strong> hol ekspedycyjny (2.91)</li></p><p><h2 id="section-127-wymagania-regulacyjne">Wymagania regulacyjne</h2><p><h3 id="section-127-bezpieczestwo-elektryczne-iec-60364-7-710">Bezpieczeństwo elektryczne (IEC 60364-7-710)</h3>
+<li><strong>Grupa 2:</strong> system IT, monitoring izolacji, zasilanie awaryjne < 0,5s, UPS</li>
+<li><strong>Grupa 1:</strong> zasilanie awaryjne < 15s, wyrównanie potencjałów</li>
+<li>Osobne obiegi elektryczne dla każdej sali operacyjnej i OIOM</li>
+<li>System redundantny (dwa niezależne źródła)</li></p><p><h3 id="section-127-przepisy-dot-blokw-operacyjnych">Przepisy dot. bloków operacyjnych</h3>
+<li>Wentylacja laminarna nad stołem operacyjnym (ISO 5)</li>
+<li>Kaskada ciśnień (nadciśnienie sale → korytarz → strona brudna)</li>
+<li>Wykończenia bezprzewodowe, antyelektrostatyczne</li>
+<li>Kontrola temperatury i wilgotności (±1°C, ±5% RH)</li>
+<li>Systemy alarmowe (temperatura, wilgotność, ciśnienie, filtry)</li></p><p><h3 id="section-127-przepisy-dot-oiom">Przepisy dot. OIOM</h3>
+<li>Wentylacja HEPA (ISO 8)</li>
+<li>Nadciśnienie w salach chorych</li>
+<li>Monitorowanie pacjentów 24/7</li>
+<li>Centrala pielęgniarska z widokiem na sale</li>
+<li>Instalacje gazów medycznych (tlen, powietrze medyczne, ssanie, N₂O)</li></p><p><h3 id="section-127-przepisy-dot-aptek-szpitalnych">Przepisy dot. aptek szpitalnych</h3>
+<li>Separacja stref (przygotowanie cytostatyków - komora laminarna)</li>
+<li>Kontrola temperatury (magazyny leków)</li>
+<li>Systemy alarmowe (temperatura magazynów)</li>
+<li>Zgodność z Prawem Farmaceutycznym</li></p><p><h3 id="section-127-przepisy-bhp">Przepisy BHP</h3>
+<li>Monitoring gazów medycznych (alarm przy nieszczelności)</li>
+<li>Wyjścia ewakuacyjne z bloku operacyjnego (minimum 2)</li>
+<li>System sygnalizacji pożarowej</li>
+<li>Oznakowanie stref niebezpiecznych</li></p><p><h2 id="section-127-przestrzenie-na-poziomie">Przestrzenie na poziomie</h2><p>Lista 92 pomieszczeń (pliki w katalogu <code>/spaces/pietro-01/</code>):</p><p><strong>Komunikacja:</strong>
+<li>2.1, 2.2, 2.2a, 2.2b - Klatka schodowa i komunikacja (317,24 m²)</li></p><p><strong>OIOM (394,76 m²):</strong>
+<li>2.3-2.28 - Śluza, sale chorych (3), pokoje lekarzy, brudowniki, magazyny</li></p><p><strong>Blok operacyjny (525,40 m²):</strong>
+<li>2.29-2.64 - Szatnie, sale operacyjne (2), przygotowanie, wybudzenia, magazyny</li></p><p><strong>Apteka (276,01 m²):</strong>
+<li>2.65-2.92 - Ekspedycja, magazyny, preparatyka, pracownie</li></p><p><h2 id="section-127-metadane">Metadane</h2><p><li><strong>Poziom funkcjonalny:</strong> Medyczny krytyczny (highest acuity)</li>
+<li><strong>Dostęp publiczny:</strong> Brak (dostęp tylko dla pacjentów, personelu, odwiedzających z kontrolą)</li>
+<li><strong>Godziny pracy:</strong></li></ul>
+  - Blok operacyjny: 7:00-18:00 (zabiegi planowane), dyżury 24/7 (zabiegi pilne)
+  - OIOM: 24/7
+  - Apteka: 7:00-19:00 (poniedziałek-piątek), dyżury w weekendy</p><p>---</p><p><strong>Wersja schematu SBM:</strong> v0.1.3
+<strong>Data utworzenia dokumentu:</strong> 2026-02-23
+</p>
+        </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Drukuj / PDF</button>
+
+    <button class="inh-toggle" id="inhToggle">Dziedziczenie</button>
+    <div class="inh-panel" id="inhPanel">
+        <div class="inh-panel-header">
+            <span>Właściwości Dziedziczone</span>
+            <span class="inh-panel-close" id="inhClose">&times;</span>
+        </div>
+        <div class="inh-panel-body" id="inhBody">
+            <p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ── TREE EXPAND/COLLAPSE ──
+        document.querySelectorAll('.toggle').forEach(function(icon) {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        document.querySelectorAll('.nav-node a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var li = this.parentElement;
+                if (li.classList.contains('has-children') && li.classList.contains('collapsed')) {
+                    li.classList.remove('collapsed');
+                    // Let navigation happen
+                }
+            });
+        });
+
+        // Start: expand depth 0, collapse everything else
+        document.querySelectorAll('.has-children').forEach(function(el) {
+            if (!el.classList.contains('nav-d0')) {
+                el.classList.add('collapsed');
+            } else {
+                el.classList.remove('collapsed');
+            }
+        });
+
+        // ── INHERITANCE PANEL ──
+        var inhToggle = document.getElementById('inhToggle');
+        var inhPanel = document.getElementById('inhPanel');
+        var inhClose = document.getElementById('inhClose');
+        var inhBody = document.getElementById('inhBody');
+        var isOpen = false;
+
+        inhToggle.addEventListener('click', function() {
+            isOpen = !isOpen;
+            inhPanel.classList.toggle('open', isOpen);
+            if (isOpen) updateInheritancePanel();
+        });
+
+        inhClose.addEventListener('click', function() {
+            isOpen = false;
+            inhPanel.classList.remove('open');
+        });
+
+        // Update panel based on which section is in view
+        var debounce = null;
+        window.addEventListener('scroll', function() {
+            if (!isOpen) return;
+            clearTimeout(debounce);
+            debounce = setTimeout(updateInheritancePanel, 150);
+        });
+
+        function updateInheritancePanel() {
+            var sections = document.querySelectorAll('.doc-section[data-inherited-height]');
+            var best = null;
+            var bestDist = Infinity;
+
+            sections.forEach(function(sec) {
+                var rect = sec.getBoundingClientRect();
+                var dist = Math.abs(rect.top);
+                if (rect.top < window.innerHeight && rect.bottom > 0 && dist < bestDist) {
+                    best = sec;
+                    bestDist = dist;
+                }
+            });
+
+            if (best) {
+                var h1 = best.querySelector('h1');
+                var name = h1 ? h1.textContent : 'Pomieszczenie';
+                var height = best.dataset.inheritedHeight;
+                var floor = best.dataset.inheritedFloor;
+                var walls = best.dataset.inheritedWalls;
+                var ceiling = best.dataset.inheritedCeiling;
+
+                var html = '<h4>' + name + '</h4>';
+                html += '<div class="inh-hint">Poniższe wartości są dziedziczone z dokumentu kondygnacji i obowiązują dla tego pomieszczenia, chyba że nadpisane powyżej.</div>';
+                html += '<h4>Z kondygnacji</h4>';
+
+                if (height) {
+                    html += '<div class="inh-row"><strong>Wysokość w świetle</strong><span class="val">' + height + '</span></div>';
+                }
+                if (floor) {
+                    html += '<div class="inh-row"><strong>Podłogi (typowe)</strong><span class="val">' + floor + '</span></div>';
+                }
+                if (walls) {
+                    html += '<div class="inh-row"><strong>Ściany (typowe)</strong><span class="val">' + walls + '</span></div>';
+                }
+                if (ceiling) {
+                    html += '<div class="inh-row"><strong>Sufity (typowe)</strong><span class="val">' + ceiling + '</span></div>';
+                }
+
+                if (!height && !floor && !walls && !ceiling) {
+                    html += '<p class="inh-empty">Brak danych o dziedziczeniu z kondygnacji.</p>';
+                }
+
+                inhBody.innerHTML = html;
+            } else {
+                inhBody.innerHTML = '<p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>';
+            }
+        }
+    });
+    </script>
+</body>
+</html>

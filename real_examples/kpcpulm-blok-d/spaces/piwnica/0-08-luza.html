@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0.8 - �luza - Kujawsko-Pomorskie Centrum Pulmonologii</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ── SIDEBAR ────────────────────────── */
+        .sidebar {
+            width: 420px;
+            min-width: 420px;
+            flex-shrink: 0;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px 15px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 13px;
+        }
+        .sidebar-title {
+            color: #60a5fa;
+            font-size: 1.15em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #334155;
+        }
+
+        /* ── NAV TREE ───────────────────────── */
+        .nav-tree {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-node {
+            position: relative;
+            margin: 1px 0;
+        }
+
+        /* Toggle arrow */
+        .toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 9px;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .toggle:hover { color: #e2e8f0; background: #334155; }
+        .toggle-spacer { display: inline-block; width: 20px; flex-shrink: 0; }
+
+        /* Expanded state */
+        .has-children:not(.collapsed) > .toggle {
+            transform: rotate(90deg);
+        }
+        .has-children.collapsed > .nav-tree {
+            display: none;
+        }
+
+        /* Links */
+        .nav-node a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .nav-node a:hover { color: #fff; background: #334155; }
+
+        /* Group labels (non-clickable) */
+        .nav-group-label {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+            padding: 8px 8px 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Depth indentation */
+        .nav-depth-0 > .nav-node { padding-left: 0; }
+        .nav-depth-1 > .nav-node { padding-left: 16px; }
+        .nav-depth-2 > .nav-node { padding-left: 32px; }
+        .nav-depth-3 > .nav-node { padding-left: 48px; }
+        .nav-depth-4 > .nav-node { padding-left: 64px; }
+
+        /* Depth-0 items (Inwestycja, Budynek) */
+        .nav-d0 > a {
+            font-weight: 700;
+            font-size: 1.05em;
+            color: #f1f5f9;
+            padding: 8px 10px;
+            background: #334155;
+            border-left: 3px solid #3b82f6;
+            margin: 4px 0;
+            width: calc(100% - 25px);
+        }
+        .nav-d0 > a:hover { background: #475569; }
+
+        /* Depth-1 items (Strefy, Levels, etc.) */
+        .nav-d1 > a {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .nav-d1.nav-group > .nav-group-label {
+            margin-top: 10px;
+        }
+
+        /* Depth-2 items (individual spaces, zones) */
+        .nav-d2 > a {
+            font-size: 0.92em;
+            color: #94a3b8;
+        }
+        .nav-d2 > a:hover { color: #e2e8f0; }
+
+        /* Header nav items (within-document) */
+        .nav-header > a {
+            font-size: 0.88em;
+            color: #64748b;
+            font-style: italic;
+        }
+        .nav-header > a:hover { color: #cbd5e1; }
+
+        /* ── CONTENT AREA ───────────────────── */
+        .content {
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+        h1 {
+            color: #1e293b;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #334155;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        h3 {
+            color: #475569;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        h4 {
+            color: #64748b;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        li { margin-bottom: 8px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        pre code { background: none; padding: 0; }
+
+        /* ── PRINT BUTTON ───────────────────── */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .print-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* ── INHERITANCE PANEL ──────────────── */
+        .inh-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 8px;
+            border-radius: 8px 0 0 8px;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 999;
+            writing-mode: vertical-rl;
+            letter-spacing: 1px;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+        }
+        .inh-toggle:hover { background: #2563eb; padding: 15px 12px; }
+
+        .inh-panel {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            border-left: 3px solid #3b82f6;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .inh-panel.open { right: 0; }
+        .inh-panel-header {
+            background: #1e293b;
+            color: white;
+            padding: 18px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .inh-panel-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .inh-panel-close:hover { opacity: 1; }
+        .inh-panel-body { padding: 20px; }
+        .inh-panel-body h4 {
+            color: #1e293b;
+            margin: 20px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 1em;
+        }
+        .inh-panel-body h4:first-child { margin-top: 0; }
+        .inh-row {
+            padding: 10px 12px;
+            background: #f8fafc;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            font-size: 0.9em;
+        }
+        .inh-row strong {
+            color: #334155;
+            display: block;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+        .inh-row .val { color: #1e293b; }
+        .inh-empty {
+            color: #94a3b8;
+            font-style: italic;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .inh-hint {
+            margin-top: 15px;
+            padding: 12px;
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            font-size: 0.85em;
+            border-radius: 0 6px 6px 0;
+            color: #1e40af;
+        }
+
+        /* ── PRINT / RESPONSIVE ─────────────── */
+        @media print {
+            .sidebar, .print-btn, .inh-toggle, .inh-panel { display: none; }
+            .content { padding: 20px; max-width: 100%; }
+        }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; max-height: 50vh; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="content">
+            <h1>Przestrzen: 0.8 - �luza</h1><p><h2 id="section-13-informacje-podstawowe">Informacje podstawowe</h2><p><strong>Typ encji:</strong> Space
+<strong>ID:</strong> <code>SPC-KPCPULM-D-0-08</code>
+<strong>Numer pomieszczenia:</strong> 0.8
+<strong>Nazwa:</strong> �luza
+<strong>Poziom:</strong> <code>LVL-KPCPULM-D-PIWNICA</code>
+<strong>Budynek:</strong> <code>BLD-KPCPULM-BLOK-D</code>
+<strong>Dzial:</strong> Pomieszczenia Prosektorium</p><p><h2 id="section-13-wymiary">Wymiary</h2><ul><li><strong>Powierzchnia uzytkowa:</strong> 2,58 m²</li></p><p><h2 id="section-13-wykonczenie">Wykonczenie</h2><p><h3 id="section-13-podlogi">Podlogi</h3>
+<li><strong>Material:</strong> Gres V klasa scieralnosci</li></p><p><h3 id="section-13-sciany">Sciany</h3>
+<li><strong>Wykonczenie:</strong> Plytki ceramiczne na cala wysokosc pomieszczenia</li></p><p><h3 id="section-13-sufit">Sufit</h3>
+<li><strong>Wykonczenie:</strong> Sufit podwieszony bezspoinowy z plyt GK odpornych na wilgoc</li></p><p><h2 id="section-13-strefy">Strefy</h2><p><li><strong>Strefa pozarowa:</strong> <code>ZONE-FIRE-ZL-IV</code></li></p><p><h2 id="section-13-stan-cyklu-zycia">Stan cyklu zycia</h2><p><li><strong>Status:</strong> planned (projektowany)</li></p><p><h2 id="section-13-metadane">Metadane</h2><p><li><strong>Data utworzenia:</strong> 2026-02-23</li>
+<li><strong>Wersja schematu SBM:</strong> v0.1.4</li></ul>
+</p>
+        </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Drukuj / PDF</button>
+
+    <button class="inh-toggle" id="inhToggle">Dziedziczenie</button>
+    <div class="inh-panel" id="inhPanel">
+        <div class="inh-panel-header">
+            <span>Właściwości Dziedziczone</span>
+            <span class="inh-panel-close" id="inhClose">&times;</span>
+        </div>
+        <div class="inh-panel-body" id="inhBody">
+            <p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ── TREE EXPAND/COLLAPSE ──
+        document.querySelectorAll('.toggle').forEach(function(icon) {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        document.querySelectorAll('.nav-node a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var li = this.parentElement;
+                if (li.classList.contains('has-children') && li.classList.contains('collapsed')) {
+                    li.classList.remove('collapsed');
+                    // Let navigation happen
+                }
+            });
+        });
+
+        // Start: expand depth 0, collapse everything else
+        document.querySelectorAll('.has-children').forEach(function(el) {
+            if (!el.classList.contains('nav-d0')) {
+                el.classList.add('collapsed');
+            } else {
+                el.classList.remove('collapsed');
+            }
+        });
+
+        // ── INHERITANCE PANEL ──
+        var inhToggle = document.getElementById('inhToggle');
+        var inhPanel = document.getElementById('inhPanel');
+        var inhClose = document.getElementById('inhClose');
+        var inhBody = document.getElementById('inhBody');
+        var isOpen = false;
+
+        inhToggle.addEventListener('click', function() {
+            isOpen = !isOpen;
+            inhPanel.classList.toggle('open', isOpen);
+            if (isOpen) updateInheritancePanel();
+        });
+
+        inhClose.addEventListener('click', function() {
+            isOpen = false;
+            inhPanel.classList.remove('open');
+        });
+
+        // Update panel based on which section is in view
+        var debounce = null;
+        window.addEventListener('scroll', function() {
+            if (!isOpen) return;
+            clearTimeout(debounce);
+            debounce = setTimeout(updateInheritancePanel, 150);
+        });
+
+        function updateInheritancePanel() {
+            var sections = document.querySelectorAll('.doc-section[data-inherited-height]');
+            var best = null;
+            var bestDist = Infinity;
+
+            sections.forEach(function(sec) {
+                var rect = sec.getBoundingClientRect();
+                var dist = Math.abs(rect.top);
+                if (rect.top < window.innerHeight && rect.bottom > 0 && dist < bestDist) {
+                    best = sec;
+                    bestDist = dist;
+                }
+            });
+
+            if (best) {
+                var h1 = best.querySelector('h1');
+                var name = h1 ? h1.textContent : 'Pomieszczenie';
+                var height = best.dataset.inheritedHeight;
+                var floor = best.dataset.inheritedFloor;
+                var walls = best.dataset.inheritedWalls;
+                var ceiling = best.dataset.inheritedCeiling;
+
+                var html = '<h4>' + name + '</h4>';
+                html += '<div class="inh-hint">Poniższe wartości są dziedziczone z dokumentu kondygnacji i obowiązują dla tego pomieszczenia, chyba że nadpisane powyżej.</div>';
+                html += '<h4>Z kondygnacji</h4>';
+
+                if (height) {
+                    html += '<div class="inh-row"><strong>Wysokość w świetle</strong><span class="val">' + height + '</span></div>';
+                }
+                if (floor) {
+                    html += '<div class="inh-row"><strong>Podłogi (typowe)</strong><span class="val">' + floor + '</span></div>';
+                }
+                if (walls) {
+                    html += '<div class="inh-row"><strong>Ściany (typowe)</strong><span class="val">' + walls + '</span></div>';
+                }
+                if (ceiling) {
+                    html += '<div class="inh-row"><strong>Sufity (typowe)</strong><span class="val">' + ceiling + '</span></div>';
+                }
+
+                if (!height && !floor && !walls && !ceiling) {
+                    html += '<p class="inh-empty">Brak danych o dziedziczeniu z kondygnacji.</p>';
+                }
+
+                inhBody.innerHTML = html;
+            } else {
+                inhBody.innerHTML = '<p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>';
+            }
+        }
+    });
+    </script>
+</body>
+</html>

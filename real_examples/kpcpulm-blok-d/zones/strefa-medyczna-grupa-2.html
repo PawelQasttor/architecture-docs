@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strefa medyczna Grupa 2 - Kujawsko-Pomorskie Centrum Pulmonologii</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ── SIDEBAR ────────────────────────── */
+        .sidebar {
+            width: 420px;
+            min-width: 420px;
+            flex-shrink: 0;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px 15px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 13px;
+        }
+        .sidebar-title {
+            color: #60a5fa;
+            font-size: 1.15em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #334155;
+        }
+
+        /* ── NAV TREE ───────────────────────── */
+        .nav-tree {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-node {
+            position: relative;
+            margin: 1px 0;
+        }
+
+        /* Toggle arrow */
+        .toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            font-size: 9px;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+        .toggle:hover { color: #e2e8f0; background: #334155; }
+        .toggle-spacer { display: inline-block; width: 20px; flex-shrink: 0; }
+
+        /* Expanded state */
+        .has-children:not(.collapsed) > .toggle {
+            transform: rotate(90deg);
+        }
+        .has-children.collapsed > .nav-tree {
+            display: none;
+        }
+
+        /* Links */
+        .nav-node a {
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.15s ease;
+            vertical-align: middle;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .nav-node a:hover { color: #fff; background: #334155; }
+
+        /* Group labels (non-clickable) */
+        .nav-group-label {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+            padding: 8px 8px 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        /* Depth indentation */
+        .nav-depth-0 > .nav-node { padding-left: 0; }
+        .nav-depth-1 > .nav-node { padding-left: 16px; }
+        .nav-depth-2 > .nav-node { padding-left: 32px; }
+        .nav-depth-3 > .nav-node { padding-left: 48px; }
+        .nav-depth-4 > .nav-node { padding-left: 64px; }
+
+        /* Depth-0 items (Inwestycja, Budynek) */
+        .nav-d0 > a {
+            font-weight: 700;
+            font-size: 1.05em;
+            color: #f1f5f9;
+            padding: 8px 10px;
+            background: #334155;
+            border-left: 3px solid #3b82f6;
+            margin: 4px 0;
+            width: calc(100% - 25px);
+        }
+        .nav-d0 > a:hover { background: #475569; }
+
+        /* Depth-1 items (Strefy, Levels, etc.) */
+        .nav-d1 > a {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+        .nav-d1.nav-group > .nav-group-label {
+            margin-top: 10px;
+        }
+
+        /* Depth-2 items (individual spaces, zones) */
+        .nav-d2 > a {
+            font-size: 0.92em;
+            color: #94a3b8;
+        }
+        .nav-d2 > a:hover { color: #e2e8f0; }
+
+        /* Header nav items (within-document) */
+        .nav-header > a {
+            font-size: 0.88em;
+            color: #64748b;
+            font-style: italic;
+        }
+        .nav-header > a:hover { color: #cbd5e1; }
+
+        /* ── CONTENT AREA ───────────────────── */
+        .content {
+            flex: 1;
+            padding: 40px 60px;
+            max-width: 1000px;
+        }
+        h1 {
+            color: #1e293b;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #334155;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+        h3 {
+            color: #475569;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+        h4 {
+            color: #64748b;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+        li { margin-bottom: 8px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #3b82f6;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        pre code { background: none; padding: 0; }
+
+        /* ── PRINT BUTTON ───────────────────── */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        .print-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        /* ── INHERITANCE PANEL ──────────────── */
+        .inh-toggle {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 15px 8px;
+            border-radius: 8px 0 0 8px;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 999;
+            writing-mode: vertical-rl;
+            letter-spacing: 1px;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+        }
+        .inh-toggle:hover { background: #2563eb; padding: 15px 12px; }
+
+        .inh-panel {
+            position: fixed;
+            right: -420px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background: #fff;
+            border-left: 3px solid #3b82f6;
+            box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .inh-panel.open { right: 0; }
+        .inh-panel-header {
+            background: #1e293b;
+            color: white;
+            padding: 18px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+        .inh-panel-close {
+            cursor: pointer;
+            font-size: 1.5em;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .inh-panel-close:hover { opacity: 1; }
+        .inh-panel-body { padding: 20px; }
+        .inh-panel-body h4 {
+            color: #1e293b;
+            margin: 20px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 1em;
+        }
+        .inh-panel-body h4:first-child { margin-top: 0; }
+        .inh-row {
+            padding: 10px 12px;
+            background: #f8fafc;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+            font-size: 0.9em;
+        }
+        .inh-row strong {
+            color: #334155;
+            display: block;
+            font-size: 0.85em;
+            margin-bottom: 2px;
+        }
+        .inh-row .val { color: #1e293b; }
+        .inh-empty {
+            color: #94a3b8;
+            font-style: italic;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .inh-hint {
+            margin-top: 15px;
+            padding: 12px;
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            font-size: 0.85em;
+            border-radius: 0 6px 6px 0;
+            color: #1e40af;
+        }
+
+        /* ── PRINT / RESPONSIVE ─────────────── */
+        @media print {
+            .sidebar, .print-btn, .inh-toggle, .inh-panel { display: none; }
+            .content { padding: 20px; max-width: 100%; }
+        }
+        @media (max-width: 900px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; min-width: 100%; height: auto; position: relative; max-height: 50vh; }
+            .content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="content">
+            <h1>Strefa: Strefa medyczna grupa 2 (IEC 60364-7-710)</h1><p><h2 id="section-3-informacje-podstawowe">Informacje podstawowe</h2><p><strong>Typ encji:</strong> Zone
+<strong>ID:</strong> ZONE-MED-GRUPA-2
+<strong>Nazwa:</strong> Strefa medyczna grupa 2 (zagrożenie życia)
+<strong>Typ strefy:</strong> Medical Equipment Zone - Group 2
+<strong>Budynek:</strong> <code>BLD-KPCPULM-BLOK-D</code></p><p><h2 id="section-3-opis">Opis</h2><p>Strefa obejmuje pomieszczenia medyczne grupy 2 wg normy IEC 60364-7-710, w których przewiduje się kontakt części aplikacyjnych aparatów medycznych do zabiegów na sercu lub podtrzymanie życia, gdzie brak ciągłości zasilania może spowodować zagrożenie życia pacjenta. Jest to strefa o najwyższych wymaganiach elektrycznych i bezpieczeństwa w całym budynku.</p><p><h2 id="section-3-klasyfikacja-wg-iec-60364-7-710">Klasyfikacja wg IEC 60364-7-710</h2><p><h3 id="section-3-grupa-2-definicja">Grupa 2 - Definicja</h3>
+Pomieszczenia medyczne, w których przewiduje się:
+<ul><li>Zabiegi inwazyjne na sercu (kardiochirurgia)</li>
+<li>Podtrzymanie życia pacjenta (OIOM, wentylacja mechaniczna)</li>
+<li>Kontakt części aplikacyjnych aparatów medycznych z obszarem serca pacjenta</li>
+<li>Zabiegi, gdzie przerwanie zasilania > 0,5s może spowodować śmierć pacjenta</li></p><p><h3 id="section-3-charakterystyka">Charakterystyka</h3>
+<li><strong>Najwyższa grupa bezpieczeństwa elektrycznego</strong> w normie IEC 60364-7-710</li>
+<li>Dopuszczony <strong>zamierzony lub niezamierzony</strong> kontakt między pacjentem a częścią zestawu elektromedycznego</li>
+<li>Kontakt między pacjentem a personelem dotykającym zestaw elektromedyczny</li>
+<li>Wymagana <strong>redundancja systemów zasilania</strong> i <strong>monitorowanie ciągłe</strong></li></p><p><h2 id="section-3-pomieszczenia-w-strefie">Pomieszczenia w strefie</h2><p><h3 id="section-3-blok-operacyjny-i-pitro">Blok operacyjny (I piętro)</h3>
+<li><strong>Sala operacyjna 1 (2.46):</strong> 45,85 m²</li>
+<li><strong>Sala operacyjna 2 (2.50):</strong> 43,55 m²</li>
+<li><strong>Przygotowanie chorego 1 (2.44):</strong> 13,10 m²</li>
+<li><strong>Przygotowanie chorego 2 (2.49):</strong> 12,38 m²</li>
+<li><strong>Sala wybudzeń (2.59):</strong> 35,48 m² (pacjenci po operacji, wentylacja mechaniczna)</li></p><p><h3 id="section-3-oiom-oddzia-anestezjologii-i-intensywnej-terapii-i-pitro">OIOM - Oddział Anestezjologii i Intensywnej Terapii (I piętro)</h3>
+<li><strong>Sala chorych OIOM 1 (2.6):</strong> 67,64 m² (ok. 4-5 łóżek)</li>
+<li><strong>Sala chorych OIOM 2 (2.9):</strong> 48,56 m² (ok. 3-4 łóżka)</li>
+<li><strong>Izolatka OIOM (2.12):</strong> 20,63 m² (1 łóżko, pacjent ciężki + izolacja)</li></p><p><strong>Łączna powierzchnia strefy:</strong> ~287 m² (8 pomieszczeń)</p><p><h2 id="section-3-wymagania-elektryczne-grupa-2">Wymagania elektryczne - Grupa 2</h2><p><h3 id="section-3-system-zasilania-it-transformator-separacyjny">System zasilania IT (transformator separacyjny)</h3><p><h4 id="section-3-transformator-izolacyjny">Transformator izolacyjny</h4>
+<li><strong>Typ:</strong> transformator separacyjny (izolacyjny) dla każdej sali operacyjnej i sali OIOM osobno</li>
+<li><strong>Moc:</strong> minimum 10 kVA (sala operacyjna), 20-30 kVA (sala OIOM)</li>
+<li><strong>Izolacja:</strong> podwójna izolacja między uzwojeniem pierwotnym a wtórnym</li>
+<li><strong>Napięcie:</strong> 230V AC (wejście i wyjście)</li>
+<li><strong>Uwagi:</strong> <strong>brak połączenia galwanicznego</strong> z siecią TN-S</li></p><p><h4 id="section-3-monitoring-izolacji">Monitoring izolacji</h4>
+<li><strong>Urządzenie:</strong> monitor izolacji (Insulation Monitoring Device - IMD)</li>
+<li><strong>Pomiar:</strong> ciągły pomiar rezystancji izolacji sieci IT względem ziemi</li>
+<li><strong>Alarm:</strong> wizualny (lampka) i dźwiękowy przy spadku izolacji < 50 kΩ (wg IEC 60364-7-710)</li>
+<li><strong>Lokalizacja alarmu:</strong> w sali operacyjnej (widoczny dla anestezjologa), w dyżurce technicznej</li>
+<li><strong>Uwagi:</strong> alarm <strong>nie przerywa</strong> zasilania (zabieg trwa dalej), informuje o pierwszym uszkodzeniu</li></p><p><h3 id="section-3-zasilanie-awaryjne">Zasilanie awaryjne</h3><p><h4 id="section-3-agregat-prdotwrczy">Agregat prądotwórczy</h4>
+<li><strong>Przełączenie:</strong> < 0,5s (wymaganie dla grupy 2)</li>
+<li><strong>Typ:</strong> automatyczna stacja zasilania awaryjnego (SZR) z agregatem spalinowym</li>
+<li><strong>Test:</strong> automatyczny test raz w tygodniu (bez przełączenia, tylko rozruch agregatu)</li>
+<li><strong>Paliwo:</strong> zbiornik ON min. 8h pracy przy 100% obciążeniu</li></p><p><h4 id="section-3-ups-uninterruptible-power-supply">UPS (Uninterruptible Power Supply)</h4>
+<li><strong>Moc:</strong> 5-10 kVA na salę operacyjną / salę OIOM</li>
+<li><strong>Czas podtrzymania:</strong> minimum 30 minut (dla aparatury podtrzymującej życie)</li>
+<li><strong>Zasilanie:</strong> aparatura anestezjologiczna, respiratory, monitory pacjenta, pompy infuzyjne</li>
+<li><strong>Typ:</strong> UPS online (double-conversion), brak przerwy zasilania</li></p><p><h4 id="section-3-redundancja">Redundancja</h4>
+<li><strong>Dwa niezależne źródła zasilania:</strong></li>
+  1. Sieć energetyczna (TN-S) → transformator IT → sala operacyjna/OIOM
+  2. Agregat prądotwórczy → transformator IT → sala operacyjna/OIOM
+<li><strong>Przełączenie:</strong> automatyczne przy zaniku sieci (< 0,5s dla grupy 2)</li></p><p><h3 id="section-3-wyrwnanie-potencjaw">Wyrównanie potencjałów</h3><p><h4 id="section-3-szyna-epr-equipotential-bonding-rail">Szyna EPR (Equipotential Bonding Rail)</h4>
+<li><strong>Lokalizacja:</strong> w każdej sali operacyjnej i sali OIOM (na ścianie, oznakowana)</li>
+<li><strong>Materiał:</strong> szyna miedziana, przekrój min. 10 mm²</li>
+<li><strong>Połączenia:</strong> wszystkie metalowe części w pomieszczeniu:</li>
+  - Stół operacyjny
+  - Lampy operacyjne (konstrukcje metalowe)
+  - Obudowy aparatury medycznej
+  - Rury instalacyjne (woda, gazy medyczne)
+  - Konstrukcje sufitowe (szyny sufitowe)
+  - Ekrany elektromagnetyczne (jeśli są)</p><p><h4 id="section-3-rezystancja-pocze">Rezystancja połączeń</h4>
+<li><strong>Wymaganie:</strong> rezystancja między szyną EPR a każdym metalowym elementem < 0,2 Ω</li>
+<li><strong>Pomiar:</strong> raz w roku (przegląd techniczny)</li></p><p><h3 id="section-3-osobne-obiegi-elektryczne">Osobne obiegi elektryczne</h3><p><h4 id="section-3-izolacja-obiegw">Izolacja obiegów</h4>
+<li><strong>Zasada:</strong> każda sala operacyjna i sala OIOM ma <strong>osobny transformator IT</strong></li>
+<li><strong>Zakaz współdzielenia:</strong> <strong>brak wspólnego transformatora</strong> dla 2 sal operacyjnych (ryzyko propagacji uszkodzenia)</li>
+<li><strong>Przykład:</strong></li>
+  - Sala operacyjna 1 (2.46) → Transformator IT-1 (10 kVA)
+  - Sala operacyjna 2 (2.50) → Transformator IT-2 (10 kVA)
+  - Sala OIOM 1 (2.6) → Transformator IT-3 (20 kVA)
+  - Sala OIOM 2 (2.9) → Transformator IT-4 (20 kVA)
+  - Izolatka OIOM (2.12) → Transformator IT-5 (10 kVA)</p><p><h2 id="section-3-aparatura-medyczna-w-strefie-grupy-2">Aparatura medyczna w strefie grupy 2</h2><p><h3 id="section-3-blok-operacyjny">Blok operacyjny</h3>
+<li><strong>Stół operacyjny:</strong> zasilanie 230V, regulacja elektryczna/hydrauliczna</li>
+<li><strong>Lampy operacyjne:</strong> 2 lampy bezcieniowe, zasilanie 230V</li>
+<li><strong>Elektrokauter (diatermia):</strong> monopolarna/bipolarna, wysokie napięcie RF</li>
+<li><strong>Aparat anestezjologiczny:</strong> respirator, monitorowanie gazów, zasilanie 230V + UPS</li>
+<li><strong>Monitor pacjenta:</strong> EKG, SpO₂, NIBP, temperatura, kapnografia - <strong>części aplikacyjne na pacjencie</strong></li>
+<li><strong>Pompy infuzyjne:</strong> 2-4 pompy, leki podtrzymujące życie (wazopresory, inotropi)</li></p><p><h3 id="section-3-oiom">OIOM</h3>
+<li><strong>Respiratory:</strong> wentylacja mechaniczna, podtrzymanie życia, zasilanie 230V + UPS</li>
+<li><strong>Monitor pacjenta:</strong> ciągłe monitorowanie EKG, SpO₂, NIBP, temperatura, CVP (centralne ciśnienie żylne)</li>
+<li><strong>Pompy infuzyjne:</strong> leki podtrzymujące życie (wazopresory, inotropi, sedacja)</li>
+<li><strong>Aparat do hemofilt racji/dializy:</strong> (opcjonalnie, dla pacjentów z niewydolnością nerek)</li>
+<li><strong>Aparat ECMO (opcjonalnie):</strong> pozaustrojowe utlenowanie krwi (ekstremalne wsparcie życia)</li></p><p><h2 id="section-3-instalacje-gazw-medycznych">Instalacje gazów medycznych</h2><p><h3 id="section-3-gazy-w-sali-operacyjnej-i-oiom">Gazy w sali operacyjnej i OIOM</h3>
+<li><strong>Tlen (O₂):</strong> 2-3 punkty na salę, 4,0 bar (anestezja, wentylacja, resuscytacja)</li>
+<li><strong>Podtlenek azotu (N₂O):</strong> 1 punkt (anestezja, tylko blok operacyjny)</li>
+<li><strong>Powietrze medyczne:</strong> 2 punkty (respiratory, narzędzia pneumatyczne)</li>
+<li><strong>Ssanie:</strong> 3 punkty (chirurgiczne, anestezjologiczne)</li>
+<li><strong>AGSS:</strong> 1 punkt (odprowadzenie anetetyków wziewnych, tylko blok operacyjny)</li></p><p><h3 id="section-3-redundancja-zasilania-gazw">Redundancja zasilania gazów</h3>
+<li><strong>Źródło główne:</strong> butlebalony centralne (w piwnicy, 0.35, 0.36)</li>
+<li><strong>Źródło awaryjne:</strong> butlegrupowe (automatyczne przełączenie przy spadku ciśnienia)</li>
+<li><strong>Alarm:</strong> centralny alarm przy spadku ciśnienia < 3,5 bar (tlen, powietrze)</li></p><p><h2 id="section-3-warunki-rodowiskowe">Warunki środowiskowe</h2><p><h3 id="section-3-temperatura-i-wilgotno">Temperatura i wilgotność</h3>
+<li><strong>Sale operacyjne:</strong> 20-24°C (±1°C), 40-60% RH (±5%)</li>
+<li><strong>OIOM:</strong> 22-24°C (±1°C), 40-60% RH (±5%)</li></p><p><h3 id="section-3-wentylacja-i-czysto-powietrza">Wentylacja i czystość powietrza</h3>
+<li><strong>Sale operacyjne:</strong></li>
+  - Przepływ laminarny LAF nad stołem operacyjnym: klasa ISO 5
+  - Strefa ogólna sali: klasa ISO 7
+  - Nadciśnienie +15 Pa względem korytarza
+  - Filtracja HEPA H14
+<li><strong>OIOM:</strong></li>
+  - Klasa ISO 8
+  - Nadciśnienie +10 Pa względem korytarza
+  - Filtracja HEPA H13</p><p><h3 id="section-3-monitoring-warunkw-rodowiskowych">Monitoring warunków środowiskowych</h3>
+<li><strong>Ciągły monitoring:</strong> temperatura, wilgotność, ciśnienie, filtracja (HEPA)</li>
+<li><strong>Alarmy:</strong> przy przekroczeniu zakresów (widoczne w salach, dyżurce technicznej)</li></p><p><h2 id="section-3-procedury-i-instrukcje">Procedury i instrukcje</h2><p><h3 id="section-3-testy-i-przegldy">Testy i przeglądy</h3>
+<li><strong>Monitoring izolacji:</strong> test przed każdym zabiegiem (sala operacyjna), raz dziennie (OIOM)</li>
+<li><strong>Wyrównanie potencjałów:</strong> pomiar raz w roku (przegląd techniczny elektryczny)</li>
+<li><strong>UPS:</strong> test raz w miesiącu (symulacja zaniku sieci)</li>
+<li><strong>Agregat:</strong> test raz w tygodniu (automatyczny rozruch bez przełączenia obciążenia)</li></p><p><h3 id="section-3-instrukcje-dla-personelu">Instrukcje dla personelu</h3>
+<li><strong>Alarm monitoringu izolacji:</strong> kontynuować zabieg, odłączyć aparaty po kolei (identyfikacja uszkodzenia)</li>
+<li><strong>Zanik zasilania:</strong> przełączenie automatyczne na UPS/agregat (< 0,5s), sprawdzić aparaturę</li>
+<li><strong>Ewakuacja:</strong> pacjent pod respiratorem → przełączenie na respirator przenośny (akumulatorowy)</li></p><p><h2 id="section-3-wymagania-regulacyjne">Wymagania regulacyjne</h2><p><h3 id="section-3-normy-i-przepisy">Normy i przepisy</h3>
+<li><strong>IEC 60364-7-710:</strong> Instalacje elektryczne w pomieszczeniach medycznych</li>
+<li><strong>PN-EN 60601:</strong> Wyroby medyczne elektryczne (aparatura medyczna)</li>
+<li><strong>Rozporządzenie Ministra Zdrowia:</strong> Wymagania dla pomieszczeń i urządzeń leczniczych</li></p><p><h3 id="section-3-dokumentacja">Dokumentacja</h3>
+<li><strong>Protokoły pomiarów:</strong> wyrównanie potencjałów, monitoring izolacji, testy UPS/agregatu</li>
+<li><strong>Instrukcje:</strong> instrukcje bezpieczeństwa elektrycznego dla personelu</li>
+<li><strong>Schematy:</strong> schematy instalacji elektrycznych IT, rozmieszczenie transformatorów, UPS</li></p><p><h2 id="section-3-stan-cyklu-ycia">Stan cyklu życia</h2><p><li><strong>Status:</strong> planned (projektowany)</li></p><p><h2 id="section-3-powizane-strefy">Powiązane strefy</h2><p><li><strong>Strefa pożarowa:</strong> <code>ZONE-FIRE-ZL-IV</code></li>
+<li><strong>Strefa medyczna grupa 1:</strong> <code>ZONE-MED-GRUPA-1</code> (gabinety diagnostyczne, gabinety zabiegowe)</li>
+<li><strong>Strefa medyczna grupa 0:</strong> <code>ZONE-MED-GRUPA-0</code> (pozostałe pomieszczenia medyczne)</li></p><p><h2 id="section-3-metadane">Metadane</h2><p><li><strong>Grupa bezpieczeństwa:</strong> Grupa 2 (najwyższa)</li>
+<li><strong>Norma:</strong> IEC 60364-7-710</li>
+<li><strong>Krytyczność:</strong> Maksymalna (podtrzymanie życia)</li>
+<li><strong>Data utworzenia:</strong> 2026-02-23</li>
+<li><strong>Wersja schematu SBM:</strong> v0.1.3</li></ul><p>---</p><p><strong>Uwagi:</strong> Strefa medyczna grupa 2 to obszar o najwyższych wymaganiach elektrycznych w całym szpitalu. System zasilania IT z monitoringiem izolacji, zasilanie awaryjne < 0,5s, UPS oraz wyrównanie potencjałów są <strong>obowiązkowe</strong> dla wszystkich pomieszczeń grupy 2. Personel medyczny i techniczny musi być przeszkolony w zakresie obsługi tych systemów oraz procedur postępowania w przypadku alarmów.
+</p>
+        </div>
+    </div>
+    <button class="print-btn" onclick="window.print()">Drukuj / PDF</button>
+
+    <button class="inh-toggle" id="inhToggle">Dziedziczenie</button>
+    <div class="inh-panel" id="inhPanel">
+        <div class="inh-panel-header">
+            <span>Właściwości Dziedziczone</span>
+            <span class="inh-panel-close" id="inhClose">&times;</span>
+        </div>
+        <div class="inh-panel-body" id="inhBody">
+            <p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ── TREE EXPAND/COLLAPSE ──
+        document.querySelectorAll('.toggle').forEach(function(icon) {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.parentElement.classList.toggle('collapsed');
+            });
+        });
+
+        document.querySelectorAll('.nav-node a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var li = this.parentElement;
+                if (li.classList.contains('has-children') && li.classList.contains('collapsed')) {
+                    li.classList.remove('collapsed');
+                    // Let navigation happen
+                }
+            });
+        });
+
+        // Start: expand depth 0, collapse everything else
+        document.querySelectorAll('.has-children').forEach(function(el) {
+            if (!el.classList.contains('nav-d0')) {
+                el.classList.add('collapsed');
+            } else {
+                el.classList.remove('collapsed');
+            }
+        });
+
+        // ── INHERITANCE PANEL ──
+        var inhToggle = document.getElementById('inhToggle');
+        var inhPanel = document.getElementById('inhPanel');
+        var inhClose = document.getElementById('inhClose');
+        var inhBody = document.getElementById('inhBody');
+        var isOpen = false;
+
+        inhToggle.addEventListener('click', function() {
+            isOpen = !isOpen;
+            inhPanel.classList.toggle('open', isOpen);
+            if (isOpen) updateInheritancePanel();
+        });
+
+        inhClose.addEventListener('click', function() {
+            isOpen = false;
+            inhPanel.classList.remove('open');
+        });
+
+        // Update panel based on which section is in view
+        var debounce = null;
+        window.addEventListener('scroll', function() {
+            if (!isOpen) return;
+            clearTimeout(debounce);
+            debounce = setTimeout(updateInheritancePanel, 150);
+        });
+
+        function updateInheritancePanel() {
+            var sections = document.querySelectorAll('.doc-section[data-inherited-height]');
+            var best = null;
+            var bestDist = Infinity;
+
+            sections.forEach(function(sec) {
+                var rect = sec.getBoundingClientRect();
+                var dist = Math.abs(rect.top);
+                if (rect.top < window.innerHeight && rect.bottom > 0 && dist < bestDist) {
+                    best = sec;
+                    bestDist = dist;
+                }
+            });
+
+            if (best) {
+                var h1 = best.querySelector('h1');
+                var name = h1 ? h1.textContent : 'Pomieszczenie';
+                var height = best.dataset.inheritedHeight;
+                var floor = best.dataset.inheritedFloor;
+                var walls = best.dataset.inheritedWalls;
+                var ceiling = best.dataset.inheritedCeiling;
+
+                var html = '<h4>' + name + '</h4>';
+                html += '<div class="inh-hint">Poniższe wartości są dziedziczone z dokumentu kondygnacji i obowiązują dla tego pomieszczenia, chyba że nadpisane powyżej.</div>';
+                html += '<h4>Z kondygnacji</h4>';
+
+                if (height) {
+                    html += '<div class="inh-row"><strong>Wysokość w świetle</strong><span class="val">' + height + '</span></div>';
+                }
+                if (floor) {
+                    html += '<div class="inh-row"><strong>Podłogi (typowe)</strong><span class="val">' + floor + '</span></div>';
+                }
+                if (walls) {
+                    html += '<div class="inh-row"><strong>Ściany (typowe)</strong><span class="val">' + walls + '</span></div>';
+                }
+                if (ceiling) {
+                    html += '<div class="inh-row"><strong>Sufity (typowe)</strong><span class="val">' + ceiling + '</span></div>';
+                }
+
+                if (!height && !floor && !walls && !ceiling) {
+                    html += '<p class="inh-empty">Brak danych o dziedziczeniu z kondygnacji.</p>';
+                }
+
+                inhBody.innerHTML = html;
+            } else {
+                inhBody.innerHTML = '<p class="inh-empty">Przewiń do sekcji pomieszczenia, aby zobaczyć dziedziczone właściwości z kondygnacji.</p>';
+            }
+        }
+    });
+    </script>
+</body>
+</html>
