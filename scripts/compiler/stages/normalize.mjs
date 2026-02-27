@@ -638,6 +638,260 @@ function performCostRollup(grouped, project, logger) {
 }
 
 /**
+ * Perform simulation tracking (v0.4 feature)
+ *
+ * Aggregates simulation results from spaces → project
+ * Tracks simulation status, results, and compliance
+ *
+ * @param {object} grouped - Grouped entities
+ * @param {object} project - Project metadata
+ * @param {object} logger - Logger instance
+ */
+function performSimulationTracking(grouped, project, logger) {
+  const simulationTypes = ['daylighting', 'thermal', 'acoustic', 'cfd', 'airflow', 'energy'];
+  const simulationSummary = {
+    totalSimulations: 0,
+    byType: {},
+    byStatus: {
+      planned: 0,
+      in_progress: 0,
+      completed: 0,
+      failed: 0
+    },
+    bySpace: [],
+    completionRate: 0
+  };
+
+  // Initialize type tracking
+  for (const type of simulationTypes) {
+    simulationSummary.byType[type] = {
+      total: 0,
+      completed: 0,
+      failed: 0,
+      pending: 0,
+      spaces: []
+    };
+  }
+
+  // Collect all simulations from spaces
+  if (grouped.spaces) {
+    for (const space of grouped.spaces) {
+      if (space.simulations && Array.isArray(space.simulations) && space.simulations.length > 0) {
+        simulationSummary.totalSimulations += space.simulations.length;
+
+        for (const sim of space.simulations) {
+          const type = sim.type || 'unknown';
+          const status = sim.status || 'planned';
+
+          // Track by status
+          if (simulationSummary.byStatus[status] !== undefined) {
+            simulationSummary.byStatus[status]++;
+          }
+
+          // Track by type
+          if (simulationSummary.byType[type]) {
+            simulationSummary.byType[type].total++;
+
+            if (status === 'completed') {
+              simulationSummary.byType[type].completed++;
+            } else if (status === 'failed') {
+              simulationSummary.byType[type].failed++;
+            } else {
+              simulationSummary.byType[type].pending++;
+            }
+
+            simulationSummary.byType[type].spaces.push({
+              spaceId: space.id,
+              spaceName: space.spaceName,
+              simulationId: sim.id,
+              status: status,
+              tool: sim.tool,
+              executionDate: sim.executionDate
+            });
+          }
+        }
+
+        simulationSummary.bySpace.push({
+          spaceId: space.id,
+          spaceName: space.spaceName,
+          simulationCount: space.simulations.length,
+          types: [...new Set(space.simulations.map(s => s.type))]
+        });
+      }
+    }
+  }
+
+  // Calculate completion rate
+  if (simulationSummary.totalSimulations > 0) {
+    simulationSummary.completionRate =
+      (simulationSummary.byStatus.completed / simulationSummary.totalSimulations * 100).toFixed(1);
+  }
+
+  // Add to project if any simulations found
+  if (simulationSummary.totalSimulations > 0) {
+    project.simulationSummary = {
+      ...simulationSummary,
+      _meta: {
+        confidence: 'calculated',
+        source: 'compiler_simulation_tracking',
+        resolution: 'calculated',
+        notes: `Aggregated from ${simulationSummary.bySpace.length} spaces`,
+        timestamp: new Date().toISOString()
+      }
+    };
+
+    logger.debug(`✓ Simulation tracking: ${simulationSummary.totalSimulations} simulations, ${simulationSummary.completionRate}% complete`);
+  } else {
+    logger.debug('! No simulation data found for tracking');
+  }
+}
+
+/**
+ * Perform performance targets aggregation (v0.4 feature)
+ *
+ * Aggregates performance targets from spaces → project
+ * Calculates averages, ranges, and compliance metrics
+ *
+ * @param {object} grouped - Grouped entities
+ * @param {object} project - Project metadata
+ * @param {object} logger - Logger instance
+ */
+function performPerformanceAggregation(grouped, project, logger) {
+  const performanceCategories = ['daylighting', 'indoorAirQuality', 'acousticPerformance', 'thermalComfort', 'energyPerformance', 'embodiedCarbon'];
+  const performanceSummary = {
+    spacesWithTargets: 0,
+    totalSpaces: 0,
+    targetCoverage: 0,
+    byCategory: {}
+  };
+
+  // Initialize category tracking
+  for (const category of performanceCategories) {
+    performanceSummary.byCategory[category] = {
+      spacesWithTargets: 0,
+      spaces: []
+    };
+  }
+
+  // Collect performance targets from spaces
+  if (grouped.spaces) {
+    performanceSummary.totalSpaces = grouped.spaces.length;
+
+    for (const space of grouped.spaces) {
+      let spaceHasTargets = false;
+
+      if (space.performanceTargets) {
+        for (const category of performanceCategories) {
+          if (space.performanceTargets[category]) {
+            spaceHasTargets = true;
+            performanceSummary.byCategory[category].spacesWithTargets++;
+            performanceSummary.byCategory[category].spaces.push({
+              spaceId: space.id,
+              spaceName: space.spaceName,
+              targets: space.performanceTargets[category]
+            });
+          }
+        }
+      }
+
+      if (spaceHasTargets) {
+        performanceSummary.spacesWithTargets++;
+      }
+    }
+
+    // Calculate coverage
+    if (performanceSummary.totalSpaces > 0) {
+      performanceSummary.targetCoverage =
+        (performanceSummary.spacesWithTargets / performanceSummary.totalSpaces * 100).toFixed(1);
+    }
+  }
+
+  // Calculate aggregated metrics for each category
+  for (const category of performanceCategories) {
+    const categoryData = performanceSummary.byCategory[category];
+
+    if (categoryData.spacesWithTargets > 0) {
+      // Add aggregated metrics based on category
+      if (category === 'energyPerformance') {
+        let totalHeating = 0;
+        let totalCooling = 0;
+        let totalEnergy = 0;
+        let count = 0;
+
+        for (const spaceData of categoryData.spaces) {
+          const targets = spaceData.targets;
+          if (targets.heatingDemand) {
+            totalHeating += targets.heatingDemand;
+            count++;
+          }
+          if (targets.coolingDemand) {
+            totalCooling += targets.coolingDemand;
+          }
+          if (targets.totalEnergyUse) {
+            totalEnergy += targets.totalEnergyUse;
+          }
+        }
+
+        if (count > 0) {
+          categoryData.aggregated = {
+            averageHeatingDemand: (totalHeating / count).toFixed(2),
+            averageCoolingDemand: (totalCooling / count).toFixed(2),
+            projectTotalEnergy: totalEnergy.toFixed(2),
+            unit: 'kWh/m²/year'
+          };
+        }
+      } else if (category === 'embodiedCarbon') {
+        let totalConstruction = 0;
+        let totalOperational = 0;
+        let count = 0;
+
+        for (const spaceData of categoryData.spaces) {
+          const targets = spaceData.targets;
+          if (targets.construction?.total) {
+            totalConstruction += targets.construction.total;
+            count++;
+          }
+          if (targets.operations?.totalOperational) {
+            totalOperational += targets.operations.totalOperational;
+          }
+        }
+
+        if (count > 0) {
+          categoryData.aggregated = {
+            totalConstructionCarbon: totalConstruction.toFixed(2),
+            totalOperationalCarbon: totalOperational.toFixed(2),
+            totalWholeLifeCarbon: (totalConstruction + totalOperational).toFixed(2),
+            unit: 'kgCO2e'
+          };
+        }
+      }
+    }
+  }
+
+  // Add to project if any performance targets found
+  if (performanceSummary.spacesWithTargets > 0) {
+    project.performanceSummary = {
+      ...performanceSummary,
+      _meta: {
+        confidence: 'calculated',
+        source: 'compiler_performance_aggregation',
+        resolution: 'calculated',
+        notes: `Aggregated from ${performanceSummary.spacesWithTargets} spaces with performance targets`,
+        timestamp: new Date().toISOString()
+      }
+    };
+
+    const categoriesWithData = performanceCategories.filter(c =>
+      performanceSummary.byCategory[c].spacesWithTargets > 0
+    ).length;
+
+    logger.debug(`✓ Performance aggregation: ${performanceSummary.spacesWithTargets} spaces, ${categoriesWithData} categories tracked`);
+  } else {
+    logger.debug('! No performance target data found for aggregation');
+  }
+}
+
+/**
  * Main normalize function
  *
  * @param {Array} rawEntities - Raw entities from parse stage
@@ -730,6 +984,14 @@ export async function normalize(rawEntities, options, logger) {
   // Stage 2.5: Cost Rollup (v0.4 feature)
   logger.debug('Computing cost rollup...');
   performCostRollup(grouped, project, logger);
+
+  // Stage 2.6: Simulation Tracking (v0.4 feature)
+  logger.debug('Aggregating simulation results...');
+  performSimulationTracking(grouped, project, logger);
+
+  // Stage 2.7: Performance Targets Aggregation (v0.4 feature)
+  logger.debug('Aggregating performance targets...');
+  performPerformanceAggregation(grouped, project, logger);
 
   // Build normalized output structure
   const normalized = {
