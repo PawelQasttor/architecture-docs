@@ -1,0 +1,796 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sbm.architecture/schemas/v0.4.0/sbm-schema.json",
+  "title": "Structured Building Model (SBM) Schema v0.4.0",
+  "description": "Complete semantic model for architectural building information with BIM integration, cost tracking, performance metrics, and simulation support",
+  "version": "0.4.0",
+  "definitions": {
+    "currency": {
+      "type": "string",
+      "enum": ["EUR", "USD", "GBP", "PLN", "CHF", "NOK", "SEK", "DKK", "CZK"],
+      "default": "EUR"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["measured", "calculated", "specified", "estimated", "assumed", "unknown"],
+      "description": "Confidence level for data provenance tracking"
+    },
+    "costBreakdown": {
+      "type": "object",
+      "properties": {
+        "budget": { "type": "number", "minimum": 0 },
+        "forecast": { "type": "number", "minimum": 0 },
+        "actual": { "type": "number", "minimum": 0 }
+      }
+    },
+    "coordinates": {
+      "type": "object",
+      "properties": {
+        "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+        "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+        "elevation": { "type": "number" }
+      },
+      "required": ["latitude", "longitude"]
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "confidence": { "$ref": "#/definitions/confidence" },
+        "source": { "type": "string" },
+        "sourceRef": { "type": "string" },
+        "extractedDate": { "type": "string", "format": "date-time" },
+        "validator": { "type": "string" },
+        "validationDate": { "type": "string", "format": "date-time" },
+        "resolution": {
+          "type": "string",
+          "enum": ["explicit", "inherited", "calculated", "defaulted"]
+        },
+        "inheritedFrom": { "type": "string" },
+        "legalBasis": { "type": "string" },
+        "justification": { "type": "string" }
+      }
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "documentType": { "const": "project" },
+        "entityType": { "const": "project" },
+        "id": { "type": "string", "pattern": "^PRJ-" },
+        "version": { "type": "string", "default": "0.4.0" },
+
+        "projectName": { "type": "string" },
+        "projectPhase": {
+          "type": "string",
+          "enum": ["initiation", "schematic_design", "design_development", "construction_documents", "bidding", "construction", "post_occupancy", "renovation"]
+        },
+        "country": { "type": "string", "pattern": "^[A-Z]{2}$" },
+        "phase": { "type": "integer", "minimum": 1, "maximum": 8 },
+
+        "budget": {
+          "type": "object",
+          "properties": {
+            "totalBudget": { "type": "number", "minimum": 0 },
+            "currency": { "$ref": "#/definitions/currency" },
+            "contingency": {
+              "type": "object",
+              "properties": {
+                "percent": { "type": "number", "minimum": 0, "maximum": 100 },
+                "amount": { "type": "number", "minimum": 0 },
+                "allocated": { "type": "number", "minimum": 0 },
+                "remaining": { "type": "number", "minimum": 0 }
+              }
+            },
+            "breakdown": {
+              "type": "object",
+              "properties": {
+                "structure": { "$ref": "#/definitions/costBreakdown" },
+                "envelope": { "$ref": "#/definitions/costBreakdown" },
+                "hvac": { "$ref": "#/definitions/costBreakdown" },
+                "plumbing": { "$ref": "#/definitions/costBreakdown" },
+                "electrical": { "$ref": "#/definitions/costBreakdown" },
+                "finishes": { "$ref": "#/definitions/costBreakdown" },
+                "equipment": { "$ref": "#/definitions/costBreakdown" }
+              }
+            },
+            "tracking": {
+              "type": "object",
+              "properties": {
+                "basisOfEstimate": { "type": "string" },
+                "lastReview": { "type": "string", "format": "date" },
+                "nextReview": { "type": "string", "format": "date" },
+                "confidence": { "type": "string", "enum": ["low", "medium", "high"] }
+              }
+            }
+          }
+        },
+
+        "simulationStrategy": {
+          "type": "object",
+          "properties": {
+            "requiredSimulations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": { "type": "string", "enum": ["daylighting", "thermal", "acoustic", "cfd", "structural", "energy"] },
+                  "scope": { "type": "string" },
+                  "tools": { "type": "array", "items": { "type": "string" } },
+                  "trigger": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+
+        "bimIntegration": {
+          "type": "object",
+          "properties": {
+            "masterModel": {
+              "type": "object",
+              "properties": {
+                "platform": { "type": "string", "enum": ["Revit", "ArchiCAD", "Tekla", "Rhino", "Blender", "Other"] },
+                "version": { "type": "string" },
+                "file": { "type": "string" }
+              }
+            },
+            "ifc": {
+              "type": "object",
+              "properties": {
+                "exportSchedule": { "type": "string" },
+                "latestExport": {
+                  "type": "object",
+                  "properties": {
+                    "file": { "type": "string" },
+                    "date": { "type": "string", "format": "date-time" },
+                    "version": { "type": "string", "enum": ["IFC2x3", "IFC4", "IFC4.3", "IFC4x3"] },
+                    "schema": { "type": "string" }
+                  }
+                }
+              }
+            },
+            "ids": {
+              "type": "object",
+              "properties": {
+                "requirementsFile": { "type": "string" },
+                "lastValidation": { "type": "string", "format": "date-time" },
+                "validationStatus": { "type": "string" }
+              }
+            },
+            "bcf": {
+              "type": "object",
+              "properties": {
+                "issueTracking": { "type": "boolean" },
+                "latestReport": { "type": "string" },
+                "openIssues": { "type": "integer", "minimum": 0 },
+                "resolvedIssues": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        },
+
+        "departments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string", "pattern": "^DEPT-" },
+              "name": { "type": "string" },
+              "type": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["documentType", "entityType", "id", "projectName", "country"]
+    },
+
+    "site": {
+      "type": "object",
+      "properties": {
+        "documentType": { "const": "site" },
+        "entityType": { "const": "site" },
+        "id": { "type": "string", "pattern": "^SITE-" },
+        "projectId": { "type": "string", "pattern": "^PRJ-" },
+
+        "location": {
+          "type": "object",
+          "properties": {
+            "address": { "type": "string" },
+            "coordinates": { "$ref": "#/definitions/coordinates" },
+            "country": { "type": "string", "pattern": "^[A-Z]{2}$" },
+            "region": { "type": "string" },
+            "municipality": { "type": "string" }
+          }
+        },
+
+        "climate": {
+          "type": "object",
+          "properties": {
+            "koppenClassification": { "type": "string" },
+            "heatingDegreeDays": { "type": "number" },
+            "coolingDegreeDays": { "type": "number" },
+            "averageWinterTemp": { "type": "number" },
+            "averageSummerTemp": { "type": "number" },
+            "annualPrecipitation": { "type": "number" },
+            "weatherFile": { "type": "string" }
+          }
+        },
+
+        "solarContext": {
+          "type": "object",
+          "properties": {
+            "trueNorthAzimuth": { "type": "number", "minimum": 0, "maximum": 360 },
+            "magneticDeclination": { "type": "number" },
+            "timezone": { "type": "string" },
+            "shadingAnalysis": {
+              "type": "object",
+              "properties": {
+                "neighboringBuildings": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string" },
+                      "height": { "type": "number" },
+                      "distance": { "type": "number" },
+                      "azimuth": { "type": "number" },
+                      "shadowImpact": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        "zoning": {
+          "type": "object",
+          "properties": {
+            "zoneDesignation": { "type": "string" },
+            "masterPlan": { "type": "string" },
+            "constraints": {
+              "type": "object",
+              "properties": {
+                "maxHeight": { "type": "number" },
+                "maxFloors": { "type": "integer" },
+                "setbacks": {
+                  "type": "object",
+                  "properties": {
+                    "front": { "type": "number" },
+                    "side": { "type": "number" },
+                    "rear": { "type": "number" }
+                  }
+                },
+                "coverageRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+                "floorAreaRatio": { "type": "number", "minimum": 0 },
+                "minGreenSpace": { "type": "number", "minimum": 0, "maximum": 1 }
+              }
+            }
+          }
+        },
+
+        "utilities": {
+          "type": "object",
+          "properties": {
+            "water": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "provider": { "type": "string" },
+                "capacity": { "type": "string" }
+              }
+            },
+            "sewer": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "capacity": { "type": "string" }
+              }
+            },
+            "electrical": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "capacity": { "type": "string" },
+                "voltage": { "type": "string" }
+              }
+            },
+            "gas": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "pressure": { "type": "string" }
+              }
+            }
+          }
+        },
+
+        "topography": {
+          "type": "object",
+          "properties": {
+            "slopePercent": { "type": "number" },
+            "slopeDirection": { "type": "number", "minimum": 0, "maximum": 360 },
+            "elevationRange": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+              }
+            },
+            "soilType": { "type": "string" },
+            "waterTable": { "type": "number" }
+          }
+        }
+      },
+      "required": ["documentType", "entityType", "id", "projectId"]
+    },
+
+    "space_program": {
+      "type": "object",
+      "properties": {
+        "documentType": { "const": "space_program" },
+        "entityType": { "const": "space_program" },
+        "id": { "type": "string", "pattern": "^PROG-" },
+        "projectId": { "type": "string", "pattern": "^PRJ-" },
+        "phase": { "type": "string", "enum": ["schematic_design", "design_development"] },
+
+        "programName": { "type": "string" },
+        "programDescription": { "type": "string" },
+
+        "targetArea": {
+          "type": "object",
+          "properties": {
+            "minimum": { "type": "number" },
+            "maximum": { "type": "number" },
+            "typical": { "type": "number" },
+            "unit": { "type": "string", "default": "m2" },
+            "basis": { "type": "string" }
+          }
+        },
+
+        "targetOccupancy": {
+          "type": "object",
+          "properties": {
+            "typical": { "type": "integer" },
+            "maximum": { "type": "integer" },
+            "usagePattern": { "type": "string" }
+          }
+        },
+
+        "spaceBreakdown": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "spaceName": { "type": "string" },
+              "count": { "type": "integer", "minimum": 1 },
+              "areaRange": {
+                "type": "object",
+                "properties": {
+                  "min": { "type": "number" },
+                  "max": { "type": "number" },
+                  "typical": { "type": "number" }
+                }
+              },
+              "priority": { "type": "string", "enum": ["essential", "required", "optional"] },
+              "requirements": { "type": "array", "items": { "type": "string" } },
+              "adjacencyPreferences": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rule": { "type": "string" },
+              "currentValue": { "type": "number" },
+              "withinTarget": { "type": "boolean" },
+              "status": { "type": "string" },
+              "rationale": { "type": "string" }
+            }
+          }
+        },
+
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "targetArea": { "type": "number" },
+              "description": { "type": "string" },
+              "tradeoffs": { "type": "array", "items": { "type": "string" } },
+              "costEstimate": { "type": "number" }
+            }
+          }
+        },
+
+        "budgetEstimate": {
+          "type": "object",
+          "properties": {
+            "totalBudget": { "type": "number" },
+            "costPerM2": { "type": "number" },
+            "currency": { "$ref": "#/definitions/currency" },
+            "confidence": { "type": "string", "enum": ["low", "medium", "high"] },
+            "basis": { "type": "string" }
+          }
+        }
+      },
+      "required": ["documentType", "entityType", "id", "projectId", "programName"]
+    },
+
+    "space": {
+      "type": "object",
+      "properties": {
+        "documentType": { "const": "space" },
+        "entityType": { "const": "space" },
+        "id": { "type": "string", "pattern": "^(SP|SPC)-" },
+        "spaceName": { "type": "string" },
+        "spaceTypeId": { "type": "string", "pattern": "^ST-" },
+
+        "buildingId": { "type": "string", "pattern": "^BLD-" },
+        "levelId": { "type": "string", "pattern": "^LVL-" },
+        "zoneIds": { "type": "array", "items": { "type": "string", "pattern": "^ZONE-" } },
+
+        "designArea": { "type": "number", "minimum": 0 },
+        "designHeight": { "type": "number", "minimum": 0 },
+        "designVolume": { "type": "number", "minimum": 0 },
+
+        "cost": {
+          "type": "object",
+          "properties": {
+            "totalCost": { "type": "number", "minimum": 0 },
+            "currency": { "$ref": "#/definitions/currency" },
+            "basis": { "type": "string", "enum": ["calculated_from_type", "quoted", "estimated", "override"] },
+            "override": { "type": "string" },
+            "breakdown": {
+              "type": "object",
+              "properties": {
+                "construction": { "type": "number" },
+                "fitout": { "type": "number" },
+                "equipment": { "type": "number" }
+              }
+            },
+            "_meta": { "$ref": "#/definitions/meta" }
+          }
+        },
+
+        "performanceTargets": {
+          "type": "object",
+          "properties": {
+            "daylighting": {
+              "type": "object",
+              "properties": {
+                "daylightFactor": { "type": "number", "minimum": 0, "maximum": 100 },
+                "spatialDaylightAutonomy": { "type": "number", "minimum": 0, "maximum": 100 },
+                "annualSunlightExposure": { "type": "number", "minimum": 0, "maximum": 100 },
+                "illuminanceTarget": { "type": "number" },
+                "uniformityRatio": { "type": "number" },
+                "viewQuality": { "type": "string" },
+                "glareControl": { "type": "string" },
+                "basis": { "type": "string" }
+              }
+            },
+            "indoorAirQuality": {
+              "type": "object",
+              "properties": {
+                "co2Maximum": { "type": "number" },
+                "vocMaximum": { "type": "number" },
+                "formaldehydeMax": { "type": "number" },
+                "particulatePM25": { "type": "number" },
+                "particulatePM10": { "type": "number" },
+                "radon": { "type": "number" },
+                "outdoorAirPerPerson": { "type": "number" },
+                "airChangeEffectiveness": { "type": "number", "minimum": 0, "maximum": 1 },
+                "basis": { "type": "string" }
+              }
+            },
+            "acousticPerformance": {
+              "type": "object",
+              "properties": {
+                "backgroundNoise": { "type": "number" },
+                "reverberation": {
+                  "type": "object",
+                  "properties": {
+                    "t60": { "type": "number" },
+                    "target": { "type": "string" }
+                  }
+                },
+                "soundIsolation": {
+                  "type": "object",
+                  "properties": {
+                    "airborneRw": { "type": "number" },
+                    "impactLnw": { "type": "number" },
+                    "facadeRw": { "type": "number" },
+                    "frequencyRange": { "type": "string" }
+                  }
+                },
+                "privacyRating": { "type": "string", "enum": ["high", "medium", "low"] }
+              }
+            },
+            "thermalComfort": {
+              "type": "object",
+              "properties": {
+                "winterDesignTemp": { "type": "number" },
+                "summerDesignTemp": { "type": "number" },
+                "operativeTemperature": {
+                  "type": "object",
+                  "properties": {
+                    "min": { "type": "number" },
+                    "max": { "type": "number" }
+                  }
+                },
+                "relativeHumidity": {
+                  "type": "object",
+                  "properties": {
+                    "min": { "type": "number" },
+                    "max": { "type": "number" }
+                  }
+                },
+                "airVelocity": { "type": "number" },
+                "radiantAsymmetry": { "type": "number" },
+                "verticalTempGradient": { "type": "number" },
+                "thermalMass": {
+                  "type": "object",
+                  "properties": {
+                    "effectiveMass": { "type": "number" },
+                    "thermalLag": { "type": "number" },
+                    "passiveSurvivability": { "type": "number" }
+                  }
+                },
+                "basis": { "type": "string" }
+              }
+            },
+            "energyPerformance": {
+              "type": "object",
+              "properties": {
+                "heatingDemand": { "type": "number" },
+                "coolingDemand": { "type": "number" },
+                "lightingDemand": { "type": "number" },
+                "plugLoadDemand": { "type": "number" },
+                "totalEnergyUse": { "type": "number" },
+                "renewableGeneration": { "type": "number" },
+                "netEnergyUse": { "type": "number" },
+                "primaryEnergyRating": { "type": "string" },
+                "basis": { "type": "string" }
+              }
+            },
+            "embodiedCarbon": {
+              "type": "object",
+              "properties": {
+                "construction": {
+                  "type": "object",
+                  "properties": {
+                    "structuralFrame": { "type": "number" },
+                    "envelope": { "type": "number" },
+                    "finishes": { "type": "number" },
+                    "services": { "type": "number" },
+                    "total": { "type": "number" }
+                  }
+                },
+                "operations": {
+                  "type": "object",
+                  "properties": {
+                    "annualOperationalCarbon": { "type": "number" },
+                    "lifespan": { "type": "number" },
+                    "totalOperational": { "type": "number" }
+                  }
+                },
+                "endOfLife": {
+                  "type": "object",
+                  "properties": {
+                    "deconstruction": { "type": "number" }
+                  }
+                },
+                "wholeLife": {
+                  "type": "object",
+                  "properties": {
+                    "total": { "type": "number" },
+                    "target": { "type": "number" },
+                    "status": { "type": "string" }
+                  }
+                },
+                "basis": { "type": "string" }
+              }
+            }
+          }
+        },
+
+        "simulations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["daylighting", "thermal", "acoustic", "cfd", "airflow", "energy"] },
+              "tool": { "type": "string" },
+              "version": { "type": "string" },
+              "status": { "type": "string", "enum": ["planned", "in_progress", "completed", "failed"] },
+              "executionDate": { "type": "string", "format": "date-time" },
+              "executedBy": { "type": "string" },
+              "scheduledDate": { "type": "string", "format": "date" },
+              "inputs": { "type": "object" },
+              "targets": { "type": "object" },
+              "results": { "type": "object" },
+              "files": {
+                "type": "object",
+                "properties": {
+                  "inputModel": { "type": "string" },
+                  "weatherData": { "type": "string" },
+                  "resultImages": { "type": "array", "items": { "type": "string" } },
+                  "resultData": { "type": "string" },
+                  "report": { "type": "string" }
+                }
+              },
+              "_meta": { "$ref": "#/definitions/meta" }
+            }
+          }
+        },
+
+        "bimIntegration": {
+          "type": "object",
+          "properties": {
+            "geometryReference": {
+              "type": "object",
+              "properties": {
+                "primarySource": { "type": "string", "enum": ["ifc", "dwg", "revit", "archicad"] },
+                "ifcSource": { "type": "string" },
+                "ifcGlobalId": { "type": "string", "pattern": "^[0-9A-Za-z_$]{22}$" },
+                "ifcEntity": { "type": "string" },
+                "dwgFile": { "type": "string" },
+                "dwgLayer": { "type": "string" },
+                "dwgHandle": { "type": "string" },
+                "lastSyncDate": { "type": "string", "format": "date-time" },
+                "syncedProperties": { "type": "array", "items": { "type": "string" } },
+                "syncStatus": { "type": "string", "enum": ["current", "stale", "conflict"] },
+                "ifcExtractedProperties": {
+                  "type": "object",
+                  "properties": {
+                    "area": { "type": "number" },
+                    "height": { "type": "number" },
+                    "volume": { "type": "number" },
+                    "lastExtracted": { "type": "string", "format": "date-time" }
+                  }
+                },
+                "validation": {
+                  "type": "object",
+                  "properties": {
+                    "areaMatch": { "type": "boolean" },
+                    "heightMatch": { "type": "boolean" },
+                    "lastValidated": { "type": "string", "format": "date-time" }
+                  }
+                },
+                "bcfIssues": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "outline2D": {
+              "type": "object",
+              "properties": {
+                "coordinates": {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": { "type": "number" },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 3
+                },
+                "unit": { "type": "string", "default": "m" },
+                "origin": { "type": "string", "enum": ["level_origin", "building_origin", "site_origin"] },
+                "elevation": { "type": "number" },
+                "azimuth": { "type": "number", "minimum": 0, "maximum": 360 },
+                "source": { "type": "string" },
+                "confidence": { "$ref": "#/definitions/confidence" }
+              }
+            },
+            "centroid": {
+              "type": "array",
+              "items": { "type": "number" },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "bounds": {
+              "type": "object",
+              "properties": {
+                "min": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 },
+                "max": { "type": "array", "items": { "type": "number" }, "minItems": 3, "maxItems": 3 }
+              }
+            }
+          }
+        },
+
+        "adjacentSpaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "relationship": { "type": "string" },
+              "boundaryType": { "type": "string" },
+              "fireRating": { "type": "string" }
+            }
+          }
+        },
+
+        "requirements": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["documentType", "entityType", "id", "spaceName"]
+    },
+
+    "requirement": {
+      "type": "object",
+      "properties": {
+        "documentType": { "const": "requirement" },
+        "entityType": { "const": "requirement" },
+        "id": { "type": "string", "pattern": "^REQ-" },
+
+        "requirementName": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "code": { "type": "string" },
+        "section": { "type": "string" },
+
+        "metric": { "type": "string" },
+        "operator": { "type": "string", "enum": ["==", "!=", "<", "<=", ">", ">=", "in", "not_in", "matches"] },
+        "value": {},
+        "unit": { "type": "string" },
+
+        "scope": {
+          "type": "object",
+          "properties": {
+            "entityType": { "type": "string" },
+            "spaceTypes": { "type": "array", "items": { "type": "string" } },
+            "zoneTypes": { "type": "array", "items": { "type": "string" } },
+            "departments": { "type": "array", "items": { "type": "string" } },
+            "countries": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+
+        "idsMapping": {
+          "type": "object",
+          "properties": {
+            "applicability": {
+              "type": "object",
+              "properties": {
+                "entity": { "type": "string" },
+                "predefinedType": { "type": "string" },
+                "partOfPset": { "type": "string" }
+              }
+            },
+            "requirements": {
+              "type": "object",
+              "properties": {
+                "property": {
+                  "type": "object",
+                  "properties": {
+                    "propertySet": { "type": "string" },
+                    "baseName": { "type": "string" },
+                    "value": { "type": "object" },
+                    "dataType": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+
+        "bcfTemplate": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "description": { "type": "string" },
+            "priority": { "type": "string", "enum": ["error", "warning", "info"] },
+            "type": { "type": "string" },
+            "assignTo": { "type": "string" },
+            "labels": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      },
+      "required": ["documentType", "entityType", "id", "requirementName"]
+    }
+  }
+}
