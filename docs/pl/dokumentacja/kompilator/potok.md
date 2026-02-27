@@ -1,6 +1,6 @@
 # Potok kompilacji
 
-Kompilator SBM v0.2.0 przetwarza encje budynku przez 5-etapowy potok. Ten dokument szczegółowo opisuje każdy etap.
+Kompilator SBM v0.4.0 przetwarza encje budynku przez 5-etapowy potok z zaawansowanymi funkcjami agregacji. Ten dokument szczegółowo opisuje każdy etap.
 
 ## Przegląd potoku
 
@@ -8,6 +8,10 @@ Kompilator SBM v0.2.0 przetwarza encje budynku przez 5-etapowy potok. Ten dokume
 Pliki Markdown → Parsowanie → Normalizacja → Walidacja → Jakość → Kompilacja → 6 wyników
    (Wejście)        ↓             ↓             ↓           ↓         ↓        (Cele)
                   Etap 1        Etap 2        Etap 3     Etap 3.5   Etap 4
+                                ├─ 2.1-2.4: Dziedziczenie
+                                ├─ 2.5: Agregacja kosztów ⭐
+                                ├─ 2.6: Śledzenie symulacji ⭐
+                                └─ 2.7: Agregacja wydajności ⭐
 ```
 
 ## Etap 1: Parsowanie
@@ -157,6 +161,125 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 - Odczyt z encji `project_specification` lub konstrukcja z opcji CLI
 - Zawiera: identyfikator projektu, nazwę, kraj, fazę, język, jednostki
 
+### 2.7 Agregacja kosztów <Badge type="tip" text="v0.4.0" />
+
+**Cel:** Hierarchiczna agregacja kosztów od pomieszczeń i zasobów do budżetu projektu
+
+**Ścieżki agregacji:**
+- **Koszty konstrukcji:** Pomieszczenia → Kondygnacje → Budynki → Projekt
+- **Koszty wyposażenia:** Zasoby → Systemy → Projekt
+
+**Proces:**
+1. Dla każdej kondygnacji sumuj koszty wszystkich pomieszczeń z pasującym `levelId`
+2. Dla każdego budynku sumuj koszty wszystkich kondygnacji z pasującym `buildingId`
+3. Dla każdego systemu sumuj koszty wszystkich zasobów z pasującym `systemId`
+4. Dla projektu sumuj koszty wszystkich budynków (konstrukcja) + wszystkich systemów (wyposażenie)
+
+**Wyjście:** Każda zagregowana encja otrzymuje obiekt `cost` z pełną proweniencją:
+
+```json
+{
+  "cost": {
+    "totalCost": 9000,
+    "currency": "PLN",
+    "basis": "rollup_from_assets",
+    "_meta": {
+      "confidence": "calculated",
+      "source": "compiler_cost_rollup",
+      "resolution": "calculated",
+      "notes": "Zagregowano z 2 instancji zasobów",
+      "contributingEntities": [
+        { "id": "AI-MVHR-01", "name": "Jednostka MVHR", "cost": 4700 },
+        { "id": "AI-UFH-MANIFOLD-01", "name": "Rozdzielacz UFH", "cost": 4300 }
+      ]
+    }
+  }
+}
+```
+
+### 2.8 Śledzenie symulacji <Badge type="tip" text="v0.4.0" />
+
+**Cel:** Agregacja wyników symulacji z pomieszczeń dla nadzoru na poziomie projektu
+
+**Śledzone typy:** `daylighting`, `thermal`, `acoustic`, `cfd`, `airflow`, `energy`
+
+**Proces:**
+1. Zbierz wszystkie symulacje z tablic `space.simulations[]`
+2. Grupuj według typu symulacji i statusu (planned, in_progress, completed, failed)
+3. Oblicz wskaźnik ukończenia i pokrycie pomieszczeń
+4. Wygeneruj zestawienia według typów ze szczegółami na poziomie pomieszczeń
+
+**Wyjście:** Projekt otrzymuje obiekt `simulationSummary`:
+
+```json
+{
+  "simulationSummary": {
+    "totalSimulations": 5,
+    "completionRate": "60.0",
+    "byType": {
+      "daylighting": {
+        "total": 2,
+        "completed": 2,
+        "spaces": [
+          {
+            "spaceId": "SP-BLD-01-L01-001",
+            "spaceName": "Sypialnia 01",
+            "simulationId": "SIM-DAYLIGHT-BEDROOM-01",
+            "status": "completed",
+            "tool": "DIVA"
+          }
+        ]
+      }
+    },
+    "_meta": {
+      "confidence": "calculated",
+      "source": "compiler_simulation_tracking"
+    }
+  }
+}
+```
+
+### 2.9 Agregacja wydajności <Badge type="tip" text="v0.4.0" />
+
+**Cel:** Agregacja celów wydajnościowych z pomieszczeń i obliczanie metryk na poziomie projektu
+
+**Śledzone kategorie:** `daylighting`, `indoorAirQuality`, `acousticPerformance`, `thermalComfort`, `energyPerformance`, `embodiedCarbon`
+
+**Proces:**
+1. Zbierz wszystkie cele wydajnościowe z obiektów `space.performanceTargets`
+2. Grupuj według kategorii wydajności
+3. Oblicz pokrycie celami (% pomieszczeń z celami)
+4. Oblicz zagregowane metryki (średnie, sumy) dla kategorii energii i węgla
+
+**Wyjście:** Projekt otrzymuje obiekt `performanceSummary`:
+
+```json
+{
+  "performanceSummary": {
+    "spacesWithTargets": 3,
+    "targetCoverage": "100.0",
+    "byCategory": {
+      "energyPerformance": {
+        "aggregated": {
+          "averageHeatingDemand": "15.00",
+          "averageCoolingDemand": "5.00",
+          "projectTotalEnergy": "60.00",
+          "unit": "kWh/m²/rok"
+        }
+      },
+      "embodiedCarbon": {
+        "aggregated": {
+          "totalConstructionCarbon": "12500.00",
+          "totalOperationalCarbon": "3000.00",
+          "totalWholeLifeCarbon": "15500.00",
+          "unit": "kgCO2e"
+        }
+      }
+    }
+  }
+}
+```
+
 **Implementacja:** `scripts/compiler/stages/normalize.mjs`
 
 ---
@@ -170,9 +293,10 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 **Proces:**
 
 ### 3.1 Walidacja schematu JSON
-- Walidacja względem `schemas/sbm-schema-v0.2.json`
+- Walidacja względem `schemas/sbm-schema-v0.4.json`
 - Używa AJV z walidacją formatów
 - Sprawdzanie wymaganych pól, typów danych, wartości enum, wzorców ID
+- Obsługuje funkcje v0.4: śledzenie kosztów, wyniki symulacji, cele wydajnościowe, integracja BIM
 
 ### 3.2 Integralność referencyjna
 - Wszystkie referencje ID muszą istnieć
@@ -329,16 +453,25 @@ Dla każdej encji:
 
 ## Wydajność potoku
 
-Pomierzone na przykładzie Green Terrace (16 encji: 3 przestrzenie, 3 strefy, 1 system, 3 typy stref, 1 typ systemu, 1 typ zasobu, 1 instancja zasobu, 1 kondygnacja, 7 wymagań jurysdykcyjnych):
+Pomierzone na przykładzie Green Terrace (21 encji: 3 przestrzenie, 3 strefy, 1 system, 3 zasoby, 3 typy stref, 1 typ przestrzeni, 1 typ systemu, 1 typ zasobu, 1 kondygnacja, 34 wymagania):
 
-| Etap | Opis |
-|------|------|
-| Parsowanie | ~15ms |
-| Normalizacja + Dziedziczenie | ~25ms |
-| Walidacja + Proweniencja + Bramki fazowe | ~30ms |
-| Podsumowania jakości | ~5ms |
-| Kompilacja 5 celów | ~55ms |
-| **Łącznie** | **~130ms** |
+| Etap | Opis | Czas | Funkcje |
+|------|------|------|---------|
+| Parsowanie | Odczyt Markdown + YAML frontmatter | ~10ms | 21 encji |
+| Normalizacja | Dziedziczenie + Relacje | ~15ms | Typ→instancja, kondygnacja→przestrzeń |
+| **Agregacja kosztów** | **Hierarchiczna agregacja** | **~5ms** | **PLN 9000 śledzone** |
+| **Śledzenie symulacji** | **Agregacja wyników** | **~5ms** | **5 sym., 60% ukończone** |
+| **Agregacja wydajności** | **Śledzenie celów** | **~5ms** | **6 kategorii, 100% pokrycie** |
+| Walidacja | Schema + Integralność + Proweniencja | ~15ms | 0 błędów, 0 ostrzeżeń |
+| Jakość | Podsumowania dla encji + projektu | ~5ms | 51 encji przeanalizowanych |
+| Kompilacja celów | 6 wygenerowanych wyników | ~10ms | BIM, zgodność, zasoby, bliźniak, jakość |
+| **Łącznie** | **Kompilacja end-to-end** | **~50ms** | **v0.4.0 kompletne** |
+
+**Agregacje v0.4.0:**
+- ✓ Agregacja kosztów: €9000 (2 zasoby → 1 system → projekt)
+- ✓ Śledzenie symulacji: 5 symulacji, 60% ukończone
+- ✓ Agregacja wydajności: 3 przestrzenie, 6 kategorii
+- ✓ Gotowość fazowa: Gotowe dla Fazy 4
 
 ## Zobacz także
 

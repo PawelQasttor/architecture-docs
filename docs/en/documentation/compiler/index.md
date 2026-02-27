@@ -1,6 +1,6 @@
 # Compiler Overview
 
-The **SBM Compiler v0.2.0** transforms human-authored Markdown entities into a validated, machine-readable JSON format and generates multiple compilation targets for BIM, compliance, facilities management, digital twin integration, and **data quality assurance**.
+The **SBM Compiler v0.4.0** transforms human-authored Markdown entities into a validated, machine-readable JSON format with **hierarchical cost aggregation**, **simulation tracking**, and **performance monitoring**, generating multiple compilation targets for BIM, compliance, facilities management, digital twin integration, and data quality assurance.
 
 ## What Does the Compiler Do?
 
@@ -39,12 +39,22 @@ The compiler bridges the gap between human-friendly authoring and machine-proces
 │ • Track inheritance provenance (_meta)          │
 │ • Load jurisdiction pack (global + country)     │
 │ • Compute reverse relationships                 │
+│ • ⭐ COST ROLLUP (v0.4): Aggregate costs        │
+│   (spaces→levels→buildings→project,             │
+│    assets→systems→project)                      │
+│ • ⭐ SIMULATION TRACKING (v0.4): Aggregate      │
+│   simulation results and calculate completion   │
+│ • ⭐ PERFORMANCE AGGREGATION (v0.4): Track      │
+│   performance targets and calculate metrics     │
 │ Output: Normalized entity graph with provenance │
+│         + cost/simulation/performance summaries │
 └─────────────────┬───────────────────────────────┘
                   ▼
 ┌─────────────────────────────────────────────────┐
 │ STAGE 3: VALIDATE                               │
-│ • JSON Schema validation (v0.2)                 │
+│ • JSON Schema validation (v0.4)                 │
+│   - Supports cost tracking, simulations,        │
+│     performance targets, BIM integration        │
 │ • Referential integrity (all IDs exist?)        │
 │ • Data provenance checks                        │
 │   - Source required for high confidence         │
@@ -235,13 +245,92 @@ The compiler automatically loads requirements based on project country:
 2. Add requirements as JSON files
 3. Compiler automatically loads when `project.country` matches
 
+## v0.4 Features <Badge type="tip" text="v0.4.0" />
+
+### Cost Rollup
+
+Automatically aggregates costs from bottom-up across the building hierarchy:
+
+**Construction costs:** Spaces → Levels → Buildings → Project
+**Equipment costs:** Assets → Systems → Project
+
+**Example output:**
+```json
+{
+  "budget": {
+    "totalBudget": 9000,
+    "currency": "PLN",
+    "breakdown": {
+      "structure": { "actual": 0 },
+      "equipment": { "actual": 9000 }
+    },
+    "_meta": {
+      "confidence": "calculated",
+      "source": "compiler_cost_rollup",
+      "contributingEntities": [...]
+    }
+  }
+}
+```
+
+### Simulation Tracking
+
+Aggregates simulation results from spaces and tracks project-wide simulation progress:
+
+**Tracked types:** daylighting, thermal, acoustic, CFD, airflow, energy
+**Status tracking:** planned → in_progress → completed → failed
+
+**Example output:**
+```json
+{
+  "simulationSummary": {
+    "totalSimulations": 5,
+    "completionRate": "60.0",
+    "byType": {
+      "daylighting": { "total": 2, "completed": 2, "failed": 0 }
+    },
+    "byStatus": {
+      "planned": 2,
+      "completed": 3,
+      "failed": 0
+    }
+  }
+}
+```
+
+### Performance Aggregation
+
+Tracks performance targets across spaces and calculates project-level metrics:
+
+**Tracked categories:** daylighting, IAQ, acoustics, thermal comfort, energy, embodied carbon
+
+**Example output:**
+```json
+{
+  "performanceSummary": {
+    "spacesWithTargets": 3,
+    "targetCoverage": "100.0",
+    "byCategory": {
+      "energyPerformance": {
+        "aggregated": {
+          "averageHeatingDemand": "15.00",
+          "averageCoolingDemand": "5.00",
+          "unit": "kWh/m²/year"
+        }
+      }
+    }
+  }
+}
+```
+
 ## Validation Layers
 
 The compiler validates on five levels:
 
 ### 1. JSON Schema Validation
-- Validates entity structure against `schemas/sbm-schema-v0.2.json`
+- Validates entity structure against `schemas/sbm-schema-v0.4.json`
 - Checks required fields, data types, enum values
+- Supports v0.4 features: cost tracking, simulations, performance targets
 
 ### 2. Referential Integrity
 - All referenced IDs must exist
@@ -265,18 +354,21 @@ The compiler validates on five levels:
 
 ```
 scripts/compiler/
-├── index.mjs                  # Main entry point, CLI (v0.2.0)
+├── index.mjs                  # Main entry point, CLI (v0.4.0)
 ├── stages/
 │   ├── parse.mjs              # Stage 1: Parse Markdown (11 entity types)
 │   ├── normalize.mjs          # Stage 2: Normalize, inheritance, relationships
-│   ├── validate.mjs           # Stage 3: Schema v0.2, provenance, phase gates
+│   │                          #   + Cost rollup (v0.4)
+│   │                          #   + Simulation tracking (v0.4)
+│   │                          #   + Performance aggregation (v0.4)
+│   ├── validate.mjs           # Stage 3: Schema v0.4, provenance, phase gates
 │   └── quality.mjs            # Stage 3.5: Quality summary generation
 ├── targets/
 │   ├── bim-mapping.mjs        # BIM mapping generator
 │   ├── compliance-report.mjs  # Compliance report generator
 │   ├── asset-register.mjs     # Asset register generator
 │   ├── twin-schema.mjs        # Digital twin schema generator
-│   └── quality-report.mjs     # Quality report generator (v0.2.0)
+│   └── quality-report.mjs     # Quality report generator
 ├── enrichers/
 │   └── jurisdiction-pack.mjs  # Jurisdiction pack loader
 ```
