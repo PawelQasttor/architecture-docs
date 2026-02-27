@@ -30,6 +30,21 @@ designArea: 14.5
 designVolume: 39.15
 unit: "m"
 
+# Requirements (merged from level + type + jurisdiction pack)
+requirements: []  # Auto-merged from LVL-01, ST-BEDROOM-STANDARD-A, and jurisdiction requirements
+
+requirements_meta:
+  confidence: "specified"
+  source: "Green Terrace Design Requirements Specification"
+  specifiedBy: "Architect - Project Team"
+  date: "2026-02-27"
+  notes: "Requirements auto-merged from level requirements (LVL-01), space type requirements (ST-BEDROOM-STANDARD-A), and Poland jurisdiction pack (WT 2021)"
+  mergeStrategy: "union"
+  inheritedFrom:
+    - "LVL-01.levelRequirements"
+    - "ST-BEDROOM-STANDARD-A.requirementTemplate"
+    - "jurisdiction_pack_PL"
+
 # NEW v0.4: Cost tracking
 cost:
   totalCost: 25085

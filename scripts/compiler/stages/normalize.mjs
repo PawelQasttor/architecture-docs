@@ -228,6 +228,7 @@ function resolveTypeInheritance(grouped, logger) {
         if (added.length > 0) {
           space[`requirements_meta`] = {
             confidence: 'specified',
+            source: 'compiler_merge',
             resolution: 'merged',
             mergedFrom: [
               { source: space.id, type: 'explicit' },
@@ -392,6 +393,7 @@ function resolveLevelInheritance(grouped, logger) {
 
         space.requirements_meta = {
           confidence: 'specified',
+          source: existingMeta?.source || 'compiler_merge',
           resolution: 'merged',
           mergedFrom: sources
         };
@@ -516,9 +518,14 @@ export async function normalize(rawEntities, options, logger) {
       const existingMeta = space.requirements_meta;
       if (existingMeta?.mergedFrom) {
         existingMeta.mergedFrom.push(jurisdictionSource);
+        // Ensure source field exists
+        if (!existingMeta.source) {
+          existingMeta.source = 'compiler_merge';
+        }
       } else {
         space.requirements_meta = {
           confidence: 'specified',
+          source: 'compiler_merge',
           resolution: 'merged',
           mergedFrom: [
             { source: space.id, type: 'explicit' },

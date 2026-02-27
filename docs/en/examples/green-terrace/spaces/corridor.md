@@ -219,6 +219,13 @@ requirements:
   - "REQ-FIRE-EGRESS-TIME-001"
   - "REQ-PL-FIRE-SEPARATION-001"
 
+requirements_meta:
+  confidence: "specified"
+  source: "Green Terrace Design Requirements Specification"
+  specifiedBy: "Architect - Project Team"
+  date: "2026-02-27"
+  notes: "Requirements specified by design team and merged with level requirements and jurisdiction pack auto-assignment"
+
 occupancy:
   maxOccupants: 4
   usagePattern: "circulation"
