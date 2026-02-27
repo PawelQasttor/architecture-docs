@@ -450,6 +450,194 @@ function extractProjectMetadata(entities, options) {
 }
 
 /**
+ * Perform cost rollup (v0.4 feature)
+ *
+ * Aggregates costs from spaces → levels → buildings → project
+ * Adds _meta provenance tracking for rolled-up costs
+ *
+ * @param {object} grouped - Grouped entities
+ * @param {object} project - Project metadata
+ * @param {object} logger - Logger instance
+ */
+function performCostRollup(grouped, project, logger) {
+  let totalSpaceCosts = 0;
+  let totalAssetCosts = 0;
+  let spacesWithCost = 0;
+  let assetsWithCost = 0;
+  const currency = project.country === 'PL' ? 'PLN' : 'EUR';
+
+  // Step 1: Aggregate space costs to levels
+  if (grouped.levels && grouped.spaces) {
+    for (const level of grouped.levels) {
+      let levelCost = 0;
+      const contributingSpaces = [];
+
+      for (const space of grouped.spaces) {
+        if (space.levelId === level.id && space.cost?.totalCost) {
+          levelCost += space.cost.totalCost;
+          contributingSpaces.push({
+            id: space.id,
+            name: space.spaceName,
+            cost: space.cost.totalCost
+          });
+          totalSpaceCosts += space.cost.totalCost;
+          spacesWithCost++;
+        }
+      }
+
+      if (levelCost > 0) {
+        level.cost = level.cost || {};
+        level.cost.totalCost = levelCost;
+        level.cost.currency = currency;
+        level.cost.basis = 'rollup_from_spaces';
+        level.cost._meta = {
+          confidence: 'calculated',
+          source: 'compiler_cost_rollup',
+          resolution: 'calculated',
+          notes: `Aggregated from ${contributingSpaces.length} spaces`,
+          contributingEntities: contributingSpaces
+        };
+      }
+    }
+  }
+
+  // Step 2: Aggregate level costs to buildings
+  if (grouped.buildings && grouped.levels) {
+    for (const building of grouped.buildings) {
+      let buildingCost = 0;
+      const contributingLevels = [];
+
+      for (const level of grouped.levels) {
+        if (level.buildingId === building.id && level.cost?.totalCost) {
+          buildingCost += level.cost.totalCost;
+          contributingLevels.push({
+            id: level.id,
+            name: level.levelName || level.id,
+            cost: level.cost.totalCost
+          });
+        }
+      }
+
+      if (buildingCost > 0) {
+        building.cost = building.cost || {};
+        building.cost.totalCost = buildingCost;
+        building.cost.currency = currency;
+        building.cost.basis = 'rollup_from_levels';
+        building.cost._meta = {
+          confidence: 'calculated',
+          source: 'compiler_cost_rollup',
+          resolution: 'calculated',
+          notes: `Aggregated from ${contributingLevels.length} levels`,
+          contributingEntities: contributingLevels
+        };
+      }
+    }
+  }
+
+  // Step 3: Aggregate asset costs to systems
+  if (grouped.systems && grouped.asset_instances) {
+    for (const system of grouped.systems) {
+      let systemCost = 0;
+      const contributingAssets = [];
+
+      for (const asset of grouped.asset_instances) {
+        if (asset.systemId === system.id && asset.cost?.totalCost) {
+          systemCost += asset.cost.totalCost;
+          contributingAssets.push({
+            id: asset.id,
+            name: asset.assetName,
+            cost: asset.cost.totalCost
+          });
+          totalAssetCosts += asset.cost.totalCost;
+          assetsWithCost++;
+        }
+      }
+
+      if (systemCost > 0) {
+        system.cost = system.cost || {};
+        system.cost.totalCost = systemCost;
+        system.cost.currency = currency;
+        system.cost.basis = 'rollup_from_assets';
+        system.cost._meta = {
+          confidence: 'calculated',
+          source: 'compiler_cost_rollup',
+          resolution: 'calculated',
+          notes: `Aggregated from ${contributingAssets.length} asset instances`,
+          contributingEntities: contributingAssets
+        };
+      }
+    }
+  }
+
+  // Step 4: Aggregate building + system costs to project
+  let projectConstructionCost = 0;
+  let projectEquipmentCost = 0;
+  const contributingBuildings = [];
+  const contributingSystems = [];
+
+  if (grouped.buildings) {
+    for (const building of grouped.buildings) {
+      if (building.cost?.totalCost) {
+        projectConstructionCost += building.cost.totalCost;
+        contributingBuildings.push({
+          id: building.id,
+          name: building.buildingName || building.id,
+          cost: building.cost.totalCost
+        });
+      }
+    }
+  }
+
+  if (grouped.systems) {
+    for (const system of grouped.systems) {
+      if (system.cost?.totalCost) {
+        projectEquipmentCost += system.cost.totalCost;
+        contributingSystems.push({
+          id: system.id,
+          name: system.systemName || system.id,
+          category: system.systemCategory,
+          cost: system.cost.totalCost
+        });
+      }
+    }
+  }
+
+  const totalProjectCost = projectConstructionCost + projectEquipmentCost;
+
+  if (totalProjectCost > 0) {
+    project.budget = project.budget || {};
+    project.budget.totalBudget = project.budget.totalBudget || totalProjectCost;
+    project.budget.currency = currency;
+    project.budget.breakdown = project.budget.breakdown || {};
+    project.budget.breakdown.structure = project.budget.breakdown.structure || {};
+    project.budget.breakdown.structure.actual = projectConstructionCost;
+    project.budget.breakdown.equipment = project.budget.breakdown.equipment || {};
+    project.budget.breakdown.equipment.actual = projectEquipmentCost;
+
+    project.budget._meta = {
+      confidence: 'calculated',
+      source: 'compiler_cost_rollup',
+      resolution: 'calculated',
+      notes: `Aggregated from ${contributingBuildings.length} buildings + ${contributingSystems.length} systems`,
+      breakdown: {
+        construction: {
+          amount: projectConstructionCost,
+          from: contributingBuildings
+        },
+        equipment: {
+          amount: projectEquipmentCost,
+          from: contributingSystems
+        }
+      }
+    };
+
+    logger.debug(`✓ Cost rollup: €${totalProjectCost.toFixed(2)} (${spacesWithCost} spaces, ${assetsWithCost} assets)`);
+  } else {
+    logger.debug('! No cost data found for rollup');
+  }
+}
+
+/**
  * Main normalize function
  *
  * @param {Array} rawEntities - Raw entities from parse stage
@@ -538,6 +726,10 @@ export async function normalize(rawEntities, options, logger) {
   if (autoAssigned > 0) {
     logger.debug(`Auto-assigned ${autoAssigned} jurisdiction requirement(s) to spaces by scope`);
   }
+
+  // Stage 2.5: Cost Rollup (v0.4 feature)
+  logger.debug('Computing cost rollup...');
+  performCostRollup(grouped, project, logger);
 
   // Build normalized output structure
   const normalized = {

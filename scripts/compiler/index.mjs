@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * Semantic Building Model (SBM) Compiler v0.2.0
+ * Semantic Building Model (SBM) Compiler v0.4.0
  *
  * Compiles Markdown + YAML semantic entities into a unified building knowledge model.
- * Supports data provenance tracking, quality summaries, and phase gate enforcement.
+ * Supports data provenance tracking, quality summaries, phase gate enforcement,
+ * cost rollup, simulation tracking, and BIM integration.
  *
  * Usage:
  *   node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL
@@ -27,7 +28,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '0.3.0';
+const VERSION = '0.4.0';
 
 // CLI argument parsing
 function parseArgs(args) {
