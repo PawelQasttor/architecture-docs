@@ -113,7 +113,7 @@ async function compile(options) {
 
     // Build SBM structure
     const sbm = {
-      sbm_version: '0.3',
+      sbm_version: '0.4',
       generatedAt: new Date().toISOString(),
       compiler: {
         version: VERSION,
