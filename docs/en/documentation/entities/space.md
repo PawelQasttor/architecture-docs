@@ -86,6 +86,9 @@ Spaces define:
 | `finishOverrides` | object | Override specific finishes from type |
 | `maintenanceZone` | string | FM maintenance zone |
 | `accessRestrictions` | string | Access control level |
+| `levelIds` | array | **[v0.6]** All levels this space spans (for atriums, voids). Auto-computed as `[levelId]` if not provided |
+| `isMultiLevel` | boolean | **[v0.6]** Auto-computed: `true` if space spans multiple levels |
+| `constructionPackageId` | string | **[v0.6]** Reference to construction work package (e.g., `"CP-STRUCTURE"`) |
 | `adjacentSpaces` | array | Adjacent space relationships |
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
@@ -1416,6 +1419,42 @@ The compiler generates a `_quality` block on each compiled space:
 | 7+ | Error for `estimated` on safety-critical fields |
 
 For the full provenance guide with examples and migration instructions, see [Data Provenance Guide](/en/guides/data-provenance).
+
+## Multi-Level Spaces (v0.6)
+
+Some spaces span multiple levels — atriums, voids, double-height rooms, stairwells. Use `levelIds` to declare all levels a space occupies.
+
+**Key rules:**
+- `levelId` (required) remains the **primary level** for inheritance and cost rollup
+- `levelIds` (optional) lists **all** levels including the primary
+- If omitted, compiler auto-computes `levelIds = [levelId]`
+- `isMultiLevel` is auto-computed (`true` when `levelIds` has 2+ entries)
+- The space appears in the `spaceIds` reverse mapping of **all** levels it spans
+
+```yaml
+---
+entityType: "space"
+id: "SP-BLD-01-VOID-STAIR"
+spaceName: "Stairwell Void"
+spaceType: "staircase"
+levelId: "LVL-01"          # Primary level (for inheritance)
+levelIds:                   # All levels this space spans
+  - "LVL-01"
+  - "LVL-00"
+designArea: 8.4
+designHeight: 6.0           # Total height across both levels
+---
+```
+
+## Construction Phasing (v0.6)
+
+Spaces can be tagged with a `constructionPackageId` to group them into construction work packages. Packages are defined on the project entity and the compiler computes per-package cost summaries.
+
+```yaml
+constructionPackageId: "CP-FINISHES"
+```
+
+See [Project Specification](/en/examples/green-terrace/project-specification) for package definitions.
 
 ## See Also
 

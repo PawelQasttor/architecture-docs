@@ -1,6 +1,7 @@
 ---
 id: "ENV-EW-01"
 entityType: "envelope"
+constructionPackageId: "CP-ENVELOPE"
 envelopeName: "External Wall Type A"
 envelopeType: "external_wall"
 buildingId: "BLD-01"

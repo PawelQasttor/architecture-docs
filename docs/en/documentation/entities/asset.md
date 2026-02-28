@@ -68,6 +68,7 @@ Assets track:
 | `assetTag` | string | Physical asset tag/QR code |
 | `cost` | object | Purchase and installation cost |
 | `energyRating` | string | Energy efficiency rating |
+| `constructionPackageId` | string | **[v0.6]** Reference to construction work package |
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
 

@@ -65,7 +65,7 @@ async function parseFile(filePath, inputDir) {
     'site', 'envelope', 'vertical_circulation', 'space', 'zone', 'system', 'asset', 'asset_instance', 'requirement',
     'building', 'level',
     'space_type', 'zone_type', 'system_type', 'asset_type',
-    'element_specification', 'project_specification'
+    'element_specification', 'project_specification', 'project'
   ];
 
   // entityType is canonical; documentType is legacy fallback

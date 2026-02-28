@@ -77,6 +77,9 @@ Przestrzenie definiują:
 | `shielding` | object | **[NOWOŚĆ v0.3.0]** Ekranowanie radiologiczne, RF i izolacja akustyczna |
 | `maintenanceZone` | string | Strefa konserwacji FM |
 | `accessRestrictions` | string | Poziom kontroli dostępu |
+| `levelIds` | array | **[v0.6]** Wszystkie poziomy, które obejmuje przestrzeń (atria, pustki). Auto-obliczane jako `[levelId]` |
+| `isMultiLevel` | boolean | **[v0.6]** Auto-obliczane: `true` jeśli przestrzeń obejmuje wiele poziomów |
+| `constructionPackageId` | string | **[v0.6]** Odniesienie do pakietu robót budowlanych |
 | `adjacentSpaces` | array | Relacje sąsiadujących przestrzeni. **[v0.3.0]** Rozszerzone o nowe relacje i pola |
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |

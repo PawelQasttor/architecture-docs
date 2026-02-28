@@ -155,6 +155,20 @@ export function isRequirementApplicable(requirement, entity) {
     }
   }
 
+  // Check specific space IDs (if requirement targets individual spaces)
+  if (requirement.scope.spaceIds && requirement.scope.spaceIds.length > 0) {
+    if (!entity.id || !requirement.scope.spaceIds.includes(entity.id)) {
+      return false;
+    }
+  }
+
+  // Check departments (if requirement targets specific departments)
+  if (requirement.scope.departments && requirement.scope.departments.length > 0) {
+    if (!entity.departmentId || !requirement.scope.departments.includes(entity.departmentId)) {
+      return false;
+    }
+  }
+
   return true;
 }
 

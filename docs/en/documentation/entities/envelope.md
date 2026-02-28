@@ -82,6 +82,7 @@ Envelopes define:
 | `openings` | array | Windows, doors, rooflights in this element |
 | `glazingRatio` | number | Window-to-wall ratio (0-1) |
 | `regulatoryCompliance` | array | Regulation checks with status |
+| `constructionPackageId` | string | **[v0.6]** Reference to construction work package |
 | `cost` | object | Cost tracking (v0.4 entityCost) |
 | `ifcMapping` | object | IFC entity, globalId, materialLayerSet |
 | `tags` | string[] | Labels for filtering |

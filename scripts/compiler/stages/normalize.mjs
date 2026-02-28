@@ -189,7 +189,123 @@ function computeRelationships(grouped) {
     }
   }
 
+  // Build system → subsystems reverse mapping (parent → children)
+  if (grouped.systems) {
+    for (const system of grouped.systems) {
+      if (!system.subsystemIds) {
+        system.subsystemIds = [];
+      }
+
+      for (const other of grouped.systems) {
+        if (other.parentSystemId === system.id) {
+          if (!system.subsystemIds.includes(other.id)) {
+            system.subsystemIds.push(other.id);
+          }
+        }
+      }
+    }
+  }
+
+  // Build level → spaces reverse mapping (using levelIds for multi-level support)
+  if (grouped.levels && grouped.spaces) {
+    for (const level of grouped.levels) {
+      if (!level.spaceIds) {
+        level.spaceIds = [];
+      }
+
+      for (const space of grouped.spaces) {
+        const spaceLevelIds = space.levelIds || (space.levelId ? [space.levelId] : []);
+        if (spaceLevelIds.includes(level.id)) {
+          if (!level.spaceIds.includes(space.id)) {
+            level.spaceIds.push(space.id);
+          }
+        }
+      }
+    }
+  }
+
   return grouped;
+}
+
+/**
+ * Resolve multi-level spaces
+ *
+ * For each space:
+ * - If levelIds is provided, validate levelId is in it and set isMultiLevel
+ * - If levelIds is not provided, auto-compute as [levelId]
+ */
+function resolveMultiLevelSpaces(grouped, logger) {
+  let multiLevelCount = 0;
+
+  for (const space of grouped.spaces) {
+    if (space.levelIds && space.levelIds.length > 0) {
+      // Validate levelId is in levelIds
+      if (space.levelId && !space.levelIds.includes(space.levelId)) {
+        space.levelIds.unshift(space.levelId);
+        logger.debug(`Space ${space.id}: prepended primary levelId to levelIds`);
+      }
+      space.isMultiLevel = space.levelIds.length > 1;
+      if (space.isMultiLevel) multiLevelCount++;
+    } else {
+      // Auto-compute levelIds from levelId
+      space.levelIds = space.levelId ? [space.levelId] : [];
+      space.isMultiLevel = false;
+    }
+  }
+
+  if (multiLevelCount > 0) {
+    logger.debug(`Resolved ${multiLevelCount} multi-level space(s)`);
+  }
+}
+
+/**
+ * Resolve construction packages: validate references and compute per-package cost summaries (v0.6).
+ */
+function resolveConstructionPackages(grouped, project, logger) {
+  const packages = project.constructionPackages;
+  if (!packages || packages.length === 0) return;
+
+  const packageMap = new Map(packages.map(p => [p.id, p]));
+  const packageCosts = new Map();
+  for (const pkg of packages) {
+    packageCosts.set(pkg.id, { totalCost: 0, currency: null, entityCount: 0 });
+  }
+
+  // Collect entities that can have constructionPackageId
+  const taggedEntities = [
+    ...(grouped.spaces || []),
+    ...(grouped.systems || []),
+    ...(grouped.assets || []),
+    ...(grouped.envelopes || [])
+  ];
+
+  for (const entity of taggedEntities) {
+    if (!entity.constructionPackageId) continue;
+    const summary = packageCosts.get(entity.constructionPackageId);
+    if (!summary) {
+      logger.debug(`  Warning: ${entity.id} references unknown construction package ${entity.constructionPackageId}`);
+      continue;
+    }
+    summary.entityCount++;
+    if (entity.cost?.totalCost) {
+      summary.totalCost += entity.cost.totalCost;
+      if (entity.cost.currency) summary.currency = entity.cost.currency;
+    }
+  }
+
+  // Write summaries back to project packages
+  for (const pkg of packages) {
+    const summary = packageCosts.get(pkg.id);
+    if (summary.entityCount > 0) {
+      pkg.costSummary = {
+        totalCost: summary.totalCost,
+        currency: summary.currency || project.budget?.currency || 'EUR',
+        entityCount: summary.entityCount
+      };
+    }
+  }
+
+  logger.debug(`✓ Construction packages: ${packages.length} packages, ${taggedEntities.filter(e => e.constructionPackageId).length} tagged entities`);
 }
 
 /**
@@ -474,11 +590,15 @@ function resolveLevelInheritance(grouped, logger) {
  * Extract project metadata from entities
  */
 function extractProjectMetadata(entities, options) {
-  // Look for project_specification document
-  const projectSpec = entities.find(e => e.documentType === 'project_specification');
+  // Look for project_specification document (legacy documentType or entityType: project)
+  const projectSpec = entities.find(e =>
+    e.documentType === 'project_specification' ||
+    e.entityType === 'project' ||
+    e.entityType === 'project_specification'
+  );
 
   if (projectSpec) {
-    return {
+    const result = {
       id: projectSpec.id || 'PRJ-UNKNOWN',
       name: projectSpec.projectName || 'Unnamed Project',
       country: options.country || 'PL',
@@ -492,6 +612,15 @@ function extractProjectMetadata(entities, options) {
         temperature: 'C'
       }
     };
+    // Pass through constructionPackages if defined (v0.6)
+    if (projectSpec.constructionPackages) {
+      result.constructionPackages = projectSpec.constructionPackages;
+    }
+    // Pass through departments if defined (v0.3)
+    if (projectSpec.departments) {
+      result.departments = projectSpec.departments;
+    }
+    return result;
   }
 
   // Fallback: construct from options
@@ -706,6 +835,65 @@ function performCostRollup(grouped, project, logger) {
     }
   }
 
+  // Step 3.5: Aggregate subsystem costs to parent systems (bottom-up)
+  if (grouped.systems) {
+    const systemMap = new Map(grouped.systems.map(s => [s.id, s]));
+
+    // Compute depth for topological ordering (leaves first)
+    function getSystemDepth(sys, visited = new Set()) {
+      if (visited.has(sys.id)) return 0;
+      visited.add(sys.id);
+      if (!sys.subsystemIds || sys.subsystemIds.length === 0) return 0;
+      return 1 + Math.max(...sys.subsystemIds.map(id => {
+        const child = systemMap.get(id);
+        return child ? getSystemDepth(child, visited) : 0;
+      }));
+    }
+
+    const sorted = [...grouped.systems].sort((a, b) => getSystemDepth(a) - getSystemDepth(b));
+
+    for (const system of sorted) {
+      if (!system.subsystemIds || system.subsystemIds.length === 0) continue;
+
+      let subsystemCost = 0;
+      const contributingSubsystems = [];
+
+      for (const subId of system.subsystemIds) {
+        const sub = systemMap.get(subId);
+        if (sub?.cost?.totalCost) {
+          subsystemCost += sub.cost.totalCost;
+          contributingSubsystems.push({
+            id: sub.id, name: sub.systemName, cost: sub.cost.totalCost
+          });
+        }
+      }
+
+      if (subsystemCost > 0) {
+        system.cost = system.cost || {};
+        const existing = system.cost.totalCost || 0;
+        system.cost.totalCost = existing + subsystemCost;
+        system.cost.currency = currency;
+        if (system.cost._meta) {
+          system.cost._meta.notes += ` + ${contributingSubsystems.length} subsystems`;
+          system.cost._meta.contributingEntities = [
+            ...(system.cost._meta.contributingEntities || []),
+            ...contributingSubsystems
+          ];
+        } else {
+          system.cost.basis = 'rollup_from_subsystems';
+          system.cost._meta = {
+            confidence: 'calculated',
+            source: 'compiler_cost_rollup',
+            resolution: 'calculated',
+            notes: `Aggregated from ${contributingSubsystems.length} subsystem(s)`,
+            contributingEntities: contributingSubsystems
+          };
+        }
+        logger.debug(`  System ${system.id}: ${currency} ${system.cost.totalCost} (includes ${contributingSubsystems.length} subsystems)`);
+      }
+    }
+  }
+
   // Step 4: Aggregate building + system costs to project
   let projectConstructionCost = 0;
   let projectEquipmentCost = 0;
@@ -739,7 +927,9 @@ function performCostRollup(grouped, project, logger) {
   }
 
   if (grouped.systems) {
+    // Only count root systems (no parentSystemId) to avoid double-counting
     for (const system of grouped.systems) {
+      if (system.parentSystemId) continue;
       if (system.cost?.totalCost) {
         projectEquipmentCost += system.cost.totalCost;
         contributingSystems.push({
@@ -1062,9 +1252,12 @@ export async function normalize(rawEntities, options, logger) {
   // Resolve level→space inheritance (after type, so type values take priority over level)
   grouped = resolveLevelInheritance(grouped, logger);
 
+  // Resolve multi-level spaces (compute levelIds and isMultiLevel)
+  resolveMultiLevelSpaces(grouped, logger);
+
   // Compute derived relationships
   grouped = computeRelationships(grouped);
-  logger.debug('Computed reverse relationships (zone→spaces, system→assets)');
+  logger.debug('Computed reverse relationships (zone→spaces, system→assets, level→spaces)');
 
   // Extract project metadata
   const project = extractProjectMetadata(rawEntities, options);
@@ -1142,6 +1335,9 @@ export async function normalize(rawEntities, options, logger) {
   // Stage 2.7: Performance Targets Aggregation (v0.4 feature)
   logger.debug('Aggregating performance targets...');
   performPerformanceAggregation(grouped, project, logger);
+
+  // Stage 2.8: Construction Packages (v0.6 feature)
+  resolveConstructionPackages(grouped, project, logger);
 
   // Build normalized output structure
   const normalized = {

@@ -82,6 +82,7 @@ Przegrody definiują:
 | `openings` | array | Okna, drzwi, świetliki w tym elemencie |
 | `glazingRatio` | number | Stosunek powierzchni przeszklonej do ściany (0-1) |
 | `regulatoryCompliance` | array | Weryfikacja przepisów ze statusem |
+| `constructionPackageId` | string | **[v0.6]** Odniesienie do pakietu robót budowlanych |
 | `cost` | object | Śledzenie kosztów (entityCost v0.4) |
 | `ifcMapping` | object | Encja IFC, globalId, materialLayerSet |
 | `tags` | string[] | Etykiety do filtrowania |

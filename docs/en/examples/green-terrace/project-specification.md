@@ -63,6 +63,37 @@ budget:
     estimateDate: "2026-02-20"
     estimateClass: "Class 2 (Budget estimate, -10% to +15%)"
 
+# NEW v0.6: Construction Packages
+constructionPackages:
+  - id: "CP-STRUCTURE"
+    name: "Structure & Foundation"
+    description: "Reinforced concrete structure, foundations, floor slabs"
+    sequence: 1
+    plannedStart: "2025-03-01"
+    plannedEnd: "2025-09-15"
+    status: "completed"
+  - id: "CP-ENVELOPE"
+    name: "Building Envelope"
+    description: "External walls, roof, windows, insulation"
+    sequence: 2
+    plannedStart: "2025-09-01"
+    plannedEnd: "2025-11-30"
+    status: "completed"
+  - id: "CP-MEP"
+    name: "MEP Systems"
+    description: "HVAC, plumbing, electrical rough-in and equipment"
+    sequence: 3
+    plannedStart: "2025-10-01"
+    plannedEnd: "2025-12-15"
+    status: "in_progress"
+  - id: "CP-FINISHES"
+    name: "Finishes & Fit-out"
+    description: "Interior finishes, flooring, painting, fixtures"
+    sequence: 4
+    plannedStart: "2025-12-01"
+    plannedEnd: "2026-02-28"
+    status: "planned"
+
 # NEW v0.4: Simulation Strategy
 simulationStrategy:
   energyModeling:

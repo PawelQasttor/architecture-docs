@@ -211,6 +211,42 @@
           "type": "array",
           "items": { "$ref": "#/definitions/documentSource" },
           "description": "Project-level document sources referenced by entity _meta fields"
+        },
+        "constructionPackages": {
+          "type": "array",
+          "description": "Construction work packages for phased delivery (v0.6)",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "sequence"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^CP-[A-Z0-9-]+$",
+                "description": "Construction package identifier"
+              },
+              "name": { "type": "string", "description": "Package name (e.g., Structure, Envelope, MEP, Finishes)" },
+              "description": { "type": "string" },
+              "sequence": { "type": "integer", "minimum": 1, "description": "Execution order (1 = first)" },
+              "plannedStart": { "type": "string", "format": "date", "description": "Planned start date" },
+              "plannedEnd": { "type": "string", "format": "date", "description": "Planned end date" },
+              "actualStart": { "type": "string", "format": "date" },
+              "actualEnd": { "type": "string", "format": "date" },
+              "status": {
+                "type": "string",
+                "enum": ["planned", "in_progress", "completed", "on_hold"],
+                "description": "Current package status"
+              },
+              "costSummary": {
+                "type": "object",
+                "description": "Auto-computed: aggregated costs from entities in this package",
+                "properties": {
+                  "totalCost": { "type": "number", "minimum": 0 },
+                  "currency": { "$ref": "#/definitions/currency" },
+                  "entityCount": { "type": "integer", "minimum": 0 }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -799,6 +835,7 @@
           }
         },
         "glazingRatio": { "type": "number", "minimum": 0, "maximum": 1, "description": "Window-to-wall ratio (0-1) for facade elements" },
+        "constructionPackageId": { "type": "string", "description": "Reference to construction work package (v0.6)" },
         "regulatoryCompliance": {
           "type": "array",
           "items": {
@@ -1249,7 +1286,14 @@
         "parentSpaceId": { "type": "string" },
         "departmentId": { "type": "string" },
         "buildingId": { "type": "string" },
-        "levelId": { "type": "string" },
+        "levelId": { "type": "string", "description": "Primary level (used for inheritance and cost rollup)" },
+        "levelIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "All levels this space spans (for atriums, voids, double-height rooms). Includes levelId. Auto-computed as [levelId] if not provided (v0.6)"
+        },
+        "isMultiLevel": { "type": "boolean", "description": "Auto-computed: true if space spans multiple levels (v0.6)" },
+        "constructionPackageId": { "type": "string", "description": "Reference to construction work package (v0.6)" },
         "zoneIds": { "type": "array", "items": { "type": "string" } },
         "designArea": { "type": "number", "minimum": 0 },
         "designHeight": { "type": ["number", "null"], "minimum": 0 },
@@ -1668,6 +1712,16 @@
           ]
         },
         "buildingId": { "type": "string" },
+        "parentSystemId": {
+          "type": "string",
+          "description": "Reference to parent system for hierarchical decomposition (v0.6)"
+        },
+        "subsystemIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Auto-computed: IDs of child systems that reference this system as parentSystemId (v0.6)"
+        },
+        "constructionPackageId": { "type": "string", "description": "Reference to construction work package (v0.6)" },
         "servedZoneIds": { "type": "array", "items": { "type": "string" } },
         "servedSpaceIds": { "type": "array", "items": { "type": "string" } },
         "assetIds": { "type": "array", "items": { "type": "string" } },
@@ -1784,6 +1838,7 @@
             "_meta": { "$ref": "#/definitions/meta" }
           }
         },
+        "constructionPackageId": { "type": "string", "description": "Reference to construction work package (v0.6)" },
         "sources": {
           "type": "array",
           "items": { "$ref": "#/definitions/documentSource" }

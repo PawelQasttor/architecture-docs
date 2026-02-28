@@ -142,6 +142,18 @@ function checkReferentialIntegrity(sbm, logger) {
           message: `Referenced level "${space.levelId}" does not exist`
         });
       }
+
+      // Check levelIds references (multi-level spaces)
+      if (space.levelIds) {
+        for (const levelId of space.levelIds) {
+          if (!allIds.has(levelId)) {
+            warnings.push({
+              path: `spaces/${space.id}/levelIds`,
+              message: `Referenced level "${levelId}" does not exist`
+            });
+          }
+        }
+      }
     }
   }
 
@@ -165,6 +177,40 @@ function checkReferentialIntegrity(sbm, logger) {
           path: `systems/${system.id}/systemTypeId`,
           message: `Referenced system type "${system.systemTypeId}" does not exist`
         });
+      }
+
+      // Check parentSystemId reference
+      if (system.parentSystemId) {
+        if (!allIds.has(system.parentSystemId)) {
+          warnings.push({
+            path: `systems/${system.id}/parentSystemId`,
+            message: `Referenced parent system "${system.parentSystemId}" does not exist`
+          });
+        } else if (system.parentSystemId === system.id) {
+          errors.push({
+            path: `systems/${system.id}/parentSystemId`,
+            message: `System references itself as parent (circular reference)`
+          });
+        }
+      }
+    }
+
+    // Detect circular system hierarchies (A→B→C→A)
+    const systemMap = new Map(sbm.entities.systems.map(s => [s.id, s]));
+    for (const system of sbm.entities.systems) {
+      if (!system.parentSystemId) continue;
+      const visited = new Set();
+      let current = system;
+      while (current?.parentSystemId) {
+        if (visited.has(current.id)) {
+          errors.push({
+            path: `systems/${system.id}/parentSystemId`,
+            message: `Circular system hierarchy detected: ${[...visited, current.id].join(' → ')}`
+          });
+          break;
+        }
+        visited.add(current.id);
+        current = systemMap.get(current.parentSystemId);
       }
     }
   }
@@ -244,6 +290,27 @@ function checkReferentialIntegrity(sbm, logger) {
         warnings.push({
           path: `zones/${zone.id}/zoneTypeId`,
           message: `Referenced zone type "${zone.zoneTypeId}" does not exist`
+        });
+      }
+    }
+  }
+
+  // Check constructionPackageId references on spaces, systems, assets, envelopes
+  const packageIds = new Set(
+    (sbm.project?.constructionPackages || []).map(p => p.id)
+  );
+  if (packageIds.size > 0) {
+    const checkableEntities = [
+      ...(sbm.entities.spaces || []).map(e => ({ ...e, _type: 'spaces' })),
+      ...(sbm.entities.systems || []).map(e => ({ ...e, _type: 'systems' })),
+      ...(sbm.entities.assets || []).map(e => ({ ...e, _type: 'assets' })),
+      ...(sbm.entities.envelopes || []).map(e => ({ ...e, _type: 'envelopes' }))
+    ];
+    for (const entity of checkableEntities) {
+      if (entity.constructionPackageId && !packageIds.has(entity.constructionPackageId)) {
+        warnings.push({
+          path: `${entity._type}/${entity.id}/constructionPackageId`,
+          message: `Referenced construction package "${entity.constructionPackageId}" does not exist in project.constructionPackages`
         });
       }
     }

@@ -8,16 +8,14 @@ systemName: "HVAC System Building 01"
 systemTypeId: "SYT-HVAC-RESIDENTIAL-MVHR"
 systemCategory: "hvac"
 buildingId: "BLD-01"
+constructionPackageId: "CP-MEP"
 
 # Served zones
 servedZoneIds:
   - "ZONE-HVAC-NORTH"
 
-# Asset instances in this system
-assetIds:
-  - "AST-MVHR-01"
-  - "AST-HP-01"
-  - "AST-UFH-MANIFOLD-01"
+# Subsystem hierarchy (v0.6) — assets moved to subsystems
+# subsystemIds auto-computed by compiler: ["SYS-HVAC-01-HEATING", "SYS-HVAC-01-VENT"]
 
 # Instance-specific performance
 performance:

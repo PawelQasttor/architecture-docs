@@ -62,6 +62,9 @@ Systemy definiują:
 | `controlStrategy` | string | Strategia sterowania (BMS, lokalna, ręczna) |
 | `maintenanceSchedule` | object | Plan konserwacji na poziomie systemu |
 | `designCriteria` | object | Parametry i cele projektowe |
+| `parentSystemId` | string | **[v0.6]** Odniesienie do systemu nadrzędnego (hierarchia) |
+| `subsystemIds` | array | **[v0.6]** Auto-obliczane: identyfikatory podsystemów |
+| `constructionPackageId` | string | **[v0.6]** Odniesienie do pakietu robót budowlanych |
 | `requirements` | array | Identyfikatory wymagań mających zastosowanie do systemu |
 | `requirementOverrides` | array | Dodatkowe wymagania poza typem systemu |
 | `performance` | object | Dane wydajności specyficzne dla instancji |

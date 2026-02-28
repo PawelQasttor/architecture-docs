@@ -64,6 +64,9 @@ Systems define:
 | `controlStrategy` | string | Control approach (BMS, local, manual) |
 | `maintenanceSchedule` | object | System-level maintenance plan |
 | `designCriteria` | object | Design parameters and targets |
+| `parentSystemId` | string | **[v0.6]** Reference to parent system for hierarchical decomposition |
+| `subsystemIds` | array | **[v0.6]** Auto-computed: child system IDs |
+| `constructionPackageId` | string | **[v0.6]** Reference to construction work package |
 | `requirements` | array | Requirement IDs applicable to system |
 | `ifcMapping` | object | IFC mapping |
 | `tags` | array | Free-form classification tags |
@@ -608,6 +611,46 @@ Systems with capacity and efficiency data enable energy modeling:
     }
   }
 }
+```
+
+## System Hierarchy (v0.6)
+
+Systems can be decomposed into parent/child hierarchies using `parentSystemId`. The compiler auto-computes `subsystemIds` as the reverse relationship.
+
+**Key rules:**
+- `parentSystemId` references a parent system (e.g., HVAC → Heating, Ventilation)
+- `subsystemIds` is auto-computed (lists children)
+- Cost rollup: assets → leaf systems → parent systems → project (no double-counting)
+- Only **root systems** (no `parentSystemId`) contribute to project-level cost aggregation
+- Circular hierarchies are detected and reported as errors
+
+```yaml
+# Parent system (root)
+---
+entityType: "system"
+id: "SYS-HVAC-01"
+systemName: "HVAC System Building 01"
+# subsystemIds auto-computed: ["SYS-HVAC-01-HEATING", "SYS-HVAC-01-VENT"]
+---
+
+# Child system (subsystem)
+---
+entityType: "system"
+id: "SYS-HVAC-01-HEATING"
+systemName: "Heating Subsystem"
+parentSystemId: "SYS-HVAC-01"
+assetIds:
+  - "AST-HP-01"
+  - "AST-UFH-MANIFOLD-01"
+---
+```
+
+## Construction Phasing (v0.6)
+
+Systems can be tagged with a `constructionPackageId` to associate them with a construction work package:
+
+```yaml
+constructionPackageId: "CP-MEP"
 ```
 
 ## See Also

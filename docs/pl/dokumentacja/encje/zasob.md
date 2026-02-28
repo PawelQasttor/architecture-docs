@@ -68,6 +68,7 @@ Zasoby śledzą:
 | `assetTag` | string | Fizyczna etykieta zasobu/kod QR |
 | `cost` | object | Koszt zakupu i instalacji |
 | `energyRating` | string | Klasa efektywności energetycznej |
+| `constructionPackageId` | string | **[v0.6]** Odniesienie do pakietu robót budowlanych |
 | `ifcMapping` | object | Mapowanie obiektu IFC |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 

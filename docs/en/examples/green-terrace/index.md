@@ -50,7 +50,16 @@ Protected staircase connecting all 6 levels
 - Cost: EUR 42,000
 - IFC mapping (IfcStair)
 
-### 3. Envelope Elements
+### 3. Spaces (v0.6: Multi-Level)
+
+#### [Stairwell Void →](./spaces/stairwell-void)
+Multi-level space spanning two floors (v0.6 feature)
+- Spans LVL-00 + LVL-01 (primary level: LVL-01)
+- `isMultiLevel: true` (auto-computed by compiler)
+- Fire zone: ZONE-FIRE-ZL-IV
+- Construction package: CP-STRUCTURE
+
+### 4. Envelope Elements
 
 #### [Envelope: External Wall Type A →](./envelope-external-wall-type-a)
 Semantic envelope entity (v0.5) for external insulated masonry wall
@@ -61,7 +70,24 @@ Semantic envelope entity (v0.5) for external insulated masonry wall
 - Openings, glazing ratio, cost breakdown
 - IFC mapping (IfcWallStandardCase), provenance tracking
 
-### 4. Element Specifications (Legacy)
+### 5. Systems (v0.6: Hierarchy)
+
+#### [HVAC System →](./systems/sys-hvac-01)
+Parent HVAC system with subsystem hierarchy (v0.6 feature)
+- Root system: SYS-HVAC-01 with 2 subsystems
+- Construction package: CP-MEP
+
+#### [Heating Subsystem →](./systems/sys-hvac-01-heating)
+Heat pump + underfloor heating subsystem
+- Parent: SYS-HVAC-01
+- Assets: AST-HP-01, AST-UFH-MANIFOLD-01
+
+#### [Ventilation Subsystem →](./systems/sys-hvac-01-vent)
+MVHR ventilation subsystem
+- Parent: SYS-HVAC-01
+- Assets: AST-MVHR-01
+
+### 6. Element Specifications (Legacy)
 
 #### [External Wall - Type A →](./external-wall-type-a)
 Legacy `element_specification` format (pre-v0.5)
