@@ -37,17 +37,21 @@ The standard formalizes this into **8 phases**:
 
 ## Pillar 2: Document Types — What You Describe
 
-When you write a document, you're describing something specific: a room, a fire zone, a heating system, a boiler. The standard defines **7 document types** — ready-made templates that tell you what to fill in:
+When you write a document, you're describing something specific: a room, a fire zone, a heating system, a boiler. The standard defines **11 entity types** — ready-made templates that tell you what to fill in:
 
 | Document type | What you're describing | Example |
 |---------------|----------------------|---------|
 | **Building** | The whole building | "Green Terrace, ul. Sloneczna 45, Warsaw" |
 | **Level** | A floor or storey | "Ground floor, +0.00m" |
 | **Space** | A room or area | "Bedroom 01, 14.5 m², 2.70m height" |
-| **Zone** | A group of rooms sharing a common characteristic | "Fire zone ZL-IV covering floors 1-6" |
+| **Space Type** | Template for similar spaces | "Standard Bedroom Type A" |
+| **Zone** | A group of rooms sharing a characteristic | "Fire zone ZL-IV covering floors 1-6" |
+| **Zone Type** | Template for zone configurations | "Fire zone ZL-IV standard" |
 | **Requirement** | A specific regulation that must be met | "Room height >= 2.50m per WT 2021 §132" |
 | **System** | A building installation | "Central heating, gas boiler, radiators" |
+| **System Type** | Template for system configurations | "Residential HVAC with MVHR" |
 | **Asset** | A specific installed product | "Vaillant ecoTEC plus 306, serial #12345" |
+| **Asset Type** | Product specification template | "Bosch Compress 7000i 12kW" |
 
 Each document type has a **template** — a ready-made file you fill in. The template tells you what information goes where, so every bedroom description has the same structure, every fire zone has the same fields, and every piece of equipment is documented the same way.
 

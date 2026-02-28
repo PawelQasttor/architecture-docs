@@ -156,5 +156,5 @@ Poniższe pola powinien zawierać każdy raport z awarii:
 - [Eksploatacja budynku -- przegląd](./) -- kontekst zarządzania awariami
 - [Planowanie konserwacji](./konserwacja) -- konserwacja prewencyjna zapobiegająca awariom
 - [Modernizacja](./modernizacja) -- gdy powtarzające się awarie wskazują na potrzebę modernizacji
-- [Karta Urządzenia](/pl/dokumentacja/encje/instancja-zasobu) -- struktura danych urządzenia
+- [Karta Urządzenia](/pl/dokumentacja/encje/zasob) -- struktura danych urządzenia
 - [Karta Instalacji](/pl/dokumentacja/encje/system) -- struktura danych systemu

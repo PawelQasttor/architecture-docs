@@ -62,20 +62,27 @@ async function parseFile(filePath, inputDir) {
 
   // Only parse semantic entities and legacy document types
   const validTypes = [
-    'space', 'zone', 'system', 'asset_instance', 'requirement',
+    'space', 'zone', 'system', 'asset', 'asset_instance', 'requirement',
     'building', 'level',
     'space_type', 'zone_type', 'system_type', 'asset_type',
     'element_specification', 'project_specification'
   ];
 
-  if (!validTypes.includes(frontmatter.documentType)) {
+  // entityType is canonical; documentType is legacy fallback
+  const docType = frontmatter.entityType || frontmatter.documentType;
+  if (!validTypes.includes(docType)) {
     return null; // Not a semantic entity or legacy doc
   }
+
+  // Normalize legacy asset_instance → asset
+  const normalizedType = docType === 'asset_instance' ? 'asset' : docType;
 
   // Add metadata
   const relativePath = path.relative(inputDir, filePath);
   const entity = {
     ...frontmatter,
+    documentType: normalizedType,
+    entityType: normalizedType,
     _metadata: {
       sourceFile: relativePath,
       parsedAt: new Date().toISOString()

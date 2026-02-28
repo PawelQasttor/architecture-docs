@@ -1,5 +1,4 @@
 ---
-documentType: "zone"
 entityType: "zone"
 id: "ZONE-ACOUSTIC-NIGHT"
 projectPhase: "design_development"

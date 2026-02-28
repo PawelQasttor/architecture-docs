@@ -51,7 +51,7 @@ That's enough to get started. Add other types when you need them.
 |------|----------------|--------------|
 | **[System](/en/documentation/entities/system)** | A building installation (heating, ventilation, plumbing) | `systems/central-heating.md` |
 | **[System Type](/en/documentation/entities/system-type)** | Template for MEP system configurations | `system-types/residential-hvac-mvhr.md` |
-| **[Asset Instance](/en/documentation/entities/asset-instance)** | A specific installed piece of equipment | `assets/boiler-hp-01.md` |
+| **[Asset](/en/documentation/entities/asset)** | A specific installed piece of equipment | `assets/boiler-hp-01.md` |
 | **[Asset Type](/en/documentation/entities/asset-type)** | Product specification (model, performance, maintenance) | `asset-types/vaillant-ecotec-306.md` |
 
 **When you need these:** Construction phase (equipment being installed), handover (facility manager needs asset register)
@@ -152,7 +152,7 @@ Every file needs a unique ID. Here's the pattern:
 | **Zone Type** | `ZT-{descriptor}` | `ZT-FIRE-ZL-IV` |
 | **System** | `SYS-{category}-{number}` | `SYS-HVAC-01` |
 | **System Type** | `SYT-{descriptor}` | `SYT-HVAC-RESIDENTIAL-MVHR` |
-| **Asset Instance** | `AI-{type}-{number}` | `AI-HP-01` (heat pump 01) |
+| **Asset** | `AST-{type}-{number}` | `AST-HP-01` (heat pump 01) |
 | **Asset Type** | `AT-{descriptor}` | `AT-VAILLANT-ECOTEC-306` |
 | **Requirement** | `REQ-{scope}-{descriptor}-{number}` | `REQ-PL-WT-HEIGHT-001` |
 
@@ -171,12 +171,15 @@ No matter which type, every file includes these basic fields:
 ```yaml
 ---
 id: "SP-BLD-01-L01-001"  # Unique identifier
-entityType: "space"  # What type of file this is
-documentType: "space"  # Usually same as entityType
+entityType: "space"  # What type of file this is (canonical field)
 version: "1.0.0"  # Semantic version (increment when you update)
 tags: ["residential", "sleeping"]  # Optional: labels for filtering
 ---
 ```
+
+::: info `entityType` is the canonical field
+The `entityType` field is the primary identifier for the file type. A legacy `documentType` field may also appear in older files but is deprecated -- the compiler treats `entityType` as authoritative with `documentType` as a fallback.
+:::
 
 **Why versions?** Track changes over time. `1.0.0` = initial design, `1.1.0` = minor update, `2.0.0` = major redesign
 
@@ -192,7 +195,7 @@ tags: ["residential", "sleeping"]  # Optional: labels for filtering
 | **Set up fire zones for permit** | [Zone documentation](/en/documentation/entities/zone) |
 | **Track building regulations** | [Requirement documentation](/en/documentation/entities/requirement) |
 | **Document MEP systems** | [System documentation](/en/documentation/entities/system) |
-| **Track installed equipment** | [Asset documentation](/en/documentation/entities/asset-instance) |
+| **Track installed equipment** | [Asset documentation](/en/documentation/entities/asset) |
 | **See all 11 types with examples** | Scroll down to see the complete list below |
 
 ---
@@ -214,11 +217,19 @@ Click any type to see detailed documentation:
 ### Technical Systems
 7. **[System](/en/documentation/entities/system)** - MEP systems (HVAC, electrical, plumbing)
 8. **[System Type](/en/documentation/entities/system-type)** - Templates for standard system configurations
-9. **[Asset Instance](/en/documentation/entities/asset-instance)** - Physical equipment (boilers, pumps, sensors)
+9. **[Asset](/en/documentation/entities/asset)** - Physical equipment (boilers, pumps, sensors)
 10. **[Asset Type](/en/documentation/entities/asset-type)** - Product specifications and templates
 
 ### Governance
 11. **[Requirement](/en/documentation/entities/requirement)** - Performance and regulatory rules (height minimums, fire ratings, daylight)
+
+::: details Supplementary Document Types
+In addition to the 11 core entity types, the SBM standard recognizes supplementary document types that are not semantic entities but provide supporting technical information:
+
+- **`element_specification`** -- Detailed construction element documentation (wall buildups, roof assemblies, floor constructions). These are descriptive documents that supplement the spatial model but do not participate in the compiler's entity graph, inheritance, or validation pipeline.
+
+Supplementary documents use the same Markdown + YAML frontmatter format and can be included alongside entity files in your project folder.
+:::
 
 ---
 
@@ -319,7 +330,7 @@ The validation tool will tell you if you reference an ID that doesn't exist. Fix
 **"How do I know which type to use?"**
 Ask: "Am I describing a physical room?" → **Space**
 "Am I describing a group of rooms?" → **Zone**
-"Am I describing equipment?" → **Asset Instance**
+"Am I describing equipment?" → **Asset**
 "Am I describing a rule?" → **Requirement**
 
 ---

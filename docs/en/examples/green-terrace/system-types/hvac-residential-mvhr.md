@@ -1,5 +1,4 @@
 ---
-documentType: "system_type"
 entityType: "system_type"
 id: "SYT-HVAC-RESIDENTIAL-MVHR"
 typeName: "Residential HVAC - MVHR + Heat Pump"

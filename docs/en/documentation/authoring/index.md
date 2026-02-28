@@ -120,7 +120,7 @@ Choose the right document type for what you're documenting:
 | **Zone** | Fire, HVAC, acoustic, security zones | [Zone Template](/en/documentation/authoring/templates#zone) |
 | **Requirement** | Performance rules, regulatory compliance | [Requirement Template](/en/documentation/authoring/templates#requirement) |
 | **System** | MEP systems (HVAC, electrical, plumbing) | [System Template](/en/documentation/authoring/templates#system) |
-| **Asset Instance** | Physical equipment with maintenance data | [Asset Template](/en/documentation/authoring/templates#asset-instance) |
+| **Asset** | Physical equipment with maintenance data | [Asset Template](/en/documentation/authoring/templates#asset) |
 | **Building** | Building-level metadata | [Building Template](/en/documentation/authoring/templates#building) |
 | **Level** | Floor/storey information | [Level Template](/en/documentation/authoring/templates#level) |
 
@@ -150,7 +150,7 @@ Use hierarchical, human-readable IDs:
 | Space | `SP-{building}-{level}-{seq}` | `SP-BLD-01-L01-001` |
 | Zone | `ZONE-{type}-{descriptor}` | `ZONE-FIRE-ZL-IV` |
 | System | `SYS-{category}-{seq}` | `SYS-HVAC-01` |
-| Asset | `AI-{type}-{seq}` | `AI-AHU-01` |
+| Asset | `AST-{type}-{seq}` | `AST-AHU-01` |
 | Requirement | `REQ-{scope}-{descriptor}-{seq}` | `REQ-DAYLIGHT-SLEEPING-001` |
 
 ### Data Types
@@ -250,7 +250,7 @@ space:
 
 # Asset references its parent system
 asset:
-  id: "AI-AHU-01"
+  id: "AST-AHU-01"
   systemId: "SYS-HVAC-01"        # Parent system
 ```
 
@@ -269,9 +269,9 @@ zone:
 # System automatically gets list of assets
 system:
   id: "SYS-HVAC-01"
-  assetInstanceIds:  # Auto-computed from asset.systemId
-    - "AI-AHU-01"
-    - "AI-VAV-01"
+  assetIds:  # Auto-computed from asset.systemId
+    - "AST-AHU-01"
+    - "AST-VAV-01"
 
 # Level automatically gets list of spaces
 level:

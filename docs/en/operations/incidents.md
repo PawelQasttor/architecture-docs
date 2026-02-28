@@ -65,7 +65,7 @@ Capture the following information at the point of reporting:
 ### 3. Assess
 
 - Confirm or adjust the severity level
-- Identify the affected assets and systems using [Asset Instance cards](/en/documentation/entities/asset-instance) and [System cards](/en/documentation/entities/system)
+- Identify the affected assets and systems using [Asset Instance cards](/en/documentation/entities/asset) and [System cards](/en/documentation/entities/system)
 - Determine if the issue is covered by warranty
 - Check if similar incidents have occurred before (review incident log)
 - Assign responsibility for repair
@@ -79,7 +79,7 @@ Capture the following information at the point of reporting:
 
 ### 5. Document
 
-- Update the [Asset Instance card](/en/documentation/entities/asset-instance) with the incident record and any condition changes
+- Update the [Asset Instance card](/en/documentation/entities/asset) with the incident record and any condition changes
 - Add notes to the relevant [System card](/en/documentation/entities/system) if the incident affects system performance
 - Record the incident in the building logbook (KOB) if required
 - File the completed incident report
@@ -123,7 +123,7 @@ Document the root cause analysis results in the incident report and link them to
 
 When an incident involves equipment or work still under warranty, follow this process:
 
-1. **Check warranty status** -- review the `warranty_expiry` field in the [Asset Instance card](/en/documentation/entities/asset-instance).
+1. **Check warranty status** -- review the `warranty_expiry` field in the [Asset Instance card](/en/documentation/entities/asset).
 2. **Notify the manufacturer or contractor** within the warranty notification period (typically 7--14 days).
 3. **Preserve evidence** -- do not discard failed components or modify the installation before the warranty inspection.
 4. **Document the claim** -- record the claim reference, correspondence, and outcome.
@@ -147,7 +147,7 @@ Every incident is an opportunity to improve your building documentation:
 
 | Event | Documentation Update |
 |---|---|
-| Equipment replaced | New [Asset Instance card](/en/documentation/entities/asset-instance), updated system diagram |
+| Equipment replaced | New [Asset Instance card](/en/documentation/entities/asset), updated system diagram |
 | Component repaired | Updated condition status, service log entry |
 | Root cause identified | Revised maintenance procedure or schedule |
 | Design defect found | Note added to [System card](/en/documentation/entities/system), flagged for retrofit review |

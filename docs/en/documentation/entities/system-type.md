@@ -413,7 +413,7 @@ When compiled, System Types are stored separately from system instances:
         "systemTypeId": "SYT-HVAC-RESIDENTIAL-MVHR",
         "buildingId": "BLD-01",
         "servedZoneIds": ["ZONE-HVAC-NORTH"],
-        "assetInstanceIds": ["AI-MVHR-01", "AI-HP-01"]
+        "assetIds": ["AST-MVHR-01", "AST-HP-01"]
         // Compiler merges type specifications here
       }
     ]
@@ -460,7 +460,7 @@ The compiler **resolves type references** and merges specifications:
     "heatRecovery": "90%",
     "copHeating": 4.2
   },
-  "assetInstanceIds": ["AI-MVHR-01", "AI-HP-01"]
+  "assetIds": ["AST-MVHR-01", "AST-HP-01"]
 }
 ```
 
@@ -578,7 +578,7 @@ SYT-ELECTRICAL-FLOOR-STANDARD → LVL-01: SYS-ELEC-L01
 
 - **[System](/en/documentation/entities/system)** - System instances that reference types
 - **[Asset Type](/en/documentation/entities/asset-type)** - Product/equipment templates
-- **[Asset Instance](/en/documentation/entities/asset-instance)** - Equipment within systems
+- **[Asset](/en/documentation/entities/asset)** - Equipment within systems
 - **[Space Type](/en/documentation/entities/space-type)** - Space templates (similar pattern)
 - **[Requirement](/en/documentation/entities/requirement)** - Requirements referenced by systems
 - **Schema:** `sbm-schema-v0.3.json` - System Type definition

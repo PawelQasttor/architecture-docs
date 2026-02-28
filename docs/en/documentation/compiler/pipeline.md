@@ -28,7 +28,7 @@ Markdown Files → Parse → Normalize → Validate → Quality → Compile → 
 4. Track file paths for error reporting
 
 **Recognized entity types:**
-- Instances: `space`, `zone`, `system`, `asset_instance`, `requirement`, `building`, `level`
+- Instances: `space`, `zone`, `system`, `asset`, `requirement`, `building`, `level`
 - Type templates: `space_type`, `zone_type`, `system_type`, `asset_type`
 - Legacy: `element_specification`, `project_specification`
 
@@ -77,7 +77,7 @@ version: "2.0.0"
 
 ### 2.1 Group Entities by Type
 
-Entities are grouped into 11 arrays: `buildings`, `levels`, `spaces`, `zones`, `systems`, `asset_instances`, `requirements`, `space_types`, `zone_types`, `system_types`, `asset_types`.
+Entities are grouped into 11 arrays: `buildings`, `levels`, `spaces`, `zones`, `systems`, `assets`, `requirements`, `space_types`, `zone_types`, `system_types`, `asset_types`.
 
 ### 2.2 Resolve Type → Instance Inheritance
 
@@ -92,7 +92,7 @@ For each instance with a `typeId`, copy template fields from the type entity if 
 
 **System Type → System:** `systemCategory`, `designLifeYears`
 
-**Asset Type → Asset Instance:** `manufacturer`, `modelNumber`, `expectedLifeYears`
+**Asset Type → Asset:** `manufacturer`, `modelNumber`, `expectedLifeYears`
 
 Inherited fields get `_meta` with `resolution: "type_default"`:
 ```json
@@ -150,7 +150,7 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 
 ### 2.4 Compute Reverse Relationships
 - `space.zoneIds` → `zone.spaceIds`
-- `asset.systemId` → `system.assetInstanceIds`
+- `asset.systemId` → `system.assetIds`
 
 ### 2.5 Load Jurisdiction Pack
 - Always load `scripts/requirements/global/`
@@ -187,10 +187,10 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
       "confidence": "calculated",
       "source": "compiler_cost_rollup",
       "resolution": "calculated",
-      "notes": "Aggregated from 2 asset instances",
+      "notes": "Aggregated from 2 assets",
       "contributingEntities": [
-        { "id": "AI-MVHR-01", "name": "MVHR Unit", "cost": 4700 },
-        { "id": "AI-UFH-MANIFOLD-01", "name": "UFH Manifold", "cost": 4300 }
+        { "id": "AST-MVHR-01", "name": "MVHR Unit", "cost": 4700 },
+        { "id": "AST-UFH-MANIFOLD-01", "name": "UFH Manifold", "cost": 4300 }
       ]
     }
   }

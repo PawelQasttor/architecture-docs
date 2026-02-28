@@ -463,7 +463,7 @@ Space documents are updated with measured areas, verified ceiling heights, confi
 ### Asset Instance Documents Completed
 Asset Instance documents receive verified serial numbers, final test results, warranty information, and confirmed operational parameters.
 
-[Learn about Asset Instance documents →](/en/documentation/entities/asset-instance)
+[Learn about Asset Instance documents →](/en/documentation/entities/asset)
 
 ### Requirements Verified
 Requirement documents are checked against measured values -- thermal performance from thermography, acoustic ratings from testing, and fire ratings from certificates. Each requirement records its compliance status.

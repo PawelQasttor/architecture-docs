@@ -1,5 +1,4 @@
 ---
-documentType: "asset_type"
 entityType: "asset_type"
 id: "AT-BOSCH-COMPRESS-7000I-12KW"
 typeName: "Bosch Compress 7000i AW 12kW Heat Pump"

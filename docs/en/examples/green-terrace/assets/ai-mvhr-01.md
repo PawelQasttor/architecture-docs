@@ -1,7 +1,6 @@
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-MVHR-01"
+entityType: "asset"
+id: "AST-MVHR-01"
 assetName: "MVHR Unit - Level 01"
 projectPhase: "construction"
 bimLOD: "LOD_400"

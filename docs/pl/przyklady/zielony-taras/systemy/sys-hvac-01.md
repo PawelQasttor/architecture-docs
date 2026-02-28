@@ -1,5 +1,4 @@
 ---
-documentType: "system"
 entityType: "system"
 id: "SYS-HVAC-01"
 projectPhase: "design_development"
@@ -15,10 +14,10 @@ servedZoneIds:
   - "ZONE-HVAC-NORTH"
 
 # Asset instances in this system
-assetInstanceIds:
-  - "AI-MVHR-01"
-  - "AI-HP-01"
-  - "AI-UFH-MANIFOLD-01"
+assetIds:
+  - "AST-MVHR-01"
+  - "AST-HP-01"
+  - "AST-UFH-MANIFOLD-01"
 
 # Instance-specific performance
 performance:
@@ -53,17 +52,17 @@ Zintegrowany system HVAC obsługujący mieszkania na pierwszym piętrze Budynku 
 
 ### Urządzenia Główne
 
-1. **Centrala MVHR** (AI-MVHR-01)
+1. **Centrala MVHR** (AST-MVHR-01)
    - Lokalizacja: Przestrzeń sufitowa nad korytarzem
    - Model: Systemair SAVE VTR 300
    - Odzysk ciepła: 92% (zmierzony)
 
-2. **Pompa Ciepła** ([AI-HP-01](../zasoby/ai-hp-01.md))
+2. **Pompa Ciepła** ([AST-HP-01](../zasoby/ai-hp-01.md))
    - Lokalizacja: Ściana zewnętrzna (strona północna, parter)
    - Model: Bosch Compress 7000i AW 12kW
    - COP: 4.3 (zmierzony przy A7/W35)
 
-3. **Rozdzielacz Ogrzewania Podłogowego** (AI-UFH-MANIFOLD-01)
+3. **Rozdzielacz Ogrzewania Podłogowego** (AST-UFH-MANIFOLD-01)
    - Lokalizacja: Szafka instalacyjna, korytarz pierwszego piętra
    - Strefy: 5 obwodów (sypialnia 01, sypialnia 02, korytarz, łazienka, salon)
 
@@ -110,7 +109,7 @@ Zintegrowany system HVAC obsługujący mieszkania na pierwszym piętrze Budynku 
 
 - **Typ Systemu:** [SYT-HVAC-RESIDENTIAL-MVHR](../typy-systemow/hvac-mieszkalny-mvhr.md)
 - **Strefy:** [ZONE-HVAC-NORTH](../strefy/strefa-hvac-polnoc.md)
-- **Zasoby:** AI-MVHR-01, [AI-HP-01](../zasoby/ai-hp-01.md), AI-UFH-MANIFOLD-01
+- **Zasoby:** AST-MVHR-01, [AST-HP-01](../zasoby/ai-hp-01.md), AST-UFH-MANIFOLD-01
 - **Budynek:** [BLD-01](../specyfikacja-projektu.md)
 
 ---

@@ -51,7 +51,7 @@ To wystarczy na start. Dodaj inne typy, gdy ich potrzebujesz.
 |-----|--------------|------------------|
 | **[Instalacja](/pl/dokumentacja/encje/system)** | Instalacja budowlana (ogrzewanie, wentylacja, hydraulika) | `systems/ogrzewanie-centralne.md` |
 | **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** | Szablon dla konfiguracji instalacji MEP | `system-types/hvac-mieszkalny-mvhr.md` |
-| **[Urządzenie](/pl/dokumentacja/encje/instancja-zasobu)** | Konkretne zainstalowane urządzenie | `assets/kociol-hp-01.md` |
+| **[Urządzenie](/pl/dokumentacja/encje/zasob)** | Konkretne zainstalowane urządzenie | `assets/kociol-hp-01.md` |
 | **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** | Specyfikacja produktu (model, wydajność, konserwacja) | `asset-types/vaillant-ecotec-306.md` |
 
 **Kiedy ich potrzebujesz:** Faza budowy (urządzenia instalowane), odbiór (zarządca potrzebuje rejestru wyposażenia)
@@ -152,7 +152,7 @@ Każdy plik potrzebuje unikalnego ID. Oto wzorzec:
 | **Typ Strefy** | `ZT-{deskryptor}` | `ZT-FIRE-ZL-IV` |
 | **Instalacja** | `SYS-{kategoria}-{numer}` | `SYS-HVAC-01` |
 | **Typ Systemu** | `SYT-{deskryptor}` | `SYT-HVAC-MIESZKALNY-MVHR` |
-| **Urządzenie** | `AI-{typ}-{numer}` | `AI-HP-01` (pompa ciepła 01) |
+| **Urządzenie** | `AST-{typ}-{numer}` | `AST-HP-01` (pompa ciepła 01) |
 | **Typ Zasobu** | `AT-{deskryptor}` | `AT-VAILLANT-ECOTEC-306` |
 | **Wymaganie** | `REQ-{zakres}-{deskryptor}-{numer}` | `REQ-PL-WT-HEIGHT-001` |
 
@@ -171,12 +171,15 @@ Niezależnie od typu, każdy plik zawiera te podstawowe pola:
 ```yaml
 ---
 id: "SP-BLD-01-L01-001"  # Unikalny identyfikator
-entityType: "space"  # Jaki typ pliku to jest
-documentType: "space"  # Zazwyczaj takie samo jak entityType
+entityType: "space"  # Jaki typ pliku to jest (pole kanoniczne)
 version: "1.0.0"  # Wersja semantyczna (inkrementuj przy aktualizacji)
 tags: ["mieszkalny", "sypialny"]  # Opcjonalne: etykiety do filtrowania
 ---
 ```
+
+::: info `entityType` jest polem kanonicznym
+Pole `entityType` jest głównym identyfikatorem typu pliku. Starsze pole `documentType` może nadal występować w istniejących plikach, ale jest przestarzałe -- kompilator traktuje `entityType` jako autorytatywne, a `documentType` jako awaryjną alternatywę.
+:::
 
 **Dlaczego wersje?** Śledź zmiany w czasie. `1.0.0` = projekt początkowy, `1.1.0` = drobna aktualizacja, `2.0.0` = większe przeprojektowanie
 
@@ -192,7 +195,7 @@ tags: ["mieszkalny", "sypialny"]  # Opcjonalne: etykiety do filtrowania
 | **Ustawić strefy pożarowe na pozwolenie** | [Dokumentacja Strefy](/pl/dokumentacja/encje/strefa) |
 | **Śledzić przepisy budowlane** | [Dokumentacja Wymagania](/pl/dokumentacja/encje/wymaganie) |
 | **Udokumentować instalacje MEP** | [Dokumentacja Instalacji](/pl/dokumentacja/encje/system) |
-| **Śledzić zainstalowane wyposażenie** | [Dokumentacja Urządzenia](/pl/dokumentacja/encje/instancja-zasobu) |
+| **Śledzić zainstalowane wyposażenie** | [Dokumentacja Urządzenia](/pl/dokumentacja/encje/zasob) |
 | **Zobaczyć wszystkie 11 typów z przykładami** | Przewiń w dół, aby zobaczyć pełną listę poniżej |
 
 ---
@@ -214,11 +217,19 @@ Kliknij dowolny typ, aby zobaczyć szczegółową dokumentację:
 ### Systemy Techniczne
 7. **[Instalacja](/pl/dokumentacja/encje/system)** - Systemy MEP (HVAC, elektryczne, hydrauliczne)
 8. **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony dla standardowych konfiguracji systemów
-9. **[Urządzenie](/pl/dokumentacja/encje/instancja-zasobu)** - Fizyczne wyposażenie (kotły, pompy, czujniki)
+9. **[Urządzenie](/pl/dokumentacja/encje/zasob)** - Fizyczne wyposażenie (kotły, pompy, czujniki)
 10. **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** - Specyfikacje produktów i szablony
 
 ### Zarządcze
 11. **[Wymaganie](/pl/dokumentacja/encje/wymaganie)** - Reguły wydajnościowe i regulacyjne (minimalne wysokości, odporności ogniowe, światło dzienne)
+
+::: details Uzupełniające typy dokumentów
+Oprócz 11 podstawowych typów encji, standard SBM rozpoznaje uzupełniające typy dokumentów, które nie są encjami semantycznymi, ale dostarczają pomocniczych informacji technicznych:
+
+- **`element_specification`** -- Szczegółowa dokumentacja elementów budowlanych (przekroje ścian, dachy, podłogi). Są to dokumenty opisowe, które uzupełniają model przestrzenny, ale nie uczestniczą w grafie encji kompilatora, dziedziczeniu ani walidacji.
+
+Dokumenty uzupełniające używają tego samego formatu Markdown + YAML frontmatter i mogą być umieszczone obok plików encji w folderze projektu.
+:::
 
 ---
 

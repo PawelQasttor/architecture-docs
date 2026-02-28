@@ -32,8 +32,8 @@ servedSpaceIds:
   - "SP-[SPACE-ID]"
 
 # Instancje zasobow (urzadzenia w tym systemie)
-assetInstanceIds:
-  - "AI-[ASSET-ID]"
+assetIds:
+  - "AST-[ASSET-ID]"
 
 # Specyfikacje wydajnosciowe (opcjonalnie)
 performance:
@@ -87,7 +87,7 @@ Opis przeznaczenia, funkcji i roli systemu w budynku.
 
 ## Powiazana dokumentacja
 
-- Link do instancji zasobow
+- Link do zasobow
 - Link do obslugiwanych przestrzeni/stref
 - Link do wymagan
 ```

@@ -1,7 +1,6 @@
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-HP-01"
+entityType: "asset"
+id: "AST-HP-01"
 projectPhase: "construction"
 bimLOD: "LOD_400"
 
@@ -45,7 +44,7 @@ tags:
   - "commissioned"
 ---
 
-# Instancja Zasobu: Pompa Ciepła HP-01
+# Zasób: Pompa Ciepła HP-01
 
 **Typ:** [Bosch Compress 7000i AW 12kW](../typy-zasobow/pompa-ciepla-bosch-7000i.md)
 

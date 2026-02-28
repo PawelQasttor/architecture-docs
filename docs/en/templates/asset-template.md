@@ -1,11 +1,11 @@
-# Asset Instance Document Template
+# Asset Document Template
 
 Use this template to document individual equipment items with maintenance data.
 
 ## Template File
 
-**Filename pattern:** `assets/ai-[asset-type]-[name].md`
-**Example:** `assets/ai-ahu-01.md`, `assets/ai-boiler-main.md`
+**Filename pattern:** `assets/ast-[asset-type]-[name].md`
+**Example:** `assets/ast-ahu-01.md`, `assets/ast-boiler-main.md`
 
 ---
 
@@ -13,9 +13,9 @@ Use this template to document individual equipment items with maintenance data.
 
 ```yaml
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-[ASSET-TYPE]-[SEQ]"  # Example: AI-AHU-01
+documentType: "asset"
+entityType: "asset"
+id: "AST-[ASSET-TYPE]-[SEQ]"  # Example: AST-AHU-01
 projectPhase: "construction_documentation"
 bimLOD: "LOD_400"
 
@@ -70,7 +70,7 @@ installation:
 version: "1.0.0"
 ---
 
-# Asset Instance: [Asset Name]
+# Asset: [Asset Name]
 
 ## Equipment Description
 
@@ -116,25 +116,25 @@ Brief description of the equipment, its function, and role in the system.
 ## Asset Type Prefixes
 
 ### HVAC
-- `AI-AHU-` - Air handling units
-- `AI-HRV-` - Heat recovery ventilators
-- `AI-BOILER-` - Boilers
-- `AI-CHILLER-` - Chillers
-- `AI-PUMP-` - Pumps
-- `AI-FAN-` - Fans
+- `AST-AHU-` - Air handling units
+- `AST-HRV-` - Heat recovery ventilators
+- `AST-BOILER-` - Boilers
+- `AST-CHILLER-` - Chillers
+- `AST-PUMP-` - Pumps
+- `AST-FAN-` - Fans
 
 ### Electrical
-- `AI-PANEL-` - Electrical panels
-- `AI-TRANS-` - Transformers
-- `AI-GEN-` - Generators
-- `AI-UPS-` - UPS systems
+- `AST-PANEL-` - Electrical panels
+- `AST-TRANS-` - Transformers
+- `AST-GEN-` - Generators
+- `AST-UPS-` - UPS systems
 
 ### Plumbing
-- `AI-TANK-` - Water tanks
-- `AI-HEATER-` - Water heaters
-- `AI-PUMP-` - Pumps
+- `AST-TANK-` - Water tanks
+- `AST-HEATER-` - Water heaters
+- `AST-PUMP-` - Pumps
 
 ### Fire Safety
-- `AI-SPRINKLER-` - Sprinkler systems
-- `AI-ALARM-` - Fire alarm panels
-- `AI-EXTINGUISHER-` - Fire extinguishers
+- `AST-SPRINKLER-` - Sprinkler systems
+- `AST-ALARM-` - Fire alarm panels
+- `AST-EXTINGUISHER-` - Fire extinguishers

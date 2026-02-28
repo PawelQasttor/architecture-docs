@@ -131,7 +131,7 @@ Przy każdym poważnym problemie z urządzeniem lub systemem warto przejść prz
 
 Modernizacja wymaga zaktualizowania dokumentacji budynku na wielu poziomach:
 
-- [ ] Nowe karty Urządzeń dla zamontowanych urządzeń ([Karta Urządzenia](/pl/dokumentacja/encje/instancja-zasobu))
+- [ ] Nowe karty Urządzeń dla zamontowanych urządzeń ([Karta Urządzenia](/pl/dokumentacja/encje/zasob))
 - [ ] Aktualizacja kart Instalacji o nowe elementy i parametry ([Karta Instalacji](/pl/dokumentacja/encje/system))
 - [ ] Archiwizacja kart zdemontowanych urządzeń (zachowanie historii)
 - [ ] Aktualizacja modelu BIM budynku ([Integracja BIM](/pl/integracja-bim/))

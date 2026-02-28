@@ -28,7 +28,7 @@ Pliki Markdown → Parsowanie → Normalizacja → Walidacja → Jakość → Ko
 4. Śledzenie ścieżek plików na potrzeby raportowania błędów
 
 **Rozpoznawane typy encji:**
-- Instancje: `space`, `zone`, `system`, `asset_instance`, `requirement`, `building`, `level`
+- Instancje: `space`, `zone`, `system`, `asset`, `requirement`, `building`, `level`
 - Szablony typów: `space_type`, `zone_type`, `system_type`, `asset_type`
 - Starsze: `element_specification`, `project_specification`
 
@@ -77,7 +77,7 @@ version: "2.0.0"
 
 ### 2.1 Grupowanie encji według typu
 
-Encje są grupowane w 11 tablic: `buildings`, `levels`, `spaces`, `zones`, `systems`, `asset_instances`, `requirements`, `space_types`, `zone_types`, `system_types`, `asset_types`.
+Encje są grupowane w 11 tablic: `buildings`, `levels`, `spaces`, `zones`, `systems`, `assets`, `requirements`, `space_types`, `zone_types`, `system_types`, `asset_types`.
 
 ### 2.2 Rozwiązywanie dziedziczenia Typ → Instancja
 
@@ -92,7 +92,7 @@ Dla każdej instancji z `typeId` kopiowane są pola szablonu z encji typu, jeśl
 
 **Typ Systemu → System:** `systemCategory`, `designLifeYears`
 
-**Typ Zasobu → Instancja Zasobu:** `manufacturer`, `modelNumber`, `expectedLifeYears`
+**Typ Zasobu → Zasób:** `manufacturer`, `modelNumber`, `expectedLifeYears`
 
 Dziedziczone pola otrzymują `_meta` z `resolution: "type_default"`:
 ```json
@@ -150,7 +150,7 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 
 ### 2.4 Obliczanie odwrotnych relacji
 - `space.zoneIds` → `zone.spaceIds`
-- `asset.systemId` → `system.assetInstanceIds`
+- `asset.systemId` → `system.assetIds`
 
 ### 2.5 Wczytywanie pakietu jurysdykcji
 - Zawsze wczytuj `scripts/requirements/global/`
@@ -187,10 +187,10 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
       "confidence": "calculated",
       "source": "compiler_cost_rollup",
       "resolution": "calculated",
-      "notes": "Zagregowano z 2 instancji zasobów",
+      "notes": "Zagregowano z 2 zasobów",
       "contributingEntities": [
-        { "id": "AI-MVHR-01", "name": "Jednostka MVHR", "cost": 4700 },
-        { "id": "AI-UFH-MANIFOLD-01", "name": "Rozdzielacz UFH", "cost": 4300 }
+        { "id": "AST-MVHR-01", "name": "Jednostka MVHR", "cost": 4700 },
+        { "id": "AST-UFH-MANIFOLD-01", "name": "Rozdzielacz UFH", "cost": 4300 }
       ]
     }
   }

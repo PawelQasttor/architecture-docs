@@ -352,10 +352,10 @@ git tag construction-docs-v1.0
 
 The [Semantic Building Model (SBM)](/en/documentation/overview) reaches full specification depth during Construction Documentation. At this phase, document types contain fabrication-ready data for procurement and construction.
 
-### Asset Instance Documents
-Equipment is fully specified with manufacturer, model, and product codes. Asset Instance document types are created for all mechanical, electrical, and plumbing (MEP) equipment.
+### Asset Documents
+Equipment is fully specified with manufacturer, model, and product codes. Asset document types are created for all mechanical, electrical, and plumbing (MEP) equipment.
 
-[Learn about Asset Instance documents →](/en/documentation/entities/asset-instance)
+[Learn about Asset documents →](/en/documentation/entities/asset)
 
 ### System Documents
 System document types for HVAC, electrical, and plumbing are fully specified with component lists, sizing calculations, and performance requirements.
@@ -370,10 +370,10 @@ The SBM compiler generates `bim_mapping.json` with Revit shared parameters, enab
 
 [Learn about the SBM compiler →](/en/documentation/compiler/)
 
-### Example: Asset Instance Document
+### Example: Asset Document
 
 ```yaml
-entity: asset_instance
+entity: asset
 id: asset-boiler-01
 name: "Central Gas Boiler"
 system: system-heating-central

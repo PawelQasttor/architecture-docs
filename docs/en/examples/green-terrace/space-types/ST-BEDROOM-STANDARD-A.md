@@ -1,5 +1,4 @@
 ---
-documentType: space_type
 entityType: space_type
 id: ST-BEDROOM-STANDARD-A
 typeName: "Standard Bedroom Type A"

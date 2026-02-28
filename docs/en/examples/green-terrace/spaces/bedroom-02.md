@@ -1,5 +1,4 @@
 ---
-documentType: "space"
 entityType: "space"
 id: "SP-BLD-01-L01-002"
 version: "0.4.0"

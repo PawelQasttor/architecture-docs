@@ -535,7 +535,7 @@ The [Semantic Building Model (SBM)](/en/documentation/overview) delivers its ful
 ### Asset Register Complete
 The compiler generates `asset_register.json` containing every Asset Instance document with manufacturer data, serial numbers, warranty dates, and maintenance schedules. This file imports directly into CMMS platforms.
 
-[Learn about Asset Instance documents →](/en/documentation/entities/asset-instance)
+[Learn about Asset Instance documents →](/en/documentation/entities/asset)
 
 ### Digital Twin Schema Generated
 The compiler produces `twin_schema.json` with sensor bindings and BMS (Building Management System) integration points, enabling real-time monitoring of building systems.

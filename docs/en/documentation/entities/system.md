@@ -52,7 +52,7 @@ Systems define:
 | Field | Type | Description |
 |-------|------|-------------|
 | `systemTypeId` | string | Reference to system_type for template properties |
-| `assetInstanceIds` | array | Asset instance IDs (auto-computed) |
+| `assetIds` | array | Asset IDs (auto-computed) |
 | `servedZoneIds` | array | Zone IDs served by this system |
 | `servedSpaceIds` | array | Space IDs served by this system |
 | `systemType` | string | Specific system type (e.g., "variable_air_volume") |
@@ -85,7 +85,7 @@ Systems define:
 - **maintenanceSchedule** — When to service equipment
 - **controlStrategy** — How it's controlled (BMS, local, manual)
 
-**Note:** `assetInstanceIds` is **automatically computed**. You don't list equipment here — equipment lists the system, and the system tracks the reverse relationship.
+**Note:** `assetIds` is **automatically computed**. You don't list equipment here — equipment lists the system, and the system tracks the reverse relationship.
 :::
 
 ## System Categories (Enum)
@@ -297,11 +297,11 @@ Variable air volume (VAV) heat pump system serving north zone residential spaces
           "REQ-THERMAL-COMFORT-001",
           "REQ-ENERGY-EFFICIENCY-HVAC-001"
         ],
-        "assetInstanceIds": [
-          "AI-AHU-01",
-          "AI-VAV-NORTH-01",
-          "AI-VAV-NORTH-02",
-          "AI-VAV-NORTH-03"
+        "assetIds": [
+          "AST-AHU-01",
+          "AST-VAV-NORTH-01",
+          "AST-VAV-NORTH-02",
+          "AST-VAV-NORTH-03"
         ],
         "ifcMapping": {
           "ifcEntity": "IfcSystem",
@@ -318,7 +318,7 @@ Variable air volume (VAV) heat pump system serving north zone residential spaces
 
 ## Reverse Relationships
 
-The compiler **auto-computes** `system.assetInstanceIds` from asset references:
+The compiler **auto-computes** `system.assetIds` from asset references:
 
 **Input:** Assets reference systems
 ```yaml
@@ -336,10 +336,10 @@ systemId: "SYS-HVAC-01"
 ```json
 {
   "id": "SYS-HVAC-01",
-  "assetInstanceIds": [
-    "AI-AHU-01",
-    "AI-VAV-NORTH-01",
-    "AI-VAV-NORTH-02"
+  "assetIds": [
+    "AST-AHU-01",
+    "AST-VAV-NORTH-01",
+    "AST-VAV-NORTH-02"
   ]
 }
 ```
@@ -387,7 +387,7 @@ buildingId: "BLD-01"
 
 # Instance-specific data
 servedZoneIds: ["ZONE-HVAC-NORTH"]
-assetInstanceIds: ["AI-MVHR-01", "AI-HP-01"]
+assetIds: ["AST-MVHR-01", "AST-HP-01"]
 performance:
   measuredCOP: 4.3  # Override: actual measured performance
 ---
@@ -413,7 +413,7 @@ performance:
     "heatRecovery": "90%",             // From type
     "measuredCOP": 4.3                 // Instance override
   },
-  "assetInstanceIds": ["AI-MVHR-01", "AI-HP-01"]  // Instance-specific
+  "assetIds": ["AST-MVHR-01", "AST-HP-01"]  // Instance-specific
 }
 ```
 
@@ -509,13 +509,13 @@ Systems aggregate asset data for facilities management:
         {
           "taskType": "filter_replacement",
           "frequency": "quarterly",
-          "affectedAssets": ["AI-AHU-01"],
+          "affectedAssets": ["AST-AHU-01"],
           "nextDue": "2026-04-01"
         },
         {
           "taskType": "annual_inspection",
           "frequency": "yearly",
-          "affectedAssets": ["AI-AHU-01", "AI-VAV-NORTH-*"],
+          "affectedAssets": ["AST-AHU-01", "AST-VAV-NORTH-*"],
           "nextDue": "2026-06-15"
         }
       ],
@@ -612,6 +612,6 @@ Systems with capacity and efficiency data enable energy modeling:
 
 ## See Also
 
-- **[Asset Instance](/en/documentation/entities/asset-instance)** - Assets belong to systems
+- **[Asset](/en/documentation/entities/asset)** - Assets belong to systems
 - **[Zone](/en/documentation/entities/zone)** - Systems serve zones
 - **[Compiler Guide](/en/documentation/compiler/)** - System maintenance planning and monitoring

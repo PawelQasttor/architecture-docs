@@ -423,9 +423,9 @@ VAV heat pump system serving north zone.
 
 ---
 
-## Creating Asset Instance Documents
+## Creating Asset Documents
 
-Asset instances are physical equipment with maintenance data.
+Assets are physical equipment with maintenance data.
 
 ### When to Create
 
@@ -446,9 +446,9 @@ Asset instances are physical equipment with maintenance data.
 **2. Define asset:**
 ```yaml
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-AHU-01"
+documentType: "asset"
+entityType: "asset"
+id: "AST-AHU-01"
 
 assetName: "Air Handling Unit 01"
 assetType: "ahu"
@@ -690,7 +690,7 @@ Follow naming conventions:
 - Spaces: `SP-{building}-{level}-{seq}`
 - Zones: `ZONE-{type}-{descriptor}`
 - Systems: `SYS-{category}-{seq}`
-- Assets: `AI-{type}-{seq}`
+- Assets: `AST-{type}-{seq}`
 
 ### Version Control Integration
 

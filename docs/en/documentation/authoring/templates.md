@@ -230,13 +230,13 @@ Brief description of the system.
 - **Controls:** BACnet DDC via BMS
 ```
 
-## Asset Instance Template {#asset-instance}
+## Asset Template {#asset}
 
 ```markdown
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-AHU-01"
+documentType: "asset"
+entityType: "asset"
+id: "AST-AHU-01"
 projectPhase: "construction"
 bimLOD: "LOD_350"
 
@@ -518,13 +518,13 @@ version: "1.0.0"
 # HVAC System 01
 ```
 
-### Minimal Asset Instance
+### Minimal Asset
 
 ```yaml
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-AHU-01"
+documentType: "asset"
+entityType: "asset"
+id: "AST-AHU-01"
 assetName: "Air Handling Unit 01"
 assetType: "ahu"
 systemId: "SYS-HVAC-01"

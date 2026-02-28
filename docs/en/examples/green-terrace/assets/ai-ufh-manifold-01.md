@@ -1,7 +1,6 @@
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-UFH-MANIFOLD-01"
+entityType: "asset"
+id: "AST-UFH-MANIFOLD-01"
 assetName: "Underfloor Heating Manifold - Level 01"
 projectPhase: "construction"
 bimLOD: "LOD_400"
@@ -247,7 +246,7 @@ Central distribution manifold controlling 12 underfloor heating zones on Level 0
 ## System Operation
 
 ### Flow Path
-1. **Heat Pump** (AI-HP-01) → primary circuit @ 35°C
+1. **Heat Pump** (AST-HP-01) → primary circuit @ 35°C
 2. **Mixing Valve** → maintains 35°C supply temperature
 3. **Manifold Supply Header** → distributes to 12 zones
 4. **Zone Actuators** → open/close based on room thermostat demand
@@ -323,7 +322,7 @@ Central distribution manifold controlling 12 underfloor heating zones on Level 0
 
 ## Integration with Heat Pump
 
-This manifold receives heated water from the **Bosch Compress 7000i Heat Pump** (AI-HP-01):
+This manifold receives heated water from the **Bosch Compress 7000i Heat Pump** (AST-HP-01):
 - Heat pump provides 35°C flow temperature (low-temperature design)
 - COP ~4.3 at these operating conditions (very efficient)
 - Heat pump capacity: 12 kW (sufficient for all 12 zones)

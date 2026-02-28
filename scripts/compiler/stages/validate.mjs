@@ -136,11 +136,11 @@ function checkReferentialIntegrity(sbm, logger) {
   // Check system → asset references
   if (sbm.entities.systems) {
     for (const system of sbm.entities.systems) {
-      if (system.assetInstanceIds) {
-        for (const assetId of system.assetInstanceIds) {
+      if (system.assetIds) {
+        for (const assetId of system.assetIds) {
           if (!allIds.has(assetId)) {
             warnings.push({
-              path: `systems/${system.id}/assetInstanceIds`,
+              path: `systems/${system.id}/assetIds`,
               message: `Referenced asset "${assetId}" does not exist (may not be defined yet)`
             });
           }

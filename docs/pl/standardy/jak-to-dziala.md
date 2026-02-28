@@ -37,17 +37,21 @@ Standard formalizuje to w **8 faz**:
 
 ## Filar 2: Karty obiektów — Co opisujesz
 
-Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: pomieszczenie, strefę pożarową, instalację grzewczą, kocioł. Standard definiuje **7 rodzajów kart** — gotowych szablonów, które mówią Ci co wpisać:
+Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: pomieszczenie, strefę pożarową, instalację grzewczą, kocioł. Standard definiuje **11 rodzajów kart** — gotowych szablonów, które mówią Ci co wpisać:
 
 | Karta | Co opisujesz | Przykład |
 |-------|-------------|---------|
 | **Budynek** | Cały obiekt budowlany | "Zielony Taras, ul. Słoneczna 45, Warszawa" |
 | **Kondygnacja** | Jedno piętro | "Parter, +0,00 m" |
 | **Pomieszczenie** | Pokój lub obszar funkcjonalny | "Sypialnia 01, 14,5 m², wysokość 2,70 m" |
+| **Typ Pomieszczenia** | Szablon dla podobnych pomieszczeń | "Typ standardowej sypialni A" |
 | **Strefa** | Grupa pomieszczeń o wspólnej charakterystyce | "Strefa pożarowa ZL-IV, kondygnacje 1-6" |
+| **Typ Strefy** | Szablon konfiguracji stref | "Strefa pożarowa ZL-IV standard" |
 | **Wymaganie** | Konkretny przepis prawny do spełnienia | "Wysokość pomieszczenia >= 2,50 m wg WT 2021 §132" |
 | **Instalacja** | System techniczny budynku | "Ogrzewanie centralne, kocioł gazowy, grzejniki" |
+| **Typ Instalacji** | Szablon konfiguracji instalacji | "Klimatyzacja mieszkalna z rekuperacją MVHR" |
 | **Urządzenie** | Konkretny zainstalowany produkt | "Vaillant ecoTEC plus 306, nr seryjny #12345" |
+| **Typ Urządzenia** | Szablon specyfikacji produktu | "Bosch Compress 7000i 12kW" |
 
 Każda karta to **gotowy szablon do wypełnienia**. Dzięki temu każdy opis sypialni ma tę samą strukturę, każda strefa pożarowa te same pola, a każde urządzenie jest dokumentowane w ten sam sposób.
 

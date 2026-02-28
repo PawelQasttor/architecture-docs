@@ -139,7 +139,7 @@ version: "1.0.0"
   "systems": [{
     "id": "SYS-HVAC-01",
     "systemTypeId": "SYT-HVAC-RESIDENTIAL-MVHR",
-    "assetInstanceIds": ["AI-MVHR-01", "AI-HP-01"]
+    "assetIds": ["AST-MVHR-01", "AST-HP-01"]
   }]
 }
 ```
@@ -162,5 +162,5 @@ performanceOverrides:
 
 - **[System](/pl/dokumentacja/encje/system)** - Instancje systemów odwołujące się do typów
 - **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** - Szablony produktów/urządzeń
-- **[Instancja Zasobu](/pl/dokumentacja/encje/instancja-zasobu)** - Urządzenia w systemach
+- **[Zasób](/pl/dokumentacja/encje/zasob)** - Urządzenia w systemach
 - **Schema:** `sbm-schema-v0.2.json` - Definicja Typu Systemu

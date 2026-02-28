@@ -124,7 +124,7 @@ async function compile(options) {
 
     // Stage 3: Validate
     logger.stage(3, 'Validate');
-    logger.debug('Validating against JSON schema v0.3, checking integrity, provenance, and phase gates...');
+    logger.debug('Validating against JSON schema v0.4, checking integrity, provenance, and phase gates...');
     const validationResult = await validate(sbm, logger);
 
     if (validationResult.valid) {

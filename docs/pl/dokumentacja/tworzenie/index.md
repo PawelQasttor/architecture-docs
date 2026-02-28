@@ -120,7 +120,7 @@ Wybierz odpowiedni typ karty dla tego, co dokumentujesz:
 | **Strefa** | Strefy pożarowe, HVAC, akustyczne, bezpieczeństwa | [Szablon Strefy](/pl/dokumentacja/tworzenie/szablony#zone) |
 | **Wymaganie** | Reguły wydajnościowe, zgodność regulacyjna | [Szablon Wymagania](/pl/dokumentacja/tworzenie/szablony#requirement) |
 | **Instalacja** | Systemy MEP (HVAC, elektryczny, hydrauliczny) | [Szablon Instalacji](/pl/dokumentacja/tworzenie/szablony#system) |
-| **Urządzenie** | Fizyczne urządzenia z danymi konserwacyjnymi | [Szablon Urządzenia](/pl/dokumentacja/tworzenie/szablony#asset-instance) |
+| **Urządzenie** | Fizyczne urządzenia z danymi konserwacyjnymi | [Szablon Urządzenia](/pl/dokumentacja/tworzenie/szablony#asset) |
 | **Budynek** | Metadane na poziomie budynku | [Szablon Budynku](/pl/dokumentacja/tworzenie/szablony#building) |
 | **Kondygnacja** | Informacje o piętrze/kondygnacji | [Szablon Kondygnacji](/pl/dokumentacja/tworzenie/szablony#level) |
 
@@ -150,7 +150,7 @@ Używaj hierarchicznych, czytelnych ID:
 | Przestrzeń | `SP-{budynek}-{kondygnacja}-{seq}` | `SP-BLD-01-L01-001` |
 | Strefa | `ZONE-{typ}-{deskryptor}` | `ZONE-FIRE-ZL-IV` |
 | Instalacja | `SYS-{kategoria}-{seq}` | `SYS-HVAC-01` |
-| Urządzenie | `AI-{typ}-{seq}` | `AI-AHU-01` |
+| Urządzenie | `AST-{typ}-{seq}` | `AST-AHU-01` |
 | Wymaganie | `REQ-{zakres}-{deskryptor}-{seq}` | `REQ-DAYLIGHT-SLEEPING-001` |
 
 ### Typy danych
@@ -250,7 +250,7 @@ space:
 
 # Zasób odwołuje się do systemu nadrzędnego
 asset:
-  id: "AI-AHU-01"
+  id: "AST-AHU-01"
   systemId: "SYS-HVAC-01"        # System nadrzędny
 ```
 
@@ -269,9 +269,9 @@ zone:
 # System automatycznie otrzymuje listę zasobów
 system:
   id: "SYS-HVAC-01"
-  assetInstanceIds:  # Obliczone automatycznie z asset.systemId
-    - "AI-AHU-01"
-    - "AI-VAV-01"
+  assetIds:  # Obliczone automatycznie z asset.systemId
+    - "AST-AHU-01"
+    - "AST-VAV-01"
 
 # Kondygnacja automatycznie otrzymuje listę przestrzeni
 level:
@@ -308,9 +308,9 @@ docs/en/examples/my-project/
 │   ├── sys-elec-01.md
 │   └── sys-plumbing-01.md
 └── assets/
-    ├── ai-ahu-01.md
-    ├── ai-vav-01.md
-    └── ai-pump-01.md
+    ├── ast-ahu-01.md
+    ├── ast-vav-01.md
+    └── ast-pump-01.md
 ```
 
 **Korzyści:**

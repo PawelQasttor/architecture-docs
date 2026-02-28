@@ -1,5 +1,4 @@
 ---
-documentType: "zone"
 entityType: "zone"
 id: "ZONE-FIRE-ZL-IV"
 projectPhase: "design_development"

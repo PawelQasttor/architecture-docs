@@ -31,9 +31,9 @@ servedZoneIds:
 servedSpaceIds:
   - "SP-[SPACE-ID]"
 
-# Asset Instances (equipment in this system)
-assetInstanceIds:
-  - "AI-[ASSET-ID]"
+# Assets (equipment in this system)
+assetIds:
+  - "AST-[ASSET-ID]"
 
 # Performance Specifications (optional)
 performance:

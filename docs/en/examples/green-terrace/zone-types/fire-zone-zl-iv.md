@@ -1,5 +1,4 @@
 ---
-documentType: "zone_type"
 entityType: "zone_type"
 id: "ZT-FIRE-ZL-IV"
 typeName: "Fire Zone ZL-IV Standard"

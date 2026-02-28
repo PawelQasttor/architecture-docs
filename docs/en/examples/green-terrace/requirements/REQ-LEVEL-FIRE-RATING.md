@@ -1,5 +1,4 @@
 ---
-documentType: requirement
 entityType: requirement
 id: REQ-LEVEL-FIRE-RATING
 requirementName: "Level Fire Resistance Rating"

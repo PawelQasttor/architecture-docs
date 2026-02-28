@@ -130,8 +130,8 @@ version: "1.0.0"
     "manufacturer": "Bosch",
     "specifications": {/* specyfikacje */}
   }],
-  "asset_instances": [{
-    "id": "AI-HP-01",
+  "assets": [{
+    "id": "AST-HP-01",
     "assetTypeId": "AT-BOSCH-COMPRESS-7000I-12KW",
     "serial": "BCS7000i-2024-001234",
     "installationDate": "2024-06-15"
@@ -148,7 +148,7 @@ version: "1.0.0"
 
 ## Zobacz Również
 
-- **[Instancja Zasobu](/pl/dokumentacja/encje/instancja-zasobu)** - Instancje zasobów odwołujące się do typów
+- **[Zasób](/pl/dokumentacja/encje/zasob)** - Zasoby odwołujące się do typów
 - **[System](/pl/dokumentacja/encje/system)** - Systemy zawierające zasoby
 - **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony systemów
 - **Schema:** `sbm-schema-v0.2.json` - Definicja Typu Zasobu

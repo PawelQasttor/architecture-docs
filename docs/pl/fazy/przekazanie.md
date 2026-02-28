@@ -533,9 +533,9 @@ git tag project-complete-v1.0
 [Semantyczny Model Budynku (SBM)](/pl/dokumentacja/przeglad) dostarcza pełną wartość w fazie Przekazania. Kompilator SBM tworzy ustrukturyzowane wyjścia, które integrują się bezpośrednio z systemami zarządzania obiektem, platformami BMS i archiwami regulacyjnymi.
 
 ### Kompletny Rejestr Zasobów
-Kompilator generuje `asset_register.json` zawierający każdą Kartę Instancji Zasobu z danymi producenta, numerami seryjnymi, datami gwarancji i harmonogramami konserwacji. Ten plik importuje się bezpośrednio do platform CMMS.
+Kompilator generuje `asset_register.json` zawierający każdą Kartę Zasobu z danymi producenta, numerami seryjnymi, datami gwarancji i harmonogramami konserwacji. Ten plik importuje się bezpośrednio do platform CMMS.
 
-[Dowiedz się o Kartach Instancji Zasobu →](/pl/dokumentacja/encje/instancja-zasobu)
+[Dowiedz się o Kartach Zasobu →](/pl/dokumentacja/encje/zasob)
 
 ### Wygenerowany Schemat Cyfrowego Bliźniaka
 Kompilator tworzy `twin_schema.json` z powiązaniami czujników i punktami integracji BMS (System Zarządzania Budynkiem), umożliwiając monitorowanie systemów budynku w czasie rzeczywistym.

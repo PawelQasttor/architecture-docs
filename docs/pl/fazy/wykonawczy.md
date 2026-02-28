@@ -352,10 +352,10 @@ git tag construction-docs-v1.0
 
 [Semantyczny Model Budynku (SBM)](/pl/dokumentacja/przeglad) osiąga pełną głębokość specyfikacji podczas Dokumentacji Wykonawczej. Na tym etapie karty zawierają dane gotowe do realizacji -- wymiary montażowe, kody produktów i parametry potrzebne do zamówień i budowy.
 
-### Karty Instancji Zasobu
-Każde urządzenie (kocioł, centrala wentylacyjna, rozdzielnia) otrzymuje własną kartę z pełną specyfikacją: producent, model, kod produktowy i warunki dostawy. Karty Instancji Zasobu tworzy się dla wszystkich urządzeń mechanicznych, elektrycznych i sanitarnych (MEP).
+### Karty Zasobu
+Każde urządzenie (kocioł, centrala wentylacyjna, rozdzielnia) otrzymuje własną kartę z pełną specyfikacją: producent, model, kod produktowy i warunki dostawy. Karty Zasobu tworzy się dla wszystkich urządzeń mechanicznych, elektrycznych i sanitarnych (MEP).
 
-[Dowiedz się o Kartach Instancji Zasobu →](/pl/dokumentacja/encje/instancja-zasobu)
+[Dowiedz się o Kartach Zasobu →](/pl/dokumentacja/encje/zasob)
 
 ### Karty Systemów
 Karty Systemów dla instalacji HVAC, elektrycznych i sanitarnych zawierają kompletne listy komponentów, obliczenia wymiarowania i wymagania dotyczące wydajności. Dzięki temu wykonawca widzi cały system w jednym miejscu.
@@ -370,10 +370,10 @@ Kompilator SBM generuje `bim_mapping.json` z parametrami współdzielonymi Revit
 
 [Dowiedz się o kompilatorze SBM →](/pl/dokumentacja/kompilator/)
 
-### Przykład: Karta Instancji Zasobu
+### Przykład: Karta Zasobu
 
 ```yaml
-entity: asset_instance
+entity: asset
 id: asset-boiler-01
 name: "Centralny Kocioł Gazowy"
 system: system-heating-central

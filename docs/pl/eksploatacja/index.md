@@ -43,7 +43,7 @@ Standard dokumentacji architektonicznej dostarcza strukturę danych bezpośredni
 
 | Element standardu | Zastosowanie w eksploatacji |
 |--------------------|-----------------------------|
-| [Karta Urządzenia](/pl/dokumentacja/encje/instancja-zasobu) | Dane gwarancyjne, interwały serwisowe, historia napraw |
+| [Karta Urządzenia](/pl/dokumentacja/encje/zasob) | Dane gwarancyjne, interwały serwisowe, historia napraw |
 | [Karta Instalacji](/pl/dokumentacja/encje/system) | Harmonogramy konserwacji systemów, parametry pracy |
 | [Szablon Urządzenia](/pl/szablony/szablon-zasobu) | Standardowe dane producenta, specyfikacje techniczne |
 | [Szablon Instalacji](/pl/szablony/szablon-systemu) | Wymagania konserwacyjne wg typu systemu |

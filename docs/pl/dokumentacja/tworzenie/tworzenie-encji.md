@@ -416,16 +416,16 @@ tags:
 VAV heat pump system serving north zone.
 
 ## System Components
-- **AHU:** Rooftop air handling unit (AI-AHU-01)
+- **AHU:** Rooftop air handling unit (AST-AHU-01)
 - **VAV boxes:** 12 terminal units
 - **Controls:** BACnet DDC via BMS
 ```
 
 ---
 
-## Tworzenie instancji zasobów
+## Tworzenie zasobów
 
-Instancje zasobów to fizyczne urządzenia z danymi konserwacyjnymi.
+Zasoby to fizyczne urządzenia z danymi konserwacyjnymi.
 
 ### Kiedy tworzyć
 
@@ -441,14 +441,14 @@ Instancje zasobów to fizyczne urządzenia z danymi konserwacyjnymi.
 
 ### Przykład krok po kroku: Centrala wentylacyjna
 
-**1. Utwórz plik:** `assets/ai-ahu-01.md`
+**1. Utwórz plik:** `assets/ast-ahu-01.md`
 
 **2. Zdefiniuj zasób:**
 ```yaml
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-AHU-01"
+documentType: "asset"
+entityType: "asset"
+id: "AST-AHU-01"
 
 assetName: "Air Handling Unit 01"
 assetType: "ahu"
@@ -628,8 +628,8 @@ vim docs/en/examples/my-project/systems/sys-hvac-01.md
 ### 6. Dodaj zasoby (dokumentacja wykonawcza)
 
 ```bash
-# Utwórz instancje zasobów
-vim docs/en/examples/my-project/assets/ai-ahu-01.md
+# Utwórz zasoby
+vim docs/en/examples/my-project/assets/ast-ahu-01.md
 ```
 
 ### 7. Skompiluj i zwaliduj
@@ -690,7 +690,7 @@ Przestrzegaj konwencji nazewnictwa:
 - Przestrzenie: `SP-{budynek}-{kondygnacja}-{seq}`
 - Strefy: `ZONE-{typ}-{deskryptor}`
 - Systemy: `SYS-{kategoria}-{seq}`
-- Zasoby: `AI-{typ}-{seq}`
+- Zasoby: `AST-{typ}-{seq}`
 
 ### Integracja z kontrolą wersji
 

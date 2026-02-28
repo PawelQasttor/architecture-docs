@@ -35,7 +35,7 @@ System c-KOB jest obowiązkowy dla nowych budynków oddawanych do użytkowania. 
 
 ## Karty Urządzeń w planowaniu konserwacji
 
-Każda [karta Urządzenia](/pl/dokumentacja/encje/instancja-zasobu) w standardzie zawiera pola bezpośrednio przydatne w planowaniu konserwacji:
+Każda [karta Urządzenia](/pl/dokumentacja/encje/zasob) w standardzie zawiera pola bezpośrednio przydatne w planowaniu konserwacji:
 
 ```yaml
 urzadzenie:

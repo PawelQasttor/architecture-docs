@@ -345,10 +345,10 @@ git log --oneline 06-construction/
 
 [Semantyczny Model Budynku (SBM)](/pl/dokumentacja/przeglad) jest aktualizowany w trakcie budowy w miarę dokumentowania rzeczywistych warunków. Karty ewoluują od specyfikacji projektowych do odzwierciedlenia faktycznie zamontowanych elementów i urządzeń.
 
-### Aktualizacja Kart Instancji Zasobu
-W miarę montażu urządzeń na budowie, Karty Instancji Zasobu uzupełnia się o numery seryjne, daty montażu i dane z uruchomienia. Dzięki temu każde urządzenie ma kompletną historię od zamówienia do odbioru.
+### Aktualizacja Kart Zasobu
+W miarę montażu urządzeń na budowie, Karty Zasobu uzupełnia się o numery seryjne, daty montażu i dane z uruchomienia. Dzięki temu każde urządzenie ma kompletną historię od zamówienia do odbioru.
 
-[Dowiedz się o Kartach Instancji Zasobu →](/pl/dokumentacja/encje/instancja-zasobu)
+[Dowiedz się o Kartach Zasobu →](/pl/dokumentacja/encje/zasob)
 
 ### Śledzenie Kart Przestrzeni
 Karty Przestrzeni zaczynają śledzić pomiary powykonawcze w miarę postępu budowy. Rejestrowane są rzeczywiste wymiary, wykończenia i warunki panujące w pomieszczeniach.
@@ -358,10 +358,10 @@ Karty Systemów uzupełnia się o rzeczywiste trasy instalacji, połączenia i z
 
 [Dowiedz się o Kartach Systemów →](/pl/dokumentacja/encje/system)
 
-### Przykład: Instancja Zasobu zaktualizowana danymi z montażu
+### Przykład: Zasób zaktualizowany danymi z montażu
 
 ```yaml
-entity: asset_instance
+entity: asset
 id: asset-boiler-01
 name: "Centralny Kocioł Gazowy"
 system: system-heating-central

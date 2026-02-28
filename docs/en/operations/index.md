@@ -52,7 +52,7 @@ POE results should be recorded in the project documentation and linked to releva
 
 This standard provides structured formats for capturing operational data:
 
-- **[Asset Instance cards](/en/documentation/entities/asset-instance)** -- store warranty dates, service intervals, manufacturer contacts, and maintenance history for individual pieces of equipment.
+- **[Asset Instance cards](/en/documentation/entities/asset)** -- store warranty dates, service intervals, manufacturer contacts, and maintenance history for individual pieces of equipment.
 - **[System cards](/en/documentation/entities/system)** -- document how systems (HVAC, electrical, plumbing) are configured, how they should perform, and what maintenance they require.
 - **YAML metadata** -- machine-readable fields for warranty expiry, next service date, and condition status enable automated alerts and reporting.
 - **[As-built documentation](/en/phases/as-built)** -- provides the baseline reference for all operational activities.

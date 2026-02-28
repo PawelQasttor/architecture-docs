@@ -1,24 +1,24 @@
-# Asset Instance (Equipment Documentation)
+# Asset (Equipment Documentation)
 
 ## What This Is
 
-An **Asset Instance** file documents one piece of physical equipment. Examples: "Air Handling Unit 01 (Serial: SR11-2026-04782)", "Elevator 1A".
+An **Asset** file documents one piece of physical equipment. Examples: "Air Handling Unit 01 (Serial: SR11-2026-04782)", "Elevator 1A".
 
 ::: tip For Architects
 **Problem:** Facilities manager asks "When does the warranty expire on AHU-01?" or "What filters do we need to order?"
 
 **Old way:** Hunt through equipment submittal files, check O&M manuals, email mechanical contractor.
 
-**With asset instances:** Open `assets/ai-ahu-01.md` — warranty date, spare parts, maintenance schedule all in one file. **No hunting.**
+**With assets:** Open `assets/ast-ahu-01.md` — warranty date, spare parts, maintenance schedule all in one file. **No hunting.**
 
 **One asset file = all equipment info (warranty, maintenance, specs) tracked automatically.**
 :::
 
-An **Asset Instance** represents a specific piece of physical equipment with maintenance data, warranty information, and operational monitoring. Asset instances enable facilities management, CMMS integration, and digital twin runtime monitoring.
+An **Asset** represents a specific piece of physical equipment with maintenance data, warranty information, and operational monitoring. Assets enable facilities management, CMMS integration, and digital twin runtime monitoring.
 
 ## Purpose
 
-Asset instances track:
+Assets track:
 - Physical equipment identity (manufacturer, model, serial number)
 - Installation location (space, level, building)
 - Maintenance schedules and service history
@@ -30,9 +30,8 @@ Asset instances track:
 
 | Field | Type | Description | Example |
 |-------|------|-------------|---------|
-| `id` | string | Unique asset identifier | `"AI-AHU-01"` |
-| `entityType` | string | Must be `"asset_instance"` | `"asset_instance"` |
-| `documentType` | string | Must be `"asset_instance"` | `"asset_instance"` |
+| `id` | string | Unique asset identifier | `"AST-AHU-01"` |
+| `entityType` | string | Must be `"asset"` | `"asset"` |
 | `assetName` | string | Human-readable name | `"Air Handling Unit 01"` |
 | `assetType` | string | Equipment type (see categories below) | `"ahu"` |
 | `systemId` | string | Parent system ID | `"SYS-HVAC-01"` |
@@ -40,7 +39,7 @@ Asset instances track:
 | `version` | string | Semantic version | `"1.0.0"` |
 
 ::: tip For Architects: What These Required Fields Mean
-- **id**: Equipment identifier (e.g., `AI-AHU-01`)
+- **id**: Equipment identifier (e.g., `AST-AHU-01`)
 - **assetName**: What you call it ("Air Handling Unit 01", "Elevator 1A")
 - **assetType**: Equipment category — `ahu`, `pump`, `elevator`, `fire_alarm_panel`
 - **systemId**: Which MEP system this belongs to (e.g., `SYS-HVAC-01`)
@@ -146,12 +145,11 @@ type VerticalTransportAssetType =
 **The simplest equipment file for handover:**
 
 ```markdown
-File: assets/ai-ahu-01.md
+File: assets/ast-ahu-01.md
 
 ---
-id: "AI-AHU-01"
-entityType: "asset_instance"
-documentType: "asset_instance"
+id: "AST-AHU-01"
+entityType: "asset"
 assetName: "Air Handling Unit 01"
 assetType: "ahu"
 systemId: "SYS-HVAC-01"
@@ -178,13 +176,12 @@ Warranty expires 2028-08-15.
 
 ## Example 2: Complete Asset (Full Details)
 
-**File:** `docs/en/examples/green-terrace/assets/ai-ahu-01.md`
+**File:** `docs/en/examples/green-terrace/assets/ast-ahu-01.md`
 
 ```markdown
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-AHU-01"
+entityType: "asset"
+id: "AST-AHU-01"
 projectPhase: "construction"
 bimLOD: "LOD_350"
 
@@ -346,11 +343,10 @@ Maintain minimum stock:
 ```json
 {
   "entities": {
-    "assetInstances": [
+    "assets": [
       {
-        "documentType": "asset_instance",
-        "entityType": "asset_instance",
-        "id": "AI-AHU-01",
+        "entityType": "asset",
+        "id": "AST-AHU-01",
         "assetName": "Air Handling Unit 01",
         "assetType": "ahu",
         "systemId": "SYS-HVAC-01",
@@ -363,67 +359,7 @@ Maintain minimum stock:
         "assetTag": "GT-AHU-001",
         "installationDate": "2026-08-15",
         "warrantyExpiry": "2028-08-15",
-        "expectedLifespan": 20,
-        "specifications": {
-          "airflow": 12000,
-          "airflowUnit": "m3/h",
-          "coolingCapacity": 85,
-          "heatingCapacity": 75,
-          "capacityUnit": "kW",
-          "filterClass": "F7",
-          "powerConsumption": 15.5,
-          "powerUnit": "kW",
-          "weight": 1850,
-          "weightUnit": "kg",
-          "dimensions": {
-            "length": 4200,
-            "width": 2100,
-            "height": 2400,
-            "unit": "mm"
-          }
-        },
-        "maintenanceSchedule": {
-          "tasks": [
-            {
-              "taskId": "MAINT-AHU-FILTER",
-              "taskName": "Replace air filters",
-              "frequency": "quarterly",
-              "estimatedDuration": 2,
-              "durationUnit": "hours",
-              "skillRequired": "HVAC technician"
-            }
-          ]
-        },
-        "spareParts": [
-          {
-            "partName": "Air filter F7",
-            "partNumber": "SF-F7-600x600",
-            "quantity": 4,
-            "reorderLevel": 2,
-            "unitCost": 145,
-            "currency": "PLN"
-          }
-        ],
-        "supplier": {
-          "name": "Systemair Polska Sp. z o.o.",
-          "contact": "serwis@systemair.pl",
-          "phone": "+48 22 123 4567",
-          "emergencyPhone": "+48 22 123 4568"
-        },
-        "cost": {
-          "purchase": 125000,
-          "installation": 18000,
-          "total": 143000,
-          "currency": "PLN"
-        },
-        "energyRating": "A+",
-        "ifcMapping": {
-          "ifcEntity": "IfcUnitaryEquipment",
-          "globalId": "0M1dG7$pJ9ws1VwCt0KMyO",
-          "objectType": "AirHandlingUnit"
-        },
-        "version": "1.0.0",
-        "tags": ["hvac", "air_handling_unit", "rooftop", "high_efficiency"]
+        "expectedLifespan": 20
       }
     ]
   }
@@ -432,7 +368,7 @@ Maintain minimum stock:
 
 ## BIM Mapping
 
-Asset instances map to specific IFC equipment entities:
+Assets map to specific IFC equipment entities:
 
 | SBM Field | Revit Parameter | IFC Property |
 |-----------|-----------------|--------------|
@@ -448,13 +384,13 @@ Asset instances map to specific IFC equipment entities:
 
 ## Asset Register Integration
 
-Asset instances populate the **asset register** compilation target:
+Assets populate the **asset register** compilation target:
 
 ```json
 {
   "assetInventory": [
     {
-      "assetId": "AI-AHU-01",
+      "assetId": "AST-AHU-01",
       "assetName": "Air Handling Unit 01",
       "assetType": "ahu",
       "systemName": "HVAC System 01 - North Zone",
@@ -471,108 +407,6 @@ Asset instances populate the **asset register** compilation target:
         "annualContribution": 6250,
         "currency": "PLN"
       }
-    }
-  ],
-
-  "maintenanceCalendar": [
-    {
-      "month": "2026-03",
-      "tasks": [
-        {
-          "assetId": "AI-AHU-01",
-          "taskId": "MAINT-AHU-FILTER",
-          "taskName": "Replace air filters",
-          "scheduledDate": "2026-03-15",
-          "estimatedDuration": 2,
-          "skillRequired": "HVAC technician",
-          "estimatedCost": 580
-        }
-      ]
-    }
-  ],
-
-  "sparePartsInventory": [
-    {
-      "partNumber": "SF-F7-600x600",
-      "partName": "Air filter F7",
-      "applicableAssets": ["AI-AHU-01"],
-      "currentStock": 8,
-      "reorderLevel": 2,
-      "unitCost": 145,
-      "totalValue": 1160
-    }
-  ]
-}
-```
-
-## Digital Twin Integration
-
-Asset instances bind to IoT sensors and BMS points:
-
-```json
-{
-  "assetSensorBindings": [
-    {
-      "entityId": "AI-AHU-01",
-      "entityName": "Air Handling Unit 01",
-      "bmsIntegration": {
-        "protocol": "BACnet",
-        "deviceId": "BACnet:201",
-        "objectIdentifier": "device,201"
-      },
-      "sensors": [
-        {
-          "sensorType": "supply_air_temperature",
-          "sensorId": "TEMP-AHU-01-SA",
-          "dataPoint": "AI-AHU-01-SA-TEMP",
-          "bacnetPoint": "analog-input,1",
-          "unit": "°C",
-          "normalRange": { "min": 14, "max": 18 }
-        },
-        {
-          "sensorType": "return_air_temperature",
-          "sensorId": "TEMP-AHU-01-RA",
-          "dataPoint": "AI-AHU-01-RA-TEMP",
-          "bacnetPoint": "analog-input,2",
-          "unit": "°C"
-        },
-        {
-          "sensorType": "supply_fan_status",
-          "sensorId": "STATUS-AHU-01-SF",
-          "dataPoint": "AI-AHU-01-SF-STATUS",
-          "bacnetPoint": "binary-input,1",
-          "values": { "0": "off", "1": "on" }
-        },
-        {
-          "sensorType": "power_consumption",
-          "sensorId": "POWER-AHU-01",
-          "dataPoint": "AI-AHU-01-POWER",
-          "bacnetPoint": "analog-input,10",
-          "unit": "kW"
-        },
-        {
-          "sensorType": "filter_pressure_drop",
-          "sensorId": "PRESSURE-AHU-01-FILTER",
-          "dataPoint": "AI-AHU-01-FILTER-DP",
-          "bacnetPoint": "analog-input,5",
-          "unit": "Pa",
-          "alarmThreshold": { "max": 250 }
-        }
-      ],
-      "alarms": [
-        {
-          "alarmId": "AI-AHU-01-FILTER-CLOGGED",
-          "condition": "filter_pressure_drop > 250",
-          "severity": "warning",
-          "action": "schedule_filter_replacement"
-        },
-        {
-          "alarmId": "AI-AHU-01-FAN-FAULT",
-          "condition": "supply_fan_status == off AND hvac_system_enabled == true",
-          "severity": "critical",
-          "action": "notify_emergency_contact"
-        }
-      ]
     }
   ]
 }
@@ -595,18 +429,18 @@ Standard maintenance frequency values:
 
 ## CMMS Export
 
-Asset instances export to **CMMS** (Computerized Maintenance Management System) formats:
+Assets export to **CMMS** (Computerized Maintenance Management System) formats:
 
 **Maximo Format:**
 ```csv
 ASSETNUM,DESCRIPTION,ASSETTYPE,LOCATION,MANUFACTURER,MODELNUM,SERIALNUM,INSTALLDATE,WARRANTY,REPLACECOST
-AI-AHU-01,Air Handling Unit 01,AHU,ROOF-MECH,Systemair,Topvex SR11 EL,SR11-2026-04782,2026-08-15,2028-08-15,125000
+AST-AHU-01,Air Handling Unit 01,AHU,ROOF-MECH,Systemair,Topvex SR11 EL,SR11-2026-04782,2026-08-15,2028-08-15,125000
 ```
 
 **SAP PM Format:**
 ```xml
 <Equipment>
-  <EquipmentNumber>AI-AHU-01</EquipmentNumber>
+  <EquipmentNumber>AST-AHU-01</EquipmentNumber>
   <Description>Air Handling Unit 01</Description>
   <TechnicalIdentNo>SR11-2026-04782</TechnicalIdentNo>
   <Manufacturer>Systemair</Manufacturer>
@@ -617,6 +451,6 @@ AI-AHU-01,Air Handling Unit 01,AHU,ROOF-MECH,Systemair,Topvex SR11 EL,SR11-2026-
 
 ## See Also
 
-- **[System](/en/documentation/entities/system)** - Asset instances belong to systems
+- **[System](/en/documentation/entities/system)** - Assets belong to systems
 - **[Space](/en/documentation/entities/space)** - Asset installation locations
 - **[Compiler Guide](/en/documentation/compiler/)** - Asset compilation and sensor binding generation

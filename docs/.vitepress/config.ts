@@ -83,7 +83,7 @@ export default defineConfig({
                 { text: 'Requirement', link: '/en/documentation/entities/requirement' },
                 { text: 'System', link: '/en/documentation/entities/system' },
                 { text: 'System Type', link: '/en/documentation/entities/system-type' },
-                { text: 'Asset Instance', link: '/en/documentation/entities/asset-instance' },
+                { text: 'Asset', link: '/en/documentation/entities/asset' },
                 { text: 'Asset Type', link: '/en/documentation/entities/asset-type' },
                 { text: 'Building', link: '/en/documentation/entities/building' },
                 { text: 'Level', link: '/en/documentation/entities/level' }
@@ -365,7 +365,7 @@ export default defineConfig({
                 { text: 'Wymaganie', link: '/pl/dokumentacja/encje/wymaganie' },
                 { text: 'Instalacja', link: '/pl/dokumentacja/encje/system' },
                 { text: 'Typ Systemu', link: '/pl/dokumentacja/encje/typ-systemu' },
-                { text: 'Urządzenie', link: '/pl/dokumentacja/encje/instancja-zasobu' },
+                { text: 'Urządzenie', link: '/pl/dokumentacja/encje/zasob' },
                 { text: 'Typ Zasobu', link: '/pl/dokumentacja/encje/typ-zasobu' },
                 { text: 'Budynek', link: '/pl/dokumentacja/encje/budynek' },
                 { text: 'Kondygnacja', link: '/pl/dokumentacja/encje/poziom' }

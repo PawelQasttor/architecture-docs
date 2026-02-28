@@ -15,7 +15,7 @@ Każda karta SBM zawiera następujące wspólne pola frontmatter:
 | Pole | Typ | Wymagane | Opis |
 |------|-----|----------|------|
 | `id` | `string` | Tak | Unikalny identyfikator z prefiksem rodzaju karty (np. `SP-001`, `ZONE-FIRE-01`) |
-| `entityType` | `string` | Tak | Jeden z: `building`, `level`, `zone`, `space`, `system`, `asset_instance`, `requirement` |
+| `entityType` | `string` | Tak | Jeden z: `building`, `level`, `zone`, `space`, `system`, `asset`, `requirement` |
 | `version` | `string` | Tak | Wersja semantyczna w formacie `MAJOR.MINOR.PATCH` (np. `1.0.0`) |
 | `tags` | `string[]` | Nie | Dowolne tagi do kategoryzacji i filtrowania |
 | `ifcMapping` | `object` | Nie | Mapowanie klasy IFC (zobacz [Mapowanie IFC](#mapowanie-ifc) poniżej) |
@@ -245,7 +245,7 @@ Reprezentuje system budynkowy (HVAC, elektryczny, sanitarny itd.).
 | `buildingId` | `string` | Tak | Odniesienie do budynku nadrzędnego |
 | `servedZoneIds` | `string[]` | Nie | Strefy obsługiwane przez ten system |
 | `servedSpaceIds` | `string[]` | Nie | Przestrzenie obsługiwane przez ten system |
-| `assetInstanceIds` | `string[]` | Nie | Zasoby należące do tego systemu |
+| `assetIds` | `string[]` | Nie | Zasoby należące do tego systemu |
 | `requirements` | `string[]` | Nie | Identyfikatory wymagań |
 | `performance` | `object` | Nie | Dowolne dane wydajnościowe |
 | `ifcMapping` | `object` | Nie | Mapowanie IFC |
@@ -266,7 +266,7 @@ systemCategory: "hvac"
 buildingId: "BLD-MAIN"
 servedZoneIds: ["ZONE-HVAC-01"]
 servedSpaceIds: ["SP-101", "SP-102", "SP-103"]
-assetInstanceIds: ["AI-AHU-01", "AI-FILTER-01"]
+assetIds: ["AST-AHU-01", "AST-FILTER-01"]
 requirements: ["REQ-TEMP-01", "REQ-VENT-01"]
 performance:
   airflowRate: 5000
@@ -289,12 +289,12 @@ tags: ["hvac", "ahu", "centrala"]
 
 Reprezentuje pojedynczy zainstalowany komponent lub urządzenie.
 
-**Wzorzec ID:** `AI-[A-Z0-9-]+`
+**Wzorzec ID:** `AST-[A-Z0-9-]+`
 
 | Pole | Typ | Wymagane | Opis |
 |------|-----|----------|------|
-| `id` | `string` | Tak | np. `AI-AHU-01` |
-| `entityType` | `string` | Tak | Musi być `"asset_instance"` |
+| `id` | `string` | Tak | np. `AST-AHU-01` |
+| `entityType` | `string` | Tak | Musi być `"asset"` |
 | `assetName` | `string` | Tak | Nazwa zasobu |
 | `assetTypeId` | `string` | Nie | Odniesienie do wpisu w katalogu typów zasobów |
 | `systemId` | `string` | Tak | Odniesienie do systemu nadrzędnego |
@@ -331,8 +331,8 @@ Reprezentuje pojedynczy zainstalowany komponent lub urządzenie.
 
 ```yaml
 ---
-id: "AI-AHU-01"
-entityType: "asset_instance"
+id: "AST-AHU-01"
+entityType: "asset"
 assetName: "Centrala Wentylacyjna - Główna"
 assetTypeId: "ATYPE-AHU-DAIKIN-D-AHU"
 systemId: "SYS-HVAC-01"
@@ -358,7 +358,7 @@ tags: ["hvac", "ahu", "daikin"]
 ---
 ```
 
-**Szablon:** [Szablon zasobu](/pl/szablony/szablon-zasobu) | **Dokumentacja karty:** [Urządzenie](/pl/dokumentacja/encje/instancja-zasobu)
+**Szablon:** [Szablon zasobu](/pl/szablony/szablon-zasobu) | **Dokumentacja karty:** [Urządzenie](/pl/dokumentacja/encje/zasob)
 
 ---
 

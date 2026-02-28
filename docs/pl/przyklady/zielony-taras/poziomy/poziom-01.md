@@ -1,5 +1,4 @@
 ---
-documentType: "level"
 entityType: "level"
 id: "LVL-01"
 projectPhase: "design_development"

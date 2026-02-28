@@ -1,5 +1,4 @@
 ---
-documentType: "system"
 entityType: "system"
 id: "SYS-HVAC-01"
 projectPhase: "design_development"
@@ -15,10 +14,10 @@ servedZoneIds:
   - "ZONE-HVAC-NORTH"
 
 # Asset instances in this system
-assetInstanceIds:
-  - "AI-MVHR-01"
-  - "AI-HP-01"
-  - "AI-UFH-MANIFOLD-01"
+assetIds:
+  - "AST-MVHR-01"
+  - "AST-HP-01"
+  - "AST-UFH-MANIFOLD-01"
 
 # Instance-specific performance
 performance:
@@ -53,17 +52,17 @@ Integrated HVAC system serving apartments on first floor of Building 01, providi
 
 ### Primary Equipment
 
-1. **MVHR Unit** (AI-MVHR-01)
+1. **MVHR Unit** (AST-MVHR-01)
    - Location: Ceiling void above corridor
    - Model: Systemair SAVE VTR 300
    - Heat recovery: 92% (tested)
 
-2. **Heat Pump** ([AI-HP-01](../assets/ai-hp-01.md))
+2. **Heat Pump** ([AST-HP-01](../assets/ai-hp-01.md))
    - Location: External wall (north side, ground level)
    - Model: Bosch Compress 7000i AW 12kW
    - COP: 4.3 (measured at A7/W35)
 
-3. **Underfloor Heating Manifold** (AI-UFH-MANIFOLD-01)
+3. **Underfloor Heating Manifold** (AST-UFH-MANIFOLD-01)
    - Location: Service cupboard, first floor corridor
    - Zones: 5 circuits (bedroom 01, bedroom 02, corridor, bathroom, living room)
 
@@ -110,7 +109,7 @@ Integrated HVAC system serving apartments on first floor of Building 01, providi
 
 - **System Type:** [SYT-HVAC-RESIDENTIAL-MVHR](../system-types/hvac-residential-mvhr.md)
 - **Zones:** [ZONE-HVAC-NORTH](../zones/hvac-zone-north.md)
-- **Assets:** AI-MVHR-01, [AI-HP-01](../assets/ai-hp-01.md), AI-UFH-MANIFOLD-01
+- **Assets:** AST-MVHR-01, [AST-HP-01](../assets/ai-hp-01.md), AST-UFH-MANIFOLD-01
 - **Building:** [BLD-01](../project-specification.md)
 
 ---

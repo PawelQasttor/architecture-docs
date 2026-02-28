@@ -52,7 +52,7 @@ Systemy definiują:
 | Pole | Typ | Opis |
 |------|-----|------|
 | `systemTypeId` | string | Odniesienie do system_type dla właściwości szablonowych |
-| `assetInstanceIds` | array | Identyfikatory instancji zasob&oacute;w (obliczane automatycznie) |
+| `assetIds` | array | Identyfikatory zasob&oacute;w (obliczane automatycznie) |
 | `servedZoneIds` | array | Identyfikatory stref obsługiwanych przez system |
 | `servedSpaceIds` | array | Identyfikatory przestrzeni obsługiwanych bezpośrednio przez system |
 | `systemType` | string | Konkretny typ systemu (np. "variable_air_volume") |
@@ -85,7 +85,7 @@ Systemy definiują:
 - **maintenanceSchedule** — Kiedy serwisować urządzenia
 - **controlStrategy** — Jak jest sterowany (BMS, lokalnie, ręcznie)
 
-**Uwaga:** `assetInstanceIds` jest **obliczane automatycznie**. Nie wypisujesz tu urządzeń — urządzenia wskazują system, a system śledzi relację odwrotną.
+**Uwaga:** `assetIds` jest **obliczane automatycznie**. Nie wypisujesz tu urządzeń — urządzenia wskazują system, a system śledzi relację odwrotną.
 :::
 
 ## Kategorie Systemów (Wyliczenie)
@@ -297,11 +297,11 @@ System zmiennoprzepływowy (VAV) z pompą ciepła obsługujący przestrzenie mie
           "REQ-THERMAL-COMFORT-001",
           "REQ-ENERGY-EFFICIENCY-HVAC-001"
         ],
-        "assetInstanceIds": [
-          "AI-AHU-01",
-          "AI-VAV-NORTH-01",
-          "AI-VAV-NORTH-02",
-          "AI-VAV-NORTH-03"
+        "assetIds": [
+          "AST-AHU-01",
+          "AST-VAV-NORTH-01",
+          "AST-VAV-NORTH-02",
+          "AST-VAV-NORTH-03"
         ],
         "ifcMapping": {
           "ifcEntity": "IfcSystem",
@@ -318,7 +318,7 @@ System zmiennoprzepływowy (VAV) z pompą ciepła obsługujący przestrzenie mie
 
 ## Relacje Odwrotne
 
-Kompilator **automatycznie oblicza** `system.assetInstanceIds` na podstawie odwołań z zasob&oacute;w:
+Kompilator **automatycznie oblicza** `system.assetIds` na podstawie odwołań z zasob&oacute;w:
 
 **Wejście:** Zasoby odwołują się do system&oacute;w
 ```yaml
@@ -336,10 +336,10 @@ systemId: "SYS-HVAC-01"
 ```json
 {
   "id": "SYS-HVAC-01",
-  "assetInstanceIds": [
-    "AI-AHU-01",
-    "AI-VAV-NORTH-01",
-    "AI-VAV-NORTH-02"
+  "assetIds": [
+    "AST-AHU-01",
+    "AST-VAV-NORTH-01",
+    "AST-VAV-NORTH-02"
   ]
 }
 ```
@@ -379,9 +379,9 @@ id: "SYS-HVAC-01"
 systemName: "System HVAC Budynek 01"
 systemTypeId: "SYT-HVAC-RESIDENTIAL-MVHR"  # Dziedziczy komponenty i wydajność
 buildingId: "BLD-01"
-assetInstanceIds:
-  - "AI-MVHR-01"
-  - "AI-HP-01"
+assetIds:
+  - "AST-MVHR-01"
+  - "AST-HP-01"
 ---
 ```
 
@@ -448,13 +448,13 @@ Systemy agregują dane zasob&oacute;w na potrzeby zarządzania obiektem:
         {
           "taskType": "filter_replacement",
           "frequency": "quarterly",
-          "affectedAssets": ["AI-AHU-01"],
+          "affectedAssets": ["AST-AHU-01"],
           "nextDue": "2026-04-01"
         },
         {
           "taskType": "annual_inspection",
           "frequency": "yearly",
-          "affectedAssets": ["AI-AHU-01", "AI-VAV-NORTH-*"],
+          "affectedAssets": ["AST-AHU-01", "AST-VAV-NORTH-*"],
           "nextDue": "2026-06-15"
         }
       ],
@@ -551,7 +551,7 @@ Systemy z danymi o wydajności i sprawności umożliwiają modelowanie energetyc
 
 ## Zobacz Także
 
-- **[Karta Urządzenie](/pl/dokumentacja/encje/instancja-zasobu)** - Urządzenia należą do system&oacute;w
+- **[Karta Urządzenie](/pl/dokumentacja/encje/zasob)** - Urządzenia należą do system&oacute;w
 - **[Karta Strefa](/pl/dokumentacja/encje/strefa)** - Systemy obsługują strefy
 - **Rejestr Zasob&oacute;w** - Planowanie konserwacji system&oacute;w
 - **Schemat Cyfrowego Bliźniaka** - Monitoring system&oacute;w

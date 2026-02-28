@@ -1,7 +1,6 @@
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-HP-01"
+entityType: "asset"
+id: "AST-HP-01"
 projectPhase: "construction"
 bimLOD: "LOD_400"
 

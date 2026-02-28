@@ -547,6 +547,21 @@ Requirements with `monitoring` verification generate runtime rules:
 }
 ```
 
+## Requirement Sources (Dual Format)
+
+Requirements exist in **two formats by design**, each serving a different purpose:
+
+| Format | Location | Purpose | Who Authors |
+|--------|----------|---------|-------------|
+| **JSON files** | `scripts/requirements/{country}/` | Jurisdiction templates shared across all projects | Standard maintainers |
+| **Markdown files** | `{project}/requirements/` | Project-specific requirements authored by the design team | Architects, engineers |
+
+**JSON (jurisdiction templates)** are reusable rule packs loaded automatically by the compiler based on the project's country code. They encode building codes (WT 2021, DIN, Building Regs) as machine-readable rules with scope matching -- the compiler auto-assigns them to spaces by `spaceType`. You do not need to reference them manually from each space file.
+
+**Markdown (project instances)** are project-specific requirements written alongside your other entity files. They follow the same YAML frontmatter format as all other SBM entities and can contain narrative documentation in the Markdown body. Use these for client-specific rules, design targets, or custom requirements that go beyond code minimums.
+
+Both formats produce identical requirement entities in the compiled `sbm.json` -- the distinction is purely about authoring workflow and reusability.
+
 ## Authoring Requirements
 
 ### Global Requirements (JSON)
@@ -556,7 +571,7 @@ Place in `scripts/requirements/global/` - automatically loaded for all projects.
 Place in `scripts/requirements/{country_code}/` - loaded when `project.country` matches.
 
 ### Project-Specific Requirements (Markdown)
-Place in `docs/en/examples/{project}/requirements/` - loaded for that project only.
+Place in `{project}/requirements/` - loaded for that project only.
 
 ```markdown
 ---

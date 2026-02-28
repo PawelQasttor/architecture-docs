@@ -1,5 +1,4 @@
 ---
-documentType: "zone"
 entityType: "zone"
 id: "ZONE-HVAC-NORTH"
 projectPhase: "design_development"

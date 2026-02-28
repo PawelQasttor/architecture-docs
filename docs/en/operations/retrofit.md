@@ -141,7 +141,7 @@ When equipment fails or performance drops, use this framework to choose the righ
 
 ### Decision Process
 
-1. **Gather data** -- review the [Asset Instance card](/en/documentation/entities/asset-instance) for age, maintenance history, and condition.
+1. **Gather data** -- review the [Asset Instance card](/en/documentation/entities/asset) for age, maintenance history, and condition.
 2. **Assess costs** -- compare repair estimate against replacement and upgrade options.
 3. **Check compliance** -- verify whether current regulations require a higher specification (see [Regulations](/en/regulations/completion-occupancy)).
 4. **Evaluate synergies** -- determine whether upgrading one component enables savings elsewhere (e.g., a more efficient boiler may allow smaller radiators).
@@ -153,7 +153,7 @@ When a retrofit is carried out, the documentation must be updated to reflect the
 
 | Action | Documentation Update |
 |---|---|
-| Equipment replaced | Create new [Asset Instance card](/en/documentation/entities/asset-instance), archive old card with end-of-service date |
+| Equipment replaced | Create new [Asset Instance card](/en/documentation/entities/asset), archive old card with end-of-service date |
 | System modified | Update [System card](/en/documentation/entities/system) with revised configuration, performance targets |
 | Building fabric changed | Update [as-built drawings](/en/phases/as-built), revise U-values and thermal models |
 | New technology added | Create new asset/system cards, update [BIM model](/en/bim-integration/) if applicable |

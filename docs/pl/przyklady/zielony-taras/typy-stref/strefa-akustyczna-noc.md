@@ -1,5 +1,4 @@
 ---
-documentType: "zone_type"
 entityType: "zone_type"
 id: "ZT-ACOUSTIC-NIGHT"
 typeName: "Acoustic Zone - Night (Sleeping Spaces)"

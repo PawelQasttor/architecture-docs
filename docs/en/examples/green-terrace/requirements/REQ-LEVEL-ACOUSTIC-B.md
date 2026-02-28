@@ -1,5 +1,4 @@
 ---
-documentType: requirement
 entityType: requirement
 id: REQ-LEVEL-ACOUSTIC-B
 requirementName: "Acoustic Performance - Class B"

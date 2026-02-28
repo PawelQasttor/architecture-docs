@@ -460,10 +460,10 @@ Każda karta SBM jest sprawdzana i aktualizowana, aby odzwierciedlać zweryfikow
 ### Aktualizacja Kart Przestrzeni
 Karty Przestrzeni uzupełnia się o zmierzone powierzchnie, zweryfikowane wysokości pomieszczeń, potwierdzone wykończenia i faktyczne urządzenia obecne w każdej przestrzeni. Architekt porównuje projekt z pomiarem i odnotowuje odchylenia.
 
-### Uzupełnienie Kart Instancji Zasobu
-Karty Instancji Zasobu otrzymują zweryfikowane numery seryjne, końcowe wyniki badań, informacje gwarancyjne i potwierdzone parametry eksploatacyjne. Stanowią podstawę przyszłej konserwacji.
+### Uzupełnienie Kart Zasobu
+Karty Zasobu otrzymują zweryfikowane numery seryjne, końcowe wyniki badań, informacje gwarancyjne i potwierdzone parametry eksploatacyjne. Stanowią podstawę przyszłej konserwacji.
 
-[Dowiedz się o Kartach Instancji Zasobu →](/pl/dokumentacja/encje/instancja-zasobu)
+[Dowiedz się o Kartach Zasobu →](/pl/dokumentacja/encje/zasob)
 
 ### Weryfikacja Wymagań
 Karty Wymagań są sprawdzane względem zmierzonych wartości -- parametry termiczne z termowizji, parametry akustyczne z badań i odporność ogniowa z certyfikatów. Każde wymaganie rejestruje swój status zgodności.

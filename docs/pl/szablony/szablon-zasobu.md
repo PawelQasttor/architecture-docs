@@ -4,8 +4,8 @@ Uzyj tego szablonu do dokumentowania poszczegolnych elementow wyposazenia wraz z
 
 ## Plik szablonu
 
-**Wzorzec nazwy pliku:** `assets/ai-[typ-zasobu]-[nazwa].md`
-**Przyklad:** `assets/ai-ahu-01.md`, `assets/ai-boiler-main.md`
+**Wzorzec nazwy pliku:** `assets/ast-[typ-zasobu]-[nazwa].md`
+**Przyklad:** `assets/ast-ahu-01.md`, `assets/ast-boiler-main.md`
 
 ---
 
@@ -13,9 +13,9 @@ Uzyj tego szablonu do dokumentowania poszczegolnych elementow wyposazenia wraz z
 
 ```yaml
 ---
-documentType: "asset_instance"
-entityType: "asset_instance"
-id: "AI-[ASSET-TYPE]-[SEQ]"  # Przyklad: AI-AHU-01
+documentType: "asset"
+entityType: "asset"
+id: "AST-[ASSET-TYPE]-[SEQ]"  # Przyklad: AST-AHU-01
 projectPhase: "construction_documentation"
 bimLOD: "LOD_400"
 
@@ -70,7 +70,7 @@ installation:
 version: "1.0.0"
 ---
 
-# Instancja Zasobu: [Nazwa Zasobu]
+# Zasób: [Nazwa Zasobu]
 
 ## Opis urzadzenia
 
@@ -116,25 +116,25 @@ Krotki opis urzadzenia, jego funkcji i roli w systemie.
 ## Prefiksy typow zasobow
 
 ### HVAC
-- `AI-AHU-` - Centrale wentylacyjne
-- `AI-HRV-` - Rekuperatory
-- `AI-BOILER-` - Kotly
-- `AI-CHILLER-` - Agregaty chlodnicze
-- `AI-PUMP-` - Pompy
-- `AI-FAN-` - Wentylatory
+- `AST-AHU-` - Centrale wentylacyjne
+- `AST-HRV-` - Rekuperatory
+- `AST-BOILER-` - Kotly
+- `AST-CHILLER-` - Agregaty chlodnicze
+- `AST-PUMP-` - Pompy
+- `AST-FAN-` - Wentylatory
 
 ### Elektryczne
-- `AI-PANEL-` - Rozdzielnice elektryczne
-- `AI-TRANS-` - Transformatory
-- `AI-GEN-` - Agregaty pradotworcze
-- `AI-UPS-` - Systemy UPS
+- `AST-PANEL-` - Rozdzielnice elektryczne
+- `AST-TRANS-` - Transformatory
+- `AST-GEN-` - Agregaty pradotworcze
+- `AST-UPS-` - Systemy UPS
 
 ### Wodno-kanalizacyjne
-- `AI-TANK-` - Zbiorniki wodne
-- `AI-HEATER-` - Podgrzewacze wody
-- `AI-PUMP-` - Pompy
+- `AST-TANK-` - Zbiorniki wodne
+- `AST-HEATER-` - Podgrzewacze wody
+- `AST-PUMP-` - Pompy
 
 ### Bezpieczenstwo pozarowe
-- `AI-SPRINKLER-` - Systemy tryskaczowe
-- `AI-ALARM-` - Centrale sygnalizacji pozarowej
-- `AI-EXTINGUISHER-` - Gasnice
+- `AST-SPRINKLER-` - Systemy tryskaczowe
+- `AST-ALARM-` - Centrale sygnalizacji pozarowej
+- `AST-EXTINGUISHER-` - Gasnice

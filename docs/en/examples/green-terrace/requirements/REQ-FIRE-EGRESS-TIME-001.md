@@ -1,5 +1,4 @@
 ---
-documentType: requirement
 entityType: requirement
 id: REQ-FIRE-EGRESS-TIME-001
 requirementName: "Fire Egress Time Limit"

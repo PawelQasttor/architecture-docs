@@ -1,5 +1,4 @@
 ---
-documentType: "space"
 entityType: "space"
 id: "SP-BLD-01-L01-001"
 projectPhase: "design_development"

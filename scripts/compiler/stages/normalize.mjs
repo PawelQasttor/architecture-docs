@@ -43,7 +43,7 @@ function groupEntitiesByType(entities) {
     zones: [],
     spaces: [],
     systems: [],
-    asset_instances: [],
+    assets: [],
     requirements: [],
     space_types: [],
     zone_types: [],
@@ -65,8 +65,8 @@ function groupEntitiesByType(entities) {
       grouped.spaces.push(normalizeEntity(entity));
     } else if (type === 'system') {
       grouped.systems.push(normalizeEntity(entity));
-    } else if (type === 'asset_instance') {
-      grouped.asset_instances.push(normalizeEntity(entity));
+    } else if (type === 'asset' || type === 'asset_instance') {
+      grouped.assets.push(normalizeEntity(entity));
     } else if (type === 'requirement') {
       grouped.requirements.push(normalizeEntity(entity));
     } else if (type === 'space_type') {
@@ -111,17 +111,17 @@ function computeRelationships(grouped) {
   }
 
   // Build system → assets reverse mapping
-  if (grouped.systems && grouped.asset_instances) {
+  if (grouped.systems && grouped.assets) {
     for (const system of grouped.systems) {
-      if (!system.assetInstanceIds) {
-        system.assetInstanceIds = [];
+      if (!system.assetIds) {
+        system.assetIds = [];
       }
 
       // Find all assets that reference this system
-      for (const asset of grouped.asset_instances) {
+      for (const asset of grouped.assets) {
         if (asset.systemId === system.id) {
-          if (!system.assetInstanceIds.includes(asset.id)) {
-            system.assetInstanceIds.push(asset.id);
+          if (!system.assetIds.includes(asset.id)) {
+            system.assetIds.push(asset.id);
           }
         }
       }
@@ -286,10 +286,10 @@ function resolveTypeInheritance(grouped, logger) {
   }
 
   // Asset Type → Asset Instance
-  if (grouped.asset_instances.length > 0 && grouped.asset_types.length > 0) {
+  if (grouped.assets.length > 0 && grouped.asset_types.length > 0) {
     const typeMap = new Map(grouped.asset_types.map(t => [t.id, t]));
 
-    for (const asset of grouped.asset_instances) {
+    for (const asset of grouped.assets) {
       const typeId = asset.assetTypeId;
       if (!typeId) continue;
 
@@ -535,12 +535,12 @@ function performCostRollup(grouped, project, logger) {
   }
 
   // Step 3: Aggregate asset costs to systems
-  if (grouped.systems && grouped.asset_instances) {
+  if (grouped.systems && grouped.assets) {
     for (const system of grouped.systems) {
       let systemCost = 0;
       const contributingAssets = [];
 
-      for (const asset of grouped.asset_instances) {
+      for (const asset of grouped.assets) {
         if (asset.systemId === system.id && asset.cost?.totalCost) {
           systemCost += asset.cost.totalCost;
           contributingAssets.push({
@@ -1002,7 +1002,7 @@ export async function normalize(rawEntities, options, logger) {
       ...(grouped.zones.length > 0 && { zones: grouped.zones }),
       ...(grouped.spaces.length > 0 && { spaces: grouped.spaces }),
       ...(grouped.systems.length > 0 && { systems: grouped.systems }),
-      ...(grouped.asset_instances.length > 0 && { asset_instances: grouped.asset_instances }),
+      ...(grouped.assets.length > 0 && { assets: grouped.assets }),
       ...(grouped.requirements.length > 0 && { requirements: grouped.requirements }),
       ...(grouped.space_types.length > 0 && { space_types: grouped.space_types }),
       ...(grouped.zone_types.length > 0 && { zone_types: grouped.zone_types }),
@@ -1017,7 +1017,7 @@ export async function normalize(rawEntities, options, logger) {
         zones: grouped.zones.length,
         spaces: grouped.spaces.length,
         systems: grouped.systems.length,
-        asset_instances: grouped.asset_instances.length,
+        assets: grouped.assets.length,
         requirements: grouped.requirements.length,
         space_types: grouped.space_types.length,
         zone_types: grouped.zone_types.length,

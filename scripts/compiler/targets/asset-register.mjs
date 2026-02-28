@@ -357,7 +357,7 @@ function generateSystemSummaries(systems, inventory, logger) {
 export function generateAssetRegister(sbm, logger) {
   logger.debug('Generating asset register...');
 
-  const assets = sbm.entities.asset_instances || [];
+  const assets = sbm.entities.assets || sbm.entities.asset_instances || [];
   const systems = sbm.entities.systems || [];
   const spaces = sbm.entities.spaces || [];
 

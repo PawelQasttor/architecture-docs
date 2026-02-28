@@ -15,7 +15,7 @@ Every SBM document includes the following common frontmatter fields:
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `id` | `string` | Yes | Unique identifier with a document-type prefix (e.g., `SP-001`, `ZONE-FIRE-01`) |
-| `entityType` | `string` | Yes | One of: `building`, `level`, `zone`, `space`, `system`, `asset_instance`, `requirement` |
+| `entityType` | `string` | Yes | One of: `building`, `level`, `zone`, `space`, `system`, `asset`, `requirement` |
 | `version` | `string` | Yes | Semantic version in `MAJOR.MINOR.PATCH` format (e.g., `1.0.0`) |
 | `tags` | `string[]` | No | Freeform tags for categorisation and filtering |
 | `ifcMapping` | `object` | No | IFC entity mapping (see [IFC Mapping](#ifc-mapping) below) |
@@ -245,7 +245,7 @@ Represents a building system (HVAC, electrical, plumbing, etc.).
 | `buildingId` | `string` | Yes | Parent building reference |
 | `servedZoneIds` | `string[]` | No | Zones this system serves |
 | `servedSpaceIds` | `string[]` | No | Spaces this system serves |
-| `assetInstanceIds` | `string[]` | No | Assets that belong to this system |
+| `assetIds` | `string[]` | No | Assets that belong to this system |
 | `requirements` | `string[]` | No | Requirement IDs that apply |
 | `performance` | `object` | No | Freeform performance data |
 | `ifcMapping` | `object` | No | IFC mapping |
@@ -266,7 +266,7 @@ systemCategory: "hvac"
 buildingId: "BLD-MAIN"
 servedZoneIds: ["ZONE-HVAC-01"]
 servedSpaceIds: ["SP-101", "SP-102", "SP-103"]
-assetInstanceIds: ["AI-AHU-01", "AI-FILTER-01"]
+assetIds: ["AST-AHU-01", "AST-FILTER-01"]
 requirements: ["REQ-TEMP-01", "REQ-VENT-01"]
 performance:
   airflowRate: 5000
@@ -285,16 +285,16 @@ tags: ["hvac", "ahu", "central"]
 
 ---
 
-### Asset Instance
+### Asset
 
 Represents an individual installed component or piece of equipment.
 
-**ID pattern:** `AI-[A-Z0-9-]+`
+**ID pattern:** `AST-[A-Z0-9-]+`
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `id` | `string` | Yes | e.g., `AI-AHU-01` |
-| `entityType` | `string` | Yes | Must be `"asset_instance"` |
+| `id` | `string` | Yes | e.g., `AST-AHU-01` |
+| `entityType` | `string` | Yes | Must be `"asset"` |
 | `assetName` | `string` | Yes | Asset name |
 | `assetTypeId` | `string` | No | Reference to an asset type catalogue entry |
 | `systemId` | `string` | Yes | Parent system reference |
@@ -331,8 +331,8 @@ Represents an individual installed component or piece of equipment.
 
 ```yaml
 ---
-id: "AI-AHU-01"
-entityType: "asset_instance"
+id: "AST-AHU-01"
+entityType: "asset"
 assetName: "Air Handling Unit - Main"
 assetTypeId: "ATYPE-AHU-DAIKIN-D-AHU"
 systemId: "SYS-HVAC-01"
@@ -358,7 +358,7 @@ tags: ["hvac", "ahu", "daikin"]
 ---
 ```
 
-**Template:** [Asset template](/en/templates/asset-template) | **Docs:** [Asset Instance](/en/documentation/entities/asset-instance)
+**Template:** [Asset template](/en/templates/asset-template) | **Docs:** [Asset](/en/documentation/entities/asset)
 
 ---
 

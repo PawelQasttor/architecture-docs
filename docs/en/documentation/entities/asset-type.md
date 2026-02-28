@@ -491,9 +491,9 @@ When compiled, Asset Types are stored separately from asset instances:
         "version": "1.0.0"
       }
     ],
-    "asset_instances": [
+    "assets": [
       {
-        "id": "AI-HP-01",
+        "id": "AST-HP-01",
         "assetTypeId": "AT-BOSCH-HP-300",
         "identifiers": {
           "serial": "HP300-2024-001234",
@@ -532,12 +532,12 @@ The compiler **resolves type references** and merges specifications:
 
 **Asset Type:** `AT-BOSCH-HP-300` has full specifications
 
-**Asset Instance:** `AI-HP-01` adds serial number and location
+**Asset:** `AST-HP-01` adds serial number and location
 
 **Compiled Output:**
 ```json
 {
-  "id": "AI-HP-01",
+  "id": "AST-HP-01",
   "assetTag": "HP-01",
   "serial": "HP300-2024-001234",
   "manufacturer": "Bosch Thermotechnology",  // From type
@@ -636,7 +636,7 @@ AT-BOSCH-HP-400 → 16 kW models
 
 ## See Also
 
-- **[Asset Instance](/en/documentation/entities/asset-instance)** - Asset instances that reference types
+- **[Asset](/en/documentation/entities/asset)** - Assets that reference types
 - **[System](/en/documentation/entities/system)** - Systems containing assets
 - **[System Type](/en/documentation/entities/system-type)** - System templates
 - **[Space Type](/en/documentation/entities/space-type)** - Space templates (similar pattern)

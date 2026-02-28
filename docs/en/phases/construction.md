@@ -345,10 +345,10 @@ git log --oneline 06-construction/
 
 The [Semantic Building Model (SBM)](/en/documentation/overview) is updated throughout construction as actual conditions are documented. Document types evolve from design specifications to reflect installed reality.
 
-### Asset Instance Documents Updated
-As equipment is installed on site, Asset Instance documents are updated with serial numbers, installation dates, and commissioning data.
+### Asset Documents Updated
+As equipment is installed on site, Asset documents are updated with serial numbers, installation dates, and commissioning data.
 
-[Learn about Asset Instance documents →](/en/documentation/entities/asset-instance)
+[Learn about Asset documents →](/en/documentation/entities/asset)
 
 ### Space Documents Tracked
 Space documents begin tracking as-built measurements as construction progresses. Actual dimensions, finishes, and conditions are recorded.
@@ -358,10 +358,10 @@ System documents are updated with actual routing, connections, and verified perf
 
 [Learn about System documents →](/en/documentation/entities/system)
 
-### Example: Asset Instance Updated with Installation Data
+### Example: Asset Updated with Installation Data
 
 ```yaml
-entity: asset_instance
+entity: asset
 id: asset-boiler-01
 name: "Central Gas Boiler"
 system: system-heating-central

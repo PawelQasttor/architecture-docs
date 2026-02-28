@@ -58,7 +58,7 @@ Failure to maintain the building logbook or to conduct mandatory inspections can
 
 ## Asset Cards for Maintenance
 
-Each piece of equipment should have an [Asset Instance card](/en/documentation/entities/asset-instance) that stores maintenance-relevant data. Use the [Asset Template](/en/templates/asset-template) as a starting point.
+Each piece of equipment should have an [Asset Instance card](/en/documentation/entities/asset) that stores maintenance-relevant data. Use the [Asset Template](/en/templates/asset-template) as a starting point.
 
 ### Key Fields for Maintenance
 

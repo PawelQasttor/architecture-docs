@@ -1,5 +1,4 @@
 ---
-documentType: "zone_type"
 entityType: "zone_type"
 id: "ZT-HVAC-RESIDENTIAL"
 typeName: "HVAC Zone - Residential Standard"
