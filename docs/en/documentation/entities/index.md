@@ -4,9 +4,9 @@
 
 "I want to document my building project. What files do I create?"
 
-This page answers that. There are **11 types of files** you can create. Each type describes a different aspect of your building.
+This page answers that. There are **14 types of files** you can create. Each type describes a different aspect of your building.
 
-::: tip You Don't Need All 11 Types
+::: tip You Don't Need All 14 Types
 Most projects start with 3-4 types:
 - **Spaces** (rooms)
 - **Zones** (fire zones, acoustic zones)
@@ -18,18 +18,21 @@ That's enough to get started. Add other types when you need them.
 
 ---
 
-## The 11 Document Types (Organized By What They Describe)
+## The 14 Document Types (Organized By What They Describe)
 
 ### **Describing Spaces (Where People Are)**
 
 | Type | When You Use It | Example File |
 |------|----------------|--------------|
+| **[Site](/en/documentation/entities/site)** | The land parcel / plot | `site.md` |
+| **[Building](/en/documentation/entities/building)** | The whole building | `buildings/green-terrace.md` |
+| **[Level](/en/documentation/entities/level)** | Each floor in your building | `levels/ground-floor.md` |
 | **[Space](/en/documentation/entities/space)** | Every room, corridor, area | `spaces/bedroom-01.md` |
 | **[Space Type](/en/documentation/entities/space-type)** | Template for similar rooms (e.g., "standard bedroom") | `space-types/standard-bedroom.md` |
-| **[Level](/en/documentation/entities/level)** | Each floor in your building | `levels/ground-floor.md` |
-| **[Building](/en/documentation/entities/building)** | The whole building | `buildings/green-terrace.md` |
+| **[Envelope](/en/documentation/entities/envelope)** | Wall, roof, floor slab, curtain wall (construction layers + performance) | `envelopes/external-wall-type-a.md` |
+| **[Vertical Circulation](/en/documentation/entities/vertical-circulation)** | Staircase, elevator, ramp, escalator (connecting levels) | `vertical-circulations/staircase-a.md` |
 
-**Start here:** If you're new, begin with **Space** (one file per room). Add **Level** and **Building** when you have multiple floors or buildings.
+**Start here:** If you're new, begin with **Space** (one file per room). Add **Level** and **Building** when you have multiple floors or buildings. Add **Site** when you need plot constraints. Add **Envelope** when you need to track wall buildups and thermal/fire performance. Add **Vertical Circulation** when you need to document stairs, elevators, and fire escape routes.
 
 ---
 
@@ -63,12 +66,18 @@ That's enough to get started. Add other types when you need them.
 Files reference each other using IDs. Think of it like hyperlinks between documents:
 
 ```
-Building (Green Terrace)
-  └─ Level (Ground Floor)
-      └─ Space (Bedroom 01)
-          ├─ belongs to Zone (Fire Zone ZL-IV)
-          ├─ must meet Requirement (height >= 2.50m)
-          └─ contains Asset (Radiator RAD-01)
+Site (Green Terrace Plot)
+  └─ Building (Green Terrace)
+      ├─ Envelope (External Wall Type A)  ← separates spaces
+      ├─ Vertical Circulation (Staircase A)  ← connects levels
+      │    ├─ connects Level (Ground Floor)
+      │    └─ connects Level (First Floor)
+      └─ Level (Ground Floor)
+          └─ Space (Bedroom 01)
+              ├─ bounded by Envelope (External Wall Type A)
+              ├─ belongs to Zone (Fire Zone ZL-IV)
+              ├─ must meet Requirement (height >= 2.50m)
+              └─ contains Asset (Radiator RAD-01)
 ```
 
 **Example:** Bedroom 01's file says "I'm in Fire Zone ZL-IV". The system automatically updates Fire Zone ZL-IV to say "Bedroom 01 is in me". You only write the link once; the reverse link is computed automatically.
@@ -144,8 +153,11 @@ Every file needs a unique ID. Here's the pattern:
 
 | Document Type | ID Format | Example |
 |--------------|-----------|---------|
+| **Site** | `SITE-{descriptor}` | `SITE-GREEN-TERRACE` |
 | **Building** | `BLD-{number}` | `BLD-01` |
 | **Level** | `LVL-{number}` | `LVL-01` (ground floor) |
+| **Envelope** | `ENV-{type}-{number}` | `ENV-EW-01` (external wall 01) |
+| **Vertical Circulation** | `VC-{type}-{descriptor}` | `VC-STAIR-A` (staircase A) |
 | **Space** | `SP-{building}-{level}-{number}` | `SP-BLD-01-L01-001` |
 | **Space Type** | `ST-{descriptor}` | `ST-BEDROOM-STANDARD-A` |
 | **Zone** | `ZONE-{type}-{descriptor}` | `ZONE-FIRE-ZL-IV` |
@@ -196,37 +208,40 @@ The `entityType` field is the primary identifier for the file type. A legacy `do
 | **Track building regulations** | [Requirement documentation](/en/documentation/entities/requirement) |
 | **Document MEP systems** | [System documentation](/en/documentation/entities/system) |
 | **Track installed equipment** | [Asset documentation](/en/documentation/entities/asset) |
-| **See all 11 types with examples** | Scroll down to see the complete list below |
+| **See all 14 types with examples** | Scroll down to see the complete list below |
 
 ---
 
-## Complete List of All 11 Document Types
+## Complete List of All 14 Document Types
 
 Click any type to see detailed documentation:
 
 ### Spatial
-1. **[Building](/en/documentation/entities/building)** - Building-level metadata (name, address, classification)
-2. **[Level](/en/documentation/entities/level)** - Floor information (elevation, gross area)
-3. **[Space](/en/documentation/entities/space)** - Rooms and functional areas (bedrooms, offices, corridors)
-4. **[Space Type](/en/documentation/entities/space-type)** - Templates for repeating room types
+1. **[Site](/en/documentation/entities/site)** - Plot/parcel context (area, setbacks, utilities, zoning)
+2. **[Building](/en/documentation/entities/building)** - Building-level metadata (name, address, classification)
+3. **[Level](/en/documentation/entities/level)** - Floor information (elevation, gross area)
+4. **[Space](/en/documentation/entities/space)** - Rooms and functional areas (bedrooms, offices, corridors)
+5. **[Space Type](/en/documentation/entities/space-type)** - Templates for repeating room types
+6. **[Envelope](/en/documentation/entities/envelope)** - Walls, roofs, slabs, curtain walls (construction layers + performance)
+7. **[Vertical Circulation](/en/documentation/entities/vertical-circulation)** - Staircases, elevators, ramps, escalators (connecting levels, egress, accessibility)
 
 ### Zoning
-5. **[Zone](/en/documentation/entities/zone)** - Functional groupings (fire, acoustic, HVAC, security)
-6. **[Zone Type](/en/documentation/entities/zone-type)** - Templates for standard zone configurations
+8. **[Zone](/en/documentation/entities/zone)** - Functional groupings (fire, acoustic, HVAC, security)
+9. **[Zone Type](/en/documentation/entities/zone-type)** - Templates for standard zone configurations
 
 ### Technical Systems
-7. **[System](/en/documentation/entities/system)** - MEP systems (HVAC, electrical, plumbing)
-8. **[System Type](/en/documentation/entities/system-type)** - Templates for standard system configurations
-9. **[Asset](/en/documentation/entities/asset)** - Physical equipment (boilers, pumps, sensors)
-10. **[Asset Type](/en/documentation/entities/asset-type)** - Product specifications and templates
+10. **[System](/en/documentation/entities/system)** - MEP systems (HVAC, electrical, plumbing)
+11. **[System Type](/en/documentation/entities/system-type)** - Templates for standard system configurations
+12. **[Asset](/en/documentation/entities/asset)** - Physical equipment (boilers, pumps, sensors)
+13. **[Asset Type](/en/documentation/entities/asset-type)** - Product specifications and templates
 
 ### Governance
-11. **[Requirement](/en/documentation/entities/requirement)** - Performance and regulatory rules (height minimums, fire ratings, daylight)
+14. **[Requirement](/en/documentation/entities/requirement)** - Performance and regulatory rules (height minimums, fire ratings, daylight)
 
 ::: details Supplementary Document Types
-In addition to the 11 core entity types, the SBM standard recognizes supplementary document types that are not semantic entities but provide supporting technical information:
+In addition to the 13 core entity types, the SBM standard recognizes supplementary document types that are not semantic entities but provide supporting technical information:
 
-- **`element_specification`** -- Detailed construction element documentation (wall buildups, roof assemblies, floor constructions). These are descriptive documents that supplement the spatial model but do not participate in the compiler's entity graph, inheritance, or validation pipeline.
+- **`element_specification`** -- Legacy detailed construction element documentation (wall buildups, roof assemblies, floor constructions). Since v0.5, the **Envelope** entity type is preferred for walls, roofs, and slabs as it participates in the compiler's entity graph, relationships, cost rollup, and validation pipeline. Existing `element_specification` files can coexist alongside envelope entities.
 
 Supplementary documents use the same Markdown + YAML frontmatter format and can be included alongside entity files in your project folder.
 :::
@@ -315,8 +330,8 @@ SBM v0.3.0 adds comprehensive support for healthcare, infrastructure, and indust
 
 ## Common Questions
 
-**"Do I need to create all 11 types?"**
-No. Start with 3-4 types (Space, Zone, Requirement, Building). Add others when you need them.
+**"Do I need to create all 14 types?"**
+No. Start with 3-4 types (Space, Zone, Requirement, Building). Add Site, Envelope, Vertical Circulation, and others when you need them.
 
 **"What if I have 50 identical bedrooms?"**
 Use the Type/Instance pattern. Create 1 Space Type (template), 50 Space instances (actual rooms).

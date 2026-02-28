@@ -37,14 +37,17 @@ Standard formalizuje to w **8 faz**:
 
 ## Filar 2: Karty obiektów — Co opisujesz
 
-Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: pomieszczenie, strefę pożarową, instalację grzewczą, kocioł. Standard definiuje **11 rodzajów kart** — gotowych szablonów, które mówią Ci co wpisać:
+Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: działkę, pomieszczenie, strefę pożarową, instalację grzewczą, kocioł. Standard definiuje **14 rodzajów kart** — gotowych szablonów, które mówią Ci co wpisać:
 
 | Karta | Co opisujesz | Przykład |
 |-------|-------------|---------|
+| **Działka** | Teren inwestycji / parcela | "Działka przy ul. Słonecznej 45, 1250 m²" |
 | **Budynek** | Cały obiekt budowlany | "Zielony Taras, ul. Słoneczna 45, Warszawa" |
 | **Kondygnacja** | Jedno piętro | "Parter, +0,00 m" |
 | **Pomieszczenie** | Pokój lub obszar funkcjonalny | "Sypialnia 01, 14,5 m², wysokość 2,70 m" |
 | **Typ Pomieszczenia** | Szablon dla podobnych pomieszczeń | "Typ standardowej sypialni A" |
+| **Przegroda** | Ściana, dach lub strop z warstwami | "Ściana zewn. typ A, U=0,18, REI 90" |
+| **Komunikacja Pionowa** | Klatka schodowa, winda lub rampa łącząca kondygnacje | "Klatka A, chroniona, REI 60, 6 kondygnacji" |
 | **Strefa** | Grupa pomieszczeń o wspólnej charakterystyce | "Strefa pożarowa ZL-IV, kondygnacje 1-6" |
 | **Typ Strefy** | Szablon konfiguracji stref | "Strefa pożarowa ZL-IV standard" |
 | **Wymaganie** | Konkretny przepis prawny do spełnienia | "Wysokość pomieszczenia >= 2,50 m wg WT 2021 §132" |

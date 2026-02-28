@@ -18,7 +18,14 @@ A complete, real-world example demonstrating the Architecture Documentation Stan
 
 This example includes complete construction documentation following the Architecture Documentation Standard:
 
-### 1. Project Documentation
+### 1. Site & Project Documentation
+
+#### [Site →](./site)
+Plot and parcel information
+- Site area: 1,250 m², buildable area: 500 m²
+- Zoning: MPZP Mokotów Stegny (max height 25m, max coverage 40%)
+- Setbacks, utilities, topography, geotechnical data
+- IFC mapping (IfcSite)
 
 #### [Project Specification →](./project-specification)
 Complete project overview and technical description
@@ -30,10 +37,34 @@ Complete project overview and technical description
 - BIM integration (IFC 4.0, LOD 400)
 - Cost estimates and schedule
 
-### 2. Element Specifications
+### 2. Vertical Circulation
+
+#### [Staircase A →](./staircase-a)
+Protected staircase connecting all 6 levels
+- Type: Two-flight dog-leg with intermediate landings
+- Fire escape route: protected staircase, REI 60, natural smoke ventilation
+- Dimensions: 1,200 mm flight width, 169/290 mm rise/going
+- Egress: 80 persons, 3.2 min evacuation time
+- Accessibility: handrails both sides, tactile warnings, contrast nosings
+- Regulatory compliance: WT 2021 §68, §69, §242, §256 (all compliant)
+- Cost: EUR 42,000
+- IFC mapping (IfcStair)
+
+### 3. Envelope Elements
+
+#### [Envelope: External Wall Type A →](./envelope-external-wall-type-a)
+Semantic envelope entity (v0.5) for external insulated masonry wall
+- Full construction layers (5 layers, 447.5 mm total)
+- Thermal: U = 0.18 W/(m²·K) (required ≤ 0.20) ✅
+- Fire: REI 90 (required REI 60) ✅
+- Acoustic: Rw = 55 dB (required ≥ 50) ✅
+- Openings, glazing ratio, cost breakdown
+- IFC mapping (IfcWallStandardCase), provenance tracking
+
+### 4. Element Specifications (Legacy)
 
 #### [External Wall - Type A →](./external-wall-type-a)
-Detailed specification for external insulated masonry wall
+Legacy `element_specification` format (pre-v0.5)
 - Complete IFC mapping (IfcWallStandardCase)
 - 5-layer material specification
 - Thermal performance: U = 0.18 W/(m²·K) ✅

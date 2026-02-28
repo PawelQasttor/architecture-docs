@@ -85,6 +85,9 @@ export default defineConfig({
                 { text: 'System Type', link: '/en/documentation/entities/system-type' },
                 { text: 'Asset', link: '/en/documentation/entities/asset' },
                 { text: 'Asset Type', link: '/en/documentation/entities/asset-type' },
+                { text: 'Envelope', link: '/en/documentation/entities/envelope' },
+                { text: 'Vertical Circulation', link: '/en/documentation/entities/vertical-circulation' },
+                { text: 'Site', link: '/en/documentation/entities/site' },
                 { text: 'Building', link: '/en/documentation/entities/building' },
                 { text: 'Level', link: '/en/documentation/entities/level' }
               ]
@@ -268,6 +271,7 @@ export default defineConfig({
                   collapsed: false,
                   items: [
                     { text: 'Project Overview', link: '/en/examples/green-terrace/' },
+                    { text: 'Site', link: '/en/examples/green-terrace/site' },
                     { text: 'Project Specification', link: '/en/examples/green-terrace/project-specification' },
                     { text: 'External Wall Type A', link: '/en/examples/green-terrace/external-wall-type-a' },
                     { text: 'Bedroom 01', link: '/en/examples/green-terrace/spaces/bedroom-01' },
@@ -367,6 +371,9 @@ export default defineConfig({
                 { text: 'Typ Systemu', link: '/pl/dokumentacja/encje/typ-systemu' },
                 { text: 'Urządzenie', link: '/pl/dokumentacja/encje/zasob' },
                 { text: 'Typ Zasobu', link: '/pl/dokumentacja/encje/typ-zasobu' },
+                { text: 'Przegroda', link: '/pl/dokumentacja/encje/przegroda' },
+                { text: 'Komunikacja Pionowa', link: '/pl/dokumentacja/encje/komunikacja-pionowa' },
+                { text: 'Działka', link: '/pl/dokumentacja/encje/dzialka' },
                 { text: 'Budynek', link: '/pl/dokumentacja/encje/budynek' },
                 { text: 'Kondygnacja', link: '/pl/dokumentacja/encje/poziom' }
               ]

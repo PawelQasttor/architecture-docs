@@ -51,6 +51,7 @@ Budynki definiują:
 
 | Pole | Typ | Opis |
 |------|-----|------|
+| `siteId` | string | Referencja do nadrzędnej encji działki |
 | `projectId` | string | Identyfikator projektu |
 | `address` | object | Adres |
 | `location` | object | Wsp&oacute;łrzędne geograficzne |
@@ -521,9 +522,25 @@ levelId: "LVL-02"
 - Śledzenie personelu i godzin pracy
 - Koordynacja przepływów pacjentów między oddziałami
 
+## Relacja z Działką
+
+Budynki mogą odwoływać się do nadrzędnej działki polem `siteId`:
+
+```yaml
+---
+id: "BLD-01"
+entityType: "building"
+siteId: "SITE-GREEN-TERRACE"  # Łączy z nadrzędną działką
+buildingName: "Green Terrace Apartments"
+---
+```
+
+Kompilator automatycznie oblicza odwrotność: tablica `buildingIds` działki zawiera wszystkie budynki, które się do niej odwołują. Zbiorczy koszt przepływa: przestrzenie → kondygnacje → budynki → działki → projekt.
+
 ## Zobacz Także
 
+- **[Działka](/pl/dokumentacja/encje/dzialka)** - Budynki należą do działek
 - **[Karta Kondygnacja](/pl/dokumentacja/encje/poziom)** - Budynki zawierają kondygnacje
-- **[Karta Przestrzeń](/pl/dokumentacja/encje/przestrzen)** - Przestrzenie należą do budynk&oacute;w
+- **[Karta Przestrzeń](/pl/dokumentacja/encje/przestrzen)** - Przestrzenie należą do budynków
 - **[Przewodnik Kompilatora](/pl/dokumentacja/kompilator/)** - Kompilacja na poziomie budynku
 - **Pakiety Jurysdykcyjne** - Wymagania specyficzne dla kraju

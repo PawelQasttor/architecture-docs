@@ -4,9 +4,9 @@
 
 "Chcę udokumentować mój projekt budowlany. Jakie pliki utworzyć?"
 
-Ta strona na to odpowiada. Istnieje **11 typów plików**, które możesz stworzyć. Każdy typ opisuje inny aspekt Twojego budynku.
+Ta strona na to odpowiada. Istnieje **14 typów plików**, które możesz stworzyć. Każdy typ opisuje inny aspekt Twojego budynku.
 
-::: tip Nie Potrzebujesz Wszystkich 11 Typów
+::: tip Nie Potrzebujesz Wszystkich 14 Typów
 Większość projektów zaczyna od 3-4 typów:
 - **Pomieszczenia** (pokoje)
 - **Strefy** (strefy pożarowe, akustyczne)
@@ -18,18 +18,21 @@ To wystarczy na start. Dodaj inne typy, gdy ich potrzebujesz.
 
 ---
 
-## 11 Typów Kart (Uporządkowanych Według Tego, Co Opisują)
+## 14 Typów Kart (Uporządkowanych Według Tego, Co Opisują)
 
 ### **Opisywanie Przestrzeni (Gdzie Są Ludzie)**
 
 | Typ | Kiedy Używasz | Przykładowy Plik |
 |-----|--------------|------------------|
+| **[Działka](/pl/dokumentacja/encje/dzialka)** | Teren inwestycji / parcela | `site.md` |
+| **[Budynek](/pl/dokumentacja/encje/budynek)** | Cały budynek | `buildings/zielony-taras.md` |
+| **[Kondygnacja](/pl/dokumentacja/encje/poziom)** | Każde piętro w budynku | `levels/parter.md` |
 | **[Pomieszczenie](/pl/dokumentacja/encje/przestrzen)** | Każdy pokój, korytarz, obszar | `spaces/sypialnia-01.md` |
 | **[Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni)** | Szablon dla podobnych pomieszczeń (np. "standardowa sypialnia") | `space-types/sypialnia-standardowa.md` |
-| **[Kondygnacja](/pl/dokumentacja/encje/poziom)** | Każde piętro w budynku | `levels/parter.md` |
-| **[Budynek](/pl/dokumentacja/encje/budynek)** | Cały budynek | `buildings/zielony-taras.md` |
+| **[Przegroda](/pl/dokumentacja/encje/przegroda)** | Ściana, dach, strop, ściana osłonowa (warstwy + parametry) | `envelopes/sciana-zewnetrzna-typ-a.md` |
+| **[Komunikacja Pionowa](/pl/dokumentacja/encje/komunikacja-pionowa)** | Klatka schodowa, winda, rampa, schody ruchome (łączenie kondygnacji) | `vertical-circulations/klatka-schodowa-a.md` |
 
-**Zacznij tutaj:** Jeśli jesteś nowy, zacznij od **Pomieszczenia** (jeden plik na pokój). Dodaj **Kondygnację** i **Budynek**, gdy masz wiele pięter lub budynków.
+**Zacznij tutaj:** Jeśli jesteś nowy, zacznij od **Pomieszczenia** (jeden plik na pokój). Dodaj **Kondygnację** i **Budynek**, gdy masz wiele pięter lub budynków. Dodaj **Przegrodę**, gdy potrzebujesz śledzić przekroje ścian i parametry cieplne/ogniowe. Dodaj **Komunikację Pionową**, gdy potrzebujesz udokumentować klatki schodowe, windy i drogi ewakuacji.
 
 ---
 
@@ -63,12 +66,18 @@ To wystarczy na start. Dodaj inne typy, gdy ich potrzebujesz.
 Pliki odwołują się do siebie używając ID. Pomyśl o tym jak o hiperlinkach między dokumentami:
 
 ```
-Budynek (Zielony Taras)
-  └─ Kondygnacja (Parter)
-      └─ Pomieszczenie (Sypialnia 01)
-          ├─ należy do Strefy (Strefa Pożarowa ZL-IV)
-          ├─ musi spełniać Wymaganie (wysokość >= 2,50m)
-          └─ zawiera Urządzenie (Grzejnik RAD-01)
+Działka (Teren Zielony Taras)
+  └─ Budynek (Zielony Taras)
+      ├─ Przegroda (Ściana zewnętrzna typ A)  ← rozdziela pomieszczenia
+      ├─ Komunikacja Pionowa (Klatka schodowa A)  ← łączy kondygnacje
+      │    ├─ łączy Kondygnację (Parter)
+      │    └─ łączy Kondygnację (Piętro 1)
+      └─ Kondygnacja (Parter)
+          └─ Pomieszczenie (Sypialnia 01)
+              ├─ ograniczona Przegrodą (Ściana zewnętrzna typ A)
+              ├─ należy do Strefy (Strefa Pożarowa ZL-IV)
+              ├─ musi spełniać Wymaganie (wysokość >= 2,50m)
+              └─ zawiera Urządzenie (Grzejnik RAD-01)
 ```
 
 **Przykład:** Plik Sypialni 01 mówi "Jestem w Strefie Pożarowej ZL-IV". System automatycznie aktualizuje Strefę Pożarową ZL-IV, aby mówiła "Sypialnia 01 jest we mnie". Piszesz link tylko raz; link zwrotny jest obliczany automatycznie.
@@ -146,6 +155,8 @@ Każdy plik potrzebuje unikalnego ID. Oto wzorzec:
 |-----------|-----------|----------|
 | **Budynek** | `BLD-{numer}` | `BLD-01` |
 | **Kondygnacja** | `LVL-{numer}` | `LVL-01` (parter) |
+| **Przegroda** | `ENV-{typ}-{numer}` | `ENV-EW-01` (ściana zewn. 01) |
+| **Komunikacja Pionowa** | `VC-{typ}-{deskryptor}` | `VC-STAIR-A` (klatka schodowa A) |
 | **Pomieszczenie** | `SP-{budynek}-{poziom}-{numer}` | `SP-BLD-01-L01-001` |
 | **Typ Przestrzeni** | `ST-{deskryptor}` | `ST-SYPIALNIA-STANDARD-A` |
 | **Strefa** | `ZONE-{typ}-{deskryptor}` | `ZONE-FIRE-ZL-IV` |
@@ -196,37 +207,40 @@ Pole `entityType` jest głównym identyfikatorem typu pliku. Starsze pole `docum
 | **Śledzić przepisy budowlane** | [Dokumentacja Wymagania](/pl/dokumentacja/encje/wymaganie) |
 | **Udokumentować instalacje MEP** | [Dokumentacja Instalacji](/pl/dokumentacja/encje/system) |
 | **Śledzić zainstalowane wyposażenie** | [Dokumentacja Urządzenia](/pl/dokumentacja/encje/zasob) |
-| **Zobaczyć wszystkie 11 typów z przykładami** | Przewiń w dół, aby zobaczyć pełną listę poniżej |
+| **Zobaczyć wszystkie 14 typów z przykładami** | Przewiń w dół, aby zobaczyć pełną listę poniżej |
 
 ---
 
-## Pełna Lista Wszystkich 11 Typów Kart
+## Pełna Lista Wszystkich 14 Typów Kart
 
 Kliknij dowolny typ, aby zobaczyć szczegółową dokumentację:
 
 ### Przestrzenne
-1. **[Budynek](/pl/dokumentacja/encje/budynek)** - Metadane poziomu budynku (nazwa, adres, klasyfikacja)
-2. **[Kondygnacja](/pl/dokumentacja/encje/poziom)** - Informacje o piętrze (wysokość, powierzchnia brutto)
-3. **[Pomieszczenie](/pl/dokumentacja/encje/przestrzen)** - Pokoje i obszary funkcjonalne (sypialnie, biura, korytarze)
-4. **[Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni)** - Szablony dla powtarzających się typów pomieszczeń
+1. **[Działka](/pl/dokumentacja/encje/dzialka)** - Teren inwestycji (powierzchnia, odległości, media, zagospodarowanie)
+2. **[Budynek](/pl/dokumentacja/encje/budynek)** - Metadane poziomu budynku (nazwa, adres, klasyfikacja)
+3. **[Kondygnacja](/pl/dokumentacja/encje/poziom)** - Informacje o piętrze (wysokość, powierzchnia brutto)
+4. **[Pomieszczenie](/pl/dokumentacja/encje/przestrzen)** - Pokoje i obszary funkcjonalne (sypialnie, biura, korytarze)
+5. **[Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni)** - Szablony dla powtarzających się typów pomieszczeń
+6. **[Przegroda](/pl/dokumentacja/encje/przegroda)** - Ściany, dachy, stropy, ściany osłonowe (warstwy + parametry)
+7. **[Komunikacja Pionowa](/pl/dokumentacja/encje/komunikacja-pionowa)** - Klatki schodowe, windy, rampy, schody ruchome (łączenie kondygnacji, ewakuacja, dostępność)
 
 ### Strefowanie
-5. **[Strefa](/pl/dokumentacja/encje/strefa)** - Grupowania funkcjonalne (pożarowe, akustyczne, HVAC, bezpieczeństwa)
-6. **[Typ Strefy](/pl/dokumentacja/encje/typ-strefy)** - Szablony dla standardowych konfiguracji stref
+8. **[Strefa](/pl/dokumentacja/encje/strefa)** - Grupowania funkcjonalne (pożarowe, akustyczne, HVAC, bezpieczeństwa)
+9. **[Typ Strefy](/pl/dokumentacja/encje/typ-strefy)** - Szablony dla standardowych konfiguracji stref
 
 ### Systemy Techniczne
-7. **[Instalacja](/pl/dokumentacja/encje/system)** - Systemy MEP (HVAC, elektryczne, hydrauliczne)
-8. **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony dla standardowych konfiguracji systemów
-9. **[Urządzenie](/pl/dokumentacja/encje/zasob)** - Fizyczne wyposażenie (kotły, pompy, czujniki)
-10. **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** - Specyfikacje produktów i szablony
+10. **[Instalacja](/pl/dokumentacja/encje/system)** - Systemy MEP (HVAC, elektryczne, hydrauliczne)
+11. **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony dla standardowych konfiguracji systemów
+12. **[Urządzenie](/pl/dokumentacja/encje/zasob)** - Fizyczne wyposażenie (kotły, pompy, czujniki)
+13. **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** - Specyfikacje produktów i szablony
 
 ### Zarządcze
-11. **[Wymaganie](/pl/dokumentacja/encje/wymaganie)** - Reguły wydajnościowe i regulacyjne (minimalne wysokości, odporności ogniowe, światło dzienne)
+14. **[Wymaganie](/pl/dokumentacja/encje/wymaganie)** - Reguły wydajnościowe i regulacyjne (minimalne wysokości, odporności ogniowe, światło dzienne)
 
 ::: details Uzupełniające typy dokumentów
-Oprócz 11 podstawowych typów encji, standard SBM rozpoznaje uzupełniające typy dokumentów, które nie są encjami semantycznymi, ale dostarczają pomocniczych informacji technicznych:
+Oprócz 13 podstawowych typów encji, standard SBM rozpoznaje uzupełniające typy dokumentów, które nie są encjami semantycznymi, ale dostarczają pomocniczych informacji technicznych:
 
-- **`element_specification`** -- Szczegółowa dokumentacja elementów budowlanych (przekroje ścian, dachy, podłogi). Są to dokumenty opisowe, które uzupełniają model przestrzenny, ale nie uczestniczą w grafie encji kompilatora, dziedziczeniu ani walidacji.
+- **`element_specification`** -- Starszy format szczegółowej dokumentacji elementów budowlanych (przekroje ścian, dachy, podłogi). Od v0.5 preferowanym typem encji dla ścian, dachów i stropów jest **Przegroda**, ponieważ uczestniczy w grafie encji kompilatora, relacjach, agregacji kosztów i walidacji. Istniejące pliki `element_specification` mogą współistnieć z encjami przegród.
 
 Dokumenty uzupełniające używają tego samego formatu Markdown + YAML frontmatter i mogą być umieszczone obok plików encji w folderze projektu.
 :::
@@ -262,8 +276,8 @@ System automatycznie oblicza **relacje zwrotne**:
 
 ## Często Zadawane Pytania
 
-**"Czy muszę utworzyć wszystkie 11 typów?"**
-Nie. Zacznij od 3-4 typów (Pomieszczenie, Strefa, Wymaganie, Budynek). Dodaj inne, gdy ich potrzebujesz.
+**"Czy muszę utworzyć wszystkie 14 typów?"**
+Nie. Zacznij od 3-4 typów (Pomieszczenie, Strefa, Wymaganie, Budynek). Dodaj Działkę, Przegrodę, Komunikację Pionową i inne, gdy ich potrzebujesz.
 
 **"Co jeśli mam 50 identycznych sypialni?"**
 Użyj wzorca Typ/Instancja. Stwórz 1 Typ Przestrzeni (szablon), 50 Instancji Przestrzeni (rzeczywiste pokoje).

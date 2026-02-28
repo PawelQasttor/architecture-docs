@@ -38,6 +38,9 @@ function normalizeEntity(entity) {
  */
 function groupEntitiesByType(entities) {
   const grouped = {
+    sites: [],
+    envelopes: [],
+    vertical_circulations: [],
     buildings: [],
     levels: [],
     zones: [],
@@ -55,7 +58,13 @@ function groupEntitiesByType(entities) {
   for (const entity of entities) {
     const type = entity.documentType;
 
-    if (type === 'building') {
+    if (type === 'site') {
+      grouped.sites.push(normalizeEntity(entity));
+    } else if (type === 'envelope') {
+      grouped.envelopes.push(normalizeEntity(entity));
+    } else if (type === 'vertical_circulation') {
+      grouped.vertical_circulations.push(normalizeEntity(entity));
+    } else if (type === 'building') {
       grouped.buildings.push(normalizeEntity(entity));
     } else if (type === 'level') {
       grouped.levels.push(normalizeEntity(entity));
@@ -92,6 +101,58 @@ function groupEntitiesByType(entities) {
  * For example: space.zoneIds → zone.spaceIds (reverse link)
  */
 function computeRelationships(grouped) {
+  // Build site → buildings reverse mapping
+  if (grouped.sites && grouped.buildings) {
+    for (const site of grouped.sites) {
+      if (!site.buildingIds) {
+        site.buildingIds = [];
+      }
+
+      // Find all buildings that reference this site
+      for (const building of grouped.buildings) {
+        if (building.siteId === site.id) {
+          if (!site.buildingIds.includes(building.id)) {
+            site.buildingIds.push(building.id);
+          }
+        }
+      }
+    }
+  }
+
+  // Build building → envelopes reverse mapping
+  if (grouped.buildings && grouped.envelopes) {
+    for (const building of grouped.buildings) {
+      if (!building.envelopeIds) {
+        building.envelopeIds = [];
+      }
+
+      for (const envelope of grouped.envelopes) {
+        if (envelope.buildingId === building.id) {
+          if (!building.envelopeIds.includes(envelope.id)) {
+            building.envelopeIds.push(envelope.id);
+          }
+        }
+      }
+    }
+  }
+
+  // Build building → vertical_circulations reverse mapping
+  if (grouped.buildings && grouped.vertical_circulations) {
+    for (const building of grouped.buildings) {
+      if (!building.verticalCirculationIds) {
+        building.verticalCirculationIds = [];
+      }
+
+      for (const vc of grouped.vertical_circulations) {
+        if (vc.buildingId === building.id) {
+          if (!building.verticalCirculationIds.includes(vc.id)) {
+            building.verticalCirculationIds.push(vc.id);
+          }
+        }
+      }
+    }
+  }
+
   // Build zone → spaces reverse mapping
   if (grouped.zones && grouped.spaces) {
     for (const zone of grouped.zones) {
@@ -534,6 +595,82 @@ function performCostRollup(grouped, project, logger) {
     }
   }
 
+  // Step 2.5: Aggregate building costs to sites
+  if (grouped.sites && grouped.buildings) {
+    for (const site of grouped.sites) {
+      let siteCost = 0;
+      const contributingBuildings = [];
+
+      for (const building of grouped.buildings) {
+        if (building.siteId === site.id && building.cost?.totalCost) {
+          siteCost += building.cost.totalCost;
+          contributingBuildings.push({
+            id: building.id,
+            name: building.buildingName || building.name || building.id,
+            cost: building.cost.totalCost
+          });
+        }
+      }
+
+      if (siteCost > 0) {
+        site.cost = site.cost || {};
+        site.cost.totalCost = siteCost;
+        site.cost.currency = currency;
+        site.cost.basis = 'rollup_from_buildings';
+        site.cost._meta = {
+          confidence: 'calculated',
+          source: 'compiler_cost_rollup',
+          resolution: 'calculated',
+          notes: `Aggregated from ${contributingBuildings.length} buildings`,
+          contributingEntities: contributingBuildings
+        };
+      }
+    }
+  }
+
+  // Step 2.75: Aggregate envelope costs to buildings
+  if (grouped.buildings && grouped.envelopes) {
+    for (const building of grouped.buildings) {
+      let envelopeCost = 0;
+      const contributingEnvelopes = [];
+
+      for (const envelope of grouped.envelopes) {
+        if (envelope.buildingId === building.id && envelope.cost?.totalCost) {
+          envelopeCost += envelope.cost.totalCost;
+          contributingEnvelopes.push({
+            id: envelope.id,
+            name: envelope.envelopeName || envelope.id,
+            cost: envelope.cost.totalCost
+          });
+        }
+      }
+
+      if (envelopeCost > 0) {
+        // Add to existing building cost (from space→level rollup) or create
+        const existingCost = building.cost?.totalCost || 0;
+        building.cost = building.cost || {};
+        building.cost.totalCost = existingCost + envelopeCost;
+        building.cost.currency = currency;
+        if (!building.cost._meta) {
+          building.cost.basis = 'rollup_from_envelopes';
+          building.cost._meta = {
+            confidence: 'calculated',
+            source: 'compiler_cost_rollup',
+            resolution: 'calculated',
+            notes: `Aggregated from ${contributingEnvelopes.length} envelopes`,
+            contributingEntities: contributingEnvelopes
+          };
+        } else {
+          // Merge envelope costs into existing building meta
+          building.cost._meta.notes += ` + ${contributingEnvelopes.length} envelopes`;
+          if (building.cost._meta.contributingEntities) {
+            building.cost._meta.contributingEntities.push(...contributingEnvelopes);
+          }
+        }
+      }
+    }
+  }
+
   // Step 3: Aggregate asset costs to systems
   if (grouped.systems && grouped.assets) {
     for (const system of grouped.systems) {
@@ -575,7 +712,20 @@ function performCostRollup(grouped, project, logger) {
   const contributingBuildings = [];
   const contributingSystems = [];
 
-  if (grouped.buildings) {
+  // Prefer sites if available, else use buildings directly
+  if (grouped.sites && grouped.sites.length > 0) {
+    for (const site of grouped.sites) {
+      if (site.cost?.totalCost) {
+        projectConstructionCost += site.cost.totalCost;
+        contributingBuildings.push({
+          id: site.id,
+          name: site.siteName || site.id,
+          cost: site.cost.totalCost,
+          type: 'site'
+        });
+      }
+    }
+  } else if (grouped.buildings) {
     for (const building of grouped.buildings) {
       if (building.cost?.totalCost) {
         projectConstructionCost += building.cost.totalCost;
@@ -904,7 +1054,7 @@ export async function normalize(rawEntities, options, logger) {
 
   // Group entities by type
   let grouped = groupEntitiesByType(rawEntities);
-  logger.debug(`Grouped: ${grouped.spaces.length} spaces, ${grouped.zones.length} zones, ${grouped.requirements.length} requirements, ${grouped.space_types.length} space types`);
+  logger.debug(`Grouped: ${grouped.sites.length} sites, ${grouped.envelopes.length} envelopes, ${grouped.spaces.length} spaces, ${grouped.zones.length} zones, ${grouped.requirements.length} requirements, ${grouped.space_types.length} space types`);
 
   // Resolve type→instance inheritance (before relationships, so inherited fields participate)
   grouped = resolveTypeInheritance(grouped, logger);
@@ -997,6 +1147,9 @@ export async function normalize(rawEntities, options, logger) {
   const normalized = {
     project,
     entities: {
+      ...(grouped.sites.length > 0 && { sites: grouped.sites }),
+      ...(grouped.envelopes.length > 0 && { envelopes: grouped.envelopes }),
+      ...(grouped.vertical_circulations.length > 0 && { vertical_circulations: grouped.vertical_circulations }),
       ...(grouped.buildings.length > 0 && { buildings: grouped.buildings }),
       ...(grouped.levels.length > 0 && { levels: grouped.levels }),
       ...(grouped.zones.length > 0 && { zones: grouped.zones }),
@@ -1012,6 +1165,9 @@ export async function normalize(rawEntities, options, logger) {
     metadata: {
       totalEntities: rawEntities.length,
       entitiesByType: {
+        sites: grouped.sites.length,
+        envelopes: grouped.envelopes.length,
+        vertical_circulations: grouped.vertical_circulations.length,
         buildings: grouped.buildings.length,
         levels: grouped.levels.length,
         zones: grouped.zones.length,

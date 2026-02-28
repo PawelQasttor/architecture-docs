@@ -62,7 +62,7 @@ async function parseFile(filePath, inputDir) {
 
   // Only parse semantic entities and legacy document types
   const validTypes = [
-    'space', 'zone', 'system', 'asset', 'asset_instance', 'requirement',
+    'site', 'envelope', 'vertical_circulation', 'space', 'zone', 'system', 'asset', 'asset_instance', 'requirement',
     'building', 'level',
     'space_type', 'zone_type', 'system_type', 'asset_type',
     'element_specification', 'project_specification'

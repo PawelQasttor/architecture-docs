@@ -51,6 +51,7 @@ Buildings define:
 
 | Field | Type | Description |
 |-------|------|-------------|
+| `siteId` | string | Reference to parent site entity |
 | `projectId` | string | Project identifier |
 | `address` | object | Street address |
 | `location` | object | Geographic coordinates |
@@ -505,8 +506,24 @@ Building metadata populates compliance report header:
 }
 ```
 
+## Site Relationship
+
+Buildings can reference a parent site using `siteId`:
+
+```yaml
+---
+id: "BLD-01"
+entityType: "building"
+siteId: "SITE-GREEN-TERRACE"  # Links to parent site
+buildingName: "Green Terrace Apartments"
+---
+```
+
+The compiler auto-computes the reverse: the site's `buildingIds` array lists all buildings that reference it. Cost rollup flows: spaces → levels → buildings → sites → project.
+
 ## See Also
 
+- **[Site](/en/documentation/entities/site)** - Buildings belong to sites
 - **[Level](/en/documentation/entities/level)** - Buildings contain levels
 - **[Space](/en/documentation/entities/space)** - Spaces belong to buildings
 - **[Compiler Guide](/en/documentation/compiler/)** - Building-level compilation

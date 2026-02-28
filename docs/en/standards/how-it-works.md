@@ -37,14 +37,17 @@ The standard formalizes this into **8 phases**:
 
 ## Pillar 2: Document Types — What You Describe
 
-When you write a document, you're describing something specific: a room, a fire zone, a heating system, a boiler. The standard defines **11 entity types** — ready-made templates that tell you what to fill in:
+When you write a document, you're describing something specific: a plot, a room, a wall buildup, a fire zone, a heating system, a boiler. The standard defines **14 entity types** — ready-made templates that tell you what to fill in:
 
 | Document type | What you're describing | Example |
 |---------------|----------------------|---------|
+| **Site** | The land parcel / plot | "Plot at ul. Sloneczna 45, 1250 m²" |
 | **Building** | The whole building | "Green Terrace, ul. Sloneczna 45, Warsaw" |
 | **Level** | A floor or storey | "Ground floor, +0.00m" |
 | **Space** | A room or area | "Bedroom 01, 14.5 m², 2.70m height" |
 | **Space Type** | Template for similar spaces | "Standard Bedroom Type A" |
+| **Envelope** | A wall, roof, or slab assembly | "External Wall Type A, U=0.18, REI 90" |
+| **Vertical Circulation** | A staircase, elevator, or ramp connecting levels | "Staircase A, protected, REI 60, 6 levels" |
 | **Zone** | A group of rooms sharing a characteristic | "Fire zone ZL-IV covering floors 1-6" |
 | **Zone Type** | Template for zone configurations | "Fire zone ZL-IV standard" |
 | **Requirement** | A specific regulation that must be met | "Room height >= 2.50m per WT 2021 §132" |

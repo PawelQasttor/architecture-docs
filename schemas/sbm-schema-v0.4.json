@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://sbm.architecture/schemas/v0.4.0/sbm-schema.json",
   "title": "Structured Building Model (SBM) Schema v0.4.0",
-  "description": "Complete semantic model for architectural building information. v0.4 adds cost tracking, performance targets, simulation management, enhanced BIM integration. Merges all v0.3 entity types and shared definitions.",
+  "description": "Complete semantic model for architectural building information. v0.4 adds cost tracking, performance targets, simulation management, enhanced BIM integration. v0.4.1 adds Site entity for plot/parcel context above buildings. v0.5.0 adds Envelope entity and Vertical Circulation entity (stairs, elevators, ramps) for complete building connectivity modeling. Merges all v0.3 entity types and shared definitions.",
   "version": "0.4.0",
 
   "type": "object",
@@ -217,6 +217,11 @@
     "entities": {
       "type": "object",
       "properties": {
+        "sites": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/site" },
+          "description": "Site definitions (plot/parcel context above buildings)"
+        },
         "buildings": {
           "type": "array",
           "items": { "$ref": "#/definitions/building" }
@@ -264,6 +269,16 @@
         "requirements": {
           "type": "array",
           "items": { "$ref": "#/definitions/requirement" }
+        },
+        "envelopes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/envelope" },
+          "description": "Building envelope elements (walls, roofs, slabs, curtain walls)"
+        },
+        "vertical_circulations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/vertical_circulation" },
+          "description": "Vertical circulation elements (staircases, elevators, ramps, escalators)"
         }
       }
     },
@@ -548,6 +563,431 @@
       }
     },
 
+    "site": {
+      "type": "object",
+      "required": ["id", "entityType", "siteName", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^SITE-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "site" },
+        "siteName": { "type": "string", "description": "Human-readable site name" },
+        "address": {
+          "type": "object",
+          "properties": {
+            "street": { "type": "string" },
+            "city": { "type": "string" },
+            "postalCode": { "type": "string" },
+            "region": { "type": "string" },
+            "country": { "type": "string", "pattern": "^[A-Z]{2}$" }
+          }
+        },
+        "location": { "$ref": "#/definitions/coordinates" },
+        "siteArea": { "type": "number", "minimum": 0, "description": "Total plot area in m²" },
+        "buildableArea": { "type": "number", "minimum": 0, "description": "Buildable area after setbacks in m²" },
+        "greenArea": { "type": "number", "minimum": 0, "description": "Required green/open area in m²" },
+        "buildingIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Auto-computed: buildings on this site"
+        },
+        "siteConstraints": {
+          "type": "array",
+          "description": "Zoning setbacks, easements, heritage buffers, etc.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["setback", "easement", "heritage_zone", "flood_zone", "environmental", "height_limit", "coverage_limit", "other"] },
+              "direction": { "type": "string" },
+              "distance": { "type": "number" },
+              "value": { "type": "string" },
+              "description": { "type": "string" },
+              "regulation": { "type": "string" }
+            }
+          }
+        },
+        "utilities": {
+          "type": "array",
+          "description": "Available utility connections at site boundary",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["water", "sewage", "stormwater", "electrical", "gas", "district_heating", "telecom", "fiber"] },
+              "connectionPoint": { "type": "string" },
+              "capacity": { "type": "string" },
+              "provider": { "type": "string" },
+              "status": { "type": "string", "enum": ["available", "planned", "requires_extension", "unavailable"] }
+            }
+          }
+        },
+        "topography": {
+          "type": "object",
+          "properties": {
+            "elevation": { "type": "number", "description": "Site elevation in m above sea level" },
+            "slope": { "type": "number", "description": "Average slope in degrees" },
+            "soilType": { "type": "string" },
+            "bearingCapacity": { "type": "number", "description": "Soil bearing capacity in kPa" },
+            "groundwaterLevel": { "type": "number", "description": "Depth to groundwater in m" },
+            "seismicZone": { "type": "string" }
+          }
+        },
+        "zoningDesignation": {
+          "type": "object",
+          "description": "Local zoning/planning designation (MPZP, WZ, etc.)",
+          "properties": {
+            "planType": { "type": "string", "enum": ["mpzp", "wz", "zoning_ordinance", "development_plan", "other"] },
+            "planReference": { "type": "string" },
+            "allowedUse": { "type": "array", "items": { "type": "string" } },
+            "maxHeight": { "type": "number" },
+            "maxCoverage": { "type": "number", "description": "Max site coverage ratio (0-1)" },
+            "maxFAR": { "type": "number", "description": "Max floor-area ratio" },
+            "minGreenRatio": { "type": "number", "description": "Min green area ratio (0-1)" }
+          }
+        },
+        "cost": { "$ref": "#/definitions/entityCost" },
+        "ifcMapping": {
+          "type": "object",
+          "properties": {
+            "ifcEntity": { "type": "string", "const": "IfcSite" },
+            "globalId": { "type": "string" }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/documentSource" }
+        },
+        "_quality": { "$ref": "#/definitions/qualitySummary" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+
+    "envelope": {
+      "type": "object",
+      "description": "A building envelope element: walls, roofs, floor slabs, curtain walls. Connects two boundary spaces and captures construction layers, thermal/acoustic/fire performance.",
+      "required": ["id", "entityType", "envelopeName", "envelopeType", "buildingId", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^ENV-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "envelope" },
+        "envelopeName": { "type": "string", "description": "Human-readable name" },
+        "envelopeType": {
+          "type": "string",
+          "enum": [
+            "external_wall", "internal_wall", "partition",
+            "roof", "flat_roof", "green_roof",
+            "floor_slab", "ground_floor_slab",
+            "curtain_wall", "below_grade_wall"
+          ],
+          "description": "Classification of the envelope element"
+        },
+        "buildingId": { "type": "string", "description": "Reference to parent building" },
+        "boundarySpaceIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1,
+          "maxItems": 2,
+          "description": "Space IDs on each side of this element (1 for external, 2 for internal)"
+        },
+        "levelIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Levels this envelope element spans"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "horizontal", "not_applicable"],
+          "description": "Cardinal orientation for facade elements"
+        },
+        "isExternal": { "type": "boolean", "description": "True if this element is part of the building exterior envelope" },
+        "isLoadBearing": { "type": "boolean", "description": "True if this element has structural function" },
+        "grossArea": { "type": "number", "minimum": 0, "description": "Gross area in m² (before opening deductions)" },
+        "netArea": { "type": "number", "minimum": 0, "description": "Net area in m² (after opening deductions)" },
+        "totalThickness": { "type": "number", "minimum": 0, "description": "Total assembly thickness in mm" },
+        "construction": {
+          "type": "object",
+          "description": "Layer-by-layer construction specification",
+          "properties": {
+            "layers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["order", "material", "thickness"],
+                "properties": {
+                  "order": { "type": "integer", "minimum": 1, "description": "Layer order (1=outermost)" },
+                  "material": { "type": "string" },
+                  "thickness": { "type": "number", "minimum": 0, "description": "Thickness in mm" },
+                  "thermalConductivity": { "type": "number", "minimum": 0, "description": "Lambda value in W/(m·K)" },
+                  "density": { "type": "number", "minimum": 0, "description": "Material density in kg/m³" },
+                  "manufacturer": { "type": "string" },
+                  "productCode": { "type": "string" },
+                  "fireClass": { "type": "string", "description": "Euroclass fire reaction (A1, A2, B, C, D, E, F)" },
+                  "function": {
+                    "type": "string",
+                    "enum": ["structural", "insulation", "finish", "vapor_barrier", "air_barrier", "drainage", "substrate", "cladding", "sheathing", "cavity"],
+                    "description": "Layer function in the assembly"
+                  }
+                }
+              }
+            },
+            "assemblyType": {
+              "type": "string",
+              "enum": ["solid", "cavity", "ventilated_cavity", "rain_screen", "etics", "framed", "sandwich_panel", "green_assembly"],
+              "description": "Overall assembly construction method"
+            }
+          }
+        },
+        "thermalPerformance": {
+          "type": "object",
+          "description": "Thermal performance of the assembly",
+          "properties": {
+            "uValue": { "type": "number", "minimum": 0, "description": "Calculated U-value in W/(m²·K)" },
+            "uValueRequired": { "type": "number", "minimum": 0, "description": "Required U-value per regulation" },
+            "calculationMethod": { "type": "string", "description": "e.g., PN-EN ISO 6946" },
+            "condensationRisk": { "type": "boolean", "description": "Result of interstitial condensation analysis" },
+            "thermalBridgePsi": { "type": "number", "description": "Linear thermal bridge coefficient in W/(m·K)" }
+          }
+        },
+        "acousticPerformance": {
+          "type": "object",
+          "description": "Acoustic performance of the assembly",
+          "properties": {
+            "rw": { "type": "number", "description": "Weighted sound reduction index in dB" },
+            "rwRequired": { "type": "number", "description": "Required Rw per regulation" },
+            "impactSoundLn": { "type": "number", "description": "Impact sound level Ln,w in dB (for floors)" },
+            "testCertificate": { "type": "string" }
+          }
+        },
+        "firePerformance": {
+          "type": "object",
+          "description": "Fire resistance of the assembly",
+          "properties": {
+            "fireRating": { "type": "string", "description": "Design fire rating (e.g., REI 90, EI 60)" },
+            "fireRatingRequired": { "type": "string", "description": "Required fire rating per regulation" },
+            "reactionToFire": { "type": "string", "description": "Overall Euroclass reaction (e.g., A2-s1,d0)" },
+            "testCertificate": { "type": "string" }
+          }
+        },
+        "moistureControl": {
+          "type": "object",
+          "description": "Moisture and airtightness performance",
+          "properties": {
+            "vaporControl": { "type": "string", "description": "Vapor control strategy description" },
+            "airtightnessTarget": { "type": "string", "description": "Target airtightness (e.g., 0.6 ACH @ 50 Pa)" },
+            "waterproofing": { "type": "string", "description": "Waterproofing strategy (for below-grade, roofs)" }
+          }
+        },
+        "openings": {
+          "type": "array",
+          "description": "Windows, doors, and other openings in this envelope element",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "openingType": {
+                "type": "string",
+                "enum": ["window", "door", "glazed_door", "rooflight", "vent", "access_panel", "curtain_wall_panel"]
+              },
+              "width": { "type": "number", "minimum": 0, "description": "Width in mm" },
+              "height": { "type": "number", "minimum": 0, "description": "Height in mm" },
+              "area": { "type": "number", "minimum": 0, "description": "Area in m²" },
+              "uValue": { "type": "number", "minimum": 0, "description": "Opening U-value in W/(m²·K)" },
+              "gValue": { "type": "number", "minimum": 0, "maximum": 1, "description": "Solar heat gain coefficient (for glazing)" },
+              "acousticRw": { "type": "number", "description": "Sound reduction Rw in dB" },
+              "fireRating": { "type": "string" },
+              "manufacturer": { "type": "string" },
+              "productCode": { "type": "string" }
+            }
+          }
+        },
+        "glazingRatio": { "type": "number", "minimum": 0, "maximum": 1, "description": "Window-to-wall ratio (0-1) for facade elements" },
+        "regulatoryCompliance": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "regulation": { "type": "string" },
+              "section": { "type": "string" },
+              "requirement": { "type": "string" },
+              "status": { "type": "string", "enum": ["compliant", "non_compliant", "pending", "not_applicable"] }
+            }
+          }
+        },
+        "cost": { "$ref": "#/definitions/entityCost" },
+        "ifcMapping": {
+          "type": "object",
+          "properties": {
+            "ifcEntity": {
+              "type": "string",
+              "enum": ["IfcWallStandardCase", "IfcWall", "IfcSlab", "IfcRoof", "IfcCurtainWall", "IfcCovering"],
+              "description": "Target IFC entity type"
+            },
+            "globalId": { "type": "string" },
+            "objectType": { "type": "string" },
+            "materialLayerSet": { "type": "string" }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/documentSource" }
+        },
+        "_quality": { "$ref": "#/definitions/qualitySummary" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+
+    "vertical_circulation": {
+      "type": "object",
+      "description": "A vertical circulation element connecting levels: staircases, elevators, ramps, escalators. Captures capacity, accessibility, fire escape properties, and egress calculations.",
+      "required": ["id", "entityType", "circulationName", "circulationType", "buildingId", "connectedLevelIds", "version"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^VC-[A-Z0-9-]+$" },
+        "entityType": { "type": "string", "const": "vertical_circulation" },
+        "circulationName": { "type": "string", "description": "Human-readable name (e.g., Staircase A, Elevator 1)" },
+        "circulationType": {
+          "type": "string",
+          "enum": [
+            "staircase", "elevator", "escalator", "ramp",
+            "ladder", "service_lift", "dumbwaiter", "fire_escape_stair"
+          ],
+          "description": "Classification of the vertical circulation element"
+        },
+        "buildingId": { "type": "string", "description": "Reference to parent building" },
+        "connectedLevelIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 2,
+          "description": "Level IDs this element connects (minimum 2)"
+        },
+        "servedSpaceIds": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Space IDs of lobbies, landings, or vestibules served by this element"
+        },
+        "isFireEscape": { "type": "boolean", "description": "True if this element serves as a designated fire escape route" },
+        "isAccessible": { "type": "boolean", "description": "True if this element meets accessibility requirements (wheelchair, mobility impaired)" },
+        "isStretcher": { "type": "boolean", "description": "True if this element can accommodate a stretcher (hospital/care buildings)" },
+        "isEvacuationLift": { "type": "boolean", "description": "True if this elevator is rated for evacuation use" },
+        "fireProperties": {
+          "type": "object",
+          "description": "Fire safety properties for escape routes",
+          "properties": {
+            "isProtectedStaircase": { "type": "boolean", "description": "Enclosed staircase with fire-rated walls" },
+            "fireRating": { "type": "string", "description": "Fire resistance rating (e.g., REI 120, EI 60)" },
+            "pressurization": { "type": "boolean", "description": "True if staircase has positive pressure ventilation" },
+            "smokeVentilation": { "type": "string", "enum": ["natural", "mechanical", "none"], "description": "Smoke ventilation strategy" },
+            "emergencyLighting": { "type": "boolean", "description": "True if equipped with emergency lighting" },
+            "maxTravelDistance": { "type": "number", "minimum": 0, "description": "Maximum travel distance to this escape in meters" },
+            "vestibuleRequired": { "type": "boolean", "description": "True if a fire vestibule/lobby is required before entry" }
+          }
+        },
+        "dimensions": {
+          "type": "object",
+          "description": "Physical dimensions of the circulation element",
+          "properties": {
+            "flightWidth": { "type": "number", "minimum": 0, "description": "Stair flight / ramp width in mm" },
+            "flightWidthRequired": { "type": "number", "minimum": 0, "description": "Required minimum width per regulation in mm" },
+            "landingDepth": { "type": "number", "minimum": 0, "description": "Landing/platform depth in mm" },
+            "headroom": { "type": "number", "minimum": 0, "description": "Clear headroom in mm" },
+            "riserHeight": { "type": "number", "minimum": 0, "description": "Step riser height in mm (stairs)" },
+            "goingDepth": { "type": "number", "minimum": 0, "description": "Step going/tread depth in mm (stairs)" },
+            "gradient": { "type": "number", "minimum": 0, "maximum": 100, "description": "Slope gradient in % (ramps)" },
+            "totalRise": { "type": "number", "minimum": 0, "description": "Total height change in mm" },
+            "numberOfFlights": { "type": "integer", "minimum": 1, "description": "Number of flights between levels" },
+            "numberOfSteps": { "type": "integer", "minimum": 1, "description": "Total number of steps per level" },
+            "shaftWidth": { "type": "number", "minimum": 0, "description": "Shaft/well width in mm (elevators)" },
+            "shaftDepth": { "type": "number", "minimum": 0, "description": "Shaft/well depth in mm (elevators)" },
+            "pitDepth": { "type": "number", "minimum": 0, "description": "Pit depth below lowest stop in mm (elevators)" },
+            "overrun": { "type": "number", "minimum": 0, "description": "Overrun height above highest stop in mm (elevators)" }
+          }
+        },
+        "elevatorProperties": {
+          "type": "object",
+          "description": "Properties specific to elevator/lift installations",
+          "properties": {
+            "loadCapacity": { "type": "number", "minimum": 0, "description": "Rated load capacity in kg" },
+            "personCapacity": { "type": "integer", "minimum": 1, "description": "Rated person capacity" },
+            "speed": { "type": "number", "minimum": 0, "description": "Rated speed in m/s" },
+            "cabWidth": { "type": "number", "minimum": 0, "description": "Internal cab width in mm" },
+            "cabDepth": { "type": "number", "minimum": 0, "description": "Internal cab depth in mm" },
+            "cabHeight": { "type": "number", "minimum": 0, "description": "Internal cab height in mm" },
+            "doorWidth": { "type": "number", "minimum": 0, "description": "Door clear opening width in mm" },
+            "doorHeight": { "type": "number", "minimum": 0, "description": "Door clear opening height in mm" },
+            "driveType": {
+              "type": "string",
+              "enum": ["traction", "hydraulic", "mrl", "pneumatic"],
+              "description": "Drive mechanism type (mrl = machine-room-less)"
+            },
+            "doorType": {
+              "type": "string",
+              "enum": ["single_slide", "double_slide", "center_opening", "swing"],
+              "description": "Door opening mechanism"
+            },
+            "stops": { "type": "integer", "minimum": 2, "description": "Number of stops" },
+            "manufacturer": { "type": "string" },
+            "model": { "type": "string" }
+          }
+        },
+        "accessibility": {
+          "type": "object",
+          "description": "Accessibility features and compliance",
+          "properties": {
+            "handrails": { "type": "string", "enum": ["none", "one_side", "both_sides"], "description": "Handrail provision" },
+            "handrailHeight": { "type": "number", "minimum": 0, "description": "Handrail height in mm" },
+            "tactileWarnings": { "type": "boolean", "description": "Tactile warning strips at top/bottom of stairs" },
+            "contrastNosings": { "type": "boolean", "description": "Contrasting step nosings for visual impairment" },
+            "brailleControls": { "type": "boolean", "description": "Braille labels on elevator controls" },
+            "audioAnnouncements": { "type": "boolean", "description": "Audio floor announcements (elevators)" },
+            "turningCircle": { "type": "number", "minimum": 0, "description": "Wheelchair turning circle diameter in mm" }
+          }
+        },
+        "egressCapacity": {
+          "type": "object",
+          "description": "Egress calculation data for fire safety",
+          "properties": {
+            "occupantCapacity": { "type": "integer", "minimum": 0, "description": "Number of occupants this element can evacuate per flow" },
+            "flowRate": { "type": "number", "minimum": 0, "description": "Evacuation flow rate in persons/min" },
+            "evacuationTime": { "type": "number", "minimum": 0, "description": "Calculated evacuation time in minutes" },
+            "requiredCapacity": { "type": "integer", "minimum": 0, "description": "Required evacuation capacity per regulations" }
+          }
+        },
+        "regulatoryCompliance": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "regulation": { "type": "string" },
+              "section": { "type": "string" },
+              "requirement": { "type": "string" },
+              "status": { "type": "string", "enum": ["compliant", "non_compliant", "pending", "not_applicable"] }
+            }
+          }
+        },
+        "cost": { "$ref": "#/definitions/entityCost" },
+        "ifcMapping": {
+          "type": "object",
+          "properties": {
+            "ifcEntity": {
+              "type": "string",
+              "enum": ["IfcStairFlight", "IfcStair", "IfcTransportElement", "IfcRamp", "IfcRampFlight"],
+              "description": "Target IFC entity type"
+            },
+            "globalId": { "type": "string" },
+            "objectType": { "type": "string" },
+            "predefinedType": { "type": "string" }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/documentSource" }
+        },
+        "_quality": { "$ref": "#/definitions/qualitySummary" },
+        "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "tags": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+
     "building": {
       "type": "object",
       "required": ["id", "entityType", "name", "version"],
@@ -555,7 +995,7 @@
         "id": { "type": "string", "pattern": "^BLD-[A-Z0-9-]+$" },
         "entityType": { "type": "string", "const": "building" },
         "name": { "type": "string" },
-        "siteId": { "type": "string" },
+        "siteId": { "type": "string", "description": "Reference to parent site entity" },
         "usage": { "type": "string" },
         "cost": { "$ref": "#/definitions/entityCost" },
         "sources": {

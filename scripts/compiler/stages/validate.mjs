@@ -77,6 +77,18 @@ function checkReferentialIntegrity(sbm, logger) {
 
   logger.debug(`ID index built: ${allIds.size} unique IDs`);
 
+  // Check building → site references
+  if (sbm.entities.buildings) {
+    for (const building of sbm.entities.buildings) {
+      if (building.siteId && !allIds.has(building.siteId)) {
+        warnings.push({
+          path: `buildings/${building.id}/siteId`,
+          message: `Referenced site "${building.siteId}" does not exist`
+        });
+      }
+    }
+  }
+
   // Check space → zone references
   if (sbm.entities.spaces) {
     for (const space of sbm.entities.spaces) {
@@ -153,6 +165,74 @@ function checkReferentialIntegrity(sbm, logger) {
           path: `systems/${system.id}/systemTypeId`,
           message: `Referenced system type "${system.systemTypeId}" does not exist`
         });
+      }
+    }
+  }
+
+  // Check envelope → building and boundarySpaceIds references
+  if (sbm.entities.envelopes) {
+    for (const envelope of sbm.entities.envelopes) {
+      if (envelope.buildingId && !allIds.has(envelope.buildingId)) {
+        warnings.push({
+          path: `envelopes/${envelope.id}/buildingId`,
+          message: `Referenced building "${envelope.buildingId}" does not exist`
+        });
+      }
+
+      if (envelope.boundarySpaceIds) {
+        for (const spaceId of envelope.boundarySpaceIds) {
+          if (!allIds.has(spaceId)) {
+            warnings.push({
+              path: `envelopes/${envelope.id}/boundarySpaceIds`,
+              message: `Referenced boundary space "${spaceId}" does not exist`
+            });
+          }
+        }
+      }
+
+      if (envelope.levelIds) {
+        for (const levelId of envelope.levelIds) {
+          if (!allIds.has(levelId)) {
+            warnings.push({
+              path: `envelopes/${envelope.id}/levelIds`,
+              message: `Referenced level "${levelId}" does not exist`
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // Check vertical_circulation → building, level, space references
+  if (sbm.entities.vertical_circulations) {
+    for (const vc of sbm.entities.vertical_circulations) {
+      if (vc.buildingId && !allIds.has(vc.buildingId)) {
+        warnings.push({
+          path: `vertical_circulations/${vc.id}/buildingId`,
+          message: `Referenced building "${vc.buildingId}" does not exist`
+        });
+      }
+
+      if (vc.connectedLevelIds) {
+        for (const levelId of vc.connectedLevelIds) {
+          if (!allIds.has(levelId)) {
+            warnings.push({
+              path: `vertical_circulations/${vc.id}/connectedLevelIds`,
+              message: `Referenced level "${levelId}" does not exist`
+            });
+          }
+        }
+      }
+
+      if (vc.servedSpaceIds) {
+        for (const spaceId of vc.servedSpaceIds) {
+          if (!allIds.has(spaceId)) {
+            warnings.push({
+              path: `vertical_circulations/${vc.id}/servedSpaceIds`,
+              message: `Referenced space "${spaceId}" does not exist`
+            });
+          }
+        }
       }
     }
   }
