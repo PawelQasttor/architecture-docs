@@ -6,6 +6,38 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [1.1.0] - 2026-03-01
+
+### Added
+- **5 new entity types** (19 total, up from 14):
+  - `opening` / `opening_type` — Windows, doors, skylights as first-class entities (promoted from inline `envelope.openings[]`)
+  - `site_feature` / `site_feature_type` — Landscape elements, parking, green infrastructure
+  - `construction_package` — Construction work packages (promoted from inline `project.constructionPackages[]`)
+- **Weighted completeness** in quality stage: critical fields (weight 3), important (weight 2), standard (weight 1)
+- **Entity-type profiles** in quality stage: `profileCompleteness` and `missingExpected` per entity
+- **Safety-critical tracking** for `firePerformance` on openings (fire doors)
+- **Shared constants** (`scripts/compiler/constants.mjs`) for safety-critical field sets
+- **New validation rules**: cost completeness warnings, duplicate zone membership detection, circular dependency detection for construction packages
+- **New referential integrity checks**: opening→envelope, site_feature→site, construction_package dependencies
+- **Opening type inheritance**: opening_type→opening field propagation
+- **Site feature type inheritance**: site_feature_type→site_feature field propagation
+- **Reverse relationships**: envelope→openingIds, site→siteFeatureIds, construction_package→assignedEntityIds
+- **Legacy migration**: inline `envelope.openings[]` and `project.constructionPackages[]` auto-migrated to standalone entities
+- **Asset register**: includes openings with maintenance/warranty data
+- **BIM mapping**: Pset_SBM_Opening, Pset_SBM_SiteFeature, Pset_SBM_ConstructionPackage
+- **Green Terrace example**: 12 new files (EN + PL each): 2 opening types, 3 openings, 1 site feature type, 2 site features, 4 construction packages
+- **Entity documentation**: opening.md, site-feature.md, construction-package.md (EN + PL)
+- **36 new tests** (104 total, up from 68): parse, normalize, validate, quality, integration
+
+### Changed
+- **Schema** `sbm-schema-v1.0.json` → `sbm-schema-v1.1.json`, version `1.1.0`, `sbm_version` const `"1.1"`
+- **Compiler version** `1.0.0` → `1.1.0`
+- **Green Terrace** entities: 57 → 69 (12 new entities from 5 new types)
+- Quality stage uses unified constants from `constants.mjs`
+- Validation stage uses unified constants from `constants.mjs`
+
+---
+
 ## [1.0.0] - 2026-02-28
 
 ### Added

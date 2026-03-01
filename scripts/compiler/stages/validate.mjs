@@ -13,6 +13,7 @@ import addFormats from 'ajv-formats';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { SAFETY_CRITICAL_FIELDS, SAFETY_CRITICAL_ENV_FIELDS } from '../constants.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,7 +22,7 @@ const __dirname = path.dirname(__filename);
  * Load JSON schema
  */
 async function loadSchema() {
-  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v1.0.json');
+  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v1.1.json');
   const schemaContent = await fs.readFile(schemaPath, 'utf-8');
   return JSON.parse(schemaContent);
 }
@@ -50,7 +51,7 @@ async function validateSchema(sbm, logger) {
     };
   }
 
-  logger.debug('✓ JSON schema validation passed (v1.0)');
+  logger.debug('✓ JSON schema validation passed (v1.1)');
   return { valid: true, errors: [] };
 }
 
@@ -195,21 +196,23 @@ function checkReferentialIntegrity(sbm, logger) {
       }
     }
 
-    // Detect circular system hierarchies (A→B→C→A)
+    // Detect circular system hierarchies (A→B→C→A) with precise cycle reporting
     const systemMap = new Map(sbm.entities.systems.map(s => [s.id, s]));
     for (const system of sbm.entities.systems) {
       if (!system.parentSystemId) continue;
-      const visited = new Set();
+      const visited = [];
       let current = system;
       while (current?.parentSystemId) {
-        if (visited.has(current.id)) {
+        if (visited.includes(current.id)) {
+          const cycleStart = visited.indexOf(current.id);
+          const cyclePath = visited.slice(cycleStart);
           errors.push({
             path: `systems/${system.id}/parentSystemId`,
-            message: `Circular system hierarchy detected: ${[...visited, current.id].join(' → ')}`
+            message: `Circular system hierarchy detected: ${cyclePath.join(' → ')} → ${current.id}`
           });
           break;
         }
-        visited.add(current.id);
+        visited.push(current.id);
         current = systemMap.get(current.parentSystemId);
       }
     }
@@ -295,22 +298,127 @@ function checkReferentialIntegrity(sbm, logger) {
     }
   }
 
-  // Check constructionPackageId references on spaces, systems, assets, envelopes
-  const packageIds = new Set(
-    (sbm.project?.constructionPackages || []).map(p => p.id)
-  );
+  // Check opening references (v1.1)
+  if (sbm.entities.openings) {
+    for (const opening of sbm.entities.openings) {
+      if (opening.envelopeId && !allIds.has(opening.envelopeId)) {
+        errors.push({
+          path: `openings/${opening.id}/envelopeId`,
+          message: `Referenced envelope "${opening.envelopeId}" does not exist`
+        });
+      }
+      if (opening.openingTypeId && !allIds.has(opening.openingTypeId)) {
+        warnings.push({
+          path: `openings/${opening.id}/openingTypeId`,
+          message: `Referenced opening type "${opening.openingTypeId}" does not exist`
+        });
+      }
+      if (opening.levelId && !allIds.has(opening.levelId)) {
+        warnings.push({
+          path: `openings/${opening.id}/levelId`,
+          message: `Referenced level "${opening.levelId}" does not exist`
+        });
+      }
+      if (opening.spaceIds) {
+        for (const spaceId of opening.spaceIds) {
+          if (!allIds.has(spaceId)) {
+            warnings.push({
+              path: `openings/${opening.id}/spaceIds`,
+              message: `Referenced space "${spaceId}" does not exist`
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // Check site_feature references (v1.1)
+  if (sbm.entities.site_features) {
+    for (const feature of sbm.entities.site_features) {
+      if (feature.siteId && !allIds.has(feature.siteId)) {
+        errors.push({
+          path: `site_features/${feature.id}/siteId`,
+          message: `Referenced site "${feature.siteId}" does not exist`
+        });
+      }
+      if (feature.siteFeatureTypeId && !allIds.has(feature.siteFeatureTypeId)) {
+        warnings.push({
+          path: `site_features/${feature.id}/siteFeatureTypeId`,
+          message: `Referenced site feature type "${feature.siteFeatureTypeId}" does not exist`
+        });
+      }
+    }
+  }
+
+  // Check construction_package references (v1.1)
+  if (sbm.entities.construction_packages) {
+    const cpMap = new Map(sbm.entities.construction_packages.map(cp => [cp.id, cp]));
+
+    for (const pkg of sbm.entities.construction_packages) {
+      if (pkg.buildingId && !allIds.has(pkg.buildingId)) {
+        warnings.push({
+          path: `construction_packages/${pkg.id}/buildingId`,
+          message: `Referenced building "${pkg.buildingId}" does not exist`
+        });
+      }
+
+      if (pkg.dependencies) {
+        for (const dep of pkg.dependencies) {
+          if (!cpMap.has(dep.packageId)) {
+            errors.push({
+              path: `construction_packages/${pkg.id}/dependencies`,
+              message: `Referenced dependency package "${dep.packageId}" does not exist`
+            });
+          }
+        }
+      }
+    }
+
+    // Detect circular construction package dependencies
+    for (const pkg of sbm.entities.construction_packages) {
+      if (!pkg.dependencies || pkg.dependencies.length === 0) continue;
+      const visited = [];
+      let currentId = pkg.id;
+      let hasCircle = false;
+
+      while (currentId) {
+        if (visited.includes(currentId)) {
+          const cycleStart = visited.indexOf(currentId);
+          const cyclePath = visited.slice(cycleStart);
+          errors.push({
+            path: `construction_packages/${pkg.id}/dependencies`,
+            message: `Circular dependency detected: ${cyclePath.join(' → ')} → ${currentId}`
+          });
+          hasCircle = true;
+          break;
+        }
+        visited.push(currentId);
+        const current = cpMap.get(currentId);
+        if (!current?.dependencies || current.dependencies.length === 0) break;
+        currentId = current.dependencies[0].packageId;
+      }
+    }
+  }
+
+  // Check constructionPackageId references on entities (v1.1: includes standalone packages)
+  const packageIds = new Set([
+    ...(sbm.project?.constructionPackages || []).map(p => p.id),
+    ...(sbm.entities.construction_packages || []).map(p => p.id)
+  ]);
   if (packageIds.size > 0) {
     const checkableEntities = [
       ...(sbm.entities.spaces || []).map(e => ({ ...e, _type: 'spaces' })),
       ...(sbm.entities.systems || []).map(e => ({ ...e, _type: 'systems' })),
       ...(sbm.entities.assets || []).map(e => ({ ...e, _type: 'assets' })),
-      ...(sbm.entities.envelopes || []).map(e => ({ ...e, _type: 'envelopes' }))
+      ...(sbm.entities.envelopes || []).map(e => ({ ...e, _type: 'envelopes' })),
+      ...(sbm.entities.openings || []).map(e => ({ ...e, _type: 'openings' })),
+      ...(sbm.entities.site_features || []).map(e => ({ ...e, _type: 'site_features' }))
     ];
     for (const entity of checkableEntities) {
       if (entity.constructionPackageId && !packageIds.has(entity.constructionPackageId)) {
         warnings.push({
           path: `${entity._type}/${entity.id}/constructionPackageId`,
-          message: `Referenced construction package "${entity.constructionPackageId}" does not exist in project.constructionPackages`
+          message: `Referenced construction package "${entity.constructionPackageId}" does not exist`
         });
       }
     }
@@ -355,6 +463,50 @@ function checkBusinessRules(sbm, logger) {
     }
   }
 
+  // Check: Spaces with area but no cost estimate (v1.1)
+  if (sbm.entities.spaces) {
+    for (const space of sbm.entities.spaces) {
+      const area = space.area || space.designArea;
+      if (area && area > 0 && !space.cost) {
+        warnings.push({
+          path: `spaces/${space.id}`,
+          message: `Space has area (${area} m2) but no cost estimate — cost rollup will be incomplete`,
+          rule: 'business:cost_completeness'
+        });
+      }
+    }
+  }
+
+  // Check: Duplicate zone membership — space in multiple zones of same type (v1.1)
+  if (sbm.entities.zones && sbm.entities.spaces) {
+    const zonesByType = {};
+    for (const zone of sbm.entities.zones) {
+      const zt = zone.zoneCategory || zone.zoneType || 'unknown';
+      if (!zonesByType[zt]) zonesByType[zt] = [];
+      zonesByType[zt].push(zone);
+    }
+
+    for (const [zoneType, zones] of Object.entries(zonesByType)) {
+      if (zones.length < 2) continue;
+      const spaceToZones = {};
+      for (const zone of zones) {
+        for (const spaceId of (zone.spaceIds || [])) {
+          if (!spaceToZones[spaceId]) spaceToZones[spaceId] = [];
+          spaceToZones[spaceId].push(zone.id);
+        }
+      }
+      for (const [spaceId, zoneIds] of Object.entries(spaceToZones)) {
+        if (zoneIds.length > 1) {
+          warnings.push({
+            path: `spaces/${spaceId}`,
+            message: `Space belongs to ${zoneIds.length} zones of type "${zoneType}": ${zoneIds.join(', ')}`,
+            rule: 'business:duplicate_zone_membership'
+          });
+        }
+      }
+    }
+  }
+
   if (warnings.length === 0) {
     logger.debug('✓ Business rules check passed');
   } else {
@@ -363,16 +515,6 @@ function checkBusinessRules(sbm, logger) {
 
   return warnings;
 }
-
-/**
- * Fields considered safety-critical for phase gate enforcement
- */
-const SAFETY_CRITICAL_FIELDS = new Set([
-  'electricalSafetyGroup',
-  'radiologicalShielding',
-  'fireRating',
-  'structuralLoad'
-]);
 
 /**
  * Check data provenance

@@ -521,6 +521,408 @@ describe('normalize', () => {
     });
   });
 
+  describe('new entity type grouping (v1.1)', () => {
+    it('should group openings and opening_types', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'envelope',
+          documentType: 'envelope',
+          id: 'ENV-TEST-01',
+          envelopeName: 'Exterior Wall',
+          envelopeType: 'wall',
+          buildingId: 'BLD-TEST',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'envelope.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'opening_type',
+          documentType: 'opening_type',
+          id: 'OT-WINDOW-A',
+          frameMaterial: 'aluminium',
+          glazingType: 'triple',
+          thermalPerformance: { uValue: 0.9 },
+          version: '1.0.0',
+          _metadata: { sourceFile: 'opening-type.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'opening',
+          documentType: 'opening',
+          id: 'OPN-TEST-01',
+          openingName: 'Window A',
+          openingCategory: 'window',
+          envelopeId: 'ENV-TEST-01',
+          openingTypeId: 'OT-WINDOW-A',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'opening.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+
+      assert.ok(result.entities.openings, 'should have openings array');
+      assert.equal(result.entities.openings.length, 1);
+      assert.ok(result.entities.opening_types, 'should have opening_types array');
+      assert.equal(result.entities.opening_types.length, 1);
+    });
+
+    it('should group site_features and site_feature_types', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'site',
+          documentType: 'site',
+          id: 'SITE-TEST-01',
+          siteName: 'Test Site',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'site.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'site_feature_type',
+          documentType: 'site_feature_type',
+          id: 'SFT-GARDEN-A',
+          manufacturer: 'GreenScape',
+          expectedLifeYears: 20,
+          version: '1.0.0',
+          _metadata: { sourceFile: 'sft.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'site_feature',
+          documentType: 'site_feature',
+          id: 'SF-TEST-01',
+          featureName: 'Front Garden',
+          featureCategory: 'vegetation',
+          siteId: 'SITE-TEST-01',
+          siteFeatureTypeId: 'SFT-GARDEN-A',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'sf.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+
+      assert.ok(result.entities.site_features, 'should have site_features array');
+      assert.equal(result.entities.site_features.length, 1);
+      assert.ok(result.entities.site_feature_types, 'should have site_feature_types array');
+      assert.equal(result.entities.site_feature_types.length, 1);
+    });
+
+    it('should group construction_packages', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'construction_package',
+          documentType: 'construction_package',
+          id: 'CP-TEST-01',
+          packageName: 'Foundation',
+          sequence: 1,
+          version: '1.0.0',
+          _metadata: { sourceFile: 'cp.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+
+      assert.ok(result.entities.construction_packages, 'should have construction_packages array');
+      assert.equal(result.entities.construction_packages.length, 1);
+    });
+
+    it('should include new entity counts in metadata', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'opening',
+          documentType: 'opening',
+          id: 'OPN-META-01',
+          openingName: 'Door A',
+          openingCategory: 'door',
+          envelopeId: 'ENV-X',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'opn.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+
+      assert.equal(result.metadata.entitiesByType.openings, 1, 'metadata should count openings');
+      assert.equal(result.metadata.entitiesByType.site_features, 0, 'metadata should count site_features');
+      assert.equal(result.metadata.entitiesByType.construction_packages, 0, 'metadata should count construction_packages');
+    });
+  });
+
+  describe('opening type → opening inheritance (v1.1)', () => {
+    it('should inherit fields from opening type to opening', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'envelope',
+          documentType: 'envelope',
+          id: 'ENV-INH-01',
+          envelopeName: 'Wall',
+          buildingId: 'BLD-TEST',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'env.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'opening_type',
+          documentType: 'opening_type',
+          id: 'OT-INH-01',
+          frameMaterial: 'timber',
+          glazingType: 'double',
+          operability: 'tilt_and_turn',
+          thermalPerformance: { uValue: 1.2, gValue: 0.5 },
+          version: '1.0.0',
+          _metadata: { sourceFile: 'ot.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'opening',
+          documentType: 'opening',
+          id: 'OPN-INH-01',
+          openingName: 'Window B',
+          openingCategory: 'window',
+          envelopeId: 'ENV-INH-01',
+          openingTypeId: 'OT-INH-01',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'opn.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+      const opening = result.entities.openings.find(o => o.id === 'OPN-INH-01');
+
+      assert.equal(opening.frameMaterial, 'timber', 'frameMaterial should be inherited');
+      assert.equal(opening.glazingType, 'double', 'glazingType should be inherited');
+      assert.equal(opening.operability, 'tilt_and_turn', 'operability should be inherited');
+      assert.deepEqual(opening.thermalPerformance, { uValue: 1.2, gValue: 0.5 }, 'thermalPerformance should be inherited');
+    });
+
+    it('should not overwrite explicit opening values', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'opening_type',
+          documentType: 'opening_type',
+          id: 'OT-NO-OVR',
+          frameMaterial: 'aluminium',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'ot.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'opening',
+          documentType: 'opening',
+          id: 'OPN-NO-OVR',
+          openingName: 'Door C',
+          openingCategory: 'door',
+          envelopeId: 'ENV-X',
+          openingTypeId: 'OT-NO-OVR',
+          frameMaterial: 'steel',  // Explicit value
+          version: '1.0.0',
+          _metadata: { sourceFile: 'opn.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+      const opening = result.entities.openings.find(o => o.id === 'OPN-NO-OVR');
+
+      assert.equal(opening.frameMaterial, 'steel', 'explicit value should NOT be overwritten');
+    });
+  });
+
+  describe('site feature type → site feature inheritance (v1.1)', () => {
+    it('should inherit fields from site feature type to site feature', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'site_feature_type',
+          documentType: 'site_feature_type',
+          id: 'SFT-INH-01',
+          manufacturer: 'GreenTech',
+          expectedLifeYears: 25,
+          maintenanceRequirements: { frequency: 'annual', description: 'Pruning' },
+          version: '1.0.0',
+          _metadata: { sourceFile: 'sft.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'site_feature',
+          documentType: 'site_feature',
+          id: 'SF-INH-01',
+          featureName: 'Hedge',
+          featureCategory: 'vegetation',
+          siteId: 'SITE-X',
+          siteFeatureTypeId: 'SFT-INH-01',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'sf.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+      const feature = result.entities.site_features.find(f => f.id === 'SF-INH-01');
+
+      assert.equal(feature.manufacturer, 'GreenTech', 'manufacturer should be inherited');
+      assert.equal(feature.expectedLifeYears, 25, 'expectedLifeYears should be inherited');
+      // maintenanceRequirements is mapped to maintenanceSchedule
+      assert.deepEqual(feature.maintenanceSchedule, { frequency: 'annual', description: 'Pruning' }, 'maintenanceSchedule should be inherited from maintenanceRequirements');
+    });
+  });
+
+  describe('new reverse relationships (v1.1)', () => {
+    it('should compute envelope.openingIds from opening.envelopeId', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'envelope',
+          documentType: 'envelope',
+          id: 'ENV-REV-01',
+          envelopeName: 'Wall',
+          buildingId: 'BLD-TEST',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'env.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'opening',
+          documentType: 'opening',
+          id: 'OPN-REV-01',
+          openingName: 'Window',
+          openingCategory: 'window',
+          envelopeId: 'ENV-REV-01',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'opn1.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'opening',
+          documentType: 'opening',
+          id: 'OPN-REV-02',
+          openingName: 'Door',
+          openingCategory: 'door',
+          envelopeId: 'ENV-REV-01',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'opn2.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+      const envelope = result.entities.envelopes.find(e => e.id === 'ENV-REV-01');
+
+      assert.ok(Array.isArray(envelope.openingIds), 'envelope should have openingIds');
+      assert.ok(envelope.openingIds.includes('OPN-REV-01'), 'should include first opening');
+      assert.ok(envelope.openingIds.includes('OPN-REV-02'), 'should include second opening');
+    });
+
+    it('should compute site.siteFeatureIds from site_feature.siteId', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'site',
+          documentType: 'site',
+          id: 'SITE-REV-01',
+          siteName: 'Test Site',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'site.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'site_feature',
+          documentType: 'site_feature',
+          id: 'SF-REV-01',
+          featureName: 'Parking',
+          featureCategory: 'parking',
+          siteId: 'SITE-REV-01',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'sf.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+      const site = result.entities.sites.find(s => s.id === 'SITE-REV-01');
+
+      assert.ok(Array.isArray(site.siteFeatureIds), 'site should have siteFeatureIds');
+      assert.ok(site.siteFeatureIds.includes('SF-REV-01'), 'should include the site feature');
+    });
+
+    it('should compute construction_package.assignedEntityIds', async () => {
+      const entities = [
+        ...createMinimalEntities(),
+        {
+          entityType: 'construction_package',
+          documentType: 'construction_package',
+          id: 'CP-REV-01',
+          packageName: 'Package One',
+          sequence: 1,
+          version: '1.0.0',
+          _metadata: { sourceFile: 'cp.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      // Tag the space with this package
+      entities.find(e => e.id === 'SP-TEST-001').constructionPackageId = 'CP-REV-01';
+
+      const result = await normalize(entities, options, logger);
+      const pkg = result.entities.construction_packages.find(p => p.id === 'CP-REV-01');
+
+      assert.ok(Array.isArray(pkg.assignedEntityIds), 'package should have assignedEntityIds');
+      assert.ok(pkg.assignedEntityIds.includes('SP-TEST-001'), 'should include the tagged space');
+    });
+  });
+
+  describe('legacy construction package migration (v1.1)', () => {
+    it('should migrate legacy project.constructionPackages to standalone entities', async () => {
+      const entities = [
+        {
+          entityType: 'project_specification',
+          documentType: 'project_specification',
+          id: 'PRJ-MIG',
+          projectName: 'Migration Test',
+          country: 'PL',
+          constructionPackages: [
+            { id: 'PKG-LEG-01', name: 'Foundation', sequence: 1 },
+            { id: 'PKG-LEG-02', name: 'Structure', sequence: 2 }
+          ],
+          version: '1.0.0',
+          _metadata: { sourceFile: 'project.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'building',
+          documentType: 'building',
+          id: 'BLD-MIG',
+          name: 'Building',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'building.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'level',
+          documentType: 'level',
+          id: 'LVL-MIG-01',
+          buildingId: 'BLD-MIG',
+          levelName: 'GF',
+          version: '1.0.0',
+          _metadata: { sourceFile: 'level.md', parsedAt: new Date().toISOString() }
+        },
+        {
+          entityType: 'space',
+          documentType: 'space',
+          id: 'SP-MIG-001',
+          spaceName: 'Room',
+          spaceType: 'bedroom',
+          buildingId: 'BLD-MIG',
+          levelId: 'LVL-MIG-01',
+          constructionPackageId: 'PKG-LEG-01',
+          cost: { totalCost: 5000, currency: 'PLN' },
+          version: '1.0.0',
+          _metadata: { sourceFile: 'space.md', parsedAt: new Date().toISOString() }
+        }
+      ];
+
+      const result = await normalize(entities, options, logger);
+
+      assert.ok(result.entities.construction_packages, 'should have construction_packages from migration');
+      assert.equal(result.entities.construction_packages.length, 2, 'should migrate both packages');
+
+      const pkg = result.entities.construction_packages.find(p => p.id === 'PKG-LEG-01');
+      assert.ok(pkg, 'migrated package should exist');
+      assert.equal(pkg.packageName, 'Foundation', 'should preserve package name');
+      assert.equal(pkg._migrated, true, 'should be flagged as migrated');
+    });
+  });
+
   describe('level to space inheritance', () => {
     it('should inherit typicalCeilingHeight as designHeight', async () => {
       const entities = createMinimalEntities();

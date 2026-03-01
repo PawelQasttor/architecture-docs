@@ -86,10 +86,13 @@ export default defineConfig({
                 { text: 'Asset', link: '/en/documentation/entities/asset' },
                 { text: 'Asset Type', link: '/en/documentation/entities/asset-type' },
                 { text: 'Envelope', link: '/en/documentation/entities/envelope' },
+                { text: 'Opening', link: '/en/documentation/entities/opening' },
                 { text: 'Vertical Circulation', link: '/en/documentation/entities/vertical-circulation' },
                 { text: 'Site', link: '/en/documentation/entities/site' },
+                { text: 'Site Feature', link: '/en/documentation/entities/site-feature' },
                 { text: 'Building', link: '/en/documentation/entities/building' },
-                { text: 'Level', link: '/en/documentation/entities/level' }
+                { text: 'Level', link: '/en/documentation/entities/level' },
+                { text: 'Construction Package', link: '/en/documentation/entities/construction-package' }
               ]
             },
             {
@@ -298,7 +301,19 @@ export default defineConfig({
                     { text: 'REQ: Fire Egress', link: '/en/examples/green-terrace/requirements/REQ-FIRE-EGRESS-TIME-001' },
                     { text: 'REQ: Acoustic', link: '/en/examples/green-terrace/requirements/REQ-LEVEL-ACOUSTIC-B' },
                     { text: 'REQ: Fire Rating', link: '/en/examples/green-terrace/requirements/REQ-LEVEL-FIRE-RATING' },
-                    { text: 'Level 01', link: '/en/examples/green-terrace/levels/level-01' }
+                    { text: 'Level 01', link: '/en/examples/green-terrace/levels/level-01' },
+                    { text: 'Window Type: Internorm KF410', link: '/en/examples/green-terrace/opening-types/internorm-kf410-window' },
+                    { text: 'Door Type: Fire EI30', link: '/en/examples/green-terrace/opening-types/fire-door-ei30' },
+                    { text: 'Window N-001', link: '/en/examples/green-terrace/openings/opn-win-n-001' },
+                    { text: 'Window N-002', link: '/en/examples/green-terrace/openings/opn-win-n-002' },
+                    { text: 'Fire Door Stair-01', link: '/en/examples/green-terrace/openings/opn-door-stair-01' },
+                    { text: 'Site Feature Type: Paving', link: '/en/examples/green-terrace/site-feature-types/sft-permeable-paving' },
+                    { text: 'North Garden', link: '/en/examples/green-terrace/site-features/sf-north-garden' },
+                    { text: 'Parking Area', link: '/en/examples/green-terrace/site-features/sf-parking' },
+                    { text: 'CP: Structure', link: '/en/examples/green-terrace/construction-packages/cp-structure' },
+                    { text: 'CP: Envelope', link: '/en/examples/green-terrace/construction-packages/cp-envelope' },
+                    { text: 'CP: MEP', link: '/en/examples/green-terrace/construction-packages/cp-mep' },
+                    { text: 'CP: Finishes', link: '/en/examples/green-terrace/construction-packages/cp-finishes' }
                   ]
                 }
               ]
@@ -383,10 +398,13 @@ export default defineConfig({
                 { text: 'Urządzenie', link: '/pl/dokumentacja/encje/zasob' },
                 { text: 'Typ Zasobu', link: '/pl/dokumentacja/encje/typ-zasobu' },
                 { text: 'Przegroda', link: '/pl/dokumentacja/encje/przegroda' },
+                { text: 'Otwór', link: '/pl/dokumentacja/encje/otwor' },
                 { text: 'Komunikacja Pionowa', link: '/pl/dokumentacja/encje/komunikacja-pionowa' },
                 { text: 'Działka', link: '/pl/dokumentacja/encje/dzialka' },
+                { text: 'Element Terenu', link: '/pl/dokumentacja/encje/element-terenu' },
                 { text: 'Budynek', link: '/pl/dokumentacja/encje/budynek' },
-                { text: 'Kondygnacja', link: '/pl/dokumentacja/encje/poziom' }
+                { text: 'Kondygnacja', link: '/pl/dokumentacja/encje/poziom' },
+                { text: 'Pakiet Budowlany', link: '/pl/dokumentacja/encje/pakiet-budowlany' }
               ]
             },
             {
@@ -595,7 +613,19 @@ export default defineConfig({
                     { text: 'WYM: Czas Ewakuacji', link: '/pl/przyklady/zielony-taras/wymagania/REQ-FIRE-EGRESS-TIME-001' },
                     { text: 'WYM: Akustyka', link: '/pl/przyklady/zielony-taras/wymagania/REQ-LEVEL-ACOUSTIC-B' },
                     { text: 'WYM: Odporność Ogniowa', link: '/pl/przyklady/zielony-taras/wymagania/REQ-LEVEL-FIRE-RATING' },
-                    { text: 'Poziom 01', link: '/pl/przyklady/zielony-taras/poziomy/poziom-01' }
+                    { text: 'Poziom 01', link: '/pl/przyklady/zielony-taras/poziomy/poziom-01' },
+                    { text: 'Typ Okna: Internorm KF410', link: '/pl/przyklady/zielony-taras/typy-otworow/okno-internorm-kf410' },
+                    { text: 'Typ Drzwi: Pożarowe EI30', link: '/pl/przyklady/zielony-taras/typy-otworow/drzwi-pozarowe-ei30' },
+                    { text: 'Okno N-001', link: '/pl/przyklady/zielony-taras/otwory/opn-win-n-001' },
+                    { text: 'Okno N-002', link: '/pl/przyklady/zielony-taras/otwory/opn-win-n-002' },
+                    { text: 'Drzwi Poż. Klatka-01', link: '/pl/przyklady/zielony-taras/otwory/opn-door-stair-01' },
+                    { text: 'Typ Elementu: Nawierzchnia', link: '/pl/przyklady/zielony-taras/typy-elementow-terenu/sft-nawierzchnia-przepuszczalna' },
+                    { text: 'Ogród Północny', link: '/pl/przyklady/zielony-taras/elementy-terenu/sf-ogrod-polnocny' },
+                    { text: 'Parking', link: '/pl/przyklady/zielony-taras/elementy-terenu/sf-parking' },
+                    { text: 'PB: Konstrukcja', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-konstrukcja' },
+                    { text: 'PB: Przegrody', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-przegroda' },
+                    { text: 'PB: Instalacje', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-instalacje' },
+                    { text: 'PB: Wykończenia', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-wykonczenie' }
                   ]
                 }
               ]

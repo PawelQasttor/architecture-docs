@@ -382,6 +382,56 @@ function generateIfcPropertySets(sbm) {
   };
   propertySets.push(assetPropertySet);
 
+  // Property Set 5: Pset_SBM_Opening (v1.1)
+  const openingPropertySet = {
+    name: "Pset_SBM_Opening",
+    description: "SBM Opening properties for windows, doors, and other openings",
+    applicableEntities: ["IfcWindow", "IfcDoor", "IfcOpeningElement"],
+    properties: [
+      { name: "SBM_ID", dataType: "IfcIdentifier", description: "SBM entity identifier" },
+      { name: "SBM_OpeningCategory", dataType: "IfcLabel", description: "Opening classification" },
+      { name: "SBM_EnvelopeId", dataType: "IfcIdentifier", description: "Parent envelope reference" },
+      { name: "SBM_UValue", dataType: "IfcThermalTransmittanceMeasure", description: "U-value in W/(m2·K)" },
+      { name: "SBM_GValue", dataType: "IfcReal", description: "Solar heat gain coefficient" },
+      { name: "SBM_AcousticRw", dataType: "IfcSoundPowerMeasure", description: "Sound reduction Rw in dB" },
+      { name: "SBM_FireRating", dataType: "IfcLabel", description: "Fire resistance rating" },
+      { name: "SBM_ClearWidth", dataType: "IfcLengthMeasure", description: "Clear opening width in mm" },
+      { name: "SBM_Operability", dataType: "IfcLabel", description: "Opening operation type" }
+    ]
+  };
+  propertySets.push(openingPropertySet);
+
+  // Property Set 6: Pset_SBM_SiteFeature (v1.1)
+  const siteFeaturePropertySet = {
+    name: "Pset_SBM_SiteFeature",
+    description: "SBM Site Feature properties for landscape and site elements",
+    applicableEntities: ["IfcGeographicElement", "IfcCivilElement", "IfcBuildingElementProxy"],
+    properties: [
+      { name: "SBM_ID", dataType: "IfcIdentifier", description: "SBM entity identifier" },
+      { name: "SBM_FeatureCategory", dataType: "IfcLabel", description: "Site feature classification" },
+      { name: "SBM_SiteId", dataType: "IfcIdentifier", description: "Parent site reference" },
+      { name: "SBM_Area", dataType: "IfcAreaMeasure", description: "Feature area in m2" },
+      { name: "SBM_Condition", dataType: "IfcLabel", description: "Current condition" }
+    ]
+  };
+  propertySets.push(siteFeaturePropertySet);
+
+  // Property Set 7: Pset_SBM_ConstructionPackage (v1.1)
+  const constructionPackagePropertySet = {
+    name: "Pset_SBM_ConstructionPackage",
+    description: "SBM Construction Package properties for work scheduling",
+    applicableEntities: ["IfcWorkSchedule", "IfcWorkPlan"],
+    properties: [
+      { name: "SBM_ID", dataType: "IfcIdentifier", description: "SBM entity identifier" },
+      { name: "SBM_PackageName", dataType: "IfcLabel", description: "Package name" },
+      { name: "SBM_Sequence", dataType: "IfcInteger", description: "Execution order" },
+      { name: "SBM_Status", dataType: "IfcLabel", description: "Package status" },
+      { name: "SBM_PlannedStart", dataType: "IfcDate", description: "Planned start date" },
+      { name: "SBM_PlannedEnd", dataType: "IfcDate", description: "Planned end date" }
+    ]
+  };
+  propertySets.push(constructionPackagePropertySet);
+
   return { propertySets };
 }
 

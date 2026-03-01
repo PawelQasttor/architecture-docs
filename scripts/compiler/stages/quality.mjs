@@ -12,29 +12,7 @@
  * - Generates warnings
  */
 
-/**
- * Fields considered safety-critical — errors here can cause physical harm.
- * These get stricter phase gate enforcement (Phase 7+: must be measured/calculated/specified).
- */
-const SAFETY_CRITICAL_FIELDS = new Set([
-  'electricalSafetyGroup',
-  'radiologicalShielding',
-  'fireRating',
-  'structuralLoad',
-  'pressurization',
-  'shielding'
-]);
-
-/**
- * Fields that are nested inside environmentalConditions and are safety-critical
- */
-const SAFETY_CRITICAL_ENV_FIELDS = new Set([
-  'pressurization',
-  'cleanlinessClass',
-  'pressureDifferentialPa',
-  'filtrationClass',
-  'airChangesPerHour'
-]);
+import { SAFETY_CRITICAL_FIELDS, SAFETY_CRITICAL_ENV_FIELDS } from '../constants.mjs';
 
 /**
  * Confidence levels ordered from strongest to weakest
@@ -50,9 +28,79 @@ function isSkippableField(key) {
 }
 
 /**
+ * Quality profiles: expected fields per entity type with criticality weights.
+ * Critical (weight 3), Important (weight 2), Standard (weight 1).
+ */
+const QUALITY_PROFILES = {
+  space: {
+    critical: ['spaceName', 'spaceType', 'buildingId', 'levelId'],
+    important: ['area', 'designArea', 'zoneIds', 'requirements', 'cost']
+  },
+  building: {
+    critical: ['buildingName', 'siteId'],
+    important: ['classification', 'grossFloorArea', 'cost']
+  },
+  level: {
+    critical: ['levelName', 'buildingId', 'levelNumber'],
+    important: ['elevation', 'grossArea']
+  },
+  zone: {
+    critical: ['zoneName', 'zoneCategory'],
+    important: ['spaceIds', 'buildingId']
+  },
+  system: {
+    critical: ['systemName', 'systemCategory', 'buildingId'],
+    important: ['assetIds', 'cost']
+  },
+  asset: {
+    critical: ['assetName', 'assetType', 'buildingId'],
+    important: ['systemId', 'manufacturer', 'cost']
+  },
+  envelope: {
+    critical: ['envelopeName', 'envelopeType', 'buildingId'],
+    important: ['thermalPerformance', 'firePerformance', 'grossArea']
+  },
+  site: {
+    critical: ['siteName'],
+    important: ['siteArea', 'buildableArea']
+  },
+  requirement: {
+    critical: ['requirementName', 'requirementType', 'scope', 'verification'],
+    important: ['metric', 'value']
+  },
+  vertical_circulation: {
+    critical: ['circulationName', 'circulationType', 'buildingId', 'connectedLevelIds'],
+    important: ['capacity']
+  },
+  opening: {
+    critical: ['openingName', 'openingCategory', 'envelopeId'],
+    important: ['dimensions', 'thermalPerformance', 'firePerformance']
+  },
+  site_feature: {
+    critical: ['featureName', 'featureCategory', 'siteId'],
+    important: ['dimensions', 'cost']
+  },
+  construction_package: {
+    critical: ['packageName', 'sequence'],
+    important: ['status', 'plannedStart', 'plannedEnd', 'costBreakdown']
+  }
+};
+
+/**
+ * Get field weight: 3 for critical, 2 for important, 1 for standard
+ */
+function getFieldWeight(field, entityType) {
+  const profile = QUALITY_PROFILES[entityType];
+  if (!profile) return 1;
+  if (profile.critical && profile.critical.includes(field)) return 3;
+  if (profile.important && profile.important.includes(field)) return 2;
+  return 1;
+}
+
+/**
  * Compute quality summary for a single entity
  */
-function computeEntityQuality(entity) {
+function computeEntityQuality(entity, entityType) {
   const fieldsByConfidence = {
     measured: 0,
     calculated: 0,
@@ -136,10 +184,42 @@ function computeEntityQuality(entity) {
     warnings.push(`${unverifiedSafety.length} safety-critical field(s) not fully verified: ${unverifiedSafety.map(f => f.field).join(', ')}`);
   }
 
+  // Weighted completeness (v1.1)
+  let weightedNonNull = 0;
+  let weightedTotal = 0;
+  for (const key of keys) {
+    const weight = getFieldWeight(key, entityType);
+    weightedTotal += weight;
+    if (entity[key] !== null && entity[key] !== undefined) {
+      weightedNonNull += weight;
+    }
+  }
+  const weightedCompleteness = weightedTotal > 0
+    ? parseFloat((weightedNonNull / weightedTotal).toFixed(2))
+    : 1.0;
+
+  // Profile completeness (v1.1)
+  const profile = QUALITY_PROFILES[entityType];
+  let profileCompleteness = null;
+  let missingExpected = undefined;
+  if (profile) {
+    const expected = [...(profile.critical || []), ...(profile.important || [])];
+    const missing = expected.filter(f => entity[f] === undefined || entity[f] === null);
+    profileCompleteness = expected.length > 0
+      ? parseFloat(((expected.length - missing.length) / expected.length).toFixed(2))
+      : 1.0;
+    if (missing.length > 0) {
+      missingExpected = missing;
+    }
+  }
+
   return {
     totalFields,
     fieldsByConfidence,
     completeness: totalFields > 0 ? parseFloat((nonNullFields / totalFields).toFixed(2)) : 1.0,
+    weightedCompleteness,
+    ...(profileCompleteness !== null && { profileCompleteness }),
+    ...(missingExpected && { missingExpected }),
     lowestConfidence: lowestConfidenceIndex >= 0 ? CONFIDENCE_ORDER[lowestConfidenceIndex] : null,
     unresolvedFields: unresolvedFields.length > 0 ? unresolvedFields : undefined,
     safetyCritical: safetyCritical.length > 0 ? safetyCritical : undefined,
@@ -157,6 +237,7 @@ function computeProjectQuality(allQualities) {
   };
 
   let totalCompleteness = 0;
+  let totalWeightedCompleteness = 0;
   const byLowestConfidence = {};
   const allSafetyCritical = [];
 
@@ -168,6 +249,7 @@ function computeProjectQuality(allQualities) {
 
     // Aggregate completeness
     totalCompleteness += quality.completeness;
+    totalWeightedCompleteness += quality.weightedCompleteness || quality.completeness;
 
     // Count by lowest confidence
     const lowest = quality.lowestConfidence || 'none';
@@ -189,6 +271,9 @@ function computeProjectQuality(allQualities) {
     totalEntities: allQualities.length,
     averageCompleteness: allQualities.length > 0
       ? parseFloat((totalCompleteness / allQualities.length).toFixed(2))
+      : 1.0,
+    averageWeightedCompleteness: allQualities.length > 0
+      ? parseFloat((totalWeightedCompleteness / allQualities.length).toFixed(2))
       : 1.0,
     fieldsByConfidence: totals,
     entitiesByLowestConfidence: byLowestConfidence,
@@ -222,7 +307,7 @@ export function generateQuality(sbm, logger) {
     if (!Array.isArray(entities)) continue;
 
     for (const entity of entities) {
-      const quality = computeEntityQuality(entity);
+      const quality = computeEntityQuality(entity, entity.entityType || entity.documentType);
       entity._quality = quality;
 
       allQualities.push({

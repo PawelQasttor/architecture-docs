@@ -27,9 +27,9 @@ function createMockLogger() {
  */
 function createValidSbm(overrides = {}) {
   return {
-    sbm_version: '1.0',
+    sbm_version: '1.1',
     generatedAt: new Date().toISOString(),
-    compiler: { version: '1.0.0', mode: 'production' },
+    compiler: { version: '1.1.0', mode: 'production' },
     project: {
       id: 'PRJ-TEST',
       name: 'Test Project',
@@ -335,6 +335,262 @@ describe('validate', () => {
     });
   });
 
+  describe('opening referential integrity (v1.1)', () => {
+    it('should error when opening references non-existent envelope', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.envelopes = [{
+        id: 'ENV-TEST-01',
+        entityType: 'envelope',
+        envelopeName: 'Exterior Wall',
+        envelopeType: 'external_wall',
+        buildingId: 'BLD-TEST',
+        version: '1.0.0'
+      }];
+      sbm.entities.openings = [{
+        id: 'OPN-TEST-01',
+        entityType: 'opening',
+        openingName: 'Window A',
+        openingCategory: 'window',
+        envelopeId: 'ENV-NONEXISTENT',
+        version: '1.0.0'
+      }];
+
+      const result = await validate(sbm, logger);
+
+      const refError = [...result.errors, ...result.warnings].find(m =>
+        m.message?.includes('ENV-NONEXISTENT')
+      );
+      assert.ok(refError, 'should detect broken envelope reference on opening');
+    });
+
+    it('should warn when opening references non-existent opening type', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.envelopes = [{
+        id: 'ENV-TEST-01',
+        entityType: 'envelope',
+        envelopeName: 'Exterior Wall',
+        envelopeType: 'external_wall',
+        buildingId: 'BLD-TEST',
+        version: '1.0.0'
+      }];
+      sbm.entities.openings = [{
+        id: 'OPN-TEST-01',
+        entityType: 'opening',
+        openingName: 'Window A',
+        openingCategory: 'window',
+        envelopeId: 'ENV-TEST-01',
+        openingTypeId: 'OT-NONEXISTENT',
+        version: '1.0.0'
+      }];
+
+      const result = await validate(sbm, logger);
+
+      const refWarning = result.warnings.find(w =>
+        w.message?.includes('OT-NONEXISTENT')
+      );
+      assert.ok(refWarning, 'should warn about missing opening type reference');
+    });
+  });
+
+  describe('site feature referential integrity (v1.1)', () => {
+    it('should error when site feature references non-existent site', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.sites = [{
+        id: 'SITE-TEST-01',
+        entityType: 'site',
+        siteName: 'Test Site',
+        version: '1.0.0'
+      }];
+      sbm.entities.site_features = [{
+        id: 'SF-TEST-01',
+        entityType: 'site_feature',
+        featureName: 'Garden',
+        featureCategory: 'vegetation',
+        siteId: 'SITE-NONEXISTENT',
+        version: '1.0.0'
+      }];
+
+      const result = await validate(sbm, logger);
+
+      const refError = [...result.errors, ...result.warnings].find(m =>
+        m.message?.includes('SITE-NONEXISTENT')
+      );
+      assert.ok(refError, 'should detect broken site reference on site feature');
+    });
+  });
+
+  describe('construction package referential integrity (v1.1)', () => {
+    it('should error when package dependency references non-existent package', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.construction_packages = [{
+        id: 'CP-TEST-01',
+        entityType: 'construction_package',
+        packageName: 'Foundation',
+        sequence: 1,
+        dependencies: [{ packageId: 'CP-NONEXISTENT', type: 'finish_to_start' }],
+        version: '1.0.0'
+      }];
+
+      const result = await validate(sbm, logger);
+
+      const refError = result.errors.find(e =>
+        e.message?.includes('CP-NONEXISTENT')
+      );
+      assert.ok(refError, 'should detect broken dependency reference');
+    });
+
+    it('should detect circular construction package dependencies', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.construction_packages = [
+        {
+          id: 'CP-CIRC-A',
+          entityType: 'construction_package',
+          packageName: 'Package A',
+          sequence: 1,
+          dependencies: [{ packageId: 'CP-CIRC-B', type: 'finish_to_start' }],
+          version: '1.0.0'
+        },
+        {
+          id: 'CP-CIRC-B',
+          entityType: 'construction_package',
+          packageName: 'Package B',
+          sequence: 2,
+          dependencies: [{ packageId: 'CP-CIRC-A', type: 'finish_to_start' }],
+          version: '1.0.0'
+        }
+      ];
+
+      const result = await validate(sbm, logger);
+
+      const circularError = result.errors.find(e =>
+        e.message?.includes('Circular') || e.message?.includes('circular')
+      );
+      assert.ok(circularError, 'should detect circular construction package dependency');
+    });
+
+    it('should pass with valid non-circular dependencies', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.construction_packages = [
+        {
+          id: 'CP-VALID-A',
+          entityType: 'construction_package',
+          packageName: 'Foundation',
+          sequence: 1,
+          version: '1.0.0'
+        },
+        {
+          id: 'CP-VALID-B',
+          entityType: 'construction_package',
+          packageName: 'Structure',
+          sequence: 2,
+          dependencies: [{ packageId: 'CP-VALID-A', type: 'finish_to_start' }],
+          version: '1.0.0'
+        }
+      ];
+
+      const result = await validate(sbm, logger);
+
+      const circularError = result.errors.find(e =>
+        e.message?.includes('Circular') || e.message?.includes('circular')
+      );
+      assert.equal(circularError, undefined, 'should not detect circular dependency for valid chain');
+    });
+  });
+
+  describe('cost completeness business rule (v1.1)', () => {
+    it('should warn when space has area but no cost', async () => {
+      const sbm = createValidSbm();
+      // Default space already has area: 15.0 but no cost
+
+      const result = await validate(sbm, logger);
+
+      const costWarning = result.warnings.find(w =>
+        w.rule === 'business:cost_completeness'
+      );
+      assert.ok(costWarning, 'should warn about missing cost estimate');
+      assert.ok(costWarning.message.includes('15'), 'warning should mention the area');
+    });
+
+    it('should not warn when space has both area and cost', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.spaces[0].cost = { totalCost: 10000, currency: 'PLN' };
+
+      const result = await validate(sbm, logger);
+
+      const costWarning = result.warnings.find(w =>
+        w.rule === 'business:cost_completeness'
+      );
+      assert.equal(costWarning, undefined, 'should not warn when cost is present');
+    });
+  });
+
+  describe('duplicate zone membership business rule (v1.1)', () => {
+    it('should warn when space belongs to multiple zones of same type', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.zones = [
+        {
+          id: 'ZONE-FIRE-A',
+          entityType: 'zone',
+          zoneName: 'Fire Zone A',
+          zoneType: 'fire',
+          buildingId: 'BLD-TEST',
+          spaceIds: ['SP-TEST-001'],
+          version: '1.0.0'
+        },
+        {
+          id: 'ZONE-FIRE-B',
+          entityType: 'zone',
+          zoneName: 'Fire Zone B',
+          zoneType: 'fire',
+          buildingId: 'BLD-TEST',
+          spaceIds: ['SP-TEST-001'],
+          version: '1.0.0'
+        }
+      ];
+      sbm.entities.spaces[0].zoneIds = ['ZONE-FIRE-A', 'ZONE-FIRE-B'];
+
+      const result = await validate(sbm, logger);
+
+      const dupWarning = result.warnings.find(w =>
+        w.rule === 'business:duplicate_zone_membership'
+      );
+      assert.ok(dupWarning, 'should warn about duplicate zone membership');
+      assert.ok(dupWarning.message.includes('fire'), 'warning should mention the zone type');
+    });
+
+    it('should not warn when space belongs to zones of different types', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.zones = [
+        {
+          id: 'ZONE-FIRE-01',
+          entityType: 'zone',
+          zoneName: 'Fire Zone',
+          zoneType: 'fire',
+          buildingId: 'BLD-TEST',
+          spaceIds: ['SP-TEST-001'],
+          version: '1.0.0'
+        },
+        {
+          id: 'ZONE-THERMAL-01',
+          entityType: 'zone',
+          zoneName: 'Thermal Zone',
+          zoneType: 'thermal',
+          buildingId: 'BLD-TEST',
+          spaceIds: ['SP-TEST-001'],
+          version: '1.0.0'
+        }
+      ];
+      sbm.entities.spaces[0].zoneIds = ['ZONE-FIRE-01', 'ZONE-THERMAL-01'];
+
+      const result = await validate(sbm, logger);
+
+      const dupWarning = result.warnings.find(w =>
+        w.rule === 'business:duplicate_zone_membership'
+      );
+      assert.equal(dupWarning, undefined, 'should not warn for different zone types');
+    });
+  });
+
   describe('sbm_version validation', () => {
     it('should fail when sbm_version is missing', async () => {
       const sbm = createValidSbm();
@@ -345,7 +601,7 @@ describe('validate', () => {
       assert.equal(result.valid, false, 'should fail without sbm_version');
     });
 
-    it('should fail when sbm_version is not "1.0"', async () => {
+    it('should fail when sbm_version is not "1.1"', async () => {
       const sbm = createValidSbm();
       sbm.sbm_version = '0.5';
 

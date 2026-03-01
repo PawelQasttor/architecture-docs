@@ -52,6 +52,11 @@ function groupEntitiesByType(entities) {
     zone_types: [],
     system_types: [],
     asset_types: [],
+    openings: [],
+    opening_types: [],
+    site_features: [],
+    site_feature_types: [],
+    construction_packages: [],
     other: [] // For legacy document types
   };
 
@@ -86,6 +91,16 @@ function groupEntitiesByType(entities) {
       grouped.system_types.push(normalizeEntity(entity));
     } else if (type === 'asset_type') {
       grouped.asset_types.push(normalizeEntity(entity));
+    } else if (type === 'opening') {
+      grouped.openings.push(normalizeEntity(entity));
+    } else if (type === 'opening_type') {
+      grouped.opening_types.push(normalizeEntity(entity));
+    } else if (type === 'site_feature') {
+      grouped.site_features.push(normalizeEntity(entity));
+    } else if (type === 'site_feature_type') {
+      grouped.site_feature_types.push(normalizeEntity(entity));
+    } else if (type === 'construction_package') {
+      grouped.construction_packages.push(normalizeEntity(entity));
     } else {
       // Legacy types (element_specification, project_specification)
       grouped.other.push(normalizeEntity(entity));
@@ -224,6 +239,66 @@ function computeRelationships(grouped) {
     }
   }
 
+  // Build envelope → openings reverse mapping (v1.1)
+  if (grouped.envelopes && grouped.openings) {
+    for (const envelope of grouped.envelopes) {
+      if (!envelope.openingIds) {
+        envelope.openingIds = [];
+      }
+
+      for (const opening of grouped.openings) {
+        if (opening.envelopeId === envelope.id) {
+          if (!envelope.openingIds.includes(opening.id)) {
+            envelope.openingIds.push(opening.id);
+          }
+        }
+      }
+    }
+  }
+
+  // Build site → site_features reverse mapping (v1.1)
+  if (grouped.sites && grouped.site_features) {
+    for (const site of grouped.sites) {
+      if (!site.siteFeatureIds) {
+        site.siteFeatureIds = [];
+      }
+
+      for (const feature of grouped.site_features) {
+        if (feature.siteId === site.id) {
+          if (!site.siteFeatureIds.includes(feature.id)) {
+            site.siteFeatureIds.push(feature.id);
+          }
+        }
+      }
+    }
+  }
+
+  // Build construction_package → assignedEntityIds reverse mapping (v1.1)
+  if (grouped.construction_packages && grouped.construction_packages.length > 0) {
+    const allTaggable = [
+      ...(grouped.spaces || []),
+      ...(grouped.systems || []),
+      ...(grouped.assets || []),
+      ...(grouped.envelopes || []),
+      ...(grouped.openings || []),
+      ...(grouped.site_features || [])
+    ];
+
+    for (const pkg of grouped.construction_packages) {
+      if (!pkg.assignedEntityIds) {
+        pkg.assignedEntityIds = [];
+      }
+
+      for (const entity of allTaggable) {
+        if (entity.constructionPackageId === pkg.id) {
+          if (!pkg.assignedEntityIds.includes(entity.id)) {
+            pkg.assignedEntityIds.push(entity.id);
+          }
+        }
+      }
+    }
+  }
+
   return grouped;
 }
 
@@ -259,11 +334,38 @@ function resolveMultiLevelSpaces(grouped, logger) {
 }
 
 /**
- * Resolve construction packages: validate references and compute per-package cost summaries (v0.6).
+ * Resolve construction packages: validate references and compute per-package cost summaries.
+ * Supports both standalone construction_package entities (v1.1) and legacy project.constructionPackages (v0.6).
  */
 function resolveConstructionPackages(grouped, project, logger) {
-  const packages = project.constructionPackages;
-  if (!packages || packages.length === 0) return;
+  // Migrate legacy inline packages to standalone entities if no standalone entities exist
+  const legacyPackages = project.constructionPackages || [];
+  if (legacyPackages.length > 0 && grouped.construction_packages.length === 0) {
+    const existingIds = new Set(grouped.construction_packages.map(p => p.id));
+    for (const pkg of legacyPackages) {
+      if (!existingIds.has(pkg.id)) {
+        grouped.construction_packages.push({
+          id: pkg.id,
+          entityType: 'construction_package',
+          documentType: 'construction_package',
+          packageName: pkg.name,
+          description: pkg.description,
+          sequence: pkg.sequence,
+          plannedStart: pkg.plannedStart,
+          plannedEnd: pkg.plannedEnd,
+          actualStart: pkg.actualStart,
+          actualEnd: pkg.actualEnd,
+          status: pkg.status,
+          version: '1.0.0',
+          _migrated: true
+        });
+        logger.debug(`Migrated legacy construction package ${pkg.id} to standalone entity`);
+      }
+    }
+  }
+
+  const packages = grouped.construction_packages;
+  if (packages.length === 0) return;
 
   const packageMap = new Map(packages.map(p => [p.id, p]));
   const packageCosts = new Map();
@@ -271,12 +373,14 @@ function resolveConstructionPackages(grouped, project, logger) {
     packageCosts.set(pkg.id, { totalCost: 0, currency: null, entityCount: 0 });
   }
 
-  // Collect entities that can have constructionPackageId
+  // Collect entities that can have constructionPackageId (v1.1: includes openings and site_features)
   const taggedEntities = [
     ...(grouped.spaces || []),
     ...(grouped.systems || []),
     ...(grouped.assets || []),
-    ...(grouped.envelopes || [])
+    ...(grouped.envelopes || []),
+    ...(grouped.openings || []),
+    ...(grouped.site_features || [])
   ];
 
   for (const entity of taggedEntities) {
@@ -293,7 +397,7 @@ function resolveConstructionPackages(grouped, project, logger) {
     }
   }
 
-  // Write summaries back to project packages
+  // Write summaries to standalone package entities
   for (const pkg of packages) {
     const summary = packageCosts.get(pkg.id);
     if (summary.entityCount > 0) {
@@ -302,6 +406,20 @@ function resolveConstructionPackages(grouped, project, logger) {
         currency: summary.currency || project.budget?.currency || 'EUR',
         entityCount: summary.entityCount
       };
+    }
+  }
+
+  // Also update legacy project packages if they exist (backward compatibility)
+  if (legacyPackages.length > 0) {
+    for (const pkg of legacyPackages) {
+      const summary = packageCosts.get(pkg.id);
+      if (summary && summary.entityCount > 0) {
+        pkg.costSummary = {
+          totalCost: summary.totalCost,
+          currency: summary.currency || project.budget?.currency || 'EUR',
+          entityCount: summary.entityCount
+        };
+      }
     }
   }
 
@@ -478,6 +596,79 @@ function resolveTypeInheritance(grouped, logger) {
 
       for (const field of ['manufacturer', 'modelNumber', 'expectedLifeYears']) {
         if (inheritField(asset, field, assetType[field], 'type_default', typeId, field)) {
+          inherited++;
+        }
+      }
+    }
+  }
+
+  // Opening Type → Opening (v1.1)
+  if (grouped.openings.length > 0 && grouped.opening_types.length > 0) {
+    const typeMap = new Map(grouped.opening_types.map(t => [t.id, t]));
+
+    for (const opening of grouped.openings) {
+      const typeId = opening.openingTypeId;
+      if (!typeId) continue;
+
+      const openingType = typeMap.get(typeId);
+      if (!openingType) {
+        logger.warn(`Opening ${opening.id} references unknown opening type: ${typeId}`);
+        continue;
+      }
+
+      for (const field of ['frameMaterial', 'glazingType', 'operability', 'manufacturer', 'productCode', 'expectedLifeYears', 'securityRating']) {
+        if (inheritField(opening, field, openingType[field], 'type_default', typeId, field)) {
+          inherited++;
+        }
+      }
+
+      // Inherit nested objects
+      for (const objField of ['thermalPerformance', 'acousticPerformance', 'firePerformance', 'accessibilityCompliance']) {
+        if (openingType[objField] && !opening[objField]) {
+          opening[objField] = { ...openingType[objField] };
+          opening[`${objField}_meta`] = {
+            confidence: 'specified',
+            resolution: 'type_default',
+            inheritedFrom: typeId,
+            inheritedField: objField
+          };
+          inherited++;
+        }
+      }
+    }
+  }
+
+  // Site Feature Type → Site Feature (v1.1)
+  if (grouped.site_features.length > 0 && grouped.site_feature_types.length > 0) {
+    const typeMap = new Map(grouped.site_feature_types.map(t => [t.id, t]));
+
+    for (const feature of grouped.site_features) {
+      const typeId = feature.siteFeatureTypeId;
+      if (!typeId) continue;
+
+      const featureType = typeMap.get(typeId);
+      if (!featureType) {
+        logger.warn(`Site feature ${feature.id} references unknown site feature type: ${typeId}`);
+        continue;
+      }
+
+      for (const field of ['manufacturer', 'expectedLifeYears']) {
+        if (inheritField(feature, field, featureType[field], 'type_default', typeId, field)) {
+          inherited++;
+        }
+      }
+
+      // Inherit nested objects
+      for (const objField of ['maintenanceRequirements', 'sustainabilityMetrics']) {
+        const targetField = objField === 'maintenanceRequirements' ? 'maintenanceSchedule' : 'sustainabilityMetrics';
+        if (featureType[objField] && !feature[targetField]) {
+          feature[targetField] = { ...featureType[objField] };
+          feature[`${targetField}_meta`] = {
+            confidence: 'specified',
+            resolution: 'type_default',
+            inheritedFrom: typeId,
+            inheritedField: objField
+          };
           inherited++;
         }
       }
@@ -1244,7 +1435,7 @@ export async function normalize(rawEntities, options, logger) {
 
   // Group entities by type
   let grouped = groupEntitiesByType(rawEntities);
-  logger.debug(`Grouped: ${grouped.sites.length} sites, ${grouped.envelopes.length} envelopes, ${grouped.spaces.length} spaces, ${grouped.zones.length} zones, ${grouped.requirements.length} requirements, ${grouped.space_types.length} space types`);
+  logger.debug(`Grouped: ${grouped.sites.length} sites, ${grouped.envelopes.length} envelopes, ${grouped.spaces.length} spaces, ${grouped.zones.length} zones, ${grouped.requirements.length} requirements, ${grouped.space_types.length} space types, ${grouped.openings.length} openings, ${grouped.site_features.length} site features, ${grouped.construction_packages.length} construction packages`);
 
   // Resolve type→instance inheritance (before relationships, so inherited fields participate)
   grouped = resolveTypeInheritance(grouped, logger);
@@ -1356,7 +1547,12 @@ export async function normalize(rawEntities, options, logger) {
       ...(grouped.space_types.length > 0 && { space_types: grouped.space_types }),
       ...(grouped.zone_types.length > 0 && { zone_types: grouped.zone_types }),
       ...(grouped.system_types.length > 0 && { system_types: grouped.system_types }),
-      ...(grouped.asset_types.length > 0 && { asset_types: grouped.asset_types })
+      ...(grouped.asset_types.length > 0 && { asset_types: grouped.asset_types }),
+      ...(grouped.openings.length > 0 && { openings: grouped.openings }),
+      ...(grouped.opening_types.length > 0 && { opening_types: grouped.opening_types }),
+      ...(grouped.site_features.length > 0 && { site_features: grouped.site_features }),
+      ...(grouped.site_feature_types.length > 0 && { site_feature_types: grouped.site_feature_types }),
+      ...(grouped.construction_packages.length > 0 && { construction_packages: grouped.construction_packages })
     },
     metadata: {
       totalEntities: rawEntities.length,
@@ -1374,7 +1570,12 @@ export async function normalize(rawEntities, options, logger) {
         space_types: grouped.space_types.length,
         zone_types: grouped.zone_types.length,
         system_types: grouped.system_types.length,
-        asset_types: grouped.asset_types.length
+        asset_types: grouped.asset_types.length,
+        openings: grouped.openings.length,
+        opening_types: grouped.opening_types.length,
+        site_features: grouped.site_features.length,
+        site_feature_types: grouped.site_feature_types.length,
+        construction_packages: grouped.construction_packages.length
       }
     }
   };

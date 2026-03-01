@@ -28,7 +28,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 // CLI argument parsing
 function parseArgs(args) {
@@ -113,7 +113,7 @@ async function compile(options) {
 
     // Build SBM structure
     const sbm = {
-      sbm_version: '1.0',
+      sbm_version: '1.1',
       generatedAt: new Date().toISOString(),
       compiler: {
         version: VERSION,
@@ -281,7 +281,7 @@ async function main() {
 
       // Build SBM structure
       const sbm = {
-        sbm_version: '1.0',
+        sbm_version: '1.1',
         generatedAt: new Date().toISOString(),
         compiler: { version: VERSION, mode: options.mode },
         ...normalized

@@ -380,6 +380,24 @@ export function generateAssetRegister(sbm, logger) {
   const cmmsExport = generateCMMSExport(inventory, logger);
   const systemSummaries = generateSystemSummaries(systems, inventory, logger);
 
+  // Generate opening inventory for maintainable openings (v1.1)
+  const openings = sbm.entities.openings || [];
+  const openingInventory = openings
+    .filter(o => o.maintenance || o.warranty || o.firePerformance)
+    .map(o => ({
+      id: o.id,
+      name: o.openingName,
+      category: o.openingCategory,
+      envelopeId: o.envelopeId,
+      fireRating: o.firePerformance?.fireRating || null,
+      selfClosing: o.firePerformance?.selfClosing || false,
+      lastService: o.maintenance?.lastServiceDate || null,
+      nextService: o.maintenance?.nextServiceDue || null,
+      warrantyEnd: o.warranty?.warrantyEnd || null,
+      manufacturer: o.manufacturer || null,
+      status: o.maintenance?.lastServiceDate ? 'operational' : 'planned'
+    }));
+
   const assetRegister = {
     version: "0.1",
     generatedAt: new Date().toISOString(),
@@ -403,6 +421,7 @@ export function generateAssetRegister(sbm, logger) {
     },
 
     inventory,
+    ...(openingInventory.length > 0 && { openingInventory }),
     systemSummaries,
     maintenanceCalendar,
     sparePartsInventory,
