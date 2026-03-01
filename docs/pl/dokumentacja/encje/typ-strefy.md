@@ -268,4 +268,4 @@ propertyOverrides:
 - **[Typ Przestrzeni](/pl/dokumentacja/encje/typ-przestrzeni)** - Szablony przestrzeni (podobny wzorzec)
 - **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony systemów
 - **[Wymaganie](/pl/dokumentacja/encje/wymaganie)** - Wymagania odwoływane przez strefy
-- **Schema:** `sbm-schema-v0.2.json` - Definicja Typu Strefy
+- **Schema:** `sbm-schema-v1.1.json` - Definicja Typu Strefy

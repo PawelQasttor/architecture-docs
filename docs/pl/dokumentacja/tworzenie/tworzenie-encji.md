@@ -423,6 +423,72 @@ VAV heat pump system serving north zone.
 
 ---
 
+## Tworzenie szablonów typów
+
+Szablony typów definiują specyfikacje wielokrotnego użytku. Instancje odwołują się do nich przez pola `typeId` i automatycznie dziedziczą właściwości.
+
+### Dostępne szablony typów
+
+| Szablon typu | Instancja | Pole referencji | Prefiks ID |
+|--------------|-----------|-----------------|------------|
+| Typ Przestrzeni | Przestrzeń | `spaceTypeId` | `ST-` |
+| Typ Strefy | Strefa | `zoneTypeId` | `ZT-` |
+| Typ Systemu | System | `systemTypeId` | `SYST-` |
+| Typ Zasobu | Zasób | `assetTypeId` | `AT-` |
+| Typ Otworu | Otwór | `openingTypeId` | `OT-` |
+| Typ Elementu Terenu | Element Terenu | `siteFeatureTypeId` | `SFT-` |
+
+### Kiedy tworzyć szablony typów
+
+- **Wiele instancji dzieli te same specyfikacje** (np. 20 sypialni z identycznymi wykończeniami)
+- **Standaryzacja produktów** (np. jeden typ okna używany w całym budynku)
+- **Redukcja dokumentacji o 25-35%** dla powtarzalnych typów encji
+
+### Przykład krok po kroku: Typ Otworu
+
+**1. Utwórz plik:** `typy-otworow/okno-internorm-kf410.md`
+
+**2. Zdefiniuj szablon typu:**
+```yaml
+---
+entityType: "opening_type"
+id: "OT-INTERNORM-KF410"
+openingName: "Okno Internorm KF 410 Potrójne Szklenie"
+openingCategory: "window"
+
+thermalPerformance:
+  uValue: 0.90
+  uValueUnit: "W/m2K"
+  gValue: 0.53
+
+acousticPerformance:
+  rw: 35
+  rwUnit: "dB"
+
+manufacturer: "Internorm"
+expectedLifeYears: 40
+version: "1.0.0"
+---
+```
+
+**3. Odwołaj się z instancji:**
+```yaml
+# otwory/opn-win-n-001.md
+---
+entityType: "opening"
+id: "OPN-WIN-N-001"
+openingName: "Okno Północne Sypialnia"
+openingCategory: "window"
+openingTypeId: "OT-INTERNORM-KF410"  # ← Dziedziczy termikę, akustykę, producenta
+envelopeId: "ENV-EW-01"
+version: "1.0.0"
+---
+```
+
+Kompilator automatycznie dziedziczy pola z typu, które nie zostały jawnie ustawione na instancji.
+
+---
+
 ## Tworzenie zasobów
 
 Zasoby to fizyczne urządzenia z danymi konserwacyjnymi.

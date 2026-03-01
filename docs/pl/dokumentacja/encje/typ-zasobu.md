@@ -151,4 +151,4 @@ version: "1.0.0"
 - **[Zasób](/pl/dokumentacja/encje/zasob)** - Zasoby odwołujące się do typów
 - **[System](/pl/dokumentacja/encje/system)** - Systemy zawierające zasoby
 - **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony systemów
-- **Schema:** `sbm-schema-v0.2.json` - Definicja Typu Zasobu
+- **Schema:** `sbm-schema-v1.1.json` - Definicja Typu Zasobu

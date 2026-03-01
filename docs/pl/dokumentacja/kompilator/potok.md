@@ -1,6 +1,6 @@
 # Potok kompilacji
 
-Kompilator SBM v1.0.0 przetwarza encje budynku przez 5-etapowy potok z zaawansowanymi funkcjami agregacji. Ten dokument szczegółowo opisuje każdy etap.
+Kompilator SBM v1.1.0 przetwarza encje budynku przez 5-etapowy potok z zaawansowanymi funkcjami agregacji. Ten dokument szczegółowo opisuje każdy etap.
 
 ## Przegląd potoku
 
@@ -24,12 +24,12 @@ Pliki Markdown → Parsowanie → Normalizacja → Walidacja → Jakość → Ko
 **Proces:**
 1. Rekurencyjne skanowanie katalogu wejściowego w poszukiwaniu plików `.md`
 2. Odczyt każdego pliku i wyodrębnienie nagłówka YAML
-3. Filtrowanie według prawidłowego `documentType` (11 typów encji + 4 szablony typów + starsze)
+3. Filtrowanie według prawidłowego `entityType` (13 typów encji + 6 szablonów typów + starsze)
 4. Śledzenie ścieżek plików na potrzeby raportowania błędów
 
 **Rozpoznawane typy encji:**
-- Instancje: `space`, `zone`, `system`, `asset`, `requirement`, `building`, `level`
-- Szablony typów: `space_type`, `zone_type`, `system_type`, `asset_type`
+- Instancje: `space`, `zone`, `system`, `asset`, `requirement`, `building`, `level`, `site`, `envelope`, `vertical_circulation`, `opening`, `site_feature`, `construction_package`
+- Szablony typów: `space_type`, `zone_type`, `system_type`, `asset_type`, `opening_type`, `site_feature_type`
 - Starsze: `element_specification`, `project_specification`
 
 **Implementacja:** `scripts/compiler/stages/parse.mjs`
@@ -77,7 +77,7 @@ version: "2.0.0"
 
 ### 2.1 Grupowanie encji według typu
 
-Encje są grupowane w 11 tablic: `buildings`, `levels`, `spaces`, `zones`, `systems`, `assets`, `requirements`, `space_types`, `zone_types`, `system_types`, `asset_types`.
+Encje są grupowane w 19 tablic: `buildings`, `levels`, `spaces`, `zones`, `systems`, `assets`, `requirements`, `sites`, `envelopes`, `vertical_circulations`, `openings`, `site_features`, `construction_packages`, `space_types`, `zone_types`, `system_types`, `asset_types`, `opening_types`, `site_feature_types`.
 
 ### 2.2 Rozwiązywanie dziedziczenia Typ → Instancja
 
@@ -93,6 +93,10 @@ Dla każdej instancji z `typeId` kopiowane są pola szablonu z encji typu, jeśl
 **Typ Systemu → System:** `systemCategory`, `designLifeYears`
 
 **Typ Zasobu → Zasób:** `manufacturer`, `modelNumber`, `expectedLifeYears`
+
+**Typ Otworu → Otwór:** `dimensions`, `thermalPerformance`, `acousticPerformance`, `firePerformance`, `hardware`
+
+**Typ Elementu Terenu → Element Terenu:** `materials`, `maintenanceSchedule`, `sustainabilityMetrics`
 
 Dziedziczone pola otrzymują `_meta` z `resolution: "type_default"`:
 ```json
@@ -151,6 +155,9 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 ### 2.4 Obliczanie odwrotnych relacji
 - `space.zoneIds` → `zone.spaceIds`
 - `asset.systemId` → `system.assetIds`
+- `opening.envelopeId` → `envelope.openingIds`
+- `site_feature.siteId` → `site.siteFeatureIds`
+- `entity.constructionPackageId` → `construction_package.assignedEntityIds`
 
 ### 2.5 Wczytywanie pakietu jurysdykcji
 - Zawsze wczytuj `scripts/requirements/global/`
@@ -290,14 +297,14 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 **Proces:**
 
 ### 3.1 Walidacja schematu JSON
-- Walidacja względem `schemas/sbm-schema-v1.0.json`
+- Walidacja względem `schemas/sbm-schema-v1.1.json`
 - Używa AJV z walidacją formatów
 - Sprawdzanie wymaganych pól, typów danych, wartości enum, wzorców ID
 - Obsługuje funkcje v0.4: śledzenie kosztów, wyniki symulacji, cele wydajnościowe, integracja BIM
 
 ### 3.2 Integralność referencyjna
 - Wszystkie referencje ID muszą istnieć
-- Sprawdzenia: `spaceTypeId`, `levelId`, `buildingId`, `zoneIds`, `systemTypeId`, `zoneTypeId`, `assetTypeId`
+- Sprawdzenia: `spaceTypeId`, `levelId`, `buildingId`, `zoneIds`, `systemTypeId`, `zoneTypeId`, `assetTypeId`, `envelopeId`, `openingTypeId`, `siteId`, `siteFeatureTypeId`, `constructionPackageId`
 - Brakujące zasoby referencjonowane przez systemy generują ostrzeżenia (mogą nie być jeszcze zdefiniowane)
 
 ### 3.3 Reguły biznesowe
@@ -319,7 +326,9 @@ Jeśli pole ma wartość null bez adnotacji `_meta`, emitowane jest ostrzeżenie
 | 5-6 | Pola `assumed` blokowane | **Błąd** |
 | 7-8 | `estimated` na polach bezpieczeństwa blokowane | **Błąd** |
 
-Pola krytyczne dla bezpieczeństwa: `electricalSafetyGroup`, `radiologicalShielding`, `fireRating`, `structuralLoad`.
+Pola krytyczne dla bezpieczeństwa (z `scripts/compiler/constants.mjs`):
+- **Pola encji:** `electricalSafetyGroup`, `radiologicalShielding`, `fireRating`, `structuralLoad`, `pressurization`, `shielding`, `firePerformance`
+- **Pola środowiskowe:** `pressurization`, `cleanlinessClass`, `pressureDifferentialPa`, `filtrationClass`, `airChangesPerHour`
 
 **Implementacja:** `scripts/compiler/stages/validate.mjs`
 

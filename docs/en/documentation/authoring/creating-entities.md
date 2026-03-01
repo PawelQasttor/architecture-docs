@@ -423,6 +423,72 @@ VAV heat pump system serving north zone.
 
 ---
 
+## Creating Type Templates
+
+Type templates define reusable specifications. Instances reference them via `typeId` fields and inherit properties automatically.
+
+### Available Type Templates
+
+| Type Template | Instance | Link Field | ID Prefix |
+|---------------|----------|------------|-----------|
+| Space Type | Space | `spaceTypeId` | `ST-` |
+| Zone Type | Zone | `zoneTypeId` | `ZT-` |
+| System Type | System | `systemTypeId` | `SYST-` |
+| Asset Type | Asset | `assetTypeId` | `AT-` |
+| Opening Type | Opening | `openingTypeId` | `OT-` |
+| Site Feature Type | Site Feature | `siteFeatureTypeId` | `SFT-` |
+
+### When to Create Type Templates
+
+- **Multiple instances share the same specifications** (e.g., 20 bedrooms with identical finishes)
+- **Product standardization** (e.g., one window type used across the building)
+- **Reduces documentation by 25-35%** for repetitive entity types
+
+### Step-by-Step Example: Opening Type
+
+**1. Create file:** `opening-types/internorm-kf410-window.md`
+
+**2. Define the type template:**
+```yaml
+---
+entityType: "opening_type"
+id: "OT-INTERNORM-KF410"
+openingName: "Internorm KF 410 Triple-Glazed Window"
+openingCategory: "window"
+
+thermalPerformance:
+  uValue: 0.90
+  uValueUnit: "W/m2K"
+  gValue: 0.53
+
+acousticPerformance:
+  rw: 35
+  rwUnit: "dB"
+
+manufacturer: "Internorm"
+expectedLifeYears: 40
+version: "1.0.0"
+---
+```
+
+**3. Reference from instances:**
+```yaml
+# openings/opn-win-n-001.md
+---
+entityType: "opening"
+id: "OPN-WIN-N-001"
+openingName: "North Bedroom Window"
+openingCategory: "window"
+openingTypeId: "OT-INTERNORM-KF410"  # ← Inherits thermal, acoustic, manufacturer
+envelopeId: "ENV-EW-01"
+version: "1.0.0"
+---
+```
+
+The compiler automatically inherits fields from the type that are not explicitly set on the instance.
+
+---
+
 ## Creating Asset Documents
 
 Assets are physical equipment with maintenance data.

@@ -1,6 +1,6 @@
 # Compilation Pipeline
 
-The SBM compiler v1.0.0 processes building entities through a 5-stage pipeline with advanced aggregation features. This document explains each stage in detail.
+The SBM compiler v1.1.0 processes building entities through a 5-stage pipeline with advanced aggregation features. This document explains each stage in detail.
 
 ## Pipeline Overview
 
@@ -24,12 +24,12 @@ Markdown Files → Parse → Normalize → Validate → Quality → Compile → 
 **Process:**
 1. Scan input directory recursively for `.md` files
 2. Read each file and extract YAML frontmatter
-3. Filter by valid `documentType` (11 entity types + 4 type templates + legacy)
+3. Filter by valid `entityType` (13 entity types + 6 type templates + legacy)
 4. Track file paths for error reporting
 
 **Recognized entity types:**
-- Instances: `space`, `zone`, `system`, `asset`, `requirement`, `building`, `level`
-- Type templates: `space_type`, `zone_type`, `system_type`, `asset_type`
+- Instances: `space`, `zone`, `system`, `asset`, `requirement`, `building`, `level`, `site`, `envelope`, `vertical_circulation`, `opening`, `site_feature`, `construction_package`
+- Type templates: `space_type`, `zone_type`, `system_type`, `asset_type`, `opening_type`, `site_feature_type`
 - Legacy: `element_specification`, `project_specification`
 
 **Implementation:** `scripts/compiler/stages/parse.mjs`
@@ -77,7 +77,7 @@ version: "2.0.0"
 
 ### 2.1 Group Entities by Type
 
-Entities are grouped into 11 arrays: `buildings`, `levels`, `spaces`, `zones`, `systems`, `assets`, `requirements`, `space_types`, `zone_types`, `system_types`, `asset_types`.
+Entities are grouped into 19 arrays: `buildings`, `levels`, `spaces`, `zones`, `systems`, `assets`, `requirements`, `sites`, `envelopes`, `vertical_circulations`, `openings`, `site_features`, `construction_packages`, `space_types`, `zone_types`, `system_types`, `asset_types`, `opening_types`, `site_feature_types`.
 
 ### 2.2 Resolve Type → Instance Inheritance
 
@@ -93,6 +93,10 @@ For each instance with a `typeId`, copy template fields from the type entity if 
 **System Type → System:** `systemCategory`, `designLifeYears`
 
 **Asset Type → Asset:** `manufacturer`, `modelNumber`, `expectedLifeYears`
+
+**Opening Type → Opening:** `dimensions`, `thermalPerformance`, `acousticPerformance`, `firePerformance`, `hardware`
+
+**Site Feature Type → Site Feature:** `materials`, `maintenanceSchedule`, `sustainabilityMetrics`
 
 Inherited fields get `_meta` with `resolution: "type_default"`:
 ```json
@@ -151,6 +155,9 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 ### 2.4 Compute Reverse Relationships
 - `space.zoneIds` → `zone.spaceIds`
 - `asset.systemId` → `system.assetIds`
+- `opening.envelopeId` → `envelope.openingIds`
+- `site_feature.siteId` → `site.siteFeatureIds`
+- `entity.constructionPackageId` → `construction_package.assignedEntityIds`
 
 ### 2.5 Load Jurisdiction Pack
 - Always load `scripts/requirements/global/`
@@ -332,14 +339,14 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 **Process:**
 
 ### 3.1 JSON Schema Validation
-- Validates against `schemas/sbm-schema-v1.0.json`
+- Validates against `schemas/sbm-schema-v1.1.json`
 - Uses AJV with format validation
 - Checks required fields, data types, enum values, ID patterns
 - Supports v0.4 features: cost tracking, simulation results, performance targets, BIM integration
 
 ### 3.2 Referential Integrity
 - All referenced IDs must exist
-- Checks: `spaceTypeId`, `levelId`, `buildingId`, `zoneIds`, `systemTypeId`, `zoneTypeId`, `assetTypeId`
+- Checks: `spaceTypeId`, `levelId`, `buildingId`, `zoneIds`, `systemTypeId`, `zoneTypeId`, `assetTypeId`, `envelopeId`, `openingTypeId`, `siteId`, `siteFeatureTypeId`, `constructionPackageId`
 - Missing assets referenced by systems generate warnings (may not be defined yet)
 
 ### 3.3 Business Rules
@@ -361,7 +368,9 @@ If a field is null with no `_meta` annotation, emit a warning. Fields should eit
 | 5-6 | `assumed` fields blocked | **Error** |
 | 7-8 | `estimated` on safety-critical blocked | **Error** |
 
-Safety-critical fields: `electricalSafetyGroup`, `radiologicalShielding`, `fireRating`, `structuralLoad`.
+Safety-critical fields (from `scripts/compiler/constants.mjs`):
+- **Entity fields:** `electricalSafetyGroup`, `radiologicalShielding`, `fireRating`, `structuralLoad`, `pressurization`, `shielding`, `firePerformance`
+- **Environmental fields:** `pressurization`, `cleanlinessClass`, `pressureDifferentialPa`, `filtrationClass`, `airChangesPerHour`
 
 **Implementation:** `scripts/compiler/stages/validate.mjs`
 

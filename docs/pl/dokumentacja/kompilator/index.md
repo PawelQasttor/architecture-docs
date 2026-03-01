@@ -241,7 +241,7 @@ Kompilator automatycznie wczytuje wymagania na podstawie kraju projektu:
 Kompilator waliduje na pięciu poziomach:
 
 ### 1. Walidacja schematu JSON
-- Waliduje strukturę encji względem `schemas/sbm-schema-v1.0.json`
+- Waliduje strukturę encji względem `schemas/sbm-schema-v1.1.json`
 - Sprawdza wymagane pola, typy danych, wartości enum
 
 ### 2. Integralność referencyjna

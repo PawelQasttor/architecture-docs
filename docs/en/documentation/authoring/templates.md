@@ -465,6 +465,86 @@ Brief level description.
 
 ---
 
+## Type Templates
+
+### Opening Type Template {#opening-type}
+
+```markdown
+---
+entityType: "opening_type"
+id: "OT-WINDOW-TYPE-01"
+openingName: "Window Type Name"
+openingCategory: "window"  # window, door, skylight, vent, curtain_wall, louvre
+
+thermalPerformance:
+  uValue: 0.90
+  uValueUnit: "W/m2K"
+  gValue: 0.53
+
+acousticPerformance:
+  rw: 35
+  rwUnit: "dB"
+
+manufacturer: "Manufacturer Name"
+expectedLifeYears: 40
+version: "1.0.0"
+---
+
+# Opening Type: Window Type Name
+```
+
+### Site Feature Type Template {#site-feature-type}
+
+```markdown
+---
+entityType: "site_feature_type"
+id: "SFT-TYPE-01"
+featureName: "Feature Type Name"
+featureCategory: "hardscape"  # vegetation, hardscape, water_feature, parking, etc.
+
+materials:
+  primary: "Material description"
+
+maintenanceSchedule:
+  frequency: "annual"
+
+expectedLifeYears: 30
+version: "1.0.0"
+---
+
+# Site Feature Type: Feature Type Name
+```
+
+### Space Type Template {#space-type}
+
+```markdown
+---
+entityType: "space_type"
+id: "ST-BEDROOM-STANDARD"
+spaceName: "Standard Bedroom"
+spaceType: "sleeping_space"
+
+designArea: 14.5
+designHeight: 2.70
+accessibilityLevel: "standard"
+
+finishes:
+  floor: "Oak engineered 15mm"
+  walls: "Acrylic paint white RAL 9010"
+  ceiling: "Acrylic paint white RAL 9010"
+
+occupancy:
+  maxOccupants: 2
+  usagePattern: "residential_sleeping"
+
+version: "1.0.0"
+---
+
+# Space Type: Standard Bedroom
+```
+
+---
+
 ## Minimal Templates
 
 For quick authoring, use these minimal templates with only required fields:

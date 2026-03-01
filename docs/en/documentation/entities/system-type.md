@@ -581,4 +581,4 @@ SYT-ELECTRICAL-FLOOR-STANDARD → LVL-01: SYS-ELEC-L01
 - **[Asset](/en/documentation/entities/asset)** - Equipment within systems
 - **[Space Type](/en/documentation/entities/space-type)** - Space templates (similar pattern)
 - **[Requirement](/en/documentation/entities/requirement)** - Requirements referenced by systems
-- **Schema:** `sbm-schema-v0.3.json` - System Type definition
+- **Schema:** `sbm-schema-v1.1.json` - System Type definition

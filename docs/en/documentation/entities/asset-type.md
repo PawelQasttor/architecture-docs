@@ -641,4 +641,4 @@ AT-BOSCH-HP-400 → 16 kW models
 - **[System Type](/en/documentation/entities/system-type)** - System templates
 - **[Space Type](/en/documentation/entities/space-type)** - Space templates (similar pattern)
 - **[Requirement](/en/documentation/entities/requirement)** - Requirements for assets
-- **Schema:** `sbm-schema-v0.2.json` - Asset Type definition
+- **Schema:** `sbm-schema-v1.1.json` - Asset Type definition

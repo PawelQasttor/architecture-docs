@@ -508,4 +508,4 @@ ZT-FIRE-ZL-IV → BLD-01: ZONE-FIRE-A, ZONE-FIRE-B
 - **[Space Type](/en/documentation/entities/space-type)** - Space templates (similar pattern)
 - **[System Type](/en/documentation/entities/system-type)** - System templates
 - **[Requirement](/en/documentation/entities/requirement)** - Requirements referenced by zones
-- **Schema:** `sbm-schema-v0.3.json` - Zone Type definition
+- **Schema:** `sbm-schema-v1.1.json` - Zone Type definition

@@ -335,9 +335,9 @@ Tracks performance targets across spaces and calculates project-level metrics:
 The compiler validates on five levels:
 
 ### 1. JSON Schema Validation
-- Validates entity structure against `schemas/sbm-schema-v1.0.json`
+- Validates entity structure against `schemas/sbm-schema-v1.1.json`
 - Checks required fields, data types, enum values
-- Supports all 14 entity types: cost tracking, simulations, performance targets
+- Supports all 19 entity types: cost tracking, simulations, performance targets
 
 ### 2. Referential Integrity
 - All referenced IDs must exist

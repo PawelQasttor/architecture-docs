@@ -4,7 +4,7 @@ The Semantic Building Model (SBM) uses **YAML frontmatter** at the top of every 
 
 The canonical schema definition is maintained as a JSON Schema file:
 
-**Schema file:** [`schemas/sbm-schema-v0.2.json`](/schemas/sbm-schema-v0.2.json)
+**Schema file:** [`schemas/sbm-schema-v1.1.json`](/schemas/sbm-schema-v1.1.json)
 
 ---
 

@@ -371,4 +371,4 @@ Instancje dziedziczą ekranowanie z typu i mogą je nadpisywać (np. inna grubo�
 - **[Typ Strefy](/pl/dokumentacja/encje/typ-strefy)** - Szablony stref
 - **[Typ Systemu](/pl/dokumentacja/encje/typ-systemu)** - Szablony systemów
 - **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** - Szablony produktów/urządzeń
-- **Schema:** `sbm-schema-v0.2.json` - Definicja Typu Przestrzeni
+- **Schema:** `sbm-schema-v1.1.json` - Definicja Typu Przestrzeni

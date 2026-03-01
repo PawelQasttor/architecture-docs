@@ -4,7 +4,7 @@ Semantyczny Model Budynku (SBM) wykorzystuje **frontmatter YAML** na początku k
 
 Kanoniczna definicja schematu jest utrzymywana jako plik JSON Schema:
 
-**Plik schematu:** [`schemas/sbm-schema-v0.2.json`](/schemas/sbm-schema-v0.2.json)
+**Plik schematu:** [`schemas/sbm-schema-v1.1.json`](/schemas/sbm-schema-v1.1.json)
 
 ---
 

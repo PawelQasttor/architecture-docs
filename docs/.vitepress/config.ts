@@ -100,7 +100,8 @@ export default defineConfig({
               items: [
                 { text: 'Compiler Overview', link: '/en/documentation/compiler/' },
                 { text: 'Getting Started', link: '/en/documentation/compiler/getting-started' },
-                { text: 'Compilation Pipeline', link: '/en/documentation/compiler/pipeline' }
+                { text: 'Compilation Pipeline', link: '/en/documentation/compiler/pipeline' },
+                { text: 'Error Reference', link: '/en/documentation/compiler/error-reference' }
               ]
             },
             {
@@ -412,7 +413,8 @@ export default defineConfig({
               items: [
                 { text: 'Przegląd Kompilatora', link: '/pl/dokumentacja/kompilator/' },
                 { text: 'Pierwsze Kroki', link: '/pl/dokumentacja/kompilator/pierwsze-kroki' },
-                { text: 'Potok Kompilacji', link: '/pl/dokumentacja/kompilator/potok' }
+                { text: 'Potok Kompilacji', link: '/pl/dokumentacja/kompilator/potok' },
+                { text: 'Referencja Bledow', link: '/pl/dokumentacja/kompilator/bledy' }
               ]
             },
             {

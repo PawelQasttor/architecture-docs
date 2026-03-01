@@ -163,4 +163,4 @@ performanceOverrides:
 - **[System](/pl/dokumentacja/encje/system)** - Instancje systemów odwołujące się do typów
 - **[Typ Zasobu](/pl/dokumentacja/encje/typ-zasobu)** - Szablony produktów/urządzeń
 - **[Zasób](/pl/dokumentacja/encje/zasob)** - Urządzenia w systemach
-- **Schema:** `sbm-schema-v0.2.json` - Definicja Typu Systemu
+- **Schema:** `sbm-schema-v1.1.json` - Definicja Typu Systemu

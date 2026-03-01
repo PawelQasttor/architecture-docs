@@ -465,6 +465,86 @@ Brief level description.
 
 ---
 
+## Szablony Typów
+
+### Szablon Typu Otworu {#opening-type}
+
+```markdown
+---
+entityType: "opening_type"
+id: "OT-TYP-OKNA-01"
+openingName: "Nazwa Typu Okna"
+openingCategory: "window"  # window, door, skylight, vent, curtain_wall, louvre
+
+thermalPerformance:
+  uValue: 0.90
+  uValueUnit: "W/m2K"
+  gValue: 0.53
+
+acousticPerformance:
+  rw: 35
+  rwUnit: "dB"
+
+manufacturer: "Nazwa Producenta"
+expectedLifeYears: 40
+version: "1.0.0"
+---
+
+# Typ Otworu: Nazwa Typu Okna
+```
+
+### Szablon Typu Elementu Terenu {#site-feature-type}
+
+```markdown
+---
+entityType: "site_feature_type"
+id: "SFT-TYP-01"
+featureName: "Nazwa Typu Elementu"
+featureCategory: "hardscape"  # vegetation, hardscape, water_feature, parking, itp.
+
+materials:
+  primary: "Opis materialu"
+
+maintenanceSchedule:
+  frequency: "annual"
+
+expectedLifeYears: 30
+version: "1.0.0"
+---
+
+# Typ Elementu Terenu: Nazwa Typu
+```
+
+### Szablon Typu Przestrzeni {#space-type}
+
+```markdown
+---
+entityType: "space_type"
+id: "ST-SYPIALNIA-STANDARD"
+spaceName: "Sypialnia Standardowa"
+spaceType: "sleeping_space"
+
+designArea: 14.5
+designHeight: 2.70
+accessibilityLevel: "standard"
+
+finishes:
+  floor: "Deska inzynierska debowa 15mm"
+  walls: "Farba akrylowa biala RAL 9010"
+  ceiling: "Farba akrylowa biala RAL 9010"
+
+occupancy:
+  maxOccupants: 2
+  usagePattern: "residential_sleeping"
+
+version: "1.0.0"
+---
+
+# Typ Przestrzeni: Sypialnia Standardowa
+```
+
+---
+
 ## Szablony minimalne
 
 Do szybkiego tworzenia używaj tych minimalnych szablonów zawierających tylko wymagane pola:
