@@ -36,7 +36,7 @@ node scripts/compiler/index.mjs version
 
 Expected output:
 ```
-Semantic Building Model Compiler v0.2.0
+Semantic Building Model Compiler v1.0.0
 ```
 
 ## Your First Compilation
@@ -90,11 +90,23 @@ node scripts/compiler/index.mjs compile \
 - `--country PL` - Load Poland jurisdiction pack (WT 2021)
 - `--verbose` - Show detailed logging
 
+### Quick Validate (No Output Files)
+
+If you just want to check your entities are valid without generating output files:
+
+```bash
+node scripts/compiler/index.mjs validate \
+  --input docs/en/examples/green-terrace \
+  --country PL --verbose
+```
+
+The `validate` command runs stages 1-3 (parse, normalize, validate) and exits with code 0 on success, 1 on failure.
+
 ### Step 3: Check the Output
 
 Expected console output:
 ```
-ℹ️  Semantic Building Model Compiler v0.2.0
+ℹ️  Semantic Building Model Compiler v1.0.0
 ℹ️  Input: docs/en/examples/green-terrace
 ℹ️  Output: build/green-terrace
 ℹ️  Country: PL
@@ -147,8 +159,8 @@ The validated, enriched building model with provenance tracking:
 
 ```json
 {
-  "sbm_version": "0.2",
-  "compiler": { "version": "0.2.0", "mode": "production" },
+  "sbm_version": "1.0",
+  "compiler": { "version": "1.0.0", "mode": "production" },
   "project": {
     "id": "PRJ-GREEN-TERRACE-2026",
     "name": "Residential Building Green Terrace",
@@ -186,8 +198,7 @@ Spaces include inherited values with provenance:
 }
 ```
 
-### 2. quality_report.json <Badge type="tip" text="v0.2.0" />
-
+### 2. quality_report.json
 Data quality audit:
 
 ```json

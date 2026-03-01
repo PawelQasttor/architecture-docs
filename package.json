@@ -12,7 +12,8 @@
     "extract:json": "node scripts/extract-frontmatter-to-json.mjs docs docs/public/json",
     "extract:examples": "node scripts/extract-frontmatter-to-json.mjs docs/en/examples docs/public/json/examples",
     "sbm:compile": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL --verbose",
-    "sbm:validate": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL --verbose",
+    "sbm:validate": "node scripts/compiler/index.mjs validate --input docs/en/examples/green-terrace --country PL --verbose",
+    "test": "node --test scripts/compiler/tests/*.test.mjs",
     "sbm:clean": "node -e \"import('fs').then(fs=>fs.promises.rm('build',{recursive:true,force:true}).then(()=>console.log('Build cleaned')))\"",
     "build:all": "npm run extract:json && npm run sbm:compile && npm run docs:build"
   },

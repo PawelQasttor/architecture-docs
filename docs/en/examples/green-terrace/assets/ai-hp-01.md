@@ -1,6 +1,7 @@
 ---
 entityType: "asset"
 id: "AST-HP-01"
+assetName: "Heat Pump - Bosch Compress 7000i"
 projectPhase: "construction"
 bimLOD: "LOD_400"
 

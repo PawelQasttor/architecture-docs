@@ -1,6 +1,6 @@
 # Compiler Overview
 
-The **SBM Compiler v0.4.0** transforms human-authored Markdown entities into a validated, machine-readable JSON format with **hierarchical cost aggregation**, **simulation tracking**, and **performance monitoring**, generating multiple compilation targets for BIM, compliance, facilities management, digital twin integration, and data quality assurance.
+The **SBM Compiler v1.0.0** transforms human-authored Markdown entities into a validated, machine-readable JSON format with **hierarchical cost aggregation**, **simulation tracking**, **performance monitoring**, **multi-level spaces**, **system hierarchy**, and **construction phasing**, generating multiple compilation targets for BIM, compliance, facilities management, digital twin integration, and data quality assurance.
 
 ## What Does the Compiler Do?
 
@@ -26,7 +26,7 @@ The compiler bridges the gap between human-friendly authoring and machine-proces
 │ STAGE 1: PARSE                                  │
 │ • Load Markdown files from input directory      │
 │ • Extract YAML frontmatter                      │
-│ • Recognize 11 entity types + 4 type templates  │
+│ • Recognize 14 entity types + 4 type templates  │
 │ Output: Raw entity collection                   │
 └─────────────────┬───────────────────────────────┘
                   ▼
@@ -39,21 +39,24 @@ The compiler bridges the gap between human-friendly authoring and machine-proces
 │ • Track inheritance provenance (_meta)          │
 │ • Load jurisdiction pack (global + country)     │
 │ • Compute reverse relationships                 │
-│ • ⭐ COST ROLLUP (v0.4): Aggregate costs        │
-│   (spaces→levels→buildings→project,             │
-│    assets→systems→project)                      │
-│ • ⭐ SIMULATION TRACKING (v0.4): Aggregate      │
+│ • ⭐ Multi-level space resolution                │
+│ • ⭐ System hierarchy (subsystem rollup)         │
+│ • ⭐ COST ROLLUP: Aggregate costs               │
+│   (spaces→levels→buildings→sites→project,       │
+│    assets→subsystems→systems→project)           │
+│ • ⭐ SIMULATION TRACKING: Aggregate             │
 │   simulation results and calculate completion   │
-│ • ⭐ PERFORMANCE AGGREGATION (v0.4): Track      │
+│ • ⭐ PERFORMANCE AGGREGATION: Track             │
 │   performance targets and calculate metrics     │
+│ • ⭐ Construction package cost summaries         │
 │ Output: Normalized entity graph with provenance │
 │         + cost/simulation/performance summaries │
 └─────────────────┬───────────────────────────────┘
                   ▼
 ┌─────────────────────────────────────────────────┐
 │ STAGE 3: VALIDATE                               │
-│ • JSON Schema validation (v0.4)                 │
-│   - Supports cost tracking, simulations,        │
+│ • JSON Schema validation (v1.0)                 │
+│   - 14 entity types, cost tracking, simulations │
 │     performance targets, BIM integration        │
 │ • Referential integrity (all IDs exist?)        │
 │ • Data provenance checks                        │
@@ -102,6 +105,11 @@ node scripts/compiler/index.mjs compile \
   --input project/entities \
   --output build/project \
   --phase 5 --country PL --verbose
+
+# Validate only (no output files generated)
+node scripts/compiler/index.mjs validate \
+  --input docs/en/examples/green-terrace \
+  --country PL --verbose
 
 # Outputs generated:
 # build/green-terrace/sbm.json
@@ -178,8 +186,7 @@ Runtime monitoring configuration:
 - IoT sensor binding
 - Real-time compliance monitoring
 
-### 5. Quality Report (`quality_report.json`) <Badge type="tip" text="v0.2.0" />
-
+### 5. Quality Report (`quality_report.json`)
 Data quality audit and phase readiness assessment:
 
 **Use cases:**
@@ -245,14 +252,14 @@ The compiler automatically loads requirements based on project country:
 2. Add requirements as JSON files
 3. Compiler automatically loads when `project.country` matches
 
-## v0.4 Features <Badge type="tip" text="v0.4.0" />
+## Key Features
 
 ### Cost Rollup
 
 Automatically aggregates costs from bottom-up across the building hierarchy:
 
-**Construction costs:** Spaces → Levels → Buildings → Project
-**Equipment costs:** Assets → Systems → Project
+**Construction costs:** Spaces → Levels → Buildings → Sites → Project
+**Equipment costs:** Assets → Subsystems → Systems → Project
 
 **Example output:**
 ```json
@@ -328,9 +335,9 @@ Tracks performance targets across spaces and calculates project-level metrics:
 The compiler validates on five levels:
 
 ### 1. JSON Schema Validation
-- Validates entity structure against `schemas/sbm-schema-v0.4.json`
+- Validates entity structure against `schemas/sbm-schema-v1.0.json`
 - Checks required fields, data types, enum values
-- Supports v0.4 features: cost tracking, simulations, performance targets
+- Supports all 14 entity types: cost tracking, simulations, performance targets
 
 ### 2. Referential Integrity
 - All referenced IDs must exist
@@ -340,13 +347,11 @@ The compiler validates on five levels:
 - Requirements applicable to scope?
 - Spaces should have zones and requirements
 
-### 4. Data Provenance <Badge type="tip" text="v0.2.0" />
-- Fields with `measured`/`calculated`/`specified` confidence must have `source` reference
+### 4. Data Provenance- Fields with `measured`/`calculated`/`specified` confidence must have `source` reference
 - Null fields without `_meta` explanation generate warnings
 - Ensures data quality tracking is complete
 
-### 5. Phase Gates <Badge type="tip" text="v0.2.0" />
-- Enforces confidence requirements based on project phase
+### 5. Phase Gates- Enforces confidence requirements based on project phase
 - Prevents projects from advancing with unverified data
 - Safety-critical fields get stricter enforcement
 
@@ -354,14 +359,14 @@ The compiler validates on five levels:
 
 ```
 scripts/compiler/
-├── index.mjs                  # Main entry point, CLI (v0.4.0)
+├── index.mjs                  # Main entry point, CLI (v1.0.0)
 ├── stages/
-│   ├── parse.mjs              # Stage 1: Parse Markdown (11 entity types)
+│   ├── parse.mjs              # Stage 1: Parse Markdown (14 entity types)
 │   ├── normalize.mjs          # Stage 2: Normalize, inheritance, relationships
-│   │                          #   + Cost rollup (v0.4)
-│   │                          #   + Simulation tracking (v0.4)
-│   │                          #   + Performance aggregation (v0.4)
-│   ├── validate.mjs           # Stage 3: Schema v0.4, provenance, phase gates
+│   │                          #   + Multi-level spaces, system hierarchy
+│   │                          #   + Cost rollup, simulation tracking
+│   │                          #   + Performance aggregation, construction packages
+│   ├── validate.mjs           # Stage 3: Schema v1.0, provenance, phase gates
 │   └── quality.mjs            # Stage 3.5: Quality summary generation
 ├── targets/
 │   ├── bim-mapping.mjs        # BIM mapping generator

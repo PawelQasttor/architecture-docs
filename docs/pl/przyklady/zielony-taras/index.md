@@ -18,7 +18,14 @@ Kompletny, praktyczny przykład demonstrujący Standard Dokumentacji Architekton
 
 Ten przykład zawiera kompletną dokumentację wykonawczą zgodną ze Standardem Dokumentacji Architektonicznej:
 
-### 1. Dokumentacja Projektowa
+### 1. Działka i Dokumentacja Projektowa
+
+#### [Działka →](./dzialka)
+Informacje o działce i parceli
+- Powierzchnia działki: 1 250 m², pow. zabudowy: 500 m²
+- Zagospodarowanie: MPZP Mokotów Stegny (max. wys. 25 m, max. zabudowa 40%)
+- Odległości, media, topografia, dane geotechniczne
+- Mapowanie IFC (IfcSite)
 
 #### [Specyfikacja Projektu →](./specyfikacja-projektu)
 Kompletny przegląd projektu i opis techniczny
@@ -30,10 +37,58 @@ Kompletny przegląd projektu i opis techniczny
 - Integracja BIM (IFC 4.0, LOD 400)
 - Kosztorys i harmonogram
 
-### 2. Specyfikacje Elementów
+### 2. Komunikacja Pionowa
+
+#### [Klatka Schodowa A →](./klatka-schodowa-a)
+Chroniona klatka schodowa łącząca 6 kondygnacji
+- Typ: Dwubiegowa z półpiętrowymi spocznikami
+- Droga ewakuacyjna: klatka chroniona, REI 60, wentylacja naturalna
+- Wymiary: 1 200 mm szer. biegu, 169/290 mm wysokość/głębokość stopni
+- Ewakuacja: 80 osób, 3,2 min czas ewakuacji
+- Dostępność: poręcze obustronne, ostrzeżenia dotykowe, kontrastowe krawędzie
+- Zgodność z WT 2021 §68, §69, §242, §256
+
+### 3. Pomieszczenia (v0.6: Multi-Level)
+
+#### [Pustka Klatki Schodowej →](./przestrzenie/pustka-klatki-schodowej)
+Pomieszczenie wielopoziomowe obejmujące dwie kondygnacje (funkcja v0.6)
+- Obejmuje LVL-00 + LVL-01 (poziom główny: LVL-01)
+- `isMultiLevel: true` (automatycznie obliczane przez kompilator)
+- Strefa pożarowa: ZONE-FIRE-ZL-IV
+- Pakiet budowlany: CP-STRUCTURE
+
+### 4. Przegrody
+
+#### [Przegroda: Ściana Zewnętrzna Typ A →](./przegroda-sciana-zewnetrzna-typ-a)
+Semantyczna encja przegrody (v0.5) — murowana ściana zewnętrzna z ociepleniem
+- Pełne warstwy konstrukcyjne (5 warstw, 447,5 mm łącznie)
+- Termika: U = 0,18 W/(m²·K) (wymagane ≤ 0,20) ✅
+- Ogień: REI 90 (wymagane REI 60) ✅
+- Akustyka: Rw = 55 dB (wymagane ≥ 50) ✅
+- Otwory, współczynnik przeszklenia, zestawienie kosztów
+- Mapowanie IFC (IfcWallStandardCase), śledzenie proweniencji
+
+### 5. Systemy (v0.6: Hierarchia)
+
+#### [System HVAC →](./systemy/sys-hvac-01)
+Nadrzędny system HVAC z hierarchią podsystemów (funkcja v0.6)
+- System główny: SYS-HVAC-01 z 2 podsystemami
+- Pakiet budowlany: CP-MEP
+
+#### [Podsystem Ogrzewania →](./systemy/sys-hvac-01-ogrzewanie)
+Pompa ciepła + ogrzewanie podłogowe
+- Nadrzędny: SYS-HVAC-01
+- Zasoby: AST-HP-01, AST-UFH-MANIFOLD-01
+
+#### [Podsystem Wentylacji →](./systemy/sys-hvac-01-wentylacja)
+Wentylacja z odzyskiem ciepła (MVHR)
+- Nadrzędny: SYS-HVAC-01
+- Zasoby: AST-MVHR-01
+
+### 6. Specyfikacje Elementów (Legacy)
 
 #### [Ściana Zewnętrzna - Typ A →](./sciana-zewnetrzna-typ-a)
-Szczegółowa specyfikacja ściany zewnętrznej murowanej z ociepleniem
+Format `element_specification` (pre-v0.5)
 - Kompletne mapowanie IFC (IfcWallStandardCase)
 - Specyfikacja 5 warstw materiałowych
 - Parametry termiczne: U = 0,18 W/(m²·K) ✅

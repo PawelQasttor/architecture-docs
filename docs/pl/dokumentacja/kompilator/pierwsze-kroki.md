@@ -36,7 +36,7 @@ node scripts/compiler/index.mjs version
 
 Oczekiwane wyjście:
 ```
-Semantic Building Model Compiler v0.2.0
+Semantic Building Model Compiler v1.0.0
 ```
 
 ## Twoja pierwsza kompilacja
@@ -94,7 +94,7 @@ node scripts/compiler/index.mjs compile \
 
 Oczekiwane wyjście konsoli:
 ```
-ℹ️  Semantic Building Model Compiler v0.2.0
+ℹ️  Semantic Building Model Compiler v1.0.0
 ℹ️  Input: docs/en/examples/green-terrace
 ℹ️  Output: build/green-terrace
 ℹ️  Country: PL
@@ -186,8 +186,7 @@ Przestrzenie zawierają odziedziczone wartości ze śledzeniem proweniencji:
 }
 ```
 
-### 2. quality_report.json <Badge type="tip" text="v0.2.0" />
-
+### 2. quality_report.json 
 Audyt jakości danych:
 
 ```json

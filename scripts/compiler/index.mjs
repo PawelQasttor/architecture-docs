@@ -28,7 +28,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '0.4.0';
+const VERSION = '1.0.0';
 
 // CLI argument parsing
 function parseArgs(args) {
@@ -113,7 +113,7 @@ async function compile(options) {
 
     // Build SBM structure
     const sbm = {
-      sbm_version: '0.4',
+      sbm_version: '1.0',
       generatedAt: new Date().toISOString(),
       compiler: {
         version: VERSION,
@@ -124,7 +124,7 @@ async function compile(options) {
 
     // Stage 3: Validate
     logger.stage(3, 'Validate');
-    logger.debug('Validating against JSON schema v0.4, checking integrity, provenance, and phase gates...');
+    logger.debug('Validating against JSON schema v1.0, checking integrity, provenance, and phase gates...');
     const validationResult = await validate(sbm, logger);
 
     if (validationResult.valid) {
@@ -255,6 +255,70 @@ async function main() {
 
     await compile(options);
 
+  } else if (options.command === 'validate') {
+    if (!options.input) {
+      console.error('Error: --input is required');
+      console.log('Usage: node scripts/compiler/index.mjs validate --input <path> [--country <code>] [--phase <num>] [--verbose]');
+      process.exit(1);
+    }
+
+    const logger = createLogger(options.verbose);
+    logger.info(`Semantic Building Model Compiler v${VERSION} — Validate Mode`);
+    logger.info(`Input: ${options.input}`);
+    logger.info(`Country: ${options.country}`);
+    logger.info(`Phase: ${options.phase}\n`);
+
+    try {
+      // Stage 1: Parse
+      logger.stage(1, 'Parse');
+      const rawEntities = await parseInput(options.input, logger);
+      logger.success(`Parsed ${rawEntities.length} entities`);
+
+      // Stage 2: Normalize
+      logger.stage(2, 'Normalize');
+      const normalized = await normalize(rawEntities, options, logger);
+      logger.success(`Normalized ${normalized.entities.spaces?.length || 0} spaces, ${normalized.entities.zones?.length || 0} zones`);
+
+      // Build SBM structure
+      const sbm = {
+        sbm_version: '1.0',
+        generatedAt: new Date().toISOString(),
+        compiler: { version: VERSION, mode: options.mode },
+        ...normalized
+      };
+
+      // Stage 3: Validate
+      logger.stage(3, 'Validate');
+      const validationResult = await validate(sbm, logger);
+
+      if (validationResult.valid) {
+        logger.success('Validation passed — no errors');
+      } else {
+        logger.error(`Validation failed with ${validationResult.errors.length} errors`);
+        validationResult.errors.forEach(err => {
+          logger.error(`  ${err.path}: ${err.message}`);
+        });
+      }
+
+      if (validationResult.warnings?.length > 0) {
+        logger.warn(`${validationResult.warnings.length} warnings`);
+        validationResult.warnings.forEach(w => {
+          logger.warn(`  ${w.path}: ${w.message}`);
+        });
+      }
+
+      if (!validationResult.valid) {
+        process.exit(1);
+      }
+
+      logger.success('\nValidation complete — project is valid');
+
+    } catch (error) {
+      console.error(`Validation failed: ${error.message}`);
+      if (options.verbose) console.error(error.stack);
+      process.exit(1);
+    }
+
   } else if (options.command === 'version') {
     console.log(`Semantic Building Model Compiler v${VERSION}`);
 
@@ -267,12 +331,13 @@ USAGE:
 
 COMMANDS:
   compile     Compile semantic entities to SBM JSON
+  validate    Validate entities without generating output files
   version     Show compiler version
   help        Show this help message
 
 OPTIONS:
   --input <path>      Input directory containing Markdown entities (required)
-  --output <path>     Output directory for sbm.json (required)
+  --output <path>     Output directory for sbm.json (required for compile)
   --country <code>    ISO country code for jurisdiction pack (default: PL)
   --phase <num>       Project phase 1-8 for phase gate enforcement (default: 3)
   --mode <mode>       Compilation mode: development | production (default: production)

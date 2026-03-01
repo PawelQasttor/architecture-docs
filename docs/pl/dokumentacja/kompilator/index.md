@@ -1,6 +1,6 @@
 # Przegląd kompilatora
 
-**Kompilator SBM v0.2.0** przekształca tworzone przez człowieka encje (encja -- w tym standardzie nazywana kartą) Markdown w zwalidowany, odczytywalny maszynowo format JSON i generuje wiele celów kompilacji dla BIM, zgodności, zarządzania obiektami, integracji z cyfrowym bliźniakiem oraz **audytu jakości danych**.
+**Kompilator SBM v1.0.0** przekształca tworzone przez człowieka encje (encja -- w tym standardzie nazywana kartą) Markdown w zwalidowany, odczytywalny maszynowo format JSON i generuje wiele celów kompilacji dla BIM, zgodności, zarządzania obiektami, integracji z cyfrowym bliźniakiem oraz **audytu jakości danych**.
 
 ## Co robi kompilator?
 
@@ -17,8 +17,7 @@ Kompilator łączy tworzenie przyjazne dla człowieka z maszynowo przetwarzalnym
 - `compliance_report.json` - Śledzenie zgodności regulacyjnej
 - `asset_register.json` - Dane zarządzania obiektami
 - `twin_schema.json` - Powiązania czujników cyfrowego bliźniaka
-- `quality_report.json` - **Audyt jakości danych i gotowość fazowa** (nowość w v0.2.0)
-
+- `quality_report.json` - **Audyt jakości danych i gotowość fazowa** 
 ## 5-etapowy potok
 
 ```
@@ -171,8 +170,7 @@ Konfiguracja monitorowania w czasie rzeczywistym:
 - Powiązanie czujników IoT
 - Monitorowanie zgodności w czasie rzeczywistym
 
-### 5. Raport jakości (`quality_report.json`) <Badge type="tip" text="v0.2.0" />
-
+### 5. Raport jakości (`quality_report.json`) 
 Audyt jakości danych i ocena gotowości fazowej:
 
 **Przypadki użycia:**
@@ -243,7 +241,7 @@ Kompilator automatycznie wczytuje wymagania na podstawie kraju projektu:
 Kompilator waliduje na pięciu poziomach:
 
 ### 1. Walidacja schematu JSON
-- Waliduje strukturę encji względem `schemas/sbm-schema-v0.2.json`
+- Waliduje strukturę encji względem `schemas/sbm-schema-v1.0.json`
 - Sprawdza wymagane pola, typy danych, wartości enum
 
 ### 2. Integralność referencyjna
@@ -254,13 +252,11 @@ Kompilator waliduje na pięciu poziomach:
 - Wymagania muszą być odpowiednie dla swojego zakresu
 - Przestrzenie powinny mieć strefy i wymagania
 
-### 4. Proweniencja danych <Badge type="tip" text="v0.2.0" />
-- Pola z pewnością `measured`/`calculated`/`specified` muszą mieć referencję `source`
+### 4. Proweniencja danych - Pola z pewnością `measured`/`calculated`/`specified` muszą mieć referencję `source`
 - Pola null bez wyjaśnienia `_meta` generują ostrzeżenia
 - Zapewnia kompletność śledzenia jakości danych
 
-### 5. Bramy fazowe <Badge type="tip" text="v0.2.0" />
-- Egzekwuje wymagania pewności na podstawie fazy projektu
+### 5. Bramy fazowe - Egzekwuje wymagania pewności na podstawie fazy projektu
 - Zapobiega awansowaniu projektów z niezweryfikowanymi danymi
 - Pola krytyczne dla bezpieczeństwa mają surowsze egzekwowanie
 
@@ -268,7 +264,7 @@ Kompilator waliduje na pięciu poziomach:
 
 ```
 scripts/compiler/
-├── index.mjs                  # Główny punkt wejścia, CLI (v0.2.0)
+├── index.mjs                  # Główny punkt wejścia, CLI (v1.0.0)
 ├── stages/
 │   ├── parse.mjs              # Etap 1: Parsowanie Markdown (11 typów encji)
 │   ├── normalize.mjs          # Etap 2: Normalizacja, dziedziczenie, relacje
@@ -279,7 +275,7 @@ scripts/compiler/
 │   ├── compliance-report.mjs  # Generator raportu zgodności
 │   ├── asset-register.mjs     # Generator rejestru zasobów
 │   ├── twin-schema.mjs        # Generator schematu cyfrowego bliźniaka
-│   └── quality-report.mjs     # Generator raportu jakości (v0.2.0)
+│   └── quality-report.mjs     # Generator raportu jakości
 ├── enrichers/
 │   └── jurisdiction-pack.mjs  # Loader pakietów jurysdykcji
 ```

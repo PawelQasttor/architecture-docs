@@ -1,6 +1,6 @@
 # Potok kompilacji
 
-Kompilator SBM v0.4.0 przetwarza encje budynku przez 5-etapowy potok z zaawansowanymi funkcjami agregacji. Ten dokument szczegółowo opisuje każdy etap.
+Kompilator SBM v1.0.0 przetwarza encje budynku przez 5-etapowy potok z zaawansowanymi funkcjami agregacji. Ten dokument szczegółowo opisuje każdy etap.
 
 ## Przegląd potoku
 
@@ -161,8 +161,7 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 - Odczyt z encji `project_specification` lub konstrukcja z opcji CLI
 - Zawiera: identyfikator projektu, nazwę, kraj, fazę, język, jednostki
 
-### 2.7 Agregacja kosztów <Badge type="tip" text="v0.4.0" />
-
+### 2.7 Agregacja kosztów
 **Cel:** Hierarchiczna agregacja kosztów od pomieszczeń i zasobów do budżetu projektu
 
 **Ścieżki agregacji:**
@@ -197,8 +196,7 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 }
 ```
 
-### 2.8 Śledzenie symulacji <Badge type="tip" text="v0.4.0" />
-
+### 2.8 Śledzenie symulacji
 **Cel:** Agregacja wyników symulacji z pomieszczeń dla nadzoru na poziomie projektu
 
 **Śledzone typy:** `daylighting`, `thermal`, `acoustic`, `cfd`, `airflow`, `energy`
@@ -239,8 +237,7 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 }
 ```
 
-### 2.9 Agregacja wydajności <Badge type="tip" text="v0.4.0" />
-
+### 2.9 Agregacja wydajności
 **Cel:** Agregacja celów wydajnościowych z pomieszczeń i obliczanie metryk na poziomie projektu
 
 **Śledzone kategorie:** `daylighting`, `indoorAirQuality`, `acousticPerformance`, `thermalComfort`, `energyPerformance`, `embodiedCarbon`
@@ -293,7 +290,7 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 **Proces:**
 
 ### 3.1 Walidacja schematu JSON
-- Walidacja względem `schemas/sbm-schema-v0.4.json`
+- Walidacja względem `schemas/sbm-schema-v1.0.json`
 - Używa AJV z walidacją formatów
 - Sprawdzanie wymaganych pól, typów danych, wartości enum, wzorców ID
 - Obsługuje funkcje v0.4: śledzenie kosztów, wyniki symulacji, cele wydajnościowe, integracja BIM
@@ -307,16 +304,14 @@ Gdy wymagania są scalane z wielu źródeł, `_meta` śledzi łańcuch scalania:
 - Każda przestrzeń powinna mieć co najmniej jedno przypisanie strefy
 - Każda przestrzeń powinna mieć co najmniej jedno wymaganie
 
-### 3.4 Proweniencja danych <Badge type="tip" text="v0.2.0" />
-
+### 3.4 Proweniencja danych
 **Reguła 1: Źródło wymagane dla wysokiego poziomu pewności**
 Jeśli `_meta.confidence` to `measured`, `calculated` lub `specified`, a `_meta.source` jest brakujące (i pole nie jest dziedziczone), emitowane jest ostrzeżenie.
 
 **Reguła 2: Null bez wyjaśnienia**
 Jeśli pole ma wartość null bez adnotacji `_meta`, emitowane jest ostrzeżenie. Pola powinny mieć wartość lub posiadać `_meta` z `confidence: "unknown"` wyjaśniającym przyczynę.
 
-### 3.5 Wymuszanie bramek fazowych <Badge type="tip" text="v0.2.0" />
-
+### 3.5 Wymuszanie bramek fazowych
 | Faza | Reguła | Ważność |
 |------|--------|---------|
 | 1-3 | Akceptowane wszystkie poziomy pewności | - |
@@ -330,8 +325,7 @@ Pola krytyczne dla bezpieczeństwa: `electricalSafetyGroup`, `radiologicalShield
 
 ---
 
-## Etap 3.5: Podsumowania jakości <Badge type="tip" text="v0.2.0" />
-
+## Etap 3.5: Podsumowania jakości
 **Cel:** Obliczanie bloków jakości per encja i podsumowania jakości całego projektu
 
 **Wejście:** Zwalidowany graf encji z Etapu 3
@@ -406,8 +400,7 @@ Dla każdej encji:
 **Generator:** `scripts/compiler/targets/twin-schema.mjs`
 **Wyjście:** `twin_schema.json`
 
-### 4.5 Cel raportu jakości <Badge type="tip" text="v0.2.0" />
-
+### 4.5 Cel raportu jakości
 **Generator:** `scripts/compiler/targets/quality-report.mjs`
 **Wyjście:** `quality_report.json`
 

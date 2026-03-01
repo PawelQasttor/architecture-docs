@@ -1,6 +1,6 @@
 # Compilation Pipeline
 
-The SBM compiler v0.4.0 processes building entities through a 5-stage pipeline with advanced aggregation features. This document explains each stage in detail.
+The SBM compiler v1.0.0 processes building entities through a 5-stage pipeline with advanced aggregation features. This document explains each stage in detail.
 
 ## Pipeline Overview
 
@@ -161,8 +161,7 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 - Read from `project_specification` entity or construct from CLI options
 - Includes: project ID, name, country, phase, language, units
 
-### 2.7 Cost Rollup <Badge type="tip" text="v0.4.0" />
-
+### 2.7 Cost Rollup 
 **Purpose:** Aggregate costs hierarchically from spaces and assets up to project budget
 
 **Aggregation Paths:**
@@ -219,8 +218,7 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 }
 ```
 
-### 2.8 Simulation Tracking <Badge type="tip" text="v0.4.0" />
-
+### 2.8 Simulation Tracking 
 **Purpose:** Aggregate simulation results from spaces to provide project-level simulation oversight
 
 **Tracked Types:** `daylighting`, `thermal`, `acoustic`, `cfd`, `airflow`, `energy`
@@ -271,8 +269,7 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 }
 ```
 
-### 2.9 Performance Aggregation <Badge type="tip" text="v0.4.0" />
-
+### 2.9 Performance Aggregation 
 **Purpose:** Aggregate performance targets from spaces and calculate project-level metrics
 
 **Tracked Categories:** `daylighting`, `indoorAirQuality`, `acousticPerformance`, `thermalComfort`, `energyPerformance`, `embodiedCarbon`
@@ -335,7 +332,7 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 **Process:**
 
 ### 3.1 JSON Schema Validation
-- Validates against `schemas/sbm-schema-v0.4.json`
+- Validates against `schemas/sbm-schema-v1.0.json`
 - Uses AJV with format validation
 - Checks required fields, data types, enum values, ID patterns
 - Supports v0.4 features: cost tracking, simulation results, performance targets, BIM integration
@@ -349,16 +346,14 @@ When requirements are merged from multiple sources, `_meta` tracks the merge cha
 - Every space should have at least one zone assignment
 - Every space should have at least one requirement
 
-### 3.4 Data Provenance <Badge type="tip" text="v0.2.0" />
-
+### 3.4 Data Provenance
 **Rule 1: Source required for high confidence**
 If `_meta.confidence` is `measured`, `calculated`, or `specified` and `_meta.source` is missing (and the field isn't inherited), emit a warning.
 
 **Rule 2: Null without explanation**
 If a field is null with no `_meta` annotation, emit a warning. Fields should either have a value or have `_meta` with `confidence: "unknown"` explaining why.
 
-### 3.5 Phase Gate Enforcement <Badge type="tip" text="v0.2.0" />
-
+### 3.5 Phase Gate Enforcement
 | Phase | Rule | Severity |
 |-------|------|----------|
 | 1-3 | All confidence levels accepted | - |
@@ -372,8 +367,7 @@ Safety-critical fields: `electricalSafetyGroup`, `radiologicalShielding`, `fireR
 
 ---
 
-## Stage 3.5: Quality Summaries <Badge type="tip" text="v0.2.0" />
-
+## Stage 3.5: Quality Summaries
 **Purpose:** Compute per-entity quality blocks and project-wide quality summary
 
 **Input:** Validated entity graph from Stage 3
@@ -448,8 +442,7 @@ For each entity:
 **Generator:** `scripts/compiler/targets/twin-schema.mjs`
 **Output:** `twin_schema.json`
 
-### 4.5 Quality Report Target <Badge type="tip" text="v0.2.0" />
-
+### 4.5 Quality Report Target
 **Generator:** `scripts/compiler/targets/quality-report.mjs`
 **Output:** `quality_report.json`
 
@@ -507,9 +500,9 @@ Measured on Green Terrace example (21 entities: 3 spaces, 3 zones, 1 system, 3 a
 | Validate | Schema + Integrity + Provenance | ~15ms | 0 errors, 0 warnings |
 | Quality | Per-entity + Project summaries | ~5ms | 51 entities analyzed |
 | Compile Targets | 6 outputs generated | ~10ms | BIM, compliance, assets, twin, quality |
-| **Total** | **End-to-end compilation** | **~50ms** | **v0.4.0 complete** |
+| **Total** | **End-to-end compilation** | **~50ms** | **v1.0.0 complete** |
 
-**v0.4.0 Aggregations:**
+**Aggregation features:**
 - ✓ Cost rollup: €9,000 (2 assets → 1 system → project)
 - ✓ Simulation tracking: 5 simulations, 60% complete
 - ✓ Performance aggregation: 3 spaces, 6 categories
