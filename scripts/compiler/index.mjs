@@ -29,7 +29,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '2.0.0';
+const VERSION = '2.1.0';
 
 // CLI argument parsing
 function parseArgs(args) {

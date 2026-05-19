@@ -6,10 +6,12 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
-## [Unreleased] — Track A: coherence
+## [2.1.0] - 2026-05-19 — Coherence, demoability & presentation
 
-Post-2.0.0 coherence pass. No new schema features; the v2.0 substance is
-made internally consistent end to end.
+A tooling + documentation release. The **SBM standard itself is unchanged**
+(`sbm_version` stays `2.0`, schema `2.0.0`) — this release makes the v2.0
+substance internally consistent, demoable, and easy to present/explore.
+Covers Tracks A (coherence), B (demoable), and C (streamlined IA).
 
 ### Changed
 - **Canonical name** is now **"Semantic Building Model"** everywhere
