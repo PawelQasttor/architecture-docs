@@ -547,7 +547,7 @@ maintenanceSchedule:
       durationUnit: "hours"
 
 spareParts:
-  - partName: "Air filter F7"
+  - partName: "Filtr powietrza F7"
     partNumber: "SF-F7-600x600"
     quantity: 4
     reorderLevel: 2
