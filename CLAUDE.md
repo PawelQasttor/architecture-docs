@@ -1,8 +1,8 @@
-# CLAUDE.md — Structured Building Model (SBM) Documentation Standard
+# CLAUDE.md — Semantic Building Model (SBM) Documentation Standard
 
 ## What this project is
 
-An **AI-ready documentation standard for architecture** (the *Structured Building Model*,
+An **AI-ready documentation standard for architecture** (the *Semantic Building Model*,
 SBM), published as a **VitePress documentation site** with a companion **Node.js
 compiler** that turns Markdown+frontmatter building models into validated structured
 output.

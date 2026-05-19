@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to the Structured Building Model (SBM) standard.
+All notable changes to the Semantic Building Model (SBM) standard.
 
 Format based on [Keep a Changelog](https://keepachangelog.com/).
 

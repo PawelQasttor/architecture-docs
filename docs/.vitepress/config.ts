@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "Architecture Documentation Standard",
+  title: "Semantic Building Model (SBM)",
   description: "AI-ready documentation standard for Polish architects",
 
   // Output directory
@@ -16,7 +16,7 @@ export default defineConfig({
     root: {
       label: 'English',
       lang: 'en',
-      title: 'Architecture Documentation Standard',
+      title: 'Semantic Building Model (SBM)',
       description: 'AI-ready documentation standard for architects',
       themeConfig: {
         nav: [
@@ -344,7 +344,7 @@ export default defineConfig({
     pl: {
       label: 'Polski',
       lang: 'pl',
-      title: 'Standard Dokumentacji Architektonicznej',
+      title: 'Semantyczny Model Budynku (SBM)',
       description: 'Standard dokumentacji gotowy na AI dla architektów',
       themeConfig: {
         nav: [

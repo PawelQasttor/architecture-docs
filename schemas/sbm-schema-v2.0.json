@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://sbm.architecture/schemas/v2.0.0/sbm-schema.json",
-  "title": "Structured Building Model (SBM) Schema v2.0.0",
+  "title": "Semantic Building Model (SBM) Schema v2.0.0",
   "description": "Complete semantic model for architectural building information. 27 entity types covering campus, site, building, level, space, zone, system, asset, envelope, vertical circulation, opening, site feature, construction package, requirements, structural system, material, space program, issue, commissioning test, circulation route, and type templates. Features include hierarchical cost rollup, data provenance tracking, type/instance inheritance, multi-level spaces, system hierarchy, construction phasing, BIM integration, unified lifecycle phases, sustainability tracking, classification systems, and full-lifecycle construction administration.",
   "version": "2.0.0",
 
