@@ -561,22 +561,18 @@ function checkBusinessRules(sbm, logger) {
         for (const reqId of space.requirements) {
           const req = reqIndex.get(reqId);
           if (req && req.scope) {
-            // Check if the requirement's scope.entityType matches
+            // Scope filtering is informational, not a defect: requirements
+            // cascade from level/type/jurisdiction onto every space, and the
+            // scope simply narrows where each one applies. A non-match means
+            // the requirement does not apply here — that is the scope working
+            // correctly, so it is logged at debug level (use --verbose), not
+            // surfaced as a project warning.
             if (req.scope.entityType && req.scope.entityType !== 'space' && req.scope.entityType !== 'any') {
-              warnings.push({
-                path: `spaces/${space.id}`,
-                message: `Requirement ${reqId} has scope.entityType="${req.scope.entityType}" but is applied to a space`,
-                rule: 'business:requirement_scope_match'
-              });
+              logger.debug(`  scope: ${reqId} (entityType "${req.scope.entityType}") does not apply to space ${space.id}`);
             }
-            // Check if space types match
             if (req.scope.spaceTypes && req.scope.spaceTypes.length > 0 && space.spaceType) {
               if (!req.scope.spaceTypes.includes(space.spaceType)) {
-                warnings.push({
-                  path: `spaces/${space.id}`,
-                  message: `Requirement ${reqId} is scoped to space types [${req.scope.spaceTypes.join(', ')}] but space is "${space.spaceType}"`,
-                  rule: 'business:requirement_scope_match'
-                });
+                logger.debug(`  scope: ${reqId} (space types [${req.scope.spaceTypes.join(', ')}]) does not apply to "${space.spaceType}" space ${space.id}`);
               }
             }
           }

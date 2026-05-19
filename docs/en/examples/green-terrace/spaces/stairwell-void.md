@@ -18,6 +18,18 @@ designHeight: 6.0
 designVolume: 50.4
 unit: "m2"
 
+# A stairwell void is open volume within the stair core — it has no
+# independent construction cost; its fabric cost is carried by the
+# vertical circulation (VC-STAIR-A) and the structure package.
+cost:
+  totalCost: 0
+  currency: "EUR"
+  basis: "override"
+  override: "Void has no independent construction cost — fabric cost carried by VC-STAIR-A / CP-STRUCTURE"
+  _meta:
+    confidence: "specified"
+    source: "Cost carried by VC-STAIR-A / CP-STRUCTURE"
+
 constructionPackageId: "CP-STRUCTURE"
 
 version: "1.0.0"

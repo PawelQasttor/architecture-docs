@@ -18,6 +18,18 @@ designHeight: 6.0
 designVolume: 50.4
 unit: "m2"
 
+# Pustka klatki schodowej to otwarta kubatura w trzonie klatki — nie ma
+# własnego kosztu budowy; koszt jej obudowy jest ujęty w komunikacji
+# pionowej (VC-STAIR-A) i pakiecie konstrukcyjnym.
+cost:
+  totalCost: 0
+  currency: "EUR"
+  basis: "override"
+  override: "Pustka nie ma własnego kosztu budowy — koszt obudowy ujęty w VC-STAIR-A / CP-STRUCTURE"
+  _meta:
+    confidence: "specified"
+    source: "Koszt ujęty w VC-STAIR-A / CP-STRUCTURE"
+
 constructionPackageId: "CP-STRUCTURE"
 
 version: "1.0.0"
