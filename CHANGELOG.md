@@ -6,6 +6,31 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [Unreleased] — Polish localization completeness
+
+Post-2.1.0. Closes the bilingual-parity gaps surfaced after the report
+i18n fix. SBM standard unchanged.
+
+### Fixed
+- **Report fully localized.** Recommendation/blocker text and compliance
+  status values were English even for Polish projects. `quality-report.mjs`
+  now emits stable machine `code`s; `html-report.mjs` renders
+  recommendations/blockers/status in the project language. The Polish
+  Green Terrace report is now 100% Polish (chrome + recommendations +
+  status); JSON targets stay English/stable for machine consumers.
+- **PL docs English sweep.** Pre-existing untracked English prose (verbatim
+  EN copies) in the Polish flagship example and reference/authoring pages
+  translated to domain-accurate Polish: the 3 requirement specs
+  (REQ-FIRE-EGRESS / ACOUSTIC-B / FIRE-RATING), system/asset/zone/space
+  type examples, `encje/wymaganie` & `encje/poziom` JSON example blocks,
+  `tworzenie/*` authoring examples — descriptions, requirements, warranty
+  terms, maintenance tasks, deliverables, notes, role titles. Canonical
+  schema vocabulary (entityType/documentType/usage/status enums, phase &
+  confidence identifiers) intentionally remains identical in both locales,
+  as in the standard.
+
+---
+
 ## [2.1.0] - 2026-05-19 — Coherence, demoability & presentation
 
 A tooling + documentation release. The **SBM standard itself is unchanged**
