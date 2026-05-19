@@ -29,7 +29,7 @@ function createValidSbm(overrides = {}) {
   return {
     sbm_version: '2.0',
     generatedAt: new Date().toISOString(),
-    compiler: { version: '1.1.0', mode: 'production' },
+    compiler: { version: '2.0.0', mode: 'production' },
     project: {
       id: 'PRJ-TEST',
       name: 'Test Project',
@@ -601,7 +601,7 @@ describe('validate', () => {
       assert.equal(result.valid, false, 'should fail without sbm_version');
     });
 
-    it('should fail when sbm_version is not "1.1"', async () => {
+    it('should fail when sbm_version is not "2.0"', async () => {
       const sbm = createValidSbm();
       sbm.sbm_version = '0.5';
 
