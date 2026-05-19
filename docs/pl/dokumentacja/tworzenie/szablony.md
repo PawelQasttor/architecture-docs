@@ -274,14 +274,14 @@ maintenanceSchedule:
       skillRequired: "HVAC technician"
 
     - taskId: "MAINT-AHU-ANNUAL"
-      taskName: "Annual inspection"
+      taskName: "Przegląd roczny"
       frequency: "yearly"
       estimatedDuration: 8
       durationUnit: "hours"
-      skillRequired: "Certified HVAC engineer"
+      skillRequired: "Certyfikowany inżynier HVAC"
 
 spareParts:
-  - partName: "Air filter F7"
+  - partName: "Filtr powietrza F7"
     partNumber: "SF-F7-600x600"
     quantity: 4
     reorderLevel: 2

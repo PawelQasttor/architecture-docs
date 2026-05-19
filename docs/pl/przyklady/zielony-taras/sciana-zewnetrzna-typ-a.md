@@ -24,7 +24,7 @@ regulatoryCompliance:
     status: "compliant"
   - standard: "WT_2021"
     section: "§ 234"
-    requirement: "Fire rating REI 60 (building height 18.5m)"
+    requirement: "Klasa odporności ogniowej REI 60 (wysokość budynku 18,5 m)"
     status: "compliant"
   - standard: "PN-EN_1996"
     description: "Masonry structures design"

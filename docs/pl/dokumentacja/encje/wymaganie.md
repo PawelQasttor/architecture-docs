@@ -32,7 +32,7 @@ Wymagania określają:
 | `id` | string | Unikalny identyfikator wymagania | `"REQ-DAYLIGHT-SLEEPING-001"` |
 | `entityType` | string | Musi być `"requirement"` | `"requirement"` |
 | `documentType` | string | Musi być `"requirement"` | `"requirement"` |
-| `requirementName` | string | Nazwa czytelna dla ludzi | `"Minimum daylight factor for sleeping spaces"` |
+| `requirementName` | string | Nazwa czytelna dla ludzi | `"Minimalny współczynnik światła dziennego dla przestrzeni do spania"` |
 | `requirementType` | string | Typ (patrz wyliczenie poniżej) | `"performance"` |
 | `metric` | string | **[v0.3.0: OPCJONALNE]** Mierzalna metryka | `"daylight_factor"` |
 | `operator` | string | **[v0.3.0: OPCJONALNE]** Operator por&oacute;wnania | `">="`, `"<="`, `"=="`, `"range"` |
@@ -329,7 +329,7 @@ tags: ["daylight", "performance", "global", "circadian_health"]
   "id": "REQ-DAYLIGHT-SLEEPING-001",
   "entityType": "requirement",
   "documentType": "requirement",
-  "requirementName": "Minimum daylight factor for sleeping spaces",
+  "requirementName": "Minimalny współczynnik światła dziennego dla przestrzeni do spania",
   "requirementType": "performance",
   "countryScope": "global",
   "scope": {
@@ -357,15 +357,15 @@ tags: ["daylight", "performance", "global", "circadian_health"]
     {
       "standard": "BREEAM_HEA_01",
       "section": "Daylighting",
-      "description": "2% average daylight factor for living spaces"
+      "description": "Średni współczynnik światła dziennego 2% dla przestrzeni mieszkalnych"
     },
     {
       "standard": "WELL_L03",
       "section": "Circadian Lighting Design",
-      "description": "Daylight access for sleep-wake cycle regulation"
+      "description": "Dostęp do światła dziennego dla regulacji rytmu snu i czuwania"
     }
   ],
-  "description": "Sleeping spaces require minimum 2% daylight factor to support circadian rhythm regulation and visual comfort. Verified through simulation at design stage.",
+  "description": "Przestrzenie do spania wymagają minimalnego współczynnika światła dziennego 2% dla wsparcia regulacji rytmu okołodobowego i komfortu wizualnego. Weryfikowane symulacją na etapie projektu.",
   "version": "1.0.0",
   "tags": ["daylight", "performance", "global", "circadian_health"]
 }
@@ -769,7 +769,7 @@ tags: ["dimensional", "poland", "wt_2021", "regulatory"]
   "id": "REQ-PL-WT-ROOM-HEIGHT-001",
   "entityType": "requirement",
   "documentType": "requirement",
-  "requirementName": "Minimum room height per WT 2021",
+  "requirementName": "Minimalna wysokość pomieszczenia wg WT 2021",
   "requirementType": "dimensional",
   "countryScope": "poland_specific",
   "scope": {
@@ -807,10 +807,10 @@ tags: ["dimensional", "poland", "wt_2021", "regulatory"]
     {
       "standard": "EN_16798-1",
       "section": "6.4",
-      "description": "Room height for adequate air quality and thermal comfort"
+      "description": "Wysokość pomieszczenia dla odpowiedniej jakości powietrza i komfortu cieplnego"
     }
   ],
-  "description": "Residential rooms (bedrooms, living rooms, kitchens) must have clear height >= 2.50 m per WT 2021 § 132. Measured from floor to lowest ceiling or roof structure element.",
+  "description": "Pomieszczenia mieszkalne (sypialnie, pokoje dzienne, kuchnie) muszą mieć wysokość w świetle ≥ 2,50 m wg WT 2021 § 132. Mierzona od podłogi do najniższego elementu sufitu lub konstrukcji dachu.",
   "version": "1.0.0",
   "tags": ["dimensional", "poland", "wt_2021", "regulatory"]
 }
@@ -1128,7 +1128,7 @@ version: "1.0.0"
   "documentType": "requirement",
   "entityType": "requirement",
   "id": "REQ-PROJECT-CUSTOM-001",
-  "requirementName": "Project-specific ceiling height",
+  "requirementName": "Wysokość pomieszczenia specyficzna dla projektu",
   "requirementType": "dimensional",
   "metric": "room_height_clear",
   "operator": ">=",
