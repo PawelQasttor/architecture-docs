@@ -55,6 +55,20 @@ made internally consistent end to end.
   Requirement scope-filter notes moved from warnings to `--verbose`
   debug; Green Terrace flagship now validates with zero warnings.
 
+### Track C notes — present & explore
+- **Quick-start** cut from 742 lines to a true ~110-line 5-minute path
+  (one file → references → compile → HTML report); EN/PL parity restored.
+- **Pitch deduplicated**: the "why" lived verbatim on the landing,
+  `introduction.md` and the quick-start. `introduction.md` is now the
+  single canonical rationale; landing trimmed 293→~115 (hero + features +
+  teaser + persona routing); quick-start links out instead of repeating.
+- **Green Terrace** reframed from a 376-line flat file dump into a ~95-line
+  guided tour that follows one bedroom (instance → type/level inheritance →
+  overlapping zones → cascaded requirements → cost rollup → HTML report).
+- **Information architecture**: overlapping nav sprawl collapsed to six
+  clear groups — Start · Model · Lifecycle · Compiler · Example ·
+  Reference (EN+PL). Content directories unchanged on disk.
+
 ---
 
 ## [2.0.0] - 2026-03-17
