@@ -66,6 +66,10 @@ async function parseFile(filePath, inputDir) {
     'building', 'level',
     'space_type', 'zone_type', 'system_type', 'asset_type',
     'opening', 'opening_type', 'site_feature', 'site_feature_type', 'construction_package',
+    // v2.0 entity types
+    'campus', 'space_program', 'material_type', 'material', 'structural_system',
+    'issue', 'commissioning_test', 'circulation_route',
+    // Legacy
     'element_specification', 'project_specification', 'project'
   ];
 

@@ -125,10 +125,6 @@ In this guide, you will create a **Space document** — a bedroom — described 
 For projects with many similar spaces, you can use **Space Types** to define specifications once and reference them from instances. This guide shows the standalone approach. See [Type/Instance Pattern](#next-steps-type-instance-pattern) below for advanced usage.
 :::
 
-::: tip New in v0.1.1: Type/Instance Pattern
-For projects with many similar spaces, you can use **Space Types** to define specifications once and reference them from instances. This guide shows the standalone approach. See [Type/Instance Pattern](#next-steps-type-instance-pattern) below for advanced usage.
-:::
-
 By the end, you will have two connected documents and a clear picture of how the entire standard works.
 
 **Here is the finished file you will create:**
@@ -206,7 +202,9 @@ This is exactly how you probably organize AutoCAD files already: one folder for 
 
 Create a new file at `spaces/bedroom-01.md` and paste the following content:
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space"
 entityType: "space"
@@ -246,6 +244,68 @@ A standard bedroom on the first floor with north-facing window.
 - Natural daylight required
 - Acoustic insulation Class B
 ```
+
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"
+designArea: 14.5
+designHeight: 2.70
+unit: "m"
+requirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+version: "1.0.0"
+tags:
+  - "residential"
+  - "sleeping"
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-001",
+  "spaceName": "Bedroom 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": ["ZONE-FIRE-ZL-IV"],
+  "designArea": 14.5,
+  "designHeight": 2.70,
+  "unit": "m",
+  "requirements": ["REQ-PL-WT-ROOM-HEIGHT-001"],
+  "version": "1.0.0",
+  "tags": ["residential", "sleeping"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceType": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "levelId": { "type": "string" },
+    "zoneIds": { "type": "array", "items": { "type": "string" } },
+    "designArea": { "type": "number" },
+    "designHeight": { "type": "number" },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ### Understanding the Fields (The Table at the Top)
 
@@ -320,7 +380,9 @@ A standard bedroom on the first floor with north-facing window.
 
 Documents become powerful when they reference each other. Create a second file at `zones/fire-zone-zl-iv.md`:
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "zone"
 entityType: "zone"
@@ -349,6 +411,59 @@ Residential fire zone classification for the main building volume.
 | Floor slabs | REI 60 | WT 2021 § 234 |
 | Staircase walls | REI 120 | WT 2021 § 234 |
 ```
+
+```yaml [YAML]
+documentType: "zone"
+entityType: "zone"
+id: "ZONE-FIRE-ZL-IV"
+zoneName: "Fire Zone ZL-IV"
+zoneType: "fire"
+levelIds:
+  - "LVL-01"
+  - "LVL-02"
+regulatoryCompliance:
+  - standard: "WT_2021"
+    section: "§ 234"
+    requirement: "Fire resistance REI 60"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "zone",
+  "entityType": "zone",
+  "id": "ZONE-FIRE-ZL-IV",
+  "zoneName": "Fire Zone ZL-IV",
+  "zoneType": "fire",
+  "levelIds": ["LVL-01", "LVL-02"],
+  "regulatoryCompliance": [
+    {
+      "standard": "WT_2021",
+      "section": "§ 234",
+      "requirement": "Fire resistance REI 60"
+    }
+  ],
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "zoneName", "zoneType", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ZONE-" },
+    "entityType": { "const": "zone" },
+    "zoneName": { "type": "string" },
+    "zoneType": { "type": "string" },
+    "levelIds": { "type": "array", "items": { "type": "string" } },
+    "regulatoryCompliance": { "type": "array" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ### How Are These Two Documents Connected?
 
@@ -416,7 +531,9 @@ Creating 20 bedrooms the way shown above means repeating the same requirements, 
 
 **1. Create a Space Type** (template - define once):
 
-```markdown
+::: code-group
+
+```md [Markdown]
 templates/space-types/standard-bedroom.md
 ---
 documentType: "space_type"
@@ -444,9 +561,68 @@ version: "1.0.0"
 ---
 ```
 
+```yaml [YAML]
+documentType: "space_type"
+entityType: "space_type"
+id: "ST-BEDROOM-STANDARD"
+typeName: "Standard Bedroom"
+spaceType: "sleeping_space"
+requirements:
+  - "REQ-DAYLIGHT-SLEEPING-001"
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+finishes:
+  floor: "MAT-FLOOR-OAK-01"
+  walls: "MAT-WALL-PAINT-WHITE"
+occupancyProfile:
+  maxOccupants: 2
+  usagePattern: "residential_sleeping"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "space_type",
+  "entityType": "space_type",
+  "id": "ST-BEDROOM-STANDARD",
+  "typeName": "Standard Bedroom",
+  "spaceType": "sleeping_space",
+  "requirements": ["REQ-DAYLIGHT-SLEEPING-001", "REQ-PL-WT-ROOM-HEIGHT-001"],
+  "finishes": {
+    "floor": "MAT-FLOOR-OAK-01",
+    "walls": "MAT-WALL-PAINT-WHITE"
+  },
+  "occupancyProfile": {
+    "maxOccupants": 2,
+    "usagePattern": "residential_sleeping"
+  },
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "typeName", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ST-" },
+    "entityType": { "const": "space_type" },
+    "typeName": { "type": "string" },
+    "spaceType": { "type": "string" },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "finishes": { "type": "object" },
+    "occupancyProfile": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **2. Create Lightweight Instances** (reference the type):
 
-```markdown
+::: code-group
+
+```md [Markdown]
 spaces/bedroom-01.md
 ---
 documentType: "space"
@@ -461,6 +637,48 @@ levelId: "LVL-01"
 designArea: 14.5  # Actual area for this bedroom
 ---
 ```
+
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+spaceTypeId: "ST-BEDROOM-STANDARD"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+designArea: 14.5
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-001",
+  "spaceName": "Bedroom 01",
+  "spaceTypeId": "ST-BEDROOM-STANDARD",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "designArea": 14.5
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceTypeId": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "levelId": { "type": "string" },
+    "designArea": { "type": "number" }
+  }
+}
+```
+
+:::
 
 ### Benefits
 

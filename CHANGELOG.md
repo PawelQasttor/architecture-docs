@@ -6,6 +6,45 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [2.0.0] - 2026-03-17
+
+### Added
+- **8 new entity types** (27 total, up from 19):
+  - `campus` — Multi-site development container (CAM- prefix)
+  - `space_program` — Quantitative space programming with brief-to-design compliance checking (PROG- prefix)
+  - `material_type` / `material` — Reusable material specifications with sustainability tracking (MT-/MAT- prefixes)
+  - `structural_system` — Structural engineering: frame type, foundations, loads, seismic design (STR- prefix)
+  - `issue` — Construction administration: RFIs, change orders, submittals, inspections, punch lists (ISS- prefix)
+  - `commissioning_test` — Commissioning and acceptance test results with pass/fail tracking (CT- prefix)
+  - `circulation_route` — Egress and accessibility path modeling with travel distance validation (CR- prefix)
+- **Building entity major extension**: grossFloorArea, netFloorArea, footprintArea, numberOfStoreys, buildingHeight, eaveHeight, floorAreaRatio, buildingCoverageRatio, occupancyClassification (ZL I-V/PM/IN), constructionClass (A-E), structuralSystem, sustainability (energy performance, embodied carbon, certifications, circular economy), yearBuilt, yearRenovated, accessibilityCompliance, campusId
+- **Unified lifecycle phases** (10 phases): concept, schematic_design, design_development, construction_documents, bidding_procurement, construction, commissioning, operation, renovation, decommissioned — replaces 3 inconsistent phase vocabularies from v1.x
+- **Classification system integration**: optional `classification` field (Uniclass, OmniClass, CSI MasterFormat, CI/SfB) on all entities
+- **Responsibility tracking**: optional `responsibility` field (discipline, organization, contact, role) on all entities
+- **Sustainability framework**: embodied carbon, operational carbon, EPC class, LCA reference, BREEAM/LEED/DGNB/WELL tracking, circular economy indicators
+- **Asset FF&E distinction**: `assetCategory` enum (equipment, furniture, fixture, fitting, signage, artwork, appliance, it_equipment)
+- **New compiler validations (v2.0)**:
+  - Currency consistency: warns when entity cost currency differs from project currency
+  - Bidirectional adjacency: warns when adjacency declarations are one-directional
+  - Requirement scope matching: warns when requirement scope doesn't match referencing entity
+  - Level order continuity: detects duplicate level order values
+  - Space program compliance: warns on under-provisioned programs
+- **Reverse relationships**: campus→siteIds, building→structuralSystemIds, structural system hierarchy
+- **Space program auto-computation**: designedQuantity, designedTotalArea, compliance status
+- **Safety-critical fields expanded**: seismicDesignCategory, loadCapacity, occupancyClassification, constructionClass
+- **Quality profiles** for all 8 new entity types
+
+### Changed
+- **Schema** `sbm-schema-v1.1.json` -> `sbm-schema-v2.0.json`, version `2.0.0`, `sbm_version` const `"2.0"`
+- **Compiler version** `1.1.0` -> `2.0.0`
+- **Project phases** unified from 3 vocabularies (8+7+6 phases) to single 10-phase vocabulary
+- **Requirement verification phases** aligned with project phases
+- **Space lifecycle states** aligned with project phases
+- **Building quality profile** expanded: critical fields now include buildingType, occupancyClassification
+- **Construction package taggable entities** expanded: materials and structural systems now tracked
+
+---
+
 ## [1.1.0] - 2026-03-01
 
 ### Added

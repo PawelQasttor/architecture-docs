@@ -49,70 +49,162 @@ Budynki definiują:
 
 ## Pola Opcjonalne
 
+### Dane podstawowe
+
 | Pole | Typ | Opis |
 |------|-----|------|
 | `siteId` | string | Referencja do nadrzędnej encji działki |
-| `projectId` | string | Identyfikator projektu |
-| `address` | object | Adres |
-| `location` | object | Wsp&oacute;łrzędne geograficzne |
-| `climateZone` | string | Klasyfikacja klimatyczna |
-| `grossFloorArea` | number | Całkowita PUM w m&sup2; |
-| `numberOfLevels` | number | Łączna liczba kondygnacji |
-| `numberOfUnits` | number | Lokale mieszkalne (jeśli dotyczy) |
-| `occupancyType` | string | Klasyfikacja użytkowania |
-| `constructionType` | string | Typ konstrukcji budynku |
-| `yearBuilt` | number | Rok budowy/oddania |
-| `projectPhase` | string | Bieżąca faza projektu |
-| `certifications` | array | Certyfikaty zrównoważonego budownictwa |
-| `departments` | array | **[NOWOŚĆ v0.3.0]** Działy/oddziały z lokalizacją i personelem |
-| `ifcMapping` | object | Mapowanie obiektu IFC |
+| `campusId` | string | **[NOWOŚĆ v2.0]** Referencja do kampusu (dla zespołów budynków) |
+| `address` | object | Adres (ulica, miasto, kod pocztowy) |
+| `location` | object | Współrzędne geograficzne |
+| `buildingType` | string | Typ użytkowania budynku (patrz wyliczenie poniżej) |
+| `yearBuilt` | integer | Rok budowy/oddania |
+| `yearRenovated` | integer | **[NOWOŚĆ v2.0]** Rok ostatniego remontu generalnego |
+
+### Parametry budynku (NOWOŚĆ v2.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `grossFloorArea` | number | **Powierzchnia Użytkowa Budynku (PUB)** w m² — do ścian zewnętrznych |
+| `netFloorArea` | number | **Powierzchnia Użytkowa Mieszkań (PUM)** w m² — bez konstrukcji, ścian, komunikacji |
+| `rentableArea` | number | Powierzchnia najmu w m² (biura, handel) |
+| `footprintArea` | number | Powierzchnia zabudowy w m² — rzut parteru |
+| `numberOfStoreys` | object | Liczba kondygnacji: `aboveGround`, `belowGround`, `total` |
+| `buildingHeight` | number | Całkowita wysokość budynku w m (od terenu do najwyższego punktu) |
+| `eaveHeight` | number | Wysokość okapu/attyki w m (do warunków zabudowy) |
+| `floorAreaRatio` | number | **Intensywność zabudowy** (PUB / powierzchnia działki) |
+| `buildingCoverageRatio` | number | **Powierzchnia zabudowy** (rzut / powierzchnia działki, 0-1) |
+
+### Klasyfikacja budowlana (NOWOŚĆ v2.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `occupancyClassification` | string | Kategoria zagrożenia ludzi: `ZL_I` - `ZL_V`, `PM`, `IN` (WT 2021) |
+| `constructionClass` | string | Klasa odporności pożarowej: `A` - `E` (WT 2021 § 212) |
+| `accessibilityCompliance` | string | Poziom dostępności: `standard`, `enhanced`, `full_universal_design` |
+
+### System konstrukcyjny (NOWOŚĆ v2.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `structuralSystem.type` | string | Typ konstrukcji: `reinforced_concrete_frame`, `masonry_loadbearing`, `steel_frame`, `timber_frame`, `clt`, `hybrid` |
+| `structuralSystem.lateralSystem` | string | System stabilizujący: `shear_walls`, `braced_frame`, `moment_frame`, `core_walls` |
+| `structuralSystem.foundationType` | string | Typ fundamentów: `strip`, `pad`, `raft`, `piled` |
+| `structuralSystem.designLife` | integer | Projektowany okres użytkowania w latach |
+
+### Zrównoważoność (NOWOŚĆ v2.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `sustainability.energyPerformance.epcClass` | string | Klasa energetyczna: `A+` do `G` (świadectwo charakterystyki energetycznej) |
+| `sustainability.energyPerformance.primaryEnergyDemand` | number | Zapotrzebowanie na energię pierwotną EP w kWh/(m²·rok) |
+| `sustainability.energyPerformance.nearlyZeroEnergyBuilding` | boolean | Spełnia wymagania nZEB |
+| `sustainability.embodiedCarbon.perM2KgCO2e` | number | Ślad węglowy wbudowany w kgCO2e/m² |
+| `sustainability.embodiedCarbon.lcaStages` | string | Etapy LCA: `A1-A3`, `A1-A5`, `A1-C4`, `A1-D` (EN 15978) |
+| `sustainability.certifications` | array | Certyfikaty: BREEAM, LEED, DGNB, WELL, Passive House |
+| `sustainability.circularEconomy.designForDisassembly` | boolean | Projektowanie do demontażu |
+
+### Klasyfikacja i odpowiedzialność (NOWOŚĆ v2.0)
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `classification.uniclass` | string | Kod Uniclass 2015 |
+| `classification.omniclass` | string | Kod OmniClass |
+| `classification.csiDivision` | string | Numer działu CSI MasterFormat |
+| `responsibility.discipline` | string | Dyscyplina: `architectural`, `structural`, `mechanical` |
+| `responsibility.organization` | string | Nazwa firmy projektowej |
+
+### Pozostałe
+
+| Pole | Typ | Opis |
+|------|-----|------|
+| `departments` | array | Działy/oddziały z lokalizacją i personelem |
+| `ifcMapping` | object | Mapowanie IFC (IfcBuilding) |
+| `cost` | object | Koszty na poziomie budynku |
 | `tags` | array | Dowolne tagi klasyfikacyjne |
 
 ::: tip Dla Architektów: Które Pola Opcjonalne Są Najważniejsze?
 
-**Dla pozwolenia na budowę:**
-- **address** — Adres: ulica, miasto, kod pocztowy
-- **grossFloorArea** — Całkowita PUM w m²
-- **numberOfLevels** — Liczba kondygnacji
-- **numberOfUnits** — Liczba lokali/mieszkań (dla budynków mieszkalnych)
-- **occupancyType** — Klasyfikacja użytkowania (R-2, B, M, itp.)
-- **constructionType** — Typ konstrukcji (Type_VA, Type_IIA, itp.)
+**Dla warunków zabudowy / pozwolenia na budowę:**
+- **grossFloorArea** — PUB/PUM w m² (wymagane w każdym wniosku)
+- **numberOfStoreys** — Liczba kondygnacji nadziemnych i podziemnych
+- **buildingHeight** / **eaveHeight** — Wysokość budynku i okapu
+- **floorAreaRatio** — Intensywność zabudowy (porównaj z MPZP/WZ)
+- **buildingCoverageRatio** — Powierzchnia zabudowy (porównaj z MPZP/WZ)
+- **occupancyClassification** — Kategoria ZL (I-V) lub PM/IN
+- **constructionClass** — Klasa odporności pożarowej (A-E)
 
-**Dla zgodności energetycznej:**
-- **climateZone** — Klasyfikacja klimatyczna (wpływa na wymagania izolacyjne)
-- **certifications** — Cele BREEAM, LEED, WELL
+**Dla świadectwa energetycznego (EPBD):**
+- **sustainability.energyPerformance** — EP, klasa energetyczna, nZEB
+- **sustainability.embodiedCarbon** — Ślad węglowy (coraz częściej wymagany w UE)
+- **sustainability.certifications** — BREEAM, LEED, Passive House
 
-**Dla lokalizacji/kontekstu:**
-- **location** — Współrzędne GPS (szerokość, długość geograficzna)
-- **yearBuilt** — Rok budowy
+**Dla studium wykonalności:**
+- **structuralSystem** — Typ konstrukcji i fundamentów
+- **footprintArea** — Powierzchnia zabudowy
+- **yearBuilt** / **yearRenovated** — Dla budynków istniejących
 
-**Najczęściej:** Po prostu wypełnij adres, PUM, liczbę kondygnacji. Resztę można dodać później w razie potrzeby.
+**Najczęściej:** Wypełnij `grossFloorArea`, `numberOfStoreys`, `buildingHeight`, `occupancyClassification`. Resztę można dodać gdy pojawią się wymagania.
 :::
 
-## Typy Budynków (Wyliczenie)
+## Typy Budynków (Wyliczenie v2.0)
 
 ```typescript
 type BuildingType =
-  | "residential_single_family"
-  | "residential_multifamily"
-  | "residential_mixed_use"
-  | "office"
-  | "retail"
-  | "industrial"
-  | "warehouse"
-  | "educational"
-  | "healthcare"
-  | "hospitality"
-  | "assembly"
-  | "government"
-  | "mixed_use";
+  | "residential_single_family"   // Dom jednorodzinny
+  | "residential_multifamily"     // Budynek wielorodzinny
+  | "residential_mixed"           // Mieszkaniowy mieszany
+  | "office"                      // Biurowy
+  | "commercial"                  // Handlowy
+  | "retail"                      // Handel detaliczny
+  | "industrial"                  // Przemysłowy
+  | "warehouse"                   // Magazynowy
+  | "healthcare"                  // Opieka zdrowotna
+  | "hospital"                    // Szpital
+  | "clinic"                      // Przychodnia
+  | "educational"                 // Edukacyjny
+  | "university"                  // Uczelnia
+  | "school"                      // Szkoła
+  | "hotel"                       // Hotel
+  | "hospitality"                 // Gastronomia
+  | "cultural"                    // Kulturalny
+  | "religious"                   // Sakralny
+  | "civic"                       // Użyteczności publicznej
+  | "transportation"              // Transportowy
+  | "parking_structure"           // Parking wielopoziomowy
+  | "mixed_use"                   // Mieszany
+  | "other";                      // Inny
 ```
+
+## Klasyfikacja Zagrożenia Ludzi (WT 2021)
+
+| Kategoria | Opis | Przykłady |
+|-----------|------|-----------|
+| `ZL_I` | Budynki użyteczności publicznej | Biura, handel, galerie |
+| `ZL_II` | Budynki przeznaczone do użytku przez osoby o ograniczonej możliwości poruszania | Szpitale, przedszkola, domy opieki |
+| `ZL_III` | Budynki użyteczności publicznej nieklasyfikowane jako ZL I i ZL II | Szkoły, uczelnie, muzea |
+| `ZL_IV` | Budynki mieszkalne | Mieszkania, hotele, internaty |
+| `ZL_V` | Budynki zamieszkania zbiorowego | Areszty, koszary |
+| `PM` | Budynki produkcyjno-magazynowe | Fabryki, magazyny |
+| `IN` | Budynki inwentarskie | Obory, stajnie |
+
+## Klasa Odporności Pożarowej (WT 2021 § 212)
+
+| Klasa | Wymagana odporność ogniowa | Typowe zastosowanie |
+|-------|----------------------------|---------------------|
+| `A` | REI 240 | Budynki wysokie (>55m), szpitale |
+| `B` | REI 120 | Budynki średniowysokie (25-55m) |
+| `C` | REI 60 | Budynki niskie (do 12m), ZL I-III |
+| `D` | REI 30 | Budynki niskie, ZL IV |
+| `E` | Brak wymagań | Budynki jednokondygnacyjne PM |
 
 ## Przykład 1: Pierwszy Plik Budynku (Minimalny)
 
 **Najprostszy plik budynku na start:**
 
-```markdown
+::: code-group
+
+```md [Markdown]
 Plik: building.md
 
 ---
@@ -140,6 +232,62 @@ Budynek mieszkalny 32-mieszkaniowy w Warszawie.
 4 kondygnacje, 4 850 m² PUM.
 ```
 
+```yaml [YAML]
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Green Terrace Apartments"
+buildingType: "residential_multifamily"
+country: "PL"
+version: "1.0.0"
+
+address:
+  street: "ul. Słoneczna 42"
+  city: "Warsaw"
+  postalCode: "00-001"
+grossFloorArea: 4850
+numberOfLevels: 4
+numberOfUnits: 32
+```
+
+```json [JSON]
+{
+  "id": "BLD-01",
+  "entityType": "building",
+  "documentType": "building",
+  "buildingName": "Green Terrace Apartments",
+  "buildingType": "residential_multifamily",
+  "country": "PL",
+  "version": "1.0.0",
+  "address": {
+    "street": "ul. Słoneczna 42",
+    "city": "Warsaw",
+    "postalCode": "00-001"
+  },
+  "grossFloorArea": 4850,
+  "numberOfLevels": 4,
+  "numberOfUnits": 32
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "name", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^BLD-" },
+    "entityType": { "const": "building" },
+    "name": { "type": "string" },
+    "grossFloorArea": { "type": "number" },
+    "numberOfLevels": { "type": "integer" },
+    "buildingType": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **To wszystko.** Certyfikaty energetyczne, strefę klimatyczną i współrzędne GPS można dodać później.
 
 ---
@@ -148,7 +296,9 @@ Budynek mieszkalny 32-mieszkaniowy w Warszawie.
 
 **Plik:** `docs/en/examples/green-terrace/building.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "building"
 entityType: "building"
@@ -229,6 +379,130 @@ Zr&oacute;wnoważony budynek mieszkalny wielorodzinny w centrum Warszawy.
 - **Przepisy budowlane:** WT 2021 (Warunki Techniczne)
 - **Planowanie:** Zatwierdzenie MPZP uzyskane 2025-11-15
 ```
+
+```yaml [YAML]
+documentType: "building"
+entityType: "building"
+id: "BLD-01"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+projectId: "PRJ-GREEN-TERRACE-2026"
+buildingName: "Green Terrace Apartments"
+buildingType: "residential_multifamily"
+
+country: "PL"
+address:
+  street: "ul. Słoneczna 42"
+  city: "Warsaw"
+  postalCode: "00-001"
+  region: "Mazowieckie"
+
+location:
+  latitude: 52.2297
+  longitude: 21.0122
+  elevation: 100
+  elevationUnit: "m"
+
+climateZone: "Dfb"
+grossFloorArea: 4850
+numberOfLevels: 4
+numberOfUnits: 32
+
+occupancyType: "R-2"
+constructionType: "Type_VA"
+yearBuilt: 2026
+
+certifications:
+  - name: "BREEAM"
+    level: "Very Good"
+    status: "in_progress"
+  - name: "LEED"
+    level: "Silver"
+    status: "planned"
+
+ifcMapping:
+  ifcEntity: "IfcBuilding"
+  globalId: "3K4hJ1$rMCxv2WxEt1LNxQ"
+  objectType: "Residential"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "multifamily"
+  - "sustainable"
+  - "warsaw"
+```
+
+```json [JSON]
+{
+  "documentType": "building",
+  "entityType": "building",
+  "id": "BLD-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "projectId": "PRJ-GREEN-TERRACE-2026",
+  "buildingName": "Green Terrace Apartments",
+  "buildingType": "residential_multifamily",
+  "country": "PL",
+  "address": {
+    "street": "ul. Słoneczna 42",
+    "city": "Warsaw",
+    "postalCode": "00-001",
+    "region": "Mazowieckie"
+  },
+  "location": {
+    "latitude": 52.2297,
+    "longitude": 21.0122,
+    "elevation": 100,
+    "elevationUnit": "m"
+  },
+  "climateZone": "Dfb",
+  "grossFloorArea": 4850,
+  "numberOfLevels": 4,
+  "numberOfUnits": 32,
+  "occupancyType": "R-2",
+  "constructionType": "Type_VA",
+  "yearBuilt": 2026,
+  "certifications": [
+    {
+      "name": "BREEAM",
+      "level": "Very Good",
+      "status": "in_progress"
+    },
+    {
+      "name": "LEED",
+      "level": "Silver",
+      "status": "planned"
+    }
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcBuilding",
+    "globalId": "3K4hJ1$rMCxv2WxEt1LNxQ",
+    "objectType": "Residential"
+  },
+  "version": "1.0.0",
+  "tags": ["residential", "multifamily", "sustainable", "warsaw"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "name", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^BLD-" },
+    "entityType": { "const": "building" },
+    "name": { "type": "string" },
+    "grossFloorArea": { "type": "number" },
+    "numberOfLevels": { "type": "integer" },
+    "buildingType": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Przykład: Skompilowany JSON
 
@@ -440,7 +714,9 @@ Metadane budynku wypełniają nagł&oacute;wek raportu zgodności:
 
 ### Przykład: Szpital z oddziałami
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "BLD-01"
 entityType: "building"
@@ -491,6 +767,130 @@ departments:
     staffCount: 18
 ---
 ```
+
+```yaml [YAML]
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Szpital Powiatowy w Krakowie"
+buildingType: "healthcare"
+country: "PL"
+version: "1.0.0"
+
+departments:
+  - id: "DEPT-SURGERY"
+    name: "Oddział Chirurgii Ogólnej"
+    description: "Blok operacyjny z 4 salami operacyjnymi i zapleczem"
+    levelIds: ["LVL-02"]
+    headOfDepartment: "dr hab. Jan Kowalski"
+    operatingHours: "07:00-19:00"
+    staffCount: 45
+
+  - id: "DEPT-ICU"
+    name: "Oddział Intensywnej Terapii"
+    description: "12-łóżkowy OIOM z wydzieloną izolatką"
+    levelIds: ["LVL-02"]
+    headOfDepartment: "dr Anna Nowak"
+    operatingHours: "24/7"
+    staffCount: 38
+
+  - id: "DEPT-EMERGENCY"
+    name: "Szpitalny Oddział Ratunkowy"
+    description: "SOR z triaż, salami zabiegowymi i poczekalniami"
+    levelIds: ["LVL-01"]
+    headOfDepartment: "dr Piotr Wiśniewski"
+    operatingHours: "24/7"
+    staffCount: 52
+
+  - id: "DEPT-RADIOLOGY"
+    name: "Zakład Diagnostyki Obrazowej"
+    description: "Pracownie CT, MRI, RTG, USG"
+    levelIds: ["LVL-01"]
+    headOfDepartment: "dr Maria Lewandowska"
+    operatingHours: "24/7"
+    staffCount: 22
+
+  - id: "DEPT-ADMIN"
+    name: "Administracja"
+    description: "Dyrekcja, kadry, księgowość, sekretariat"
+    levelIds: ["LVL-03"]
+    operatingHours: "07:30-15:30"
+    staffCount: 18
+```
+
+```json [JSON]
+{
+  "id": "BLD-01",
+  "entityType": "building",
+  "documentType": "building",
+  "buildingName": "Szpital Powiatowy w Krakowie",
+  "buildingType": "healthcare",
+  "country": "PL",
+  "version": "1.0.0",
+  "departments": [
+    {
+      "id": "DEPT-SURGERY",
+      "name": "Oddział Chirurgii Ogólnej",
+      "description": "Blok operacyjny z 4 salami operacyjnymi i zapleczem",
+      "levelIds": ["LVL-02"],
+      "headOfDepartment": "dr hab. Jan Kowalski",
+      "operatingHours": "07:00-19:00",
+      "staffCount": 45
+    },
+    {
+      "id": "DEPT-ICU",
+      "name": "Oddział Intensywnej Terapii",
+      "description": "12-łóżkowy OIOM z wydzieloną izolatką",
+      "levelIds": ["LVL-02"],
+      "headOfDepartment": "dr Anna Nowak",
+      "operatingHours": "24/7",
+      "staffCount": 38
+    },
+    {
+      "id": "DEPT-EMERGENCY",
+      "name": "Szpitalny Oddział Ratunkowy",
+      "description": "SOR z triaż, salami zabiegowymi i poczekalniami",
+      "levelIds": ["LVL-01"],
+      "headOfDepartment": "dr Piotr Wiśniewski",
+      "operatingHours": "24/7",
+      "staffCount": 52
+    },
+    {
+      "id": "DEPT-RADIOLOGY",
+      "name": "Zakład Diagnostyki Obrazowej",
+      "description": "Pracownie CT, MRI, RTG, USG",
+      "levelIds": ["LVL-01"],
+      "headOfDepartment": "dr Maria Lewandowska",
+      "operatingHours": "24/7",
+      "staffCount": 22
+    },
+    {
+      "id": "DEPT-ADMIN",
+      "name": "Administracja",
+      "description": "Dyrekcja, kadry, księgowość, sekretariat",
+      "levelIds": ["LVL-03"],
+      "operatingHours": "07:30-15:30",
+      "staffCount": 18
+    }
+  ]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "name", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^BLD-" },
+    "entityType": { "const": "building" },
+    "name": { "type": "string" },
+    "buildingType": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ### Odwoływanie się do działów z przestrzeni
 

@@ -12,6 +12,16 @@ Use Zone Types when you have **multiple similar zones** (e.g., identical fire zo
 - ✅ Simplified zone management across floors/buildings
 :::
 
+::: tip For Architects
+**Problem**: 6-story building with identical fire zones on each floor. Each zone needs: REI 60 rating, max escape distance 10m, smoke detection requirements, compartmentation rules, evacuation strategy.
+
+**Old way**: 12 fire zone files (2 per floor) × 180 lines each = **2,160 lines** of repeated fire safety specs. Building code changes? Update 12 files.
+
+**With Zone Type**: **One template** (250 lines) + 12 instances (80 lines each = level, spaces, specific overrides only) = **1,210 lines total**. That's **44% less documentation**. Fire code update? Edit one file, affects all 12 zones.
+
+For 50 identical zones across multiple buildings: **63% reduction** in documentation volume.
+:::
+
 ## Purpose
 
 Zone Types define **template specifications** that apply to all zone instances:
@@ -208,7 +218,9 @@ properties:
 
 **File:** `templates/zone-types/fire-zone-zl-iv.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "zone_type"
 entityType: "zone_type"
@@ -287,6 +299,93 @@ This zone type ensures:
 - ❌ Commercial, office - different fire zone categories
 - ❌ Industrial buildings - separate fire safety codes
 ```
+
+```yaml [YAML]
+documentType: "zone_type"
+entityType: "zone_type"
+id: "ZT-FIRE-ZL-IV"
+typeName: "Fire Zone ZL-IV Standard"
+zoneType: "fire"
+description: "Standard fire safety zone for residential buildings per Polish regulations (ZL-IV category)"
+
+requirements:
+  - "REQ-FIRE-ZL-IV-001"
+  - "REQ-FIRE-COMPARTMENTATION-001"
+  - "REQ-FIRE-DETECTION-001"
+
+properties:
+  fireResistance: "REI 60"
+  maxEscapeDistance: 10.0
+  compartmentationRequired: true
+  smokeControlStrategy: "natural"
+  evacuationStrategy: "single_stage"
+  fireDetectionType: "smoke"
+  emergencyLightingRequired: true
+  fireExtinguishersRequired: true
+
+version: "1.0.0"
+tags:
+  - "fire-safety"
+  - "residential"
+  - "polish-code"
+```
+
+```json [JSON]
+{
+  "documentType": "zone_type",
+  "entityType": "zone_type",
+  "id": "ZT-FIRE-ZL-IV",
+  "typeName": "Fire Zone ZL-IV Standard",
+  "zoneType": "fire",
+  "description": "Standard fire safety zone for residential buildings per Polish regulations (ZL-IV category)",
+  "requirements": [
+    "REQ-FIRE-ZL-IV-001",
+    "REQ-FIRE-COMPARTMENTATION-001",
+    "REQ-FIRE-DETECTION-001"
+  ],
+  "properties": {
+    "fireResistance": "REI 60",
+    "maxEscapeDistance": 10.0,
+    "compartmentationRequired": true,
+    "smokeControlStrategy": "natural",
+    "evacuationStrategy": "single_stage",
+    "fireDetectionType": "smoke",
+    "emergencyLightingRequired": true,
+    "fireExtinguishersRequired": true
+  },
+  "version": "1.0.0",
+  "tags": ["fire-safety", "residential", "polish-code"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "zoneCategory", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ZT-"
+    },
+    "entityType": {
+      "const": "zone_type"
+    },
+    "typeName": {
+      "type": "string"
+    },
+    "zoneCategory": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "array"
+    },
+    "environmentalConditions": {
+      "type": "object"
+    }
+  }
+}
+```
+
+:::
 
 ## ID Naming Convention
 

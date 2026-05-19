@@ -12,6 +12,16 @@ Używaj Typów Systemów gdy masz **wiele podobnych systemów** (np. identyczne 
 - ✅ Uproszczone specyfikacje systemów w projektach
 :::
 
+::: tip Dla Architektów
+**Problem**: Kompleks mieszkaniowy z 10 identycznymi budynkami. Każdy ma ten sam system HVAC: jednostka MVHR, pompa ciepła, ogrzewanie podłogowe, sterowanie 8-strefowe, wymagania wentylacyjne, kryteria wydajności.
+
+**Stary sposób**: 10 plików systemów × 320 linii każdy = **3200 linii** powtórzonych list komponentów i wymagań. Zmiana wymagania efektywności MVHR? Edytuj 10 plików.
+
+**Z Typem Systemu**: **Jeden szablon** (450 linii) + 10 instancji (120 linii każda = ID budynku, obsługiwane strefy, ID zasobów tylko) = **1650 linii w sumie**. To **48% mniej dokumentacji**. Aktualizacja wymagania wentylacji? Edytuj jeden plik, wpływa na wszystkie 10 systemów.
+
+Dla 20 identycznych systemów: **redukcja o 58%** w objętości dokumentacji.
+:::
+
 ## Pola Wymagane
 
 | Pole | Typ | Opis | Przykład |
@@ -99,7 +109,9 @@ typicalPerformance:
 
 ## Przykład: Typ Systemu HVAC
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "system_type"
 id: "SYT-HVAC-RESIDENTIAL-MVHR"
@@ -126,6 +138,71 @@ typicalPerformance:
 version: "1.0.0"
 ---
 ```
+
+```yaml [YAML]
+documentType: "system_type"
+id: "SYT-HVAC-RESIDENTIAL-MVHR"
+typeName: "Mieszkaniowy HVAC - MVHR + Pompa Ciepła"
+systemCategory: "hvac"
+
+requirements:
+  - "REQ-HVAC-VENTILATION-RATE"
+  - "REQ-HVAC-HEAT-RECOVERY"
+
+components:
+  - category: "air_handling"
+    description: "Jednostka MVHR"
+    specification: "90% odzysk ciepła"
+  - category: "heating"
+    description: "Pompa ciepła powietrze-woda"
+    specification: "12 kW, COP 4.2"
+
+typicalPerformance:
+  heatingCapacity: "12 kW"
+  heatRecovery: "90%"
+  copHeating: 4.2
+
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "system_type",
+  "id": "SYT-HVAC-RESIDENTIAL-MVHR",
+  "typeName": "Mieszkaniowy HVAC - MVHR + Pompa Ciepła",
+  "systemCategory": "hvac",
+  "requirements": [
+    "REQ-HVAC-VENTILATION-RATE",
+    "REQ-HVAC-HEAT-RECOVERY"
+  ],
+  "components": [
+    {
+      "category": "air_handling",
+      "description": "Jednostka MVHR",
+      "specification": "90% odzysk ciepła"
+    },
+    {
+      "category": "heating",
+      "description": "Pompa ciepła powietrze-woda",
+      "specification": "12 kW, COP 4.2"
+    }
+  ],
+  "typicalPerformance": {
+    "heatingCapacity": "12 kW",
+    "heatRecovery": "90%",
+    "copHeating": 4.2
+  },
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "systemCategory", "version"]
+}
+```
+
+:::
 
 ## Skompilowane Wyjście
 

@@ -12,6 +12,16 @@ Używaj Typów Stref gdy masz **wiele podobnych stref** (np. identyczne strefy p
 - ✅ Uproszczone zarządzanie strefami na piętrach/budynkach
 :::
 
+::: tip Dla Architektów
+**Problem**: Budynek 6-kondygnacyjny z identycznymi strefami pożarowymi na każdym piętrze. Każda strefa potrzebuje: klasy REI 60, maksymalnej odległości ewakuacji 10m, wymagań wykrywania dymu, zasad przeciwpożarowej kompartmentacji, strategii ewakuacji.
+
+**Stary sposób**: 12 plików stref pożarowych (2 na piętro) × 180 linii każdy = **2160 linii** powtórzonych specyfikacji bezpieczeństwa pożarowego. Zmiana przepisów pożarowych? Aktualizuj 12 plików.
+
+**Z Typem Strefy**: **Jeden szablon** (250 linii) + 12 instancji (80 linii każda = kondygnacja, pomieszczenia, konkretne nadpisania tylko) = **1210 linii w sumie**. To **44% mniej dokumentacji**. Aktualizacja przepisów pożarowych? Edytuj jeden plik, wpływa na wszystkie 12 stref.
+
+Dla 50 identycznych stref w wielu budynkach: **redukcja o 63%** w objętości dokumentacji.
+:::
+
 ## Cel
 
 Typy Stref definiują **specyfikacje szablonowe** stosowane do wszystkich instancji stref:
@@ -104,7 +114,9 @@ properties:
 
 **Plik:** `templates/zone-types/fire-zone-zl-iv.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "zone_type"
 entityType: "zone_type"
@@ -171,6 +183,72 @@ Ten typ strefy zapewnia:
 - ❌ Budynki komercyjne, biurowe - inne kategorie stref pożarowych
 - ❌ Budynki przemysłowe - odrębne przepisy bezpieczeństwa pożarowego
 ```
+
+```yaml [YAML]
+documentType: "zone_type"
+entityType: "zone_type"
+id: "ZT-FIRE-ZL-IV"
+typeName: "Strefa Pożarowa ZL-IV Standard"
+zoneType: "fire"
+description: "Standardowa strefa bezpieczeństwa pożarowego dla budynków mieszkalnych zgodnie z polskimi przepisami (kategoria ZL-IV)"
+
+requirements:
+  - "REQ-PL-FIRE-SEPARATION-001"
+  - "REQ-FIRE-COMPARTMENTATION-001"
+  - "REQ-FIRE-DETECTION-001"
+
+properties:
+  fireResistance: "REI 60"
+  maxEscapeDistance: 10.0
+  compartmentationRequired: true
+  smokeControlStrategy: "natural"
+  evacuationStrategy: "single_stage"
+  fireDetectionType: "smoke"
+
+version: "1.0.0"
+tags:
+  - "bezpieczenstwo-pozarowe"
+  - "mieszkaniowe"
+  - "polski-kod"
+```
+
+```json [JSON]
+{
+  "documentType": "zone_type",
+  "entityType": "zone_type",
+  "id": "ZT-FIRE-ZL-IV",
+  "typeName": "Strefa Pożarowa ZL-IV Standard",
+  "zoneType": "fire",
+  "description": "Standardowa strefa bezpieczeństwa pożarowego dla budynków mieszkalnych zgodnie z polskimi przepisami (kategoria ZL-IV)",
+  "requirements": [
+    "REQ-PL-FIRE-SEPARATION-001",
+    "REQ-FIRE-COMPARTMENTATION-001",
+    "REQ-FIRE-DETECTION-001"
+  ],
+  "properties": {
+    "fireResistance": "REI 60",
+    "maxEscapeDistance": 10.0,
+    "compartmentationRequired": true,
+    "smokeControlStrategy": "natural",
+    "evacuationStrategy": "single_stage",
+    "fireDetectionType": "smoke"
+  },
+  "version": "1.0.0",
+  "tags": [
+    "bezpieczenstwo-pozarowe",
+    "mieszkaniowe",
+    "polski-kod"
+  ]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "zoneCategory", "version"]
+}
+```
+
+:::
 
 ## Konwencja Nazewnictwa ID
 

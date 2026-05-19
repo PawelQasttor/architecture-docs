@@ -102,7 +102,9 @@ typicalFinishes:
 
 Następnie utwórz plik `spaces/bedroom-01.md` (tylko unikalne dane):
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space"
 entityType: "space"
@@ -146,6 +148,65 @@ Zobacz `levels/level-01.md` dla wysokości sufitu i wykończeń.
 - Wymagane naturalne oświetlenie dzienne
 - Izolacyjność akustyczna Klasa B
 ```
+
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-001"
+spaceName: "Sypialnia 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"
+designArea: 14.5
+unit: "m"
+requirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+version: "1.0.0"
+tags:
+  - "residential"
+  - "sleeping"
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-001",
+  "spaceName": "Sypialnia 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": ["ZONE-FIRE-ZL-IV"],
+  "designArea": 14.5,
+  "unit": "m",
+  "requirements": ["REQ-PL-WT-ROOM-HEIGHT-001"],
+  "version": "1.0.0",
+  "tags": ["residential", "sleeping"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceType": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "levelId": { "type": "string" },
+    "zoneIds": { "type": "array", "items": { "type": "string" } },
+    "designArea": { "type": "number" },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ### Objaśnienie pól YAML
 
@@ -205,7 +266,9 @@ Pisz raz, obsługuj zarówno ludzi, jak i maszyny. Nagłówek YAML i treść Mar
 
 Dokumenty stają się naprawdę użyteczne, gdy odwołują się do siebie nawzajem. Utwórz drugi plik w lokalizacji `zones/fire-zone-zl-iv.md`:
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "zone"
 entityType: "zone"
@@ -234,6 +297,59 @@ Klasyfikacja mieszkalnej strefy pożarowej dla głównej bryły budynku.
 | Stropy | REI 60 | WT 2021 § 234 |
 | Ściany klatki schodowej | REI 120 | WT 2021 § 234 |
 ```
+
+```yaml [YAML]
+documentType: "zone"
+entityType: "zone"
+id: "ZONE-FIRE-ZL-IV"
+zoneName: "Fire Zone ZL-IV"
+zoneType: "fire"
+levelIds:
+  - "LVL-01"
+  - "LVL-02"
+regulatoryCompliance:
+  - standard: "WT_2021"
+    section: "§ 234"
+    requirement: "Odporność ogniowa REI 60"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "zone",
+  "entityType": "zone",
+  "id": "ZONE-FIRE-ZL-IV",
+  "zoneName": "Fire Zone ZL-IV",
+  "zoneType": "fire",
+  "levelIds": ["LVL-01", "LVL-02"],
+  "regulatoryCompliance": [
+    {
+      "standard": "WT_2021",
+      "section": "§ 234",
+      "requirement": "Odporność ogniowa REI 60"
+    }
+  ],
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "zoneName", "zoneType", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ZONE-" },
+    "entityType": { "const": "zone" },
+    "zoneName": { "type": "string" },
+    "zoneType": { "type": "string" },
+    "levelIds": { "type": "array", "items": { "type": "string" } },
+    "regulatoryCompliance": { "type": "array" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ### Jak te dwa dokumenty są ze sobą połączone?
 

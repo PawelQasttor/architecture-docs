@@ -12,6 +12,16 @@ Use System Types when you have **multiple similar systems** (e.g., identical HVA
 - ✅ Simplified system specifications across projects
 :::
 
+::: tip For Architects
+**Problem**: Residential complex with 10 identical buildings. Each has the same HVAC system: MVHR unit, heat pump, underfloor heating, 8-zone controls, ventilation requirements, performance criteria.
+
+**Old way**: 10 system files × 320 lines each = **3,200 lines** of repeated component lists and requirements. Change MVHR efficiency requirement? Edit 10 files.
+
+**With System Type**: **One template** (450 lines) + 10 instances (120 lines each = building ID, served zones, asset IDs only) = **1,650 lines total**. That's **48% less documentation**. Update ventilation requirement? Edit one file, affects all 10 systems.
+
+For 20 identical systems: **58% reduction** in documentation volume.
+:::
+
 ## Purpose
 
 System Types define **template specifications** that apply to all system instances:
@@ -198,7 +208,9 @@ typicalPerformance:
 
 **File:** `templates/system-types/hvac-residential-mvhr.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "system_type"
 entityType: "system_type"
@@ -349,6 +361,170 @@ This system type provides:
 - ❌ Cooling required - use MVHR + cooling system type
 - ❌ Commercial buildings - use commercial HVAC type
 ```
+
+```yaml [YAML]
+documentType: "system_type"
+entityType: "system_type"
+id: "SYT-HVAC-RESIDENTIAL-MVHR"
+typeName: "Residential HVAC - MVHR System"
+systemCategory: "hvac"
+description: "Standard residential HVAC system with mechanical ventilation and heat recovery, underfloor heating, and individual room controls"
+
+requirements:
+  - "REQ-HVAC-VENTILATION-RATE"
+  - "REQ-HVAC-HEAT-RECOVERY"
+  - "REQ-ENERGY-EFFICIENCY-HVAC"
+  - "REQ-ACOUSTIC-HVAC-NOISE"
+
+components:
+  - category: "air_handling"
+    description: "Heat recovery ventilation unit"
+    specification: "MVHR with 90% heat recovery efficiency"
+    quantity: 1
+  - category: "heating"
+    description: "Air-to-water heat pump"
+    specification: "12 kW heating capacity, COP 4.2"
+    quantity: 1
+  - category: "heating"
+    description: "Underfloor heating manifold with zone valves"
+    specification: "8-zone manifold with thermostatic controls"
+    quantity: 1
+  - category: "ventilation"
+    description: "Supply air diffusers"
+    specification: "Ceiling-mounted adjustable diffusers"
+    quantity: 8
+  - category: "ventilation"
+    description: "Extract air grilles"
+    specification: "Bathroom/kitchen extract grilles"
+    quantity: 4
+  - category: "controls"
+    description: "Room thermostats"
+    specification: "Wireless programmable thermostats"
+    quantity: 8
+  - category: "controls"
+    description: "MVHR control panel"
+    specification: "Wall-mounted with boost/holiday modes"
+    quantity: 1
+
+typicalPerformance:
+  heatingCapacity: "12 kW"
+  ventilationRate: "0.5 ACH"
+  heatRecovery: "90%"
+  energyEfficiency: "A+++"
+  copHeating: 4.2
+  noiseLevel: "25 dB(A)"
+  designTemperature: "21-24°C"
+  relativeHumidity: "40-60%"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "mvhr"
+  - "heat-pump"
+  - "underfloor-heating"
+```
+
+```json [JSON]
+{
+  "documentType": "system_type",
+  "entityType": "system_type",
+  "id": "SYT-HVAC-RESIDENTIAL-MVHR",
+  "typeName": "Residential HVAC - MVHR System",
+  "systemCategory": "hvac",
+  "description": "Standard residential HVAC system with mechanical ventilation and heat recovery, underfloor heating, and individual room controls",
+  "requirements": [
+    "REQ-HVAC-VENTILATION-RATE",
+    "REQ-HVAC-HEAT-RECOVERY",
+    "REQ-ENERGY-EFFICIENCY-HVAC",
+    "REQ-ACOUSTIC-HVAC-NOISE"
+  ],
+  "components": [
+    {
+      "category": "air_handling",
+      "description": "Heat recovery ventilation unit",
+      "specification": "MVHR with 90% heat recovery efficiency",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Air-to-water heat pump",
+      "specification": "12 kW heating capacity, COP 4.2",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Underfloor heating manifold with zone valves",
+      "specification": "8-zone manifold with thermostatic controls",
+      "quantity": 1
+    },
+    {
+      "category": "ventilation",
+      "description": "Supply air diffusers",
+      "specification": "Ceiling-mounted adjustable diffusers",
+      "quantity": 8
+    },
+    {
+      "category": "ventilation",
+      "description": "Extract air grilles",
+      "specification": "Bathroom/kitchen extract grilles",
+      "quantity": 4
+    },
+    {
+      "category": "controls",
+      "description": "Room thermostats",
+      "specification": "Wireless programmable thermostats",
+      "quantity": 8
+    },
+    {
+      "category": "controls",
+      "description": "MVHR control panel",
+      "specification": "Wall-mounted with boost/holiday modes",
+      "quantity": 1
+    }
+  ],
+  "typicalPerformance": {
+    "heatingCapacity": "12 kW",
+    "ventilationRate": "0.5 ACH",
+    "heatRecovery": "90%",
+    "energyEfficiency": "A+++",
+    "copHeating": 4.2,
+    "noiseLevel": "25 dB(A)",
+    "designTemperature": "21-24°C",
+    "relativeHumidity": "40-60%"
+  },
+  "version": "1.0.0",
+  "tags": ["residential", "mvhr", "heat-pump", "underfloor-heating"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "systemCategory", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^SYST-"
+    },
+    "entityType": {
+      "const": "system_type"
+    },
+    "typeName": {
+      "type": "string"
+    },
+    "systemCategory": {
+      "type": "string"
+    },
+    "designParameters": {
+      "type": "object"
+    },
+    "componentTemplate": {
+      "type": "array"
+    }
+  }
+}
+```
+
+:::
 
 ## ID Naming Convention
 

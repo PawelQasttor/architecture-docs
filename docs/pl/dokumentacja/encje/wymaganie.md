@@ -130,21 +130,59 @@ type RequirementType =
 
 **Najprostsze wymaganie — minimalna wysokość pomieszczenia:**
 
-```yaml
-Plik: requirements/pl/room-height-min.json
+::: code-group
 
+```yaml [Markdown]
+---
+id: "REQ-PL-WT-ROOM-HEIGHT-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Minimalna wysokość pomieszczenia wg WT 2021"
+requirementType: "dimensional"
+metric: "height"
+operator: ">="
+value: 2.5
+unit: "m"
+legalBasis:
+  - regulation: "WT_2021"
+    section: "§ 132"
+    article: "Minimalna wysokość pomieszczenia"
+version: "1.0.0"
+---
+
+# Wymaganie: Minimalna Wysokość Pomieszczenia wg WT 2021
+
+Każde pomieszczenie mieszkalne musi mieć wysokość >= 2,50m.
+```
+
+```yaml [YAML]
+id: "REQ-PL-WT-ROOM-HEIGHT-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Minimalna wysokość pomieszczenia wg WT 2021"
+requirementType: "dimensional"
+metric: "height"
+operator: ">="
+value: 2.5
+unit: "m"
+legalBasis:
+  - regulation: "WT_2021"
+    section: "§ 132"
+    article: "Minimalna wysokość pomieszczenia"
+version: "1.0.0"
+```
+
+```json [JSON]
 {
   "id": "REQ-PL-WT-ROOM-HEIGHT-001",
   "entityType": "requirement",
   "documentType": "requirement",
   "requirementName": "Minimalna wysokość pomieszczenia wg WT 2021",
   "requirementType": "dimensional",
-
   "metric": "height",
   "operator": ">=",
   "value": 2.5,
   "unit": "m",
-
   "legalBasis": [
     {
       "regulation": "WT_2021",
@@ -152,10 +190,49 @@ Plik: requirements/pl/room-height-min.json
       "article": "Minimalna wysokość pomieszczenia"
     }
   ],
-
   "version": "1.0.0"
 }
 ```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "requirementName", "requirementType", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-"
+    },
+    "entityType": {
+      "const": "requirement"
+    },
+    "requirementName": {
+      "type": "string"
+    },
+    "requirementType": {
+      "type": "string",
+      "enum": ["performance", "dimensional", "regulatory", "design", "operational", "safety", "sustainability", "qualitative"]
+    },
+    "metric": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
 
 **Co to robi:**
 - Każde pomieszczenie, które odwołuje się do `REQ-PL-WT-ROOM-HEIGHT-001` jest automatycznie sprawdzane
@@ -167,7 +244,87 @@ Plik: requirements/pl/room-height-min.json
 
 **Plik:** `scripts/requirements/global/req-daylight-sleeping-001.json`
 
-```json
+::: code-group
+
+```yaml [Markdown]
+---
+id: "REQ-DAYLIGHT-SLEEPING-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Minimum daylight factor for sleeping spaces"
+requirementType: "performance"
+countryScope: "global"
+scope:
+  entityType: "space"
+  spaceTypes: ["sleeping_space", "bedroom"]
+metric: "daylight_factor"
+operator: ">="
+value: 2.0
+unit: "%"
+verification:
+  method: "simulation"
+  tool: "DIVA, Ladybug, Radiance"
+  standard: "EN_17037"
+  phase: ["schematic", "design_development"]
+  responsible: "lighting_designer"
+technicalBasis:
+  - standard: "EN_17037:2018"
+    section: "5.2"
+    description: "Daylight in Buildings - Minimum recommendation"
+    url: "https://standards.cen.eu"
+  - standard: "BREEAM_HEA_01"
+    section: "Daylighting"
+    description: "2% average daylight factor for living spaces"
+  - standard: "WELL_L03"
+    section: "Circadian Lighting Design"
+    description: "Daylight access for sleep-wake cycle regulation"
+description: "Sleeping spaces require minimum 2% daylight factor to support circadian rhythm regulation and visual comfort. Verified through simulation at design stage."
+version: "1.0.0"
+tags: ["daylight", "performance", "global", "circadian_health"]
+---
+
+# Requirement: Minimum Daylight Factor for Sleeping Spaces
+
+Sleeping spaces require minimum 2% daylight factor.
+```
+
+```yaml [YAML]
+id: "REQ-DAYLIGHT-SLEEPING-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Minimum daylight factor for sleeping spaces"
+requirementType: "performance"
+countryScope: "global"
+scope:
+  entityType: "space"
+  spaceTypes: ["sleeping_space", "bedroom"]
+metric: "daylight_factor"
+operator: ">="
+value: 2.0
+unit: "%"
+verification:
+  method: "simulation"
+  tool: "DIVA, Ladybug, Radiance"
+  standard: "EN_17037"
+  phase: ["schematic", "design_development"]
+  responsible: "lighting_designer"
+technicalBasis:
+  - standard: "EN_17037:2018"
+    section: "5.2"
+    description: "Daylight in Buildings - Minimum recommendation"
+    url: "https://standards.cen.eu"
+  - standard: "BREEAM_HEA_01"
+    section: "Daylighting"
+    description: "2% average daylight factor for living spaces"
+  - standard: "WELL_L03"
+    section: "Circadian Lighting Design"
+    description: "Daylight access for sleep-wake cycle regulation"
+description: "Sleeping spaces require minimum 2% daylight factor to support circadian rhythm regulation and visual comfort. Verified through simulation at design stage."
+version: "1.0.0"
+tags: ["daylight", "performance", "global", "circadian_health"]
+```
+
+```json [JSON]
 {
   "id": "REQ-DAYLIGHT-SLEEPING-001",
   "entityType": "requirement",
@@ -175,17 +332,14 @@ Plik: requirements/pl/room-height-min.json
   "requirementName": "Minimum daylight factor for sleeping spaces",
   "requirementType": "performance",
   "countryScope": "global",
-
   "scope": {
     "entityType": "space",
     "spaceTypes": ["sleeping_space", "bedroom"]
   },
-
   "metric": "daylight_factor",
   "operator": ">=",
   "value": 2.0,
   "unit": "%",
-
   "verification": {
     "method": "simulation",
     "tool": "DIVA, Ladybug, Radiance",
@@ -193,7 +347,6 @@ Plik: requirements/pl/room-height-min.json
     "phase": ["schematic", "design_development"],
     "responsible": "lighting_designer"
   },
-
   "technicalBasis": [
     {
       "standard": "EN_17037:2018",
@@ -212,13 +365,60 @@ Plik: requirements/pl/room-height-min.json
       "description": "Daylight access for sleep-wake cycle regulation"
     }
   ],
-
   "description": "Sleeping spaces require minimum 2% daylight factor to support circadian rhythm regulation and visual comfort. Verified through simulation at design stage.",
-
   "version": "1.0.0",
   "tags": ["daylight", "performance", "global", "circadian_health"]
 }
 ```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "requirementName", "requirementType", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-"
+    },
+    "entityType": {
+      "const": "requirement"
+    },
+    "requirementName": {
+      "type": "string"
+    },
+    "requirementType": {
+      "type": "string",
+      "enum": ["performance", "dimensional", "regulatory", "design", "operational", "safety", "sustainability", "qualitative"]
+    },
+    "metric": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "verificationMethod": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
 
 ## Wzorce: Numeryczne vs Jakościowe (v0.3.0)
 
@@ -228,7 +428,41 @@ Od wersji v0.3.0 wymagania mogą przyjmować dwie formy:
 
 Wymaganie z mierzalną wartością docelową — system automatycznie sprawdza zgodność:
 
-```json
+::: code-group
+
+```yaml [Markdown]
+---
+id: "REQ-OR-PRESSURE-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Nadciśnienie sali operacyjnej"
+requirementType: "performance"
+metric: "pressure_differential"
+operator: ">="
+value: 15
+unit: "Pa"
+version: "1.0.0"
+---
+
+# Wymaganie: Nadciśnienie Sali Operacyjnej
+
+Sala operacyjna wymaga nadciśnienia >= 15 Pa.
+```
+
+```yaml [YAML]
+id: "REQ-OR-PRESSURE-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Nadciśnienie sali operacyjnej"
+requirementType: "performance"
+metric: "pressure_differential"
+operator: ">="
+value: 15
+unit: "Pa"
+version: "1.0.0"
+```
+
+```json [JSON]
 {
   "id": "REQ-OR-PRESSURE-001",
   "entityType": "requirement",
@@ -243,20 +477,124 @@ Wymaganie z mierzalną wartością docelową — system automatycznie sprawdza z
 }
 ```
 
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "requirementName", "requirementType", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-"
+    },
+    "entityType": {
+      "const": "requirement"
+    },
+    "requirementName": {
+      "type": "string"
+    },
+    "requirementType": {
+      "type": "string",
+      "enum": ["performance", "dimensional", "regulatory", "design", "operational", "safety", "sustainability", "qualitative"]
+    },
+    "metric": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
+
 ### Wzorzec jakościowy (qualitativeDescription + acceptanceCriteria + evidenceRequired)
 
 Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
 
-```json
+::: code-group
+
+```yaml [Markdown]
+---
+id: "REQ-OR-CLEAN-DIRTY-SEPARATION-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Separacja ciągów czystych i brudnych w bloku operacyjnym"
+requirementType: "qualitative"
+qualitativeDescription: "Blok operacyjny musi zapewniać pełną separację ciągów czystych i brudnych zgodnie z wymaganiami sanitarno-epidemiologicznymi"
+acceptanceCriteria:
+  - "Materiały sterylne dostarczane wyłącznie ciągiem czystym"
+  - "Odpady i brudna bielizna usuwane wyłącznie ciągiem brudnym"
+  - "Personel wchodzi do sali przez śluzę z przebieralnią"
+  - "Pacjent transportowany dedykowanym ciągiem pacjenckim"
+  - "Brak krzyżowania się ciągów czystych i brudnych"
+evidenceRequired:
+  - "Zatwierdzony rysunek technologiczny bloku operacyjnego"
+  - "Opinia sanitarno-epidemiologiczna WSSE"
+  - "Protokół odbioru technicznego"
+  - "Schemat przepływów (clean/dirty flow diagram)"
+scope:
+  entityType: "space"
+  spaceTypes: ["operating_room", "sterilization", "clean_room"]
+legalBasis:
+  - regulation: "Dz.U. 2012 poz. 739"
+    section: "§ 37"
+    description: "Wymagania dla pomieszczeń bloku operacyjnego"
+version: "1.0.0"
+tags: ["qualitative", "healthcare", "infection_control", "surgical"]
+---
+
+# Wymaganie: Separacja Ciągów Czystych i Brudnych
+
+Blok operacyjny musi zapewniać pełną separację ciągów czystych i brudnych.
+```
+
+```yaml [YAML]
+id: "REQ-OR-CLEAN-DIRTY-SEPARATION-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Separacja ciągów czystych i brudnych w bloku operacyjnym"
+requirementType: "qualitative"
+qualitativeDescription: "Blok operacyjny musi zapewniać pełną separację ciągów czystych i brudnych zgodnie z wymaganiami sanitarno-epidemiologicznymi"
+acceptanceCriteria:
+  - "Materiały sterylne dostarczane wyłącznie ciągiem czystym"
+  - "Odpady i brudna bielizna usuwane wyłącznie ciągiem brudnym"
+  - "Personel wchodzi do sali przez śluzę z przebieralnią"
+  - "Pacjent transportowany dedykowanym ciągiem pacjenckim"
+  - "Brak krzyżowania się ciągów czystych i brudnych"
+evidenceRequired:
+  - "Zatwierdzony rysunek technologiczny bloku operacyjnego"
+  - "Opinia sanitarno-epidemiologiczna WSSE"
+  - "Protokół odbioru technicznego"
+  - "Schemat przepływów (clean/dirty flow diagram)"
+scope:
+  entityType: "space"
+  spaceTypes: ["operating_room", "sterilization", "clean_room"]
+legalBasis:
+  - regulation: "Dz.U. 2012 poz. 739"
+    section: "§ 37"
+    description: "Wymagania dla pomieszczeń bloku operacyjnego"
+version: "1.0.0"
+tags: ["qualitative", "healthcare", "infection_control", "surgical"]
+```
+
+```json [JSON]
 {
   "id": "REQ-OR-CLEAN-DIRTY-SEPARATION-001",
   "entityType": "requirement",
   "documentType": "requirement",
   "requirementName": "Separacja ciągów czystych i brudnych w bloku operacyjnym",
   "requirementType": "qualitative",
-
   "qualitativeDescription": "Blok operacyjny musi zapewniać pełną separację ciągów czystych i brudnych zgodnie z wymaganiami sanitarno-epidemiologicznymi",
-
   "acceptanceCriteria": [
     "Materiały sterylne dostarczane wyłącznie ciągiem czystym",
     "Odpady i brudna bielizna usuwane wyłącznie ciągiem brudnym",
@@ -264,19 +602,16 @@ Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
     "Pacjent transportowany dedykowanym ciągiem pacjenckim",
     "Brak krzyżowania się ciągów czystych i brudnych"
   ],
-
   "evidenceRequired": [
     "Zatwierdzony rysunek technologiczny bloku operacyjnego",
     "Opinia sanitarno-epidemiologiczna WSSE",
     "Protokół odbioru technicznego",
     "Schemat przepływów (clean/dirty flow diagram)"
   ],
-
   "scope": {
     "entityType": "space",
     "spaceTypes": ["operating_room", "sterilization", "clean_room"]
   },
-
   "legalBasis": [
     {
       "regulation": "Dz.U. 2012 poz. 739",
@@ -284,11 +619,50 @@ Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
       "description": "Wymagania dla pomieszczeń bloku operacyjnego"
     }
   ],
-
   "version": "1.0.0",
   "tags": ["qualitative", "healthcare", "infection_control", "surgical"]
 }
 ```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "requirementName", "requirementType", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-"
+    },
+    "entityType": {
+      "const": "requirement"
+    },
+    "requirementName": {
+      "type": "string"
+    },
+    "requirementType": {
+      "type": "string",
+      "enum": ["performance", "dimensional", "regulatory", "design", "operational", "safety", "sustainability", "qualitative"]
+    },
+    "qualitativeDescription": {
+      "type": "string"
+    },
+    "acceptanceCriteria": {
+      "type": "array"
+    },
+    "evidenceRequired": {
+      "type": "array"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
 
 **Kiedy używać wzorca jakościowego:**
 - Wymagania organizacyjne (separacja ciągów, procedury)
@@ -302,7 +676,95 @@ Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
 
 **Plik:** `scripts/requirements/pl/req-pl-wt-room-height-001.json`
 
-```json
+::: code-group
+
+```yaml [Markdown]
+---
+id: "REQ-PL-WT-ROOM-HEIGHT-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Minimum room height per WT 2021"
+requirementType: "dimensional"
+countryScope: "poland_specific"
+scope:
+  entityType: "space"
+  spaceTypes: ["sleeping_space", "bedroom", "living_space", "living_room", "kitchen"]
+metric: "room_height_clear"
+operator: ">="
+value: 2.50
+unit: "m"
+verification:
+  method: "measurement"
+  tool: "Laser distance meter"
+  standard: "WT_2021"
+  phase: ["design_development", "as_built"]
+  responsible: "architect"
+legalBasis:
+  - regulation: "WT_2021"
+    section: "§ 132"
+    article: "ust. 1"
+    description: "Wysokość pomieszczeń mieszkalnych"
+    fullText: "Wysokość pomieszczeń w budynkach mieszkalnych, mierzona od podłogi do najniższego elementu stropu lub konstrukcji dachu, nie może być mniejsza niż 2,50 m"
+    effectiveDate: "2021-09-20"
+  - regulation: "Prawo_budowlane"
+    section: "Art. 7"
+    article: "ust. 1 pkt 1"
+    description: "Wymagania podstawowe dotyczące obiektów budowlanych"
+technicalBasis:
+  - standard: "EN_16798-1"
+    section: "6.4"
+    description: "Room height for adequate air quality and thermal comfort"
+description: "Residential rooms (bedrooms, living rooms, kitchens) must have clear height >= 2.50 m per WT 2021 § 132. Measured from floor to lowest ceiling or roof structure element."
+version: "1.0.0"
+tags: ["dimensional", "poland", "wt_2021", "regulatory"]
+---
+
+# Wymaganie: Minimalna Wysokość Pomieszczenia wg WT 2021
+
+Pomieszczenia mieszkalne muszą mieć wysokość >= 2,50 m wg WT 2021 § 132.
+```
+
+```yaml [YAML]
+id: "REQ-PL-WT-ROOM-HEIGHT-001"
+entityType: "requirement"
+documentType: "requirement"
+requirementName: "Minimum room height per WT 2021"
+requirementType: "dimensional"
+countryScope: "poland_specific"
+scope:
+  entityType: "space"
+  spaceTypes: ["sleeping_space", "bedroom", "living_space", "living_room", "kitchen"]
+metric: "room_height_clear"
+operator: ">="
+value: 2.50
+unit: "m"
+verification:
+  method: "measurement"
+  tool: "Laser distance meter"
+  standard: "WT_2021"
+  phase: ["design_development", "as_built"]
+  responsible: "architect"
+legalBasis:
+  - regulation: "WT_2021"
+    section: "§ 132"
+    article: "ust. 1"
+    description: "Wysokość pomieszczeń mieszkalnych"
+    fullText: "Wysokość pomieszczeń w budynkach mieszkalnych, mierzona od podłogi do najniższego elementu stropu lub konstrukcji dachu, nie może być mniejsza niż 2,50 m"
+    effectiveDate: "2021-09-20"
+  - regulation: "Prawo_budowlane"
+    section: "Art. 7"
+    article: "ust. 1 pkt 1"
+    description: "Wymagania podstawowe dotyczące obiektów budowlanych"
+technicalBasis:
+  - standard: "EN_16798-1"
+    section: "6.4"
+    description: "Room height for adequate air quality and thermal comfort"
+description: "Residential rooms (bedrooms, living rooms, kitchens) must have clear height >= 2.50 m per WT 2021 § 132. Measured from floor to lowest ceiling or roof structure element."
+version: "1.0.0"
+tags: ["dimensional", "poland", "wt_2021", "regulatory"]
+```
+
+```json [JSON]
 {
   "id": "REQ-PL-WT-ROOM-HEIGHT-001",
   "entityType": "requirement",
@@ -310,17 +772,14 @@ Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
   "requirementName": "Minimum room height per WT 2021",
   "requirementType": "dimensional",
   "countryScope": "poland_specific",
-
   "scope": {
     "entityType": "space",
     "spaceTypes": ["sleeping_space", "bedroom", "living_space", "living_room", "kitchen"]
   },
-
   "metric": "room_height_clear",
   "operator": ">=",
   "value": 2.50,
   "unit": "m",
-
   "verification": {
     "method": "measurement",
     "tool": "Laser distance meter",
@@ -328,11 +787,10 @@ Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
     "phase": ["design_development", "as_built"],
     "responsible": "architect"
   },
-
   "legalBasis": [
     {
       "regulation": "WT_2021",
-      "section": "&sect; 132",
+      "section": "§ 132",
       "article": "ust. 1",
       "description": "Wysokość pomieszczeń mieszkalnych",
       "fullText": "Wysokość pomieszczeń w budynkach mieszkalnych, mierzona od podłogi do najniższego elementu stropu lub konstrukcji dachu, nie może być mniejsza niż 2,50 m",
@@ -342,10 +800,9 @@ Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
       "regulation": "Prawo_budowlane",
       "section": "Art. 7",
       "article": "ust. 1 pkt 1",
-      "description": "Wymagania podstawowe dotyczące obiekt&oacute;w budowlanych"
+      "description": "Wymagania podstawowe dotyczące obiektów budowlanych"
     }
   ],
-
   "technicalBasis": [
     {
       "standard": "EN_16798-1",
@@ -353,13 +810,57 @@ Wymaganie organizacyjne lub proceduralne, bez wartości liczbowej:
       "description": "Room height for adequate air quality and thermal comfort"
     }
   ],
-
-  "description": "Residential rooms (bedrooms, living rooms, kitchens) must have clear height ≥ 2.50 m per WT 2021 &sect; 132. Measured from floor to lowest ceiling or roof structure element.",
-
+  "description": "Residential rooms (bedrooms, living rooms, kitchens) must have clear height >= 2.50 m per WT 2021 § 132. Measured from floor to lowest ceiling or roof structure element.",
   "version": "1.0.0",
   "tags": ["dimensional", "poland", "wt_2021", "regulatory"]
 }
 ```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "requirementName", "requirementType", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-"
+    },
+    "entityType": {
+      "const": "requirement"
+    },
+    "requirementName": {
+      "type": "string"
+    },
+    "requirementType": {
+      "type": "string",
+      "enum": ["performance", "dimensional", "regulatory", "design", "operational", "safety", "sustainability", "qualitative"]
+    },
+    "metric": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "verificationMethod": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
 
 ## Definicja Zakresu
 
@@ -574,7 +1075,9 @@ Umieszczaj w `scripts/requirements/{kod_kraju}/` - ładowane gdy `project.countr
 ### Wymagania Specyficzne dla Projektu (Markdown)
 Umieszczaj w `docs/en/examples/{projekt}/requirements/` - ładowane tylko dla danego projektu.
 
-```markdown
+::: code-group
+
+```yaml [Markdown]
 ---
 documentType: "requirement"
 entityType: "requirement"
@@ -599,6 +1102,168 @@ version: "1.0.0"
 
 Klient wymaga 3.00 m wysokości w świetle dla wszystkich przestrzeni biurowych (przekracza minimum kodowe 2.50 m).
 ```
+
+```yaml [YAML]
+documentType: "requirement"
+entityType: "requirement"
+id: "REQ-PROJECT-CUSTOM-001"
+requirementName: "Project-specific ceiling height"
+requirementType: "dimensional"
+metric: "room_height_clear"
+operator: ">="
+value: 3.00
+unit: "m"
+scope:
+  entityType: "space"
+  spaceTypes: ["office"]
+verification:
+  method: "measurement"
+  phase: ["as_built"]
+  responsible: "contractor"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "requirement",
+  "entityType": "requirement",
+  "id": "REQ-PROJECT-CUSTOM-001",
+  "requirementName": "Project-specific ceiling height",
+  "requirementType": "dimensional",
+  "metric": "room_height_clear",
+  "operator": ">=",
+  "value": 3.00,
+  "unit": "m",
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": ["office"]
+  },
+  "verification": {
+    "method": "measurement",
+    "phase": ["as_built"],
+    "responsible": "contractor"
+  },
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "requirementName", "requirementType", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-"
+    },
+    "entityType": {
+      "const": "requirement"
+    },
+    "requirementName": {
+      "type": "string"
+    },
+    "requirementType": {
+      "type": "string",
+      "enum": ["performance", "dimensional", "regulatory", "design", "operational", "safety", "sustainability", "qualitative"]
+    },
+    "metric": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "value": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "object"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
+
+---
+
+## Typowe Błędy
+
+### ❌ Błąd 1: Mieszanie Typów Liczbowych i Jakościowych
+
+**Problem**: Wymaganie ma ZARÓWNO `metric/operator/value` (liczbowe) JAK I `qualitativeDescription` (jakościowe).
+
+**Rozwiązanie**: Wybierz JEDEN typ — albo liczbowy albo jakościowy, nigdy oba.
+
+```yaml
+# ❌ Złe: Oba typy
+metric: "height"
+operator: ">="
+value: 2.5
+qualitativeDescription: "Przestrzeń musi mieć adekwatną wysokość"  # Konflikt!
+
+# ✅ Dobre: Tylko liczbowe
+metric: "height"
+operator: ">="
+value: 2.5
+unit: "m"
+
+# LUB
+
+# ✅ Dobre: Tylko jakościowe
+qualitativeDescription: "Przepływy czyste i brudne nie mogą się krzyżować"
+acceptanceCriteria:
+  - "Osobne korytarze dla czystego i brudnego sprzętu"
+```
+
+---
+
+### ❌ Błąd 2: Używanie Jakościowego Gdy Liczbowe Działałoby
+
+**Problem**: `qualitativeDescription: "Wysokość przestrzeni musi być co najmniej 2,50 m"` (może być mierzalne).
+
+**Rozwiązanie**: Jeśli możesz wyrazić jako [metryka] [operator] [wartość] → **używaj liczbowego**.
+
+```yaml
+# ❌ Złe: Jakościowe dla mierzalnego wymagania
+qualitativeDescription: "Wysokość przestrzeni musi być co najmniej 2,50 m"
+
+# ✅ Dobre: Liczbowe
+metric: "height"
+operator: ">="
+value: 2.5
+unit: "m"
+```
+
+**Kiedy używać jakościowego**: Wymagania, które **nie mogą** być wyrażone jako liczba (np. "przepływy czyste/brudne muszą być rozdzielone").
+
+---
+
+### ❌ Błąd 3: Brak Kontekstu Jurysdykcji
+
+**Problem**: `requirementName: "Minimalna wysokość pomieszczenia >= 2,50 m"` (nie wiadomo skąd to wymaganie).
+
+**Rozwiązanie**: Zawsze dołącz `jurisdictionCode` i `reference` do przepisu.
+
+```yaml
+# ❌ Złe: Brak kontekstu
+requirementName: "Minimalna wysokość pomieszczenia >= 2,50 m"
+
+# ✅ Dobre: Z jurysdykcją i referencją
+requirementName: "Minimalna wysokość pomieszczenia >= 2,50 m (WT 2021 §132)"
+jurisdictionCode: "PL"
+reference:
+  regulation: "WT 2021"
+  section: "§132"
+  article: "Pomieszczenia mieszkalne"
+```
+
+---
 
 ## Zobacz Także
 

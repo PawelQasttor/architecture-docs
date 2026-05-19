@@ -243,7 +243,9 @@ The SBM Compiler handles envelopes as follows:
 
 ## Complete Example
 
-```yaml
+::: code-group
+
+```markdown [Markdown]
 ---
 id: "ENV-EW-01"
 entityType: "envelope"
@@ -348,6 +350,209 @@ tags:
 
 Load-bearing external wall with ventilated cavity, spanning all facades of Building 01.
 ```
+
+```yaml [YAML]
+id: "ENV-EW-01"
+entityType: "envelope"
+envelopeName: "External Wall Type A"
+envelopeType: "external_wall"
+buildingId: "BLD-01"
+boundarySpaceIds:
+  - "SP-BLD-01-L01-001"
+levelIds:
+  - "LVL-00"
+  - "LVL-01"
+  - "LVL-02"
+orientation: "N"
+isExternal: true
+isLoadBearing: true
+grossArea: 1245
+netArea: 1050
+totalThickness: 447.5
+construction:
+  assemblyType: "ventilated_cavity"
+  layers:
+    - order: 1
+      material: "Mineral render"
+      thickness: 15
+      thermalConductivity: 0.82
+      function: "finish"
+      fireClass: "A1"
+    - order: 2
+      material: "AAC blocks"
+      thickness: 200
+      thermalConductivity: 0.55
+      function: "structural"
+      fireClass: "A1"
+    - order: 3
+      material: "XPS insulation"
+      thickness: 180
+      thermalConductivity: 0.035
+      function: "insulation"
+      fireClass: "E"
+    - order: 4
+      material: "Ventilated air cavity"
+      thickness: 40
+      function: "cavity"
+    - order: 5
+      material: "Gypsum plasterboard"
+      thickness: 12.5
+      thermalConductivity: 0.21
+      function: "finish"
+      fireClass: "A2"
+thermalPerformance:
+  uValue: 0.18
+  uValueRequired: 0.20
+  calculationMethod: "PN-EN ISO 6946"
+  condensationRisk: false
+acousticPerformance:
+  rw: 55
+  rwRequired: 50
+  testCertificate: "AC2024-5678"
+firePerformance:
+  fireRating: "REI 90"
+  fireRatingRequired: "REI 60"
+  reactionToFire: "A2-s1,d0"
+  testCertificate: "FR2024-1234"
+moistureControl:
+  vaporControl: "Diffusion-open exterior, sd < 0.5m"
+  airtightnessTarget: "0.6 ACH @ 50 Pa"
+openings:
+  - id: "WIN-EW01-001"
+    openingType: "window"
+    width: 1200
+    height: 1500
+    area: 1.8
+    uValue: 0.90
+    gValue: 0.50
+glazingRatio: 0.157
+cost:
+  totalCost: 192544
+  currency: "EUR"
+  basis: "architect_estimate_phase_4"
+ifcMapping:
+  ifcEntity: "IfcWallStandardCase"
+  objectType: "ExternalWall_TypeA"
+  globalId: "3vB2YO$rLBxv3VxEu2LPxQ"
+  materialLayerSet: "ExternalWall_TypeA_Layers"
+regulatoryCompliance:
+  - regulation: "WT 2021"
+    section: "§ 328"
+    requirement: "U ≤ 0.20 W/(m²·K)"
+    status: "compliant"
+  - regulation: "WT 2021"
+    section: "§ 234"
+    requirement: "REI 60 (building height 18.5m)"
+    status: "compliant"
+version: "1.0.0"
+tags:
+  - "external-wall"
+  - "load-bearing"
+  - "building-01"
+```
+
+```json [JSON]
+{
+  "id": "ENV-EW-01",
+  "entityType": "envelope",
+  "envelopeName": "External Wall Type A",
+  "envelopeCategory": "external_wall",
+  "buildingId": "BLD-01",
+  "boundarySpaceIds": ["SP-BLD-01-L01-001"],
+  "levelIds": ["LVL-00", "LVL-01", "LVL-02"],
+  "orientation": "N",
+  "isExternal": true,
+  "isLoadBearing": true,
+  "grossArea": 1245,
+  "netArea": 1050,
+  "totalThickness": 447.5,
+  "construction": {
+    "assemblyType": "ventilated_cavity",
+    "layers": [
+      { "order": 1, "material": "Mineral render", "thickness": 15, "thermalConductivity": 0.82, "function": "finish", "fireClass": "A1" },
+      { "order": 2, "material": "AAC blocks", "thickness": 200, "thermalConductivity": 0.55, "function": "structural", "fireClass": "A1" },
+      { "order": 3, "material": "XPS insulation", "thickness": 180, "thermalConductivity": 0.035, "function": "insulation", "fireClass": "E" },
+      { "order": 4, "material": "Ventilated air cavity", "thickness": 40, "function": "cavity" },
+      { "order": 5, "material": "Gypsum plasterboard", "thickness": 12.5, "thermalConductivity": 0.21, "function": "finish", "fireClass": "A2" }
+    ]
+  },
+  "thermalPerformance": {
+    "uValue": 0.18,
+    "uValueRequired": 0.20,
+    "calculationMethod": "PN-EN ISO 6946",
+    "condensationRisk": false
+  },
+  "acousticPerformance": {
+    "rw": 55,
+    "rwRequired": 50,
+    "testCertificate": "AC2024-5678"
+  },
+  "firePerformance": {
+    "fireRating": "REI 90",
+    "fireRatingRequired": "REI 60",
+    "reactionToFire": "A2-s1,d0",
+    "testCertificate": "FR2024-1234"
+  },
+  "moistureControl": {
+    "vaporControl": "Diffusion-open exterior, sd < 0.5m",
+    "airtightnessTarget": "0.6 ACH @ 50 Pa"
+  },
+  "openings": [
+    {
+      "id": "WIN-EW01-001",
+      "openingType": "window",
+      "width": 1200,
+      "height": 1500,
+      "area": 1.8,
+      "uValue": 0.90,
+      "gValue": 0.50
+    }
+  ],
+  "glazingRatio": 0.157,
+  "cost": {
+    "totalCost": 192544,
+    "currency": "EUR",
+    "basis": "architect_estimate_phase_4"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcWallStandardCase",
+    "objectType": "ExternalWall_TypeA",
+    "globalId": "3vB2YO$rLBxv3VxEu2LPxQ",
+    "materialLayerSet": "ExternalWall_TypeA_Layers"
+  },
+  "regulatoryCompliance": [
+    { "regulation": "WT 2021", "section": "§ 328", "requirement": "U ≤ 0.20 W/(m²·K)", "status": "compliant" },
+    { "regulation": "WT 2021", "section": "§ 234", "requirement": "REI 60 (building height 18.5m)", "status": "compliant" }
+  ],
+  "version": "1.0.0",
+  "tags": ["external-wall", "load-bearing", "building-01"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "envelopeName", "envelopeCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ENV-" },
+    "entityType": { "const": "envelope" },
+    "envelopeName": { "type": "string" },
+    "envelopeCategory": {
+      "type": "string",
+      "enum": ["external_wall", "roof", "ground_floor", "party_wall", "internal_wall", "curtain_wall"]
+    },
+    "buildingId": { "type": "string" },
+    "orientation": { "type": "string" },
+    "area": { "type": "number" },
+    "layers": { "type": "array" },
+    "thermalPerformance": { "type": "object" },
+    "acousticPerformance": { "type": "object" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## See Also
 

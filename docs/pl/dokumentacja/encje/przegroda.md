@@ -187,7 +187,9 @@ firePerformance:
 
 ## Kompletny przykład
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "ENV-EW-01"
 entityType: "envelope"
@@ -231,6 +233,95 @@ tags:
 
 Nośna ściana zewnętrzna z pustką wentylowaną, obejmująca wszystkie elewacje Budynku 01.
 ```
+
+```yaml [YAML]
+id: "ENV-EW-01"
+entityType: "envelope"
+envelopeName: "Ściana zewnętrzna typ A"
+envelopeType: "external_wall"
+buildingId: "BLD-01"
+boundarySpaceIds:
+  - "SP-BLD-01-L01-001"
+orientation: "N"
+isExternal: true
+isLoadBearing: true
+grossArea: 1245
+netArea: 1050
+totalThickness: 447.5
+thermalPerformance:
+  uValue: 0.18
+  uValueRequired: 0.20
+  calculationMethod: "PN-EN ISO 6946"
+  condensationRisk: false
+acousticPerformance:
+  rw: 55
+  rwRequired: 50
+firePerformance:
+  fireRating: "REI 90"
+  fireRatingRequired: "REI 60"
+cost:
+  totalCost: 192544
+  currency: "EUR"
+  basis: "kosztorys_architekt_faza_4"
+ifcMapping:
+  ifcEntity: "IfcWallStandardCase"
+  objectType: "ExternalWall_TypeA"
+version: "1.0.0"
+tags:
+  - "sciana-zewnetrzna"
+  - "nosna"
+  - "budynek-01"
+```
+
+```json [JSON]
+{
+  "id": "ENV-EW-01",
+  "entityType": "envelope",
+  "envelopeName": "Ściana zewnętrzna typ A",
+  "envelopeType": "external_wall",
+  "buildingId": "BLD-01",
+  "boundarySpaceIds": ["SP-BLD-01-L01-001"],
+  "orientation": "N",
+  "isExternal": true,
+  "isLoadBearing": true,
+  "grossArea": 1245,
+  "netArea": 1050,
+  "totalThickness": 447.5,
+  "thermalPerformance": {
+    "uValue": 0.18,
+    "uValueRequired": 0.20,
+    "calculationMethod": "PN-EN ISO 6946",
+    "condensationRisk": false
+  },
+  "acousticPerformance": {
+    "rw": 55,
+    "rwRequired": 50
+  },
+  "firePerformance": {
+    "fireRating": "REI 90",
+    "fireRatingRequired": "REI 60"
+  },
+  "cost": {
+    "totalCost": 192544,
+    "currency": "EUR",
+    "basis": "kosztorys_architekt_faza_4"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcWallStandardCase",
+    "objectType": "ExternalWall_TypeA"
+  },
+  "version": "1.0.0",
+  "tags": ["sciana-zewnetrzna", "nosna", "budynek-01"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "envelopeName", "envelopeCategory", "buildingId", "version"]
+}
+```
+
+:::
 
 ## Zobacz też
 

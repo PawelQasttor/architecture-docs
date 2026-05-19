@@ -111,7 +111,9 @@ type BuildingType =
 
 **The simplest building file to get started:**
 
-```markdown
+::: code-group
+
+```md [Markdown]
 File: building.md
 
 ---
@@ -139,6 +141,63 @@ numberOfUnits: 32
 4 levels, 4,850 m² GFA.
 ```
 
+```yaml [YAML]
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Green Terrace Apartments"
+buildingType: "residential_multifamily"
+country: "PL"
+version: "1.0.0"
+
+address:
+  street: "ul. Słoneczna 42"
+  city: "Warsaw"
+  postalCode: "00-001"
+grossFloorArea: 4850
+numberOfLevels: 4
+numberOfUnits: 32
+```
+
+```json [JSON]
+{
+  "id": "BLD-01",
+  "entityType": "building",
+  "documentType": "building",
+  "buildingName": "Green Terrace Apartments",
+  "buildingType": "residential_multifamily",
+  "country": "PL",
+  "version": "1.0.0",
+  "address": {
+    "street": "ul. Słoneczna 42",
+    "city": "Warsaw",
+    "postalCode": "00-001"
+  },
+  "grossFloorArea": 4850,
+  "numberOfLevels": 4,
+  "numberOfUnits": 32
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "name", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^BLD-[A-Z0-9-]+$" },
+    "entityType": { "const": "building" },
+    "name": { "type": "string" },
+    "address": { "type": "object" },
+    "grossFloorArea": { "type": "number" },
+    "numberOfLevels": { "type": "integer" },
+    "buildingType": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **That's it.** You can add energy certifications, climate zone, and GPS coordinates later.
 
 ---
@@ -147,7 +206,9 @@ numberOfUnits: 32
 
 **File:** `docs/en/examples/green-terrace/building.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "building"
 entityType: "building"
@@ -228,6 +289,134 @@ Sustainable multifamily residential building in Warsaw city center.
 - **Building code:** WT 2021 (Warunki Techniczne)
 - **Planning:** MPZP approval received 2025-11-15
 ```
+
+```yaml [YAML]
+documentType: "building"
+entityType: "building"
+id: "BLD-01"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+projectId: "PRJ-GREEN-TERRACE-2026"
+buildingName: "Green Terrace Apartments"
+buildingType: "residential_multifamily"
+
+country: "PL"
+address:
+  street: "ul. Słoneczna 42"
+  city: "Warsaw"
+  postalCode: "00-001"
+  region: "Mazowieckie"
+
+location:
+  latitude: 52.2297
+  longitude: 21.0122
+  elevation: 100
+  elevationUnit: "m"
+
+climateZone: "Dfb"
+grossFloorArea: 4850
+numberOfLevels: 4
+numberOfUnits: 32
+
+occupancyType: "R-2"
+constructionType: "Type_VA"
+yearBuilt: 2026
+
+certifications:
+  - name: "BREEAM"
+    level: "Very Good"
+    status: "in_progress"
+  - name: "LEED"
+    level: "Silver"
+    status: "planned"
+
+ifcMapping:
+  ifcEntity: "IfcBuilding"
+  globalId: "3K4hJ1$rMCxv2WxEt1LNxQ"
+  objectType: "Residential"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "multifamily"
+  - "sustainable"
+  - "warsaw"
+```
+
+```json [JSON]
+{
+  "documentType": "building",
+  "entityType": "building",
+  "id": "BLD-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "projectId": "PRJ-GREEN-TERRACE-2026",
+  "buildingName": "Green Terrace Apartments",
+  "buildingType": "residential_multifamily",
+  "country": "PL",
+  "address": {
+    "street": "ul. Słoneczna 42",
+    "city": "Warsaw",
+    "postalCode": "00-001",
+    "region": "Mazowieckie"
+  },
+  "location": {
+    "latitude": 52.2297,
+    "longitude": 21.0122,
+    "elevation": 100,
+    "elevationUnit": "m"
+  },
+  "climateZone": "Dfb",
+  "grossFloorArea": 4850,
+  "numberOfLevels": 4,
+  "numberOfUnits": 32,
+  "occupancyType": "R-2",
+  "constructionType": "Type_VA",
+  "yearBuilt": 2026,
+  "certifications": [
+    {
+      "name": "BREEAM",
+      "level": "Very Good",
+      "status": "in_progress"
+    },
+    {
+      "name": "LEED",
+      "level": "Silver",
+      "status": "planned"
+    }
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcBuilding",
+    "globalId": "3K4hJ1$rMCxv2WxEt1LNxQ",
+    "objectType": "Residential"
+  },
+  "version": "1.0.0",
+  "tags": ["residential", "multifamily", "sustainable", "warsaw"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "name", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^BLD-[A-Z0-9-]+$" },
+    "entityType": { "const": "building" },
+    "name": { "type": "string" },
+    "siteId": { "type": "string" },
+    "address": { "type": "object" },
+    "grossFloorArea": { "type": "number" },
+    "numberOfLevels": { "type": "integer" },
+    "buildingType": { "type": "string" },
+    "structuralSystem": { "type": "string" },
+    "yearOfConstruction": { "type": "integer" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Example: Compiled JSON
 
@@ -421,7 +610,9 @@ certifications:
 
 ### Example: Hospital Departments
 
-```yaml
+::: code-group
+
+```md [Markdown]
 ---
 id: "BLD-01"
 entityType: "building"
@@ -467,6 +658,111 @@ departments:
 
 Main clinical building with ICU, surgery, radiology, and admin departments.
 ```
+
+```yaml [YAML]
+id: "BLD-01"
+entityType: "building"
+documentType: "building"
+buildingName: "Regional Hospital - Building D"
+buildingType: "healthcare"
+country: "PL"
+version: "1.0.0"
+
+departments:
+  - id: "DEPT-OIOM"
+    name: "Intensive Care Unit (OIOM)"
+    description: "12-bed ICU with 2 isolation bays"
+    levelIds: ["LVL-02"]
+    headOfDepartment: "Dr. Anna Kowalska"
+    operatingHours: "24/7"
+    staffCount: 45
+
+  - id: "DEPT-SURGERY"
+    name: "Surgery Department"
+    description: "6 operating rooms + recovery"
+    levelIds: ["LVL-03"]
+    headOfDepartment: "Dr. Piotr Nowak"
+    operatingHours: "Mon-Fri 07:00-19:00, emergency 24/7"
+    staffCount: 60
+
+  - id: "DEPT-RADIOLOGY"
+    name: "Radiology Department"
+    description: "X-ray, CT, MRI, fluoroscopy"
+    levelIds: ["LVL-01"]
+    operatingHours: "Mon-Fri 07:00-20:00, on-call 24/7"
+    staffCount: 25
+
+  - id: "DEPT-ADMIN"
+    name: "Administration"
+    description: "Hospital administration and records"
+    levelIds: ["LVL-01"]
+    operatingHours: "Mon-Fri 08:00-16:00"
+    staffCount: 15
+```
+
+```json [JSON]
+{
+  "id": "BLD-01",
+  "entityType": "building",
+  "documentType": "building",
+  "buildingName": "Regional Hospital - Building D",
+  "buildingType": "healthcare",
+  "country": "PL",
+  "version": "1.0.0",
+  "departments": [
+    {
+      "id": "DEPT-OIOM",
+      "name": "Intensive Care Unit (OIOM)",
+      "description": "12-bed ICU with 2 isolation bays",
+      "levelIds": ["LVL-02"],
+      "headOfDepartment": "Dr. Anna Kowalska",
+      "operatingHours": "24/7",
+      "staffCount": 45
+    },
+    {
+      "id": "DEPT-SURGERY",
+      "name": "Surgery Department",
+      "description": "6 operating rooms + recovery",
+      "levelIds": ["LVL-03"],
+      "headOfDepartment": "Dr. Piotr Nowak",
+      "operatingHours": "Mon-Fri 07:00-19:00, emergency 24/7",
+      "staffCount": 60
+    },
+    {
+      "id": "DEPT-RADIOLOGY",
+      "name": "Radiology Department",
+      "description": "X-ray, CT, MRI, fluoroscopy",
+      "levelIds": ["LVL-01"],
+      "operatingHours": "Mon-Fri 07:00-20:00, on-call 24/7",
+      "staffCount": 25
+    },
+    {
+      "id": "DEPT-ADMIN",
+      "name": "Administration",
+      "description": "Hospital administration and records",
+      "levelIds": ["LVL-01"],
+      "operatingHours": "Mon-Fri 08:00-16:00",
+      "staffCount": 15
+    }
+  ]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "name", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^BLD-[A-Z0-9-]+$" },
+    "entityType": { "const": "building" },
+    "name": { "type": "string" },
+    "buildingType": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ### Referencing Departments from Spaces
 

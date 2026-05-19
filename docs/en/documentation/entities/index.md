@@ -1,12 +1,16 @@
 # Document Types: What Files Do You Need?
 
+::: tip Current Version
+**SBM v1.1.0** — **19 entity types** available
+:::
+
 ## The Question You're Asking
 
 "I want to document my building project. What files do I create?"
 
-This page answers that. There are **14 types of files** you can create. Each type describes a different aspect of your building.
+This page answers that. There are **19 types of files** you can create. Each type describes a different aspect of your building.
 
-::: tip You Don't Need All 14 Types
+::: tip You Don't Need All 19 Types
 Most projects start with 3-4 types:
 - **Spaces** (rooms)
 - **Zones** (fire zones, acoustic zones)
@@ -18,7 +22,7 @@ That's enough to get started. Add other types when you need them.
 
 ---
 
-## The 14 Document Types (Organized By What They Describe)
+## The 19 Entity Types (Organized By What They Describe)
 
 ### **Describing Spaces (Where People Are)**
 
@@ -30,6 +34,8 @@ That's enough to get started. Add other types when you need them.
 | **[Space](/en/documentation/entities/space)** | Every room, corridor, area | `spaces/bedroom-01.md` |
 | **[Space Type](/en/documentation/entities/space-type)** | Template for similar rooms (e.g., "standard bedroom") | `space-types/standard-bedroom.md` |
 | **[Envelope](/en/documentation/entities/envelope)** | Wall, roof, floor slab, curtain wall (construction layers + performance) | `envelopes/external-wall-type-a.md` |
+| **[Opening](/en/documentation/entities/opening)** | Specific window, door, or skylight | `openings/window-n-001.md` |
+| **Opening Type** | Template for window/door specs (see [Green Terrace examples](/en/examples/green-terrace/)) | `opening-types/internorm-kf410.md` |
 | **[Vertical Circulation](/en/documentation/entities/vertical-circulation)** | Staircase, elevator, ramp, escalator (connecting levels) | `vertical-circulations/staircase-a.md` |
 
 **Start here:** If you're new, begin with **Space** (one file per room). Add **Level** and **Building** when you have multiple floors or buildings. Add **Site** when you need plot constraints. Add **Envelope** when you need to track wall buildups and thermal/fire performance. Add **Vertical Circulation** when you need to document stairs, elevators, and fire escape routes.
@@ -43,6 +49,9 @@ That's enough to get started. Add other types when you need them.
 | **[Zone](/en/documentation/entities/zone)** | Group of rooms sharing a characteristic (fire zone, acoustic zone, HVAC zone) | `zones/fire-zone-zl-iv.md` |
 | **[Zone Type](/en/documentation/entities/zone-type)** | Template for zone configurations | `zone-types/fire-zl-iv-standard.md` |
 | **[Requirement](/en/documentation/entities/requirement)** | A regulation or rule that must be met | `requirements/height-minimum-250cm.md` |
+| **[Site Feature](/en/documentation/entities/site-feature)** | Landscape or site element | `site-features/north-garden.md` |
+| **Site Feature Type** | Template for site elements (see [Green Terrace examples](/en/examples/green-terrace/)) | `site-feature-types/permeable-paving.md` |
+| **[Construction Package](/en/documentation/entities/construction-package)** | Phase of construction work | `construction-packages/cp-structure.md` |
 
 **When you need zones:** Permit submission (fire zones required), MEP coordination (HVAC zones), acoustic design
 
@@ -208,11 +217,11 @@ The `entityType` field is the primary identifier for the file type. A legacy `do
 | **Track building regulations** | [Requirement documentation](/en/documentation/entities/requirement) |
 | **Document MEP systems** | [System documentation](/en/documentation/entities/system) |
 | **Track installed equipment** | [Asset documentation](/en/documentation/entities/asset) |
-| **See all 14 types with examples** | Scroll down to see the complete list below |
+| **See all 19 types with examples** | Scroll down to see the complete list below |
 
 ---
 
-## Complete List of All 14 Document Types
+## Complete List of All 19 Entity Types
 
 Click any type to see detailed documentation:
 
@@ -223,20 +232,27 @@ Click any type to see detailed documentation:
 4. **[Space](/en/documentation/entities/space)** - Rooms and functional areas (bedrooms, offices, corridors)
 5. **[Space Type](/en/documentation/entities/space-type)** - Templates for repeating room types
 6. **[Envelope](/en/documentation/entities/envelope)** - Walls, roofs, slabs, curtain walls (construction layers + performance)
-7. **[Vertical Circulation](/en/documentation/entities/vertical-circulation)** - Staircases, elevators, ramps, escalators (connecting levels, egress, accessibility)
+7. **Opening** - Specific windows, doors, skylights (see [Green Terrace examples](/en/examples/green-terrace/))
+8. **Opening Type** - Templates for window/door specifications (see [Green Terrace examples](/en/examples/green-terrace/))
+9. **[Vertical Circulation](/en/documentation/entities/vertical-circulation)** - Staircases, elevators, ramps, escalators (connecting levels, egress, accessibility)
 
 ### Zoning
-8. **[Zone](/en/documentation/entities/zone)** - Functional groupings (fire, acoustic, HVAC, security)
-9. **[Zone Type](/en/documentation/entities/zone-type)** - Templates for standard zone configurations
+10. **[Zone](/en/documentation/entities/zone)** - Functional groupings (fire, acoustic, HVAC, security)
+11. **[Zone Type](/en/documentation/entities/zone-type)** - Templates for standard zone configurations
 
 ### Technical Systems
-10. **[System](/en/documentation/entities/system)** - MEP systems (HVAC, electrical, plumbing)
-11. **[System Type](/en/documentation/entities/system-type)** - Templates for standard system configurations
-12. **[Asset](/en/documentation/entities/asset)** - Physical equipment (boilers, pumps, sensors)
-13. **[Asset Type](/en/documentation/entities/asset-type)** - Product specifications and templates
+12. **[System](/en/documentation/entities/system)** - MEP systems (HVAC, electrical, plumbing)
+13. **[System Type](/en/documentation/entities/system-type)** - Templates for standard system configurations
+14. **[Asset](/en/documentation/entities/asset)** - Physical equipment (boilers, pumps, sensors)
+15. **[Asset Type](/en/documentation/entities/asset-type)** - Product specifications and templates
+
+### Site & Construction
+16. **Site Feature** - Landscape elements, parking, green infrastructure (see [Green Terrace examples](/en/examples/green-terrace/))
+17. **Site Feature Type** - Templates for site element specifications (see [Green Terrace examples](/en/examples/green-terrace/))
+18. **Construction Package** - Phased construction work packages with scheduling and costs (see [Green Terrace examples](/en/examples/green-terrace/))
 
 ### Governance
-14. **[Requirement](/en/documentation/entities/requirement)** - Performance and regulatory rules (height minimums, fire ratings, daylight)
+19. **[Requirement](/en/documentation/entities/requirement)** - Performance and regulatory rules (height minimums, fire ratings, daylight)
 
 ::: details Supplementary Document Types
 In addition to the 13 core entity types, the SBM standard recognizes supplementary document types that are not semantic entities but provide supporting technical information:

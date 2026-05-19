@@ -101,7 +101,9 @@ type ZoneType =
 
 **Plik:** `docs/en/examples/green-terrace/zones/fire-zone-zl-iv.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "zone"
 entityType: "zone"
@@ -159,6 +161,89 @@ Strefa obejmuje wszystkie przestrzenie mieszkalne na kondygnacjach L00-L02:
 - Sypialnie, pokoje dzienne, kuchnie
 - Wyłączone: klatki schodowe (osobna strefa pożarowa)
 ```
+
+```yaml [YAML]
+documentType: "zone"
+entityType: "zone"
+id: "ZONE-FIRE-ZL-IV"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+zoneName: "Fire Zone ZL-IV (Residential)"
+zoneType: "fire"
+buildingId: "BLD-01"
+
+zoneClassification: "ZL-IV"
+fireRating: "REI 60"
+
+requirements:
+  - "REQ-PL-FIRE-SEPARATION-001"
+  - "REQ-FIRE-ZL-IV-001"
+
+description: >
+  Residential fire zone with low fire load (ZL-IV per WT 2021 § 234).
+  Requires REI 60 walls and floors, EI 30 fire doors.
+
+ifcMapping:
+  ifcEntity: "IfcZone"
+  globalId: "3P5hJ2$sNDxw4YzFv3MQyR"
+  objectType: "FireZone"
+
+version: "1.0.0"
+tags:
+  - "fire_safety"
+  - "residential"
+  - "zl_iv"
+```
+
+```json [JSON]
+{
+  "documentType": "zone",
+  "entityType": "zone",
+  "id": "ZONE-FIRE-ZL-IV",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "zoneName": "Fire Zone ZL-IV (Residential)",
+  "zoneType": "fire",
+  "buildingId": "BLD-01",
+  "zoneClassification": "ZL-IV",
+  "fireRating": "REI 60",
+  "requirements": [
+    "REQ-PL-FIRE-SEPARATION-001",
+    "REQ-FIRE-ZL-IV-001"
+  ],
+  "description": "Residential fire zone with low fire load (ZL-IV per WT 2021 § 234). Requires REI 60 walls and floors, EI 30 fire doors.",
+  "ifcMapping": {
+    "ifcEntity": "IfcZone",
+    "globalId": "3P5hJ2$sNDxw4YzFv3MQyR",
+    "objectType": "FireZone"
+  },
+  "version": "1.0.0",
+  "tags": ["fire_safety", "residential", "zl_iv"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "zoneName", "zoneCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ZONE-" },
+    "entityType": { "const": "zone" },
+    "zoneName": { "type": "string" },
+    "zoneCategory": {
+      "type": "string",
+      "enum": ["fire", "hvac", "acoustic", "lighting", "security", "cleanroom", "electrical", "smoke"]
+    },
+    "buildingId": { "type": "string" },
+    "containedSpaceIds": { "type": "array" },
+    "requirements": { "type": "array" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Przykład: Skompilowany JSON
 
@@ -361,6 +446,69 @@ Strefy mogą agregować dane z czujnik&oacute;w ze wszystkich zawartych przestrz
   ]
 }
 ```
+
+---
+
+## Typowe Błędy
+
+### ❌ Błąd 1: Ręczne Pisanie `spaceIds`
+
+**Problem**: Ręczne pisanie `spaceIds: ["SP-001", "SP-002"]` w pliku strefy.
+
+**Rozwiązanie**: `spaceIds` jest **auto-obliczane** przez kompilator z `Space.zoneIds` — **nigdy nie pisz tego ręcznie**.
+
+```yaml
+# ❌ Złe: Ręczne wypełnianie
+# zones/strefa-pożarowa-north.md
+spaceIds: ["SP-001", "SP-002"]  # Kompilator to oblicza!
+
+# ✅ Dobre: Pozwól kompilatorowi obliczyć
+# zones/strefa-pożarowa-north.md
+zoneName: "Strefa Pożarowa Północ"
+zoneType: "fire"
+# (spaceIds pozostaw puste — kompilator wypełni)
+
+# spaces/sypialnia-01.md
+zoneIds: ["ZONE-FIRE-NORTH"]  # Kompilator użyje tego do wypełnienia Zone.spaceIds
+```
+
+---
+
+### ❌ Błąd 2: `spaceIds` Pozostaje Puste
+
+**Problem**: `Zone.spaceIds` jest pustą tablicą po kompilacji.
+
+**Przyczyna**: Żadna przestrzeń nie odnosi się do tej strefy poprzez `zoneIds`.
+
+**Rozwiązanie**: Dodaj `zoneIds: ["ZONE-FIRE-NORTH"]` do plików przestrzeni.
+
+```yaml
+# spaces/sypialnia-01.md
+zoneIds:
+  - "ZONE-FIRE-NORTH"  # Referencja wprost
+
+# Kompilator widzi to → wypełnia Zone.spaceIds: ["SP-001"]
+```
+
+---
+
+### ❌ Błąd 3: Nieprawidłowy Format ID Strefy
+
+**Problem**: `zoneIds: ["fire-north"]` w przestrzeni (nie ma prefiksu `ZONE-`).
+
+**Rozwiązanie**: ID stref MUSZĄ mieć prefiks `ZONE-`.
+
+```yaml
+# ❌ Złe
+zoneIds: ["fire-north", "hvac-west"]
+
+# ✅ Dobre
+zoneIds:
+  - "ZONE-FIRE-NORTH"
+  - "ZONE-HVAC-WEST"
+```
+
+---
 
 ## Zobacz Także
 

@@ -183,9 +183,9 @@ type SpaceType =
 
 **Najprostszy możliwy plik przestrzeni** — tylko 6 wymaganych pól:
 
-```markdown
-Plik: spaces/sypialnia-01.md
+::: code-group
 
+```md [Markdown]
 ---
 id: "SP-BLD-01-L01-001"
 entityType: "space"
@@ -202,6 +202,48 @@ version: "1.0.0"
 Standardowa sypialnia na parterze.
 ```
 
+```yaml [YAML]
+id: "SP-BLD-01-L01-001"
+entityType: "space"
+documentType: "space"
+spaceName: "Sypialnia 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "id": "SP-BLD-01-L01-001",
+  "entityType": "space",
+  "documentType": "space",
+  "spaceName": "Sypialnia 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceType": { "type": "string", "enum": ["sleeping_space", "bedroom", "..."] },
+    "buildingId": { "type": "string" },
+    "levelId": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **To wszystko.** To jest prawidłowy plik przestrzeni. Możesz dodać więcej szczegółów później.
 
 ---
@@ -210,9 +252,9 @@ Standardowa sypialnia na parterze.
 
 **Dodanie pól potrzebnych do złożenia pozwolenia:**
 
-```markdown
-Plik: spaces/sypialnia-01.md
+::: code-group
 
+```md [Markdown]
 ---
 id: "SP-BLD-01-L01-001"
 entityType: "space"
@@ -222,8 +264,6 @@ spaceType: "sleeping_space"
 buildingId: "BLD-01"
 levelId: "LVL-01"
 version: "1.0.0"
-
-# Dodane dla zgodności z pozwoleniem
 designArea: 14.5
 designHeight: 2.70
 unit: "m"
@@ -240,6 +280,61 @@ Powierzchnia: 14,5 m², Wysokość: 2,70 m.
 Strefa pożarowa ZL-IV. Spełnia minimum WT 2021 (2,50 m).
 ```
 
+```yaml [YAML]
+id: "SP-BLD-01-L01-001"
+entityType: "space"
+documentType: "space"
+spaceName: "Sypialnia 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+version: "1.0.0"
+designArea: 14.5
+designHeight: 2.70
+unit: "m"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"
+requirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+```
+
+```json [JSON]
+{
+  "id": "SP-BLD-01-L01-001",
+  "entityType": "space",
+  "documentType": "space",
+  "spaceName": "Sypialnia 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "version": "1.0.0",
+  "designArea": 14.5,
+  "designHeight": 2.70,
+  "unit": "m",
+  "zoneIds": ["ZONE-FIRE-ZL-IV"],
+  "requirements": ["REQ-PL-WT-ROOM-HEIGHT-001"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "designArea": { "type": "number", "minimum": 0 },
+    "designHeight": { "type": ["number", "null"], "minimum": 0 },
+    "unit": { "type": "string" },
+    "zoneIds": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "string" } }
+  }
+}
+```
+
+:::
+
 **Zastosowanie:** Ten plik teraz generuje:
 - ✅ Wpis do zestawienia pomieszczeń (powierzchnia, wysokość)
 - ✅ Przypisanie do strefy pożarowej (do rysunków pozwolenia)
@@ -251,7 +346,9 @@ Strefa pożarowa ZL-IV. Spełnia minimum WT 2021 (2,50 m).
 
 **Plik:** `docs/en/examples/green-terrace/spaces/bedroom-01.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space"
 entityType: "space"
@@ -308,28 +405,167 @@ tags:
 
 # Przestrzeń: Bedroom 01
 
-Standardowa sypialnia z oknem p&oacute;łnocnym zapewniającym naturalne doświetlenie.
+Standardowa sypialnia z oknem północnym zapewniającym naturalne doświetlenie.
 
 ## Parametry Projektowe
 
-- Powierzchnia podłogi: 14.5 m&sup2;
+- Powierzchnia podłogi: 14.5 m²
 - Wysokość w świetle: 2.70 m
-- Objętość: 39.15 m&sup3;
+- Objętość: 39.15 m³
 
 ## Wymagania
 
 Ta przestrzeń musi spełniać:
-- Minimalny wsp&oacute;łczynnik doświetlenia 2% (EN 17037)
+- Minimalny współczynnik doświetlenia 2% (EN 17037)
 - Izolacja akustyczna klasy B (ISO 140-4)
-- Wysokość pomieszczenia ≥ 2.50 m (WT 2021 &sect; 132)
-- Komfort cieplny 20-26&deg;C (EN 16798-1)
+- Wysokość pomieszczenia ≥ 2.50 m (WT 2021 § 132)
+- Komfort cieplny 20-26°C (EN 16798-1)
 
 ## Przypisania do Stref
 
 - **Strefa pożarowa:** ZL-IV (niskie obciążenie ogniowe, mieszkalna)
-- **Strefa HVAC:** P&oacute;łnocna (wentylacja mechaniczna nawiewno-wywiewna)
+- **Strefa HVAC:** Północna (wentylacja mechaniczna nawiewno-wywiewna)
 - **Strefa akustyczna:** Nocna (zwiększona ochrona akustyczna)
 ```
+
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-001"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"
+  - "ZONE-HVAC-NORTH"
+  - "ZONE-ACOUSTIC-NIGHT"
+
+designArea: 14.5
+designHeight: 2.70
+designVolume: 39.15
+unit: "m"
+
+requirements:
+  - "REQ-DAYLIGHT-SLEEPING-001"
+  - "REQ-ACOUSTIC-SLEEPING-001"
+  - "REQ-THERMAL-COMFORT-001"
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+
+occupancy:
+  maxOccupants: 2
+  usagePattern: "residential_sleeping"
+  hoursPerDay: 8
+  daysPerWeek: 7
+
+maintenanceZone: "MAINT-ZONE-RESIDENTIAL"
+accessRestrictions: "tenant_only"
+
+adjacentSpaces:
+  - id: "SP-BLD-01-L01-002"
+    relationship: "shares_wall"
+  - id: "SP-BLD-01-L01-CORR"
+    relationship: "connects_via_door"
+
+ifcMapping:
+  ifcEntity: "IfcSpace"
+  globalId: "2O3fG9$rLBxv3VxEu2LPxQ"
+  objectType: "Bedroom"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "sleeping"
+  - "north-facing"
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-001",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "spaceName": "Bedroom 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": ["ZONE-FIRE-ZL-IV", "ZONE-HVAC-NORTH", "ZONE-ACOUSTIC-NIGHT"],
+  "designArea": 14.5,
+  "designHeight": 2.70,
+  "designVolume": 39.15,
+  "unit": "m",
+  "requirements": [
+    "REQ-DAYLIGHT-SLEEPING-001",
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-THERMAL-COMFORT-001",
+    "REQ-PL-WT-ROOM-HEIGHT-001"
+  ],
+  "occupancy": {
+    "maxOccupants": 2,
+    "usagePattern": "residential_sleeping",
+    "hoursPerDay": 8,
+    "daysPerWeek": 7
+  },
+  "maintenanceZone": "MAINT-ZONE-RESIDENTIAL",
+  "accessRestrictions": "tenant_only",
+  "adjacentSpaces": [
+    { "id": "SP-BLD-01-L01-002", "relationship": "shares_wall" },
+    { "id": "SP-BLD-01-L01-CORR", "relationship": "connects_via_door" }
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcSpace",
+    "globalId": "2O3fG9$rLBxv3VxEu2LPxQ",
+    "objectType": "Bedroom"
+  },
+  "version": "1.0.0",
+  "tags": ["residential", "sleeping", "north-facing"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceType": { "type": "string", "enum": ["sleeping_space", "..."] },
+    "designArea": { "type": "number", "minimum": 0 },
+    "designHeight": { "type": ["number", "null"], "minimum": 0 },
+    "designVolume": { "type": "number", "minimum": 0 },
+    "zoneIds": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "occupancy": {
+      "type": "object",
+      "properties": {
+        "maxOccupants": { "type": "integer", "minimum": 0 },
+        "usagePattern": { "type": "string" },
+        "hoursPerDay": { "type": "number" },
+        "daysPerWeek": { "type": "integer" }
+      }
+    },
+    "adjacentSpaces": {
+      "type": "array",
+      "items": {
+        "required": ["id", "relationship"],
+        "properties": {
+          "id": { "type": "string" },
+          "relationship": { "type": "string", "enum": ["shares_wall", "connects_via_door", "..."] }
+        }
+      }
+    },
+    "ifcMapping": { "type": "object" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  }
+}
+```
+
+:::
 
 ## Przykład: Skompilowany JSON
 
@@ -1193,6 +1429,154 @@ designHeight_meta:
 ```
 
 Pełny przewodnik: [Proweniencja danych](/pl/przewodniki/proweniencja-danych)
+
+---
+
+## Typowe Błędy
+
+### ❌ Błąd 1: Nie Używanie Typów Przestrzeni Dla Powtarzających Się Pomieszczeń
+
+**Problem**: 50 identycznych sypialni, każda z pełnymi specyfikacjami (wykończenia, wymagania, wyposażenie) = 14 000 linii powtórzeń.
+
+**Rozwiązanie**: Utwórz **Typ Przestrzeni** z wspólnymi specyfikacjami, sypialnie tylko odnoszą się do typu.
+
+```yaml
+# ❌ Złe: 50 × 280 linii = 14 000 linii
+# spaces/sypialnia-01.md
+finishes: { floor: "Dąb", walls: "Biały", ... }
+requirements: ["REQ-DAYLIGHT", "REQ-ACOUSTIC", ...]
+
+# ✅ Dobre: Typ (210 linii) + 50 × instancje (50 linii) = 2710 linii
+# templates/space-types/sypialnia-standard.md
+finishes: { floor: "Dąb", walls: "Biały", ... }
+
+# spaces/sypialnia-01.md
+spaceTypeId: "ST-BEDROOM-STANDARD"
+designArea: 14.5  # Tylko dane specyficzne dla instancji
+```
+
+---
+
+### ❌ Błąd 2: Niewłaściwy Format ID
+
+**Problem**: `id: "sypialnia-01"` lub `id: "001"` (brak prefiksu budynku/poziomu)
+
+**Rozwiązanie**: Przestrzenie MUSZĄ mieć format `SP-{building}-{level}-{number}`
+
+```yaml
+# ❌ Złe
+id: "sypialnia-01"
+id: "001"
+id: "SP-001"  # Brak budynku/poziomu
+
+# ✅ Dobre
+id: "SP-BLD-01-L01-001"  # Budynek 01, Poziom 01, Przestrzeń 001
+id: "SP-BLD-02-L03-042"  # Budynek 02, Poziom 03, Przestrzeń 042
+```
+
+---
+
+### ❌ Błąd 3: Ręczne Wypełnianie Auto-Obliczanych Pól
+
+**Problem**: Ręczne pisanie `levelIds` dla przestrzeni wielopoziomowych lub `isMultiLevel`.
+
+**Rozwiązanie**: Kompilator auto-oblicza te pola — **nie pisz ich ręcznie**.
+
+```yaml
+# ❌ Złe: Ręczne wypełnianie
+levelIds: ["LVL-01", "LVL-02"]  # Kompilator to oblicza!
+isMultiLevel: true               # Kompilator to oblicza!
+
+# ✅ Dobre: Pozwól kompilatorowi obliczyć
+# Dla przestrzeni wielopoziomowych, kompilator wykrywa z geometrii
+# lub ustaw jeśli znane:
+levelIds: ["LVL-01", "LVL-02"]  # OK jeśli świadomie ustawiasz
+```
+
+---
+
+### ❌ Błąd 4: Pomyłka W Dziedziczeniu
+
+**Problem**: Oczekiwanie wartości `designHeight` z typu przestrzeni, ale typ nie ma `areaGuidelines.targetHeight`.
+
+**Rozwiązanie**: Przestrzenie dziedziczą `designHeight` z **kondygnacji** (`typicalCeilingHeight`), NIE z typu przestrzeni (chyba że typ definiuje `areaGuidelines.targetHeight`).
+
+**Kolejność pierwszeństwa**:
+1. `designHeight` przestrzeni (jawne)
+2. `areaGuidelines.targetHeight` typu przestrzeni
+3. `typicalCeilingHeight` kondygnacji ← Najczęstsze źródło
+
+```yaml
+# Kondygnacja
+typicalCeilingHeight: 2.70
+
+# Przestrzeń (dziedziczy z kondygnacji)
+levelId: "LVL-01"
+# Kompilator ustawi designHeight: 2.70 z kondygnacji
+```
+
+---
+
+### ❌ Błąd 5: Nieprawidłowe Referencje Stref
+
+**Problem**: Pisanie `zoneIds: ["fire-zone-north"]` (nie jest prawidłowym ID strefy).
+
+**Rozwiązanie**: `zoneIds` musi odwoływać się do faktycznych ID stref z prefiksem `ZONE-`.
+
+```yaml
+# ❌ Złe
+zoneIds: ["fire-zone", "hvac-zone"]  # Brak prefiksu ZONE-
+
+# ✅ Dobre
+zoneIds:
+  - "ZONE-FIRE-ZL-IV-NORTH"
+  - "ZONE-HVAC-WEST-L01"
+```
+
+---
+
+### ❌ Błąd 6: Scalanie vs Zastępowanie Mylone
+
+**Problem**: Oczekiwanie, że `finishes: { floor: "Płytki" }` w przestrzeni zastąpi **wszystkie** wykończenia z typu.
+
+**Rozwiązanie**: Obiekty są **scalane** (nie zastępowane). Określ tylko klucze do nadpisania.
+
+```yaml
+# Typ definiuje
+finishes:
+  floor: "Dąb"
+  walls: "Biały"
+  ceiling: "Napinany"
+
+# Przestrzeń nadpisuje
+finishes:
+  floor: "Płytki"  # Nadpisuje tylko podłogę
+
+# Wynik: floor="Płytki", walls="Biały", ceiling="Napinany"
+```
+
+---
+
+### ❌ Błąd 7: Niewłaściwe Wartości Enum
+
+**Problem**: `spaceType: "bedroom"` (nie jest prawidłowym enumem).
+
+**Rozwiązanie**: Użyj prawidłowych wartości enum (np. `sleeping_space`, nie `bedroom`).
+
+```yaml
+# ❌ Złe
+spaceType: "bedroom"      # Nie jest prawidłowym enumem
+spaceType: "office"       # Nie jest prawidłowym enumem
+
+# ✅ Dobre
+spaceType: "sleeping_space"     # Prawidłowy enum
+spaceType: "office_space"       # Prawidłowy enum
+spaceType: "food_preparation"   # Prawidłowy enum
+```
+
+**Sprawdź pełną listę**: [Schema `/enum/spaceType`]
+
+---
 
 ## Zobacz Także
 

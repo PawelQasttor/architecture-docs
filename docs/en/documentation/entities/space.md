@@ -388,9 +388,9 @@ bedroom-01:
 
 **The simplest possible space file** — just the 6 required fields:
 
-```markdown
-File: spaces/bedroom-01.md
+::: code-group
 
+```md [Markdown]
 ---
 id: "SP-BLD-01-L01-001"
 entityType: "space"
@@ -407,6 +407,48 @@ version: "1.0.0"
 Standard bedroom on ground floor.
 ```
 
+```yaml [YAML]
+id: "SP-BLD-01-L01-001"
+entityType: "space"
+documentType: "space"
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "id": "SP-BLD-01-L01-001",
+  "entityType": "space",
+  "documentType": "space",
+  "spaceName": "Bedroom 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceType": { "type": "string", "enum": ["sleeping_space", "bedroom", "..."] },
+    "buildingId": { "type": "string" },
+    "levelId": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **That's it.** This is a valid space file. You can add more details later.
 
 ---
@@ -415,9 +457,9 @@ Standard bedroom on ground floor.
 
 **Adding the fields you need for permit submission:**
 
-```markdown
-File: spaces/bedroom-01.md
+::: code-group
 
+```md [Markdown]
 ---
 id: "SP-BLD-01-L01-001"
 entityType: "space"
@@ -427,8 +469,6 @@ spaceType: "sleeping_space"
 buildingId: "BLD-01"
 levelId: "LVL-01"
 version: "1.0.0"
-
-# Added for permit compliance
 designArea: 14.5
 designHeight: 2.70
 unit: "m"
@@ -445,6 +485,61 @@ Floor area: 14.5 m², Clear height: 2.70 m.
 Fire zone ZL-IV. Meets WT 2021 minimum height (2.50 m).
 ```
 
+```yaml [YAML]
+id: "SP-BLD-01-L01-001"
+entityType: "space"
+documentType: "space"
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+version: "1.0.0"
+designArea: 14.5
+designHeight: 2.70
+unit: "m"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"
+requirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+```
+
+```json [JSON]
+{
+  "id": "SP-BLD-01-L01-001",
+  "entityType": "space",
+  "documentType": "space",
+  "spaceName": "Bedroom 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "version": "1.0.0",
+  "designArea": 14.5,
+  "designHeight": 2.70,
+  "unit": "m",
+  "zoneIds": ["ZONE-FIRE-ZL-IV"],
+  "requirements": ["REQ-PL-WT-ROOM-HEIGHT-001"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "designArea": { "type": "number", "minimum": 0 },
+    "designHeight": { "type": ["number", "null"], "minimum": 0 },
+    "unit": { "type": "string" },
+    "zoneIds": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "string" } }
+  }
+}
+```
+
+:::
+
 **Use case:** This file now generates:
 - ✅ Room schedule entry (area, height)
 - ✅ Fire zone assignment (for permit drawings)
@@ -456,7 +551,9 @@ Fire zone ZL-IV. Meets WT 2021 minimum height (2.50 m).
 
 **File:** `docs/en/examples/green-terrace/spaces/bedroom-01.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space"
 entityType: "space"
@@ -536,11 +633,152 @@ This space must satisfy:
 - **Acoustic Zone:** Night (enhanced acoustic protection)
 ```
 
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-001"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+spaceName: "Bedroom 01"
+spaceType: "sleeping_space"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"
+  - "ZONE-HVAC-NORTH"
+  - "ZONE-ACOUSTIC-NIGHT"
+
+designArea: 14.5
+designHeight: 2.70
+designVolume: 39.15
+unit: "m"
+
+requirements:
+  - "REQ-DAYLIGHT-SLEEPING-001"
+  - "REQ-ACOUSTIC-SLEEPING-001"
+  - "REQ-THERMAL-COMFORT-001"
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+
+occupancy:
+  maxOccupants: 2
+  usagePattern: "residential_sleeping"
+  hoursPerDay: 8
+  daysPerWeek: 7
+
+maintenanceZone: "MAINT-ZONE-RESIDENTIAL"
+accessRestrictions: "tenant_only"
+
+adjacentSpaces:
+  - id: "SP-BLD-01-L01-002"
+    relationship: "shares_wall"
+  - id: "SP-BLD-01-L01-CORR"
+    relationship: "connects_via_door"
+
+ifcMapping:
+  ifcEntity: "IfcSpace"
+  globalId: "2O3fG9$rLBxv3VxEu2LPxQ"
+  objectType: "Bedroom"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "sleeping"
+  - "north-facing"
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-001",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "spaceName": "Bedroom 01",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": ["ZONE-FIRE-ZL-IV", "ZONE-HVAC-NORTH", "ZONE-ACOUSTIC-NIGHT"],
+  "designArea": 14.5,
+  "designHeight": 2.70,
+  "designVolume": 39.15,
+  "unit": "m",
+  "requirements": [
+    "REQ-DAYLIGHT-SLEEPING-001",
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-THERMAL-COMFORT-001",
+    "REQ-PL-WT-ROOM-HEIGHT-001"
+  ],
+  "occupancy": {
+    "maxOccupants": 2,
+    "usagePattern": "residential_sleeping",
+    "hoursPerDay": 8,
+    "daysPerWeek": 7
+  },
+  "maintenanceZone": "MAINT-ZONE-RESIDENTIAL",
+  "accessRestrictions": "tenant_only",
+  "adjacentSpaces": [
+    { "id": "SP-BLD-01-L01-002", "relationship": "shares_wall" },
+    { "id": "SP-BLD-01-L01-CORR", "relationship": "connects_via_door" }
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcSpace",
+    "globalId": "2O3fG9$rLBxv3VxEu2LPxQ",
+    "objectType": "Bedroom"
+  },
+  "version": "1.0.0",
+  "tags": ["residential", "sleeping", "north-facing"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceType": { "type": "string", "enum": ["sleeping_space", "..."] },
+    "designArea": { "type": "number", "minimum": 0 },
+    "designHeight": { "type": ["number", "null"], "minimum": 0 },
+    "designVolume": { "type": "number", "minimum": 0 },
+    "zoneIds": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "occupancy": {
+      "type": "object",
+      "properties": {
+        "maxOccupants": { "type": "integer", "minimum": 0 },
+        "usagePattern": { "type": "string" },
+        "hoursPerDay": { "type": "number" },
+        "daysPerWeek": { "type": "integer" }
+      }
+    },
+    "adjacentSpaces": {
+      "type": "array",
+      "items": {
+        "required": ["id", "relationship"],
+        "properties": {
+          "id": { "type": "string" },
+          "relationship": { "type": "string", "enum": ["shares_wall", "connects_via_door", "..."] }
+        }
+      }
+    },
+    "ifcMapping": { "type": "object" },
+    "tags": { "type": "array", "items": { "type": "string" } }
+  }
+}
+```
+
+:::
+
 ## Example 4: Operating Room with v0.3.0 Fields
 
 **A healthcare operating room using new v0.3.0 features** -- structured finishes, expanded environmental conditions, shielding, and directional adjacency:
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space"
 entityType: "space"
@@ -568,7 +806,6 @@ requirements:
   - "REQ-FIRE-SEPARATION-OR"
   - "REQ-HVAC-OR-LAMINAR"
 
-# Structured finishes (v0.3.0)
 finishes:
   floor:
     material: "seamless vinyl"
@@ -592,7 +829,6 @@ finishes:
     fireClass: "A2-s1,d0"
     cleanability: "cleanroom"
 
-# Expanded environmental conditions (v0.3.0)
 environmentalConditions:
   temperatureRange: { min: 18, max: 24, unit: "C" }
   humidityRange: { min: 30, max: 60 }
@@ -605,7 +841,6 @@ environmentalConditions:
   laminarFlow: true
   operatingRoomClass: "class_ia"
 
-# Shielding (v0.3.0)
 shielding:
   radiological:
     required: false
@@ -614,7 +849,6 @@ shielding:
   acousticIsolation:
     requiredRw: 50
 
-# Expanded adjacency (v0.3.0)
 adjacentSpaces:
   - id: "SP-BLD-01-L03-ANTEROOM-01"
     relationship: "connects_via_airlock"
@@ -659,6 +893,193 @@ Class Ia operating room (DIN 1946-4) with laminar flow canopy.
 - Positive pressure +15 Pa vs. corridor
 - Seamless vinyl flooring with cove base, antimicrobial HPL walls
 ```
+
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L03-OR-01"
+spaceName: "Operating Room 01"
+spaceType: "operating_room"
+buildingId: "BLD-01"
+levelId: "LVL-03"
+departmentId: "DEPT-SURGERY"
+version: "1.0.0"
+
+designArea: 42.0
+designHeight: 3.00
+unit: "m"
+electricalSafetyGroup: "group_2"
+
+zoneIds:
+  - "ZONE-FIRE-ZL-II"
+  - "ZONE-CLEANROOM-OR"
+  - "ZONE-MED-ELEC-GROUP2"
+
+requirements:
+  - "REQ-OR-CLASS-IA-001"
+  - "REQ-FIRE-SEPARATION-OR"
+  - "REQ-HVAC-OR-LAMINAR"
+
+finishes:
+  floor:
+    material: "seamless vinyl"
+    productCode: "Tarkett iQ Granit SD"
+    fireClass: "Bfl-s1"
+    antimicrobial: true
+    cleanability: "cleanroom"
+  walls:
+    material: "HPL panel"
+    fireClass: "B-s1,d0"
+    antimicrobial: true
+  ceiling:
+    material: "sealed laminar flow canopy"
+    fireClass: "A2-s1,d0"
+
+environmentalConditions:
+  temperatureRange: { min: 18, max: 24, unit: "C" }
+  humidityRange: { min: 30, max: 60 }
+  pressurization: "positive"
+  cleanlinessClass: "ISO 7"
+  airChangesPerHour: 20
+  freshAirPercentage: 100
+  filtrationClass: "HEPA H14"
+  pressureDifferentialPa: 15
+  laminarFlow: true
+  operatingRoomClass: "class_ia"
+
+shielding:
+  radiological: { required: false }
+  rfShielding: { required: false }
+  acousticIsolation: { requiredRw: 50 }
+
+adjacentSpaces:
+  - id: "SP-BLD-01-L03-ANTEROOM-01"
+    relationship: "connects_via_airlock"
+    boundaryType: "airlock"
+    fireRating: "EI 60"
+  - id: "SP-BLD-01-L03-SCRUB"
+    relationship: "connects_via_door"
+    boundaryType: "interlock_door"
+  - id: "SP-BLD-01-L03-CSSD-CLEAN"
+    relationship: "clean_supply_to"
+    boundaryType: "pass_through_hatch"
+  - id: "SP-BLD-01-L03-DIRTY-CORR"
+    relationship: "dirty_return_from"
+    boundaryType: "pass_through_hatch"
+  - id: "SP-BLD-01-L03-OR-02"
+    relationship: "shares_wall"
+    boundaryType: "fire_wall"
+    fireRating: "REI 60"
+
+occupancy:
+  maxOccupants: 10
+  usagePattern: "healthcare_surgical"
+  hoursPerDay: 10
+  daysPerWeek: 5
+
+tags: ["healthcare", "surgery", "cleanroom", "laminar-flow"]
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L03-OR-01",
+  "spaceName": "Operating Room 01",
+  "spaceType": "operating_room",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-03",
+  "departmentId": "DEPT-SURGERY",
+  "version": "1.0.0",
+  "designArea": 42.0,
+  "designHeight": 3.00,
+  "unit": "m",
+  "electricalSafetyGroup": "group_2",
+  "zoneIds": ["ZONE-FIRE-ZL-II", "ZONE-CLEANROOM-OR", "ZONE-MED-ELEC-GROUP2"],
+  "requirements": ["REQ-OR-CLASS-IA-001", "REQ-FIRE-SEPARATION-OR", "REQ-HVAC-OR-LAMINAR"],
+  "finishes": {
+    "floor": {
+      "material": "seamless vinyl",
+      "productCode": "Tarkett iQ Granit SD",
+      "fireClass": "Bfl-s1",
+      "antimicrobial": true,
+      "cleanability": "cleanroom"
+    },
+    "walls": {
+      "material": "HPL panel",
+      "fireClass": "B-s1,d0",
+      "antimicrobial": true
+    },
+    "ceiling": {
+      "material": "sealed laminar flow canopy",
+      "fireClass": "A2-s1,d0"
+    }
+  },
+  "environmentalConditions": {
+    "temperatureRange": { "min": 18, "max": 24, "unit": "C" },
+    "humidityRange": { "min": 30, "max": 60 },
+    "pressurization": "positive",
+    "cleanlinessClass": "ISO 7",
+    "airChangesPerHour": 20,
+    "freshAirPercentage": 100,
+    "filtrationClass": "HEPA H14",
+    "pressureDifferentialPa": 15,
+    "laminarFlow": true,
+    "operatingRoomClass": "class_ia"
+  },
+  "shielding": {
+    "radiological": { "required": false },
+    "rfShielding": { "required": false },
+    "acousticIsolation": { "requiredRw": 50 }
+  },
+  "adjacentSpaces": [
+    { "id": "SP-BLD-01-L03-ANTEROOM-01", "relationship": "connects_via_airlock", "boundaryType": "airlock", "fireRating": "EI 60" },
+    { "id": "SP-BLD-01-L03-SCRUB", "relationship": "connects_via_door", "boundaryType": "interlock_door" },
+    { "id": "SP-BLD-01-L03-CSSD-CLEAN", "relationship": "clean_supply_to", "boundaryType": "pass_through_hatch" },
+    { "id": "SP-BLD-01-L03-DIRTY-CORR", "relationship": "dirty_return_from", "boundaryType": "pass_through_hatch" },
+    { "id": "SP-BLD-01-L03-OR-02", "relationship": "shares_wall", "boundaryType": "fire_wall", "fireRating": "REI 60" }
+  ],
+  "occupancy": {
+    "maxOccupants": 10,
+    "usagePattern": "healthcare_surgical",
+    "hoursPerDay": 10,
+    "daysPerWeek": 5
+  },
+  "tags": ["healthcare", "surgery", "cleanroom", "laminar-flow"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceType": { "type": "string", "enum": ["operating_room", "..."] },
+    "departmentId": { "type": "string" },
+    "electricalSafetyGroup": { "type": "string", "enum": ["standard", "group_0", "group_1", "group_2"] },
+    "finishes": { "type": "object", "properties": { "floor": {}, "walls": {}, "ceiling": {} } },
+    "environmentalConditions": { "$ref": "#/definitions/environmentalConditionsSpec" },
+    "shielding": { "$ref": "#/definitions/shieldingSpec" },
+    "adjacentSpaces": {
+      "type": "array",
+      "items": {
+        "required": ["id", "relationship"],
+        "properties": {
+          "id": { "type": "string" },
+          "relationship": { "type": "string" },
+          "boundaryType": { "type": "string" },
+          "fireRating": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+```
+
+:::
 
 ---
 
@@ -857,7 +1278,9 @@ Sensors bind to space IDs for runtime monitoring:
 
 **File:** `templates/space-types/standard-bedroom-type-a.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space_type"
 entityType: "space_type"
@@ -865,7 +1288,6 @@ id: "ST-BEDROOM-STANDARD-A"
 typeName: "Standard Bedroom - Type A"
 spaceType: "sleeping_space"
 
-# TEMPLATE SPECIFICATIONS (inherited by all instances)
 requirements:
   - "REQ-DAYLIGHT-SLEEPING-001"
   - "REQ-ACOUSTIC-SLEEPING-001"
@@ -900,28 +1322,134 @@ version: "1.0.0"
 
 # Space Type: Standard Bedroom - Type A
 
-[Complete specifications defined once...]
+Complete specifications defined once, inherited by all instances.
 ```
+
+```yaml [YAML]
+documentType: "space_type"
+entityType: "space_type"
+id: "ST-BEDROOM-STANDARD-A"
+typeName: "Standard Bedroom - Type A"
+spaceType: "sleeping_space"
+
+requirements:
+  - "REQ-DAYLIGHT-SLEEPING-001"
+  - "REQ-ACOUSTIC-SLEEPING-001"
+  - "REQ-THERMAL-COMFORT-001"
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+
+finishes:
+  floor: "MAT-FLOOR-OAK-01"
+  walls: "MAT-WALL-PAINT-WHITE"
+  ceiling: "MAT-CEILING-PAINT-WHITE"
+  door: "DOOR-INT-AC-01"
+  window: "WINDOW-TYPE-A"
+
+equipment:
+  - category: "safety"
+    description: "Optical smoke detector"
+    quantity: 1
+
+occupancyProfile:
+  maxOccupants: 2
+  usagePattern: "residential_sleeping"
+  hoursPerDay: 8
+
+typicalArea:
+  min: 10.0
+  max: 18.0
+  typical: 14.0
+  unit: "m2"
+
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "space_type",
+  "entityType": "space_type",
+  "id": "ST-BEDROOM-STANDARD-A",
+  "typeName": "Standard Bedroom - Type A",
+  "spaceType": "sleeping_space",
+  "requirements": [
+    "REQ-DAYLIGHT-SLEEPING-001",
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-THERMAL-COMFORT-001",
+    "REQ-PL-WT-ROOM-HEIGHT-001"
+  ],
+  "finishes": {
+    "floor": "MAT-FLOOR-OAK-01",
+    "walls": "MAT-WALL-PAINT-WHITE",
+    "ceiling": "MAT-CEILING-PAINT-WHITE",
+    "door": "DOOR-INT-AC-01",
+    "window": "WINDOW-TYPE-A"
+  },
+  "equipment": [
+    { "category": "safety", "description": "Optical smoke detector", "quantity": 1 }
+  ],
+  "occupancyProfile": {
+    "maxOccupants": 2,
+    "usagePattern": "residential_sleeping",
+    "hoursPerDay": 8
+  },
+  "typicalArea": {
+    "min": 10.0,
+    "max": 18.0,
+    "typical": 14.0,
+    "unit": "m2"
+  },
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "typeName", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ST-[A-Z0-9-]+$" },
+    "entityType": { "const": "space_type" },
+    "typeName": { "type": "string" },
+    "spaceType": { "type": "string" },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "finishes": { "type": "object" },
+    "equipment": { "type": "array" },
+    "occupancyProfile": { "type": "object" },
+    "typicalArea": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "typical": { "type": "number" },
+        "unit": { "type": "string" }
+      }
+    }
+  }
+}
+```
+
+:::
 
 ### 2. Create Lightweight Instances
 
 **File:** `spaces/bedroom-01.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space"
 entityType: "space"
 id: "SP-BLD-01-L01-001"
 
 spaceName: "Bedroom 01"
-spaceTypeId: "ST-BEDROOM-STANDARD-A"  # ← Reference to type!
+spaceTypeId: "ST-BEDROOM-STANDARD-A"
 
-# INSTANCE-SPECIFIC DATA ONLY
 buildingId: "BLD-01"
 levelId: "LVL-01"
 zoneIds: ["ZONE-FIRE-ZL-IV", "ZONE-HVAC-NORTH"]
 
-designArea: 14.5  # Actual area for this instance
+designArea: 14.5
 designHeight: 2.70
 designVolume: 39.15
 
@@ -936,7 +1464,7 @@ version: "2.0.0"
 
 **Type:** Standard Bedroom - Type A (see type definition file)
 
-Inherits all specifications from type. See type definition for complete requirements, finishes, and equipment.
+Inherits all specifications from type.
 
 ## Instance Details
 - Area: 14.5 m² (within type range)
@@ -944,19 +1472,78 @@ Inherits all specifications from type. See type definition for complete requirem
 - Orientation: North-facing
 ```
 
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+spaceTypeId: "ST-BEDROOM-STANDARD-A"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+zoneIds: ["ZONE-FIRE-ZL-IV", "ZONE-HVAC-NORTH"]
+designArea: 14.5
+designHeight: 2.70
+designVolume: 39.15
+adjacentSpaces:
+  - id: "SP-BLD-01-L01-002"
+    relationship: "shares_wall"
+version: "2.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-001",
+  "spaceName": "Bedroom 01",
+  "spaceTypeId": "ST-BEDROOM-STANDARD-A",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": ["ZONE-FIRE-ZL-IV", "ZONE-HVAC-NORTH"],
+  "designArea": 14.5,
+  "designHeight": 2.70,
+  "designVolume": 39.15,
+  "adjacentSpaces": [
+    { "id": "SP-BLD-01-L01-002", "relationship": "shares_wall" }
+  ],
+  "version": "2.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceTypeId": { "type": "string", "description": "Reference to Space Type for inherited specs" },
+    "buildingId": { "type": "string" },
+    "levelId": { "type": "string" },
+    "designArea": { "type": "number", "minimum": 0 },
+    "adjacentSpaces": { "type": "array" }
+  }
+}
+```
+
+:::
+
 **File:** `spaces/bedroom-02.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "space"
 entityType: "space"
 id: "SP-BLD-01-L01-002"
 spaceName: "Bedroom 02"
-spaceTypeId: "ST-BEDROOM-STANDARD-A"  # ← Same type!
+spaceTypeId: "ST-BEDROOM-STANDARD-A"
 
 buildingId: "BLD-01"
 levelId: "LVL-01"
-designArea: 12.8  # Different area
+designArea: 12.8
 
 version: "2.0.0"
 ---
@@ -967,6 +1554,48 @@ version: "2.0.0"
 
 Inherits specifications from type.
 ```
+
+```yaml [YAML]
+documentType: "space"
+entityType: "space"
+id: "SP-BLD-01-L01-002"
+spaceName: "Bedroom 02"
+spaceTypeId: "ST-BEDROOM-STANDARD-A"
+buildingId: "BLD-01"
+levelId: "LVL-01"
+designArea: 12.8
+version: "2.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "space",
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-002",
+  "spaceName": "Bedroom 02",
+  "spaceTypeId": "ST-BEDROOM-STANDARD-A",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "designArea": 12.8,
+  "version": "2.0.0"
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "spaceName", "buildingId", "levelId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^(SP|SPC)-[A-Z0-9-]+$" },
+    "entityType": { "const": "space" },
+    "spaceName": { "type": "string" },
+    "spaceTypeId": { "type": "string" },
+    "designArea": { "type": "number", "minimum": 0 }
+  }
+}
+```
+
+:::
 
 ### Benefits
 
@@ -1455,6 +2084,50 @@ constructionPackageId: "CP-FINISHES"
 ```
 
 See [Project Specification](/en/examples/green-terrace/project-specification) for package definitions.
+
+---
+
+## Common Mistakes
+
+::: danger ❌ Mistake #1: Not Using Space Types for Repeating Rooms
+**Problem**: Copy-pasting the same requirements, finishes, and equipment specs across 50 bedroom files.
+
+**Why it's bad**: Update requirement → edit 50 files. Risk of inconsistency.
+
+**Fix**: Create a Space Type, reference it from instances (see [Property Inheritance Guide](/en/guides/property-inheritance))
+:::
+
+::: danger ❌ Mistake #2: Wrong ID Format
+**Problem**: Using `"bedroom1"` instead of `"SP-BLD-01-L01-001"`
+
+**Fix**: Use standard format `SP-{building}-{level}-{number}`
+:::
+
+::: danger ❌ Mistake #3: Manually Populating Auto-Computed Fields
+**Problem**: Trying to list `assetIds` in space file.
+
+**Fix**: Let compiler compute it from `Asset.spaceId` forward references
+:::
+
+::: danger ❌ Mistake #4: Not Knowing Values Are Inherited
+**Problem**: Space has `designHeight: 2.70` but you never set it (inherited from `level.typicalCeilingHeight`)
+
+**Fix**: Check level file or set explicitly. Use `npm run compile -- --verbose` to see inherited values
+:::
+
+::: danger ❌ Mistake #5: Wrong Zone Reference
+**Problem**: `zoneIds: ["ZONE-FIRE-ZL-4"]` but zone file is `ZONE-FIRE-ZL-IV`
+
+**Fix**: Match zone ID exactly (case-sensitive)
+:::
+
+::: danger ❌ Mistake #6: Wrong spaceType Enum Value
+**Problem**: Using `"bedroom"` instead of `"sleeping_space"`
+
+**Fix**: Use exact enum values from [Space Types Enum](#space-types-enum) section
+:::
+
+---
 
 ## See Also
 

@@ -230,9 +230,9 @@ sypialnia-01:
 
 **Najprostszy plik poziomu — parter:**
 
-```markdown
-Plik: levels/level-01.md
+::: code-group
 
+```yaml [Markdown]
 ---
 id: "LVL-01"
 entityType: "level"
@@ -242,7 +242,6 @@ buildingId: "BLD-01"
 elevation: 0.0
 elevationUnit: "m"
 version: "1.0.0"
-
 # Dla pozwolenia/zestawień
 levelNumber: 0
 levelHeight: 3.20
@@ -254,6 +253,75 @@ grossFloorArea: 1250
 Kondygnacja wejściowa główna z holem i lokalami mieszkalnymi.
 ```
 
+```yaml [YAML]
+id: "LVL-01"
+entityType: "level"
+documentType: "level"
+levelName: "Kondygnacja 01 (Parter)"
+buildingId: "BLD-01"
+elevation: 0.0
+elevationUnit: "m"
+version: "1.0.0"
+levelNumber: 0
+levelHeight: 3.20
+grossFloorArea: 1250
+```
+
+```json [JSON]
+{
+  "id": "LVL-01",
+  "entityType": "level",
+  "documentType": "level",
+  "levelName": "Kondygnacja 01 (Parter)",
+  "buildingId": "BLD-01",
+  "elevation": 0.0,
+  "elevationUnit": "m",
+  "version": "1.0.0",
+  "levelNumber": 0,
+  "levelHeight": 3.20,
+  "grossFloorArea": 1250
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "levelName", "levelNumber", "buildingId", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^LVL-"
+    },
+    "entityType": {
+      "const": "level"
+    },
+    "levelName": {
+      "type": "string"
+    },
+    "levelNumber": {
+      "type": "integer"
+    },
+    "buildingId": {
+      "type": "string"
+    },
+    "elevation": {
+      "type": "number"
+    },
+    "floorToFloorHeight": {
+      "type": "number"
+    },
+    "grossFloorArea": {
+      "type": "number"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
+
 **To wszystko.** Gdy pomieszczenia odwołują się do `LVL-01`, automatycznie pojawiają się na liście pomieszczeń tej kondygnacji.
 
 ---
@@ -262,9 +330,9 @@ Kondygnacja wejściowa główna z holem i lokalami mieszkalnymi.
 
 **Zdefiniuj typowe właściwości raz — wszystkie pomieszczenia dziedziczą:**
 
-```markdown
-Plik: levels/level-02.md
+::: code-group
 
+```yaml [Markdown]
 ---
 id: "LVL-02"
 entityType: "level"
@@ -274,19 +342,15 @@ buildingId: "BLD-01"
 elevation: 3.20
 elevationUnit: "m"
 version: "1.0.0"
-
 levelNumber: 1
 levelHeight: 3.00
 grossFloorArea: 1200
-
-# ⭐ Właściwości dziedziczone (NOWOŚĆ v0.1.4)
-typicalCeilingHeight: 2.70    # Wszystkie pomieszczenia dziedziczą to jako designHeight
+typicalCeilingHeight: 2.70
 typicalFinishes:
   floor: "deska_inzynierska_dab_naturalny"
   walls: "farba_biala_matowa"
   ceiling: "farba_biala_matowa"
   baseboard: "mdf_bialy_120mm"
-
 typicalEnvironmentalConditions:
   temperatureRange:
     min: 20
@@ -295,7 +359,6 @@ typicalEnvironmentalConditions:
   humidityRange:
     min: 30
     max: 60
-
 levelRequirements:
   - "REQ-PL-WT-ROOM-HEIGHT-001"
   - "REQ-FIRE-FLOOR-RATING-REI-60"
@@ -314,6 +377,126 @@ Wszystkie pomieszczenia na tej kondygnacji automatycznie otrzymują:
 Tylko pomieszczenia wymagające czegoś innego (jak łazienki z płytkami ceramicznymi) określają nadpisania.
 ```
 
+```yaml [YAML]
+id: "LVL-02"
+entityType: "level"
+documentType: "level"
+levelName: "Kondygnacja 02"
+buildingId: "BLD-01"
+elevation: 3.20
+elevationUnit: "m"
+version: "1.0.0"
+levelNumber: 1
+levelHeight: 3.00
+grossFloorArea: 1200
+typicalCeilingHeight: 2.70
+typicalFinishes:
+  floor: "deska_inzynierska_dab_naturalny"
+  walls: "farba_biala_matowa"
+  ceiling: "farba_biala_matowa"
+  baseboard: "mdf_bialy_120mm"
+typicalEnvironmentalConditions:
+  temperatureRange:
+    min: 20
+    max: 26
+    unit: "C"
+  humidityRange:
+    min: 30
+    max: 60
+levelRequirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+  - "REQ-FIRE-FLOOR-RATING-REI-60"
+```
+
+```json [JSON]
+{
+  "id": "LVL-02",
+  "entityType": "level",
+  "documentType": "level",
+  "levelName": "Kondygnacja 02",
+  "buildingId": "BLD-01",
+  "elevation": 3.20,
+  "elevationUnit": "m",
+  "version": "1.0.0",
+  "levelNumber": 1,
+  "levelHeight": 3.00,
+  "grossFloorArea": 1200,
+  "typicalCeilingHeight": 2.70,
+  "typicalFinishes": {
+    "floor": "deska_inzynierska_dab_naturalny",
+    "walls": "farba_biala_matowa",
+    "ceiling": "farba_biala_matowa",
+    "baseboard": "mdf_bialy_120mm"
+  },
+  "typicalEnvironmentalConditions": {
+    "temperatureRange": {
+      "min": 20,
+      "max": 26,
+      "unit": "C"
+    },
+    "humidityRange": {
+      "min": 30,
+      "max": 60
+    }
+  },
+  "levelRequirements": [
+    "REQ-PL-WT-ROOM-HEIGHT-001",
+    "REQ-FIRE-FLOOR-RATING-REI-60"
+  ]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "levelName", "levelNumber", "buildingId", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^LVL-"
+    },
+    "entityType": {
+      "const": "level"
+    },
+    "levelName": {
+      "type": "string"
+    },
+    "levelNumber": {
+      "type": "integer"
+    },
+    "buildingId": {
+      "type": "string"
+    },
+    "elevation": {
+      "type": "number"
+    },
+    "floorToFloorHeight": {
+      "type": "number"
+    },
+    "typicalCeilingHeight": {
+      "type": "number"
+    },
+    "grossFloorArea": {
+      "type": "number"
+    },
+    "typicalFinishes": {
+      "type": "object"
+    },
+    "typicalEnvironmentalConditions": {
+      "type": "object"
+    },
+    "levelRequirements": {
+      "type": "array"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
+
 **Korzyść:** Zamiast określać wysokość sufitu i wykończenia w 40 plikach pomieszczeń, określasz raz tutaj. Oszczędza 90% powtórzeń.
 
 ---
@@ -324,38 +507,32 @@ Tylko pomieszczenia wymagające czegoś innego (jak łazienki z płytkami cerami
 
 **Plik:** `docs/en/examples/green-terrace/levels/level-01.md`
 
-```markdown
+::: code-group
+
+```yaml [Markdown]
 ---
 documentType: "level"
 entityType: "level"
 id: "LVL-01"
 projectPhase: "design_development"
 bimLOD: "LOD_300"
-
 levelName: "Level 01 (Ground)"
 buildingId: "BLD-01"
 levelNumber: 0
-
 elevation: 0.0
 elevationUnit: "m"
-
 levelHeight: 3.20
 levelHeightUnit: "m"
-
 grossFloorArea: 1250
 areaUnit: "m2"
-
 levelType: "ground"
-
 description: >
   Ground floor with main entrance, lobby, and 8 residential units.
   Includes bike storage and mail room.
-
 ifcMapping:
   ifcEntity: "IfcBuildingStorey"
   globalId: "2L3gI9$sNEyv4XzGv2MPzR"
   objectType: "Ground Floor"
-
 version: "1.0.0"
 tags:
   - "ground_floor"
@@ -365,31 +542,143 @@ tags:
 
 # Kondygnacja 01: Parter
 
-Kondygnacja wejściowa gł&oacute;wna z holem i lokalami mieszkalnymi.
+Kondygnacja wejściowa główna z holem i lokalami mieszkalnymi.
 
 ## Dane Kondygnacji
 
 - **Rzędna:** 0.00 m (poziom terenu)
 - **Wysokość kondygnacji (strop-strop):** 3.20 m
-- **Powierzchnia użytkowa brutto:** 1 250 m&sup2;
+- **Powierzchnia użytkowa brutto:** 1 250 m2
 - **Lokale:** 8 lokali mieszkalnych
 
 ## Przestrzenie na Tej Kondygnacji
 
-- **Hol wejściowy:** 45 m&sup2;
-- **Pomieszczenie poczty:** 12 m&sup2;
-- **Przechowalnia rower&oacute;w:** 35 m&sup2;
-- **Lokale mieszkalne:** 8 lokali (900 m&sup2; łącznie)
-- **Korytarze:** 120 m&sup2;
-- **Klatki schodowe:** 2 &times; 15 m&sup2; = 30 m&sup2;
-- **Hol windowy:** 18 m&sup2;
+- **Hol wejściowy:** 45 m2
+- **Pomieszczenie poczty:** 12 m2
+- **Przechowalnia rowerów:** 35 m2
+- **Lokale mieszkalne:** 8 lokali (900 m2 łącznie)
+- **Korytarze:** 120 m2
+- **Klatki schodowe:** 2 x 15 m2 = 30 m2
+- **Hol windowy:** 18 m2
 
 ## Komunikacja Pionowa
 
 - **Klatki schodowe:** 2 chronione klatki schodowe (o odporności ogniowej)
 - **Windy:** 1 winda obsługująca wszystkie kondygnacje
-- **Dostęp:** Wejście gł&oacute;wne z poziomu ulicy
+- **Dostęp:** Wejście główne z poziomu ulicy
 ```
+
+```yaml [YAML]
+documentType: "level"
+entityType: "level"
+id: "LVL-01"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+levelName: "Level 01 (Ground)"
+buildingId: "BLD-01"
+levelNumber: 0
+elevation: 0.0
+elevationUnit: "m"
+levelHeight: 3.20
+levelHeightUnit: "m"
+grossFloorArea: 1250
+areaUnit: "m2"
+levelType: "ground"
+description: >
+  Ground floor with main entrance, lobby, and 8 residential units.
+  Includes bike storage and mail room.
+ifcMapping:
+  ifcEntity: "IfcBuildingStorey"
+  globalId: "2L3gI9$sNEyv4XzGv2MPzR"
+  objectType: "Ground Floor"
+version: "1.0.0"
+tags:
+  - "ground_floor"
+  - "entrance"
+  - "residential"
+```
+
+```json [JSON]
+{
+  "documentType": "level",
+  "entityType": "level",
+  "id": "LVL-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "levelName": "Level 01 (Ground)",
+  "buildingId": "BLD-01",
+  "levelNumber": 0,
+  "elevation": 0.0,
+  "elevationUnit": "m",
+  "levelHeight": 3.20,
+  "levelHeightUnit": "m",
+  "grossFloorArea": 1250,
+  "areaUnit": "m2",
+  "levelType": "ground",
+  "description": "Ground floor with main entrance, lobby, and 8 residential units. Includes bike storage and mail room.",
+  "ifcMapping": {
+    "ifcEntity": "IfcBuildingStorey",
+    "globalId": "2L3gI9$sNEyv4XzGv2MPzR",
+    "objectType": "Ground Floor"
+  },
+  "version": "1.0.0",
+  "tags": ["ground_floor", "entrance", "residential"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "levelName", "levelNumber", "buildingId", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^LVL-"
+    },
+    "entityType": {
+      "const": "level"
+    },
+    "levelName": {
+      "type": "string"
+    },
+    "levelNumber": {
+      "type": "integer"
+    },
+    "buildingId": {
+      "type": "string"
+    },
+    "elevation": {
+      "type": "number"
+    },
+    "floorToFloorHeight": {
+      "type": "number"
+    },
+    "typicalCeilingHeight": {
+      "type": "number"
+    },
+    "grossFloorArea": {
+      "type": "number"
+    },
+    "typicalFinishes": {
+      "type": "object"
+    },
+    "typicalEnvironmentalConditions": {
+      "type": "object"
+    },
+    "levelRequirements": {
+      "type": "array"
+    },
+    "cost": {
+      "type": "object"
+    },
+    "version": {
+      "type": "string"
+    }
+  }
+}
+```
+
+:::
 
 ## Przykład: Skompilowany JSON
 

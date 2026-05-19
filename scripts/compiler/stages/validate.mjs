@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
  * Load JSON schema
  */
 async function loadSchema() {
-  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v1.1.json');
+  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v2.0.json');
   const schemaContent = await fs.readFile(schemaPath, 'utf-8');
   return JSON.parse(schemaContent);
 }
@@ -503,6 +503,118 @@ function checkBusinessRules(sbm, logger) {
             rule: 'business:duplicate_zone_membership'
           });
         }
+      }
+    }
+  }
+
+  // v2.0: Check currency consistency across entities with cost
+  if (sbm.project && sbm.project.budget && sbm.project.budget.currency) {
+    const projectCurrency = sbm.project.budget.currency;
+    const allWithCost = [
+      ...(sbm.entities.spaces || []),
+      ...(sbm.entities.systems || []),
+      ...(sbm.entities.assets || []),
+      ...(sbm.entities.envelopes || []),
+      ...(sbm.entities.openings || []),
+      ...(sbm.entities.site_features || []),
+      ...(sbm.entities.materials || []),
+      ...(sbm.entities.structural_systems || [])
+    ];
+    for (const entity of allWithCost) {
+      if (entity.cost && entity.cost.currency && entity.cost.currency !== projectCurrency) {
+        warnings.push({
+          path: `${entity.entityType}/${entity.id}`,
+          message: `Entity uses ${entity.cost.currency} but project currency is ${projectCurrency} — cost rollup may be incorrect`,
+          rule: 'business:currency_consistency'
+        });
+      }
+    }
+  }
+
+  // v2.0: Check bidirectional adjacency consistency
+  if (sbm.entities.spaces) {
+    const spaceIndex = new Map(sbm.entities.spaces.map(s => [s.id, s]));
+    for (const space of sbm.entities.spaces) {
+      if (space.adjacentSpaces) {
+        for (const adj of space.adjacentSpaces) {
+          const neighbor = spaceIndex.get(adj.id);
+          if (neighbor && neighbor.adjacentSpaces) {
+            const reverseAdj = neighbor.adjacentSpaces.find(a => a.id === space.id);
+            if (!reverseAdj) {
+              warnings.push({
+                path: `spaces/${space.id}`,
+                message: `Space declares adjacency to ${adj.id} but ${adj.id} does not declare adjacency back — one-directional relationship`,
+                rule: 'business:bidirectional_adjacency'
+              });
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // v2.0: Check requirement scope matching
+  if (sbm.entities.requirements && sbm.entities.spaces) {
+    const reqIndex = new Map((sbm.entities.requirements || []).map(r => [r.id, r]));
+    for (const space of sbm.entities.spaces) {
+      if (space.requirements) {
+        for (const reqId of space.requirements) {
+          const req = reqIndex.get(reqId);
+          if (req && req.scope) {
+            // Check if the requirement's scope.entityType matches
+            if (req.scope.entityType && req.scope.entityType !== 'space' && req.scope.entityType !== 'any') {
+              warnings.push({
+                path: `spaces/${space.id}`,
+                message: `Requirement ${reqId} has scope.entityType="${req.scope.entityType}" but is applied to a space`,
+                rule: 'business:requirement_scope_match'
+              });
+            }
+            // Check if space types match
+            if (req.scope.spaceTypes && req.scope.spaceTypes.length > 0 && space.spaceType) {
+              if (!req.scope.spaceTypes.includes(space.spaceType)) {
+                warnings.push({
+                  path: `spaces/${space.id}`,
+                  message: `Requirement ${reqId} is scoped to space types [${req.scope.spaceTypes.join(', ')}] but space is "${space.spaceType}"`,
+                  rule: 'business:requirement_scope_match'
+                });
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // v2.0: Check level order continuity
+  if (sbm.entities.levels) {
+    const levelsByBuilding = {};
+    for (const level of sbm.entities.levels) {
+      const bid = level.buildingId || 'unknown';
+      if (!levelsByBuilding[bid]) levelsByBuilding[bid] = [];
+      levelsByBuilding[bid].push(level);
+    }
+    for (const [buildingId, levels] of Object.entries(levelsByBuilding)) {
+      const orders = levels.filter(l => l.order !== undefined).map(l => l.order).sort((a, b) => a - b);
+      const duplicates = orders.filter((v, i) => orders.indexOf(v) !== i);
+      if (duplicates.length > 0) {
+        warnings.push({
+          path: `buildings/${buildingId}`,
+          message: `Duplicate level orders: ${duplicates.join(', ')}`,
+          rule: 'business:level_ordering'
+        });
+      }
+    }
+  }
+
+  // v2.0: Check space program compliance
+  if (sbm.entities.space_programs) {
+    for (const prog of sbm.entities.space_programs) {
+      if (prog.compliance && prog.compliance.status === 'under_provision') {
+        warnings.push({
+          path: `space_programs/${prog.id}`,
+          message: `Space program "${prog.programName}" is under-provisioned: need ${prog.requiredQuantity || 0} spaces, designed ${prog.designedQuantity || 0}`,
+          rule: 'business:space_program_compliance'
+        });
       }
     }
   }

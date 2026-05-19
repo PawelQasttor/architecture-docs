@@ -288,26 +288,27 @@ Kocioł HP-01 (Vaillant ecoTEC plus 306)
 
 ## Aktualna Wersja
 
-**SBM v0.2.0** (2026-02-23)
+::: tip Aktualna Wersja
+**SBM v1.1.0** (2026-03-01) — **19 typów encji** obecnie dostępnych
+:::
 
-**Nowość w v0.2.0 -- Proweniencja danych:**
-- **Adnotacje `_meta` na poziomie pól** -- śledzenie pewności, źródła i kto wyekstrahował każdy punkt danych
-- **6-poziomowa skala pewności** -- measured, calculated, specified, estimated, assumed, unknown
-- **Proweniencja dziedziczenia** -- kompilator śledzi, czy wartość była jawna, odziedziczona z poziomu czy z typu przestrzeni
-- **Podsumowania jakości encji** -- kompilator generuje statystyki kompletności i pewności per encja
-- **Bramki fazowe** -- dane `assumed` blokowane po fazie Projektu Wykonawczego; dane `estimated` blokowane dla pól krytycznych po fazie Powykonawczej
+**Nowość w v1.1.0 — Pięć nowych typów encji:**
+- **Otwory i Typy Otworów** — okna, drzwi, świetliki jako encje pierwszej klasy (awansowane z wbudowanej tablicy)
+- **Elementy Terenu i Typy Elementów Terenu** — elementy krajobrazu, parking, infrastruktura zielona
+- **Pakiety Budowlane** — fazowanie budowy, harmonogramy i podsumowania kosztów (awansowane z pola wbudowanego)
+- **Ważona jakość** — pola krytyczne (3x), ważne (2x), standardowe (1x) w obliczeniach jakości
+- **Współdzielone stałe** — moduł stałych dla krytycznych zbiorów pól (bezpieczeństwo pożarowe, dostępność, konstrukcja)
 
-**Dlaczego:** Rzeczywisty projekt szpitalny pokazał, że bez proweniencji sfabrykowane dane (osłona radiologiczna 2,0 mm Pb zamiast 0,3 mm Pb ze źródła) są nie do odróżnienia od zweryfikowanych danych.
+**Poprzednie wersje:**
+- **v1.0.0** (2026-02-28): Wydanie produkcyjne — schemat/kompilator v1.0.0, 68 testów, pełna paritet EN/PL
+- **v0.6.0** (2026-02-27): Przestrzenie wielopoziomowe, hierarchie systemów, fazowanie budowy
+- **v0.5.0** (2026-02-26): Encje Działki, Przegrody i Komunikacji Pionowej (14 typów encji)
+- **v0.4.0** (2026-02-25): Agregacja kosztów, śledzenie symulacji, agregacja wydajności
+- **v0.3.0** (2026-02-24): Kompletność opieki zdrowotnej (52 typy przestrzeni, 12 typów stref, 13 kategorii systemów)
+- **v0.2.0** (2026-02-23): Proweniencja danych, adnotacje `_meta`, 6-poziomowa pewność
+- **v0.1.x** (2026-02-22–23): Wzorzec typ/instancja, dziedziczenie właściwości, pola rzeczywistego świata
 
-**Więcej informacji:** [Przewodnik po proweniencji danych](/pl/przewodniki/proweniencja-danych)
-
-Poprzednie wersje:
-- v0.1.4 (2026-02-23): Dziedziczenie właściwości (Kondygnacja -> Przestrzeń)
-- v0.1.3 (2026-02-22): Warunki środowiskowe, grupy bezpieczeństwa elektrycznego, referencje przepisów, stany cyklu życia
-- v0.1.2 (2026-02-22): Numery pomieszczeń, poziomy dostępności, przestrzenie nadrzędne/podrzędne, działy
-- v0.1.1 (2026-02-22): Wzorzec typ/instancja (Typy Przestrzeni, Typy Stref, Typy Systemów, Typy Zasobów)
-
-**Co się zmieniło:** Jeśli dopiero zaczynasz, ignoruj proweniencję, dopóki nie masz danych z rzeczywistych źródeł. Zacznij od pomieszczeń, stref i wymagań.
+**Zobacz także:** [CHANGELOG.md](https://github.com/twoj-repo/architecture-docs/blob/master/CHANGELOG.md) — pełna historia wersji
 
 ::: tip Zacznij Prosto
 Nie musisz używać każdego pola. Zacznij od:

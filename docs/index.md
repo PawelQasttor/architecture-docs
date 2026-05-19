@@ -2,16 +2,16 @@
 layout: home
 
 hero:
-  name: "Document 10x Faster"
-  text: "Stop Losing Information Between AutoCAD, Excel, and Email"
-  tagline: One file per room. One file per fire zone. Text files that stay consistent automatically. No special software required.
+  name: "Semantic Building Model"
+  text: "A Documentation Standard for Building Projects"
+  tagline: One text file per room, zone, and system. Structured data that humans and computers both read. No special software — just folders and files.
   actions:
     - theme: brand
-      text: Get Started (5 min)
-      link: /en/standards/quick-start
+      text: What is SBM?
+      link: /en/standards/introduction
     - theme: alt
-      text: See Real Example
-      link: /en/examples/green-terrace/
+      text: Quick Start (5 min)
+      link: /en/standards/quick-start
     - theme: alt
       text: Polski
       link: /pl/
@@ -280,7 +280,7 @@ Once you're ready to go deeper:
 | Topic | What You'll Learn |
 |-------|-------------------|
 | [8 Project Phases](/en/standards/document-structure) | When to create which documents (from concept to handover) |
-| [Document Types](/en/documentation/entities/) | The 11 types of building information (rooms, zones, systems, equipment) |
+| [Document Types](/en/documentation/entities/) | The 19 types of building information (rooms, zones, systems, equipment, and more) |
 | [BIM Integration](/en/bim-integration/) | How to sync with Revit, ArchiCAD, and IFC |
 | [Templates](/en/templates/) | Copy-paste templates for every document type |
 | [Polish Regulations](/en/regulations/) | Built-in support for WT 2021 and Prawo Budowlane |

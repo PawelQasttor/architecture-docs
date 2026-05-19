@@ -145,7 +145,9 @@ type VerticalTransportAssetType =
 
 **Najprostszy plik urządzenia dla przekazania:**
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 Plik: assets/ast-ahu-01.md
 
 ---
@@ -171,6 +173,46 @@ Centrala dachowa obsługująca strefę północną.
 Gwarancja kończy się 2028-08-15.
 ```
 
+```yaml [YAML]
+id: "AST-AHU-01"
+entityType: "asset"
+assetName: "Centrala wentylacyjna 01"
+assetType: "ahu"
+systemId: "SYS-HVAC-01"
+buildingId: "BLD-01"
+version: "1.0.0"
+manufacturer: "Systemair"
+modelNumber: "Topvex SR11 EL"
+serialNumber: "SR11-2026-04782"
+installationDate: "2026-08-15"
+warrantyExpiry: "2028-08-15"
+```
+
+```json [JSON]
+{
+  "id": "AST-AHU-01",
+  "entityType": "asset",
+  "assetName": "Centrala wentylacyjna 01",
+  "assetType": "ahu",
+  "systemId": "SYS-HVAC-01",
+  "buildingId": "BLD-01",
+  "version": "1.0.0",
+  "manufacturer": "Systemair",
+  "modelNumber": "Topvex SR11 EL",
+  "serialNumber": "SR11-2026-04782",
+  "installationDate": "2026-08-15",
+  "warrantyExpiry": "2028-08-15"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "assetName", "assetCategory", "systemId", "version"]
+}
+```
+
+:::
+
 **To wszystko.** Zespół zarządzania może dodać harmonogramy konserwacji i części zamienne później.
 
 ---
@@ -179,7 +221,9 @@ Gwarancja kończy się 2028-08-15.
 
 **Plik:** `docs/en/examples/green-terrace/assets/ast-ahu-01.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 entityType: "asset"
 id: "AST-AHU-01"
@@ -214,6 +258,73 @@ tags:
 
 Dachowa centrala wentylacyjna obsługująca system HVAC strefy północnej.
 ```
+
+```yaml [YAML]
+entityType: "asset"
+id: "AST-AHU-01"
+projectPhase: "construction"
+bimLOD: "LOD_350"
+
+assetName: "Air Handling Unit 01"
+assetType: "ahu"
+systemId: "SYS-HVAC-01"
+buildingId: "BLD-01"
+spaceId: "SP-BLD-01-ROOF-MECH"
+levelId: "LVL-ROOF"
+
+manufacturer: "Systemair"
+modelNumber: "Topvex SR11 EL"
+serialNumber: "SR11-2026-04782"
+assetTag: "GT-AHU-001"
+
+installationDate: "2026-08-15"
+warrantyExpiry: "2028-08-15"
+expectedLifespan: 20
+
+version: "1.0.0"
+tags:
+  - "hvac"
+  - "air_handling_unit"
+  - "rooftop"
+  - "high_efficiency"
+```
+
+```json [JSON]
+{
+  "entityType": "asset",
+  "id": "AST-AHU-01",
+  "projectPhase": "construction",
+  "bimLOD": "LOD_350",
+  "assetName": "Air Handling Unit 01",
+  "assetType": "ahu",
+  "systemId": "SYS-HVAC-01",
+  "buildingId": "BLD-01",
+  "spaceId": "SP-BLD-01-ROOF-MECH",
+  "levelId": "LVL-ROOF",
+  "manufacturer": "Systemair",
+  "modelNumber": "Topvex SR11 EL",
+  "serialNumber": "SR11-2026-04782",
+  "assetTag": "GT-AHU-001",
+  "installationDate": "2026-08-15",
+  "warrantyExpiry": "2028-08-15",
+  "expectedLifespan": 20,
+  "version": "1.0.0",
+  "tags": [
+    "hvac",
+    "air_handling_unit",
+    "rooftop",
+    "high_efficiency"
+  ]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "assetName", "assetCategory", "systemId", "version"]
+}
+```
+
+:::
 
 ## Przykład: Skompilowany JSON
 

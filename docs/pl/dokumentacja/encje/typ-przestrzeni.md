@@ -12,6 +12,16 @@ Używaj Typów Przestrzeni gdy masz **wiele podobnych przestrzeni** (np. 20 iden
 - ✅ Redukcja dokumentacji o 26-33% dla powtarzających się elementów
 :::
 
+::: tip Dla Architektów
+**Problem**: Budynek mieszkalny z 50 identycznymi sypialniami. Każda potrzebuje specyfikacji: światło dzienne, akustyka, wykończenia, wyposażenie, wysokość minimalna, przepisy.
+
+**Stary sposób**: 50 plików × 84 linie każdy = **4200 linii** powtórzonych specyfikacji. Zmiana wymogów akustycznych? Edytuj 50 plików i miej nadzieję, że żaden nie został pominięty.
+
+**Z Typem Przestrzeni**: **Jeden szablon** (210 linii) + 50 instancji (50 linii każda = nazwa, powierzchnia tylko) = **2710 linii w sumie**. To **26% mniej dokumentacji**. Aktualizacja wymagań akustycznych? Edytuj jeden plik, wpływa na wszystkie 50 sypialni.
+
+Rzeczywisty przykład: 50 sypialni z pełnymi specyfikacjami vs szablon + instancje = **redukcja o 1490 linii**.
+:::
+
 ## Cel
 
 Typy Przestrzeni definiują **specyfikacje szablonowe** stosowane do wszystkich instancji:
@@ -167,7 +177,9 @@ occupancyProfile:
 
 ## Przykład: Definicja Typu Przestrzeni
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "space_type"
 id: "ST-BEDROOM-STANDARD-A"
@@ -210,6 +222,103 @@ typicalArea:
 version: "1.0.0"
 ---
 ```
+
+```yaml [YAML]
+documentType: "space_type"
+id: "ST-BEDROOM-STANDARD-A"
+typeName: "Sypialnia Standard - Typ A"
+spaceType: "sleeping_space"
+
+requirements:
+  - "REQ-DAYLIGHT-SLEEPING-001"
+  - "REQ-ACOUSTIC-SLEEPING-001"
+  - "REQ-THERMAL-COMFORT-001"
+
+finishes:
+  floor:
+    material: "MAT-FLOOR-OAK-01"
+    description: "Dąb inżynieryjny"
+  walls:
+    material: "MAT-WALL-PAINT-WHITE"
+  door:
+    specification: "DOOR-INT-AC-01"
+
+equipment:
+  - category: "safety"
+    description: "Czujnik dymu"
+    quantity: 1
+
+accessibilityLevel: "standard"
+
+occupancyProfile:
+  maxOccupants: 2
+  bedCount: 2
+  usagePattern: "residential_sleeping"
+  hoursPerDay: 8
+
+typicalArea:
+  min: 10.0
+  max: 18.0
+  typical: 14.0
+  unit: "m2"
+
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "documentType": "space_type",
+  "id": "ST-BEDROOM-STANDARD-A",
+  "typeName": "Sypialnia Standard - Typ A",
+  "spaceType": "sleeping_space",
+  "requirements": [
+    "REQ-DAYLIGHT-SLEEPING-001",
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-THERMAL-COMFORT-001"
+  ],
+  "finishes": {
+    "floor": {
+      "material": "MAT-FLOOR-OAK-01",
+      "description": "Dąb inżynieryjny"
+    },
+    "walls": {
+      "material": "MAT-WALL-PAINT-WHITE"
+    },
+    "door": {
+      "specification": "DOOR-INT-AC-01"
+    }
+  },
+  "equipment": [
+    {
+      "category": "safety",
+      "description": "Czujnik dymu",
+      "quantity": 1
+    }
+  ],
+  "accessibilityLevel": "standard",
+  "occupancyProfile": {
+    "maxOccupants": 2,
+    "bedCount": 2,
+    "usagePattern": "residential_sleeping",
+    "hoursPerDay": 8
+  },
+  "typicalArea": {
+    "min": 10.0,
+    "max": 18.0,
+    "typical": 14.0,
+    "unit": "m2"
+  },
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "version"]
+}
+```
+
+:::
 
 ## Skompilowane Wyjście
 

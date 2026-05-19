@@ -37,8 +37,8 @@ const QUALITY_PROFILES = {
     important: ['area', 'designArea', 'zoneIds', 'requirements', 'cost']
   },
   building: {
-    critical: ['buildingName', 'siteId'],
-    important: ['classification', 'grossFloorArea', 'cost']
+    critical: ['name', 'siteId', 'buildingType', 'occupancyClassification'],
+    important: ['grossFloorArea', 'numberOfStoreys', 'buildingHeight', 'structuralSystem', 'sustainability', 'cost']
   },
   level: {
     critical: ['levelName', 'buildingId', 'levelNumber'],
@@ -83,6 +83,39 @@ const QUALITY_PROFILES = {
   construction_package: {
     critical: ['packageName', 'sequence'],
     important: ['status', 'plannedStart', 'plannedEnd', 'costBreakdown']
+  },
+  // v2.0 entity type profiles
+  campus: {
+    critical: ['campusName'],
+    important: ['totalArea', 'totalGFA', 'siteIds']
+  },
+  space_program: {
+    critical: ['programName', 'requiredQuantity'],
+    important: ['spaceTypeId', 'requiredTotalArea', 'compliance']
+  },
+  material_type: {
+    critical: ['materialName', 'materialCategory'],
+    important: ['physicalProperties', 'fireProperties', 'sustainability']
+  },
+  material: {
+    critical: ['materialName', 'materialTypeId'],
+    important: ['quantity', 'procurementStatus', 'cost']
+  },
+  structural_system: {
+    critical: ['systemName', 'structuralCategory', 'buildingId'],
+    important: ['structuralType', 'designParameters', 'loads', 'cost']
+  },
+  issue: {
+    critical: ['issueTitle', 'issueType', 'status'],
+    important: ['description', 'initiatedBy', 'assignedTo', 'dueDate']
+  },
+  commissioning_test: {
+    critical: ['testName', 'testCategory', 'status'],
+    important: ['testedEntityIds', 'requirementIds', 'results']
+  },
+  circulation_route: {
+    critical: ['routeName', 'routeType', 'buildingId'],
+    important: ['waypoints', 'totalTravelDistance', 'maxTravelDistance', 'minimumWidth']
   }
 };
 

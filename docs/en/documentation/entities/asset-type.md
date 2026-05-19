@@ -13,6 +13,16 @@ Use Asset Types when you have **multiple identical equipment items** (e.g., 50 i
 - ✅ Centralized spare parts and maintenance procedures
 :::
 
+::: tip For Architects
+**Problem**: Housing project with 50 identical heat pumps. Each needs full specs: manufacturer, model, capacity, COP, dimensions, maintenance schedule, warranty, installation requirements.
+
+**Old way**: 50 asset files × 280 lines each = **14,000 lines** of repeated specifications. Update product specs? Edit all 50 files.
+
+**With Asset Type**: **One template** (350 lines) + 50 instances (90 lines each = serial, location, install date only) = **4,850 lines total**. That's **66% less documentation**. Product spec update? Edit one file, affects all 50 assets.
+
+Real example: 100 identical smoke detectors = **93% reduction** in documentation volume.
+:::
+
 ## Purpose
 
 Asset Types define **product specifications** that apply to all asset instances:
@@ -212,7 +222,9 @@ cost:
 
 **File:** `templates/asset-types/bosch-heat-pump-hp300.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "asset_type"
 entityType: "asset_type"
@@ -435,6 +447,186 @@ Air-to-water heat pump designed for residential heating and domestic hot water a
 - ❌ Extreme cold climates (<-20°C) - use ground source or bivalent system
 - ❌ Commercial buildings - use commercial-grade equipment
 ```
+
+```yaml [YAML]
+documentType: "asset_type"
+entityType: "asset_type"
+id: "AT-BOSCH-HP-300"
+typeName: "Bosch HP-300 Heat Pump"
+category: "hvac"
+description: "Air-to-water heat pump for residential heating, 12 kW heating capacity, R-32 refrigerant"
+
+manufacturer: "Bosch Thermotechnology"
+model: "HP-300"
+productCode: "8738207145"
+
+specifications:
+  heatingCapacity: "12 kW"
+  coolingCapacity: "10 kW"
+  refrigerant: "R-32"
+  refrigerantCharge: "1.8 kg"
+  flowTemperature: "35°C"
+  returnTemperature: "30°C"
+  powerInput: "2.8 kW"
+  soundPressureLevel: "35 dB(A)"
+  dimensions: "800×600×1200 mm (H×W×D)"
+  weight: "85 kg"
+  ipRating: "IP24"
+  ambientTemperatureRange: "-20°C to +35°C"
+
+performanceData:
+  copHeating: 4.2
+  copCooling: 3.8
+  energyClass: "A+++"
+  seasonalCOP: 4.5
+  maxWorkingPressure: "30 bar"
+  noiseLevel: "35 dB(A)"
+  modulationRange: "20-100%"
+
+maintenanceProfile:
+  serviceIntervalMonths: 12
+  expectedLifetimeYears: 15
+  warrantyYears: 5
+  sparePartsRequired:
+    - "Filter set (annual replacement)"
+    - "Expansion vessel membrane"
+    - "Pressure sensor"
+    - "Flow switch"
+    - "Compressor contactor"
+  maintenanceProcedures:
+    - "Annual service: filter replacement, pressure check"
+    - "Quarterly visual inspection"
+    - "Check refrigerant pressure and leakage"
+    - "Clean heat exchanger coils (annual)"
+    - "Verify electrical connections"
+    - "Test safety cutouts and controls"
+    - "Check condensate drainage"
+    - "Inspect outdoor unit for debris"
+
+requirements:
+  - "REQ-HVAC-HEAT-PUMP-INSTALLATION"
+  - "REQ-REFRIGERANT-HANDLING"
+  - "REQ-ELECTRICAL-SAFETY"
+
+cost:
+  purchasePrice: 8500
+  installationCost: 1200
+  currency: "EUR"
+
+version: "1.0.0"
+tags:
+  - "heat-pump"
+  - "heating"
+  - "cooling"
+  - "r32"
+  - "residential"
+```
+
+```json [JSON]
+{
+  "documentType": "asset_type",
+  "entityType": "asset_type",
+  "id": "AT-BOSCH-HP-300",
+  "typeName": "Bosch HP-300 Heat Pump",
+  "category": "hvac",
+  "description": "Air-to-water heat pump for residential heating, 12 kW heating capacity, R-32 refrigerant",
+  "manufacturer": "Bosch Thermotechnology",
+  "model": "HP-300",
+  "productCode": "8738207145",
+  "specifications": {
+    "heatingCapacity": "12 kW",
+    "coolingCapacity": "10 kW",
+    "refrigerant": "R-32",
+    "refrigerantCharge": "1.8 kg",
+    "flowTemperature": "35°C",
+    "returnTemperature": "30°C",
+    "powerInput": "2.8 kW",
+    "soundPressureLevel": "35 dB(A)",
+    "dimensions": "800×600×1200 mm (H×W×D)",
+    "weight": "85 kg",
+    "ipRating": "IP24",
+    "ambientTemperatureRange": "-20°C to +35°C"
+  },
+  "performanceData": {
+    "copHeating": 4.2,
+    "copCooling": 3.8,
+    "energyClass": "A+++",
+    "seasonalCOP": 4.5,
+    "maxWorkingPressure": "30 bar",
+    "noiseLevel": "35 dB(A)",
+    "modulationRange": "20-100%"
+  },
+  "maintenanceProfile": {
+    "serviceIntervalMonths": 12,
+    "expectedLifetimeYears": 15,
+    "warrantyYears": 5,
+    "sparePartsRequired": [
+      "Filter set (annual replacement)",
+      "Expansion vessel membrane",
+      "Pressure sensor",
+      "Flow switch",
+      "Compressor contactor"
+    ],
+    "maintenanceProcedures": [
+      "Annual service: filter replacement, pressure check",
+      "Quarterly visual inspection",
+      "Check refrigerant pressure and leakage",
+      "Clean heat exchanger coils (annual)",
+      "Verify electrical connections",
+      "Test safety cutouts and controls",
+      "Check condensate drainage",
+      "Inspect outdoor unit for debris"
+    ]
+  },
+  "requirements": [
+    "REQ-HVAC-HEAT-PUMP-INSTALLATION",
+    "REQ-REFRIGERANT-HANDLING",
+    "REQ-ELECTRICAL-SAFETY"
+  ],
+  "cost": {
+    "purchasePrice": 8500,
+    "installationCost": 1200,
+    "currency": "EUR"
+  },
+  "version": "1.0.0",
+  "tags": ["heat-pump", "heating", "cooling", "r32", "residential"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "assetCategory", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^AT-"
+    },
+    "entityType": {
+      "const": "asset_type"
+    },
+    "typeName": {
+      "type": "string"
+    },
+    "assetCategory": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "modelNumber": {
+      "type": "string"
+    },
+    "performance": {
+      "type": "object"
+    },
+    "cost": {
+      "type": "object"
+    }
+  }
+}
+```
+
+:::
 
 ## ID Naming Convention
 

@@ -14,6 +14,14 @@ A **Vertical Circulation** entity describes a building element that connects lev
 For most residential projects, you need 1-2 vertical circulation files (one staircase, one elevator). Add fire escape details and egress calculations when preparing for permit submission.
 :::
 
+::: tip For Architects
+**Problem**: Building permit requires egress analysis. Staircase A serves 6 levels, needs REI 120 protection, 1.20m width, evacuation capacity documentation.
+
+**Old way**: Scatter across drawings (width), Excel (capacity calculations), Word specs (fire rating), schedules (served levels).
+
+**With Vertical Circulation**: **One file per staircase** — levels served (`connectedLevelIds`), dimensions (`flightWidth: 1200`), fire rating (`REI 120`), egress capacity (`occupantCapacity: 120`, `evacuationTime: 4.5`). All egress data in one place for permit submission.
+:::
+
 ---
 
 ## Required Fields
@@ -53,7 +61,9 @@ For most residential projects, you need 1-2 vertical circulation files (one stai
 
 ## Minimal Example (Staircase)
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "VC-STAIR-A"
 entityType: "vertical_circulation"
@@ -77,11 +87,67 @@ version: "1.0.0"
 Main staircase serving all residential levels.
 ```
 
+```yaml [YAML]
+id: "VC-STAIR-A"
+entityType: "vertical_circulation"
+circulationName: "Staircase A"
+circulationType: "staircase"
+buildingId: "BLD-01"
+connectedLevelIds:
+  - "LVL-00"
+  - "LVL-01"
+  - "LVL-02"
+  - "LVL-03"
+  - "LVL-04"
+  - "LVL-05"
+isFireEscape: true
+isAccessible: false
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "id": "VC-STAIR-A",
+  "entityType": "vertical_circulation",
+  "circulationName": "Staircase A",
+  "circulationType": "staircase",
+  "buildingId": "BLD-01",
+  "connectedLevelIds": ["LVL-00", "LVL-01", "LVL-02", "LVL-03", "LVL-04", "LVL-05"],
+  "isFireEscape": true,
+  "isAccessible": false,
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "circulationName", "circulationType", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^VC-" },
+    "entityType": { "const": "vertical_circulation" },
+    "circulationName": { "type": "string" },
+    "circulationType": {
+      "type": "string",
+      "enum": ["staircase", "elevator", "escalator", "ramp", "ladder", "dumbwaiter"]
+    },
+    "buildingId": { "type": "string" },
+    "connectedLevelIds": { "type": "array" },
+    "fireEscape": { "type": "boolean" },
+    "accessibility": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 ---
 
 ## Complete Example (Elevator)
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "VC-ELEV-01"
 entityType: "vertical_circulation"
@@ -164,11 +230,180 @@ tags: ["accessibility", "stretcher", "residential"]
 KONE MonoSpace 500 machine-room-less passenger elevator serving all levels.
 ```
 
+```yaml [YAML]
+id: "VC-ELEV-01"
+entityType: "vertical_circulation"
+circulationName: "Passenger Elevator 1"
+circulationType: "elevator"
+buildingId: "BLD-01"
+connectedLevelIds:
+  - "LVL-00"
+  - "LVL-01"
+  - "LVL-02"
+  - "LVL-03"
+  - "LVL-04"
+  - "LVL-05"
+servedSpaceIds:
+  - "SP-BLD-01-L00-LOBBY"
+  - "SP-BLD-01-L01-LOBBY"
+isFireEscape: false
+isAccessible: true
+isStretcher: true
+isEvacuationLift: false
+dimensions:
+  shaftWidth: 1800
+  shaftDepth: 2100
+  pitDepth: 1200
+  overrun: 3600
+  totalRise: 16200
+elevatorProperties:
+  loadCapacity: 1000
+  personCapacity: 13
+  speed: 1.0
+  cabWidth: 1100
+  cabDepth: 1400
+  cabHeight: 2200
+  doorWidth: 900
+  doorHeight: 2100
+  driveType: "mrl"
+  doorType: "center_opening"
+  stops: 6
+  manufacturer: "KONE"
+  model: "MonoSpace 500"
+accessibility:
+  handrails: "both_sides"
+  handrailHeight: 900
+  brailleControls: true
+  audioAnnouncements: true
+  turningCircle: 1500
+regulatoryCompliance:
+  - regulation: "WT 2021"
+    section: "§ 54"
+    requirement: "Elevator required in buildings > 4 stories"
+    status: "compliant"
+  - regulation: "WT 2021"
+    section: "§ 193"
+    requirement: "Minimum cab dimensions for stretcher access"
+    status: "compliant"
+cost:
+  estimatedTotal: 85000
+  currency: "EUR"
+  breakdown:
+    equipment: 65000
+    installation: 15000
+    shaft_construction: 5000
+ifcMapping:
+  ifcEntity: "IfcTransportElement"
+  objectType: "PassengerElevator_01"
+  predefinedType: "ELEVATOR"
+version: "1.0.0"
+tags: ["accessibility", "stretcher", "residential"]
+```
+
+```json [JSON]
+{
+  "id": "VC-ELEV-01",
+  "entityType": "vertical_circulation",
+  "circulationName": "Passenger Elevator 1",
+  "circulationType": "elevator",
+  "buildingId": "BLD-01",
+  "connectedLevelIds": ["LVL-00", "LVL-01", "LVL-02", "LVL-03", "LVL-04", "LVL-05"],
+  "servedSpaceIds": ["SP-BLD-01-L00-LOBBY", "SP-BLD-01-L01-LOBBY"],
+  "isFireEscape": false,
+  "isAccessible": true,
+  "isStretcher": true,
+  "isEvacuationLift": false,
+  "dimensions": {
+    "shaftWidth": 1800,
+    "shaftDepth": 2100,
+    "pitDepth": 1200,
+    "overrun": 3600,
+    "totalRise": 16200
+  },
+  "elevatorProperties": {
+    "loadCapacity": 1000,
+    "personCapacity": 13,
+    "speed": 1.0,
+    "cabWidth": 1100,
+    "cabDepth": 1400,
+    "cabHeight": 2200,
+    "doorWidth": 900,
+    "doorHeight": 2100,
+    "driveType": "mrl",
+    "doorType": "center_opening",
+    "stops": 6,
+    "manufacturer": "KONE",
+    "model": "MonoSpace 500"
+  },
+  "accessibility": {
+    "handrails": "both_sides",
+    "handrailHeight": 900,
+    "brailleControls": true,
+    "audioAnnouncements": true,
+    "turningCircle": 1500
+  },
+  "regulatoryCompliance": [
+    {
+      "regulation": "WT 2021",
+      "section": "\u00a7 54",
+      "requirement": "Elevator required in buildings > 4 stories",
+      "status": "compliant"
+    },
+    {
+      "regulation": "WT 2021",
+      "section": "\u00a7 193",
+      "requirement": "Minimum cab dimensions for stretcher access",
+      "status": "compliant"
+    }
+  ],
+  "cost": {
+    "estimatedTotal": 85000,
+    "currency": "EUR",
+    "breakdown": {
+      "equipment": 65000,
+      "installation": 15000,
+      "shaft_construction": 5000
+    }
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcTransportElement",
+    "objectType": "PassengerElevator_01",
+    "predefinedType": "ELEVATOR"
+  },
+  "version": "1.0.0",
+  "tags": ["accessibility", "stretcher", "residential"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "circulationName", "circulationType", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^VC-" },
+    "entityType": { "const": "vertical_circulation" },
+    "circulationName": { "type": "string" },
+    "circulationType": {
+      "type": "string",
+      "enum": ["staircase", "elevator", "escalator", "ramp", "ladder", "dumbwaiter"]
+    },
+    "buildingId": { "type": "string" },
+    "connectedLevelIds": { "type": "array" },
+    "fireEscape": { "type": "boolean" },
+    "accessibility": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 ---
 
 ## Fire Escape Staircase Example
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "VC-STAIR-FIRE-B"
 entityType: "vertical_circulation"
@@ -235,6 +470,145 @@ tags: ["fire-escape", "protected", "pressurized"]
 
 Protected, pressurized fire escape staircase on the east side of the building.
 ```
+
+```yaml [YAML]
+id: "VC-STAIR-FIRE-B"
+entityType: "vertical_circulation"
+circulationName: "Fire Escape Staircase B"
+circulationType: "fire_escape_stair"
+buildingId: "BLD-01"
+connectedLevelIds:
+  - "LVL-00"
+  - "LVL-01"
+  - "LVL-02"
+  - "LVL-03"
+  - "LVL-04"
+  - "LVL-05"
+isFireEscape: true
+isAccessible: true
+fireProperties:
+  isProtectedStaircase: true
+  fireRating: "REI 120"
+  pressurization: true
+  smokeVentilation: "mechanical"
+  emergencyLighting: true
+  maxTravelDistance: 25.0
+  vestibuleRequired: true
+dimensions:
+  flightWidth: 1200
+  flightWidthRequired: 1200
+  landingDepth: 1500
+  headroom: 2200
+  riserHeight: 175
+  goingDepth: 280
+  totalRise: 2700
+  numberOfFlights: 2
+  numberOfSteps: 16
+accessibility:
+  handrails: "both_sides"
+  handrailHeight: 900
+  tactileWarnings: true
+  contrastNosings: true
+egressCapacity:
+  occupantCapacity: 120
+  flowRate: 60
+  evacuationTime: 4.5
+  requiredCapacity: 100
+regulatoryCompliance:
+  - regulation: "WT 2021"
+    section: "§ 256"
+    requirement: "Protected staircase in buildings > 25m"
+    status: "compliant"
+  - regulation: "WT 2021"
+    section: "§ 242"
+    requirement: "Minimum stair width 1.2m for escape routes"
+    status: "compliant"
+version: "1.0.0"
+tags: ["fire-escape", "protected", "pressurized"]
+```
+
+```json [JSON]
+{
+  "id": "VC-STAIR-FIRE-B",
+  "entityType": "vertical_circulation",
+  "circulationName": "Fire Escape Staircase B",
+  "circulationType": "fire_escape_stair",
+  "buildingId": "BLD-01",
+  "connectedLevelIds": ["LVL-00", "LVL-01", "LVL-02", "LVL-03", "LVL-04", "LVL-05"],
+  "isFireEscape": true,
+  "isAccessible": true,
+  "fireProperties": {
+    "isProtectedStaircase": true,
+    "fireRating": "REI 120",
+    "pressurization": true,
+    "smokeVentilation": "mechanical",
+    "emergencyLighting": true,
+    "maxTravelDistance": 25.0,
+    "vestibuleRequired": true
+  },
+  "dimensions": {
+    "flightWidth": 1200,
+    "flightWidthRequired": 1200,
+    "landingDepth": 1500,
+    "headroom": 2200,
+    "riserHeight": 175,
+    "goingDepth": 280,
+    "totalRise": 2700,
+    "numberOfFlights": 2,
+    "numberOfSteps": 16
+  },
+  "accessibility": {
+    "handrails": "both_sides",
+    "handrailHeight": 900,
+    "tactileWarnings": true,
+    "contrastNosings": true
+  },
+  "egressCapacity": {
+    "occupantCapacity": 120,
+    "flowRate": 60,
+    "evacuationTime": 4.5,
+    "requiredCapacity": 100
+  },
+  "regulatoryCompliance": [
+    {
+      "regulation": "WT 2021",
+      "section": "\u00a7 256",
+      "requirement": "Protected staircase in buildings > 25m",
+      "status": "compliant"
+    },
+    {
+      "regulation": "WT 2021",
+      "section": "\u00a7 242",
+      "requirement": "Minimum stair width 1.2m for escape routes",
+      "status": "compliant"
+    }
+  ],
+  "version": "1.0.0",
+  "tags": ["fire-escape", "protected", "pressurized"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "circulationName", "circulationType", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^VC-" },
+    "entityType": { "const": "vertical_circulation" },
+    "circulationName": { "type": "string" },
+    "circulationType": {
+      "type": "string",
+      "enum": ["staircase", "elevator", "escalator", "ramp", "ladder", "dumbwaiter"]
+    },
+    "buildingId": { "type": "string" },
+    "connectedLevelIds": { "type": "array" },
+    "fireEscape": { "type": "boolean" },
+    "accessibility": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ---
 

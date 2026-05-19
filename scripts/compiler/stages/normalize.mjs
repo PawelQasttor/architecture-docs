@@ -57,6 +57,15 @@ function groupEntitiesByType(entities) {
     site_features: [],
     site_feature_types: [],
     construction_packages: [],
+    // v2.0 entity types
+    campuses: [],
+    space_programs: [],
+    material_types: [],
+    materials: [],
+    structural_systems: [],
+    issues: [],
+    commissioning_tests: [],
+    circulation_routes: [],
     other: [] // For legacy document types
   };
 
@@ -101,6 +110,22 @@ function groupEntitiesByType(entities) {
       grouped.site_feature_types.push(normalizeEntity(entity));
     } else if (type === 'construction_package') {
       grouped.construction_packages.push(normalizeEntity(entity));
+    } else if (type === 'campus') {
+      grouped.campuses.push(normalizeEntity(entity));
+    } else if (type === 'space_program') {
+      grouped.space_programs.push(normalizeEntity(entity));
+    } else if (type === 'material_type') {
+      grouped.material_types.push(normalizeEntity(entity));
+    } else if (type === 'material') {
+      grouped.materials.push(normalizeEntity(entity));
+    } else if (type === 'structural_system') {
+      grouped.structural_systems.push(normalizeEntity(entity));
+    } else if (type === 'issue') {
+      grouped.issues.push(normalizeEntity(entity));
+    } else if (type === 'commissioning_test') {
+      grouped.commissioning_tests.push(normalizeEntity(entity));
+    } else if (type === 'circulation_route') {
+      grouped.circulation_routes.push(normalizeEntity(entity));
     } else {
       // Legacy types (element_specification, project_specification)
       grouped.other.push(normalizeEntity(entity));
@@ -273,7 +298,84 @@ function computeRelationships(grouped) {
     }
   }
 
-  // Build construction_package → assignedEntityIds reverse mapping (v1.1)
+  // Build campus → siteIds reverse mapping (v2.0)
+  if (grouped.campuses && grouped.sites) {
+    for (const campus of grouped.campuses) {
+      if (!campus.siteIds) {
+        campus.siteIds = [];
+      }
+      for (const site of grouped.sites) {
+        if (site.campusId === campus.id) {
+          if (!campus.siteIds.includes(site.id)) {
+            campus.siteIds.push(site.id);
+          }
+        }
+      }
+    }
+  }
+
+  // Build building → structuralSystemIds reverse mapping (v2.0)
+  if (grouped.buildings && grouped.structural_systems) {
+    for (const building of grouped.buildings) {
+      if (!building.structuralSystemIds) {
+        building.structuralSystemIds = [];
+      }
+      for (const str of grouped.structural_systems) {
+        if (str.buildingId === building.id) {
+          if (!building.structuralSystemIds.includes(str.id)) {
+            building.structuralSystemIds.push(str.id);
+          }
+        }
+      }
+    }
+  }
+
+  // Build structural system hierarchy — parentStructuralSystemId → subsystemIds (v2.0)
+  if (grouped.structural_systems) {
+    for (const sys of grouped.structural_systems) {
+      if (!sys.subsystemIds) {
+        sys.subsystemIds = [];
+      }
+    }
+    for (const sys of grouped.structural_systems) {
+      if (sys.parentStructuralSystemId) {
+        const parent = grouped.structural_systems.find(s => s.id === sys.parentStructuralSystemId);
+        if (parent && !parent.subsystemIds.includes(sys.id)) {
+          parent.subsystemIds.push(sys.id);
+        }
+      }
+    }
+  }
+
+  // Build space_program → compliance auto-computation (v2.0)
+  if (grouped.space_programs && grouped.spaces) {
+    for (const prog of grouped.space_programs) {
+      const matchingSpaces = grouped.spaces.filter(s => {
+        if (prog.spaceTypeId && s.spaceTypeId === prog.spaceTypeId) return true;
+        if (prog.spaceType && s.spaceType === prog.spaceType) return true;
+        return false;
+      }).filter(s => !prog.buildingId || s.buildingId === prog.buildingId);
+
+      prog.designedQuantity = matchingSpaces.length;
+      prog.designedTotalArea = matchingSpaces.reduce((sum, s) => sum + (s.designArea || 0), 0);
+
+      if (!prog.compliance) prog.compliance = {};
+      prog.compliance.quantityMet = prog.designedQuantity >= (prog.requiredQuantity || 0);
+      prog.compliance.areaMet = prog.designedTotalArea >= (prog.requiredTotalArea || 0);
+      prog.compliance.quantityVariance = prog.designedQuantity - (prog.requiredQuantity || 0);
+      prog.compliance.areaVariance = prog.designedTotalArea - (prog.requiredTotalArea || 0);
+
+      if (prog.designedQuantity === 0) {
+        prog.compliance.status = 'not_started';
+      } else if (prog.compliance.quantityMet && prog.compliance.areaMet) {
+        prog.compliance.status = prog.compliance.quantityVariance > 0 ? 'over_provision' : 'compliant';
+      } else {
+        prog.compliance.status = 'under_provision';
+      }
+    }
+  }
+
+  // Build construction_package → assignedEntityIds reverse mapping (v1.1, extended v2.0)
   if (grouped.construction_packages && grouped.construction_packages.length > 0) {
     const allTaggable = [
       ...(grouped.spaces || []),
@@ -281,7 +383,10 @@ function computeRelationships(grouped) {
       ...(grouped.assets || []),
       ...(grouped.envelopes || []),
       ...(grouped.openings || []),
-      ...(grouped.site_features || [])
+      ...(grouped.site_features || []),
+      // v2.0 additions
+      ...(grouped.materials || []),
+      ...(grouped.structural_systems || [])
     ];
 
     for (const pkg of grouped.construction_packages) {

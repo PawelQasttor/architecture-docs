@@ -2,8 +2,10 @@
 
 A **Space Type** is a reusable template that defines common specifications for similar spaces. Space instances reference a type to inherit requirements, finishes, equipment, and occupancy profiles.
 
-::: tip When to Use
+::: tip For Architects: When to Use Space Types
 Use Space Types when you have **multiple similar spaces** (e.g., 20 identical bedrooms, 50 office cubicles). Define specifications once in the type, then create lightweight instances that reference it.
+
+**Real example**: 50 bedrooms with identical specs = 4,200 lines of repetition. **With Space Type**: 1 template (210 lines) + 50 instances (2,500 lines) = **26% less documentation**. Update bedroom specs → edit 1 file, all 50 rooms update.
 
 **Benefits:**
 - ✅ Define requirements, finishes, equipment once
@@ -59,7 +61,9 @@ These fields define the **template specifications** inherited by all instances:
 
 **File:** `templates/space-types/standard-bedroom-type-a.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "space_type"
 entityType: "space_type"
@@ -168,6 +172,175 @@ Standard residential bedroom for 1-2 occupants with natural daylight, acoustic p
 - ❌ Master bedrooms with en-suite - create separate type
 - ❌ Children's bedrooms with special safety requirements
 ```
+
+```yaml [YAML]
+documentType: "space_type"
+entityType: "space_type"
+id: "ST-BEDROOM-STANDARD-A"
+typeName: "Standard Bedroom - Type A"
+spaceType: "sleeping_space"
+description: "Standard residential bedroom for 1-2 occupants"
+
+requirements:
+  - "REQ-DAYLIGHT-SLEEPING-001"
+  - "REQ-ACOUSTIC-SLEEPING-001"
+  - "REQ-THERMAL-COMFORT-001"
+  - "REQ-VENTILATION-OCCUPIED-001"
+  - "REQ-FIRE-ZL-IV-001"
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+
+finishes:
+  floor:
+    material: "MAT-FLOOR-OAK-01"
+    description: "Engineered oak flooring"
+    thickness: "14mm"
+  walls:
+    material: "MAT-WALL-PAINT-WHITE"
+    description: "Painted gypsum plasterboard"
+  ceiling:
+    material: "MAT-CEILING-PAINT-WHITE"
+  door:
+    specification: "DOOR-INT-AC-01"
+    size: "830×2050mm"
+    soundReduction: "Rw = 38 dB"
+  window:
+    specification: "WINDOW-TYPE-A"
+    size: "1200×1400mm"
+    uValue: "0.9 W/(m²·K)"
+
+equipment:
+  - category: "safety"
+    description: "Optical smoke detector (ceiling-mounted)"
+    quantity: 1
+  - category: "climate"
+    description: "Room thermostat for underfloor heating"
+    quantity: 1
+  - category: "ventilation"
+    description: "MVHR supply diffuser"
+    quantity: 1
+  - category: "electrical"
+    description: "Double socket outlet (bedside)"
+    quantity: 2
+
+accessibilityLevel: "standard"
+
+occupancyProfile:
+  maxOccupants: 2
+  bedCount: 2
+  usagePattern: "residential_sleeping"
+  hoursPerDay: 8
+  daysPerWeek: 7
+
+typicalArea:
+  min: 10.0
+  max: 18.0
+  typical: 14.0
+  unit: "m2"
+
+typicalHeight:
+  min: 2.50
+  typical: 2.70
+  unit: "m"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "sleeping"
+  - "standard-type"
+```
+
+```json [JSON]
+{
+  "documentType": "space_type",
+  "entityType": "space_type",
+  "id": "ST-BEDROOM-STANDARD-A",
+  "typeName": "Standard Bedroom - Type A",
+  "spaceType": "sleeping_space",
+  "description": "Standard residential bedroom for 1-2 occupants",
+  "requirements": [
+    "REQ-DAYLIGHT-SLEEPING-001",
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-THERMAL-COMFORT-001",
+    "REQ-VENTILATION-OCCUPIED-001",
+    "REQ-FIRE-ZL-IV-001",
+    "REQ-PL-WT-ROOM-HEIGHT-001"
+  ],
+  "finishes": {
+    "floor": {
+      "material": "MAT-FLOOR-OAK-01",
+      "description": "Engineered oak flooring",
+      "thickness": "14mm"
+    },
+    "walls": {
+      "material": "MAT-WALL-PAINT-WHITE",
+      "description": "Painted gypsum plasterboard"
+    },
+    "ceiling": {
+      "material": "MAT-CEILING-PAINT-WHITE"
+    },
+    "door": {
+      "specification": "DOOR-INT-AC-01",
+      "size": "830×2050mm",
+      "soundReduction": "Rw = 38 dB"
+    },
+    "window": {
+      "specification": "WINDOW-TYPE-A",
+      "size": "1200×1400mm",
+      "uValue": "0.9 W/(m²·K)"
+    }
+  },
+  "equipment": [
+    { "category": "safety", "description": "Optical smoke detector (ceiling-mounted)", "quantity": 1 },
+    { "category": "climate", "description": "Room thermostat for underfloor heating", "quantity": 1 },
+    { "category": "ventilation", "description": "MVHR supply diffuser", "quantity": 1 },
+    { "category": "electrical", "description": "Double socket outlet (bedside)", "quantity": 2 }
+  ],
+  "accessibilityLevel": "standard",
+  "occupancyProfile": {
+    "maxOccupants": 2,
+    "bedCount": 2,
+    "usagePattern": "residential_sleeping",
+    "hoursPerDay": 8,
+    "daysPerWeek": 7
+  },
+  "typicalArea": { "min": 10.0, "max": 18.0, "typical": 14.0, "unit": "m2" },
+  "typicalHeight": { "min": 2.50, "typical": 2.70, "unit": "m" },
+  "version": "1.0.0",
+  "tags": ["residential", "sleeping", "standard-type"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ST-"
+    },
+    "entityType": {
+      "const": "space_type"
+    },
+    "typeName": {
+      "type": "string"
+    },
+    "spaceType": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "array"
+    },
+    "finishes": {
+      "type": "object"
+    },
+    "typicalArea": {
+      "type": "object"
+    }
+  }
+}
+```
+
+:::
 
 ## ID Naming Convention
 
@@ -407,7 +580,9 @@ finishes:
 
 ### Example: Operating Room Type with Structured Finishes
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "ST-OR-CLASS-IA"
 entityType: "space_type"
@@ -476,6 +651,166 @@ typicalHeight:
   unit: "m"
 ---
 ```
+
+```yaml [YAML]
+id: "ST-OR-CLASS-IA"
+entityType: "space_type"
+documentType: "space_type"
+typeName: "Operating Room - DIN 1946-4 Class Ia"
+spaceType: "operating_room"
+version: "1.0.0"
+
+electricalSafetyGroup: "group_2"
+
+finishes:
+  floor:
+    material: "seamless conductive vinyl"
+    fireClass: "Bfl-s1"
+    slipResistance: "R10"
+    antimicrobial: true
+    esdProtection: true
+    cleanability: "cleanroom"
+    coveBase: true
+    seamless: true
+  walls:
+    material: "stainless steel / HPL hybrid"
+    fireClass: "A2-s1,d0"
+    antimicrobial: true
+    cleanability: "cleanroom"
+    seamless: true
+  ceiling:
+    material: "sealed laminar flow canopy"
+    fireClass: "A2-s1,d0"
+    cleanability: "cleanroom"
+
+environmentalConditions:
+  temperatureRange: { min: 18, max: 24, unit: "C" }
+  humidityRange: { min: 30, max: 60 }
+  pressurization: "positive"
+  cleanlinessClass: "ISO 7"
+  airChangesPerHour: 20
+  freshAirPercentage: 100
+  filtrationClass: "HEPA H14"
+  pressureDifferentialPa: 15
+  laminarFlow: true
+  operatingRoomClass: "class_ia"
+
+shielding:
+  radiological:
+    required: false
+  rfShielding:
+    required: false
+  acousticIsolation:
+    requiredRw: 50
+
+requirements:
+  - "REQ-OR-CLASS-IA-001"
+  - "REQ-FIRE-SEPARATION-OR"
+  - "REQ-HVAC-OR-LAMINAR"
+
+typicalArea:
+  min: 36.0
+  max: 55.0
+  typical: 42.0
+  unit: "m2"
+
+typicalHeight:
+  min: 2.80
+  typical: 3.00
+  unit: "m"
+```
+
+```json [JSON]
+{
+  "id": "ST-OR-CLASS-IA",
+  "entityType": "space_type",
+  "documentType": "space_type",
+  "typeName": "Operating Room - DIN 1946-4 Class Ia",
+  "spaceType": "operating_room",
+  "version": "1.0.0",
+  "electricalSafetyGroup": "group_2",
+  "finishes": {
+    "floor": {
+      "material": "seamless conductive vinyl",
+      "fireClass": "Bfl-s1",
+      "slipResistance": "R10",
+      "antimicrobial": true,
+      "esdProtection": true,
+      "cleanability": "cleanroom",
+      "coveBase": true,
+      "seamless": true
+    },
+    "walls": {
+      "material": "stainless steel / HPL hybrid",
+      "fireClass": "A2-s1,d0",
+      "antimicrobial": true,
+      "cleanability": "cleanroom",
+      "seamless": true
+    },
+    "ceiling": {
+      "material": "sealed laminar flow canopy",
+      "fireClass": "A2-s1,d0",
+      "cleanability": "cleanroom"
+    }
+  },
+  "environmentalConditions": {
+    "temperatureRange": { "min": 18, "max": 24, "unit": "C" },
+    "humidityRange": { "min": 30, "max": 60 },
+    "pressurization": "positive",
+    "cleanlinessClass": "ISO 7",
+    "airChangesPerHour": 20,
+    "freshAirPercentage": 100,
+    "filtrationClass": "HEPA H14",
+    "pressureDifferentialPa": 15,
+    "laminarFlow": true,
+    "operatingRoomClass": "class_ia"
+  },
+  "shielding": {
+    "radiological": { "required": false },
+    "rfShielding": { "required": false },
+    "acousticIsolation": { "requiredRw": 50 }
+  },
+  "requirements": [
+    "REQ-OR-CLASS-IA-001",
+    "REQ-FIRE-SEPARATION-OR",
+    "REQ-HVAC-OR-LAMINAR"
+  ],
+  "typicalArea": { "min": 36.0, "max": 55.0, "typical": 42.0, "unit": "m2" },
+  "typicalHeight": { "min": 2.80, "typical": 3.00, "unit": "m" }
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "typeName", "version"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ST-"
+    },
+    "entityType": {
+      "const": "space_type"
+    },
+    "typeName": {
+      "type": "string"
+    },
+    "spaceType": {
+      "type": "string"
+    },
+    "requirements": {
+      "type": "array"
+    },
+    "finishes": {
+      "type": "object"
+    },
+    "typicalArea": {
+      "type": "object"
+    }
+  }
+}
+```
+
+:::
 
 ## Expanded Environmental Conditions (v0.3.0)
 

@@ -37,7 +37,7 @@ Standard formalizuje to w **8 faz**:
 
 ## Filar 2: Karty obiektów — Co opisujesz
 
-Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: działkę, pomieszczenie, strefę pożarową, instalację grzewczą, kocioł. Standard definiuje **14 rodzajów kart** — gotowych szablonów, które mówią Ci co wpisać:
+Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: działkę, pomieszczenie, strefę pożarową, instalację grzewczą, kocioł. Standard definiuje **19 rodzajów kart** — gotowych szablonów, które mówią Ci co wpisać:
 
 | Karta | Co opisujesz | Przykład |
 |-------|-------------|---------|
@@ -47,7 +47,11 @@ Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: działkę
 | **Pomieszczenie** | Pokój lub obszar funkcjonalny | "Sypialnia 01, 14,5 m², wysokość 2,70 m" |
 | **Typ Pomieszczenia** | Szablon dla podobnych pomieszczeń | "Typ standardowej sypialni A" |
 | **Przegroda** | Ściana, dach lub strop z warstwami | "Ściana zewn. typ A, U=0,18, REI 90" |
+| **Otwór** | Okno, drzwi lub świetlik w przegrodzie | "Okno OT-WIN-01, 1,20×1,50 m, U=0,8" |
+| **Typ Otworu** | Szablon specyfikacji otworów | "Typ okna PVC trójszybowego" |
 | **Komunikacja Pionowa** | Klatka schodowa, winda lub rampa łącząca kondygnacje | "Klatka A, chroniona, REI 60, 6 kondygnacji" |
+| **Element Terenu** | Krajobraz, parking, zieleń na działce | "Chodnik betonowy, 45 m², nawierzchnia przepuszczalna" |
+| **Typ Elementu Terenu** | Szablon elementów terenowych | "Standardowy chodnik betonowy 8 cm" |
 | **Strefa** | Grupa pomieszczeń o wspólnej charakterystyce | "Strefa pożarowa ZL-IV, kondygnacje 1-6" |
 | **Typ Strefy** | Szablon konfiguracji stref | "Strefa pożarowa ZL-IV standard" |
 | **Wymaganie** | Konkretny przepis prawny do spełnienia | "Wysokość pomieszczenia >= 2,50 m wg WT 2021 §132" |
@@ -55,6 +59,7 @@ Kiedy tworzysz dokument w tym standardzie, opisujesz coś konkretnego: działkę
 | **Typ Instalacji** | Szablon konfiguracji instalacji | "Klimatyzacja mieszkalna z rekuperacją MVHR" |
 | **Urządzenie** | Konkretny zainstalowany produkt | "Vaillant ecoTEC plus 306, nr seryjny #12345" |
 | **Typ Urządzenia** | Szablon specyfikacji produktu | "Bosch Compress 7000i 12kW" |
+| **Pakiet Budowlany** | Faza budowy z harmonogramem i kosztami | "Faza 1: Fundamenty, 6 tygodni, 150.000 zł" |
 
 Każda karta to **gotowy szablon do wypełnienia**. Dzięki temu każdy opis sypialni ma tę samą strukturę, każda strefa pożarowa te same pola, a każde urządzenie jest dokumentowane w ten sam sposób.
 

@@ -154,7 +154,9 @@ zoningDesignation:
 
 ## Przykład: Minimalny Plik Działki
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 Plik: site.md
 
 ---
@@ -174,6 +176,43 @@ version: "1.0.0"
 
 Działka 1 250 m² przy ul. Słonecznej, Warszawa.
 ```
+
+```yaml [YAML]
+id: "SITE-GREEN-TERRACE"
+entityType: "site"
+siteName: "Działka Green Terrace"
+siteArea: 1250
+address:
+  street: "ul. Słoneczna 45"
+  city: "Warszawa"
+  postalCode: "02-495"
+  country: "PL"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "id": "SITE-GREEN-TERRACE",
+  "entityType": "site",
+  "siteName": "Działka Green Terrace",
+  "siteArea": 1250,
+  "address": {
+    "street": "ul. Słoneczna 45",
+    "city": "Warszawa",
+    "postalCode": "02-495",
+    "country": "PL"
+  },
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "siteName", "version"]
+}
+```
+
+:::
 
 ## Jak Działka Łączy Się z Innymi Encjami
 

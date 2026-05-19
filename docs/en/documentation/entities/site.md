@@ -179,7 +179,9 @@ zoningDesignation:
 
 ## Example 1: Minimal Site File
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 File: site.md
 
 ---
@@ -200,9 +202,56 @@ version: "1.0.0"
 1,250 m² plot on ul. Słoneczna, Warsaw.
 ```
 
+```yaml [YAML]
+id: "SITE-GREEN-TERRACE"
+entityType: "site"
+siteName: "Green Terrace Plot"
+siteArea: 1250
+address:
+  street: "ul. Słoneczna 45"
+  city: "Warsaw"
+  postalCode: "02-495"
+  country: "PL"
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "id": "SITE-GREEN-TERRACE",
+  "entityType": "site",
+  "siteName": "Green Terrace Plot",
+  "siteArea": 1250,
+  "address": {
+    "street": "ul. Słoneczna 45",
+    "city": "Warsaw",
+    "postalCode": "02-495",
+    "country": "PL"
+  },
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "siteName", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SITE-" },
+    "entityType": { "const": "site" },
+    "siteName": { "type": "string" },
+    "address": { "type": "object" },
+    "totalArea": { "type": "number" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 ## Example 2: Complete Site (Full Details)
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 id: "SITE-GREEN-TERRACE"
 entityType: "site"
@@ -318,6 +367,182 @@ tags:
 
 All major utilities available at boundary. District heating requires 15m extension from west.
 ```
+
+```yaml [YAML]
+id: "SITE-GREEN-TERRACE"
+entityType: "site"
+siteName: "Green Terrace Plot"
+
+address:
+  street: "ul. Słoneczna 45"
+  city: "Warsaw"
+  postalCode: "02-495"
+  region: "Mazowieckie"
+  country: "PL"
+
+location:
+  latitude: 52.2297
+  longitude: 21.0122
+  elevation: 100
+
+siteArea: 1250
+buildableArea: 500
+greenArea: 312.5
+
+siteConstraints:
+  - type: "setback"
+    direction: "north"
+    distance: 4.0
+    regulation: "MPZP §12.3"
+  - type: "setback"
+    direction: "south"
+    distance: 4.0
+    regulation: "MPZP §12.3"
+  - type: "setback"
+    direction: "east"
+    distance: 3.0
+    regulation: "MPZP §12.3"
+  - type: "setback"
+    direction: "west"
+    distance: 3.0
+    regulation: "MPZP §12.3"
+  - type: "height_limit"
+    value: "25m"
+    regulation: "MPZP §8.1"
+  - type: "coverage_limit"
+    value: "40%"
+    regulation: "MPZP §9.2"
+
+utilities:
+  - type: "water"
+    connectionPoint: "north_boundary"
+    capacity: "DN100"
+    provider: "MPWiK Warszawa"
+    status: "available"
+  - type: "sewage"
+    connectionPoint: "north_boundary"
+    capacity: "DN150"
+    status: "available"
+  - type: "electrical"
+    connectionPoint: "east_boundary"
+    capacity: "40kW"
+    provider: "innogy Stoen"
+    status: "available"
+  - type: "district_heating"
+    connectionPoint: "west_boundary"
+    capacity: "120 kW"
+    provider: "Veolia Warszawa"
+    status: "requires_extension"
+
+topography:
+  elevation: 100
+  slope: 1.5
+  soilType: "clay_loam"
+  bearingCapacity: 250
+  groundwaterLevel: 3.2
+
+zoningDesignation:
+  planType: "mpzp"
+  planReference: "MPZP Mokotów Stegny, Uchwała Nr XLII/1234/2023"
+  allowedUse:
+    - "residential_multifamily"
+    - "services"
+  maxHeight: 25
+  maxCoverage: 0.4
+  maxFAR: 2.5
+  minGreenRatio: 0.25
+
+ifcMapping:
+  ifcEntity: "IfcSite"
+  globalId: "1a2B3c4D5e6F7g8H9i0JkL"
+
+version: "1.0.0"
+tags:
+  - "residential"
+  - "warsaw"
+  - "mokotow"
+```
+
+```json [JSON]
+{
+  "id": "SITE-GREEN-TERRACE",
+  "entityType": "site",
+  "siteName": "Green Terrace Plot",
+  "address": {
+    "street": "ul. Słoneczna 45",
+    "city": "Warsaw",
+    "postalCode": "02-495",
+    "region": "Mazowieckie",
+    "country": "PL"
+  },
+  "location": {
+    "latitude": 52.2297,
+    "longitude": 21.0122,
+    "elevation": 100
+  },
+  "siteArea": 1250,
+  "buildableArea": 500,
+  "greenArea": 312.5,
+  "siteConstraints": [
+    { "type": "setback", "direction": "north", "distance": 4.0, "regulation": "MPZP §12.3" },
+    { "type": "setback", "direction": "south", "distance": 4.0, "regulation": "MPZP §12.3" },
+    { "type": "setback", "direction": "east", "distance": 3.0, "regulation": "MPZP §12.3" },
+    { "type": "setback", "direction": "west", "distance": 3.0, "regulation": "MPZP §12.3" },
+    { "type": "height_limit", "value": "25m", "regulation": "MPZP §8.1" },
+    { "type": "coverage_limit", "value": "40%", "regulation": "MPZP §9.2" }
+  ],
+  "utilities": [
+    { "type": "water", "connectionPoint": "north_boundary", "capacity": "DN100", "provider": "MPWiK Warszawa", "status": "available" },
+    { "type": "sewage", "connectionPoint": "north_boundary", "capacity": "DN150", "status": "available" },
+    { "type": "electrical", "connectionPoint": "east_boundary", "capacity": "40kW", "provider": "innogy Stoen", "status": "available" },
+    { "type": "district_heating", "connectionPoint": "west_boundary", "capacity": "120 kW", "provider": "Veolia Warszawa", "status": "requires_extension" }
+  ],
+  "topography": {
+    "elevation": 100,
+    "slope": 1.5,
+    "soilType": "clay_loam",
+    "bearingCapacity": 250,
+    "groundwaterLevel": 3.2
+  },
+  "zoningDesignation": {
+    "planType": "mpzp",
+    "planReference": "MPZP Mokotów Stegny, Uchwała Nr XLII/1234/2023",
+    "allowedUse": ["residential_multifamily", "services"],
+    "maxHeight": 25,
+    "maxCoverage": 0.4,
+    "maxFAR": 2.5,
+    "minGreenRatio": 0.25
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcSite",
+    "globalId": "1a2B3c4D5e6F7g8H9i0JkL"
+  },
+  "version": "1.0.0",
+  "tags": ["residential", "warsaw", "mokotow"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "siteName", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SITE-" },
+    "entityType": { "const": "site" },
+    "siteName": { "type": "string" },
+    "address": { "type": "object" },
+    "coordinates": { "type": "object" },
+    "totalArea": { "type": "number" },
+    "buildableArea": { "type": "number" },
+    "zoningClassification": { "type": "string" },
+    "topography": { "type": "object" },
+    "utilities": { "type": "object" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## How Site Connects to Other Entities
 

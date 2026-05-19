@@ -128,22 +128,30 @@ Don't worry about understanding this diagram now. It shows how information flows
 
 ---
 
-## 11 Types of Building Information
+## 19 Types of Building Information
 
-The standard defines **11 document types**. Each one describes a different aspect of your building:
+The standard defines **19 entity types**. Each one describes a different aspect of your building:
 
 | Type | What You're Describing | Example |
 |------|----------------------|---------|
+| **Site** | The land parcel / plot | "Plot at ul. Słoneczna 45, 1250 m²" |
 | **Building** | The whole building | "Green Terrace, ul. Słoneczna 45, Warsaw" |
 | **Level** | A floor | "Ground floor, +0.00m" |
 | **Space** | A room | "Bedroom 01, 14.5m², 2.70m height" |
 | **Space Type** | Template for similar rooms | "Standard bedroom template (use for all bedrooms)" |
+| **Envelope** | Wall, roof, or floor assembly | "External Wall Type A, U=0.18 W/(m²·K)" |
+| **Opening** | Specific window, door, or skylight | "Window N-001, 1.5m × 2.0m, north facade" |
+| **Opening Type** | Template for window/door specs | "Internorm KF410 triple-glazed window" |
+| **Vertical Circulation** | Staircase, elevator, or ramp | "Staircase A, protected, REI 60, 6 levels" |
 | **Zone** | Group of rooms sharing a characteristic | "Fire zone ZL-IV covering levels 1-6" |
 | **Zone Type** | Template for zone configurations | "Fire zone ZL-IV standard (residential building)" |
 | **System** | Building installation | "Central heating system with gas boiler" |
 | **System Type** | Template for MEP systems | "Residential HVAC with heat recovery" |
-| **Asset Instance** | Specific equipment | "Boiler #12345, installed 2024-03-15" |
+| **Asset** | Specific equipment | "Boiler #12345, installed 2024-03-15" |
 | **Asset Type** | Product specification | "Vaillant ecoTEC plus 306 (generic spec)" |
+| **Site Feature** | Landscape or site element | "North Garden, 120m² green roof with sedum" |
+| **Site Feature Type** | Template for site elements | "Permeable paving standard specification" |
+| **Construction Package** | Phase of construction work | "CP-01: Structure, Q1 2024, €450k budget" |
 | **Requirement** | Regulation to meet | "Room height >= 2.50m per WT 2021 §132" |
 
 ::: tip Templates vs Actual Things
@@ -286,26 +294,32 @@ Boiler HP-01 (Vaillant ecoTEC plus 306)
 
 ## Current Version
 
-**SBM v0.2.0** (2026-02-23)
+::: tip Current Version
+**SBM v1.1.0** (2026-03-01) — **19 entity types** now available
+:::
 
-**New in v0.2.0 -- Data Provenance:**
-- **Field-level `_meta` annotations** -- track confidence, source, and who extracted each data point
-- **6-level confidence scale** -- measured, calculated, specified, estimated, assumed, unknown
-- **Inheritance provenance** -- compiler tracks whether a value was explicit, inherited from level, or from space type
-- **Entity quality summaries** -- compiler generates completeness and confidence statistics per entity
-- **Phase gate enforcement** -- assumed data blocked after Construction Docs phase; estimated data blocked for safety-critical fields after As-Built phase
+**New in v1.1.0 — Enhanced Semantic Model:**
+- **5 new entity types** — Opening, Opening Type, Site Feature, Site Feature Type, Construction Package
+- **Weighted quality scoring** — Critical fields (3×), important (2×), standard (1×) weights
+- **Shared safety-critical constants** — Centralized field definitions prevent inconsistencies
+- **104 compiler tests** — Comprehensive validation coverage
+- **Full EN/PL documentation parity** — All 19 types documented in both languages
 
-**Why:** A real hospital project showed that without provenance, fabricated data (radiation shielding documented as 2.0 mm Pb when the source says 0.3 mm Pb) is indistinguishable from verified data. The provenance model makes every data point traceable.
+**Why:** Real projects showed that windows/doors buried in envelope specs were hard to track, and construction phasing data was scattered. Promoting these to first-class entities makes project data complete and traceable.
 
-**Learn more:** [Data Provenance Guide](/en/guides/data-provenance)
+**Learn more:** [Compiler Overview](/en/documentation/compiler/)
 
-Previous versions:
-- v0.1.4 (2026-02-23): Property inheritance (Level -> Space)
-- v0.1.3 (2026-02-22): Environmental conditions, electrical safety groups, regulatory references, lifecycle states
-- v0.1.2 (2026-02-22): Room numbers, accessibility levels, parent/child spaces, departments
-- v0.1.1 (2026-02-22): Type/instance pattern (Space Types, Zone Types, System Types, Asset Types)
+Recent versions:
+- **v1.0.0** (2026-02-24): Production release with 68 tests, CHANGELOG
+- **v0.6.0** (2026-02-24): Multi-level spaces, system hierarchy, construction phasing
+- **v0.5.0** (2026-02-24): Site, Envelope, Vertical Circulation entities (14 → 14 types)
+- **v0.4.0** (2026-02-23): Cost rollup, simulation tracking, performance aggregation
+- **v0.3.0** (2026-02-23): Healthcare completeness (52 space types, 12 zone types)
+- **v0.2.0** (2026-02-23): Data provenance with field-level `_meta` annotations
+- **v0.1.4** (2026-02-23): Property inheritance (Level → Space)
+- **v0.1.1** (2026-02-22): Type/instance pattern (Space Types, Zone Types, System Types, Asset Types)
 
-**What changed:** If you're just starting, ignore provenance until you have data from real sources. Start with rooms, zones, and requirements.
+**What changed:** If you're upgrading from v1.0, add Opening/Site Feature/Construction Package entities. If you're just starting, begin with Site, Building, Level, Space, and Zone — then add other types as your project needs them.
 
 ::: tip Start Simple
 You don't need to use every field. Start with:

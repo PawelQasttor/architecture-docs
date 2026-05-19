@@ -126,7 +126,9 @@ type SystemCategory =
 
 **Najprostszy system HVAC dla koordynacji MEP:**
 
-```markdown
+::: code-group
+
+```md [Markdown]
 Plik: systems/sys-hvac-01.md
 
 ---
@@ -152,6 +154,61 @@ capacity:
 System pompy ciepła obsługujący sypialnie i salony w strefie północnej.
 ```
 
+```yaml [YAML]
+id: "SYS-HVAC-01"
+entityType: "system"
+documentType: "system"
+systemName: "System HVAC Strefa Północna"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+version: "1.0.0"
+
+servedZoneIds:
+  - "ZONE-HVAC-NORTH"
+capacity:
+  cooling: 85
+  heating: 75
+  unit: "kW"
+```
+
+```json [JSON]
+{
+  "id": "SYS-HVAC-01",
+  "entityType": "system",
+  "documentType": "system",
+  "systemName": "System HVAC Strefa Północna",
+  "systemCategory": "hvac",
+  "buildingId": "BLD-01",
+  "version": "1.0.0",
+  "servedZoneIds": ["ZONE-HVAC-NORTH"],
+  "capacity": {
+    "cooling": 85,
+    "heating": 75,
+    "unit": "kW"
+  }
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "systemName", "systemCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SYS-" },
+    "entityType": { "const": "system" },
+    "systemName": { "type": "string" },
+    "systemCategory": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "servedZoneIds": { "type": "array" },
+    "performance": { "type": "object" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **To wszystko.** Gdy urządzenia odwołują się do `SYS-HVAC-01`, automatycznie pojawiają się na liście urządzeń tego systemu.
 
 ---
@@ -160,7 +217,9 @@ System pompy ciepła obsługujący sypialnie i salony w strefie północnej.
 
 **Plik:** `docs/en/examples/green-terrace/systems/sys-hvac-01.md`
 
-```markdown
+::: code-group
+
+```md [Markdown]
 ---
 documentType: "system"
 entityType: "system"
@@ -252,6 +311,139 @@ System zmiennoprzepływowy (VAV) z pompą ciepła obsługujący przestrzenie mie
 - Przegląd roczny: Pełny test wydajności systemu
 - Konserwacja predykcyjna: Monitoring drgań kompresor&oacute;w
 ```
+
+```yaml [YAML]
+documentType: "system"
+entityType: "system"
+id: "SYS-HVAC-01"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+systemName: "HVAC System 01 - North Zone"
+systemCategory: "hvac"
+systemType: "variable_air_volume"
+buildingId: "BLD-01"
+
+servedZoneIds:
+  - "ZONE-HVAC-NORTH"
+
+capacity:
+  cooling: 85
+  heating: 75
+  unit: "kW"
+
+efficiency:
+  cooling_cop: 3.2
+  heating_cop: 3.8
+  seer: 16.5
+
+energySource: "electricity_heat_pump"
+controlStrategy: "bms_ddc"
+
+designCriteria:
+  outdoorAirRate: 30
+  outdoorAirRateUnit: "m3/h/person"
+  minFreshAir: 0.5
+  minFreshAirUnit: "ACH"
+  supplyAirTemp: 16
+  supplyAirTempUnit: "°C"
+
+maintenanceSchedule:
+  filterReplacement: "quarterly"
+  annualInspection: true
+  predictiveMaintenance: true
+
+requirements:
+  - "REQ-VENTILATION-OCCUPIED-001"
+  - "REQ-THERMAL-COMFORT-001"
+  - "REQ-ENERGY-EFFICIENCY-HVAC-001"
+
+ifcMapping:
+  ifcEntity: "IfcSystem"
+  globalId: "1N2eH8$qKAxt2WxDu1LNyP"
+  objectType: "HVAC"
+
+version: "1.0.0"
+tags:
+  - "hvac"
+  - "heat_pump"
+  - "variable_air_volume"
+  - "energy_efficient"
+```
+
+```json [JSON]
+{
+  "documentType": "system",
+  "entityType": "system",
+  "id": "SYS-HVAC-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "systemName": "HVAC System 01 - North Zone",
+  "systemCategory": "hvac",
+  "systemType": "variable_air_volume",
+  "buildingId": "BLD-01",
+  "servedZoneIds": ["ZONE-HVAC-NORTH"],
+  "capacity": {
+    "cooling": 85,
+    "heating": 75,
+    "unit": "kW"
+  },
+  "efficiency": {
+    "cooling_cop": 3.2,
+    "heating_cop": 3.8,
+    "seer": 16.5
+  },
+  "energySource": "electricity_heat_pump",
+  "controlStrategy": "bms_ddc",
+  "designCriteria": {
+    "outdoorAirRate": 30,
+    "outdoorAirRateUnit": "m3/h/person",
+    "minFreshAir": 0.5,
+    "minFreshAirUnit": "ACH",
+    "supplyAirTemp": 16,
+    "supplyAirTempUnit": "°C"
+  },
+  "maintenanceSchedule": {
+    "filterReplacement": "quarterly",
+    "annualInspection": true,
+    "predictiveMaintenance": true
+  },
+  "requirements": [
+    "REQ-VENTILATION-OCCUPIED-001",
+    "REQ-THERMAL-COMFORT-001",
+    "REQ-ENERGY-EFFICIENCY-HVAC-001"
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcSystem",
+    "globalId": "1N2eH8$qKAxt2WxDu1LNyP",
+    "objectType": "HVAC"
+  },
+  "version": "1.0.0",
+  "tags": ["hvac", "heat_pump", "variable_air_volume", "energy_efficient"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "systemName", "systemCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SYS-" },
+    "entityType": { "const": "system" },
+    "systemName": { "type": "string" },
+    "systemCategory": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "parentSystemId": { "type": "string" },
+    "subsystemIds": { "type": "array" },
+    "servedZoneIds": { "type": "array" },
+    "performance": { "type": "object" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Przykład: Skompilowany JSON
 
@@ -551,6 +743,67 @@ Systemy z danymi o wydajności i sprawności umożliwiają modelowanie energetyc
   }
 }
 ```
+
+---
+
+## Typowe Błędy
+
+### ❌ Błąd 1: Ręczne Pisanie `assetIds`
+
+**Problem**: Ręczne pisanie `assetIds: ["AST-HP-01", "AST-MVHR-01"]` w pliku systemu.
+
+**Rozwiązanie**: `assetIds` jest **auto-obliczane** przez kompilator z `Asset.systemId` — **nigdy nie pisz tego ręcznie**.
+
+```yaml
+# ❌ Złe: Ręczne wypełnianie
+# systems/sys-hvac-01.md
+assetIds: ["AST-HP-01", "AST-MVHR-01"]  # Kompilator to oblicza!
+
+# ✅ Dobre: Pozwól kompilatorowi obliczyć
+# systems/sys-hvac-01.md
+systemName: "System HVAC Budynek 01"
+
+# assets/hp-01.md
+systemId: "SYS-HVAC-01"  # Kompilator użyje tego do wypełnienia System.assetIds
+```
+
+---
+
+### ❌ Błąd 2: `assetIds` Pozostaje Puste
+
+**Problem**: `System.assetIds` jest pustą tablicą po kompilacji.
+
+**Przyczyna**: Żaden zasób nie odnosi się do tego systemu poprzez `systemId`.
+
+**Rozwiązanie**: Dodaj `systemId: "SYS-HVAC-01"` do plików zasobów.
+
+```yaml
+# assets/pompa-ciepla-01.md
+systemId: "SYS-HVAC-01"  # Referencja wprost
+
+# Kompilator widzi to → wypełnia System.assetIds: ["AST-HP-01"]
+```
+
+---
+
+### ❌ Błąd 3: Mylenie `systemCategory` (Enum) z `systemTypeId` (Referencja)
+
+**Problem**: `systemTypeId: "hvac"` (to jest enum, nie ID typu).
+
+**Rozwiązanie**:
+- `systemCategory` (enum): `"hvac"`, `"electrical"`, `"plumbing"` (z listy)
+- `systemTypeId` (referencja): `"SYT-HVAC-RESIDENTIAL-MVHR"` (odnosi się do szablonu typu)
+
+```yaml
+# ❌ Złe: Mylenie enum z referencją typu
+systemTypeId: "hvac"  # To jest wartość enum!
+
+# ✅ Dobre: Prawidłowe użycie
+systemCategory: "hvac"  # Enum z listy
+systemTypeId: "SYT-HVAC-RESIDENTIAL-MVHR"  # Referencja do typu systemu
+```
+
+---
 
 ## Zobacz Także
 

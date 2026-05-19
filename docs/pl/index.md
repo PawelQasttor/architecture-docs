@@ -2,16 +2,16 @@
 layout: home
 
 hero:
-  name: "Dokumentuj 10x Szybciej"
-  text: "Przestań Tracić Informacje Między AutoCAD, Excel i E-mailami"
-  tagline: Jeden plik na pomieszczenie. Jeden plik na strefę pożarową. Pliki tekstowe, które automatycznie się nie rozjeżdżają. Bez specjalnego oprogramowania.
+  name: "Semantyczny Model Budynku"
+  text: "Standard Dokumentacji Projektów Budowlanych"
+  tagline: Jeden plik tekstowy na pomieszczenie, strefę i instalację. Dane strukturalne, które czytają ludzie i komputery. Bez specjalnego oprogramowania — tylko foldery i pliki.
   actions:
     - theme: brand
+      text: Czym jest SBM?
+      link: /pl/standardy/wprowadzenie
+    - theme: alt
       text: Szybki Start (5 min)
       link: /pl/standardy/szybki-start
-    - theme: alt
-      text: Zobacz Prawdziwy Przykład
-      link: /pl/przyklady/zielony-taras/
     - theme: alt
       text: English
       link: /
@@ -280,7 +280,7 @@ Gdy będziesz gotowy zagłębić się bardziej:
 | Temat | Czego Się Nauczysz |
 |-------|-------------------|
 | [8 Faz Projektu](/pl/standardy/struktura-dokumentu) | Kiedy tworzyć które dokumenty (od koncepcji do przekazania) |
-| [Typy Dokumentów](/pl/dokumentacja/encje/) | 11 typów informacji o budynku (pomieszczenia, strefy, instalacje, wyposażenie) |
+| [Typy Dokumentów](/pl/dokumentacja/encje/) | 19 typów informacji o budynku (pomieszczenia, strefy, instalacje, wyposażenie i więcej) |
 | [Integracja BIM](/pl/integracja-bim/) | Jak synchronizować z Revit, ArchiCAD i IFC |
 | [Szablony](/pl/szablony/) | Szablony kopiuj-wklej dla każdego typu dokumentu |
 | [Polskie Przepisy](/pl/przepisy/) | Wbudowane wsparcie dla WT 2021 i Prawa Budowlanego |

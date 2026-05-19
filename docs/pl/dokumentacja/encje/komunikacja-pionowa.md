@@ -14,6 +14,14 @@ Encja **Komunikacja Pionowa** opisuje element budynku łączący kondygnacje: kl
 W większości projektów mieszkalnych potrzebujesz 1-2 plików komunikacji pionowej (jedna klatka schodowa, jedna winda). Dodaj szczegóły ewakuacji i obliczenia przepustowości przy przygotowaniu wniosku o pozwolenie.
 :::
 
+::: tip Dla Architektów
+**Problem**: Wniosek o pozwolenie na budowę wymaga analizy ewakuacji. Klatka A obsługuje 6 kondygnacji, potrzebuje ochrony REI 120, szerokości 1,20m, dokumentacji zdolności ewakuacji.
+
+**Stary sposób**: Rozproszone między rysunkami (szerokość), Excelem (obliczenia przepustowości), specyfikacją Word (klasa ognioodporności), harmonogramami (obsługiwane kondygnacje).
+
+**Z Komunikacją Pionową**: **Jeden plik na klatkę** — obsługiwane kondygnacje (`connectedLevelIds`), wymiary (`flightWidth: 1200`), klasa ogniowa (`REI 120`), zdolność ewakuacji (`occupantCapacity: 120`, `evacuationTime: 4.5`). Wszystkie dane ewakuacyjne w jednym miejscu do wniosku o pozwolenie.
+:::
+
 ---
 
 ## Pola Wymagane
@@ -53,7 +61,9 @@ W większości projektów mieszkalnych potrzebujesz 1-2 plików komunikacji pion
 
 ## Minimalny Przykład (Klatka Schodowa)
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "VC-KLATKA-A"
 entityType: "vertical_circulation"
@@ -77,11 +87,56 @@ version: "1.0.0"
 Główna klatka schodowa obsługująca wszystkie kondygnacje mieszkalne.
 ```
 
+```yaml [YAML]
+id: "VC-KLATKA-A"
+entityType: "vertical_circulation"
+circulationName: "Klatka schodowa A"
+circulationType: "staircase"
+buildingId: "BLD-01"
+connectedLevelIds:
+  - "LVL-00"
+  - "LVL-01"
+  - "LVL-02"
+  - "LVL-03"
+  - "LVL-04"
+  - "LVL-05"
+isFireEscape: true
+isAccessible: false
+version: "1.0.0"
+```
+
+```json [JSON]
+{
+  "id": "VC-KLATKA-A",
+  "entityType": "vertical_circulation",
+  "circulationName": "Klatka schodowa A",
+  "circulationType": "staircase",
+  "buildingId": "BLD-01",
+  "connectedLevelIds": [
+    "LVL-00", "LVL-01", "LVL-02",
+    "LVL-03", "LVL-04", "LVL-05"
+  ],
+  "isFireEscape": true,
+  "isAccessible": false,
+  "version": "1.0.0"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "circulationName", "circulationType", "buildingId", "version"]
+}
+```
+
+:::
+
 ---
 
 ## Kompletny Przykład (Winda)
 
-```yaml
+::: code-group
+
+```yaml [Markdown]
 ---
 id: "VC-WINDA-01"
 entityType: "vertical_circulation"
@@ -148,6 +203,138 @@ tags: ["dostępność", "nosze", "mieszkalny"]
 
 Winda KONE MonoSpace 500 bez maszynowni, obsługująca wszystkie kondygnacje.
 ```
+
+```yaml [YAML]
+id: "VC-WINDA-01"
+entityType: "vertical_circulation"
+circulationName: "Winda osobowa 1"
+circulationType: "elevator"
+buildingId: "BLD-01"
+connectedLevelIds:
+  - "LVL-00"
+  - "LVL-01"
+  - "LVL-02"
+  - "LVL-03"
+  - "LVL-04"
+  - "LVL-05"
+isAccessible: true
+isStretcher: true
+
+dimensions:
+  shaftWidth: 1800
+  shaftDepth: 2100
+  pitDepth: 1200
+  overrun: 3600
+
+elevatorProperties:
+  loadCapacity: 1000
+  personCapacity: 13
+  speed: 1.0
+  cabWidth: 1100
+  cabDepth: 1400
+  cabHeight: 2200
+  doorWidth: 900
+  doorHeight: 2100
+  driveType: "mrl"
+  doorType: "center_opening"
+  stops: 6
+  manufacturer: "KONE"
+  model: "MonoSpace 500"
+
+accessibility:
+  handrails: "both_sides"
+  brailleControls: true
+  audioAnnouncements: true
+  turningCircle: 1500
+
+regulatoryCompliance:
+  - regulation: "WT 2021"
+    section: "§ 54"
+    requirement: "Winda wymagana w budynkach > 4 kondygnacji"
+    status: "compliant"
+
+cost:
+  estimatedTotal: 85000
+  currency: "EUR"
+
+ifcMapping:
+  ifcEntity: "IfcTransportElement"
+  objectType: "WindaOsobowa_01"
+  predefinedType: "ELEVATOR"
+
+version: "1.0.0"
+tags: ["dostępność", "nosze", "mieszkalny"]
+```
+
+```json [JSON]
+{
+  "id": "VC-WINDA-01",
+  "entityType": "vertical_circulation",
+  "circulationName": "Winda osobowa 1",
+  "circulationType": "elevator",
+  "buildingId": "BLD-01",
+  "connectedLevelIds": [
+    "LVL-00", "LVL-01", "LVL-02",
+    "LVL-03", "LVL-04", "LVL-05"
+  ],
+  "isAccessible": true,
+  "isStretcher": true,
+  "dimensions": {
+    "shaftWidth": 1800,
+    "shaftDepth": 2100,
+    "pitDepth": 1200,
+    "overrun": 3600
+  },
+  "elevatorProperties": {
+    "loadCapacity": 1000,
+    "personCapacity": 13,
+    "speed": 1.0,
+    "cabWidth": 1100,
+    "cabDepth": 1400,
+    "cabHeight": 2200,
+    "doorWidth": 900,
+    "doorHeight": 2100,
+    "driveType": "mrl",
+    "doorType": "center_opening",
+    "stops": 6,
+    "manufacturer": "KONE",
+    "model": "MonoSpace 500"
+  },
+  "accessibility": {
+    "handrails": "both_sides",
+    "brailleControls": true,
+    "audioAnnouncements": true,
+    "turningCircle": 1500
+  },
+  "regulatoryCompliance": [
+    {
+      "regulation": "WT 2021",
+      "section": "§ 54",
+      "requirement": "Winda wymagana w budynkach > 4 kondygnacji",
+      "status": "compliant"
+    }
+  ],
+  "cost": {
+    "estimatedTotal": 85000,
+    "currency": "EUR"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcTransportElement",
+    "objectType": "WindaOsobowa_01",
+    "predefinedType": "ELEVATOR"
+  },
+  "version": "1.0.0",
+  "tags": ["dostępność", "nosze", "mieszkalny"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "circulationName", "circulationType", "buildingId", "version"]
+}
+```
+
+:::
 
 ---
 

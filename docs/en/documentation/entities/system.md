@@ -91,6 +91,244 @@ Systems define:
 **Note:** `assetIds` is **automatically computed**. You don't list equipment here — equipment lists the system, and the system tracks the reverse relationship.
 :::
 
+---
+
+## System Hierarchies
+
+::: tip Introduced in SBM v0.6.0
+Break complex systems into parent-child hierarchies for better organization and automatic cost/performance rollup.
+:::
+
+### Why Use System Hierarchies?
+
+Large systems are often composed of subsystems. Example: A central HVAC system has separate heating, cooling, and ventilation subsystems.
+
+**Without hierarchy:**
+- All subsystems are flat, no relationship shown
+- Cost and performance data scattered
+- Hard to understand system composition
+
+**With hierarchy:**
+- Parent system aggregates child costs/performance
+- Clear organizational structure
+- Easier maintenance planning
+
+### How It Works
+
+**You define**: Child systems reference their parent via `parentSystemId`
+
+**Compiler computes**: Parent system's `subsystemIds` array is auto-populated
+
+### Example: Multi-Level HVAC System
+
+```
+SYS-HVAC-01 (Central HVAC System)
+  ├─ SYS-HVAC-01-HEATING (Heating Subsystem)
+  │    ├─ AST-HP-01 (Heat Pump)
+  │    └─ AST-UFH-MANIFOLD-01 (Underfloor Heating Manifold)
+  │
+  └─ SYS-HVAC-01-VENT (Ventilation Subsystem)
+       └─ AST-MVHR-01 (MVHR Unit)
+```
+
+### File Structure
+
+#### Parent System
+
+```yaml
+# systems/sys-hvac-01.md
+---
+id: "SYS-HVAC-01"
+systemName: "Central HVAC System"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+
+# No parentSystemId (this is the top level)
+# subsystemIds is auto-computed by compiler
+
+cost:
+  design: 85000  # Total for entire HVAC
+  actual: 87500
+
+capacity:
+  heatingCapacityKW: 12
+  coolingCapacityKW: 10
+  ventilationRateM3h: 450
+---
+
+# Central HVAC System
+
+Integrated heating, cooling, and ventilation for the entire building.
+
+## Subsystems
+
+See:
+- [Heating Subsystem](./sys-hvac-01-heating.md)
+- [Ventilation Subsystem](./sys-hvac-01-vent.md)
+```
+
+#### Child System 1: Heating
+
+```yaml
+# systems/sys-hvac-01-heating.md
+---
+id: "SYS-HVAC-01-HEATING"
+systemName: "Heating Subsystem"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+
+parentSystemId: "SYS-HVAC-01"  # ← References parent
+
+cost:
+  design: 45000
+  actual: 46500
+
+capacity:
+  heatingCapacityKW: 12
+---
+
+# Heating Subsystem
+
+Air-to-water heat pump with underfloor heating distribution.
+
+## Assets
+
+- [Heat Pump HP-01](../assets/ai-hp-01.md)
+- [UFH Manifold](../assets/ai-ufh-manifold-01.md)
+```
+
+#### Child System 2: Ventilation
+
+```yaml
+# systems/sys-hvac-01-vent.md
+---
+id: "SYS-HVAC-01-VENT"
+systemName: "Ventilation Subsystem"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+
+parentSystemId: "SYS-HVAC-01"  # ← References parent
+
+cost:
+  design: 40000
+  actual: 41000
+
+capacity:
+  ventilationRateM3h: 450
+  heatRecoveryEfficiency: 0.92
+---
+
+# Ventilation Subsystem
+
+Mechanical ventilation with heat recovery (MVHR).
+
+## Assets
+
+- [MVHR Unit](../assets/ai-mvhr-01.md)
+```
+
+### Compiler Output (Auto-Computed Relationships)
+
+After compilation, the parent system's `subsystemIds` is populated:
+
+```json
+{
+  "id": "SYS-HVAC-01",
+  "systemName": "Central HVAC System",
+  "subsystemIds": [
+    "SYS-HVAC-01-HEATING",  // ← Compiler found this child
+    "SYS-HVAC-01-VENT"      // ← Compiler found this child
+  ],
+  "cost": {
+    "design": 85000,
+    "actual": 87500,
+    "_rollup": {
+      "subsystemsDesign": 85000,  // 45000 + 40000
+      "subsystemsActual": 87500   // 46500 + 41000
+    }
+  }
+}
+```
+
+### Cost and Performance Rollup
+
+The compiler **automatically aggregates** costs and performance from child systems to parent:
+
+| Metric | Heating | Ventilation | Parent (Rollup) |
+|--------|---------|-------------|-----------------|
+| Design Cost | €45,000 | €40,000 | **€85,000** |
+| Actual Cost | €46,500 | €41,000 | **€87,500** |
+| Heating Capacity | 12 kW | — | **12 kW** |
+| Ventilation Rate | — | 450 m³/h | **450 m³/h** |
+
+**Result**: Update a child system's cost → parent's rolled-up total updates automatically.
+
+### Use Cases
+
+#### Use Case 1: Large Building with Multiple HVAC Zones
+
+```
+SYS-HVAC (Building-Wide)
+  ├─ SYS-HVAC-NORTH (North Zone)
+  ├─ SYS-HVAC-SOUTH (South Zone)
+  └─ SYS-HVAC-CORE (Core Zone)
+```
+
+#### Use Case 2: Electrical System by Floor
+
+```
+SYS-ELEC (Main Distribution)
+  ├─ SYS-ELEC-L01 (Level 01 Distribution)
+  ├─ SYS-ELEC-L02 (Level 02 Distribution)
+  └─ SYS-ELEC-L03 (Level 03 Distribution)
+```
+
+#### Use Case 3: Plumbing with Hot/Cold/Drainage
+
+```
+SYS-PLUMB (Plumbing System)
+  ├─ SYS-PLUMB-COLD (Cold Water)
+  ├─ SYS-PLUMB-HOT (Hot Water)
+  └─ SYS-PLUMB-DRAIN (Drainage)
+```
+
+### When to Use Hierarchies
+
+| Scenario | Use Hierarchy? | Why? |
+|----------|----------------|------|
+| **Simple system (1 boiler, 1 set of radiators)** | ❌ No | One system file is enough |
+| **Multi-zone HVAC (3 air handlers)** | ✅ Yes | Each zone is a subsystem |
+| **Building-wide electrical (multiple panels)** | ✅ Yes | Main panel → sub-panels → circuits |
+| **Complex facility (hospital, airport)** | ✅ Yes | Central plant → distribution → zones |
+
+**Rule of thumb**: If you have 3+ related systems that share costs/performance, use hierarchy.
+
+### Validation
+
+The compiler checks:
+- ✅ `parentSystemId` references an existing system
+- ✅ No circular references (A → B → A)
+- ✅ Hierarchy depth < 10 levels (performance limit)
+- ❌ Error if orphan systems reference non-existent parents
+
+### Troubleshooting
+
+**Problem:** "My parent system has no subsystemIds"
+
+**Checklist:**
+1. ✅ Do child systems specify `parentSystemId`?
+2. ✅ Is the parent system ID exactly correct? (case-sensitive)
+3. ✅ Did you run the compiler? (`npm run compile`)
+
+**Problem:** "Cost rollup doesn't match"
+
+**Checklist:**
+1. ✅ Do all child systems have `cost.design` and `cost.actual`?
+2. ✅ Are costs numeric (not strings)?
+3. ✅ Check compiler output for rollup warnings
+
+---
+
 ## System Categories (Enum)
 
 ```typescript
@@ -126,7 +364,9 @@ type SystemCategory =
 
 **The simplest HVAC system for MEP coordination:**
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 File: systems/sys-hvac-01.md
 
 ---
@@ -152,6 +392,64 @@ capacity:
 Heat pump system serving north zone bedrooms and living rooms.
 ```
 
+```yaml [YAML]
+id: "SYS-HVAC-01"
+entityType: "system"
+documentType: "system"
+systemName: "HVAC System North Zone"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+version: "1.0.0"
+servedZoneIds:
+  - "ZONE-HVAC-NORTH"
+capacity:
+  cooling: 85
+  heating: 75
+  unit: "kW"
+```
+
+```json [JSON]
+{
+  "id": "SYS-HVAC-01",
+  "entityType": "system",
+  "documentType": "system",
+  "systemName": "HVAC System North Zone",
+  "systemCategory": "hvac",
+  "buildingId": "BLD-01",
+  "version": "1.0.0",
+  "servedZoneIds": [
+    "ZONE-HVAC-NORTH"
+  ],
+  "capacity": {
+    "cooling": 85,
+    "heating": 75,
+    "unit": "kW"
+  }
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "systemName", "systemCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SYS-[A-Z0-9-]+$" },
+    "entityType": { "const": "system" },
+    "systemName": { "type": "string" },
+    "systemCategory": {
+      "type": "string",
+      "enum": ["hvac", "electrical", "plumbing", "fire_safety", "security", "lighting", "communications", "vertical_transport", "renewable_energy", "medical_gas", "nurse_call", "pneumatic_tube", "medical_waste", "it_network"]
+    },
+    "buildingId": { "type": "string" },
+    "servedZoneIds": { "type": "array" },
+    "capacity": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **That's it.** When equipment references `SYS-HVAC-01`, it automatically appears in this system's equipment list.
 
 ---
@@ -160,7 +458,9 @@ Heat pump system serving north zone bedrooms and living rooms.
 
 **File:** `docs/en/examples/green-terrace/systems/sys-hvac-01.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "system"
 entityType: "system"
@@ -252,6 +552,139 @@ Variable air volume (VAV) heat pump system serving north zone residential spaces
 - Annual inspection: Full system performance test
 - Predictive maintenance: Vibration monitoring on compressors
 ```
+
+```yaml [YAML]
+documentType: "system"
+entityType: "system"
+id: "SYS-HVAC-01"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+systemName: "HVAC System 01 - North Zone"
+systemCategory: "hvac"
+systemType: "variable_air_volume"
+buildingId: "BLD-01"
+servedZoneIds:
+  - "ZONE-HVAC-NORTH"
+capacity:
+  cooling: 85
+  heating: 75
+  unit: "kW"
+efficiency:
+  cooling_cop: 3.2
+  heating_cop: 3.8
+  seer: 16.5
+energySource: "electricity_heat_pump"
+controlStrategy: "bms_ddc"
+designCriteria:
+  outdoorAirRate: 30
+  outdoorAirRateUnit: "m3/h/person"
+  minFreshAir: 0.5
+  minFreshAirUnit: "ACH"
+  supplyAirTemp: 16
+  supplyAirTempUnit: "°C"
+maintenanceSchedule:
+  filterReplacement: "quarterly"
+  annualInspection: true
+  predictiveMaintenance: true
+requirements:
+  - "REQ-VENTILATION-OCCUPIED-001"
+  - "REQ-THERMAL-COMFORT-001"
+  - "REQ-ENERGY-EFFICIENCY-HVAC-001"
+ifcMapping:
+  ifcEntity: "IfcSystem"
+  globalId: "1N2eH8$qKAxt2WxDu1LNyP"
+  objectType: "HVAC"
+version: "1.0.0"
+tags:
+  - "hvac"
+  - "heat_pump"
+  - "variable_air_volume"
+  - "energy_efficient"
+```
+
+```json [JSON]
+{
+  "documentType": "system",
+  "entityType": "system",
+  "id": "SYS-HVAC-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "systemName": "HVAC System 01 - North Zone",
+  "systemCategory": "hvac",
+  "systemType": "variable_air_volume",
+  "buildingId": "BLD-01",
+  "servedZoneIds": [
+    "ZONE-HVAC-NORTH"
+  ],
+  "capacity": {
+    "cooling": 85,
+    "heating": 75,
+    "unit": "kW"
+  },
+  "efficiency": {
+    "cooling_cop": 3.2,
+    "heating_cop": 3.8,
+    "seer": 16.5
+  },
+  "energySource": "electricity_heat_pump",
+  "controlStrategy": "bms_ddc",
+  "designCriteria": {
+    "outdoorAirRate": 30,
+    "outdoorAirRateUnit": "m3/h/person",
+    "minFreshAir": 0.5,
+    "minFreshAirUnit": "ACH",
+    "supplyAirTemp": 16,
+    "supplyAirTempUnit": "°C"
+  },
+  "maintenanceSchedule": {
+    "filterReplacement": "quarterly",
+    "annualInspection": true,
+    "predictiveMaintenance": true
+  },
+  "requirements": [
+    "REQ-VENTILATION-OCCUPIED-001",
+    "REQ-THERMAL-COMFORT-001",
+    "REQ-ENERGY-EFFICIENCY-HVAC-001"
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcSystem",
+    "globalId": "1N2eH8$qKAxt2WxDu1LNyP",
+    "objectType": "HVAC"
+  },
+  "version": "1.0.0",
+  "tags": [
+    "hvac",
+    "heat_pump",
+    "variable_air_volume",
+    "energy_efficient"
+  ]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "systemName", "systemCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SYS-[A-Z0-9-]+$" },
+    "entityType": { "const": "system" },
+    "systemName": { "type": "string" },
+    "systemCategory": {
+      "type": "string",
+      "enum": ["hvac", "electrical", "plumbing", "fire_safety", "security", "lighting", "communications", "vertical_transport", "renewable_energy", "medical_gas", "nurse_call", "pneumatic_tube", "medical_waste", "it_network"]
+    },
+    "systemTypeId": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "servedZoneIds": { "type": "array" },
+    "servedSpaceIds": { "type": "array" },
+    "performance": { "type": "object" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Example: Compiled JSON
 
@@ -378,7 +811,10 @@ typicalPerformance:
 ```
 
 **System Instance (References Type):**
-```yaml
+
+::: code-group
+
+```yaml [Markdown]
 # sys-hvac-01.md
 ---
 id: "SYS-HVAC-01"
@@ -395,6 +831,62 @@ performance:
   measuredCOP: 4.3  # Override: actual measured performance
 ---
 ```
+
+```yaml [YAML]
+id: "SYS-HVAC-01"
+entityType: "system"
+systemName: "HVAC System Building 01"
+systemTypeId: "SYT-HVAC-RESIDENTIAL-MVHR"
+systemCategory: "hvac"
+buildingId: "BLD-01"
+servedZoneIds: ["ZONE-HVAC-NORTH"]
+assetIds: ["AST-MVHR-01", "AST-HP-01"]
+performance:
+  measuredCOP: 4.3
+```
+
+```json [JSON]
+{
+  "id": "SYS-HVAC-01",
+  "entityType": "system",
+  "systemName": "HVAC System Building 01",
+  "systemTypeId": "SYT-HVAC-RESIDENTIAL-MVHR",
+  "systemCategory": "hvac",
+  "buildingId": "BLD-01",
+  "servedZoneIds": ["ZONE-HVAC-NORTH"],
+  "assetIds": ["AST-MVHR-01", "AST-HP-01"],
+  "performance": {
+    "measuredCOP": 4.3
+  }
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "systemName", "systemCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^SYS-[A-Z0-9-]+$" },
+    "entityType": { "const": "system" },
+    "systemName": { "type": "string" },
+    "systemTypeId": { "type": "string" },
+    "systemCategory": {
+      "type": "string",
+      "enum": ["hvac", "electrical", "plumbing", "fire_safety", "security", "lighting", "communications", "vertical_transport", "renewable_energy", "medical_gas", "nurse_call", "pneumatic_tube", "medical_waste", "it_network"]
+    },
+    "buildingId": { "type": "string" },
+    "parentSystemId": { "type": "string" },
+    "subsystemIds": { "type": "array" },
+    "servedZoneIds": { "type": "array" },
+    "servedSpaceIds": { "type": "array" },
+    "performance": { "type": "object" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 **Compiled Output:**
 ```json

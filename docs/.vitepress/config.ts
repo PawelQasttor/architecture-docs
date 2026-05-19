@@ -24,6 +24,7 @@ export default defineConfig({
           {
             text: 'Get Started',
             items: [
+              { text: '💡 What is SBM?', link: '/en/standards/introduction' },
               { text: '🚀 Quick Start (5 min)', link: '/en/standards/quick-start' },
               { text: '🧭 How It Works', link: '/en/standards/how-it-works' },
               { text: 'Complete Workflow', link: '/en/standards/document-structure' }
@@ -76,6 +77,7 @@ export default defineConfig({
               text: 'Document Types',
               items: [
                 { text: 'Document Types Overview', link: '/en/documentation/entities/' },
+                { text: 'Quick Reference (All 19 Types)', link: '/en/documentation/entities/quick-reference' },
                 { text: 'Space', link: '/en/documentation/entities/space' },
                 { text: 'Space Type', link: '/en/documentation/entities/space-type' },
                 { text: 'Zone', link: '/en/documentation/entities/zone' },
@@ -92,7 +94,15 @@ export default defineConfig({
                 { text: 'Site Feature', link: '/en/documentation/entities/site-feature' },
                 { text: 'Building', link: '/en/documentation/entities/building' },
                 { text: 'Level', link: '/en/documentation/entities/level' },
-                { text: 'Construction Package', link: '/en/documentation/entities/construction-package' }
+                { text: 'Construction Package', link: '/en/documentation/entities/construction-package' },
+                { text: 'Campus', link: '/en/documentation/entities/campus' },
+                { text: 'Space Program', link: '/en/documentation/entities/space-program' },
+                { text: 'Material Type', link: '/en/documentation/entities/material-type' },
+                { text: 'Material', link: '/en/documentation/entities/material' },
+                { text: 'Structural System', link: '/en/documentation/entities/structural-system' },
+                { text: 'Issue', link: '/en/documentation/entities/issue' },
+                { text: 'Commissioning Test', link: '/en/documentation/entities/commissioning-test' },
+                { text: 'Circulation Route', link: '/en/documentation/entities/circulation-route' }
               ]
             },
             {
@@ -117,10 +127,12 @@ export default defineConfig({
             {
               text: 'Getting Started',
               items: [
+                { text: 'What is SBM?', link: '/en/standards/introduction' },
                 { text: 'Quick Start', link: '/en/standards/quick-start' },
                 { text: 'How It All Fits Together', link: '/en/standards/how-it-works' },
                 { text: 'Standards Overview', link: '/en/standards/' },
                 { text: 'Complete Workflow', link: '/en/standards/document-structure' },
+                { text: 'Glossary of Terms', link: '/en/standards/glossary' },
                 { text: 'Dual-Format Docs', link: '/en/standards/dual-format' },
                 { text: 'Frontmatter Schema', link: '/en/standards/frontmatter-schema' }
               ]
@@ -245,6 +257,9 @@ export default defineConfig({
               text: 'Guides',
               items: [
                 { text: 'Overview', link: '/en/guides/' },
+                { text: 'Entity Design Principles', link: '/en/guides/entity-design-principles' },
+                { text: 'Property Inheritance', link: '/en/guides/property-inheritance' },
+                { text: 'IFC Mapping', link: '/en/guides/ifc-mapping' },
                 { text: 'Data Provenance', link: '/en/guides/data-provenance' },
                 { text: 'PDF Export', link: '/en/guides/pdf-export' },
                 { text: 'Starting a New Project', link: '/en/guides/new-project' },
@@ -337,6 +352,7 @@ export default defineConfig({
           {
             text: 'Jak Zacząć',
             items: [
+              { text: '💡 Czym jest SBM?', link: '/pl/standardy/wprowadzenie' },
               { text: '🚀 Szybki Start (5 min)', link: '/pl/standardy/szybki-start' },
               { text: '🧭 Jak to działa', link: '/pl/standardy/jak-to-dziala' },
               { text: 'Kompletny przepływ pracy', link: '/pl/standardy/struktura-dokumentu' }
@@ -389,6 +405,7 @@ export default defineConfig({
               text: 'Rodzaje kart',
               items: [
                 { text: 'Przegląd kart', link: '/pl/dokumentacja/encje/' },
+                { text: 'Szybki przegląd', link: '/pl/dokumentacja/encje/szybki-przeglad' },
                 { text: 'Pomieszczenie', link: '/pl/dokumentacja/encje/przestrzen' },
                 { text: 'Typ Przestrzeni', link: '/pl/dokumentacja/encje/typ-przestrzeni' },
                 { text: 'Strefa', link: '/pl/dokumentacja/encje/strefa' },
@@ -405,7 +422,15 @@ export default defineConfig({
                 { text: 'Element Terenu', link: '/pl/dokumentacja/encje/element-terenu' },
                 { text: 'Budynek', link: '/pl/dokumentacja/encje/budynek' },
                 { text: 'Kondygnacja', link: '/pl/dokumentacja/encje/poziom' },
-                { text: 'Pakiet Budowlany', link: '/pl/dokumentacja/encje/pakiet-budowlany' }
+                { text: 'Pakiet Budowlany', link: '/pl/dokumentacja/encje/pakiet-budowlany' },
+                { text: 'Kampus', link: '/pl/dokumentacja/encje/kampus' },
+                { text: 'Program Przestrzenny', link: '/pl/dokumentacja/encje/program-przestrzenny' },
+                { text: 'Typ Materiału', link: '/pl/dokumentacja/encje/typ-materialu' },
+                { text: 'Materiał', link: '/pl/dokumentacja/encje/material' },
+                { text: 'System Konstrukcyjny', link: '/pl/dokumentacja/encje/system-konstrukcyjny' },
+                { text: 'Zgłoszenie', link: '/pl/dokumentacja/encje/zgloszenie' },
+                { text: 'Test Odbioru', link: '/pl/dokumentacja/encje/test-odbioru' },
+                { text: 'Trasa Komunikacji', link: '/pl/dokumentacja/encje/trasa-komunikacji' }
               ]
             },
             {
@@ -430,9 +455,11 @@ export default defineConfig({
             {
               text: 'Jak zacząć',
               items: [
+                { text: 'Czym jest SBM?', link: '/pl/standardy/wprowadzenie' },
                 { text: 'Szybki Start', link: '/pl/standardy/szybki-start' },
                 { text: 'Jak to działa', link: '/pl/standardy/jak-to-dziala' },
                 { text: 'Przegląd', link: '/pl/standardy/' },
+                { text: 'Słownik', link: '/pl/standardy/slownik' },
                 { text: 'Kompletny przepływ pracy', link: '/pl/standardy/struktura-dokumentu' },
                 { text: 'Dokumenty dwuformatowe', link: '/pl/standardy/dual-format' },
                 { text: 'Schema frontmatter', link: '/pl/standardy/schema-frontmatter' }
@@ -558,6 +585,9 @@ export default defineConfig({
               text: 'Przewodniki',
               items: [
                 { text: 'Przegląd', link: '/pl/przewodniki/' },
+                { text: 'Dziedziczenie właściwości', link: '/pl/przewodniki/dziedziczenie-wlasciwosci' },
+                { text: 'Zasady projektowania encji', link: '/pl/przewodniki/zasady-projektowania-encji' },
+                { text: 'Mapowanie IFC', link: '/pl/przewodniki/mapowanie-ifc' },
                 { text: 'Proweniencja danych', link: '/pl/przewodniki/proweniencja-danych' },
                 { text: 'Eksport PDF', link: '/pl/przewodniki/eksport-pdf' },
                 { text: 'Nowy projekt', link: '/pl/przewodniki/nowy-projekt' },

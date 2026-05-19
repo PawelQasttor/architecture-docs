@@ -26,7 +26,7 @@ function createMockLogger() {
  */
 function createTestSbm(entities = {}) {
   return {
-    sbm_version: '1.1',
+    sbm_version: '2.0',
     generatedAt: new Date().toISOString(),
     compiler: { version: '1.1.0', mode: 'production' },
     project: {
@@ -204,8 +204,13 @@ describe('generateQuality', () => {
           name: 'Full Building',
           buildingName: 'Full Building',
           siteId: 'SITE-X',
-          classification: 'residential',
+          buildingType: 'residential_multifamily',
+          occupancyClassification: 'ZL_IV',
           grossFloorArea: 1000,
+          numberOfStoreys: { aboveGround: 4, belowGround: 1, total: 5 },
+          buildingHeight: 16.5,
+          structuralSystem: { type: 'reinforced_concrete_frame' },
+          sustainability: { energyPerformance: { epcClass: 'B' } },
           cost: { totalCost: 500000 },
           version: '1.0.0'
         }]

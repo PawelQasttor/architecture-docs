@@ -349,7 +349,9 @@ bedroom-01:
 
 **The simplest level file — ground floor:**
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 File: levels/level-01.md
 
 ---
@@ -373,6 +375,56 @@ grossFloorArea: 1250
 Main entrance level with lobby and residential units.
 ```
 
+```yaml [YAML]
+id: "LVL-01"
+entityType: "level"
+documentType: "level"
+levelName: "Level 01 (Ground)"
+buildingId: "BLD-01"
+elevation: 0.0
+elevationUnit: "m"
+version: "1.0.0"
+levelNumber: 0
+levelHeight: 3.20
+grossFloorArea: 1250
+```
+
+```json [JSON]
+{
+  "id": "LVL-01",
+  "entityType": "level",
+  "documentType": "level",
+  "levelName": "Level 01 (Ground)",
+  "buildingId": "BLD-01",
+  "elevation": 0.0,
+  "elevationUnit": "m",
+  "version": "1.0.0",
+  "levelNumber": 0,
+  "levelHeight": 3.20,
+  "grossFloorArea": 1250
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "levelName", "levelNumber", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^LVL-[A-Z0-9-]+$" },
+    "entityType": { "const": "level" },
+    "levelName": { "type": "string" },
+    "levelNumber": { "type": "integer" },
+    "buildingId": { "type": "string" },
+    "elevation": { "type": "number" },
+    "floorToFloorHeight": { "type": "number" },
+    "grossFloorArea": { "type": "number" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **That's it.** When rooms reference `LVL-01`, they automatically appear on this floor's room list.
 
 ---
@@ -381,7 +433,9 @@ Main entrance level with lobby and residential units.
 
 **Define typical properties once — all rooms inherit them:**
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 File: levels/level-02.md
 
 ---
@@ -433,6 +487,92 @@ All rooms on this floor automatically get:
 Only rooms that need something different (like bathrooms with ceramic tile) specify overrides.
 ```
 
+```yaml [YAML]
+id: "LVL-02"
+entityType: "level"
+documentType: "level"
+levelName: "Level 02"
+buildingId: "BLD-01"
+elevation: 3.20
+elevationUnit: "m"
+version: "1.0.0"
+levelNumber: 1
+levelHeight: 3.00
+grossFloorArea: 1200
+typicalCeilingHeight: 2.70
+typicalFinishes:
+  floor: "oak_engineered_natural"
+  walls: "paint_white_matte"
+  ceiling: "paint_white_matte"
+  baseboard: "mdf_white_120mm"
+typicalEnvironmentalConditions:
+  temperatureRange:
+    min: 20
+    max: 26
+    unit: "C"
+  humidityRange:
+    min: 30
+    max: 60
+levelRequirements:
+  - "REQ-PL-WT-ROOM-HEIGHT-001"
+  - "REQ-FIRE-FLOOR-RATING-REI-60"
+```
+
+```json [JSON]
+{
+  "id": "LVL-02",
+  "entityType": "level",
+  "documentType": "level",
+  "levelName": "Level 02",
+  "buildingId": "BLD-01",
+  "elevation": 3.20,
+  "elevationUnit": "m",
+  "version": "1.0.0",
+  "levelNumber": 1,
+  "levelHeight": 3.00,
+  "grossFloorArea": 1200,
+  "typicalCeilingHeight": 2.70,
+  "typicalFinishes": {
+    "floor": "oak_engineered_natural",
+    "walls": "paint_white_matte",
+    "ceiling": "paint_white_matte",
+    "baseboard": "mdf_white_120mm"
+  },
+  "typicalEnvironmentalConditions": {
+    "temperatureRange": { "min": 20, "max": 26, "unit": "C" },
+    "humidityRange": { "min": 30, "max": 60 }
+  },
+  "levelRequirements": [
+    "REQ-PL-WT-ROOM-HEIGHT-001",
+    "REQ-FIRE-FLOOR-RATING-REI-60"
+  ]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "levelName", "levelNumber", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^LVL-[A-Z0-9-]+$" },
+    "entityType": { "const": "level" },
+    "levelName": { "type": "string" },
+    "levelNumber": { "type": "integer" },
+    "buildingId": { "type": "string" },
+    "elevation": { "type": "number" },
+    "floorToFloorHeight": { "type": "number" },
+    "typicalCeilingHeight": { "type": "number" },
+    "grossFloorArea": { "type": "number" },
+    "typicalFinishes": { "type": "object" },
+    "typicalEnvironmentalConditions": { "type": "object" },
+    "levelRequirements": { "type": "array" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **Benefit:** Instead of specifying ceiling height and finishes in 40 room files, specify once here. Saves 90% of repetition.
 
 ---
@@ -441,7 +581,9 @@ Only rooms that need something different (like bathrooms with ceramic tile) spec
 
 **File:** `docs/en/examples/green-terrace/levels/level-01.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "level"
 entityType: "level"
@@ -507,6 +649,91 @@ Main entrance level with lobby and residential units.
 - **Elevators:** 1 elevator serving all floors
 - **Access:** Main entrance from street level
 ```
+
+```yaml [YAML]
+documentType: "level"
+entityType: "level"
+id: "LVL-01"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+levelName: "Level 01 (Ground)"
+buildingId: "BLD-01"
+levelNumber: 0
+elevation: 0.0
+elevationUnit: "m"
+levelHeight: 3.20
+levelHeightUnit: "m"
+grossFloorArea: 1250
+areaUnit: "m2"
+levelType: "ground"
+description: >
+  Ground floor with main entrance, lobby, and 8 residential units.
+  Includes bike storage and mail room.
+ifcMapping:
+  ifcEntity: "IfcBuildingStorey"
+  globalId: "2L3gI9$sNEyv4XzGv2MPzR"
+  objectType: "Ground Floor"
+version: "1.0.0"
+tags:
+  - "ground_floor"
+  - "entrance"
+  - "residential"
+```
+
+```json [JSON]
+{
+  "documentType": "level",
+  "entityType": "level",
+  "id": "LVL-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "levelName": "Level 01 (Ground)",
+  "buildingId": "BLD-01",
+  "levelNumber": 0,
+  "elevation": 0.0,
+  "elevationUnit": "m",
+  "levelHeight": 3.20,
+  "levelHeightUnit": "m",
+  "grossFloorArea": 1250,
+  "areaUnit": "m2",
+  "levelType": "ground",
+  "description": "Ground floor with main entrance, lobby, and 8 residential units. Includes bike storage and mail room.",
+  "ifcMapping": {
+    "ifcEntity": "IfcBuildingStorey",
+    "globalId": "2L3gI9$sNEyv4XzGv2MPzR",
+    "objectType": "Ground Floor"
+  },
+  "version": "1.0.0",
+  "tags": ["ground_floor", "entrance", "residential"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "levelName", "levelNumber", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^LVL-[A-Z0-9-]+$" },
+    "entityType": { "const": "level" },
+    "levelName": { "type": "string" },
+    "levelNumber": { "type": "integer" },
+    "buildingId": { "type": "string" },
+    "elevation": { "type": "number" },
+    "floorToFloorHeight": { "type": "number" },
+    "typicalCeilingHeight": { "type": "number" },
+    "grossFloorArea": { "type": "number" },
+    "netUsableArea": { "type": "number" },
+    "typicalFinishes": { "type": "object" },
+    "typicalEnvironmentalConditions": { "type": "object" },
+    "levelRequirements": { "type": "array" },
+    "constructionPackageId": { "type": "string" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Example: Compiled JSON
 

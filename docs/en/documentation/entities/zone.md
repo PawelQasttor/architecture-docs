@@ -83,8 +83,144 @@ Zones define:
 - **acousticClass** — e.g., "Class B" (insulation requirement)
 - **requirements** — Acoustic performance requirements
 
-**Note:** `spaceIds` is **automatically computed**. You don't list rooms here — they list the zone, and the system tracks the reverse relationship.
+**Note:** `spaceIds` is **automatically computed**. You don't list rooms here — they list the zone, and the system tracks the reverse relationship. See [How Bidirectional References Work](#how-bidirectional-references-work) below.
 :::
+
+## How Bidirectional References Work
+
+::: info Compiler Automation
+You **never** manually populate `spaceIds` in zone files. The compiler automatically computes reverse relationships from forward references.
+:::
+
+### The Forward Reference (You Write This)
+
+In each **Space** file, you declare which zones it belongs to:
+
+```yaml
+# spaces/bedroom-01.md
+---
+id: "SP-BLD-01-L01-001"
+spaceName: "Bedroom 01"
+zoneIds:
+  - "ZONE-FIRE-ZL-IV"  # ← You write this
+  - "ZONE-HVAC-NORTH"  # ← You write this
+---
+```
+
+### The Reverse Reference (Compiler Computes)
+
+When you compile, the compiler:
+
+1. **Reads** all Space files
+2. **Finds** all references to `"ZONE-FIRE-ZL-IV"`
+3. **Populates** `spaceIds` in the Zone file automatically
+
+**Compiled output:**
+
+```json
+{
+  "id": "ZONE-FIRE-ZL-IV",
+  "zoneName": "Fire Zone ZL-IV",
+  "spaceIds": [
+    "SP-BLD-01-L01-001",  // ← Compiler found this reference
+    "SP-BLD-01-L01-002",  // ← Compiler found this reference
+    "SP-BLD-01-L01-003"   // ← Compiler found this reference
+  ]
+}
+```
+
+### Why This Matters
+
+**Without automatic reverse links:**
+- You'd manually maintain both `Space.zoneIds` AND `Zone.spaceIds`
+- Risk: Space says it's in Zone A, but Zone A doesn't list the space → data inconsistency
+- Maintenance nightmare: Add a room → update 2 files, remove a room → update 2 files
+
+**With automatic reverse links:**
+- ✅ Write the link once (in Space)
+- ✅ Compiler maintains consistency
+- ✅ Impossible to have mismatched references
+
+### How to Verify It Worked
+
+#### Method 1: Check Compiler Output
+
+```bash
+npm run compile
+
+# Look for zone summary:
+# Zone ZONE-FIRE-ZL-IV: 12 spaces
+```
+
+#### Method 2: Read the Quality Report
+
+```bash
+npm run compile -- quality-report
+
+# Output shows:
+# Zone ZONE-FIRE-ZL-IV:
+#   spaceIds: 12 items (auto-computed ✓)
+```
+
+#### Method 3: Inspect the JSON Output
+
+```bash
+cat output/compiled-project.json | jq '.zones[] | select(.id == "ZONE-FIRE-ZL-IV") | .spaceIds'
+
+# Output:
+# [
+#   "SP-BLD-01-L01-001",
+#   "SP-BLD-01-L01-002",
+#   ...
+# ]
+```
+
+### Troubleshooting: "My zone has no spaceIds"
+
+**Problem:** You compiled, but `Zone.spaceIds` is empty.
+
+**Checklist:**
+
+1. ✅ **Do any spaces reference this zone?**
+   ```bash
+   grep -r "ZONE-FIRE-ZL-IV" spaces/
+   ```
+   If no results → no spaces reference this zone yet.
+
+2. ✅ **Is the zone ID exactly correct?**
+   - Space says: `"ZONE-FIRE-ZL-IV"`
+   - Zone file ID must match exactly (case-sensitive, no spaces)
+   - Common mistake: `ZONE-FIRE-ZL-4` vs `ZONE-FIRE-ZL-IV`
+
+3. ✅ **Did you run the compiler?**
+   ```bash
+   npm run compile
+   ```
+   The reverse links are computed during compilation, not when you save files.
+
+4. ✅ **Are there validation errors?**
+   ```bash
+   npm run compile -- validate
+   ```
+   If a space references a zone that doesn't exist, the compiler reports an error and skips populating `spaceIds`.
+
+### Other Bidirectional Relationships
+
+The same pattern applies to other entity relationships:
+
+| Forward Reference | Reverse Reference | Auto-Computed |
+|-------------------|-------------------|---------------|
+| `Space.levelId` → Level | `Level.spaceIds` ← Space | ✅ Yes |
+| `Space.buildingId` → Building | `Building.spaceIds` ← Space | ✅ Yes |
+| `Asset.spaceId` → Space | `Space.assetIds` ← Asset | ✅ Yes |
+| `System.parentSystemId` → System | `System.subsystemIds` ← System | ✅ Yes |
+| `Space.zoneIds` → Zone | `Zone.spaceIds` ← Space | ✅ Yes |
+
+::: tip Best Practice
+Always write forward references (from child → parent or from member → container). The compiler handles reverse links. **Never** manually edit auto-computed fields.
+:::
+
+---
 
 ## Zone Types (Enum)
 
@@ -121,7 +257,9 @@ type ZoneType =
 
 **The simplest fire zone for permit submission:**
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 File: zones/fire-zone-zl-iv.md
 
 ---
@@ -149,6 +287,66 @@ Fire resistance: REI 60 walls and floors.
 Fire doors: EI 30.
 ```
 
+```yaml [YAML]
+id: "ZONE-FIRE-ZL-IV"
+entityType: "zone"
+documentType: "zone"
+zoneName: "Fire Zone ZL-IV"
+zoneType: "fire"
+buildingId: "BLD-01"
+version: "1.0.0"
+
+# For permit compliance
+zoneClassification: "ZL-IV"
+fireRating: "REI 60"
+levelIds:
+  - "LVL-01"
+  - "LVL-02"
+  - "LVL-03"
+```
+
+```json [JSON]
+{
+  "id": "ZONE-FIRE-ZL-IV",
+  "entityType": "zone",
+  "documentType": "zone",
+  "zoneName": "Fire Zone ZL-IV",
+  "zoneCategory": "fire",
+  "buildingId": "BLD-01",
+  "version": "1.0.0",
+  "zoneClassification": "ZL-IV",
+  "fireRating": "REI 60",
+  "levelIds": [
+    "LVL-01",
+    "LVL-02",
+    "LVL-03"
+  ]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "zoneName", "zoneCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ZONE-[A-Z0-9-]+$" },
+    "entityType": { "const": "zone" },
+    "zoneName": { "type": "string" },
+    "zoneCategory": {
+      "type": "string",
+      "enum": ["fire", "hvac", "acoustic", "lighting", "security", "cleanroom", "electrical", "smoke"]
+    },
+    "zoneTypeId": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "containedSpaceIds": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **That's it.** When rooms reference `ZONE-FIRE-ZL-IV`, they automatically appear in this zone's room list.
 
 ---
@@ -157,7 +355,9 @@ Fire doors: EI 30.
 
 **File:** `docs/en/examples/green-terrace/zones/fire-zone-zl-iv.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 documentType: "zone"
 entityType: "zone"
@@ -215,6 +415,90 @@ This zone contains all residential spaces on levels L00-L02:
 - Bedrooms, living rooms, kitchens
 - Excludes: stairwells (separate fire zone)
 ```
+
+```yaml [YAML]
+documentType: "zone"
+entityType: "zone"
+id: "ZONE-FIRE-ZL-IV"
+projectPhase: "design_development"
+bimLOD: "LOD_300"
+
+zoneName: "Fire Zone ZL-IV (Residential)"
+zoneType: "fire"
+buildingId: "BLD-01"
+
+zoneClassification: "ZL-IV"
+fireRating: "REI 60"
+
+requirements:
+  - "REQ-PL-FIRE-SEPARATION-001"
+  - "REQ-FIRE-ZL-IV-001"
+
+description: >
+  Residential fire zone with low fire load (ZL-IV per WT 2021 § 234).
+  Requires REI 60 walls and floors, EI 30 fire doors.
+
+ifcMapping:
+  ifcEntity: "IfcZone"
+  globalId: "3P5hJ2$sNDxw4YzFv3MQyR"
+  objectType: "FireZone"
+
+version: "1.0.0"
+tags:
+  - "fire_safety"
+  - "residential"
+  - "zl_iv"
+```
+
+```json [JSON]
+{
+  "id": "ZONE-FIRE-ZL-IV",
+  "entityType": "zone",
+  "documentType": "zone",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "zoneName": "Fire Zone ZL-IV (Residential)",
+  "zoneCategory": "fire",
+  "buildingId": "BLD-01",
+  "zoneClassification": "ZL-IV",
+  "fireRating": "REI 60",
+  "requirements": [
+    "REQ-PL-FIRE-SEPARATION-001",
+    "REQ-FIRE-ZL-IV-001"
+  ],
+  "description": "Residential fire zone with low fire load (ZL-IV per WT 2021 § 234). Requires REI 60 walls and floors, EI 30 fire doors.",
+  "ifcMapping": {
+    "ifcEntity": "IfcZone",
+    "globalId": "3P5hJ2$sNDxw4YzFv3MQyR",
+    "objectType": "FireZone"
+  },
+  "version": "1.0.0",
+  "tags": ["fire_safety", "residential", "zl_iv"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "zoneName", "zoneCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ZONE-[A-Z0-9-]+$" },
+    "entityType": { "const": "zone" },
+    "zoneName": { "type": "string" },
+    "zoneCategory": {
+      "type": "string",
+      "enum": ["fire", "hvac", "acoustic", "lighting", "security", "cleanroom", "electrical", "smoke"]
+    },
+    "zoneTypeId": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "containedSpaceIds": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Example: Compiled JSON
 
@@ -311,7 +595,10 @@ properties:
 ```
 
 **Zone Instance (References Type):**
-```yaml
+
+::: code-group
+
+```markdown [Markdown]
 # fire-zone-north.md
 ---
 id: "ZONE-FIRE-NORTH"
@@ -326,6 +613,58 @@ levelIds: ["LVL-01", "LVL-02"]
 spaceIds: ["SP-001", "SP-002", "SP-003"]
 ---
 ```
+
+```yaml [YAML]
+id: "ZONE-FIRE-NORTH"
+entityType: "zone"
+zoneName: "Fire Zone North Wing"
+zoneTypeId: "ZT-FIRE-ZL-IV"
+zoneType: "fire"
+buildingId: "BLD-01"
+levelIds:
+  - "LVL-01"
+  - "LVL-02"
+spaceIds:
+  - "SP-001"
+  - "SP-002"
+  - "SP-003"
+```
+
+```json [JSON]
+{
+  "id": "ZONE-FIRE-NORTH",
+  "entityType": "zone",
+  "zoneName": "Fire Zone North Wing",
+  "zoneTypeId": "ZT-FIRE-ZL-IV",
+  "zoneCategory": "fire",
+  "buildingId": "BLD-01",
+  "levelIds": ["LVL-01", "LVL-02"],
+  "containedSpaceIds": ["SP-001", "SP-002", "SP-003"]
+}
+```
+
+```json [Schema]
+{
+  "type": "object",
+  "required": ["id", "entityType", "zoneName", "zoneCategory", "buildingId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^ZONE-[A-Z0-9-]+$" },
+    "entityType": { "const": "zone" },
+    "zoneName": { "type": "string" },
+    "zoneCategory": {
+      "type": "string",
+      "enum": ["fire", "hvac", "acoustic", "lighting", "security", "cleanroom", "electrical", "smoke"]
+    },
+    "zoneTypeId": { "type": "string" },
+    "buildingId": { "type": "string" },
+    "containedSpaceIds": { "type": "array", "items": { "type": "string" } },
+    "requirements": { "type": "array", "items": { "type": "string" } },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 **Compiled Output:**
 ```json
@@ -449,6 +788,44 @@ Zones can aggregate sensor data from all contained spaces:
   ]
 }
 ```
+
+---
+
+## Common Mistakes
+
+::: danger ❌ Mistake #1: Manually Populating spaceIds
+**Problem**: Trying to list spaces in the zone file
+
+**Why it's bad**: `spaceIds` is auto-computed. Your manual list gets overwritten.
+
+**Fix**: Spaces declare `zoneIds` → Compiler populates Zone's `spaceIds`
+:::
+
+::: danger ❌ Mistake #2: Zone ID Typo (Case-Sensitive)
+**Problem**: Space references `"ZONE-FIRE-ZL-4"` but zone is `"ZONE-FIRE-ZL-IV"`
+
+**Fix**: Match exactly (case-sensitive, Roman numerals)
+:::
+
+::: danger ❌ Mistake #3: Forgetting to Run Compiler
+**Problem**: Zone's `spaceIds` is empty after adding space references
+
+**Fix**: Run `npm run compile` to compute reverse relationships
+:::
+
+::: danger ❌ Mistake #4: Creating Unused Zones
+**Problem**: Zone exists but no spaces reference it
+
+**Fix**: Check `grep -r "ZONE-ID" spaces/` to verify references exist
+:::
+
+::: danger ❌ Mistake #5: Wrong zoneType Enum
+**Problem**: Using `"fire-compartment"` instead of `"fire"`
+
+**Fix**: Use exact enum values from [Zone Types](#zone-types-enum)
+:::
+
+---
 
 ## See Also
 

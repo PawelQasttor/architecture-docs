@@ -27,7 +27,7 @@ function createMockLogger() {
  */
 function createValidSbm(overrides = {}) {
   return {
-    sbm_version: '1.1',
+    sbm_version: '2.0',
     generatedAt: new Date().toISOString(),
     compiler: { version: '1.1.0', mode: 'production' },
     project: {

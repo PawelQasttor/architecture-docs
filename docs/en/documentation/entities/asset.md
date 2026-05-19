@@ -145,7 +145,9 @@ type VerticalTransportAssetType =
 
 **The simplest equipment file for handover:**
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 File: assets/ast-ahu-01.md
 
 ---
@@ -171,6 +173,57 @@ Rooftop HVAC unit serving north zone.
 Warranty expires 2028-08-15.
 ```
 
+```yaml [YAML]
+id: "AST-AHU-01"
+entityType: "asset"
+assetName: "Air Handling Unit 01"
+assetType: "ahu"
+systemId: "SYS-HVAC-01"
+buildingId: "BLD-01"
+version: "1.0.0"
+manufacturer: "Systemair"
+modelNumber: "Topvex SR11 EL"
+serialNumber: "SR11-2026-04782"
+installationDate: "2026-08-15"
+warrantyExpiry: "2028-08-15"
+```
+
+```json [JSON]
+{
+  "id": "AST-AHU-01",
+  "entityType": "asset",
+  "assetName": "Air Handling Unit 01",
+  "assetCategory": "ahu",
+  "systemId": "SYS-HVAC-01",
+  "buildingId": "BLD-01",
+  "version": "1.0.0",
+  "manufacturer": "Systemair",
+  "modelNumber": "Topvex SR11 EL",
+  "serialNumber": "SR11-2026-04782",
+  "installationDate": "2026-08-15",
+  "warrantyExpiry": "2028-08-15"
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "assetName", "assetCategory", "systemId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^AST-" },
+    "entityType": { "const": "asset" },
+    "assetName": { "type": "string" },
+    "assetCategory": { "type": "string" },
+    "systemId": { "type": "string" },
+    "manufacturer": { "type": "string" },
+    "modelNumber": { "type": "string" },
+    "serialNumber": { "type": "string" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
+
 **That's it.** Facilities team can add maintenance schedules and spare parts later.
 
 ---
@@ -179,7 +232,9 @@ Warranty expires 2028-08-15.
 
 **File:** `docs/en/examples/green-terrace/assets/ast-ahu-01.md`
 
-```markdown
+::: code-group
+
+```markdown [Markdown]
 ---
 entityType: "asset"
 id: "AST-AHU-01"
@@ -336,6 +391,222 @@ Maintain minimum stock:
 - Fan belts: 1 spare
 - Control board: 1 spare (expensive, order on failure)
 ```
+
+```yaml [YAML]
+entityType: "asset"
+id: "AST-AHU-01"
+projectPhase: "construction"
+bimLOD: "LOD_350"
+
+assetName: "Air Handling Unit 01"
+assetType: "ahu"
+systemId: "SYS-HVAC-01"
+buildingId: "BLD-01"
+spaceId: "SP-BLD-01-ROOF-MECH"
+levelId: "LVL-ROOF"
+
+manufacturer: "Systemair"
+modelNumber: "Topvex SR11 EL"
+serialNumber: "SR11-2026-04782"
+assetTag: "GT-AHU-001"
+
+installationDate: "2026-08-15"
+warrantyExpiry: "2028-08-15"
+expectedLifespan: 20
+
+specifications:
+  airflow: 12000
+  airflowUnit: "m3/h"
+  coolingCapacity: 85
+  heatingCapacity: 75
+  capacityUnit: "kW"
+  filterClass: "F7"
+  powerConsumption: 15.5
+  powerUnit: "kW"
+  weight: 1850
+  weightUnit: "kg"
+  dimensions:
+    length: 4200
+    width: 2100
+    height: 2400
+    unit: "mm"
+
+maintenanceSchedule:
+  tasks:
+    - taskId: "MAINT-AHU-FILTER"
+      taskName: "Replace air filters"
+      frequency: "quarterly"
+      estimatedDuration: 2
+      durationUnit: "hours"
+      skillRequired: "HVAC technician"
+    - taskId: "MAINT-AHU-ANNUAL"
+      taskName: "Annual inspection and performance test"
+      frequency: "yearly"
+      estimatedDuration: 8
+      durationUnit: "hours"
+      skillRequired: "Certified HVAC engineer"
+    - taskId: "MAINT-AHU-BEARING"
+      taskName: "Lubricate fan bearings"
+      frequency: "semi_annual"
+      estimatedDuration: 1
+      durationUnit: "hours"
+      skillRequired: "HVAC technician"
+
+spareParts:
+  - partName: "Air filter F7"
+    partNumber: "SF-F7-600x600"
+    quantity: 4
+    reorderLevel: 2
+    unitCost: 145
+    currency: "PLN"
+  - partName: "Fan belt"
+    partNumber: "BELT-SR11-STD"
+    quantity: 2
+    reorderLevel: 1
+    unitCost: 89
+    currency: "PLN"
+
+supplier:
+  name: "Systemair Polska Sp. z o.o."
+  contact: "serwis@systemair.pl"
+  phone: "+48 22 123 4567"
+  emergencyPhone: "+48 22 123 4568"
+
+cost:
+  purchase: 125000
+  installation: 18000
+  total: 143000
+  currency: "PLN"
+
+energyRating: "A+"
+
+ifcMapping:
+  ifcEntity: "IfcUnitaryEquipment"
+  globalId: "0M1dG7$pJ9ws1VwCt0KMyO"
+  objectType: "AirHandlingUnit"
+
+version: "1.0.0"
+tags:
+  - "hvac"
+  - "air_handling_unit"
+  - "rooftop"
+  - "high_efficiency"
+```
+
+```json [JSON]
+{
+  "id": "AST-AHU-01",
+  "entityType": "asset",
+  "projectPhase": "construction",
+  "bimLOD": "LOD_350",
+  "assetName": "Air Handling Unit 01",
+  "assetCategory": "ahu",
+  "systemId": "SYS-HVAC-01",
+  "buildingId": "BLD-01",
+  "spaceId": "SP-BLD-01-ROOF-MECH",
+  "levelId": "LVL-ROOF",
+  "manufacturer": "Systemair",
+  "modelNumber": "Topvex SR11 EL",
+  "serialNumber": "SR11-2026-04782",
+  "assetTag": "GT-AHU-001",
+  "installationDate": "2026-08-15",
+  "warrantyExpiry": "2028-08-15",
+  "expectedLifespan": 20,
+  "specifications": {
+    "airflow": 12000,
+    "airflowUnit": "m3/h",
+    "coolingCapacity": 85,
+    "heatingCapacity": 75,
+    "capacityUnit": "kW",
+    "filterClass": "F7",
+    "powerConsumption": 15.5,
+    "powerUnit": "kW",
+    "weight": 1850,
+    "weightUnit": "kg",
+    "dimensions": {
+      "length": 4200,
+      "width": 2100,
+      "height": 2400,
+      "unit": "mm"
+    }
+  },
+  "maintenanceSchedule": {
+    "tasks": [
+      {
+        "taskId": "MAINT-AHU-FILTER",
+        "taskName": "Replace air filters",
+        "frequency": "quarterly",
+        "estimatedDuration": 2,
+        "durationUnit": "hours",
+        "skillRequired": "HVAC technician"
+      },
+      {
+        "taskId": "MAINT-AHU-ANNUAL",
+        "taskName": "Annual inspection and performance test",
+        "frequency": "yearly",
+        "estimatedDuration": 8,
+        "durationUnit": "hours",
+        "skillRequired": "Certified HVAC engineer"
+      },
+      {
+        "taskId": "MAINT-AHU-BEARING",
+        "taskName": "Lubricate fan bearings",
+        "frequency": "semi_annual",
+        "estimatedDuration": 1,
+        "durationUnit": "hours",
+        "skillRequired": "HVAC technician"
+      }
+    ]
+  },
+  "spareParts": [
+    { "partName": "Air filter F7", "partNumber": "SF-F7-600x600", "quantity": 4, "reorderLevel": 2, "unitCost": 145, "currency": "PLN" },
+    { "partName": "Fan belt", "partNumber": "BELT-SR11-STD", "quantity": 2, "reorderLevel": 1, "unitCost": 89, "currency": "PLN" }
+  ],
+  "supplier": {
+    "name": "Systemair Polska Sp. z o.o.",
+    "contact": "serwis@systemair.pl",
+    "phone": "+48 22 123 4567",
+    "emergencyPhone": "+48 22 123 4568"
+  },
+  "cost": {
+    "purchase": 125000,
+    "installation": 18000,
+    "total": 143000,
+    "currency": "PLN"
+  },
+  "energyRating": "A+",
+  "ifcMapping": {
+    "ifcEntity": "IfcUnitaryEquipment",
+    "globalId": "0M1dG7$pJ9ws1VwCt0KMyO",
+    "objectType": "AirHandlingUnit"
+  },
+  "version": "1.0.0",
+  "tags": ["hvac", "air_handling_unit", "rooftop", "high_efficiency"]
+}
+```
+
+```json [Schema]
+{
+  "required": ["id", "entityType", "assetName", "assetCategory", "systemId", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^AST-" },
+    "entityType": { "const": "asset" },
+    "assetName": { "type": "string" },
+    "assetCategory": { "type": "string" },
+    "assetTypeId": { "type": "string" },
+    "systemId": { "type": "string" },
+    "spaceId": { "type": "string" },
+    "manufacturer": { "type": "string" },
+    "modelNumber": { "type": "string" },
+    "serialNumber": { "type": "string" },
+    "performance": { "type": "object" },
+    "cost": { "type": "object" },
+    "version": { "type": "string" }
+  }
+}
+```
+
+:::
 
 ## Example: Compiled JSON
 
