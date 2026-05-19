@@ -7,7 +7,7 @@ envelopeId: "ENV-EW-01"
 openingTypeId: "OT-FIRE-DOOR-EI30"
 levelId: "LVL-01"
 spaceIds:
-  - "SP-STAIRWELL-VOID"
+  - "SP-BLD-01-VOID-STAIR"
   - "SP-BLD-01-L01-CORR"
 
 dimensions:
