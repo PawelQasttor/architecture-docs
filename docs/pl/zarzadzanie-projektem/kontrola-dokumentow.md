@@ -139,11 +139,11 @@ Zatwierdzanie dokumentów odbywa się na zakończenie każdej fazy. Poniższa ta
 | Faza | Zatwierdza | Weryfikuje | Uwagi |
 |---|---|---|---|
 | [Koncepcja](/pl/fazy/koncepcja) | Inwestor | Architekt prowadzący | Zatwierdzenie programu funkcjonalnego |
-| [Projekt wstępny](/pl/fazy/wstepny) | Inwestor | Architekt + projektanci branżowi | Zatwierdzenie rozwiązań technicznych |
-| [Projekt budowlany](/pl/fazy/budowlany) | Organ administracji | Architekt prowadzący | Pozwolenie na budowę |
-| [Projekt wykonawczy](/pl/fazy/wykonawczy) | Architekt prowadzący | Projektanci branżowi, koordynator BIM | Kompletność i spójność dokumentacji |
+| [Projekt wstępny](/pl/fazy/projekt-wstepny) | Inwestor | Architekt + projektanci branżowi | Zatwierdzenie rozwiązań technicznych |
+| [Projekt budowlany](/pl/fazy/projekt-budowlany) | Organ administracji | Architekt prowadzący | Pozwolenie na budowę |
+| [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) | Architekt prowadzący | Projektanci branżowi, koordynator BIM | Kompletność i spójność dokumentacji |
 | [Budowa](/pl/fazy/budowa) | Kierownik budowy | Inspektor nadzoru, architekt (nadzór autorski) | Zgodność realizacji z projektem |
-| [Dokumentacja powykonawcza](/pl/fazy/powykonawcza) | Inspektor nadzoru | Kierownik budowy, architekt | Zgodność ze stanem faktycznym |
+| [Dokumentacja powykonawcza](/pl/fazy/odbiory) | Inspektor nadzoru | Kierownik budowy, architekt | Zgodność ze stanem faktycznym |
 
 Szczegółowe wymagania bramek opisano w sekcji [Bramki fazowe](/pl/jakosc/bramki-fazowe).
 

@@ -9,7 +9,7 @@ Sensors and IoT devices are building components, just like walls and windows. Th
 - **Specified** during design (from [Design Development](/en/phases/design-development) onward)
 - **Documented** in the BIM model (at [LOD 500](/en/bim-integration/lod-loi) for as-built)
 - **Mapped** to building management systems during [Construction](/en/phases/construction)
-- **Handed over** with complete data as part of [Handover](/en/phases/handover) deliverables
+- **Handed over** with complete data as part of [Handover](/en/phases/operation) deliverables
 
 ::: info
 This standard treats sensors as assets. Each sensor is documented using an Asset card within the project database, linked to its location (Room, Zone, Floor) and the system it serves (Installation).
@@ -41,10 +41,10 @@ A Building Management System (BMS) collects data from sensors, controls building
 | Deliverable | Phase | Description |
 |---|---|---|
 | Sensor location plans | [Design Development](/en/phases/design-development) | Floor plans showing sensor positions by type |
-| Sensor schedule | [Construction Docs](/en/phases/construction-docs) | Table listing every sensor: type, location, system, data point ID |
-| Cable routing coordination | [Construction Docs](/en/phases/construction-docs) | Coordinated with MEP routing in the BIM model |
-| As-built sensor model | [As-Built](/en/phases/as-built) | BIM model with all sensors at LOD 500 |
-| Asset data handover | [Handover](/en/phases/handover) | Complete Asset cards for every sensor and meter |
+| Sensor schedule | [Construction Docs](/en/phases/construction-documents) | Table listing every sensor: type, location, system, data point ID |
+| Cable routing coordination | [Construction Docs](/en/phases/construction-documents) | Coordinated with MEP routing in the BIM model |
+| As-built sensor model | [As-Built](/en/phases/commissioning) | BIM model with all sensors at LOD 500 |
+| Asset data handover | [Handover](/en/phases/operation) | Complete Asset cards for every sensor and meter |
 
 ### Data Points Mapping
 
@@ -109,7 +109,7 @@ Each sensor or IoT device in the building gets its own Asset card in the project
 | O&M manual | Reference to operations manual | Doc ref: OM-HVAC-042 |
 
 ::: warning
-Missing Asset cards at handover create long-term problems. Facilities teams cannot maintain sensors they do not know about. Ensure every sensor is documented before [Handover](/en/phases/handover) sign-off.
+Missing Asset cards at handover create long-term problems. Facilities teams cannot maintain sensors they do not know about. Ensure every sensor is documented before [Handover](/en/phases/operation) sign-off.
 :::
 
 ## Dashboard Examples
@@ -170,5 +170,5 @@ The communication protocol used by each sensor should be recorded in the Asset c
 - [LOD/LOI Matrix](/en/bim-integration/lod-loi)
 - [IFC Entities](/en/bim-integration/ifc-entities)
 - [Bidirectional Sync](/en/bim-integration/bidirectional-sync)
-- [Handover Phase](/en/phases/handover)
+- [Handover Phase](/en/phases/operation)
 - [BIM Integration Overview](/en/bim-integration/)

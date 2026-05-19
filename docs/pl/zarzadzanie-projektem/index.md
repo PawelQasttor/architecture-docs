@@ -44,18 +44,18 @@ Każdy z tych filarów jest zintegrowany z [7 typami dokumentów](/pl/szablony/)
 
 ## Powiązanie z fazami projektu
 
-Każda z [8 faz projektu](/pl/fazy/rozpoczecie) generuje inne zadania zarządcze. Poniższa tabela pokazuje, które czynności zarządzania projektem dominują w poszczególnych fazach.
+Każda z [8 faz projektu](/pl/fazy/koncepcja) generuje inne zadania zarządcze. Poniższa tabela pokazuje, które czynności zarządzania projektem dominują w poszczególnych fazach.
 
 | Faza | Nadzór | Kontrola dokumentów | Zarządzanie zmianami | Zarządzanie ryzykiem |
 |---|:---:|:---:|:---:|:---:|
-| [Rozpoczęcie](/pl/fazy/rozpoczecie) | Powołanie zespołu, ustalenie ról | Założenie struktury projektu | --- | Identyfikacja ryzyk wstępnych |
+| [Rozpoczęcie](/pl/fazy/koncepcja) | Powołanie zespołu, ustalenie ról | Założenie struktury projektu | --- | Identyfikacja ryzyk wstępnych |
 | [Koncepcja](/pl/fazy/koncepcja) | Spotkania z inwestorem | Pierwsze karty Budynku i Stref | Zmiany koncepcyjne (częste) | Analiza ryzyk lokalizacyjnych |
-| [Projekt wstępny](/pl/fazy/wstepny) | Koordynacja międzybranżowa | Komplet kart Pomieszczeń | Zmiany funkcjonalne | Ryzyka związane z MPZP |
-| [Projekt budowlany](/pl/fazy/budowlany) | Przeglądy formalne | Dokumentacja do pozwolenia | Zmiany wymagające uzgodnień | Ryzyko odmowy pozwolenia |
-| [Projekt wykonawczy](/pl/fazy/wykonawczy) | Koordynacja z wykonawcą | Pełna dokumentacja techniczna | Zmiany detali i specyfikacji | Ryzyka kosztowe |
+| [Projekt wstępny](/pl/fazy/projekt-wstepny) | Koordynacja międzybranżowa | Komplet kart Pomieszczeń | Zmiany funkcjonalne | Ryzyka związane z MPZP |
+| [Projekt budowlany](/pl/fazy/projekt-budowlany) | Przeglądy formalne | Dokumentacja do pozwolenia | Zmiany wymagające uzgodnień | Ryzyko odmowy pozwolenia |
+| [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) | Koordynacja z wykonawcą | Pełna dokumentacja techniczna | Zmiany detali i specyfikacji | Ryzyka kosztowe |
 | [Budowa](/pl/fazy/budowa) | Nadzór autorski | Rewizje dokumentów roboczych | Zmiany na budowie | Ryzyka realizacyjne |
-| [Dokumentacja powykonawcza](/pl/fazy/powykonawcza) | Weryfikacja zgodności | Aktualizacja do stanu faktycznego | Korekty powykonawcze | --- |
-| [Przekazanie](/pl/fazy/przekazanie) | Odbiory i protokoły | Archiwizacja dokumentacji | --- | --- |
+| [Dokumentacja powykonawcza](/pl/fazy/odbiory) | Weryfikacja zgodności | Aktualizacja do stanu faktycznego | Korekty powykonawcze | --- |
+| [Przekazanie](/pl/fazy/eksploatacja) | Odbiory i protokoły | Archiwizacja dokumentacji | --- | --- |
 
 ## Powiązania z innymi sekcjami standardu
 

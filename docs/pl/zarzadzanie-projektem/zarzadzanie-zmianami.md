@@ -13,14 +13,14 @@ Zmiany w projekcie architektonicznym wynikają z różnych przyczyn. Ich rozpozn
 
 | Źródło zmiany | Przykład | Typowa faza |
 |---|---|---|
-| **Życzenia inwestora** | Zmiana liczby pokoi, dodanie garażu podziemnego | [Koncepcja](/pl/fazy/koncepcja), [Projekt wstępny](/pl/fazy/wstepny) |
-| **Warunki gruntowe** | Odkrycie wysokiego poziomu wód gruntowych | [Projekt budowlany](/pl/fazy/budowlany), [Budowa](/pl/fazy/budowa) |
+| **Życzenia inwestora** | Zmiana liczby pokoi, dodanie garażu podziemnego | [Koncepcja](/pl/fazy/koncepcja), [Projekt wstępny](/pl/fazy/projekt-wstepny) |
+| **Warunki gruntowe** | Odkrycie wysokiego poziomu wód gruntowych | [Projekt budowlany](/pl/fazy/projekt-budowlany), [Budowa](/pl/fazy/budowa) |
 | **Zmiany przepisów** | Nowelizacja Warunków Technicznych, zmiana MPZP | Każda faza |
-| **Ograniczenia budżetowe** | Konieczność obniżenia kosztów o 15% | [Projekt wykonawczy](/pl/fazy/wykonawczy) |
-| **Kolizje międzybranżowe** | Kanał wentylacyjny koliduje z belką konstrukcyjną | [Projekt wykonawczy](/pl/fazy/wykonawczy) |
+| **Ograniczenia budżetowe** | Konieczność obniżenia kosztów o 15% | [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) |
+| **Kolizje międzybranżowe** | Kanał wentylacyjny koliduje z belką konstrukcyjną | [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) |
 | **Warunki na budowie** | Odkrycie niezinwentaryzowanej infrastruktury podziemnej | [Budowa](/pl/fazy/budowa) |
-| **Uzgodnienia gestorów sieci** | Zmiana trasy przyłącza przez gestora | [Projekt budowlany](/pl/fazy/budowlany) |
-| **Decyzje konserwatorskie** | Wymagania konserwatora dotyczące elewacji | [Projekt wstępny](/pl/fazy/wstepny), [Projekt budowlany](/pl/fazy/budowlany) |
+| **Uzgodnienia gestorów sieci** | Zmiana trasy przyłącza przez gestora | [Projekt budowlany](/pl/fazy/projekt-budowlany) |
+| **Decyzje konserwatorskie** | Wymagania konserwatora dotyczące elewacji | [Projekt wstępny](/pl/fazy/projekt-wstepny), [Projekt budowlany](/pl/fazy/projekt-budowlany) |
 
 ::: warning Uwaga
 Im późniejsza faza, tym wyższy koszt wprowadzenia zmiany. Zmiana w fazie koncepcji to godziny pracy, zmiana na budowie --- tygodnie opóźnień i dodatkowe nakłady finansowe. Dlatego standard SP-BLD kładzie nacisk na wczesne wykrywanie problemów poprzez [bramki fazowe](/pl/jakosc/bramki-fazowe).

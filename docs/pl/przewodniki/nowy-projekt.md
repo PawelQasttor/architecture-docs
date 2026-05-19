@@ -120,7 +120,7 @@ Skorzystaj z ramowej metodyki i szablonów z rozdziału [Zarządzanie ryzykiem](
 Zamknij fazę inicjacji:
 
 1. Zatwierdź wszystkie dokumenty w repozytorium projektu z odpowiednimi oznaczeniami wersji.
-2. Przeprowadź przegląd bramki [fazy Rozpoczęcia](/pl/fazy/rozpoczecie).
+2. Przeprowadź przegląd bramki [fazy Rozpoczęcia](/pl/fazy/koncepcja).
 3. Uzyskaj akceptację inwestora i kierownictwa projektu.
 4. Przejdź do fazy koncepcji projektowej.
 
@@ -144,5 +144,5 @@ Użyj tej listy, aby zweryfikować kompletność przygotowań przed przejściem 
 | 10 | Przegląd bramki fazy inicjacji przeprowadzony | :white_large_square: |
 
 ::: info Kolejne kroki
-Po ukończeniu listy kontrolnej przejdź do dokumentacji [fazy Rozpoczęcia](/pl/fazy/rozpoczecie), aby rozpocząć prace koncepcyjne. Bieżące zasady prowadzenia projektu opisuje rozdział [Zarządzanie projektem](/pl/zarzadzanie-projektem/).
+Po ukończeniu listy kontrolnej przejdź do dokumentacji [fazy Rozpoczęcia](/pl/fazy/koncepcja), aby rozpocząć prace koncepcyjne. Bieżące zasady prowadzenia projektu opisuje rozdział [Zarządzanie projektem](/pl/zarzadzanie-projektem/).
 :::

@@ -17,11 +17,11 @@ LOD i LOI rozwijaja sie rownolegle, ale sa sledzone oddzielnie. Element moze mie
 | LOD | Nazwa | Opis | Typowa faza |
 |---|---|---|---|
 | LOD 100 | Koncepcyjny | Symboliczna reprezentacja, przyblizony rozmiar i lokalizacja | [Koncepcja](/pl/fazy/koncepcja) |
-| LOD 200 | Przyblizony | Generyczny element z przyblizanymi wymiarami, ksztaltem i orientacja | [Projekt Wstepny](/pl/fazy/wstepny) |
-| LOD 300 | Dokladny | Konkretny element z dokladnymi wymiarami, ksztaltem i pozycja | [Projekt Budowlany](/pl/fazy/budowlany) |
-| LOD 350 | Gotowy do realizacji | LOD 300 plus interfejsy i polaczenia z innymi elementami | [Projekt Wykonawczy](/pl/fazy/wykonawczy) |
+| LOD 200 | Przyblizony | Generyczny element z przyblizanymi wymiarami, ksztaltem i orientacja | [Projekt Wstepny](/pl/fazy/projekt-wstepny) |
+| LOD 300 | Dokladny | Konkretny element z dokladnymi wymiarami, ksztaltem i pozycja | [Projekt Budowlany](/pl/fazy/projekt-budowlany) |
+| LOD 350 | Gotowy do realizacji | LOD 300 plus interfejsy i polaczenia z innymi elementami | [Projekt Wykonawczy](/pl/fazy/projekt-wykonawczy) |
 | LOD 400 | Produkcyjny | Na tyle szczegolowy, by umozliwic produkcje lub zamowienie | [Budowa](/pl/fazy/budowa) |
-| LOD 500 | Powykonawczy | Zweryfikowana terenowo reprezentacja zainstalowanego elementu | [Powykonawcza](/pl/fazy/powykonawcza) |
+| LOD 500 | Powykonawczy | Zweryfikowana terenowo reprezentacja zainstalowanego elementu | [Powykonawcza](/pl/fazy/odbiory) |
 
 ## Skala LOI -- przeglad
 

@@ -4,7 +4,7 @@ A BIM Execution Plan is the foundational document that defines how Building Info
 
 ## When to Create a BEP
 
-The BEP should be drafted during the [Initiation phase](/en/phases/initiation) and finalised no later than the [Concept phase](/en/phases/concept). Waiting longer introduces coordination risks that become costly to resolve.
+The BEP should be drafted during the [Initiation phase](/en/phases/concept) and finalised no later than the [Concept phase](/en/phases/concept). Waiting longer introduces coordination risks that become costly to resolve.
 
 ::: tip
 Start the BEP as a draft when the project team is first assembled. Refine it as the scope, software, and team structure become clearer.
@@ -95,9 +95,9 @@ A consistent naming convention prevents confusion and supports automated workflo
 | Phase | Frequency | Scope | Led by |
 |---|---|---|---|
 | [Concept](/en/phases/concept) | Bi-weekly | Architecture vs. Structure | BIM Manager |
-| [Schematic](/en/phases/schematic) | Weekly | All disciplines | BIM Manager |
+| [Schematic](/en/phases/schematic-design) | Weekly | All disciplines | BIM Manager |
 | [Design Development](/en/phases/design-development) | Weekly | All disciplines + site | BIM Coordinator per discipline |
-| [Construction Docs](/en/phases/construction-docs) | Twice weekly | Full model incl. fabrication detail | BIM Manager |
+| [Construction Docs](/en/phases/construction-documents) | Twice weekly | Full model incl. fabrication detail | BIM Manager |
 
 ::: warning
 Clash detection is not optional. Unresolved clashes at the end of each phase must be documented as open issues in the project tracker. They become blockers for phase sign-off.
@@ -119,14 +119,14 @@ The BEP must reference the project's [LOD definitions](/en/bim-integration/lod-d
 
 | Phase | Deliverables | Format |
 |---|---|---|
-| [Initiation](/en/phases/initiation) | BEP draft, project setup in CDE | .docx / CDE |
+| [Initiation](/en/phases/concept) | BEP draft, project setup in CDE | .docx / CDE |
 | [Concept](/en/phases/concept) | Massing model, site context model | .ifc, .pdf |
-| [Schematic](/en/phases/schematic) | Coordinated design model, preliminary clash report | .ifc, .bcf, .pdf |
+| [Schematic](/en/phases/schematic-design) | Coordinated design model, preliminary clash report | .ifc, .bcf, .pdf |
 | [Design Development](/en/phases/design-development) | Detailed model, updated specifications, resolved clash report | .ifc, .xlsx, .pdf |
-| [Construction Docs](/en/phases/construction-docs) | Construction-ready model, full drawing set, quantity schedules | .ifc, .pdf, .xlsx |
+| [Construction Docs](/en/phases/construction-documents) | Construction-ready model, full drawing set, quantity schedules | .ifc, .pdf, .xlsx |
 | [Construction](/en/phases/construction) | Updated model with site changes, RFI log | .ifc, .bcf |
-| [As-Built](/en/phases/as-built) | As-built model reflecting constructed conditions | .ifc |
-| [Handover](/en/phases/handover) | Final model, asset data, O&M manuals | .ifc, .cobie, .pdf |
+| [As-Built](/en/phases/commissioning) | As-built model reflecting constructed conditions | .ifc |
+| [Handover](/en/phases/operation) | Final model, asset data, O&M manuals | .ifc, .cobie, .pdf |
 
 ## BEP Template Checklist
 

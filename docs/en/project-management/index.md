@@ -29,14 +29,14 @@ This documentation standard uses Markdown files with YAML frontmatter to describ
 - Risks are identified early and linked to the documents they affect
 
 ::: tip
-Think of project management as the operating system for your documentation. The [8-phase workflow](/en/phases/initiation) defines **what** gets produced. Project management defines **how** it gets produced, reviewed, and controlled.
+Think of project management as the operating system for your documentation. The [8-phase workflow](/en/phases/concept) defines **what** gets produced. Project management defines **how** it gets produced, reviewed, and controlled.
 :::
 
 ## How PM Activities Map to the 8 Phases
 
 Not every PM activity runs at the same intensity throughout the project. The table below shows where each activity is most critical.
 
-| PM Activity | [Initiation](/en/phases/initiation) | [Concept](/en/phases/concept) | [Schematic](/en/phases/schematic) | [Design Dev.](/en/phases/design-development) | [Construction Docs](/en/phases/construction-docs) | [Construction](/en/phases/construction) | [As-Built](/en/phases/as-built) | [Handover](/en/phases/handover) |
+| PM Activity | [Initiation](/en/phases/concept) | [Concept](/en/phases/concept) | [Schematic](/en/phases/schematic-design) | [Design Dev.](/en/phases/design-development) | [Construction Docs](/en/phases/construction-documents) | [Construction](/en/phases/construction) | [As-Built](/en/phases/commissioning) | [Handover](/en/phases/operation) |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | Stakeholder register | High | Medium | Low | Low | Low | Low | Low | Low |
 | RACI matrix setup | High | Medium | -- | -- | -- | -- | -- | -- |
@@ -72,7 +72,7 @@ Do not skip the setup steps during Initiation. Retrofitting governance and docum
 
 - **Single source of truth.** Every document lives in one place, follows one naming convention, and has one current version.
 - **Traceability.** Every decision, change, and risk is recorded with a date, an owner, and a reason.
-- **Phase alignment.** PM activities are tied to the [8-phase workflow](/en/phases/initiation). Documents mature through phases, and controls tighten as the project advances.
+- **Phase alignment.** PM activities are tied to the [8-phase workflow](/en/phases/concept). Documents mature through phases, and controls tighten as the project advances.
 - **Proportionality.** Scale the PM effort to the project. A small residential renovation needs lighter governance than a hospital complex. The frameworks here can be adapted.
 
 ## Related Sections

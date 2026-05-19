@@ -12,7 +12,7 @@ Bez CDE zespoly projektowe polegaja na zalacznikach e-mail, dyskach lokalnych i 
 - **Sledzenie statusu** -- dokumenty przechodza przez zdefiniowane stany obiegu
 
 ::: tip
-Wdroz CDE podczas [fazy Rozpoczecia](/pl/fazy/rozpoczecie), zanim powstana jakiekolwiek pliki projektowe. Powinno to byc zdefiniowane w [Planie Realizacji BIM](/pl/integracja-bim/bep).
+Wdroz CDE podczas [fazy Rozpoczecia](/pl/fazy/koncepcja), zanim powstana jakiekolwiek pliki projektowe. Powinno to byc zdefiniowane w [Planie Realizacji BIM](/pl/integracja-bim/bep).
 :::
 
 ## Struktura folderow
@@ -73,7 +73,7 @@ Nigdy nie przechowuj plikow poza zdefiniowana struktura folderow. Pliki bez przy
 | Wykonawca | Brak dostepu | Brak dostepu | Odczyt (wybrane) | Odczyt | Brak dostepu |
 
 ::: info
-Uprawnienia dostepu powinny byc przegladane przy kazdej bramce fazowej. Gdy projekt przechodzi z [Projektu Budowlanego](/pl/fazy/budowlany) do [Projektu Wykonawczego](/pl/fazy/wykonawczy), wykonawcy moga potrzebowac szerszego dostepu do obszaru Udostepnione.
+Uprawnienia dostepu powinny byc przegladane przy kazdej bramce fazowej. Gdy projekt przechodzi z [Projektu Budowlanego](/pl/fazy/projekt-budowlany) do [Projektu Wykonawczego](/pl/fazy/projekt-wykonawczy), wykonawcy moga potrzebowac szerszego dostepu do obszaru Udostepnione.
 :::
 
 ## Nazewnictwo plikow w CDE
@@ -154,12 +154,12 @@ Przeglady przekraczajace termin eskalacji musza byc zglaszane w systemie sledzen
 | PlanRadar | Popularny w Polsce, dobry do zarzadzania usterkami | Ograniczone mozliwosci modelowania BIM |
 
 ::: info
-Wybor platformy CDE powinien byc uzgodniony w [BEP](/pl/integracja-bim/bep) podczas [fazy Rozpoczecia](/pl/fazy/rozpoczecie). Nalezy wziac pod uwage ekosystem oprogramowania juz uzywany oraz mozliwosci techniczne wszystkich uczestnikow projektu.
+Wybor platformy CDE powinien byc uzgodniony w [BEP](/pl/integracja-bim/bep) podczas [fazy Rozpoczecia](/pl/fazy/koncepcja). Nalezy wziac pod uwage ekosystem oprogramowania juz uzywany oraz mozliwosci techniczne wszystkich uczestnikow projektu.
 :::
 
 ## Polaczenie CDE z kontrola dokumentow
 
-Standard traktuje CDE jako szkielet kontroli dokumentow projektu. Kazdy dokument wskazany w produktach fazowych (patrz [przeglad faz](/pl/fazy/rozpoczecie)) musi istniec w CDE z prawidlowymi kodami statusu.
+Standard traktuje CDE jako szkielet kontroli dokumentow projektu. Kazdy dokument wskazany w produktach fazowych (patrz [przeglad faz](/pl/fazy/koncepcja)) musi istniec w CDE z prawidlowymi kodami statusu.
 
 Kluczowe punkty integracji:
 

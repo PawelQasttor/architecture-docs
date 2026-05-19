@@ -72,7 +72,7 @@ The documents below are required for both the completion notification and the oc
 | 10 | **Fire protection documentation** (for buildings requiring fire officer approval) | Fire safety specialist |
 
 ::: info As-built geodetic survey
-The as-built geodetic survey (*geodezyjna inwentaryzacja powykonawcza*) must be prepared by a licensed surveyor and submitted to the county geodetic office (*PODGiK*) before you file the completion notification. Processing by PODGiK can take 2--4 weeks, so plan accordingly during the [as-built phase](/en/phases/as-built).
+The as-built geodetic survey (*geodezyjna inwentaryzacja powykonawcza*) must be prepared by a licensed surveyor and submitted to the county geodetic office (*PODGiK*) before you file the completion notification. Processing by PODGiK can take 2--4 weeks, so plan accordingly during the [as-built phase](/en/phases/commissioning).
 :::
 
 ## Common Problems and How to Avoid Them
@@ -102,7 +102,7 @@ After the building is occupied, the owner assumes ongoing responsibilities:
 | **Building log book** (*ksiazka obiektu budowlanego*) | Maintained continuously | Art. 64 Prawo Budowlane |
 
 ::: tip Building log book (KOB)
-Since 2023, the building log book can be maintained electronically (*Cyfrowa Ksiazka Obiektu Budowlanego*, c-KOB) through the government system. All inspection results, repairs, and modifications must be recorded. Set this up as part of the [handover phase](/en/phases/handover) deliverables.
+Since 2023, the building log book can be maintained electronically (*Cyfrowa Ksiazka Obiektu Budowlanego*, c-KOB) through the government system. All inspection results, repairs, and modifications must be recorded. Set this up as part of the [handover phase](/en/phases/operation) deliverables.
 :::
 
 ## Practical Tips
@@ -119,6 +119,6 @@ Since 2023, the building log book can be maintained electronically (*Cyfrowa Ksi
 - [Building Permit](/en/regulations/building-permit)
 - [Construction Formalities](/en/regulations/construction-formalities)
 - [Prawo Budowlane](/en/regulations/prawo-budowlane)
-- [As-Built Documentation](/en/phases/as-built)
-- [Handover Phase](/en/phases/handover)
+- [As-Built Documentation](/en/phases/commissioning)
+- [Handover Phase](/en/phases/operation)
 - [Administrative Fees](/en/regulations/fees)

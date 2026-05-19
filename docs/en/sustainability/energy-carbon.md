@@ -83,10 +83,10 @@ Passive strategies reduce energy demand before active systems are sized. These d
 |---|---|---|
 | Building orientation | Solar gain calculations, window schedule annotations | [Concept](/en/phases/concept) |
 | Compact form factor | Surface-to-volume ratio in energy model inputs | [Concept](/en/phases/concept) |
-| High-performance insulation | Wall, roof, and floor U-value specifications | [Schematic](/en/phases/schematic) |
+| High-performance insulation | Wall, roof, and floor U-value specifications | [Schematic](/en/phases/schematic-design) |
 | Triple-glazed windows | Window schedule U-values, g-values, frame factors | [Design Development](/en/phases/design-development) |
 | Thermal mass utilisation | Material specifications, night ventilation strategy | [Design Development](/en/phases/design-development) |
-| Airtightness | Target n50 value, airtightness test protocol | [Construction Documents](/en/phases/construction-docs) |
+| Airtightness | Target n50 value, airtightness test protocol | [Construction Documents](/en/phases/construction-documents) |
 | Solar shading | Shading device specifications, solar gain calculations | [Design Development](/en/phases/design-development) |
 
 ## Energy Performance Certificate
@@ -97,10 +97,10 @@ Every new building in Poland requires an energy performance certificate (swiadec
 2. **Construction** — contractor builds according to specification; any changes affecting energy performance must be documented
 3. **Completion** — qualified energy assessor prepares the certificate based on as-built conditions
 4. **Registration** — certificate is registered in the central register (centralny rejestr)
-5. **Handover** — certificate is included in the [handover package](/en/phases/handover)
+5. **Handover** — certificate is included in the [handover package](/en/phases/operation)
 
 ::: warning
-The energy certificate must reflect the **as-built** condition, not just the design intent. If materials or systems changed during construction, the certificate must be updated accordingly. Track changes through the [construction documents](/en/phases/construction-docs) phase.
+The energy certificate must reflect the **as-built** condition, not just the design intent. If materials or systems changed during construction, the certificate must be updated accordingly. Track changes through the [construction documents](/en/phases/construction-documents) phase.
 :::
 
 ## Embodied Carbon
@@ -172,7 +172,7 @@ sustainability:
 ```
 
 ::: tip
-Update these values at each design phase. The concept-phase values are estimates; the [schematic design](/en/phases/schematic) values should be based on preliminary calculations; [design development](/en/phases/design-development) values on detailed modelling. See [BIM Integration](/en/bim-integration/) for linking these targets to your model.
+Update these values at each design phase. The concept-phase values are estimates; the [schematic design](/en/phases/schematic-design) values should be based on preliminary calculations; [design development](/en/phases/design-development) values on detailed modelling. See [BIM Integration](/en/bim-integration/) for linking these targets to your model.
 :::
 
 ## Key Energy Parameters: Where They Appear in Documentation
@@ -181,24 +181,24 @@ Update these values at each design phase. The concept-phase values are estimates
 |---|---|---|---|
 | EP target | `sustainability.energy.ep_target` | Project / Building | [Concept](/en/phases/concept) |
 | EP regulatory max | `sustainability.energy.ep_regulatory_max` | Project / Building | [Concept](/en/phases/concept) |
-| Wall U-value | `sustainability.envelope.wall_u` | Zone card | [Schematic](/en/phases/schematic) |
-| Roof U-value | `sustainability.envelope.roof_u` | Zone card | [Schematic](/en/phases/schematic) |
+| Wall U-value | `sustainability.envelope.wall_u` | Zone card | [Schematic](/en/phases/schematic-design) |
+| Roof U-value | `sustainability.envelope.roof_u` | Zone card | [Schematic](/en/phases/schematic-design) |
 | Window U-value | `sustainability.envelope.window_u` | Space card / Window schedule | [Design Development](/en/phases/design-development) |
 | Airtightness target | `sustainability.envelope.airtightness_n50` | Building document | [Design Development](/en/phases/design-development) |
 | LCA scope | `sustainability.carbon.lca_scope` | Project / Building | [Concept](/en/phases/concept) |
 | Embodied carbon target | `sustainability.carbon.embodied_target` | Project / Building | [Concept](/en/phases/concept) |
-| Renewable share | `sustainability.energy.renewable_share` | Building / System card | [Schematic](/en/phases/schematic) |
+| Renewable share | `sustainability.energy.renewable_share` | Building / System card | [Schematic](/en/phases/schematic-design) |
 
 ## Phase-by-Phase Energy Impact
 
 | Phase | Key Decisions | Impact on EP |
 |---|---|---|
 | [Concept](/en/phases/concept) | Building orientation, form factor (compactness), glazing ratio | 30-40% of final EP determined |
-| [Schematic Design](/en/phases/schematic) | Envelope concept, system strategy, renewable energy approach | 20-30% of final EP determined |
+| [Schematic Design](/en/phases/schematic-design) | Envelope concept, system strategy, renewable energy approach | 20-30% of final EP determined |
 | [Design Development](/en/phases/design-development) | Envelope specification, HVAC system selection, renewable energy sources | 20-30% of final EP determined |
-| [Construction Documents](/en/phases/construction-docs) | Detailed thermal bridge analysis, airtightness specification, lighting design | 10-20% refinement |
+| [Construction Documents](/en/phases/construction-documents) | Detailed thermal bridge analysis, airtightness specification, lighting design | 10-20% refinement |
 | Construction | Quality of insulation installation, airtightness execution, commissioning | Determines gap between design and actual performance |
-| [Handover](/en/phases/handover) | Energy certificate, sensor commissioning, O&M manuals | Baseline for operational monitoring |
+| [Handover](/en/phases/operation) | Energy certificate, sensor commissioning, O&M manuals | Baseline for operational monitoring |
 | [Operations](/en/operations/) | Building management settings, occupant behaviour, [maintenance](/en/operations/maintenance) | Ongoing optimisation |
 
 ## Energy Documentation Checklist
@@ -238,12 +238,12 @@ Update these values at each design phase. The concept-phase values are estimates
 - [ ] Energy certificate issued and registered
 - [ ] [Sensor and monitoring systems](/en/bim-integration/sensors-iot) commissioned
 - [ ] Energy monitoring baseline established — see [Operations](/en/operations/)
-- [ ] [Handover package](/en/phases/handover) includes energy certificate, monitoring access, and maintenance schedules
+- [ ] [Handover package](/en/phases/operation) includes energy certificate, monitoring access, and maintenance schedules
 
 ## Practical Recommendations
 
 1. **Set targets early** — define EP and embodied carbon targets in the project brief at the [concept phase](/en/phases/concept).
-2. **Calculate, do not guess** — use energy modelling software from [schematic design](/en/phases/schematic) onward.
+2. **Calculate, do not guess** — use energy modelling software from [schematic design](/en/phases/schematic-design) onward.
 3. **Consider the whole envelope** — thermal bridges can add 10-30% to calculated heat loss if not addressed.
 4. **Request EPDs** — ask suppliers for Environmental Product Declarations to support your LCA.
 5. **Track changes** — document any specification change that affects energy or carbon performance through [phase gate reviews](/en/quality/phase-gates).

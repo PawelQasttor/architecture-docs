@@ -31,18 +31,18 @@ Każda kolejna warstwa zakłada, że poprzednia została wykonana. Bramka fazowa
 
 ## Powiązanie z fazami projektu
 
-System QA jest zintegrowany z [8 fazami dokumentacji](/pl/fazy/rozpoczecie). Każda faza kończy się bramką, której przejście wymaga spełnienia określonych kryteriów. Poniższa tabela przedstawia główne czynności kontrolne w poszczególnych fazach:
+System QA jest zintegrowany z [8 fazami dokumentacji](/pl/fazy/koncepcja). Każda faza kończy się bramką, której przejście wymaga spełnienia określonych kryteriów. Poniższa tabela przedstawia główne czynności kontrolne w poszczególnych fazach:
 
 | Faza | Czynności QA | Kluczowe dokumenty do weryfikacji |
 |------|-------------|-----------------------------------|
-| [Rozpoczęcie](/pl/fazy/rozpoczecie) | Weryfikacja danych wejściowych, sprawdzenie warunków zabudowy / MPZP | Karta Budynku, dane geodezyjne |
+| [Rozpoczęcie](/pl/fazy/koncepcja) | Weryfikacja danych wejściowych, sprawdzenie warunków zabudowy / MPZP | Karta Budynku, dane geodezyjne |
 | [Koncepcja](/pl/fazy/koncepcja) | Przegląd wariantów, zgodność z wytycznymi inwestora | Karty Stref, schematy funkcjonalne |
-| [Projekt wstępny](/pl/fazy/wstepny) | Przegląd koordynacyjny międzybranżowy, wstępna kontrola przepisów | Karty Pomieszczeń, Karty Instalacji |
-| [Projekt budowlany](/pl/fazy/budowlany) | Pełna kontrola zgodności z WT, przegląd dokumentacji do pozwolenia | Karty Wymagań, projekt zagospodarowania |
-| [Projekt wykonawczy](/pl/fazy/wykonawczy) | Kontrola detali, sprawdzenie specyfikacji materiałowych | Karty Urządzeń, detale architektoniczne |
+| [Projekt wstępny](/pl/fazy/projekt-wstepny) | Przegląd koordynacyjny międzybranżowy, wstępna kontrola przepisów | Karty Pomieszczeń, Karty Instalacji |
+| [Projekt budowlany](/pl/fazy/projekt-budowlany) | Pełna kontrola zgodności z WT, przegląd dokumentacji do pozwolenia | Karty Wymagań, projekt zagospodarowania |
+| [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) | Kontrola detali, sprawdzenie specyfikacji materiałowych | Karty Urządzeń, detale architektoniczne |
 | [Budowa](/pl/fazy/budowa) | Nadzór autorski, weryfikacja zmian projektowych | Protokoły nadzoru, karty zmian |
-| [Dokumentacja powykonawcza](/pl/fazy/powykonawcza) | Sprawdzenie zgodności z realizacją, aktualizacja modelu | Karty powykonawcze, pomiary |
-| [Przekazanie](/pl/fazy/przekazanie) | Kompletność dokumentacji przekazanej, archiwizacja | Dokumentacja użytkowa, instrukcje |
+| [Dokumentacja powykonawcza](/pl/fazy/odbiory) | Sprawdzenie zgodności z realizacją, aktualizacja modelu | Karty powykonawcze, pomiary |
+| [Przekazanie](/pl/fazy/eksploatacja) | Kompletność dokumentacji przekazanej, archiwizacja | Dokumentacja użytkowa, instrukcje |
 
 ## Struktura sekcji Jakość
 

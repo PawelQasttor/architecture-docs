@@ -13,7 +13,7 @@ This guide applies whenever you need to document a building that already exists:
 - **Due diligence** -- pre-purchase surveys and condition assessments
 
 ::: info Key Difference from New Projects
-For existing buildings, you start with the [As-Built Phase (Phase 7)](/en/phases/as-built) rather than Phase 1. You are recording what exists before planning what will change.
+For existing buildings, you start with the [As-Built Phase (Phase 7)](/en/phases/commissioning) rather than Phase 1. You are recording what exists before planning what will change.
 :::
 
 ## Survey Workflow

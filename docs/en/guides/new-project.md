@@ -120,7 +120,7 @@ Use the [Risk Management](/en/project-management/risk-management) framework and 
 Finalize the initiation phase:
 
 1. Commit all documents to the project repository with proper version tags.
-2. Conduct the [Initiation Phase](/en/phases/initiation) gate review.
+2. Conduct the [Initiation Phase](/en/phases/concept) gate review.
 3. Obtain sign-off from the client and project leadership.
 4. Proceed to the concept design phase.
 
@@ -144,5 +144,5 @@ Use this checklist to verify completeness before moving to the next phase.
 | 10 | Initiation phase gate review completed | :white_large_square: |
 
 ::: info Next Steps
-Once the checklist is complete, move to the [Initiation Phase](/en/phases/initiation) documentation to begin concept design work. For ongoing project governance, see [Project Management](/en/project-management/).
+Once the checklist is complete, move to the [Initiation Phase](/en/phases/concept) documentation to begin concept design work. For ongoing project governance, see [Project Management](/en/project-management/).
 :::

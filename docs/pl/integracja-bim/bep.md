@@ -4,7 +4,7 @@ Plan Realizacji BIM to podstawowy dokument definiujacy sposob wykorzystania mode
 
 ## Kiedy opracowac BEP
 
-BEP powinien byc przygotowany w wersji roboczej podczas [fazy Rozpoczecia](/pl/fazy/rozpoczecie) i sfinalizowany najpozniej w [fazie Koncepcji](/pl/fazy/koncepcja). Opoznienie zwieksza ryzyko koordynacyjne, ktore staje sie kosztowne do rozwiazania.
+BEP powinien byc przygotowany w wersji roboczej podczas [fazy Rozpoczecia](/pl/fazy/koncepcja) i sfinalizowany najpozniej w [fazie Koncepcji](/pl/fazy/koncepcja). Opoznienie zwieksza ryzyko koordynacyjne, ktore staje sie kosztowne do rozwiazania.
 
 ::: tip
 Rozpocznij prace nad BEP w momencie zebrania zespolu projektowego. Doprecyzuj dokument w miare ustalania zakresu, oprogramowania i struktury zespolu.
@@ -95,9 +95,9 @@ Spojna konwencja nazewnictwa zapobiega pomylkom i wspiera automatyczne procesy w
 | Faza | Czestotliwosc | Zakres | Prowadzacy |
 |---|---|---|---|
 | [Koncepcja](/pl/fazy/koncepcja) | Co dwa tygodnie | Architektura vs. Konstrukcja | Menedzer BIM |
-| [Projekt Wstepny](/pl/fazy/wstepny) | Co tydzien | Wszystkie branze | Menedzer BIM |
-| [Projekt Budowlany](/pl/fazy/budowlany) | Co tydzien | Wszystkie branze + teren | Koordynator BIM per branza |
-| [Projekt Wykonawczy](/pl/fazy/wykonawczy) | Dwa razy w tygodniu | Pelny model z detalami | Menedzer BIM |
+| [Projekt Wstepny](/pl/fazy/projekt-wstepny) | Co tydzien | Wszystkie branze | Menedzer BIM |
+| [Projekt Budowlany](/pl/fazy/projekt-budowlany) | Co tydzien | Wszystkie branze + teren | Koordynator BIM per branza |
+| [Projekt Wykonawczy](/pl/fazy/projekt-wykonawczy) | Dwa razy w tygodniu | Pelny model z detalami | Menedzer BIM |
 
 ::: warning
 Wykrywanie kolizji nie jest opcjonalne. Nierozwiazane kolizje na koniec kazdej fazy musza byc udokumentowane jako otwarte problemy w systemie sledzenia. Staja sie one blokadami dla podpisania fazy.
@@ -119,14 +119,14 @@ BEP musi odwolywac sie do projektowych [definicji LOD](/pl/integracja-bim/defini
 
 | Faza | Produkty | Format |
 |---|---|---|
-| [Rozpoczecie](/pl/fazy/rozpoczecie) | Wersja robocza BEP, konfiguracja CDE | .docx / CDE |
+| [Rozpoczecie](/pl/fazy/koncepcja) | Wersja robocza BEP, konfiguracja CDE | .docx / CDE |
 | [Koncepcja](/pl/fazy/koncepcja) | Model brylowy, model kontekstu | .ifc, .pdf |
-| [Projekt Wstepny](/pl/fazy/wstepny) | Skoordynowany model, wstepny raport kolizji | .ifc, .bcf, .pdf |
-| [Projekt Budowlany](/pl/fazy/budowlany) | Model szczegolowy, specyfikacje, raport kolizji | .ifc, .xlsx, .pdf |
-| [Projekt Wykonawczy](/pl/fazy/wykonawczy) | Model wykonawczy, pelny zestaw rysunkow, przedmiary | .ifc, .pdf, .xlsx |
+| [Projekt Wstepny](/pl/fazy/projekt-wstepny) | Skoordynowany model, wstepny raport kolizji | .ifc, .bcf, .pdf |
+| [Projekt Budowlany](/pl/fazy/projekt-budowlany) | Model szczegolowy, specyfikacje, raport kolizji | .ifc, .xlsx, .pdf |
+| [Projekt Wykonawczy](/pl/fazy/projekt-wykonawczy) | Model wykonawczy, pelny zestaw rysunkow, przedmiary | .ifc, .pdf, .xlsx |
 | [Budowa](/pl/fazy/budowa) | Zaktualizowany model ze zmianami, rejestr RFI | .ifc, .bcf |
-| [Powykonawcza](/pl/fazy/powykonawcza) | Model powykonawczy odzwierciedlajacy stan zbudowany | .ifc |
-| [Przekazanie](/pl/fazy/przekazanie) | Finalny model, dane o wyposazeniu, instrukcje O&M | .ifc, .cobie, .pdf |
+| [Powykonawcza](/pl/fazy/odbiory) | Model powykonawczy odzwierciedlajacy stan zbudowany | .ifc |
+| [Przekazanie](/pl/fazy/eksploatacja) | Finalny model, dane o wyposazeniu, instrukcje O&M | .ifc, .cobie, .pdf |
 
 ## Lista kontrolna BEP
 

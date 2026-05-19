@@ -17,11 +17,11 @@ LOD and LOI advance together but are tracked separately. An element may have det
 | LOD | Name | Description | Typical phase |
 |---|---|---|---|
 | LOD 100 | Conceptual | Symbolic representation, approximate size and location | [Concept](/en/phases/concept) |
-| LOD 200 | Approximate | Generic element with approximate dimensions, shape, and orientation | [Schematic](/en/phases/schematic) |
+| LOD 200 | Approximate | Generic element with approximate dimensions, shape, and orientation | [Schematic](/en/phases/schematic-design) |
 | LOD 300 | Precise | Specific element with accurate dimensions, shape, and position | [Design Development](/en/phases/design-development) |
-| LOD 350 | Construction-ready | LOD 300 plus interfaces and connections to other elements | [Construction Docs](/en/phases/construction-docs) |
+| LOD 350 | Construction-ready | LOD 300 plus interfaces and connections to other elements | [Construction Docs](/en/phases/construction-documents) |
 | LOD 400 | Fabrication | Detailed enough for fabrication or procurement | [Construction](/en/phases/construction) |
-| LOD 500 | As-Built | Verified field representation of the installed element | [As-Built](/en/phases/as-built) |
+| LOD 500 | As-Built | Verified field representation of the installed element | [As-Built](/en/phases/commissioning) |
 
 ## LOI Scale Overview
 

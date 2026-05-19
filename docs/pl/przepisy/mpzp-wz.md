@@ -83,7 +83,7 @@ Ustawowy termin wydania WZ to 21 dni od złożenia kompletnego wniosku, jednak w
 
 ## Kluczowe parametry z MPZP / WZ
 
-Poniższe parametry z MPZP lub decyzji WZ bezpośrednio wpływają na [projekt budowlany](/pl/fazy/budowlany) i muszą być uwzględnione już na etapie [rozpoczęcia prac projektowych](/pl/fazy/rozpoczecie):
+Poniższe parametry z MPZP lub decyzji WZ bezpośrednio wpływają na [projekt budowlany](/pl/fazy/projekt-budowlany) i muszą być uwzględnione już na etapie [rozpoczęcia prac projektowych](/pl/fazy/koncepcja):
 
 | Parametr | Opis | Wpływ na projekt |
 |----------|------|------------------|
@@ -124,7 +124,7 @@ Parametry z MPZP/WZ powinny być wprowadzone do karty projektu już na etapie ws
 6. **Sprzeczność WZ z późniejszym MPZP** — jeśli gmina uchwali plan, decyzja WZ wygasa w zakresie sprzecznym z planem
 
 ::: info Następne kroki
-Po uzyskaniu informacji z MPZP lub prawomocnej decyzji WZ, kolejnym etapem jest przygotowanie dokumentacji do [pozwolenia na budowę](/pl/przepisy/pozwolenie-na-budowe). Parametry zagospodarowania stanowią dane wejściowe do [projektu zagospodarowania terenu](/pl/fazy/budowlany).
+Po uzyskaniu informacji z MPZP lub prawomocnej decyzji WZ, kolejnym etapem jest przygotowanie dokumentacji do [pozwolenia na budowę](/pl/przepisy/pozwolenie-na-budowe). Parametry zagospodarowania stanowią dane wejściowe do [projektu zagospodarowania terenu](/pl/fazy/projekt-budowlany).
 :::
 
 ## Powiązane dokumenty
@@ -132,5 +132,5 @@ Po uzyskaniu informacji z MPZP lub prawomocnej decyzji WZ, kolejnym etapem jest 
 - [Prawo budowlane — omówienie](/pl/przepisy/prawo-budowlane)
 - [Warunki techniczne WT 2021](/pl/przepisy/wt-2021)
 - [Pozwolenie na budowę — procedura](/pl/przepisy/pozwolenie-na-budowe)
-- [Faza rozpoczęcia projektu](/pl/fazy/rozpoczecie)
+- [Faza rozpoczęcia projektu](/pl/fazy/koncepcja)
 - [Kontrola dokumentów](/pl/zarzadzanie-projektem/kontrola-dokumentow)

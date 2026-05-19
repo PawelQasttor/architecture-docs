@@ -13,7 +13,7 @@ Przewodnik ma zastosowanie zawsze, gdy dokumentujesz budynek, który już istnie
 - **Audyt przedtransakcyjny** -- przeglądy techniczne i ocena stanu przed zakupem
 
 ::: info Kluczowa różnica wobec nowych projektów
-W przypadku istniejących budynków zaczynasz od [fazy Powykonawczej (Faza 7)](/pl/fazy/powykonawcza), a nie od Fazy 1. Najpierw rejestrujesz stan zastany, potem planujesz zmiany.
+W przypadku istniejących budynków zaczynasz od [fazy Powykonawczej (Faza 7)](/pl/fazy/odbiory), a nie od Fazy 1. Najpierw rejestrujesz stan zastany, potem planujesz zmiany.
 :::
 
 ## Punkt wyjścia: Książka Obiektu Budowlanego

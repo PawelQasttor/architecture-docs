@@ -22,7 +22,7 @@ Nie każda inwestycja wymaga pozwolenia na budowę. Dla mniejszych obiektów wys
 | Instalacje wewnętrzne (gaz, c.o.) | — | Tak | — |
 
 ::: info Zgłoszenie z projektem
-Od 2020 r. w przypadku budynków mieszkalnych jednorodzinnych o powierzchni zabudowy do 70 m² (do dwóch kondygnacji) można zastosować uproszczoną procedurę zgłoszenia. Pozostałe budynki jednorodzinne mogą korzystać ze zgłoszenia, ale wymagane jest dołączenie pełnego [projektu budowlanego](/pl/fazy/budowlany).
+Od 2020 r. w przypadku budynków mieszkalnych jednorodzinnych o powierzchni zabudowy do 70 m² (do dwóch kondygnacji) można zastosować uproszczoną procedurę zgłoszenia. Pozostałe budynki jednorodzinne mogą korzystać ze zgłoszenia, ale wymagane jest dołączenie pełnego [projektu budowlanego](/pl/fazy/projekt-budowlany).
 :::
 
 ## Wymagane dokumenty
@@ -139,5 +139,5 @@ Wygaśnięcie pozwolenia na budowę oznacza konieczność ponownego przejścia c
 - [Warunki techniczne WT 2021](/pl/przepisy/wt-2021)
 - [Formalności budowlane — kierownik, dziennik](/pl/przepisy/formalnosci-budowlane)
 - [Opłaty administracyjne](/pl/przepisy/oplaty)
-- [Faza projektu budowlanego](/pl/fazy/budowlany)
+- [Faza projektu budowlanego](/pl/fazy/projekt-budowlany)
 - [Bramki fazowe — kontrola jakości](/pl/jakosc/bramki-fazowe)

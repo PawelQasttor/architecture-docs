@@ -95,7 +95,7 @@ A WZ decision does not expire. However, it becomes void if an MPZP is adopted fo
 
 ## Step-by-Step: How to Check Zoning for a Plot
 
-Follow this procedure during the [initiation phase](/en/phases/initiation) of every project:
+Follow this procedure during the [initiation phase](/en/phases/concept) of every project:
 
 1. **Identify the plot** -- obtain the plot number (*numer dzialki*) and precinct (*obreb*) from the land register or the national geoportal (geoportal.gov.pl).
 2. **Check for MPZP coverage** -- visit the local municipality website or the national spatial information system (sip.gis.gov.pl). Many cities publish interactive plan maps.
@@ -122,7 +122,7 @@ Follow this procedure during the [initiation phase](/en/phases/initiation) of ev
 - For WZ applications, submit **more detailed descriptions** than the minimum -- this gives the office less room to impose unexpected conditions.
 - Use the MPZP/WZ parameters to set up your design constraints in the [project management](/en/project-management/) system early.
 - If the MPZP is under preparation (*w trakcie opracowania*), check the draft plan -- your project may need to anticipate future requirements.
-- Keep a record of all zoning documents in the project file for the [as-built documentation](/en/phases/as-built) phase.
+- Keep a record of all zoning documents in the project file for the [as-built documentation](/en/phases/commissioning) phase.
 
 ## Related Pages
 
@@ -130,5 +130,5 @@ Follow this procedure during the [initiation phase](/en/phases/initiation) of ev
 - [Prawo Budowlane](/en/regulations/prawo-budowlane)
 - [WT 2021 -- Technical Conditions](/en/regulations/wt-2021)
 - [Building Permit](/en/regulations/building-permit)
-- [Initiation Phase](/en/phases/initiation)
+- [Initiation Phase](/en/phases/concept)
 - [Administrative Fees](/en/regulations/fees)

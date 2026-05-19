@@ -62,7 +62,7 @@ Opłaty za przyłączenie do sieci ustalane są przez poszczególnych gestorów 
 | **Gazowe** | Opłata przyłączeniowa + instalacja | 3 500–9 500 zł |
 
 ::: warning Koszty mogą się znacznie różnić
-Podane zakresy mają charakter orientacyjny. Rzeczywiste koszty zależą od lokalizacji, długości przyłączy, warunków gruntowych i taryf lokalnych gestorów. Zawsze występuj o wycenę indywidualną na etapie [rozpoczęcia projektu](/pl/fazy/rozpoczecie).
+Podane zakresy mają charakter orientacyjny. Rzeczywiste koszty zależą od lokalizacji, długości przyłączy, warunków gruntowych i taryf lokalnych gestorów. Zawsze występuj o wycenę indywidualną na etapie [rozpoczęcia projektu](/pl/fazy/koncepcja).
 :::
 
 ## Koszty inwentaryzacji geodezyjnej
@@ -147,4 +147,4 @@ Kluczowe zwolnienia: opłata za PnB i WZ nie dotyczy budownictwa mieszkaniowego;
 ## Powiązane dokumenty
 
 - [MPZP i WZ](/pl/przepisy/mpzp-wz) | [Pozwolenie na budowę](/pl/przepisy/pozwolenie-na-budowe) | [Odbiory i użytkowanie](/pl/przepisy/odbiory-uzytkowanie)
-- [Formalności budowlane](/pl/przepisy/formalnosci-budowlane) | [Zarządzanie projektem](/pl/zarzadzanie-projektem/) | [Faza rozpoczęcia](/pl/fazy/rozpoczecie)
+- [Formalności budowlane](/pl/przepisy/formalnosci-budowlane) | [Zarządzanie projektem](/pl/zarzadzanie-projektem/) | [Faza rozpoczęcia](/pl/fazy/koncepcja)

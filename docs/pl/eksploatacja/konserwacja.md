@@ -150,5 +150,5 @@ Poniższy szablon można dostosować do konkretnego budynku. Każdy wiersz powin
 
 - [Eksploatacja budynku -- przegląd](./) -- kontekst planowania konserwacji
 - [Zarządzanie awariami](./awarie) -- co robić, gdy konserwacja nie zapobiegła problemowi
-- [Faza przekazania](/pl/fazy/przekazanie) -- przekazanie dokumentacji konserwacyjnej
-- [Dokumentacja powykonawcza](/pl/fazy/powykonawcza) -- źródło danych technicznych dla konserwacji
+- [Faza przekazania](/pl/fazy/eksploatacja) -- przekazanie dokumentacji konserwacyjnej
+- [Dokumentacja powykonawcza](/pl/fazy/odbiory) -- źródło danych technicznych dla konserwacji

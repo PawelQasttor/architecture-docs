@@ -137,7 +137,7 @@ Keep the following documents available on site at all times during the [construc
 9. **Site manager's and inspector's professional license documents**
 
 ::: tip Digital documentation
-Use the [project management](/en/project-management/) system to maintain digital copies of all site documents. This simplifies the transition to the [as-built phase](/en/phases/as-built) and speeds up the [handover](/en/phases/handover) process.
+Use the [project management](/en/project-management/) system to maintain digital copies of all site documents. This simplifies the transition to the [as-built phase](/en/phases/commissioning) and speeds up the [handover](/en/phases/operation) process.
 :::
 
 ## Related Pages
@@ -147,5 +147,5 @@ Use the [project management](/en/project-management/) system to maintain digital
 - [Completion & Occupancy](/en/regulations/completion-occupancy)
 - [Prawo Budowlane](/en/regulations/prawo-budowlane)
 - [Construction Phase](/en/phases/construction)
-- [As-Built Documentation](/en/phases/as-built)
+- [As-Built Documentation](/en/phases/commissioning)
 - [Administrative Fees](/en/regulations/fees)

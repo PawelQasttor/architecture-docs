@@ -10,7 +10,7 @@ Budynek bez uporządkowanej dokumentacji generuje wyższe koszty utrzymania, dł
 Na każdą złotówkę wydaną na budowę przypada 5 zł na utrzymanie i 200 zł na koszty operacyjne w całym cyklu życia. Inwestycja w dokumentację zwraca się wielokrotnie.
 :::
 
-Nasz standard zapewnia ciągłość informacji od [fazy przekazania](/pl/fazy/przekazanie) przez cały okres użytkowania. Dane zapisane w kartach Urządzeń i kartach Instalacji w formacie YAML są czytelne zarówno dla ludzi, jak i dla systemów CAFM/CMMS.
+Nasz standard zapewnia ciągłość informacji od [fazy przekazania](/pl/fazy/eksploatacja) przez cały okres użytkowania. Dane zapisane w kartach Urządzeń i kartach Instalacji w formacie YAML są czytelne zarówno dla ludzi, jak i dla systemów CAFM/CMMS.
 
 ## Ewaluacja poużytkownikowa (POE)
 
@@ -86,8 +86,8 @@ Po kilkunastu latach eksploatacji wiele systemów wymaga modernizacji -- ze wzgl
 
 ## Powiązane sekcje
 
-- [Faza przekazania](/pl/fazy/przekazanie) -- jak przygotować dokumentację do eksploatacji
-- [Dokumentacja powykonawcza](/pl/fazy/powykonawcza) -- podstawa dokumentacji eksploatacyjnej
+- [Faza przekazania](/pl/fazy/eksploatacja) -- jak przygotować dokumentację do eksploatacji
+- [Dokumentacja powykonawcza](/pl/fazy/odbiory) -- podstawa dokumentacji eksploatacyjnej
 - [Katalog kart dokumentacji](/pl/dokumentacja/encje/) -- pełna lista typów kart w standardzie
 - [Zrównoważoność](/pl/zrownowazonosc/) -- powiązanie eksploatacji z celami środowiskowymi
 - [Energia i ślad węglowy](/pl/zrownowazonosc/energia-karbon) -- monitoring zużycia energii w eksploatacji

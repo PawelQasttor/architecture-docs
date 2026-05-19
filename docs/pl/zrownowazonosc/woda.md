@@ -156,13 +156,13 @@ Dane o gospodarce wodnej mogą być synchronizowane z modelem [BIM](/pl/integrac
 - [ ] Wstępna strategia retencji (typ zbiornika, lokalizacja)
 - [ ] Identyfikacja możliwości zbierania deszczówki i odzysku wody szarej
 
-### [Projekt wstępny](/pl/fazy/wstepny)
+### [Projekt wstępny](/pl/fazy/projekt-wstepny)
 - [ ] Obliczenie powierzchni nieprzepuszczalnych i współczynników spływu
 - [ ] Obliczenie pojemności retencji z parametrami opadu miarodajnego
 - [ ] Uzyskanie informacji o dopuszczalnym odpływie od zarządcy sieci
 - [ ] Koncepcja zielonej infrastruktury na planie zagospodarowania
 
-### [Projekt budowlany](/pl/fazy/budowlany)
+### [Projekt budowlany](/pl/fazy/projekt-budowlany)
 - [ ] Wymiarowanie zbiornika retencyjnego (obliczenia hydrauliczne)
 - [ ] Projekt nawierzchni przepuszczalnych z bilansem powierzchni
 - [ ] Projekt dachu zielonego (jeśli dotyczy) — substrat, roślinność, retencja
@@ -170,12 +170,12 @@ Dane o gospodarce wodnej mogą być synchronizowane z modelem [BIM](/pl/integrac
 - [ ] Zestawienie armatury wodooszczędnej w kartach Urządzeń
 - [ ] Rozdzielenie instalacji wody pitnej i niepitnej na rysunkach
 
-### [Projekt wykonawczy](/pl/fazy/wykonawczy)
+### [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy)
 - [ ] Szczegóły montażowe zbiorników retencyjnych i skrzynek rozsączających
 - [ ] Specyfikacja automatyki przełączania (deszczówka / wodociąg)
 - [ ] Oznakowanie instalacji wody niepitnej
 
-### [Przekazanie](/pl/fazy/przekazanie)
+### [Przekazanie](/pl/fazy/eksploatacja)
 - [ ] Dokumentacja powykonawcza systemów retencji (rzeczywiste pojemności)
 - [ ] Instrukcja [konserwacji](/pl/eksploatacja/konserwacja) filtrów, zbiorników, pomp
 - [ ] Plan monitoringu zużycia wody w [fazie eksploatacji](/pl/eksploatacja/)

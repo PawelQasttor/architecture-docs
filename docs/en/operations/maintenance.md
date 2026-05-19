@@ -181,6 +181,6 @@ Use this structure for monthly maintenance reporting:
 
 ## Linking Maintenance to Construction Records
 
-Maintenance planning should reference [as-built documentation](/en/phases/as-built) and [construction phase](/en/phases/construction) records. When a component is replaced or modified, update both the maintenance records and the as-built documentation to keep them aligned.
+Maintenance planning should reference [as-built documentation](/en/phases/commissioning) and [construction phase](/en/phases/construction) records. When a component is replaced or modified, update both the maintenance records and the as-built documentation to keep them aligned.
 
 For buildings with BIM models, maintenance data can be linked to model elements. See [BIM Integration](/en/bim-integration/) for details on connecting maintenance records to the digital model.

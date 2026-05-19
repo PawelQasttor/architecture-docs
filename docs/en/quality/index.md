@@ -36,20 +36,20 @@ The self-check layer is the most important. It takes the least time and catches 
 
 ## How QA Connects to the Project Phases
 
-The standard defines [eight project phases](/en/phases/initiation). Each phase produces specific documents and ends with a phase gate --- a formal checkpoint where the team confirms everything is complete before moving forward.
+The standard defines [eight project phases](/en/phases/concept). Each phase produces specific documents and ends with a phase gate --- a formal checkpoint where the team confirms everything is complete before moving forward.
 
 The table below summarizes what QA activities apply at each phase.
 
 | Phase | Key Documents to Review | Primary QA Focus |
 |---|---|---|
-| [Initiation](/en/phases/initiation) | Building brief, site analysis | Scope definition, stakeholder requirements captured |
+| [Initiation](/en/phases/concept) | Building brief, site analysis | Scope definition, stakeholder requirements captured |
 | [Concept](/en/phases/concept) | Space documents, zone definitions | Design intent, spatial relationships, feasibility |
-| [Schematic](/en/phases/schematic) | Requirement docs, system outlines | Code compliance, structural and MEP feasibility |
+| [Schematic](/en/phases/schematic-design) | Requirement docs, system outlines | Code compliance, structural and MEP feasibility |
 | [Design Development](/en/phases/design-development) | System docs, asset specifications | Coordination between disciplines, detail accuracy |
-| [Construction Docs](/en/phases/construction-docs) | Full document set, BIM model | Completeness, constructability, permit readiness |
+| [Construction Docs](/en/phases/construction-documents) | Full document set, BIM model | Completeness, constructability, permit readiness |
 | [Construction](/en/phases/construction) | RFI responses, submittals | Field accuracy, change tracking |
-| [As-Built](/en/phases/as-built) | As-built documents, updated model | Accuracy against constructed conditions |
-| [Handover](/en/phases/handover) | O&M manuals, asset registers | Completeness for facility management |
+| [As-Built](/en/phases/commissioning) | As-built documents, updated model | Accuracy against constructed conditions |
+| [Handover](/en/phases/operation) | O&M manuals, asset registers | Completeness for facility management |
 
 ## QA and Document Types
 

@@ -32,16 +32,19 @@ export default defineConfig({
           },
           { text: 'Examples', link: '/en/examples/' },
           {
-            text: '8 Project Phases',
+            text: 'Lifecycle',
             items: [
-              { text: '1. Project Initiation', link: '/en/phases/initiation' },
-              { text: '2. Concept Design (LOD 100)', link: '/en/phases/concept' },
-              { text: '3. Schematic Design (LOD 200)', link: '/en/phases/schematic' },
-              { text: '4. Design Development (LOD 300)', link: '/en/phases/design-development' },
-              { text: '5. Construction Docs (LOD 400)', link: '/en/phases/construction-docs' },
-              { text: '6. Construction Phase', link: '/en/phases/construction' },
-              { text: '7. As-Built (LOD 500)', link: '/en/phases/as-built' },
-              { text: '8. Handover & Maintenance', link: '/en/phases/handover' }
+              { text: '🔟 The 10-Phase Lifecycle', link: '/en/phases/' },
+              { text: '1. Concept', link: '/en/phases/concept' },
+              { text: '2. Schematic Design', link: '/en/phases/schematic-design' },
+              { text: '3. Design Development', link: '/en/phases/design-development' },
+              { text: '4. Construction Documents', link: '/en/phases/construction-documents' },
+              { text: '5. Bidding & Procurement', link: '/en/phases/bidding-procurement' },
+              { text: '6. Construction', link: '/en/phases/construction' },
+              { text: '7. Commissioning', link: '/en/phases/commissioning' },
+              { text: '8. Operation', link: '/en/phases/operation' },
+              { text: '9. Renovation', link: '/en/phases/renovation' },
+              { text: '10. Decommissioned', link: '/en/phases/decommissioned' }
             ]
           },
           {
@@ -140,27 +143,25 @@ export default defineConfig({
           ],
           '/en/phases/': [
             {
-              text: 'Architect Workflow',
+              text: 'SBM Lifecycle',
               items: [
-                { text: 'Complete Overview', link: '/en/standards/document-structure' }
-              ]
-            },
-            {
-              text: 'Project Phases',
-              items: [
-                { text: '1. Project Initiation', link: '/en/phases/initiation' },
-                { text: '2. Concept Design (LOD 100)', link: '/en/phases/concept' },
-                { text: '3. Schematic Design (LOD 200)', link: '/en/phases/schematic' },
-                { text: '4. Design Development (LOD 300)', link: '/en/phases/design-development' },
-                { text: '5. Construction Docs (LOD 400)', link: '/en/phases/construction-docs' },
-                { text: '6. Construction Phase', link: '/en/phases/construction' },
-                { text: '7. As-Built (LOD 500)', link: '/en/phases/as-built' },
-                { text: '8. Handover & Maintenance', link: '/en/phases/handover' }
+                { text: 'The 10-Phase Lifecycle', link: '/en/phases/' },
+                { text: '1. Concept', link: '/en/phases/concept' },
+                { text: '2. Schematic Design', link: '/en/phases/schematic-design' },
+                { text: '3. Design Development', link: '/en/phases/design-development' },
+                { text: '4. Construction Documents', link: '/en/phases/construction-documents' },
+                { text: '5. Bidding & Procurement', link: '/en/phases/bidding-procurement' },
+                { text: '6. Construction', link: '/en/phases/construction' },
+                { text: '7. Commissioning', link: '/en/phases/commissioning' },
+                { text: '8. Operation', link: '/en/phases/operation' },
+                { text: '9. Renovation', link: '/en/phases/renovation' },
+                { text: '10. Decommissioned', link: '/en/phases/decommissioned' }
               ]
             },
             {
               text: 'Reference',
               items: [
+                { text: 'Complete Workflow', link: '/en/standards/document-structure' },
                 { text: 'Regulations', link: '/en/regulations/' },
                 { text: 'IFC Entities', link: '/en/bim-integration/ifc-entities' },
                 { text: 'LOD Definitions', link: '/en/bim-integration/lod-definitions' }
@@ -360,16 +361,19 @@ export default defineConfig({
           },
           { text: 'Przykłady', link: '/pl/przyklady/' },
           {
-            text: '8 Faz Projektu',
+            text: 'Cykl życia',
             items: [
-              { text: '1. Rozpoczęcie Projektu', link: '/pl/fazy/rozpoczecie' },
-              { text: '2. Projekt Koncepcyjny (LOD 100)', link: '/pl/fazy/koncepcja' },
-              { text: '3. Projekt Wstępny (LOD 200)', link: '/pl/fazy/wstepny' },
-              { text: '4. Projekt Budowlany (LOD 300)', link: '/pl/fazy/budowlany' },
-              { text: '5. Projekt Wykonawczy (LOD 400)', link: '/pl/fazy/wykonawczy' },
-              { text: '6. Faza Budowy', link: '/pl/fazy/budowa' },
-              { text: '7. Dokumentacja Powykonawcza (LOD 500)', link: '/pl/fazy/powykonawcza' },
-              { text: '8. Przekazanie i Konserwacja', link: '/pl/fazy/przekazanie' }
+              { text: '🔟 Cykl życia (10 faz)', link: '/pl/fazy/' },
+              { text: '1. Koncepcja', link: '/pl/fazy/koncepcja' },
+              { text: '2. Projekt wstępny', link: '/pl/fazy/projekt-wstepny' },
+              { text: '3. Projekt budowlany', link: '/pl/fazy/projekt-budowlany' },
+              { text: '4. Projekt wykonawczy', link: '/pl/fazy/projekt-wykonawczy' },
+              { text: '5. Przetarg i zamówienie', link: '/pl/fazy/przetarg' },
+              { text: '6. Budowa', link: '/pl/fazy/budowa' },
+              { text: '7. Odbiory i rozruch', link: '/pl/fazy/odbiory' },
+              { text: '8. Eksploatacja', link: '/pl/fazy/eksploatacja' },
+              { text: '9. Modernizacja', link: '/pl/fazy/modernizacja' },
+              { text: '10. Wycofanie', link: '/pl/fazy/wycofanie' }
             ]
           },
           {
@@ -468,27 +472,25 @@ export default defineConfig({
           ],
           '/pl/fazy/': [
             {
-              text: 'Przepływ pracy architekta',
+              text: 'Cykl życia SBM',
               items: [
-                { text: 'Kompletny przegląd', link: '/pl/standardy/struktura-dokumentu' }
-              ]
-            },
-            {
-              text: 'Fazy Projektu',
-              items: [
-                { text: '1. Rozpoczęcie Projektu', link: '/pl/fazy/rozpoczecie' },
-                { text: '2. Projekt Koncepcyjny (LOD 100)', link: '/pl/fazy/koncepcja' },
-                { text: '3. Projekt Wstępny (LOD 200)', link: '/pl/fazy/wstepny' },
-                { text: '4. Projekt Budowlany (LOD 300)', link: '/pl/fazy/budowlany' },
-                { text: '5. Projekt Wykonawczy (LOD 400)', link: '/pl/fazy/wykonawczy' },
-                { text: '6. Faza Budowy', link: '/pl/fazy/budowa' },
-                { text: '7. Dokumentacja Powykonawcza (LOD 500)', link: '/pl/fazy/powykonawcza' },
-                { text: '8. Przekazanie i Konserwacja', link: '/pl/fazy/przekazanie' }
+                { text: 'Cykl życia (10 faz)', link: '/pl/fazy/' },
+                { text: '1. Koncepcja', link: '/pl/fazy/koncepcja' },
+                { text: '2. Projekt wstępny', link: '/pl/fazy/projekt-wstepny' },
+                { text: '3. Projekt budowlany', link: '/pl/fazy/projekt-budowlany' },
+                { text: '4. Projekt wykonawczy', link: '/pl/fazy/projekt-wykonawczy' },
+                { text: '5. Przetarg i zamówienie', link: '/pl/fazy/przetarg' },
+                { text: '6. Budowa', link: '/pl/fazy/budowa' },
+                { text: '7. Odbiory i rozruch', link: '/pl/fazy/odbiory' },
+                { text: '8. Eksploatacja', link: '/pl/fazy/eksploatacja' },
+                { text: '9. Modernizacja', link: '/pl/fazy/modernizacja' },
+                { text: '10. Wycofanie', link: '/pl/fazy/wycofanie' }
               ]
             },
             {
               text: 'Materiały Pomocnicze',
               items: [
+                { text: 'Kompletny przepływ pracy', link: '/pl/standardy/struktura-dokumentu' },
                 { text: 'Przepisy', link: '/pl/przepisy/' },
                 { text: 'Obiekty IFC', link: '/pl/integracja-bim/encje-ifc' },
                 { text: 'Definicje LOD', link: '/pl/integracja-bim/definicje-lod' }

@@ -70,7 +70,7 @@ sustainability:
     daylight_target: "DF 2.0%"
 ```
 
-These fields are populated progressively: estimates at [concept](/en/phases/concept), refined during [schematic design](/en/phases/schematic) and [design development](/en/phases/design-development), finalised in [construction documents](/en/phases/construction-docs), and verified at [handover](/en/phases/handover).
+These fields are populated progressively: estimates at [concept](/en/phases/concept), refined during [schematic design](/en/phases/schematic-design) and [design development](/en/phases/design-development), finalised in [construction documents](/en/phases/construction-documents), and verified at [handover](/en/phases/operation).
 
 ## Three Focus Areas
 
@@ -105,11 +105,11 @@ Rainwater retention, permeable surfaces, green infrastructure, water-efficient f
 | Phase | Sustainability Actions | Documentation Output |
 |---|---|---|
 | [Concept](/en/phases/concept) | Site analysis, orientation study, massing options, preliminary energy targets | Sustainability brief, preliminary EP estimate |
-| [Schematic Design](/en/phases/schematic) | Envelope strategy, system concepts, daylight studies, water strategy outline | Updated YAML targets, initial energy model, daylight analysis |
+| [Schematic Design](/en/phases/schematic-design) | Envelope strategy, system concepts, daylight studies, water strategy outline | Updated YAML targets, initial energy model, daylight analysis |
 | [Design Development](/en/phases/design-development) | Envelope specification, system selection, daylight simulation, water retention sizing | Energy model, material schedule with EPDs, IEQ analysis reports |
-| [Construction Documents](/en/phases/construction-docs) | Detailed specifications, thermal bridge catalogue, acoustic details, fixture schedules | Complete specifications, energy certificate input data, retention calculations |
+| [Construction Documents](/en/phases/construction-documents) | Detailed specifications, thermal bridge catalogue, acoustic details, fixture schedules | Complete specifications, energy certificate input data, retention calculations |
 | Construction | Material verification, airtightness testing, acoustic testing, commissioning | Test reports, as-built energy model, energy certificate |
-| [Handover](/en/phases/handover) | Energy certificate, O&M manuals, monitoring setup, occupant guides | Completed energy certificate, sensor commissioning report, maintenance schedule |
+| [Handover](/en/phases/operation) | Energy certificate, O&M manuals, monitoring setup, occupant guides | Completed energy certificate, sensor commissioning report, maintenance schedule |
 | [Operations](/en/operations/) | Post-occupancy evaluation, energy monitoring, maintenance | Monitoring reports, performance benchmarks |
 
 ::: warning

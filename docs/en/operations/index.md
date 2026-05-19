@@ -55,7 +55,7 @@ This standard provides structured formats for capturing operational data:
 - **[Asset Instance cards](/en/documentation/entities/asset)** -- store warranty dates, service intervals, manufacturer contacts, and maintenance history for individual pieces of equipment.
 - **[System cards](/en/documentation/entities/system)** -- document how systems (HVAC, electrical, plumbing) are configured, how they should perform, and what maintenance they require.
 - **YAML metadata** -- machine-readable fields for warranty expiry, next service date, and condition status enable automated alerts and reporting.
-- **[As-built documentation](/en/phases/as-built)** -- provides the baseline reference for all operational activities.
+- **[As-built documentation](/en/phases/commissioning)** -- provides the baseline reference for all operational activities.
 
 ::: warning
 Operational documentation is only useful if it is kept current. Assign clear responsibility for documentation updates as part of every maintenance, repair, and modification activity.
@@ -65,7 +65,7 @@ Operational documentation is only useful if it is kept current. Assign clear res
 
 | Lifecycle Stage | Documentation Activity | Key Outputs |
 |---|---|---|
-| [Handover](/en/phases/handover) | Verify completeness of O&M manuals, warranties, training records | Handover checklist, defects list |
+| [Handover](/en/phases/operation) | Verify completeness of O&M manuals, warranties, training records | Handover checklist, defects list |
 | First year of operation | Commission seasonal systems, conduct initial POE, establish maintenance schedules | POE report, maintenance calendar |
 | Ongoing operations | Record maintenance activities, track incidents, update asset condition | Service logs, incident reports |
 | Periodic reviews (3--5 years) | Reassess maintenance strategy, conduct energy audits, review system performance | Audit reports, updated schedules |
@@ -89,7 +89,7 @@ Building operations are subject to periodic inspection and compliance requiremen
 
 ## Getting Started
 
-1. Verify that [handover documentation](/en/phases/handover) is complete and all O&M manuals are available.
+1. Verify that [handover documentation](/en/phases/operation) is complete and all O&M manuals are available.
 2. Set up the maintenance calendar using the guidance in [Maintenance Planning](./maintenance).
 3. Establish an incident reporting workflow as described in [Incident Management](./incidents).
 4. Schedule the first post-occupancy evaluation for 3--6 months after occupancy.

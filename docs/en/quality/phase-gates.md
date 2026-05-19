@@ -17,7 +17,7 @@ For background on the QA framework, see [Quality Assurance](/en/quality/). For r
 
 ## Gate 1: Initiation Complete
 
-Transition from [Initiation](/en/phases/initiation) to [Concept](/en/phases/concept).
+Transition from [Initiation](/en/phases/concept) to [Concept](/en/phases/concept).
 
 **Required documents:**
 - [ ] Building document created with site address, classification, and project metadata
@@ -43,7 +43,7 @@ Transition from [Initiation](/en/phases/initiation) to [Concept](/en/phases/conc
 
 ## Gate 2: Concept Complete
 
-Transition from [Concept](/en/phases/concept) to [Schematic](/en/phases/schematic).
+Transition from [Concept](/en/phases/concept) to [Schematic](/en/phases/schematic-design).
 
 **Required documents:**
 - [ ] Space documents created for all major spaces (with areas and functions)
@@ -70,7 +70,7 @@ Transition from [Concept](/en/phases/concept) to [Schematic](/en/phases/schemati
 
 ## Gate 3: Schematic Design Complete
 
-Transition from [Schematic](/en/phases/schematic) to [Design Development](/en/phases/design-development).
+Transition from [Schematic](/en/phases/schematic-design) to [Design Development](/en/phases/design-development).
 
 **Required documents:**
 - [ ] All Space documents updated with refined areas and adjacency relationships
@@ -100,7 +100,7 @@ Transition from [Schematic](/en/phases/schematic) to [Design Development](/en/ph
 
 ## Gate 4: Design Development Complete
 
-Transition from [Design Development](/en/phases/design-development) to [Construction Docs](/en/phases/construction-docs).
+Transition from [Design Development](/en/phases/design-development) to [Construction Docs](/en/phases/construction-documents).
 
 **Required documents:**
 - [ ] System documents completed for all building systems
@@ -135,7 +135,7 @@ Gate 4 is the most common point of failure. Insufficient coordination review her
 
 ## Gate 5: Construction Documents Complete
 
-Transition from [Construction Docs](/en/phases/construction-docs) to [Construction](/en/phases/construction).
+Transition from [Construction Docs](/en/phases/construction-documents) to [Construction](/en/phases/construction).
 
 **Required documents:**
 - [ ] Complete set of all seven document types, fully populated
@@ -165,7 +165,7 @@ Transition from [Construction Docs](/en/phases/construction-docs) to [Constructi
 
 ## Gate 6: Construction Phase Complete
 
-Transition from [Construction](/en/phases/construction) to [As-Built](/en/phases/as-built).
+Transition from [Construction](/en/phases/construction) to [As-Built](/en/phases/commissioning).
 
 **Required documents:**
 - [ ] All RFIs logged with responses and document impacts recorded
@@ -191,7 +191,7 @@ Transition from [Construction](/en/phases/construction) to [As-Built](/en/phases
 
 ## Gate 7: As-Built Documentation Complete
 
-Transition from [As-Built](/en/phases/as-built) to [Handover](/en/phases/handover).
+Transition from [As-Built](/en/phases/commissioning) to [Handover](/en/phases/operation).
 
 **Required documents:**
 - [ ] All document types updated to reflect as-built conditions
@@ -218,7 +218,7 @@ Transition from [As-Built](/en/phases/as-built) to [Handover](/en/phases/handove
 
 ## Gate 8: Handover Complete
 
-Transition from [Handover](/en/phases/handover) to facility operations.
+Transition from [Handover](/en/phases/operation) to facility operations.
 
 **Required documents:**
 - [ ] Operations and maintenance manuals delivered

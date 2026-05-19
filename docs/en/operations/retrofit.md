@@ -51,7 +51,7 @@ A building energy audit systematically evaluates how energy is used and identifi
 
 ### Polish Requirements
 
-Under the Energy Efficiency Act (*Ustawa o efektywnosci energetycznej*), large enterprises in Poland must conduct energy audits every four years. Public buildings above 250 m2 require an energy performance certificate. The audit should reference the building's [as-built documentation](/en/phases/as-built) and current [System cards](/en/documentation/entities/system) for accurate assessment.
+Under the Energy Efficiency Act (*Ustawa o efektywnosci energetycznej*), large enterprises in Poland must conduct energy audits every four years. Public buildings above 250 m2 require an energy performance certificate. The audit should reference the building's [as-built documentation](/en/phases/commissioning) and current [System cards](/en/documentation/entities/system) for accurate assessment.
 
 ## Upgrade Feasibility: Cost-Benefit Analysis
 
@@ -155,7 +155,7 @@ When a retrofit is carried out, the documentation must be updated to reflect the
 |---|---|
 | Equipment replaced | Create new [Asset Instance card](/en/documentation/entities/asset), archive old card with end-of-service date |
 | System modified | Update [System card](/en/documentation/entities/system) with revised configuration, performance targets |
-| Building fabric changed | Update [as-built drawings](/en/phases/as-built), revise U-values and thermal models |
+| Building fabric changed | Update [as-built drawings](/en/phases/commissioning), revise U-values and thermal models |
 | New technology added | Create new asset/system cards, update [BIM model](/en/bim-integration/) if applicable |
 | Energy performance changed | Update energy baseline in [sustainability records](/en/sustainability/) |
 | Regulatory compliance achieved | Record certification or compliance evidence |
@@ -169,7 +169,7 @@ After any retrofit, reset the maintenance schedules for affected equipment and s
 Retrofit closes the loop in the building documentation lifecycle:
 
 1. **[Construction](/en/phases/construction)** created the original asset and system records.
-2. **[Handover](/en/phases/handover)** delivered those records to the operations team.
+2. **[Handover](/en/phases/operation)** delivered those records to the operations team.
 3. **[Maintenance](./maintenance)** and **[incident data](./incidents)** reveal where performance has degraded.
 4. **Retrofit** restores or improves performance and generates updated documentation.
 5. The cycle begins again with new baseline records for the next operational period.

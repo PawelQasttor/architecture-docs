@@ -11,17 +11,17 @@ Każdy projekt architektoniczny niesie ze sobą ryzyka --- od opóźnień admini
 
 | ID | Ryzyko | Opis | Typowa faza |
 |---|---|---|---|
-| R-01 | **Opóźnienie pozwolenia na budowę** | Przedłużająca się procedura administracyjna, wezwania do uzupełnienia dokumentacji | [Projekt budowlany](/pl/fazy/budowlany) |
+| R-01 | **Opóźnienie pozwolenia na budowę** | Przedłużająca się procedura administracyjna, wezwania do uzupełnienia dokumentacji | [Projekt budowlany](/pl/fazy/projekt-budowlany) |
 | R-02 | **Przekroczenie budżetu** | Wzrost cen materiałów, niedoszacowanie kosztów, zmiany inwestora | Wszystkie fazy |
 | R-03 | **Niekorzystne warunki gruntowe** | Wysoki poziom wód gruntowych, słaba nośność, zanieczyszczenia | [Koncepcja](/pl/fazy/koncepcja), [Budowa](/pl/fazy/budowa) |
 | R-04 | **Spory z wykonawcą** | Różnice interpretacyjne dokumentacji, roszczenia finansowe | [Budowa](/pl/fazy/budowa) |
 | R-05 | **Zmiany w przepisach** | Nowelizacja Warunków Technicznych, zmiana norm | Wszystkie fazy |
-| R-06 | **Ograniczenia MPZP** | Niezgodność zamierzenia z planem miejscowym, konieczność uzyskania WZ | [Rozpoczęcie](/pl/fazy/rozpoczecie), [Koncepcja](/pl/fazy/koncepcja) |
-| R-07 | **Kolizje międzybranżowe** | Niespójności między branżami wykryte zbyt późno | [Projekt wykonawczy](/pl/fazy/wykonawczy) |
-| R-08 | **Opóźnienia uzgodnień gestorów** | Przedłużające się warunki przyłączenia do sieci | [Projekt budowlany](/pl/fazy/budowlany) |
-| R-09 | **Zmiana zakresu przez inwestora** | Rozszerzenie programu funkcjonalnego w trakcie projektowania | [Projekt wstępny](/pl/fazy/wstepny), [Projekt wykonawczy](/pl/fazy/wykonawczy) |
+| R-06 | **Ograniczenia MPZP** | Niezgodność zamierzenia z planem miejscowym, konieczność uzyskania WZ | [Rozpoczęcie](/pl/fazy/koncepcja), [Koncepcja](/pl/fazy/koncepcja) |
+| R-07 | **Kolizje międzybranżowe** | Niespójności między branżami wykryte zbyt późno | [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) |
+| R-08 | **Opóźnienia uzgodnień gestorów** | Przedłużające się warunki przyłączenia do sieci | [Projekt budowlany](/pl/fazy/projekt-budowlany) |
+| R-09 | **Zmiana zakresu przez inwestora** | Rozszerzenie programu funkcjonalnego w trakcie projektowania | [Projekt wstępny](/pl/fazy/projekt-wstepny), [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) |
 | R-10 | **Utrata kluczowego członka zespołu** | Odejście głównego projektanta w trakcie projektu | Wszystkie fazy |
-| R-11 | **Wymagania konserwatora zabytków** | Nieprzewidziane ograniczenia przy obiektach w strefie ochrony | [Koncepcja](/pl/fazy/koncepcja), [Projekt budowlany](/pl/fazy/budowlany) |
+| R-11 | **Wymagania konserwatora zabytków** | Nieprzewidziane ograniczenia przy obiektach w strefie ochrony | [Koncepcja](/pl/fazy/koncepcja), [Projekt budowlany](/pl/fazy/projekt-budowlany) |
 | R-12 | **Błędy w dokumentacji** | Niespójności między rysunkami a opisem, braki w specyfikacjach | [Budowa](/pl/fazy/budowa) |
 
 ## Rejestr ryzyk --- szablon
@@ -76,24 +76,24 @@ Każda faza projektu generuje inne zagrożenia. Poniższe zestawienie pomaga w p
 
 | Faza | Kluczowe ryzyka | Działania prewencyjne |
 |---|---|---|
-| [Rozpoczęcie](/pl/fazy/rozpoczecie) | Niejasne wymagania inwestora, brak budżetu | Szczegółowy brief, wstępna analiza kosztów |
+| [Rozpoczęcie](/pl/fazy/koncepcja) | Niejasne wymagania inwestora, brak budżetu | Szczegółowy brief, wstępna analiza kosztów |
 | [Koncepcja](/pl/fazy/koncepcja) | Niezgodność z MPZP, ograniczenia działki | Analiza MPZP, wizja lokalna, warunki zabudowy |
-| [Projekt wstępny](/pl/fazy/wstepny) | Nierealistyczny program funkcjonalny, brak uzgodnień wstępnych | Weryfikacja powierzchni, konsultacje z gestorami |
+| [Projekt wstępny](/pl/fazy/projekt-wstepny) | Nierealistyczny program funkcjonalny, brak uzgodnień wstępnych | Weryfikacja powierzchni, konsultacje z gestorami |
 
 ### Fazy projektowe
 
 | Faza | Kluczowe ryzyka | Działania prewencyjne |
 |---|---|---|
-| [Projekt budowlany](/pl/fazy/budowlany) | Odmowa pozwolenia, braki formalne, protesty sąsiadów | Checklista kompletności, analiza stron postępowania |
-| [Projekt wykonawczy](/pl/fazy/wykonawczy) | Kolizje międzybranżowe, przekroczenie budżetu | Regularna kontrola kolizji w [modelu BIM](/pl/integracja-bim/), kosztorysy aktualizowane |
+| [Projekt budowlany](/pl/fazy/projekt-budowlany) | Odmowa pozwolenia, braki formalne, protesty sąsiadów | Checklista kompletności, analiza stron postępowania |
+| [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) | Kolizje międzybranżowe, przekroczenie budżetu | Regularna kontrola kolizji w [modelu BIM](/pl/integracja-bim/), kosztorysy aktualizowane |
 
 ### Fazy realizacyjne
 
 | Faza | Kluczowe ryzyka | Działania prewencyjne |
 |---|---|---|
 | [Budowa](/pl/fazy/budowa) | Warunki gruntowe, opóźnienia dostaw, spory z wykonawcą | Harmonogram dostaw, umowa z jasnym zakresem, nadzór autorski |
-| [Dokumentacja powykonawcza](/pl/fazy/powykonawcza) | Niezgodność wykonania z projektem, braki dokumentacyjne | Bieżąca dokumentacja fotograficzna, inwentaryzacja |
-| [Przekazanie](/pl/fazy/przekazanie) | Usterki uniemożliwiające odbiór, brak wymaganych dokumentów | Lista kontrolna odbiorowa, próby instalacji |
+| [Dokumentacja powykonawcza](/pl/fazy/odbiory) | Niezgodność wykonania z projektem, braki dokumentacyjne | Bieżąca dokumentacja fotograficzna, inwentaryzacja |
+| [Przekazanie](/pl/fazy/eksploatacja) | Usterki uniemożliwiające odbiór, brak wymaganych dokumentów | Lista kontrolna odbiorowa, próby instalacji |
 
 ## Powiązanie ryzyk z dokumentacją
 

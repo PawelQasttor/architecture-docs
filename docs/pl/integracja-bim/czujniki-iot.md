@@ -6,10 +6,10 @@ Wspolczesne budynki generuja dane przez caly okres eksploatacji. Ta strona wyjas
 
 Czujniki i urzadzenia IoT sa komponentami budynku, tak samo jak sciany i okna. Musza byc:
 
-- **Wyspecyfikowane** w trakcie projektowania (od [Projektu Budowlanego](/pl/fazy/budowlany) wzwyz)
+- **Wyspecyfikowane** w trakcie projektowania (od [Projektu Budowlanego](/pl/fazy/projekt-budowlany) wzwyz)
 - **Udokumentowane** w modelu BIM (na poziomie [LOD 500](/pl/integracja-bim/lod-loi) dla dokumentacji powykonawczej)
 - **Zmapowane** do systemow zarzadzania budynkiem w trakcie [Budowy](/pl/fazy/budowa)
-- **Przekazane** z kompletnymi danymi jako czesc produktow fazy [Przekazania](/pl/fazy/przekazanie)
+- **Przekazane** z kompletnymi danymi jako czesc produktow fazy [Przekazania](/pl/fazy/eksploatacja)
 
 ::: info
 Standard traktuje czujniki jako wyposazenie. Kazdy czujnik jest dokumentowany za pomoca karty Urzadzenia w bazie danych projektu, powiazanej z jego lokalizacja (Pomieszczenie, Strefa, Kondygnacja) i systemem, ktory obsluguje (Instalacja).
@@ -40,11 +40,11 @@ System Zarzadzania Budynkiem (BMS) zbiera dane z czujnikow, steruje systemami bu
 
 | Produkt | Faza | Opis |
 |---|---|---|
-| Plany lokalizacji czujnikow | [Projekt Budowlany](/pl/fazy/budowlany) | Rzuty kondygnacji z pozycjami czujnikow wedlug typow |
-| Zestawienie czujnikow | [Projekt Wykonawczy](/pl/fazy/wykonawczy) | Tabela z kazdym czujnikiem: typ, lokalizacja, system, ID punktu danych |
-| Koordynacja tras kablowych | [Projekt Wykonawczy](/pl/fazy/wykonawczy) | Skoordynowane z przebiegami instalacji w modelu BIM |
-| Model powykonawczy czujnikow | [Powykonawcza](/pl/fazy/powykonawcza) | Model BIM ze wszystkimi czujnikami na poziomie LOD 500 |
-| Przekazanie danych o wyposazeniu | [Przekazanie](/pl/fazy/przekazanie) | Kompletne karty Urzadzen dla wszystkich czujnikow i miernikow |
+| Plany lokalizacji czujnikow | [Projekt Budowlany](/pl/fazy/projekt-budowlany) | Rzuty kondygnacji z pozycjami czujnikow wedlug typow |
+| Zestawienie czujnikow | [Projekt Wykonawczy](/pl/fazy/projekt-wykonawczy) | Tabela z kazdym czujnikiem: typ, lokalizacja, system, ID punktu danych |
+| Koordynacja tras kablowych | [Projekt Wykonawczy](/pl/fazy/projekt-wykonawczy) | Skoordynowane z przebiegami instalacji w modelu BIM |
+| Model powykonawczy czujnikow | [Powykonawcza](/pl/fazy/odbiory) | Model BIM ze wszystkimi czujnikami na poziomie LOD 500 |
+| Przekazanie danych o wyposazeniu | [Przekazanie](/pl/fazy/eksploatacja) | Kompletne karty Urzadzen dla wszystkich czujnikow i miernikow |
 
 ### Mapowanie punktow danych
 
@@ -63,7 +63,7 @@ Kazdy czujnik generuje jeden lub wiecej punktow danych. Musza byc zmapowane w do
 | Odniesienie do Urzadzenia | Powiazanie z karta Urzadzenia danego czujnika | URZ-TEMP-0042 |
 
 ::: tip
-Uzgodnij konwencje nazewnictwa punktow danych podczas [fazy Projektu Budowlanego](/pl/fazy/budowlany). Stosowanie spojnej konwencji (np. System-Urzadzenie-Parametr) pozwala uniknac kosztownego przemapowania podczas rozruchu.
+Uzgodnij konwencje nazewnictwa punktow danych podczas [fazy Projektu Budowlanego](/pl/fazy/projekt-budowlany). Stosowanie spojnej konwencji (np. System-Urzadzenie-Parametr) pozwala uniknac kosztownego przemapowania podczas rozruchu.
 :::
 
 ## Koncepcja blizniak cyfrowego
@@ -109,7 +109,7 @@ Kazdy czujnik lub urzadzenie IoT w budynku otrzymuje wlasna karte Urzadzenia w b
 | Instrukcja O&M | Odniesienie do instrukcji eksploatacji | Ref. dok.: IO-HVAC-042 |
 
 ::: warning
-Brakujace karty Urzadzen przy przekazaniu tworza dlugoterminowe problemy. Zespoly eksploatacyjne nie moga utrzymywac czujnikow, o ktorych nie wiedza. Upewnij sie, ze kazdy czujnik jest udokumentowany przed podpisaniem [Przekazania](/pl/fazy/przekazanie).
+Brakujace karty Urzadzen przy przekazaniu tworza dlugoterminowe problemy. Zespoly eksploatacyjne nie moga utrzymywac czujnikow, o ktorych nie wiedza. Upewnij sie, ze kazdy czujnik jest udokumentowany przed podpisaniem [Przekazania](/pl/fazy/eksploatacja).
 :::
 
 ## Przyklady pulpitow nawigacyjnych
@@ -170,5 +170,5 @@ Protokol komunikacji uzywany przez kazdy czujnik powinien byc zapisany w karcie 
 - [Matryca LOD/LOI](/pl/integracja-bim/lod-loi)
 - [Mapowanie IFC](/pl/integracja-bim/encje-ifc)
 - [Synchronizacja dwukierunkowa](/pl/integracja-bim/synchronizacja-dwukierunkowa)
-- [Faza Przekazania](/pl/fazy/przekazanie)
+- [Faza Przekazania](/pl/fazy/eksploatacja)
 - [Integracja BIM -- przeglad](/pl/integracja-bim/)

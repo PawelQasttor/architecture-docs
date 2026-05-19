@@ -44,7 +44,7 @@ Within each phase folder, group files by document type:
 ```
 
 ::: tip
-This structure aligns with the 7 document types in the standard (Space, Zone, Requirement, System, Asset, Building, Level) and the [8 project phases](/en/phases/initiation). Teams using a CDE should map these folders to the CDE container structure defined in the [BIM Execution Plan](/en/bim-integration/bep).
+This structure aligns with the 7 document types in the standard (Space, Zone, Requirement, System, Asset, Building, Level) and the [8 project phases](/en/phases/concept). Teams using a CDE should map these folders to the CDE container structure defined in the [BIM Execution Plan](/en/bim-integration/bep).
 :::
 
 ## File Naming Convention
@@ -148,14 +148,14 @@ Different phases require different levels of sign-off. The table below shows the
 
 | Phase | Documents requiring approval | Primary approver | Secondary approver |
 |---|---|---|---|
-| [Initiation](/en/phases/initiation) | Project brief, stakeholder register | Client | Project Manager |
+| [Initiation](/en/phases/concept) | Project brief, stakeholder register | Client | Project Manager |
 | [Concept](/en/phases/concept) | Building cards, initial zone cards | Client | Lead Architect |
-| [Schematic](/en/phases/schematic) | All space cards, requirement cards | Lead Architect | Client |
+| [Schematic](/en/phases/schematic-design) | All space cards, requirement cards | Lead Architect | Client |
 | [Design Development](/en/phases/design-development) | System cards, updated requirement cards | Lead Architect | Structural / MEP leads |
-| [Construction Docs](/en/phases/construction-docs) | All document types, compliance checks | Lead Architect | All consultants |
+| [Construction Docs](/en/phases/construction-documents) | All document types, compliance checks | Lead Architect | All consultants |
 | [Construction](/en/phases/construction) | Site instructions, variation orders | Project Manager | Contractor |
-| [As-Built](/en/phases/as-built) | Updated cards reflecting built conditions | Lead Architect | Contractor |
-| [Handover](/en/phases/handover) | Complete documentation set, O&M manuals | Client | Facility Manager |
+| [As-Built](/en/phases/commissioning) | Updated cards reflecting built conditions | Lead Architect | Contractor |
+| [Handover](/en/phases/operation) | Complete documentation set, O&M manuals | Client | Facility Manager |
 
 ## Document Control Checklist
 

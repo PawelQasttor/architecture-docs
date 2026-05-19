@@ -135,7 +135,7 @@ Modernizacja wymaga zaktualizowania dokumentacji budynku na wielu poziomach:
 - [ ] Aktualizacja kart Instalacji o nowe elementy i parametry ([Karta Instalacji](/pl/dokumentacja/encje/system))
 - [ ] Archiwizacja kart zdemontowanych urządzeń (zachowanie historii)
 - [ ] Aktualizacja modelu BIM budynku ([Integracja BIM](/pl/integracja-bim/))
-- [ ] Nowa dokumentacja powykonawcza ([Faza powykonawcza](/pl/fazy/powykonawcza))
+- [ ] Nowa dokumentacja powykonawcza ([Faza powykonawcza](/pl/fazy/odbiory))
 - [ ] Aktualizacja świadectwa charakterystyki energetycznej
 - [ ] Wpis do Książki Obiektu Budowlanego
 - [ ] Aktualizacja harmonogramu konserwacji ([Planowanie konserwacji](./konserwacja))

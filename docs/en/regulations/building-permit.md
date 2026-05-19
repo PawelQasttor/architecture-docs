@@ -63,7 +63,7 @@ The 65-day statutory deadline does not include time spent waiting for the applic
 |------------------|-------------------|
 | Incomplete documentation | Use the checklist above; have a second person review the package before submission |
 | Project does not comply with MPZP/WZ | Cross-check every design parameter against the [zoning requirements](/en/regulations/zoning-mpzp-wz) before finalizing the project |
-| Missing or expired utility conditions | Request utility conditions early in the [initiation phase](/en/phases/initiation); confirm validity dates |
+| Missing or expired utility conditions | Request utility conditions early in the [initiation phase](/en/phases/concept); confirm validity dates |
 | Designer lacks valid professional license | Verify license (*uprawnienia budowlane*) and current chamber membership (*izba*) for all designers |
 | Insufficient fire safety documentation | For buildings requiring fire protection review, obtain the fire officer's opinion before submission |
 | Plot access to a public road not established | Resolve road access (easement or road manager's consent) before applying |
@@ -103,7 +103,7 @@ A building permit can be **transferred to a new investor** without a new applica
 - Start document collection at least **2 months** before the planned submission date.
 - Submit the application **in person** and request a confirmation stamp on your copy -- this establishes the official submission date.
 - Track the 65-day deadline. If the authority exceeds it, you can file a complaint about inactivity (*skarga na bezczynnosc*).
-- Coordinate with your [project management](/en/project-management/) schedule -- the permit process is typically the longest single milestone in the [initiation phase](/en/phases/initiation).
+- Coordinate with your [project management](/en/project-management/) schedule -- the permit process is typically the longest single milestone in the [initiation phase](/en/phases/concept).
 - Keep one complete copy of the submitted project for your records.
 
 ## Related Pages
@@ -114,5 +114,5 @@ A building permit can be **transferred to a new investor** without a new applica
 - [WT 2021 -- Technical Conditions](/en/regulations/wt-2021)
 - [Construction Formalities](/en/regulations/construction-formalities)
 - [Administrative Fees](/en/regulations/fees)
-- [Initiation Phase](/en/phases/initiation)
+- [Initiation Phase](/en/phases/concept)
 - [Design Development Phase](/en/phases/design-development)

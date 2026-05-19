@@ -102,10 +102,10 @@ Retencja wód opadowych, powierzchnie przepuszczalne, zielona infrastruktura, ar
 | Faza | Działania | Wynik dokumentacyjny |
 |---|---|---|
 | [Koncepcja](/pl/fazy/koncepcja) | Analiza terenu i orientacji, warianty bryły, wstępne cele energetyczne, strategia wodna | Założenia zrównoważoności w karcie Budynku, wstępny szacunek EP |
-| [Projekt wstępny](/pl/fazy/wstepny) | Dobór przegród, wstępny model energetyczny, koncepcja wentylacji | Uzupełnione karty Stref, wstępne bilanse |
-| [Projekt budowlany](/pl/fazy/budowlany) | Specyfikacja przegród i instalacji, symulacja oświetlenia, obliczenia retencji | Model energetyczny, karty Instalacji z danymi środowiskowymi |
-| [Projekt wykonawczy](/pl/fazy/wykonawczy) | Analiza mostków termicznych, specyfikacja szczelności, detale akustyczne | Kompletne karty Pomieszczeń z parametrami IEQ |
-| [Przekazanie](/pl/fazy/przekazanie) | Weryfikacja as-built, świadectwo energetyczne, instrukcje eksploatacji | Dokumentacja powykonawcza, plan monitoringu |
+| [Projekt wstępny](/pl/fazy/projekt-wstepny) | Dobór przegród, wstępny model energetyczny, koncepcja wentylacji | Uzupełnione karty Stref, wstępne bilanse |
+| [Projekt budowlany](/pl/fazy/projekt-budowlany) | Specyfikacja przegród i instalacji, symulacja oświetlenia, obliczenia retencji | Model energetyczny, karty Instalacji z danymi środowiskowymi |
+| [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) | Analiza mostków termicznych, specyfikacja szczelności, detale akustyczne | Kompletne karty Pomieszczeń z parametrami IEQ |
+| [Przekazanie](/pl/fazy/eksploatacja) | Weryfikacja as-built, świadectwo energetyczne, instrukcje eksploatacji | Dokumentacja powykonawcza, plan monitoringu |
 
 ::: warning
 Dane o zrównoważonym rozwoju w modelu [BIM](/pl/integracja-bim/) muszą być spójne z wartościami w dokumentacji regulacyjnej. Ustal jeden obieg informacji, aby uniknąć rozbieżności między modelem a wnioskiem o świadectwo energetyczne. Dane z [czujników IoT](/pl/integracja-bim/czujniki-iot) mogą później weryfikować założenia projektowe.

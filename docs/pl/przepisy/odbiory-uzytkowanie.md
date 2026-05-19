@@ -115,7 +115,7 @@ Przystąpienie do użytkowania obiektu **bez wymaganego pozwolenia na użytkowan
 
 ## Inwentaryzacja geodezyjna powykonawcza
 
-Inwentaryzacja geodezyjna powykonawcza jest wymagana zarówno przy zawiadomieniu, jak i przy pozwoleniu na użytkowanie. Wykonuje ją uprawniony geodeta. Obejmuje: usytuowanie obiektu na działce, usytuowanie przyłączy, zgodność z PZT oraz naniesienie na mapę zasadniczą. W praktyce geodeta potrzebuje **2–4 tygodnie** — uwzględnij to w [harmonogramie fazy powykonawczej](/pl/fazy/powykonawcza).
+Inwentaryzacja geodezyjna powykonawcza jest wymagana zarówno przy zawiadomieniu, jak i przy pozwoleniu na użytkowanie. Wykonuje ją uprawniony geodeta. Obejmuje: usytuowanie obiektu na działce, usytuowanie przyłączy, zgodność z PZT oraz naniesienie na mapę zasadniczą. W praktyce geodeta potrzebuje **2–4 tygodnie** — uwzględnij to w [harmonogramie fazy powykonawczej](/pl/fazy/odbiory).
 
 ## Świadectwo charakterystyki energetycznej
 
@@ -145,4 +145,4 @@ Inwentaryzacja geodezyjna powykonawcza jest wymagana zarówno przy zawiadomieniu
 ## Powiązane dokumenty
 
 - [Formalności budowlane](/pl/przepisy/formalnosci-budowlane) | [Pozwolenie na budowę](/pl/przepisy/pozwolenie-na-budowe) | [Opłaty administracyjne](/pl/przepisy/oplaty)
-- [Faza powykonawcza](/pl/fazy/powykonawcza) | [Faza przekazania](/pl/fazy/przekazanie) | [Bramki fazowe](/pl/jakosc/bramki-fazowe)
+- [Faza powykonawcza](/pl/fazy/odbiory) | [Faza przekazania](/pl/fazy/eksploatacja) | [Bramki fazowe](/pl/jakosc/bramki-fazowe)

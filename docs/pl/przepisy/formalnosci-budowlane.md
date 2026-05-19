@@ -51,7 +51,7 @@ Dziennik budowy jest urzędowym dokumentem przebiegu robót budowlanych. Od 2023
 | Format | Książka formatu A4, z ponumerowanymi stronami |
 | Wpisy | Chronologiczne, atramentem, bez skreśleń (błędy — korekta z datą i podpisem) |
 | Przechowywanie | Na terenie budowy, w miejscu dostępnym dla uprawnionych osób |
-| Po zakończeniu budowy | Dołączany do [dokumentacji powykonawczej](/pl/fazy/powykonawcza) |
+| Po zakończeniu budowy | Dołączany do [dokumentacji powykonawczej](/pl/fazy/odbiory) |
 
 ### Elektroniczny Dziennik Budowy (EDB)
 
@@ -147,4 +147,4 @@ Kwalifikacji odstąpienia od zatwierdzonego projektu dokonuje **projektant**. Is
 ## Powiązane dokumenty
 
 - [Pozwolenie na budowę](/pl/przepisy/pozwolenie-na-budowe) | [Odbiory i użytkowanie](/pl/przepisy/odbiory-uzytkowanie) | [Prawo budowlane](/pl/przepisy/prawo-budowlane)
-- [Faza budowy](/pl/fazy/budowa) | [Dokumentacja powykonawcza](/pl/fazy/powykonawcza) | [Zarządzanie projektem](/pl/zarzadzanie-projektem/)
+- [Faza budowy](/pl/fazy/budowa) | [Dokumentacja powykonawcza](/pl/fazy/odbiory) | [Zarządzanie projektem](/pl/zarzadzanie-projektem/)

@@ -1,6 +1,6 @@
 # Administrative Fees
 
-This page provides a practical reference for the fees and costs associated with building projects in Poland. Use it for budgeting during the [initiation phase](/en/phases/initiation) and for verifying payments throughout the project lifecycle.
+This page provides a practical reference for the fees and costs associated with building projects in Poland. Use it for budgeting during the [initiation phase](/en/phases/concept) and for verifying payments throughout the project lifecycle.
 
 ::: info Legal basis
 Administrative fees are regulated by the **Act on Stamp Duty** (*Ustawa o oplacie skarbowej*, 16 November 2006) and specific provisions of [Prawo Budowlane](/en/regulations/prawo-budowlane). Geodetic and utility fees are set by local authorities and service providers.
@@ -86,7 +86,7 @@ Utility connection fees vary significantly by provider and location. The table b
 | **Telecom / fiber** | 0 -- 2 000 | Often free in urban areas with existing infrastructure |
 
 ::: tip Technical conditions first
-Before budgeting for utility connections, request **technical conditions** (*warunki przyłączenia*) from each provider. These are usually free and will specify the exact connection fee, timeline, and any infrastructure the investor must build. Request these during the [initiation phase](/en/phases/initiation).
+Before budgeting for utility connections, request **technical conditions** (*warunki przyłączenia*) from each provider. These are usually free and will specify the exact connection fee, timeline, and any infrastructure the investor must build. Request these during the [initiation phase](/en/phases/concept).
 :::
 
 ## PINB-Related Costs
@@ -108,16 +108,16 @@ The table below provides a rough budget estimate for administrative and regulato
 
 | Cost item | Estimated range (PLN) | Phase |
 |-----------|-----------------------|-------|
-| MPZP excerpt or WZ application | 0 -- 598 | [Initiation](/en/phases/initiation) |
-| Base map for design | 1 500 -- 4 000 | [Initiation](/en/phases/initiation) |
-| Geotechnical survey | 1 000 -- 3 000 | [Initiation](/en/phases/initiation) |
+| MPZP excerpt or WZ application | 0 -- 598 | [Initiation](/en/phases/concept) |
+| Base map for design | 1 500 -- 4 000 | [Initiation](/en/phases/concept) |
+| Geotechnical survey | 1 000 -- 3 000 | [Initiation](/en/phases/concept) |
 | Building permit fee | 0 (exempt for residential) | [Design development](/en/phases/design-development) |
 | Utility connection fees (total) | 8 000 -- 25 000 | [Construction](/en/phases/construction) |
 | Building stakeout | 1 000 -- 3 000 | [Construction](/en/phases/construction) |
-| As-built geodetic survey | 1 500 -- 4 000 | [As-built](/en/phases/as-built) |
-| Energy performance certificate | 800 -- 2 000 | [As-built](/en/phases/as-built) |
-| Installation test protocols | 500 -- 2 000 | [As-built](/en/phases/as-built) |
-| Completion notification | 0 | [Handover](/en/phases/handover) |
+| As-built geodetic survey | 1 500 -- 4 000 | [As-built](/en/phases/commissioning) |
+| Energy performance certificate | 800 -- 2 000 | [As-built](/en/phases/commissioning) |
+| Installation test protocols | 500 -- 2 000 | [As-built](/en/phases/commissioning) |
+| Completion notification | 0 | [Handover](/en/phases/operation) |
 | **Total administrative/regulatory costs** | **~14 000 -- 43 000** | All phases |
 
 ## Payment Methods and Tips
@@ -135,5 +135,5 @@ The table below provides a rough budget estimate for administrative and regulato
 - [Zoning: MPZP & WZ](/en/regulations/zoning-mpzp-wz)
 - [Completion & Occupancy](/en/regulations/completion-occupancy)
 - [Construction Formalities](/en/regulations/construction-formalities)
-- [Initiation Phase](/en/phases/initiation)
+- [Initiation Phase](/en/phases/concept)
 - [Project Management](/en/project-management/)

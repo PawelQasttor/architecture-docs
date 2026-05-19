@@ -31,7 +31,7 @@ Classify every incident by severity to determine response priority and escalatio
 | 4 | Low | Minor issue, no immediate operational impact | Within 5 working days | Cosmetic damage, non-critical sensor fault, minor fixture issue |
 
 ::: tip
-Response times should be adjusted to your building type and occupancy. A hospital requires faster response at every level than a warehouse. Define your response targets during the [handover phase](/en/phases/handover) and include them in the building's O&M documentation.
+Response times should be adjusted to your building type and occupancy. A hospital requires faster response at every level than a warehouse. Define your response targets during the [handover phase](/en/phases/operation) and include them in the building's O&M documentation.
 :::
 
 ## Incident Reporting Workflow
@@ -83,7 +83,7 @@ Capture the following information at the point of reporting:
 - Add notes to the relevant [System card](/en/documentation/entities/system) if the incident affects system performance
 - Record the incident in the building logbook (KOB) if required
 - File the completed incident report
-- Update as-built documentation if any modifications were made (see [As-Built](/en/phases/as-built))
+- Update as-built documentation if any modifications were made (see [As-Built](/en/phases/commissioning))
 
 ## Root Cause Analysis
 

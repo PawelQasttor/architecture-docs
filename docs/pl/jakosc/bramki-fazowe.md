@@ -6,7 +6,7 @@ Bramka fazowa to formalny punkt kontrolny między kolejnymi fazami projektu. Prz
 Przed bramką kierownik projektu przechodzi przez wszystkie punkty. Każdy punkt oznaczony `[ ]` wymaga potwierdzenia. Brak spełnienia któregokolwiek punktu oznacza wstrzymanie przejścia do kolejnej fazy do czasu uzupełnienia.
 :::
 
-Szczegóły poszczególnych faz znajdziesz w [opisach faz projektu](/pl/fazy/rozpoczecie). Zasady prowadzenia przeglądów opisano w [procedurach przeglądów](./procedury-przegladow).
+Szczegóły poszczególnych faz znajdziesz w [opisach faz projektu](/pl/fazy/koncepcja). Zasady prowadzenia przeglądów opisano w [procedurach przeglądów](./procedury-przegladow).
 
 ---
 

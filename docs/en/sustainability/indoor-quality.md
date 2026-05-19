@@ -209,11 +209,11 @@ Zone cards define the shared systems and boundaries. Space cards define the room
 | Phase | IEQ Documentation Tasks |
 |---|---|
 | [Concept](/en/phases/concept) | Define IEQ targets in project brief; preliminary orientation and massing analysis for daylight; identify site noise sources |
-| [Schematic Design](/en/phases/schematic) | Initial daylight studies, ventilation concept (natural vs mechanical), acoustic zoning, preliminary thermal comfort strategy |
+| [Schematic Design](/en/phases/schematic-design) | Initial daylight studies, ventilation concept (natural vs mechanical), acoustic zoning, preliminary thermal comfort strategy |
 | [Design Development](/en/phases/design-development) | Daylight simulation (DF or CBDM), ventilation calculations with airflow rates, acoustic specifications for separating elements, thermal comfort and overheating analysis |
-| [Construction Documents](/en/phases/construction-docs) | Detailed glazing specifications, ductwork and diffuser layout, acoustic construction details, shading device specifications, CO2 sensor locations |
+| [Construction Documents](/en/phases/construction-documents) | Detailed glazing specifications, ductwork and diffuser layout, acoustic construction details, shading device specifications, CO2 sensor locations |
 | Construction | Airtightness testing, acoustic testing of separating elements (R'w and L'n,w), ventilation commissioning and balancing |
-| [Handover](/en/phases/handover) | Test reports included in handover package, [sensor commissioning](/en/bim-integration/sensors-iot), occupant comfort guide, [maintenance schedules](/en/operations/maintenance) for ventilation filters |
+| [Handover](/en/phases/operation) | Test reports included in handover package, [sensor commissioning](/en/bim-integration/sensors-iot), occupant comfort guide, [maintenance schedules](/en/operations/maintenance) for ventilation filters |
 | [Operations](/en/operations/) | Post-occupancy comfort surveys, indoor air quality monitoring via [IoT sensors](/en/bim-integration/sensors-iot), seasonal HVAC adjustments |
 
 ## IEQ Documentation Checklist

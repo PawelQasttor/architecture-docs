@@ -14,11 +14,11 @@ Changes arise from many sources across the project lifecycle. The most common tr
 | Trigger | Example | Typical phase |
 |---|---|---|
 | Client request | "We need two additional meeting rooms on Level 3" | Any phase, most common in [Concept](/en/phases/concept) and [Design Development](/en/phases/design-development) |
-| Site conditions | Ground investigation reveals rock where piling was planned | [Schematic](/en/phases/schematic) to [Construction](/en/phases/construction) |
+| Site conditions | Ground investigation reveals rock where piling was planned | [Schematic](/en/phases/schematic-design) to [Construction](/en/phases/construction) |
 | Regulation update | Updated fire safety code requires wider corridors | Any phase |
-| Cost constraint | Value engineering to reduce cladding specification | [Design Development](/en/phases/design-development) to [Construction Docs](/en/phases/construction-docs) |
+| Cost constraint | Value engineering to reduce cladding specification | [Design Development](/en/phases/design-development) to [Construction Docs](/en/phases/construction-documents) |
 | Coordination clash | Structural beam conflicts with ductwork route | [Design Development](/en/phases/design-development) to [Construction](/en/phases/construction) |
-| Planning condition | Local authority requires additional landscaping | [Concept](/en/phases/concept) to [Construction Docs](/en/phases/construction-docs) |
+| Planning condition | Local authority requires additional landscaping | [Concept](/en/phases/concept) to [Construction Docs](/en/phases/construction-documents) |
 
 ::: info
 The later a change occurs, the more expensive it is. A room layout change during Concept may cost hours of documentation work. The same change during Construction may cost weeks and significant money. This is why the [phase gate](/en/quality/phase-gates) process exists -- to lock down decisions before the cost of change escalates.

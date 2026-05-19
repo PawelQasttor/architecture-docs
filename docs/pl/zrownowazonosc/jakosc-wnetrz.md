@@ -179,24 +179,24 @@ Parametry IEQ oddziałują na siebie wzajemnie i na efektywność energetyczną.
 - [ ] Cele IEQ zapisane w założeniach (kategoria komfortu, strategia wentylacji)
 - [ ] Wstępna analiza orientacji budynku pod kątem doświetlenia
 
-### [Projekt wstępny](/pl/fazy/wstepny)
+### [Projekt wstępny](/pl/fazy/projekt-wstepny)
 - [ ] Stosunek okien do podłogi obliczony dla pomieszczeń na pobyt ludzi
 - [ ] Koncepcja wentylacji (grawitacyjna / mechaniczna) z uzasadnieniem
 - [ ] Strefowanie akustyczne — identyfikacja stref wymagających podwyższonej izolacji
 
-### [Projekt budowlany](/pl/fazy/budowlany)
+### [Projekt budowlany](/pl/fazy/projekt-budowlany)
 - [ ] Symulacja oświetlenia dziennego (DF) dla kluczowych pomieszczeń
 - [ ] Obliczenia wentylacji z wydajnościami dla każdego pomieszczenia
 - [ ] Analiza komfortu cieplnego z oceną ryzyka przegrzewania
 - [ ] Specyfikacja akustyczna przegród wewnętrznych (R'w, L'n,w)
 - [ ] Karty Pomieszczeń uzupełnione o parametry IEQ
 
-### [Projekt wykonawczy](/pl/fazy/wykonawczy)
+### [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy)
 - [ ] Specyfikacja przeszkleń (U, g, Rw) w kartach Urządzeń
 - [ ] Szczegółowa specyfikacja instalacji wentylacyjnej w kartach Instalacji
 - [ ] Detale przegród akustycznych z obliczeniami
 
-### [Przekazanie](/pl/fazy/przekazanie)
+### [Przekazanie](/pl/fazy/eksploatacja)
 - [ ] Pomiary akustyczne przegród (protokoły R'w, L'n,w)
 - [ ] Badanie szczelności powietrznej (test blower door)
 - [ ] Plan monitoringu IEQ w [fazie eksploatacji](/pl/eksploatacja/) — [czujniki IoT](/pl/integracja-bim/czujniki-iot) (CO₂, temperatura, wilgotność)

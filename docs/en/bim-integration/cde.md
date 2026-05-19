@@ -12,7 +12,7 @@ Without a CDE, project teams rely on email attachments, local drives, and inform
 - **Status tracking** -- documents move through defined workflow states
 
 ::: tip
-Establish the CDE during the [Initiation phase](/en/phases/initiation), before any design files are created. This should be defined in the [BIM Execution Plan](/en/bim-integration/bep).
+Establish the CDE during the [Initiation phase](/en/phases/concept), before any design files are created. This should be defined in the [BIM Execution Plan](/en/bim-integration/bep).
 :::
 
 ## Folder Structure
@@ -73,7 +73,7 @@ Never store files outside the defined folder structure. Orphaned files undermine
 | Contractor | No access | No access | Read (selected) | Read | No access |
 
 ::: info
-Access permissions should be reviewed at each phase gate. As the project moves from [Design Development](/en/phases/design-development) to [Construction Docs](/en/phases/construction-docs), contractors may need broader Shared access.
+Access permissions should be reviewed at each phase gate. As the project moves from [Design Development](/en/phases/design-development) to [Construction Docs](/en/phases/construction-documents), contractors may need broader Shared access.
 :::
 
 ## File Naming in the CDE
@@ -154,12 +154,12 @@ Reviews that exceed the escalation timeframe must be flagged in the project trac
 | Nextcloud / SharePoint | Flexible, can be self-hosted, familiar interface | Requires manual workflow configuration |
 
 ::: info
-The choice of CDE platform should be agreed in the [BEP](/en/bim-integration/bep) during the [Initiation phase](/en/phases/initiation). Consider the software ecosystem already in use and the technical capability of all project participants.
+The choice of CDE platform should be agreed in the [BEP](/en/bim-integration/bep) during the [Initiation phase](/en/phases/concept). Consider the software ecosystem already in use and the technical capability of all project participants.
 :::
 
 ## Connecting the CDE to Document Control
 
-This standard treats the CDE as the backbone of project document control. Every document referenced in phase deliverables (see [phases overview](/en/phases/initiation)) must exist in the CDE with correct status codes.
+This standard treats the CDE as the backbone of project document control. Every document referenced in phase deliverables (see [phases overview](/en/phases/concept)) must exist in the CDE with correct status codes.
 
 Key integration points:
 

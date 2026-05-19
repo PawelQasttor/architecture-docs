@@ -83,14 +83,14 @@ Different project phases carry different risk profiles. The table below highligh
 
 | Phase | Key risks | Recommended actions |
 |---|---|---|
-| [Initiation](/en/phases/initiation) | Unclear brief, unrealistic budget, unknown site constraints | Validate the brief with the client; commission site surveys; benchmark costs |
+| [Initiation](/en/phases/concept) | Unclear brief, unrealistic budget, unknown site constraints | Validate the brief with the client; commission site surveys; benchmark costs |
 | [Concept](/en/phases/concept) | Planning refusal, stakeholder disagreement on design direction | Early pre-application discussion with planning authority; stakeholder workshops |
-| [Schematic](/en/phases/schematic) | Design does not meet spatial or regulatory requirements | Cross-check space cards against [requirement cards](/en/templates/); conduct compliance review |
+| [Schematic](/en/phases/schematic-design) | Design does not meet spatial or regulatory requirements | Cross-check space cards against [requirement cards](/en/templates/); conduct compliance review |
 | [Design Development](/en/phases/design-development) | Coordination clashes between disciplines, scope creep | Run clash detection in the [BIM model](/en/bim-integration/); enforce [change management](./change-management) |
-| [Construction Docs](/en/phases/construction-docs) | Incomplete or inconsistent documentation, late consultant input | Use the [quality review procedure](/en/quality/review-procedures) checklist; set consultant deadlines |
+| [Construction Docs](/en/phases/construction-documents) | Incomplete or inconsistent documentation, late consultant input | Use the [quality review procedure](/en/quality/review-procedures) checklist; set consultant deadlines |
 | [Construction](/en/phases/construction) | Contractor delays, quality defects, unforeseen site conditions | Weekly site inspections; maintain a defects log; review [risk register](./risk-management) at site meetings |
-| [As-Built](/en/phases/as-built) | Documentation does not reflect what was actually built | Require contractor to submit as-built mark-ups; verify against BIM model |
-| [Handover](/en/phases/handover) | Missing O&M manuals, incomplete training, defects at handover | Start handover checklist early; tie final payment to documentation completeness |
+| [As-Built](/en/phases/commissioning) | Documentation does not reflect what was actually built | Require contractor to submit as-built mark-ups; verify against BIM model |
+| [Handover](/en/phases/operation) | Missing O&M manuals, incomplete training, defects at handover | Start handover checklist early; tie final payment to documentation completeness |
 
 ## How Risks Connect to Documentation
 

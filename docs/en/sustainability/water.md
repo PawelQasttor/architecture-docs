@@ -144,7 +144,7 @@ Harvesting system components:
 6. **Distribution** — separate pipework clearly labelled "non-potable"
 
 ::: warning
-Rainwater distribution pipes must be completely separate from potable water supply and clearly marked. Polish sanitary regulations prohibit any cross-connection between potable and non-potable systems. Document the separation in your installation drawings and include it in the [construction documents](/en/phases/construction-docs).
+Rainwater distribution pipes must be completely separate from potable water supply and clearly marked. Polish sanitary regulations prohibit any cross-connection between potable and non-potable systems. Document the separation in your installation drawings and include it in the [construction documents](/en/phases/construction-documents).
 :::
 
 ## Greywater Recycling
@@ -205,24 +205,24 @@ sustainability:
 | Strategy | Documentation Type | Phase Introduced | Key Data |
 |---|---|---|---|
 | Permeable paving | Zone card (landscape) | [Concept](/en/phases/concept) | Surface type, area, runoff coefficient |
-| Green roof | Zone card + System card | [Schematic](/en/phases/schematic) | Substrate depth, area, retention %, structural load |
-| Retention tank | System card (drainage) | [Schematic](/en/phases/schematic) | Volume, material, discharge rate, overflow |
+| Green roof | Zone card + System card | [Schematic](/en/phases/schematic-design) | Substrate depth, area, retention %, structural load |
+| Retention tank | System card (drainage) | [Schematic](/en/phases/schematic-design) | Volume, material, discharge rate, overflow |
 | Rain garden / bioswale | Zone card (landscape) | [Design Development](/en/phases/design-development) | Area, depth, planting, infiltration rate |
 | Rainwater harvesting | System card (rainwater) | [Design Development](/en/phases/design-development) | Collection area, tank volume, treatment, distribution |
 | Greywater recycling | System card (greywater) | [Design Development](/en/phases/design-development) | Capacity, treatment type, reuse destinations |
-| Water-efficient fixtures | Space card | [Construction Documents](/en/phases/construction-docs) | Flow rates, flush volumes per fixture |
-| Stormwater monitoring | System card + [Sensors](/en/bim-integration/sensors-iot) | [Handover](/en/phases/handover) | Tank level sensors, flow meters, alert thresholds |
+| Water-efficient fixtures | Space card | [Construction Documents](/en/phases/construction-documents) | Flow rates, flush volumes per fixture |
+| Stormwater monitoring | System card + [Sensors](/en/bim-integration/sensors-iot) | [Handover](/en/phases/operation) | Tank level sensors, flow meters, alert thresholds |
 
 ## Water Documentation Per Phase
 
 | Phase | Water Documentation Tasks |
 |---|---|
 | [Concept](/en/phases/concept) | Site permeability analysis, local regulation review (MPZP, water authority), preliminary water strategy, retention concept |
-| [Schematic Design](/en/phases/schematic) | Retention volume calculation, green roof feasibility, permeable surface layout, preliminary System cards for water systems |
+| [Schematic Design](/en/phases/schematic-design) | Retention volume calculation, green roof feasibility, permeable surface layout, preliminary System cards for water systems |
 | [Design Development](/en/phases/design-development) | Detailed retention sizing, harvesting system design, fixture schedule, greywater feasibility assessment, Zone cards for drainage zones |
-| [Construction Documents](/en/phases/construction-docs) | Full drainage drawings, retention tank specifications, pipe sizing, non-potable system separation details, fixture schedule with flow rates |
+| [Construction Documents](/en/phases/construction-documents) | Full drainage drawings, retention tank specifications, pipe sizing, non-potable system separation details, fixture schedule with flow rates |
 | Construction | Tank installation verification, pipe pressure testing, system commissioning |
-| [Handover](/en/phases/handover) | As-built drainage drawings, system commissioning reports, [sensor setup](/en/bim-integration/sensors-iot), O&M manuals for water systems |
+| [Handover](/en/phases/operation) | As-built drainage drawings, system commissioning reports, [sensor setup](/en/bim-integration/sensors-iot), O&M manuals for water systems |
 | [Operations](/en/operations/) | Tank level monitoring, filter [maintenance](/en/operations/maintenance), water consumption tracking, seasonal irrigation management |
 
 ## Water Documentation Checklist

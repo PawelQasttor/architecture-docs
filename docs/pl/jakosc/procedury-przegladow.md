@@ -136,9 +136,9 @@ Przegląd z inwestorem (lub jego przedstawicielem) ma charakter prezentacyjno-de
 | Faza | Zakres prezentacji |
 |------|-------------------|
 | [Koncepcja](/pl/fazy/koncepcja) | Warianty koncepcyjne, bilans powierzchni, wizualizacje, szacunek kosztów |
-| [Projekt wstępny](/pl/fazy/wstepny) | Układ funkcjonalny, rzuty z metrażami, wstępne rozwiązania materiałowe |
-| [Projekt budowlany](/pl/fazy/budowlany) | Elewacje, przekroje, zestawienie powierzchni, zgodność z przepisami |
-| [Projekt wykonawczy](/pl/fazy/wykonawczy) | Detale wykończeniowe, specyfikacja materiałów, harmonogram realizacji |
+| [Projekt wstępny](/pl/fazy/projekt-wstepny) | Układ funkcjonalny, rzuty z metrażami, wstępne rozwiązania materiałowe |
+| [Projekt budowlany](/pl/fazy/projekt-budowlany) | Elewacje, przekroje, zestawienie powierzchni, zgodność z przepisami |
+| [Projekt wykonawczy](/pl/fazy/projekt-wykonawczy) | Detale wykończeniowe, specyfikacja materiałów, harmonogram realizacji |
 
 ### Zasady prowadzenia przeglądu z inwestorem
 
