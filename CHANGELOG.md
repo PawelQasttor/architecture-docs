@@ -38,9 +38,22 @@ made internally consistent end to end.
 - `.gitignore` un-anchored `examples/` rule was silently un-tracking the
   flagship example under `docs/en/examples/`.
 
+### Added
+- **Human-readable HTML report** compiler target (`report.html`) — a
+  self-contained printable page (lifecycle position, requirement
+  verification progress, data quality, regulatory compliance) for
+  clients/principals. `npm run sbm:report` one-command showcase; a live
+  sample is published at `/green-terrace-report.html`.
+
 ### Removed
 - Unrelated XanoScript scaffold (340 untracked files) that had been
   dumped into this docs repo.
+
+### Track B notes
+- Output reframed: pre-`construction_documents` pending verification is
+  presented as expected progress, not a compliance-failure score.
+  Requirement scope-filter notes moved from warnings to `--verbose`
+  debug; Green Terrace flagship now validates with zero warnings.
 
 ---
 
