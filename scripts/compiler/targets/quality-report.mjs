@@ -190,12 +190,15 @@ function generatePhaseReadiness(sbm, projectQuality) {
   const assumedCount = projectQuality.fieldsByConfidence?.assumed || 0;
   if (nextRank >= errRank && assumedCount > 0) {
     blockers.push({
+      code: 'gate.assumed_error',
       rule: `No assumed fields permitted from ${PHASE_GATE.errorAssumedFrom}`,
       count: assumedCount,
+      phase: nextPhase,
       action: `Verify or re-classify ${assumedCount} assumed field(s) before advancing to ${nextPhase}`
     });
   } else if (nextRank >= warnRank && assumedCount > 0) {
     warnings.push({
+      code: 'gate.assumed_warning',
       rule: `Assumed fields generate warnings from ${PHASE_GATE.warnAssumedFrom}`,
       count: assumedCount,
       action: `Plan verification for ${assumedCount} assumed field(s)`
@@ -206,12 +209,14 @@ function generatePhaseReadiness(sbm, projectQuality) {
   const unverifiedSafety = projectQuality.safetyCriticalFields?.unverified || 0;
   if (nextRank >= safetyRank && unverifiedSafety > 0) {
     blockers.push({
+      code: 'gate.safety_blocker',
       rule: `All safety-critical fields must be measured/calculated/specified from ${PHASE_GATE.errorSafetyEstimatedFrom}`,
       count: unverifiedSafety,
       action: `Verify ${unverifiedSafety} safety-critical field(s) with authoritative sources`
     });
   } else if (unverifiedSafety > 0) {
     warnings.push({
+      code: 'gate.safety_warning',
       rule: 'Safety-critical fields should be verified as early as possible',
       count: unverifiedSafety,
       action: `Schedule verification for ${unverifiedSafety} safety-critical field(s)`
@@ -222,6 +227,7 @@ function generatePhaseReadiness(sbm, projectQuality) {
   const avgCompleteness = projectQuality.averageCompleteness || 0;
   if (avgCompleteness < 0.8 && nextRank >= errRank) {
     warnings.push({
+      code: 'gate.completeness',
       rule: `Average completeness below 80% at ${PHASE_GATE.errorAssumedFrom}+`,
       value: avgCompleteness,
       action: 'Fill missing fields or explicitly mark as unknown with _meta'
@@ -257,6 +263,8 @@ function generateRecommendations(safetyAudit, provenanceGaps, phaseReadiness) {
     recommendations.push({
       priority: 'critical',
       category: 'safety',
+      code: 'rec.safety_unverified',
+      count: unverifiedSafety.length,
       message: `${unverifiedSafety.length} safety-critical field(s) need verification from authoritative sources`,
       action: 'Locate source documents and add _meta annotations with source references',
       fields: unverifiedSafety.map(f => `${f.entityId}/${f.field} (${f.confidence})`)
@@ -269,6 +277,8 @@ function generateRecommendations(safetyAudit, provenanceGaps, phaseReadiness) {
     recommendations.push({
       priority: 'high',
       category: 'provenance',
+      code: 'rec.no_meta',
+      count: noMeta,
       message: `${noMeta} field(s) have values but no provenance tracking`,
       action: 'Add _meta annotations with confidence level and source reference for each field'
     });
@@ -280,6 +290,8 @@ function generateRecommendations(safetyAudit, provenanceGaps, phaseReadiness) {
     recommendations.push({
       priority: 'high',
       category: 'provenance',
+      code: 'rec.no_source',
+      count: noSource,
       message: `${noSource} field(s) claim high confidence but have no source reference`,
       action: 'Add source and sourceRef to _meta for each field, or downgrade confidence to estimated'
     });
@@ -290,6 +302,9 @@ function generateRecommendations(safetyAudit, provenanceGaps, phaseReadiness) {
     recommendations.push({
       priority: 'high',
       category: 'phase_gate',
+      code: blocker.code || 'phase_gate',
+      count: blocker.count,
+      phase: blocker.phase,
       message: blocker.rule,
       action: blocker.action
     });
