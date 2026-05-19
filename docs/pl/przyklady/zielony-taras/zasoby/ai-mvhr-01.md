@@ -72,15 +72,15 @@ serviceHistory:
   - date: "2024-05-15"
     type: "commissioning"
     performedBy: "Ventilation Systems Sp. z o.o."
-    notes: "Initial commissioning - heat recovery efficiency 92.3%, all tests passed"
+    notes: "Pierwszy rozruch — sprawność odzysku ciepła 92,3%, wszystkie próby zaliczone"
   - date: "2024-08-10"
     type: "filter_replacement"
-    performedBy: "Building Manager"
-    notes: "G4 supply filter replaced (3-month interval)"
+    performedBy: "Zarządca budynku"
+    notes: "Wymieniono filtr nawiewny G4 (interwał 3-miesięczny)"
   - date: "2024-11-10"
     type: "annual_service"
     performedBy: "Ventilation Systems Sp. z o.o."
-    notes: "F7 extract filter replaced, heat exchanger cleaned, fan inspected - no issues"
+    notes: "Wymieniono filtr wywiewny F7, oczyszczono wymiennik ciepła, skontrolowano wentylator — bez uwag"
 
 # Spare parts
 spareParts:

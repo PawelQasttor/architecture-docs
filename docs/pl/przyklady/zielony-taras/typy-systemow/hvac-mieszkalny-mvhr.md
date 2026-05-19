@@ -36,28 +36,28 @@ components:
     quantity: 1
 
   - category: "ventilation"
-    description: "Supply air diffusers"
-    specification: "Ceiling-mounted adjustable diffusers, low-noise"
+    description: "Nawiewniki powietrza"
+    specification: "Nawiewniki sufitowe regulowane, niskoszumowe"
     quantity: 8
 
   - category: "ventilation"
-    description: "Extract air grilles"
-    specification: "Bathroom/kitchen extract grilles with acoustic dampers"
+    description: "Kratki wywiewne"
+    specification: "Kratki wywiewne z łazienek/kuchni z tłumikami akustycznymi"
     quantity: 4
 
   - category: "controls"
-    description: "Room thermostats"
-    specification: "Wireless programmable thermostats, LCD display"
+    description: "Termostaty pomieszczeniowe"
+    specification: "Bezprzewodowe termostaty programowalne, wyświetlacz LCD"
     quantity: 8
 
   - category: "controls"
-    description: "MVHR control panel"
-    specification: "Wall-mounted with boost/holiday/night modes"
+    description: "Panel sterowania MVHR"
+    specification: "Montaż naścienny z trybami boost/urlopowy/nocny"
     quantity: 1
 
   - category: "controls"
-    description: "Weather compensation controller"
-    specification: "Outdoor sensor + controller for heat pump optimization"
+    description: "Sterownik pogodowy"
+    specification: "Czujnik zewnętrzny + sterownik do optymalizacji pompy ciepła"
     quantity: 1
 
 # TYPICAL PERFORMANCE

@@ -603,7 +603,7 @@ documentType: "requirement"
 entityType: "requirement"
 id: "REQ-CLIENT-CEILING-HEIGHT-001"
 
-requirementName: "Client-specified office ceiling height"
+requirementName: "Wysokość pomieszczenia biurowego określona przez klienta"
 requirementType: "dimensional"
 countryScope: "project_specific"
 
