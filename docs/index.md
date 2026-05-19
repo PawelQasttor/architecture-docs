@@ -279,8 +279,8 @@ Once you're ready to go deeper:
 
 | Topic | What You'll Learn |
 |-------|-------------------|
-| [8 Project Phases](/en/standards/document-structure) | When to create which documents (from concept to handover) |
-| [Document Types](/en/documentation/entities/) | The 19 types of building information (rooms, zones, systems, equipment, and more) |
+| [10-Phase Lifecycle](/en/phases/) | When to create which documents (concept → decommissioned) |
+| [Document Types](/en/documentation/entities/) | The 27 types of building information (rooms, zones, systems, equipment, and more) |
 | [BIM Integration](/en/bim-integration/) | How to sync with Revit, ArchiCAD, and IFC |
 | [Templates](/en/templates/) | Copy-paste templates for every document type |
 | [Polish Regulations](/en/regulations/) | Built-in support for WT 2021 and Prawo Budowlane |

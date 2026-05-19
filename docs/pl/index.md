@@ -279,8 +279,8 @@ Gdy będziesz gotowy zagłębić się bardziej:
 
 | Temat | Czego Się Nauczysz |
 |-------|-------------------|
-| [8 Faz Projektu](/pl/standardy/struktura-dokumentu) | Kiedy tworzyć które dokumenty (od koncepcji do przekazania) |
-| [Typy Dokumentów](/pl/dokumentacja/encje/) | 19 typów informacji o budynku (pomieszczenia, strefy, instalacje, wyposażenie i więcej) |
+| [Cykl życia (10 faz)](/pl/fazy/) | Kiedy tworzyć które dokumenty (od koncepcji do wycofania) |
+| [Typy Dokumentów](/pl/dokumentacja/encje/) | 27 typów informacji o budynku (pomieszczenia, strefy, instalacje, wyposażenie i więcej) |
 | [Integracja BIM](/pl/integracja-bim/) | Jak synchronizować z Revit, ArchiCAD i IFC |
 | [Szablony](/pl/szablony/) | Szablony kopiuj-wklej dla każdego typu dokumentu |
 | [Polskie Przepisy](/pl/przepisy/) | Wbudowane wsparcie dla WT 2021 i Prawa Budowlanego |
