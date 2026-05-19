@@ -11,30 +11,10 @@ nul
 # --- Compiler build / generated artifacts ---
 output/
 
-# --- Local IDE & agent config (not part of the SBM standard) ---
+# --- Local AI-assistant / IDE config (not part of the SBM standard) ---
 .claude/
 .codex/
 .cursor/
-.xano/
-.github/agents/
-.github/copilot-instructions.md
-
-# --- Unrelated XanoScript scaffold (boilerplate contamination, not the SBM docs standard) ---
-# Files remain on disk; ignored so `git status` stays meaningful and `git add -A` can't
-# pull them into the docs repo. Remove or relocate to a separate repo when decided.
-addons/
-agents/
-apis/
-functions/
-mcp_servers/
-middlewares/
-realtime/
-tables/
-tasks/
-tools/
-workflow_tests/
-AGENTS.md
-CLAUDE.md
 
 # --- Old v0.x scratch notes / stray examples ---
 LEVEL-UPDATE-v0.4-COMPLETE.md
