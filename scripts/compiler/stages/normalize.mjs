@@ -908,6 +908,11 @@ function extractProjectMetadata(entities, options) {
         temperature: 'C'
       }
     };
+    // Pass through budget if defined (v0.4) — preserves the declared budget
+    // currency and totals so the cost rollup augments rather than overrides them
+    if (projectSpec.budget) {
+      result.budget = projectSpec.budget;
+    }
     // Pass through constructionPackages if defined (v0.6)
     if (projectSpec.constructionPackages) {
       result.constructionPackages = projectSpec.constructionPackages;
@@ -950,7 +955,10 @@ function performCostRollup(grouped, project, logger) {
   let totalAssetCosts = 0;
   let spacesWithCost = 0;
   let assetsWithCost = 0;
-  const currency = project.country === 'PL' ? 'PLN' : 'EUR';
+  // Respect an explicitly declared project budget currency; fall back to a
+  // country-based default only when none is declared. (Silently overriding a
+  // user-declared currency produced spurious cross-entity warnings — see Track A.)
+  const currency = project.budget?.currency || (project.country === 'PL' ? 'PLN' : 'EUR');
 
   // Step 1: Aggregate space costs to levels
   if (grouped.levels && grouped.spaces) {

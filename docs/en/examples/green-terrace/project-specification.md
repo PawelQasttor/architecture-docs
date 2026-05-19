@@ -29,15 +29,25 @@ buildingData:
 budget:
   totalBudget: 1800000
   currency: "EUR"
-  contingency: 90000  # 5%
-  contingencyPercent: 5
+  contingency:
+    amount: 90000
+    percent: 5
 
   breakdown:
-    foundation_structure: 540000  # 30%
-    envelope: 360000              # 20%
-    mep_systems: 450000           # 25%
-    finishes: 270000              # 15%
-    external_works: 90000         # 5%
+    structure:
+      budget: 540000     # 30%
+    envelope:
+      budget: 360000     # 20%
+    hvac:
+      budget: 250000     # part of MEP (25% total)
+    plumbing:
+      budget: 100000     # part of MEP
+    electrical:
+      budget: 100000     # part of MEP
+    finishes:
+      budget: 270000     # 15%
+    external_works:
+      budget: 90000      # 5% (loose extra — no schema sitework category)
 
   forecast:
     totalForecast: 1750000

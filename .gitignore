@@ -16,9 +16,11 @@ output/
 .codex/
 .cursor/
 
-# --- Old v0.x scratch notes / stray examples ---
+# --- Old v0.x scratch notes / stray root examples dir ---
+# NOTE: leading slash anchors to repo root so this does NOT match the
+# tracked flagship example under docs/en/examples/.
 LEVEL-UPDATE-v0.4-COMPLETE.md
 MIGRATION-COMPLETE-v0.4-PHASE-1.md
 MIGRATION-v0.3-to-v0.4.md
 PROJECT-UPDATE-v0.4-COMPLETE.md
-examples/
+/examples/
