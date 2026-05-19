@@ -87,11 +87,11 @@ spareParts:
   - partName: "G4 Supply Filter 800x600"
     partNumber: "MVHR-F-G4-800x600"
     quantity: 2
-    location: "Technical room shelf"
+    location: "Półka w pomieszczeniu technicznym"
   - partName: "F7 Extract Filter 800x600"
     partNumber: "MVHR-F-F7-800x600"
     quantity: 1
-    location: "Technical room shelf"
+    location: "Półka w pomieszczeniu technicznym"
 
 # Performance data
 performanceData:
