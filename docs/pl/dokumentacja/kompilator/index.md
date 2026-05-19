@@ -1,6 +1,6 @@
 # Przegląd kompilatora
 
-**Kompilator SBM v1.0.0** przekształca tworzone przez człowieka encje (encja -- w tym standardzie nazywana kartą) Markdown w zwalidowany, odczytywalny maszynowo format JSON i generuje wiele celów kompilacji dla BIM, zgodności, zarządzania obiektami, integracji z cyfrowym bliźniakiem oraz **audytu jakości danych**.
+**Kompilator SBM v2.0.0** przekształca tworzone przez człowieka encje (encja -- w tym standardzie nazywana kartą) Markdown w zwalidowany, odczytywalny maszynowo format JSON i generuje wiele celów kompilacji dla BIM, zgodności, zarządzania obiektami, integracji z cyfrowym bliźniakiem oraz **audytu jakości danych**.
 
 ## Co robi kompilator?
 
@@ -17,7 +17,11 @@ Kompilator łączy tworzenie przyjazne dla człowieka z maszynowo przetwarzalnym
 - `compliance_report.json` - Śledzenie zgodności regulacyjnej
 - `asset_register.json` - Dane zarządzania obiektami
 - `twin_schema.json` - Powiązania czujników cyfrowego bliźniaka
-- `quality_report.json` - **Audyt jakości danych i gotowość fazowa** 
+- `quality_report.json` - **Audyt jakości danych i gotowość fazowa**
+- `report.html` - **Raport czytelny dla człowieka** — gotowość fazowa, postęp weryfikacji, jakość danych i zgodność z przepisami na jednej stronie do druku dla klienta/inwestora. [Zobacz przykład →](/green-terrace-report.html)
+
+Uruchom `npm run sbm:report`, aby skompilować przykład i wygenerować raport HTML.
+
 ## 5-etapowy potok
 
 ```

@@ -315,7 +315,7 @@ export function generateQualityReport(sbm, projectQuality, logger) {
   const phaseReadiness = generatePhaseReadiness(sbm, projectQuality);
   const recommendations = generateRecommendations(safetyAudit, provenanceGaps, phaseReadiness);
 
-  logger.debug(`Quality report: ${entityCards.length} entities, ${safetyAudit.totalFields} safety fields, ${provenanceGaps.totalGaps} gaps`);
+  logger.debug(`Quality report: ${entityCards.length} entities analysed, ${safetyAudit.totalFields} safety-critical fields tracked, ${provenanceGaps.totalGaps} fields pending source attribution`);
 
   return {
     version: '0.2',

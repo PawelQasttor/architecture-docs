@@ -21,6 +21,7 @@ import { generateComplianceReport } from './targets/compliance-report.mjs';
 import { generateAssetRegister } from './targets/asset-register.mjs';
 import { generateDigitalTwinSchema } from './targets/twin-schema.mjs';
 import { generateQualityReport } from './targets/quality-report.mjs';
+import { generateHtmlReport } from './targets/html-report.mjs';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -166,8 +167,12 @@ async function compile(options) {
     const assetRegister = generateAssetRegister(sbm, logger);
     const digitalTwinSchema = generateDigitalTwinSchema(sbm, logger);
     const qualityReport = generateQualityReport(sbm, projectQuality, logger);
+    const htmlReport = generateHtmlReport(
+      sbm, projectQuality, complianceReport, qualityReport,
+      Number(((Date.now() - startTime) / 1000).toFixed(2))
+    );
 
-    logger.success('Generated 5 compilation targets');
+    logger.success('Generated 6 compilation targets (5 JSON + HTML report)');
 
     // Ensure output directory exists
     await fs.mkdir(options.output, { recursive: true });
@@ -199,6 +204,11 @@ async function compile(options) {
       );
       logger.success(`Generated: ${targetPath}`);
     }
+
+    // Write the human-readable HTML report (raw string, not JSON)
+    const htmlPath = path.join(options.output, 'report.html');
+    await fs.writeFile(htmlPath, htmlReport, 'utf-8');
+    logger.success(`Generated: ${htmlPath}  ← open this one`);
 
     // Write validation report (if there were warnings)
     if (validationResult.warnings?.length > 0) {

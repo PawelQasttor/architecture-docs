@@ -1,6 +1,6 @@
 # Compiler Overview
 
-The **SBM Compiler v1.0.0** transforms human-authored Markdown entities into a validated, machine-readable JSON format with **hierarchical cost aggregation**, **simulation tracking**, **performance monitoring**, **multi-level spaces**, **system hierarchy**, and **construction phasing**, generating multiple compilation targets for BIM, compliance, facilities management, digital twin integration, and data quality assurance.
+The **SBM Compiler v2.0.0** transforms human-authored Markdown entities into a validated, machine-readable JSON format with **hierarchical cost aggregation**, **simulation tracking**, **performance monitoring**, **multi-level spaces**, **system hierarchy**, and **construction phasing**, generating multiple compilation targets for BIM, compliance, facilities management, digital twin integration, and data quality assurance.
 
 ## What Does the Compiler Do?
 
@@ -17,7 +17,10 @@ The compiler bridges the gap between human-friendly authoring and machine-proces
 - `compliance_report.json` - Regulatory compliance tracking
 - `asset_register.json` - Facilities management data
 - `twin_schema.json` - Digital twin sensor bindings
-- `quality_report.json` - **Data quality audit and phase readiness** (new in v0.2.0)
+- `quality_report.json` - **Data quality audit and phase readiness**
+- `report.html` - **Human-readable report** — phase readiness, verification progress, data quality and regulatory compliance on one printable page for clients/principals. [View a live sample →](/green-terrace-report.html)
+
+Run `npm run sbm:report` to compile the example and produce the HTML report.
 
 ## 5-Stage Pipeline
 
