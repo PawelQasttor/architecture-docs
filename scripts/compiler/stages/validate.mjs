@@ -13,7 +13,7 @@ import addFormats from 'ajv-formats';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SAFETY_CRITICAL_FIELDS, SAFETY_CRITICAL_ENV_FIELDS } from '../constants.mjs';
+import { SAFETY_CRITICAL_FIELDS, SAFETY_CRITICAL_ENV_FIELDS, PHASE_GATE, phaseRank, phaseName } from '../constants.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -697,20 +697,24 @@ function checkProvenance(sbm, logger) {
 }
 
 /**
- * Enforce phase gates
+ * Enforce phase gates (unified lifecycle phases).
  *
- * Phase 1-3: All confidence levels accepted
- * Phase 4:   Warn for 'assumed' fields
- * Phase 5+:  Error for 'assumed' on required properties
- * Phase 7+:  Error for 'estimated' on safety-critical properties
+ * Before construction_documents: all confidence levels accepted
+ * From construction_documents:   warn for 'assumed' fields
+ * From bidding_procurement:      error for 'assumed' on any field
+ * From commissioning:            error for 'estimated' on safety-critical
  */
 function checkPhaseGates(sbm, logger) {
-  const phase = sbm.project?.phase || 3;
+  const phaseLabel = phaseName(sbm.project?.phase);
+  const rank = phaseRank(sbm.project?.phase);
+  const warnRank = phaseRank(PHASE_GATE.warnAssumedFrom);
+  const errRank = phaseRank(PHASE_GATE.errorAssumedFrom);
+  const safetyRank = phaseRank(PHASE_GATE.errorSafetyEstimatedFrom);
   const errors = [];
   const warnings = [];
 
-  if (phase < 4) {
-    logger.debug(`✓ Phase ${phase}: all confidence levels accepted`);
+  if (rank < warnRank) {
+    logger.debug(`✓ Phase ${phaseLabel}: all confidence levels accepted`);
     return { errors, warnings };
   }
 
@@ -733,29 +737,29 @@ function checkPhaseGates(sbm, logger) {
 
         const confidence = meta.confidence;
 
-        // Phase 4+: Warn for assumed
-        if (phase >= 4 && confidence === 'assumed') {
+        // From construction_documents: warn for assumed
+        if (rank >= warnRank && confidence === 'assumed') {
           warnings.push({
             path: `${entityType}/${entityId}/${key}`,
-            message: `Phase ${phase}: field has 'assumed' confidence — verification needed`,
+            message: `Phase ${phaseLabel}: field has 'assumed' confidence — verification needed`,
             rule: 'phase_gate:assumed_warning'
           });
         }
 
-        // Phase 5+: Error for assumed on any field
-        if (phase >= 5 && confidence === 'assumed') {
+        // From bidding_procurement: error for assumed on any field
+        if (rank >= errRank && confidence === 'assumed') {
           errors.push({
             path: `${entityType}/${entityId}/${key}`,
-            message: `Phase ${phase}: 'assumed' confidence not permitted (must be estimated or better)`,
+            message: `Phase ${phaseLabel}: 'assumed' confidence not permitted (must be estimated or better)`,
             rule: 'phase_gate:assumed_error'
           });
         }
 
-        // Phase 7+: Error for estimated on safety-critical
-        if (phase >= 7 && confidence === 'estimated' && SAFETY_CRITICAL_FIELDS.has(key)) {
+        // From commissioning: error for estimated on safety-critical
+        if (rank >= safetyRank && confidence === 'estimated' && SAFETY_CRITICAL_FIELDS.has(key)) {
           errors.push({
             path: `${entityType}/${entityId}/${key}`,
-            message: `Phase ${phase}: safety-critical field '${key}' has 'estimated' confidence (must be measured/calculated/specified)`,
+            message: `Phase ${phaseLabel}: safety-critical field '${key}' has 'estimated' confidence (must be measured/calculated/specified)`,
             rule: 'phase_gate:safety_critical'
           });
         }
@@ -764,7 +768,7 @@ function checkPhaseGates(sbm, logger) {
   }
 
   if (errors.length === 0 && warnings.length === 0) {
-    logger.debug(`✓ Phase gate check passed (phase ${phase})`);
+    logger.debug(`✓ Phase gate check passed (phase ${phaseLabel})`);
   } else {
     if (errors.length > 0) logger.debug(`✗ Phase gate: ${errors.length} errors`);
     if (warnings.length > 0) logger.debug(`! Phase gate: ${warnings.length} warnings`);

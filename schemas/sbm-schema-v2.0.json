@@ -63,10 +63,29 @@
           }
         },
         "phase": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 8,
-          "description": "Current project phase (1-8) for phase gate enforcement"
+          "description": "Current lifecycle phase. Canonical form is a unified phase name; a legacy numeric phase (1-8) is still accepted and mapped for back-compat.",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": [
+                "concept",
+                "schematic_design",
+                "design_development",
+                "construction_documents",
+                "bidding_procurement",
+                "construction",
+                "commissioning",
+                "operation",
+                "renovation",
+                "decommissioned"
+              ]
+            },
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8
+            }
+          ]
         },
         "projectPhase": {
           "type": "string",

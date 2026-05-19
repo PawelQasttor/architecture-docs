@@ -10,6 +10,7 @@
  */
 
 import { loadJurisdictionPack, getApplicableRequirements } from '../enrichers/jurisdiction-pack.mjs';
+import { DEFAULT_PHASE } from '../constants.mjs';
 
 /**
  * Normalize a single entity
@@ -898,7 +899,7 @@ function extractProjectMetadata(entities, options) {
       id: projectSpec.id || 'PRJ-UNKNOWN',
       name: projectSpec.projectName || 'Unnamed Project',
       country: options.country || 'PL',
-      phase: options.phase || projectSpec.phase || 3,
+      phase: options.phase || projectSpec.phase || projectSpec.projectPhase || DEFAULT_PHASE,
       language: projectSpec.language || 'pl',
       location: projectSpec.location || {},
       units: {
@@ -929,7 +930,7 @@ function extractProjectMetadata(entities, options) {
     id: 'PRJ-UNKNOWN',
     name: 'Unnamed Project',
     country: options.country || 'PL',
-    phase: options.phase || 3,
+    phase: options.phase || DEFAULT_PHASE,
     language: 'pl',
     units: {
       length: 'mm',

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Semantic Building Model (SBM) Compiler v0.4.0
+ * Semantic Building Model (SBM) Compiler v2.0.0
  *
  * Compiles Markdown + YAML semantic entities into a unified building knowledge model.
  * Supports data provenance tracking, quality summaries, phase gate enforcement,
@@ -9,7 +9,7 @@
  *
  * Usage:
  *   node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL
- *   node scripts/compiler/index.mjs compile --input project/ --output build/ --phase 5 --verbose
+ *   node scripts/compiler/index.mjs compile --input project/ --output build/ --phase bidding_procurement --verbose
  */
 
 import { parseInput } from './stages/parse.mjs';
@@ -37,7 +37,7 @@ function parseArgs(args) {
     input: null,
     output: null,
     country: 'PL',
-    phase: 3,
+    phase: 'design_development',
     verbose: false,
     mode: 'production'
   };
@@ -56,7 +56,8 @@ function parseArgs(args) {
       options.country = next;
       i++;
     } else if (arg === '--phase' && next) {
-      options.phase = parseInt(next, 10);
+      // Accept a unified phase name or a legacy numeric phase (1-8).
+      options.phase = /^\d+$/.test(next) ? Number(next) : next;
       i++;
     } else if (arg === '--verbose' || arg === '-v') {
       options.verbose = true;
@@ -243,13 +244,13 @@ async function main() {
   if (options.command === 'compile') {
     if (!options.input) {
       console.error('Error: --input is required');
-      console.log('Usage: node scripts/compiler/index.mjs compile --input <path> --output <path> [--country <code>] [--phase <num>] [--verbose]');
+      console.log('Usage: node scripts/compiler/index.mjs compile --input <path> --output <path> [--country <code>] [--phase <phase>] [--verbose]');
       process.exit(1);
     }
 
     if (!options.output) {
       console.error('Error: --output is required');
-      console.log('Usage: node scripts/compiler/index.mjs compile --input <path> --output <path> [--country <code>] [--phase <num>] [--verbose]');
+      console.log('Usage: node scripts/compiler/index.mjs compile --input <path> --output <path> [--country <code>] [--phase <phase>] [--verbose]');
       process.exit(1);
     }
 
@@ -258,7 +259,7 @@ async function main() {
   } else if (options.command === 'validate') {
     if (!options.input) {
       console.error('Error: --input is required');
-      console.log('Usage: node scripts/compiler/index.mjs validate --input <path> [--country <code>] [--phase <num>] [--verbose]');
+      console.log('Usage: node scripts/compiler/index.mjs validate --input <path> [--country <code>] [--phase <phase>] [--verbose]');
       process.exit(1);
     }
 
@@ -339,34 +340,41 @@ OPTIONS:
   --input <path>      Input directory containing Markdown entities (required)
   --output <path>     Output directory for sbm.json (required for compile)
   --country <code>    ISO country code for jurisdiction pack (default: PL)
-  --phase <num>       Project phase 1-8 for phase gate enforcement (default: 3)
+  --phase <name>      Unified lifecycle phase for gate enforcement
+                      (default: design_development). Accepts a unified phase
+                      name (concept … decommissioned) or a legacy number 1-8.
   --mode <mode>       Compilation mode: development | production (default: production)
   --verbose, -v       Enable verbose logging
 
-PHASE GATES:
-  Phase 1-3   All confidence levels accepted
-  Phase 4     Warns for 'assumed' confidence fields
-  Phase 5+    Errors for 'assumed' confidence on any field
-  Phase 7+    Errors for 'estimated' confidence on safety-critical fields
+UNIFIED PHASES (canonical lifecycle order):
+  concept · schematic_design · design_development · construction_documents ·
+  bidding_procurement · construction · commissioning · operation ·
+  renovation · decommissioned
+
+PHASE GATES (confidence strictness):
+  before construction_documents  All confidence levels accepted
+  from   construction_documents  Warns for 'assumed' confidence fields
+  from   bidding_procurement     Errors for 'assumed' confidence on any field
+  from   commissioning           Errors for 'estimated' on safety-critical fields
 
 EXAMPLES:
-  # Compile Green Terrace example (Phase 3, default)
+  # Compile Green Terrace example (design_development, default)
   node scripts/compiler/index.mjs compile \\
     --input docs/en/examples/green-terrace \\
     --output build/green-terrace \\
     --country PL
 
-  # Compile with Phase 5 enforcement (strict)
+  # Compile with bidding_procurement enforcement (strict)
   node scripts/compiler/index.mjs compile \\
     --input project/entities \\
     --output build/project \\
-    --phase 5 --verbose
+    --phase bidding_procurement --verbose
 
-  # Compile hospital project (Phase 4, warnings for assumed data)
+  # Compile hospital project (construction_documents — warns on assumed data)
   node scripts/compiler/index.mjs compile \\
     --input real_examples/kpcpulm-blok-d \\
     --output build/kpcpulm \\
-    --phase 4 --country PL --verbose
+    --phase construction_documents --country PL --verbose
     `);
 
   } else {

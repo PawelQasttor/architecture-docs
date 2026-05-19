@@ -9,6 +9,8 @@
  * - Data collection recommendations
  */
 
+import { UNIFIED_PHASES, PHASE_GATE, phaseRank, phaseName } from '../constants.mjs';
+
 /**
  * Confidence levels ordered from strongest to weakest
  */
@@ -172,33 +174,39 @@ function generateProvenanceGaps(sbm) {
  * Determines if the project data quality is sufficient for the next phase.
  */
 function generatePhaseReadiness(sbm, projectQuality) {
-  const currentPhase = sbm.project?.phase || 3;
-  const nextPhase = currentPhase + 1;
+  const currentPhase = phaseName(sbm.project?.phase);
+  const currentRank = phaseRank(currentPhase);
+  const nextRank = Math.min(currentRank + 1, UNIFIED_PHASES.length - 1);
+  const nextPhase = UNIFIED_PHASES[nextRank];
+
+  const warnRank = phaseRank(PHASE_GATE.warnAssumedFrom);
+  const errRank = phaseRank(PHASE_GATE.errorAssumedFrom);
+  const safetyRank = phaseRank(PHASE_GATE.errorSafetyEstimatedFrom);
 
   const blockers = [];
   const warnings = [];
 
-  // Check for assumed fields (blocks Phase 5+)
+  // Assumed fields — blocked from PHASE_GATE.errorAssumedFrom
   const assumedCount = projectQuality.fieldsByConfidence?.assumed || 0;
-  if (nextPhase >= 5 && assumedCount > 0) {
+  if (nextRank >= errRank && assumedCount > 0) {
     blockers.push({
-      rule: 'No assumed fields permitted from Phase 5',
+      rule: `No assumed fields permitted from ${PHASE_GATE.errorAssumedFrom}`,
       count: assumedCount,
-      action: `Verify or re-classify ${assumedCount} assumed field(s) before advancing to Phase ${nextPhase}`
+      action: `Verify or re-classify ${assumedCount} assumed field(s) before advancing to ${nextPhase}`
     });
-  } else if (nextPhase >= 4 && assumedCount > 0) {
+  } else if (nextRank >= warnRank && assumedCount > 0) {
     warnings.push({
-      rule: 'Assumed fields generate warnings from Phase 4',
+      rule: `Assumed fields generate warnings from ${PHASE_GATE.warnAssumedFrom}`,
       count: assumedCount,
       action: `Plan verification for ${assumedCount} assumed field(s)`
     });
   }
 
-  // Check for safety-critical unverified
+  // Safety-critical unverified — blocked from PHASE_GATE.errorSafetyEstimatedFrom
   const unverifiedSafety = projectQuality.safetyCriticalFields?.unverified || 0;
-  if (nextPhase >= 7 && unverifiedSafety > 0) {
+  if (nextRank >= safetyRank && unverifiedSafety > 0) {
     blockers.push({
-      rule: 'All safety-critical fields must be measured/calculated/specified from Phase 7',
+      rule: `All safety-critical fields must be measured/calculated/specified from ${PHASE_GATE.errorSafetyEstimatedFrom}`,
       count: unverifiedSafety,
       action: `Verify ${unverifiedSafety} safety-critical field(s) with authoritative sources`
     });
@@ -210,25 +218,28 @@ function generatePhaseReadiness(sbm, projectQuality) {
     });
   }
 
-  // Check completeness
+  // Completeness
   const avgCompleteness = projectQuality.averageCompleteness || 0;
-  if (avgCompleteness < 0.8 && nextPhase >= 5) {
+  if (avgCompleteness < 0.8 && nextRank >= errRank) {
     warnings.push({
-      rule: 'Average completeness below 80% at Phase 5+',
+      rule: `Average completeness below 80% at ${PHASE_GATE.errorAssumedFrom}+`,
       value: avgCompleteness,
       action: 'Fill missing fields or explicitly mark as unknown with _meta'
     });
   }
 
+  const atFinalPhase = currentRank >= UNIFIED_PHASES.length - 1;
   return {
     currentPhase,
     nextPhase,
     ready: blockers.length === 0,
     blockers,
     warnings,
-    summary: blockers.length === 0
-      ? `Project is ready to advance to Phase ${nextPhase}`
-      : `${blockers.length} blocker(s) must be resolved before Phase ${nextPhase}`
+    summary: atFinalPhase
+      ? `Project is at the final lifecycle phase (${currentPhase})`
+      : blockers.length === 0
+        ? `Project is ready to advance to ${nextPhase}`
+        : `${blockers.length} blocker(s) must be resolved before ${nextPhase}`
   };
 }
 
