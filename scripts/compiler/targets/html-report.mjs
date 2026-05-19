@@ -15,6 +15,7 @@
  */
 
 import { UNIFIED_PHASES, phaseRank } from '../constants.mjs';
+import { generateDiagrams } from './diagrams.mjs';
 
 function esc(s) {
   return String(s ?? '')
@@ -196,6 +197,7 @@ export function generateHtmlReport(sbm, projectQuality, complianceReport, qualit
   h1{font-size:24px;margin:0 0 4px}
   .sub{color:var(--mut);font-size:14px}
   h2{font-size:16px;margin:34px 0 12px;letter-spacing:.02em;text-transform:uppercase;color:var(--mut)}
+  .diag-title{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin:0 0 8px;font-weight:600}
   .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}
   .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px}
   .card .n{font-size:26px;font-weight:700}
@@ -228,6 +230,8 @@ export function generateHtmlReport(sbm, projectQuality, complianceReport, qualit
    · ${esc(L.phase)} <strong>${esc(pr.currentPhase || project.phase || '—')}</strong>
    · ${esc(L.generated)} ${esc(new Date(complianceReport?.generatedAt || Date.now()).toISOString().slice(0, 16).replace('T', ' '))} UTC</div>
 </header>
+
+${generateDiagrams(sbm, langKey)}
 
 <div class="cards">
   <div class="card"><div class="n">${entityCount}</div><div class="l">${esc(L.cardEntities)}</div></div>

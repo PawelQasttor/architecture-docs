@@ -6,10 +6,26 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
-## [Unreleased] — Polish localization completeness
+## [Unreleased] — Polish localization completeness + Project-at-a-glance diagrams
 
 Post-2.1.0. Closes the bilingual-parity gaps surfaced after the report
-i18n fix. SBM standard unchanged.
+i18n fix and adds three schematic SVG diagrams to the report. SBM
+standard unchanged.
+
+### Added
+- **Project-at-a-glance diagrams** — new compiler target `targets/diagrams.mjs`
+  generating three SVGs derived from existing data (no schema changes):
+  - **Massing (LOD 100)** — oblique axonometric extruded box from
+    building.footprintArea / buildingHeight / numberOfStoreys, with
+    floor lines at level elevations + eave marker.
+  - **Stacking** — vertical level bands sized by floor-to-floor height,
+    coloured by predominant space type, labelled with elevation, level
+    name, space count and area.
+  - **Adjacency & connections** — space node-link graph from
+    openings.spaceIds, with zone-membership chips (fire/HVAC/acoustic)
+    per space.
+  - Embedded in `report.html` as a "Project at a glance" panel at the
+    top; localised per project.language (EN/PL).
 
 ### Fixed
 - **Report fully localized.** Recommendation/blocker text and compliance
