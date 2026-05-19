@@ -3,7 +3,7 @@ entityType: "system_type"
 id: "SYT-HVAC-RESIDENTIAL-MVHR"
 typeName: "Residential HVAC - MVHR + Heat Pump"
 systemCategory: "hvac"
-description: "Standard residential HVAC system combining mechanical ventilation with heat recovery (MVHR), air-to-water heat pump heating, and underfloor heating distribution for energy-efficient residential buildings"
+description: "Standardowy mieszkaniowy system HVAC łączący wentylację mechaniczną z odzyskiem ciepła (MVHR), ogrzewanie pompą ciepła powietrze-woda oraz rozprowadzenie ogrzewania podłogowego dla energooszczędnych budynków mieszkalnych"
 
 # REQUIREMENTS (applies to ALL instances)
 requirements:
@@ -16,18 +16,18 @@ requirements:
 # COMPONENTS (standard configuration)
 components:
   - category: "air_handling"
-    description: "Heat recovery ventilation unit (MVHR)"
-    specification: "MVHR with 90% heat recovery efficiency, EC fans, F7 filters"
+    description: "Centrala wentylacyjna z odzyskiem ciepła (MVHR)"
+    specification: "MVHR o sprawności odzysku ciepła 90%, wentylatory EC, filtry F7"
     quantity: 1
 
   - category: "heating"
-    description: "Air-to-water heat pump"
-    specification: "12 kW heating capacity, COP 4.2 at A7/W35, R-32 refrigerant"
+    description: "Pompa ciepła powietrze-woda"
+    specification: "Moc grzewcza 12 kW, COP 4,2 przy A7/W35, czynnik R-32"
     quantity: 1
 
   - category: "heating"
-    description: "Underfloor heating manifold with zone valves"
-    specification: "8-zone manifold with thermostatic controls, mixing valve"
+    description: "Rozdzielacz ogrzewania podłogowego z zaworami strefowymi"
+    specification: "Rozdzielacz 8-strefowy ze sterowaniem termostatycznym, zawór mieszający"
     quantity: 1
 
   - category: "heating"

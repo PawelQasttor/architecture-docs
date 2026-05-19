@@ -912,7 +912,7 @@ LVL-ROOF:
   levelType: "roof"
   elevation: 12.20
   levelHeight: 2.50
-  description: "Mechanical penthouse and rooftop access"
+  description: "Maszynownia na dachu i dostęp na dach"
 ```
 
 ## Wykończenia strukturalne (v0.3.0)

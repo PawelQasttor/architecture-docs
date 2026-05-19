@@ -3,7 +3,7 @@ entityType: "zone_type"
 id: "ZT-ACOUSTIC-NIGHT"
 typeName: "Acoustic Zone - Night (Sleeping Spaces)"
 zoneType: "acoustic"
-description: "Enhanced acoustic zone for sleeping spaces requiring high sound insulation per Polish standards"
+description: "Podwyższona strefa akustyczna dla przestrzeni do spania wymagających wysokiej izolacyjności akustycznej wg polskich norm"
 
 # REQUIREMENTS (applies to ALL instances)
 requirements:

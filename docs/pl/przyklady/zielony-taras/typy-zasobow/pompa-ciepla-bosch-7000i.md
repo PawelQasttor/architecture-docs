@@ -3,7 +3,7 @@ entityType: "asset_type"
 id: "AT-BOSCH-COMPRESS-7000I-12KW"
 typeName: "Bosch Compress 7000i AW 12kW Heat Pump"
 category: "hvac"
-description: "Air-to-water heat pump for residential heating, 12 kW capacity, inverter-driven, R-32 refrigerant"
+description: "Pompa ciepła powietrze-woda do ogrzewania mieszkalnego, moc 12 kW, sterowanie inwerterowe, czynnik R-32"
 
 manufacturer: "Bosch Thermotechnology"
 model: "Compress 7000i AW"

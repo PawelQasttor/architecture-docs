@@ -251,7 +251,7 @@ version: "1.0.0"
 id: "REQ-DAYLIGHT-SLEEPING-001"
 entityType: "requirement"
 documentType: "requirement"
-requirementName: "Minimum daylight factor for sleeping spaces"
+requirementName: "Minimalny współczynnik światła dziennego dla przestrzeni do spania"
 requirementType: "performance"
 countryScope: "global"
 scope:
@@ -274,11 +274,11 @@ technicalBasis:
     url: "https://standards.cen.eu"
   - standard: "BREEAM_HEA_01"
     section: "Daylighting"
-    description: "2% average daylight factor for living spaces"
+    description: "Średni współczynnik światła dziennego 2% dla przestrzeni mieszkalnych"
   - standard: "WELL_L03"
     section: "Circadian Lighting Design"
-    description: "Daylight access for sleep-wake cycle regulation"
-description: "Sleeping spaces require minimum 2% daylight factor to support circadian rhythm regulation and visual comfort. Verified through simulation at design stage."
+    description: "Dostęp do światła dziennego dla regulacji rytmu snu i czuwania"
+description: "Przestrzenie do spania wymagają minimalnego współczynnika światła dziennego 2% dla wsparcia regulacji rytmu okołodobowego i komfortu wizualnego. Weryfikowane symulacją na etapie projektu."
 version: "1.0.0"
 tags: ["daylight", "performance", "global", "circadian_health"]
 ---
@@ -292,7 +292,7 @@ Sleeping spaces require minimum 2% daylight factor.
 id: "REQ-DAYLIGHT-SLEEPING-001"
 entityType: "requirement"
 documentType: "requirement"
-requirementName: "Minimum daylight factor for sleeping spaces"
+requirementName: "Minimalny współczynnik światła dziennego dla przestrzeni do spania"
 requirementType: "performance"
 countryScope: "global"
 scope:
@@ -315,11 +315,11 @@ technicalBasis:
     url: "https://standards.cen.eu"
   - standard: "BREEAM_HEA_01"
     section: "Daylighting"
-    description: "2% average daylight factor for living spaces"
+    description: "Średni współczynnik światła dziennego 2% dla przestrzeni mieszkalnych"
   - standard: "WELL_L03"
     section: "Circadian Lighting Design"
-    description: "Daylight access for sleep-wake cycle regulation"
-description: "Sleeping spaces require minimum 2% daylight factor to support circadian rhythm regulation and visual comfort. Verified through simulation at design stage."
+    description: "Dostęp do światła dziennego dla regulacji rytmu snu i czuwania"
+description: "Przestrzenie do spania wymagają minimalnego współczynnika światła dziennego 2% dla wsparcia regulacji rytmu okołodobowego i komfortu wizualnego. Weryfikowane symulacją na etapie projektu."
 version: "1.0.0"
 tags: ["daylight", "performance", "global", "circadian_health"]
 ```
@@ -683,7 +683,7 @@ tags: ["qualitative", "healthcare", "infection_control", "surgical"]
 id: "REQ-PL-WT-ROOM-HEIGHT-001"
 entityType: "requirement"
 documentType: "requirement"
-requirementName: "Minimum room height per WT 2021"
+requirementName: "Minimalna wysokość pomieszczenia wg WT 2021"
 requirementType: "dimensional"
 countryScope: "poland_specific"
 scope:
@@ -713,8 +713,8 @@ legalBasis:
 technicalBasis:
   - standard: "EN_16798-1"
     section: "6.4"
-    description: "Room height for adequate air quality and thermal comfort"
-description: "Residential rooms (bedrooms, living rooms, kitchens) must have clear height >= 2.50 m per WT 2021 § 132. Measured from floor to lowest ceiling or roof structure element."
+    description: "Wysokość pomieszczenia dla odpowiedniej jakości powietrza i komfortu cieplnego"
+description: "Pomieszczenia mieszkalne (sypialnie, pokoje dzienne, kuchnie) muszą mieć wysokość w świetle ≥ 2,50 m wg WT 2021 § 132. Mierzona od podłogi do najniższego elementu sufitu lub konstrukcji dachu."
 version: "1.0.0"
 tags: ["dimensional", "poland", "wt_2021", "regulatory"]
 ---
@@ -728,7 +728,7 @@ Pomieszczenia mieszkalne muszą mieć wysokość >= 2,50 m wg WT 2021 § 132.
 id: "REQ-PL-WT-ROOM-HEIGHT-001"
 entityType: "requirement"
 documentType: "requirement"
-requirementName: "Minimum room height per WT 2021"
+requirementName: "Minimalna wysokość pomieszczenia wg WT 2021"
 requirementType: "dimensional"
 countryScope: "poland_specific"
 scope:
@@ -758,8 +758,8 @@ legalBasis:
 technicalBasis:
   - standard: "EN_16798-1"
     section: "6.4"
-    description: "Room height for adequate air quality and thermal comfort"
-description: "Residential rooms (bedrooms, living rooms, kitchens) must have clear height >= 2.50 m per WT 2021 § 132. Measured from floor to lowest ceiling or roof structure element."
+    description: "Wysokość pomieszczenia dla odpowiedniej jakości powietrza i komfortu cieplnego"
+description: "Pomieszczenia mieszkalne (sypialnie, pokoje dzienne, kuchnie) muszą mieć wysokość w świetle ≥ 2,50 m wg WT 2021 § 132. Mierzona od podłogi do najniższego elementu sufitu lub konstrukcji dachu."
 version: "1.0.0"
 tags: ["dimensional", "poland", "wt_2021", "regulatory"]
 ```
@@ -1082,7 +1082,7 @@ Umieszczaj w `docs/en/examples/{projekt}/requirements/` - ładowane tylko dla da
 documentType: "requirement"
 entityType: "requirement"
 id: "REQ-PROJECT-CUSTOM-001"
-requirementName: "Project-specific ceiling height"
+requirementName: "Wysokość pomieszczenia specyficzna dla projektu"
 requirementType: "dimensional"
 metric: "room_height_clear"
 operator: ">="
@@ -1107,7 +1107,7 @@ Klient wymaga 3.00 m wysokości w świetle dla wszystkich przestrzeni biurowych 
 documentType: "requirement"
 entityType: "requirement"
 id: "REQ-PROJECT-CUSTOM-001"
-requirementName: "Project-specific ceiling height"
+requirementName: "Wysokość pomieszczenia specyficzna dla projektu"
 requirementType: "dimensional"
 metric: "room_height_clear"
 operator: ">="

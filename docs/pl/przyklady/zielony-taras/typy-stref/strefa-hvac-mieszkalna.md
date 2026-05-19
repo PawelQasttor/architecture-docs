@@ -3,7 +3,7 @@ entityType: "zone_type"
 id: "ZT-HVAC-RESIDENTIAL"
 typeName: "HVAC Zone - Residential Standard"
 zoneType: "hvac"
-description: "Standard residential HVAC zone with underfloor heating and mechanical ventilation for thermal comfort"
+description: "Standardowa mieszkaniowa strefa HVAC z ogrzewaniem podłogowym i wentylacją mechaniczną dla komfortu cieplnego"
 
 # REQUIREMENTS (applies to ALL instances)
 requirements:

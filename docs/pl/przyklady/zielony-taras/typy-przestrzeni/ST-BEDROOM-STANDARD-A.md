@@ -2,7 +2,7 @@
 entityType: space_type
 id: ST-BEDROOM-STANDARD-A
 typeName: "Standard Bedroom Type A"
-description: "Standard bedroom layout for Green Terrace residential units - 15m² single occupancy with ensuite bathroom access"
+description: "Standardowy układ sypialni dla lokali mieszkalnych Green Terrace — 15 m² dla jednej osoby, z dostępem do łazienki przynależnej"
 spaceType: bedroom
 
 # Geometric Properties
@@ -135,12 +135,12 @@ electricalSafetyGroup: standard
 regulatoryReferences:
   - code: "WT 2021"
     section: "§ 76"
-    description: "Minimum bedroom area requirements"
+    description: "Wymagania minimalnej powierzchni sypialni"
     status: compliant
 
   - code: "WT 2021"
     section: "§ 132"
-    description: "Minimum ceiling height for habitable rooms"
+    description: "Minimalna wysokość pomieszczeń przeznaczonych na pobyt ludzi"
     status: compliant
 
 # Cost Estimation

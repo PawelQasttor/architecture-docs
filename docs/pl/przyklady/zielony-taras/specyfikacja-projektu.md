@@ -6,7 +6,7 @@ projectPhase: "construction_documentation"
 buildingClassification:
   category: "A"
   type: "residential_multi_family"
-  description: "Apartment building"
+  description: "Budynek wielorodzinny"
 buildingData:
   height: 18.5
   floors: 6

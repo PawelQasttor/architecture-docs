@@ -3,7 +3,7 @@ entityType: "zone_type"
 id: "ZT-FIRE-ZL-IV"
 typeName: "Fire Zone ZL-IV Standard"
 zoneType: "fire"
-description: "Standard fire safety zone for residential buildings per Polish regulations (ZL-IV category)"
+description: "Standardowa strefa pożarowa dla budynków mieszkalnych wg polskich przepisów (kategoria ZL-IV)"
 
 # REQUIREMENTS (applies to ALL instances)
 requirements:
