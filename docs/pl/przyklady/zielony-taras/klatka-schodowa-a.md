@@ -62,19 +62,19 @@ egressCapacity:
 regulatoryCompliance:
   - regulation: "WT 2021"
     section: "§ 68"
-    requirement: "Minimum stair width 1.2m in residential buildings > 3 stories"
+    requirement: "Minimalna szerokość biegu 1,2 m w budynkach mieszkalnych powyżej 3 kondygnacji"
     status: "compliant"
   - regulation: "WT 2021"
     section: "§ 69"
-    requirement: "Maximum riser height 175mm, minimum going 250mm"
+    requirement: "Maksymalna wysokość stopnia 175 mm, minimalna szerokość 250 mm"
     status: "compliant"
   - regulation: "WT 2021"
     section: "§ 242"
-    requirement: "Escape route width >= 1.2m for buildings with >50 occupants"
+    requirement: "Szerokość drogi ewakuacyjnej ≥ 1,2 m dla budynków powyżej 50 osób"
     status: "compliant"
   - regulation: "WT 2021"
     section: "§ 256"
-    requirement: "Protected staircase with fire-rated enclosure"
+    requirement: "Klatka schodowa chroniona w obudowie o określonej odporności ogniowej"
     status: "compliant"
 
 cost:

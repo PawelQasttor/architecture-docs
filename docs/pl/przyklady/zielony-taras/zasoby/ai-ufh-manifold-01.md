@@ -82,7 +82,7 @@ warranty:
   warrantyStart: "2024-04-20"
   warrantyEnd: "2029-04-20"
   warrantyProvider: "Heating Solutions Sp. z o.o."
-  warrantyTerms: "5 years parts and labor, 2-year pump warranty"
+  warrantyTerms: "5 lat na części i robociznę, 2-letnia gwarancja na pompę"
 
 maintenance:
   lastServiceDate: "2024-10-20"
@@ -91,9 +91,9 @@ maintenance:
   serviceIntervalMonths: 12
   maintenanceSchedule:
     - interval: "12 months"
-      task: "Actuator operation test, pump inspection, mixing valve check, pressure test"
+      task: "Próba działania siłowników, kontrola pompy, sprawdzenie zaworu mieszającego, próba ciśnieniowa"
     - interval: "24 months"
-      task: "Full system flush and cleaning, pump replacement (if needed)"
+      task: "Pełne płukanie i czyszczenie instalacji, wymiana pompy (w razie potrzeby)"
   expectedLifetimeYears: 20
 
 # Service history

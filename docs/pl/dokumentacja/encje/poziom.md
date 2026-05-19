@@ -615,7 +615,7 @@ tags:
   "grossFloorArea": 1250,
   "areaUnit": "m2",
   "levelType": "ground",
-  "description": "Ground floor with main entrance, lobby, and 8 residential units. Includes bike storage and mail room.",
+  "description": "Parter z głównym wejściem, holem i 8 lokalami mieszkalnymi. Obejmuje rowerownię i pomieszczenie na korespondencję.",
   "ifcMapping": {
     "ifcEntity": "IfcBuildingStorey",
     "globalId": "2L3gI9$sNEyv4XzGv2MPzR",
@@ -702,7 +702,7 @@ tags:
         "grossFloorArea": 1250,
         "areaUnit": "m2",
         "levelType": "ground",
-        "description": "Ground floor with main entrance, lobby, and 8 residential units. Includes bike storage and mail room.",
+        "description": "Parter z głównym wejściem, holem i 8 lokalami mieszkalnymi. Obejmuje rowerownię i pomieszczenie na korespondencję.",
         "spaceIds": [
           "SP-BLD-01-L01-001",
           "SP-BLD-01-L01-002",

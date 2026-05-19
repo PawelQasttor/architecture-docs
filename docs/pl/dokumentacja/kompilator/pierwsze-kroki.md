@@ -205,7 +205,7 @@ Audyt jakości danych:
     {
       "priority": "high",
       "message": "269 field(s) have values but no provenance tracking",
-      "action": "Add _meta annotations with confidence level and source reference"
+      "action": "Dodaj adnotacje _meta z poziomem pewności i odniesieniem do źródła"
     }
   ]
 }

@@ -51,7 +51,7 @@ warranty:
   warrantyStart: "2024-05-10"
   warrantyEnd: "2029-05-10"
   warrantyProvider: "MVHR Manufacturer"
-  warrantyTerms: "5 years parts and labor, extended heat exchanger warranty (10 years)"
+  warrantyTerms: "5 lat na części i robociznę, przedłużona gwarancja na wymiennik ciepła (10 lat)"
 
 maintenance:
   lastServiceDate: "2024-11-10"
@@ -60,11 +60,11 @@ maintenance:
   serviceIntervalMonths: 6
   maintenanceSchedule:
     - interval: "3 months"
-      task: "Filter inspection and cleaning (user)"
+      task: "Kontrola i czyszczenie filtra (użytkownik)"
     - interval: "6 months"
-      task: "Filter replacement (G4 supply filter)"
+      task: "Wymiana filtra (filtr nawiewny G4)"
     - interval: "12 months"
-      task: "Filter replacement (F7 extract filter), heat exchanger inspection, fan cleaning"
+      task: "Wymiana filtra (filtr wywiewny F7), kontrola wymiennika ciepła, czyszczenie wentylatora"
   expectedLifetimeYears: 15
 
 # Service history

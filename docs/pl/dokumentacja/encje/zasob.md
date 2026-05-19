@@ -384,7 +384,7 @@ Zasoby wypełniają cel kompilacji **rejestr zasobów**:
       "assetName": "Air Handling Unit 01",
       "assetType": "ahu",
       "systemName": "HVAC System 01 - North Zone",
-      "location": "Rooftop mechanical room",
+      "location": "Maszynownia na dachu",
       "manufacturer": "Systemair",
       "model": "Topvex SR11 EL",
       "serial": "SR11-2026-04782",
