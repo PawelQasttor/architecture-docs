@@ -22,49 +22,38 @@ export default defineConfig({
         nav: [
           { text: 'Home', link: '/' },
           {
-            text: 'Get Started',
+            text: 'Start',
             items: [
               { text: '💡 What is SBM?', link: '/en/standards/introduction' },
               { text: '🚀 Quick Start (5 min)', link: '/en/standards/quick-start' },
               { text: '🧭 How It Works', link: '/en/standards/how-it-works' },
+              { text: 'Glossary', link: '/en/standards/glossary' },
               { text: 'Complete Workflow', link: '/en/standards/document-structure' }
             ]
           },
-          { text: 'Examples', link: '/en/examples/' },
           {
-            text: 'Lifecycle',
+            text: 'Model',
             items: [
-              { text: '🔟 The 10-Phase Lifecycle', link: '/en/phases/' },
-              { text: '1. Concept', link: '/en/phases/concept' },
-              { text: '2. Schematic Design', link: '/en/phases/schematic-design' },
-              { text: '3. Design Development', link: '/en/phases/design-development' },
-              { text: '4. Construction Documents', link: '/en/phases/construction-documents' },
-              { text: '5. Bidding & Procurement', link: '/en/phases/bidding-procurement' },
-              { text: '6. Construction', link: '/en/phases/construction' },
-              { text: '7. Commissioning', link: '/en/phases/commissioning' },
-              { text: '8. Operation', link: '/en/phases/operation' },
-              { text: '9. Renovation', link: '/en/phases/renovation' },
-              { text: '10. Decommissioned', link: '/en/phases/decommissioned' }
-            ]
-          },
-          {
-            text: 'Learn the System',
-            items: [
-              { text: 'Document Types', link: '/en/documentation/entities/' },
+              { text: 'Document Types (27)', link: '/en/documentation/entities/' },
+              { text: 'System Overview', link: '/en/documentation/overview' },
               { text: 'Templates', link: '/en/templates/' },
-              { text: 'BIM Integration', link: '/en/bim-integration/' },
-              { text: 'System Overview', link: '/en/documentation/overview' }
+              { text: 'Entity Design Principles', link: '/en/guides/entity-design-principles' },
+              { text: 'Property Inheritance', link: '/en/guides/property-inheritance' }
             ]
           },
+          { text: 'Lifecycle', link: '/en/phases/' },
+          { text: 'Compiler', link: '/en/documentation/compiler/' },
+          { text: 'Example', link: '/en/examples/' },
           {
             text: 'Reference',
             items: [
               { text: 'Polish Regulations', link: '/en/regulations/' },
+              { text: 'BIM Integration', link: '/en/bim-integration/' },
               { text: 'Project Management', link: '/en/project-management/' },
               { text: 'Quality Assurance', link: '/en/quality/' },
               { text: 'Building Operations', link: '/en/operations/' },
               { text: 'Sustainability', link: '/en/sustainability/' },
-              { text: 'Tools & Guides', link: '/en/guides/' }
+              { text: 'Guides & Tools', link: '/en/guides/' }
             ]
           }
         ],
@@ -351,49 +340,38 @@ export default defineConfig({
         nav: [
           { text: 'Strona główna', link: '/pl/' },
           {
-            text: 'Jak Zacząć',
+            text: 'Start',
             items: [
               { text: '💡 Czym jest SBM?', link: '/pl/standardy/wprowadzenie' },
               { text: '🚀 Szybki Start (5 min)', link: '/pl/standardy/szybki-start' },
               { text: '🧭 Jak to działa', link: '/pl/standardy/jak-to-dziala' },
+              { text: 'Słownik', link: '/pl/standardy/slownik' },
               { text: 'Kompletny przepływ pracy', link: '/pl/standardy/struktura-dokumentu' }
             ]
           },
-          { text: 'Przykłady', link: '/pl/przyklady/' },
           {
-            text: 'Cykl życia',
+            text: 'Model',
             items: [
-              { text: '🔟 Cykl życia (10 faz)', link: '/pl/fazy/' },
-              { text: '1. Koncepcja', link: '/pl/fazy/koncepcja' },
-              { text: '2. Projekt wstępny', link: '/pl/fazy/projekt-wstepny' },
-              { text: '3. Projekt budowlany', link: '/pl/fazy/projekt-budowlany' },
-              { text: '4. Projekt wykonawczy', link: '/pl/fazy/projekt-wykonawczy' },
-              { text: '5. Przetarg i zamówienie', link: '/pl/fazy/przetarg' },
-              { text: '6. Budowa', link: '/pl/fazy/budowa' },
-              { text: '7. Odbiory i rozruch', link: '/pl/fazy/odbiory' },
-              { text: '8. Eksploatacja', link: '/pl/fazy/eksploatacja' },
-              { text: '9. Modernizacja', link: '/pl/fazy/modernizacja' },
-              { text: '10. Wycofanie', link: '/pl/fazy/wycofanie' }
-            ]
-          },
-          {
-            text: 'Poznaj System',
-            items: [
-              { text: 'Rodzaje kart', link: '/pl/dokumentacja/encje/' },
+              { text: 'Rodzaje kart (27)', link: '/pl/dokumentacja/encje/' },
+              { text: 'Przegląd systemu', link: '/pl/dokumentacja/przeglad' },
               { text: 'Szablony', link: '/pl/szablony/' },
-              { text: 'Integracja BIM', link: '/pl/integracja-bim/' },
-              { text: 'Przegląd systemu', link: '/pl/dokumentacja/przeglad' }
+              { text: 'Zasady projektowania encji', link: '/pl/przewodniki/zasady-projektowania-encji' },
+              { text: 'Dziedziczenie właściwości', link: '/pl/przewodniki/dziedziczenie-wlasciwosci' }
             ]
           },
+          { text: 'Cykl życia', link: '/pl/fazy/' },
+          { text: 'Kompilator', link: '/pl/dokumentacja/kompilator/' },
+          { text: 'Przykład', link: '/pl/przyklady/' },
           {
             text: 'Materiały Pomocnicze',
             items: [
               { text: 'Polskie Przepisy', link: '/pl/przepisy/' },
+              { text: 'Integracja BIM', link: '/pl/integracja-bim/' },
               { text: 'Zarządzanie Projektem', link: '/pl/zarzadzanie-projektem/' },
               { text: 'Zapewnienie Jakości', link: '/pl/jakosc/' },
               { text: 'Eksploatacja Budynku', link: '/pl/eksploatacja/' },
               { text: 'Zrównoważone budownictwo', link: '/pl/zrownowazonosc/' },
-              { text: 'Narzędzia i Przewodniki', link: '/pl/przewodniki/' }
+              { text: 'Przewodniki i Narzędzia', link: '/pl/przewodniki/' }
             ]
           }
         ],
