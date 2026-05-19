@@ -1,8 +1,8 @@
 ---
 entityType: requirement
 id: REQ-FIRE-EGRESS-TIME-001
-requirementName: "Fire Egress Time Limit"
-description: "Maximum evacuation time from any point on Level 01 to protected stairwell"
+requirementName: "Limit czasu ewakuacji pożarowej"
+description: "Maksymalny czas ewakuacji z dowolnego punktu Poziomu 01 do chronionej klatki schodowej"
 requirementType: safety
 countryScope: poland_specific
 priority: critical
@@ -22,8 +22,8 @@ egressTime:
   operator: "<="
   value: 2.5
   unit: minutes
-  testMethod: "Simulation (Pathfinder / RSET calculation)"
-  description: "Maximum time to reach protected stairwell from any occupied space"
+  testMethod: "Symulacja (Pathfinder / obliczenie RSET)"
+  description: "Maksymalny czas dotarcia do chronionej klatki schodowej z dowolnej przestrzeni użytkowej"
 
 # Travel Distance Requirement
 travelDistance:
@@ -31,8 +31,8 @@ travelDistance:
   operator: "<="
   value: 40.0
   unit: m
-  testMethod: "Measured along escape route centerline"
-  description: "Maximum travel distance to nearest stairwell"
+  testMethod: "Pomiar wzdłuż osi drogi ewakuacyjnej"
+  description: "Maksymalna długość dojścia ewakuacyjnego do najbliższej klatki schodowej"
 
 # Corridor Width Requirement
 corridorWidth:
@@ -40,8 +40,8 @@ corridorWidth:
   operator: ">="
   value: 1.40
   unit: m
-  testMethod: "As-built measurement"
-  description: "Minimum clear width for primary escape corridor"
+  testMethod: "Pomiar powykonawczy"
+  description: "Minimalna szerokość w świetle głównego korytarza ewakuacyjnego"
 
 # Door Width Requirement
 doorWidth:
@@ -49,33 +49,33 @@ doorWidth:
   operator: ">="
   value: 0.90
   unit: m
-  testMethod: "As-built measurement"
-  description: "Minimum clear opening width for escape route doors"
+  testMethod: "Pomiar powykonawczy"
+  description: "Minimalna szerokość w świetle otworu drzwi na drodze ewakuacyjnej"
 
 # Acceptance Criteria (Array format for v0.3)
 acceptanceCriteria:
-  - "Egress Time: Maximum 2.5 minutes RSET to protected stairwell"
-  - "Travel Distance: Maximum 40 meters along escape route"
-  - "Corridor Capacity: Primary corridor ≥1.40m clear width"
-  - "Door Performance: Minimum 0.90m clear opening width with self-closing fire doors (EI 30)"
-  - "Stairwell Capacity: Minimum 1.20m clear width in protected enclosure (REI 60)"
+  - "Czas ewakuacji: maksymalnie 2,5 minuty RSET do chronionej klatki schodowej"
+  - "Długość dojścia: maksymalnie 40 metrów wzdłuż drogi ewakuacyjnej"
+  - "Przepustowość korytarza: główny korytarz ≥1,40 m szerokości w świetle"
+  - "Parametry drzwi: minimum 0,90 m szerokości otworu w świetle, drzwi pożarowe samozamykające (EI 30)"
+  - "Przepustowość klatki schodowej: minimum 1,20 m szerokości w świetle w obudowie chronionej (REI 60)"
 
 qualitativeDescription: |
-  Level 01 fire egress must meet the following performance criteria:
-  1. Egress Time: Maximum 2.5 minutes RSET (Required Safe Egress Time) from any occupied point to protected stairwell entrance (assumes walking speed 1.2 m/s, door delay 2 sec)
-  2. Travel Distance: Maximum 40 meters measured along escape route from furthest point in any dwelling unit to nearest protected stairwell door
-  3. Corridor Capacity: Primary corridor ≥1.40m clear width, Secondary corridors ≥1.20m clear width, No obstructions in escape routes
-  4. Door Performance: Minimum 0.90m clear opening width, Self-closing fire doors (EI 30 minimum), Direction of escape opening, Panic hardware on stairwell doors (if required)
-  5. Stairwell Capacity: Minimum 1.20m clear width, Adequate capacity for simultaneous evacuation, Protected enclosure (REI 60)
+  Ewakuacja pożarowa Poziomu 01 musi spełniać następujące kryteria:
+  1. Czas ewakuacji: maksymalnie 2,5 minuty RSET (wymagany bezpieczny czas ewakuacji) z dowolnego punktu użytkowego do wejścia chronionej klatki schodowej (założono prędkość marszu 1,2 m/s, zwłokę przy drzwiach 2 s)
+  2. Długość dojścia: maksymalnie 40 metrów mierzone wzdłuż drogi ewakuacyjnej od najdalszego punktu w lokalu do najbliższych drzwi chronionej klatki schodowej
+  3. Przepustowość korytarzy: korytarz główny ≥1,40 m w świetle, korytarze drugorzędne ≥1,20 m w świetle, brak przeszkód na drogach ewakuacyjnych
+  4. Parametry drzwi: minimum 0,90 m szerokości otworu w świetle, drzwi pożarowe samozamykające (minimum EI 30), kierunek otwierania zgodny z kierunkiem ewakuacji, okucia antypaniczne na drzwiach klatki (jeśli wymagane)
+  5. Przepustowość klatki schodowej: minimum 1,20 m w świetle, przepustowość wystarczająca do jednoczesnej ewakuacji, obudowa chroniona (REI 60)
 
 evidenceRequired:
-  - "Fire egress simulation report (Pathfinder or equivalent)"
-  - "As-built drawings showing escape routes and distances"
-  - "Door schedule with clear opening dimensions"
-  - "Fire door installation certificates"
-  - "Stairwell pressurization test results (if applicable)"
-  - "Emergency lighting test certificate"
-  - "Evacuation drill report"
+  - "Raport z symulacji ewakuacji pożarowej (Pathfinder lub równoważny)"
+  - "Rysunki powykonawcze pokazujące drogi ewakuacyjne i długości dojść"
+  - "Zestawienie drzwi z wymiarami otworów w świetle"
+  - "Certyfikaty montażu drzwi pożarowych"
+  - "Wyniki próby napowietrzania klatki schodowej (jeśli dotyczy)"
+  - "Certyfikat próby oświetlenia awaryjnego"
+  - "Raport z próbnej ewakuacji"
 
 # Design Assumptions
 designAssumptions:
@@ -90,44 +90,44 @@ designAssumptions:
 phases:
   - phase: schematic_design
     status: completed
-    deliverable: "Preliminary egress analysis and layout"
+    deliverable: "Wstępna analiza ewakuacji i układ funkcjonalny"
 
   - phase: design_development
     status: completed
-    deliverable: "Fire egress simulation (Pathfinder)"
+    deliverable: "Symulacja ewakuacji pożarowej (Pathfinder)"
 
   - phase: construction_documentation
     status: completed
-    deliverable: "Escape route details and door schedules"
+    deliverable: "Detale dróg ewakuacyjnych i zestawienia drzwi"
 
   - phase: construction
     status: in_progress
-    deliverable: "As-built verification of egress routes"
+    deliverable: "Weryfikacja powykonawcza dróg ewakuacyjnych"
 
   - phase: handover
     status: pending
-    deliverable: "Evacuation drill and final certification"
+    deliverable: "Próbna ewakuacja i certyfikacja końcowa"
 
 # Regulatory Context
 regulatoryReferences:
   - code: "WT 2021"
     section: "§ 256"
-    description: "Escape routes in residential buildings"
+    description: "Drogi ewakuacyjne w budynkach mieszkalnych"
     status: applicable
 
   - code: "WT 2021"
     section: "§ 257"
-    description: "Doors on escape routes"
+    description: "Drzwi na drogach ewakuacyjnych"
     status: applicable
 
   - code: "WT 2021"
     section: "§ 234"
-    description: "Fire compartmentation and protection"
+    description: "Oddzielenia i zabezpieczenia przeciwpożarowe"
     status: applicable
 
   - code: "PD 7974-6"
     section: "Human factors: Life safety strategies"
-    description: "RSET calculation methodology"
+    description: "Metodyka obliczenia RSET"
     status: reference
 
 # Verification Method
@@ -141,16 +141,16 @@ verification:
   frequency: pre_occupancy
   tool: "Pathfinder"
   standard: "PD 7974-6"
-  responsible: "Fire Safety Engineer"
+  responsible: "Inżynier ds. bezpieczeństwa pożarowego"
 
 # Simulation Results
 simulationResults:
   software: "Pathfinder 2024"
-  scenario: "Simultaneous evacuation of Level 01 (worst case)"
+  scenario: "Jednoczesna ewakuacja Poziomu 01 (przypadek najbardziej niekorzystny)"
   results:
     maxRSET: 2.1  # minutes
     maxTravelDistance: 38.5  # meters
-    bottleneck: "Corridor junction near units 5-6"
+    bottleneck: "Skrzyżowanie korytarzy przy lokalach 5–6"
     status: PASS
 
 # Related Requirements
@@ -161,39 +161,39 @@ relatedRequirements:
 
 # Cost Impact
 estimatedCostImpact:
-  description: "Egress requirements impact corridor width and door specifications"
+  description: "Wymagania ewakuacyjne wpływają na szerokość korytarzy i specyfikację drzwi"
   magnitude: low
   value: 5000
   currency: EUR
 
 # Critical Safety Requirement
 safetyCritical: true
-failureMode: "Delayed evacuation, potential loss of life"
+failureMode: "Opóźniona ewakuacja, potencjalne zagrożenie życia"
 mitigationMeasures:
-  - "Dual egress routes from each dwelling unit"
-  - "Self-closing fire doors on all escape routes"
-  - "Emergency lighting with 3-hour battery backup"
-  - "Smoke detection and alarm system"
-  - "Annual evacuation drills"
+  - "Dwie niezależne drogi ewakuacyjne z każdego lokalu"
+  - "Drzwi pożarowe samozamykające na wszystkich drogach ewakuacyjnych"
+  - "Oświetlenie awaryjne z 3-godzinnym podtrzymaniem bateryjnym"
+  - "System detekcji dymu i sygnalizacji pożaru"
+  - "Coroczne próbne ewakuacje"
 
 # Notes
 notes: |
-  This is a CRITICAL safety requirement. Any changes to Level 01 layout
-  that affect egress routes MUST be re-evaluated.
+  To jest KRYTYCZNE wymaganie bezpieczeństwa. Wszelkie zmiany układu
+  Poziomu 01 wpływające na drogi ewakuacyjne MUSZĄ zostać ponownie ocenione.
 
-  RSET calculation includes:
-  - Detection time: 30 seconds (smoke detectors)
-  - Pre-movement time: 60 seconds (residential occupancy)
-  - Travel time: ~70 seconds (38.5m at 1.2 m/s + door delays)
-  - Safety factor: ×1.5
-  - Total RSET: 2.1 minutes (within 2.5 minute limit)
+  Obliczenie RSET obejmuje:
+  - Czas detekcji: 30 sekund (czujki dymu)
+  - Czas przeddziałania: 60 sekund (zabudowa mieszkalna)
+  - Czas przejścia: ~70 sekund (38,5 m przy 1,2 m/s + zwłoki przy drzwiach)
+  - Współczynnik bezpieczeństwa: ×1,5
+  - Łączny RSET: 2,1 minuty (w granicach limitu 2,5 minuty)
 
-  Simulation verified under worst-case scenario:
-  - Simultaneous evacuation of all 18 units on Level 01
-  - Single stairwell blocked (residents use secondary route)
-  - No bottleneck exceeded 2.5 minute threshold
+  Symulacja zweryfikowana w scenariuszu najbardziej niekorzystnym:
+  - Jednoczesna ewakuacja wszystkich 18 lokali na Poziomie 01
+  - Jedna klatka schodowa zablokowana (mieszkańcy korzystają z drogi zapasowej)
+  - Żadne zwężenie nie przekroczyło progu 2,5 minuty
 
-createdBy: "Fire Safety Engineer"
+createdBy: "Inżynier ds. bezpieczeństwa pożarowego"
 lastModified: "2026-02-27"
 version: "1.0.0"
 ---

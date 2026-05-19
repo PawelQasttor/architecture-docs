@@ -1,8 +1,8 @@
 ---
 entityType: requirement
 id: REQ-LEVEL-FIRE-RATING
-requirementName: "Level Fire Resistance Rating"
-description: "Fire resistance rating for structural elements and fire compartmentation at Level 01"
+requirementName: "Klasa odporności ogniowej kondygnacji"
+description: "Klasa odporności ogniowej elementów konstrukcyjnych i podziału na strefy pożarowe na Poziomie 01"
 requirementType: safety
 countryScope: poland_specific
 priority: high
@@ -17,56 +17,56 @@ scope:
 
 # Qualitative Description
 qualitativeDescription: |
-  Level 01 structural elements and compartmentation must achieve:
-  - Floor slab: REI 60 (60 minutes fire resistance)
-  - Corridor walls: EI 30 (30 minutes integrity and insulation)
-  - Unit separation walls: REI 60 (60 minutes full protection)
-  - Apartment entry doors: EI 30 (30 minutes)
-  - Fire doors to stairwell: EI 60-C (60 minutes, self-closing)
+  Elementy konstrukcyjne i podział pożarowy Poziomu 01 muszą osiągnąć:
+  - Płyta stropowa: REI 60 (60 minut odporności ogniowej)
+  - Ściany korytarzy: EI 30 (30 minut szczelności i izolacyjności)
+  - Ściany oddzielające lokale: REI 60 (60 minut pełnej ochrony)
+  - Drzwi wejściowe do lokali: EI 30 (30 minut)
+  - Drzwi pożarowe do klatki schodowej: EI 60-C (60 minut, samozamykające)
 
 # Acceptance Criteria (Array format for v0.3)
 acceptanceCriteria:
-  - "Floor slab: REI 60 (60 minutes fire resistance)"
-  - "Corridor walls: EI 30 (30 minutes integrity and insulation)"
-  - "Unit separation walls: REI 60 (60 minutes full protection)"
-  - "Apartment entry doors: EI 30 (30 minutes)"
-  - "Fire doors to stairwell: EI 60-C (60 minutes, self-closing)"
+  - "Płyta stropowa: REI 60 (60 minut odporności ogniowej)"
+  - "Ściany korytarzy: EI 30 (30 minut szczelności i izolacyjności)"
+  - "Ściany oddzielające lokale: REI 60 (60 minut pełnej ochrony)"
+  - "Drzwi wejściowe do lokali: EI 30 (30 minut)"
+  - "Drzwi pożarowe do klatki schodowej: EI 60-C (60 minut, samozamykające)"
 
 evidenceRequired:
-  - "Product technical datasheets for fire-rated assemblies"
-  - "Third-party test reports (PN-EN 13501-2)"
-  - "As-built construction details showing fire barrier continuity"
-  - "Fire door installation certificates"
-  - "Building inspection approval"
+  - "Karty techniczne produktów dla przegród o określonej odporności ogniowej"
+  - "Raporty z badań niezależnej jednostki (PN-EN 13501-2)"
+  - "Detale powykonawcze pokazujące ciągłość barier ogniowych"
+  - "Certyfikaty montażu drzwi pożarowych"
+  - "Zatwierdzenie kontroli budowlanej"
 
 # Phase Requirements
 phases:
   - phase: design_development
     status: specified
-    deliverable: "Fire-rated assembly specifications"
+    deliverable: "Specyfikacje przegród o określonej odporności ogniowej"
 
   - phase: construction_documentation
     status: specified
-    deliverable: "Construction details showing fire barrier details"
+    deliverable: "Detale konstrukcyjne pokazujące rozwiązania barier ogniowych"
 
   - phase: construction
     status: specified
-    deliverable: "Product submittals and test reports"
+    deliverable: "Karty materiałowe i raporty z badań"
 
   - phase: handover
     status: pending
-    deliverable: "Final fire safety certification"
+    deliverable: "Końcowa certyfikacja bezpieczeństwa pożarowego"
 
 # Regulatory Context
 regulatoryReferences:
   - code: "WT 2021"
     section: "§ 234"
-    description: "Fire compartmentation requirements for residential buildings"
+    description: "Wymagania oddzielenia pożarowego dla budynków mieszkalnych"
     status: applicable
 
   - code: "PN-EN 13501-2"
     section: "Classification of construction products"
-    description: "Fire resistance testing and classification"
+    description: "Badanie i klasyfikacja odporności ogniowej"
     status: applicable
 
 # Verification Method
@@ -78,7 +78,7 @@ verification:
     - as_built
   frequency: one_time
   standard: "PN-EN 13501-2"
-  responsible: "Fire Safety Engineer / Building Inspector"
+  responsible: "Inżynier ds. bezpieczeństwa pożarowego / Inspektor budowlany"
 
 # Related Requirements
 relatedRequirements:
@@ -87,21 +87,22 @@ relatedRequirements:
 
 # Cost Impact
 estimatedCostImpact:
-  description: "Fire-rated construction adds approximately 8-12% to structural and partition costs"
+  description: "Konstrukcja o określonej odporności ogniowej zwiększa koszty konstrukcji i ścian o ok. 8–12%"
   magnitude: medium
 
 # Notes
 notes: |
-  This requirement applies to all spaces on Level 01. Individual spaces
-  may have additional fire safety requirements based on occupancy type.
+  To wymaganie dotyczy wszystkich przestrzeni na Poziomie 01. Poszczególne
+  przestrzenie mogą mieć dodatkowe wymagania pożarowe zależne od sposobu
+  użytkowania.
 
-  Fire resistance ratings follow European classification:
-  - R: Load-bearing capacity
-  - E: Integrity (no flames/hot gases)
-  - I: Insulation (temperature rise limits)
-  - C: Self-closing (for doors)
+  Klasy odporności ogniowej wg klasyfikacji europejskiej:
+  - R: Nośność
+  - E: Szczelność (brak płomieni/gorących gazów)
+  - I: Izolacyjność (ograniczenie przyrostu temperatury)
+  - C: Samozamykające (dla drzwi)
 
-createdBy: "Fire Safety Engineer"
+createdBy: "Inżynier ds. bezpieczeństwa pożarowego"
 lastModified: "2026-02-27"
 version: "1.0.0"
 ---
