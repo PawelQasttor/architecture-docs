@@ -101,22 +101,22 @@ serviceHistory:
   - date: "2024-04-25"
     type: "commissioning"
     performedBy: "Heating Solutions Sp. z o.o."
-    notes: "Initial commissioning - all zones balanced, 6-bar pressure test passed"
+    notes: "Pierwszy rozruch — wszystkie strefy zrównoważone, próba ciśnieniowa 6 bar zaliczona"
   - date: "2024-10-20"
     type: "6month_inspection"
     performedBy: "Heating Solutions Sp. z o.o."
-    notes: "All actuators operating correctly, pump performance good, no leaks detected"
+    notes: "Wszystkie siłowniki działają prawidłowo, wydajność pompy dobra, brak nieszczelności"
 
 # Spare parts
 spareParts:
-  - partName: "Actuator 230V NC"
+  - partName: "Siłownik 230V NC"
     partNumber: "ACT-UFH-NC-230V"
     quantity: 2
-    location: "Manifold cabinet"
-  - partName: "Pump Wilo RS 25/6"
+    location: "Szafka rozdzielacza"
+  - partName: "Pompa Wilo RS 25/6"
     partNumber: "WILO-RS-25-6"
     quantity: 0
-    notes: "Order when needed (24-hour delivery)"
+    notes: "Zamawiać w razie potrzeby (dostawa 24-godzinna)"
 
 # Performance data
 performanceData:
