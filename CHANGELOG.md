@@ -6,6 +6,44 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [Unreleased] — Track A: coherence
+
+Post-2.0.0 coherence pass. No new schema features; the v2.0 substance is
+made internally consistent end to end.
+
+### Changed
+- **Canonical name** is now **"Semantic Building Model"** everywhere
+  (schema v2.0 title, CHANGELOG, site/locale titles, CLAUDE.md). Frozen
+  historical schemas (v0.4/v1.0/v1.1) intentionally keep their original title.
+- **Phase model fully unified to the 10 named lifecycle phases.** The
+  pre-v2.0 8-step LOD vocabulary and the compiler's numeric `phase` are
+  retired in favour of `concept … decommissioned`:
+  - Compiler emits named phases (`phaseRank`/`phaseName`, `PHASE_GATE`,
+    `DEFAULT_PHASE=design_development`); legacy numeric `--phase`/`phase:`
+    still accepted via `LEGACY_PHASE_MAP`.
+  - Schema `project.phase` → `oneOf(unified-name enum | legacy int 1-8)`.
+  - `docs/{en/phases,pl/fazy}/`: 8 legacy pages → 10 unified-phase pages +
+    a canonical lifecycle index (old→new migration + gate tables); full
+    EN/PL parity. Nav/sidebars rebuilt; triplicated "workflow" links removed;
+    241 cross-references remapped.
+- Landing pages: "8 Project Phases" → 10-phase lifecycle; "19 types" → 27.
+
+### Fixed
+- Compiler dropped a declared `project.budget`, forcing PL projects to
+  PLN and producing spurious cross-entity currency warnings — now respects
+  declared currency (country only as fallback).
+- Green Terrace flagship: budget migrated v0.4→v2.0 shape; missing
+  `building`/levels/asset-types added; dangling refs fixed
+  (25 → 7 warnings; the 7 are legitimate requirement-scope info).
+- `.gitignore` un-anchored `examples/` rule was silently un-tracking the
+  flagship example under `docs/en/examples/`.
+
+### Removed
+- Unrelated XanoScript scaffold (340 untracked files) that had been
+  dumped into this docs repo.
+
+---
+
 ## [2.0.0] - 2026-03-17
 
 ### Added
