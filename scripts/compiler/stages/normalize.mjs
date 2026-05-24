@@ -1666,7 +1666,16 @@ export async function normalize(rawEntities, options, logger) {
       ...(grouped.opening_types.length > 0 && { opening_types: grouped.opening_types }),
       ...(grouped.site_features.length > 0 && { site_features: grouped.site_features }),
       ...(grouped.site_feature_types.length > 0 && { site_feature_types: grouped.site_feature_types }),
-      ...(grouped.construction_packages.length > 0 && { construction_packages: grouped.construction_packages })
+      ...(grouped.construction_packages.length > 0 && { construction_packages: grouped.construction_packages }),
+      // v2.0 entity types
+      ...(grouped.campuses.length > 0 && { campuses: grouped.campuses }),
+      ...(grouped.space_programs.length > 0 && { space_programs: grouped.space_programs }),
+      ...(grouped.material_types.length > 0 && { material_types: grouped.material_types }),
+      ...(grouped.materials.length > 0 && { materials: grouped.materials }),
+      ...(grouped.structural_systems.length > 0 && { structural_systems: grouped.structural_systems }),
+      ...(grouped.issues.length > 0 && { issues: grouped.issues }),
+      ...(grouped.commissioning_tests.length > 0 && { commissioning_tests: grouped.commissioning_tests }),
+      ...(grouped.circulation_routes.length > 0 && { circulation_routes: grouped.circulation_routes })
     },
     metadata: {
       totalEntities: rawEntities.length,
@@ -1689,7 +1698,16 @@ export async function normalize(rawEntities, options, logger) {
         opening_types: grouped.opening_types.length,
         site_features: grouped.site_features.length,
         site_feature_types: grouped.site_feature_types.length,
-        construction_packages: grouped.construction_packages.length
+        construction_packages: grouped.construction_packages.length,
+        // v2.0 entity types
+        campuses: grouped.campuses.length,
+        space_programs: grouped.space_programs.length,
+        material_types: grouped.material_types.length,
+        materials: grouped.materials.length,
+        structural_systems: grouped.structural_systems.length,
+        issues: grouped.issues.length,
+        commissioning_tests: grouped.commissioning_tests.length,
+        circulation_routes: grouped.circulation_routes.length
       }
     }
   };
