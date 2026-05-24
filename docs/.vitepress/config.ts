@@ -359,6 +359,25 @@ export default defineConfig({
                     { text: 'Tenant IEQ survey 2027', link: '/en/examples/green-terrace-2028/tenant-survey-summary' },
                     { text: 'SCHEMA-GAPS (input to v2.2)', link: '/en/examples/green-terrace-2028/SCHEMA-GAPS' }
                   ]
+                },
+                {
+                  text: 'Green Terrace Park (Campus showcase)',
+                  collapsed: true,
+                  items: [
+                    { text: 'Campus Overview', link: '/en/examples/green-terrace-park/' },
+                    { text: 'Campus entity', link: '/en/examples/green-terrace-park/campus' },
+                    { text: 'Site (Phase 2)', link: '/en/examples/green-terrace-park/site' },
+                    { text: 'BLD-02 Sunny Crescent (construction)', link: '/en/examples/green-terrace-park/buildings/BLD-02-sunny-crescent' },
+                    { text: 'BLD-03 Linden Court (DD)', link: '/en/examples/green-terrace-park/buildings/BLD-03-linden-court' },
+                    { text: 'BLD-04 Oak Pavilion (SD)', link: '/en/examples/green-terrace-park/buildings/BLD-04-oak-pavilion' },
+                    { text: 'District heating loop', link: '/en/examples/green-terrace-park/systems/SYS-DH-LOOP-CAMPUS' },
+                    { text: 'Playground', link: '/en/examples/green-terrace-park/site-features/SF-PLAYGROUND' },
+                    { text: 'EV charging hub', link: '/en/examples/green-terrace-park/site-features/SF-EV-HUB' },
+                    { text: 'Bike storage', link: '/en/examples/green-terrace-park/site-features/SF-BIKE-STORAGE' },
+                    { text: 'Communal garden', link: '/en/examples/green-terrace-park/site-features/SF-COMMUNAL-GARDEN' },
+                    { text: 'Site infrastructure CP', link: '/en/examples/green-terrace-park/construction-packages/CP-SITE-INFRASTRUCTURE' },
+                    { text: 'Issue: Campus planning condition', link: '/en/examples/green-terrace-park/issues/ISS-CAMPUS-PLANNING-001' }
+                  ]
                 }
               ]
             }
@@ -714,6 +733,25 @@ export default defineConfig({
                     { text: 'Weryfikacja energetyczna 2027', link: '/pl/przyklady/zielony-taras-2028/weryfikacja-energetyczna' },
                     { text: 'Ankieta IEQ mieszkańców 2027', link: '/pl/przyklady/zielony-taras-2028/podsumowanie-ankiety-mieszkancow' },
                     { text: 'SCHEMA-GAPS (wejście do v2.2)', link: '/pl/przyklady/zielony-taras-2028/SCHEMA-GAPS' }
+                  ]
+                },
+                {
+                  text: 'Zielony Taras Park (przykład Kampusu)',
+                  collapsed: true,
+                  items: [
+                    { text: 'Przegląd Kampusu', link: '/pl/przyklady/zielony-taras-park/' },
+                    { text: 'Encja Kampus', link: '/pl/przyklady/zielony-taras-park/kampus' },
+                    { text: 'Działka (Faza 2)', link: '/pl/przyklady/zielony-taras-park/dzialka' },
+                    { text: 'BLD-02 Słoneczny Półksiężyc (budowa)', link: '/pl/przyklady/zielony-taras-park/budynki/BLD-02-sloneczny-polksiezyc' },
+                    { text: 'BLD-03 Dziedziniec Lipowy (DD)', link: '/pl/przyklady/zielony-taras-park/budynki/BLD-03-dziedziniec-lipowy' },
+                    { text: 'BLD-04 Pawilon Dębowy (SD)', link: '/pl/przyklady/zielony-taras-park/budynki/BLD-04-pawilon-debowy' },
+                    { text: 'Pętla ciepłownicza', link: '/pl/przyklady/zielony-taras-park/systemy/SYS-DH-LOOP-CAMPUS' },
+                    { text: 'Plac zabaw', link: '/pl/przyklady/zielony-taras-park/elementy-terenu/SF-PLAYGROUND' },
+                    { text: 'Hub ładowania EV', link: '/pl/przyklady/zielony-taras-park/elementy-terenu/SF-EV-HUB' },
+                    { text: 'Schowek na rowery', link: '/pl/przyklady/zielony-taras-park/elementy-terenu/SF-BIKE-STORAGE' },
+                    { text: 'Ogród wspólnotowy', link: '/pl/przyklady/zielony-taras-park/elementy-terenu/SF-COMMUNAL-GARDEN' },
+                    { text: 'CP infrastruktury terenowej', link: '/pl/przyklady/zielony-taras-park/pakiety-budowlane/CP-SITE-INFRASTRUCTURE' },
+                    { text: 'Zgłoszenie: Warunek planistyczny kampusu', link: '/pl/przyklady/zielony-taras-park/zgloszenia/ISS-CAMPUS-PLANNING-001' }
                   ]
                 }
               ]

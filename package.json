@@ -16,6 +16,8 @@
     "sbm:report": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace --output build/green-terrace --country PL && node -e \"console.log('\\n\\u{1F4C4}  Open the report: build/green-terrace/report.html')\"",
     "sbm:compile:2028": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace-2028 --output build/green-terrace-2028 --country PL --phase operation --verbose",
     "sbm:validate:2028": "node scripts/compiler/index.mjs validate --input docs/en/examples/green-terrace-2028 --country PL --phase operation --verbose",
+    "sbm:compile:park": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace-park --output build/green-terrace-park --country PL --phase construction --verbose",
+    "sbm:validate:park": "node scripts/compiler/index.mjs validate --input docs/en/examples/green-terrace-park --country PL --phase construction --verbose",
     "test": "node --test scripts/compiler/tests/*.test.mjs",
     "sbm:clean": "node -e \"import('fs').then(fs=>fs.promises.rm('build',{recursive:true,force:true}).then(()=>console.log('Build cleaned')))\"",
     "build:all": "npm run extract:json && npm run sbm:compile && npm run docs:build"
