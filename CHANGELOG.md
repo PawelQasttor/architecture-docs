@@ -6,11 +6,77 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
-## [Unreleased] — Polish localization completeness + Project-at-a-glance diagrams
+## [Unreleased] — Green Terrace v2.1 example refresh + operation-phase showcase + compiler v2.0 bucket fix
 
-Post-2.1.0. Closes the bilingual-parity gaps surfaced after the report
-i18n fix and adds three schematic SVG diagrams to the report. SBM
-standard unchanged.
+Post-2.1.0. Three bundled changes: (a) full normalization of the
+Green Terrace flagship example to v2.0 schema + 10-phase lifecycle
+coverage with 11 new v2.0 entities, (b) new sibling example
+**Green Terrace 2028** demonstrating the operation lifecycle phase
+with measured commissioning results, asset operational history,
+6 operation-phase issues, and a SCHEMA-GAPS inventory listing v2.2
+proposals, (c) compiler bug fix where v2.0 entity buckets
+(`space_programs`, `material_types`, `materials`, `structural_systems`,
+`issues`, `commissioning_tests`, `circulation_routes`, `campuses`) were
+grouped during normalize but never emitted to sbm.json output.
+SBM standard itself unchanged (sbm_version stays 2.0).
+
+### Added
+- **Green Terrace v2.1 refresh** — 11 new v2.0 entities cover the
+  remaining lifecycle phases: `PROG-BEDROOM-STANDARD` (concept brief),
+  `STR-GREEN-TERRACE` + `MT-CONCRETE-C30-37` + `MT-INSULATION-PIR-150`
+  (DD-phase structural + materials extracted from prose into queryable
+  entities), `CR-FIRE-EGRESS-L01` (CD-phase circulation route),
+  3 Issues spanning bidding + construction, 3 scheduled
+  Commissioning Tests. Updated index narrative with a Lifecycle
+  Walkthrough table mapping every phase to its example entity.
+  Bedrooms 4.02 ↔ corridor inheritance + brief-to-design check now
+  trigger an intentional under_provision warning (2 designed of 27
+  programmed — pedagogical scope, documented in PROG entity notes).
+- **Green Terrace 2028 sibling example** — same BLD-01, 22 months
+  post-handover. 45 files (EN + PL parity). All 3 commissioning tests
+  have `results.measured` populated; one came back as a conditional
+  pass and triggered a downstream non-conformance issue. 3 assets
+  carry 22 months of operational history (runtime hours, service
+  events, performance trend). 6 operation-phase issues span warranty
+  (HP compressor batch defect), tenant maintenance request, BMS-detected
+  CO₂ anomaly, retro-commissioning recommendation, annual fire
+  inspection finding, and an 18-month air-tightness NCR. Post-occupancy
+  energy verification (47 vs 45 kWh/m²/year — Class B confirmed) and
+  tenant IEQ survey summary as narrative docs.
+- **SCHEMA-GAPS.md inventory** in the 2028 example — 5 places where
+  v2.0 doesn't cleanly model operation-phase needs, with proposed v2.2
+  shapes: `telemetry_stream`, `asset.operationalHistory` sub-schema,
+  `occupant_survey`, `energy_verification_record`, and
+  `retrocx_recommendation`. Input to v2.2 standard discussion.
+- **npm scripts**: `sbm:validate:2028` + `sbm:compile:2028` (uses
+  `--phase operation` to opt into operation-phase gate behaviour).
+- **VitePress sidebar**: new "Green Terrace 2028 (Operation Phase)"
+  collapsible section in both locales.
+
+### Fixed
+- **Compiler: v2.0 entity buckets dropped from sbm.json output.**
+  `scripts/compiler/stages/normalize.mjs` grouped v2.0 entities
+  (campuses, space_programs, material_types, materials, structural_systems,
+  issues, commissioning_tests, circulation_routes) correctly but the
+  `entities:` spread and `metadata.entitiesByType` block only listed v1
+  buckets. v2.0 entities parsed + validated but disappeared from output.
+  Now all 8 v2.0 buckets are conditionally emitted alongside v1 buckets.
+  Surfaced by the v2.1 example refresh.
+- **Green Terrace example**: every entity bumped to `version: "2.1.0"`
+  (was patchwork of "0.4.0" / "1.0.0" / "2.0.0"). project-specification.md
+  legacy `documentType: "project"` removed (entityType retained) and
+  legacy numeric `phase: 4` normalized to canonical `phase: "construction_documents"`.
+  Requirement files: non-canonical phase strings (`construction_documentation`,
+  `handover`, `schematic`, `as_built`) normalized to the 10-phase enum.
+  Stripped "NEW v0.4" / "SBM v0.4 Summary" labelling cruft from
+  project-specification.
+
+### Earlier post-2.1.0 work (Polish localization + Project-at-a-glance diagrams)
+
+Already-merged work since v2.1.0, kept in this Unreleased section pending
+the next tagged release. Closes the bilingual-parity gaps surfaced after
+the report i18n fix and adds three schematic SVG diagrams to the report.
+SBM standard unchanged.
 
 ### Added
 - **Project-at-a-glance diagrams** — new compiler target `targets/diagrams.mjs`
