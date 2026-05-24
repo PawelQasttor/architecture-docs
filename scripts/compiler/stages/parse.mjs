@@ -69,6 +69,8 @@ async function parseFile(filePath, inputDir) {
     // v2.0 entity types
     'campus', 'space_program', 'material_type', 'material', 'structural_system',
     'issue', 'commissioning_test', 'circulation_route',
+    // v2.2 entity types
+    'telemetry_stream',
     // Legacy
     'element_specification', 'project_specification', 'project'
   ];

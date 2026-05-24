@@ -6,6 +6,78 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [2.2.0] - 2026-05-24 — Operation-phase schema extensions: telemetry_stream + asset.operationalHistory
+
+The first schema bump since v2.0. Additive only — every v2.0-conforming
+model is also v2.2-conforming. Resolves the top two gaps from the
+`SCHEMA-GAPS.md` inventory surfaced by the Green Terrace 2028
+operation-phase example.
+
+### Added
+
+- **New `telemetry_stream` entity type (28th entity).** Wraps a
+  continuous numeric data stream (BMS point, sub-meter, IoT device) with:
+  a `dataReference` (file path or live protocol: file_csv, bacnet, mqtt, etc.),
+  human-asserted or compiler-computed `summaryStatistics` (min/max/mean/median
+  + rolling means over arbitrary windows), explicit `thresholds` (design
+  target, regulatory limit, operator alarm, energy baseline, comfort band)
+  with `currentlyExceeded` state + `exceededSince` date, and `qualityMetadata`
+  (coverage fraction, outage events, calibration valid-until).
+  ID pattern `^TEL-[A-Z0-9-]+$`. Each stream references its measured entity
+  via `measuredEntityId` + `measuredEntityType` (space, system, asset,
+  building, level, envelope, site_feature).
+- **`asset.operationalHistory` structured sub-schema.** Adds typed fields
+  to the `asset` entity for: `runtimeHours` + `runtimeHoursAsOf`,
+  `cycleCount`, `energyConsumed_kWh`, `filterChangeCount`,
+  `zoneValveReplacements`, a chronological `servicedAt` array (date, type
+  enum [planned_inspection / warranty_repair / unplanned_repair /
+  parts_replacement / filter_change / rebalancing / zone_valve_replacement /
+  recommissioning / decommission / other], technician, findings, cost_eur,
+  relatedIssueId), `performanceTrend` (asset-type-specific via
+  additionalProperties), and `dataSource` (link to underlying telemetry).
+  Previously these fields had to live in opaque `additionalProperties`
+  blobs — now they're typed + queryable.
+- **`asset.activeIssueIds`** — array of operation-phase issue IDs currently
+  affecting the asset. Lets the compiler render cross-entity lineage in
+  the asset register target.
+- **`schemas/sbm-schema-v2.2.json`** — new schema file (the v2.0 schema
+  stays frozen for reference, per convention).
+- **2 telemetry_stream entities** retrofitted into the Green Terrace 2028
+  example (EN + PL): `TEL-CO2-402-001` (driving the CO₂ anomaly issue)
+  and `TEL-HP-COP-001` (driving the post-warranty COP drift narrative).
+  Replaces the v2.0 "narrative + external CSV reference" pattern with
+  first-class queryable entities.
+
+### Changed
+
+- **`sbm_version` bumped to "2.2"** in compiler output + schema const.
+  The compiler now emits and validates against the v2.2 schema by default.
+- **Compiler version**: 2.1.0 → 2.2.0
+- **Constants**: new `V2_2_ENTITY_TYPES` set with `telemetry_stream`;
+  `ALL_ENTITY_TYPES` extended. `parse.mjs validTypes` extended.
+- **Normalize stage**: `telemetry_streams` bucket added to `grouped`,
+  to the output `entities:` spread, and to `metadata.entitiesByType`
+  counts (following the same pattern as the v2.0 bucket fix from the
+  previous Unreleased section).
+- **Tests**: 3 test files updated to assert against `sbm_version: '2.2'`
+  instead of `'2.0'`. 104/104 tests still pass.
+- **SCHEMA-GAPS.md** in the 2028 example now notes gaps #1 (telemetry_stream)
+  and #2 (asset.operationalHistory) as **RESOLVED in v2.2**. Gaps #3-#5
+  (occupant_survey, energy_verification_record, retrocx_recommendation as
+  first-class lifecycle) remain candidates for v2.3+.
+
+### Migration
+
+- Existing v2.0 models continue to validate cleanly under the v2.2 schema
+  (additive changes only). Just bump the `sbm_version` field to `"2.2"`.
+- To opt into the new `telemetry_stream` entity, create `TEL-*.md` files
+  in your input directory under a `telemetry-streams/` folder (or any
+  folder — the compiler scans recursively).
+- To opt into typed `asset.operationalHistory`, replace any opaque
+  `additionalProperties` representation with the typed sub-schema.
+
+---
+
 ## [Unreleased] — Green Terrace v2.1 example refresh + operation-phase showcase + compiler v2.0 bucket fix
 
 Post-2.1.0. Three bundled changes: (a) full normalization of the

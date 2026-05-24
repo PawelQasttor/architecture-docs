@@ -111,7 +111,14 @@ export const V2_ENTITY_TYPES = new Set([
 ]);
 
 /**
- * All entity types recognized by the compiler (v1.x + v2.0)
+ * v2.2 entity types recognized by the compiler (additions beyond v2.0)
+ */
+export const V2_2_ENTITY_TYPES = new Set([
+  'telemetry_stream'
+]);
+
+/**
+ * All entity types recognized by the compiler (v1.x + v2.0 + v2.2)
  */
 export const ALL_ENTITY_TYPES = new Set([
   'site', 'building', 'level', 'space', 'zone', 'system', 'asset', 'requirement',
@@ -119,5 +126,7 @@ export const ALL_ENTITY_TYPES = new Set([
   'space_type', 'zone_type', 'system_type', 'asset_type', 'opening_type', 'site_feature_type',
   // v2.0
   'campus', 'space_program', 'material_type', 'material',
-  'structural_system', 'issue', 'commissioning_test', 'circulation_route'
+  'structural_system', 'issue', 'commissioning_test', 'circulation_route',
+  // v2.2
+  'telemetry_stream'
 ]);

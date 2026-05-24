@@ -357,7 +357,9 @@ export default defineConfig({
                     { text: 'Issue: Air-tightness NCR', link: '/en/examples/green-terrace-2028/issues/ISS-NC-AIRTIGHTNESS-001' },
                     { text: 'Energy verification 2027', link: '/en/examples/green-terrace-2028/energy-verification' },
                     { text: 'Tenant IEQ survey 2027', link: '/en/examples/green-terrace-2028/tenant-survey-summary' },
-                    { text: 'SCHEMA-GAPS (input to v2.2)', link: '/en/examples/green-terrace-2028/SCHEMA-GAPS' }
+                    { text: 'SCHEMA-GAPS (input to v2.2)', link: '/en/examples/green-terrace-2028/SCHEMA-GAPS' },
+                    { text: 'Telemetry: CO₂ in Bedroom 4.02 (v2.2)', link: '/en/examples/green-terrace-2028/telemetry-streams/TEL-CO2-402-001' },
+                    { text: 'Telemetry: Heat pump COP (v2.2)', link: '/en/examples/green-terrace-2028/telemetry-streams/TEL-HP-COP-001' }
                   ]
                 },
                 {
@@ -732,7 +734,9 @@ export default defineConfig({
                     { text: 'Zgłoszenie: NCR szczelności', link: '/pl/przyklady/zielony-taras-2028/zgloszenia/ISS-NC-AIRTIGHTNESS-001' },
                     { text: 'Weryfikacja energetyczna 2027', link: '/pl/przyklady/zielony-taras-2028/weryfikacja-energetyczna' },
                     { text: 'Ankieta IEQ mieszkańców 2027', link: '/pl/przyklady/zielony-taras-2028/podsumowanie-ankiety-mieszkancow' },
-                    { text: 'SCHEMA-GAPS (wejście do v2.2)', link: '/pl/przyklady/zielony-taras-2028/SCHEMA-GAPS' }
+                    { text: 'SCHEMA-GAPS (wejście do v2.2)', link: '/pl/przyklady/zielony-taras-2028/SCHEMA-GAPS' },
+                    { text: 'Telemetria: CO₂ w Sypialni 4.02 (v2.2)', link: '/pl/przyklady/zielony-taras-2028/strumienie-telemetrii/TEL-CO2-402-001' },
+                    { text: 'Telemetria: COP pompy ciepła (v2.2)', link: '/pl/przyklady/zielony-taras-2028/strumienie-telemetrii/TEL-HP-COP-001' }
                   ]
                 },
                 {

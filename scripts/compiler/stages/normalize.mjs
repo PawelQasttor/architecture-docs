@@ -67,6 +67,8 @@ function groupEntitiesByType(entities) {
     issues: [],
     commissioning_tests: [],
     circulation_routes: [],
+    // v2.2 entity types
+    telemetry_streams: [],
     other: [] // For legacy document types
   };
 
@@ -127,6 +129,8 @@ function groupEntitiesByType(entities) {
       grouped.commissioning_tests.push(normalizeEntity(entity));
     } else if (type === 'circulation_route') {
       grouped.circulation_routes.push(normalizeEntity(entity));
+    } else if (type === 'telemetry_stream') {
+      grouped.telemetry_streams.push(normalizeEntity(entity));
     } else {
       // Legacy types (element_specification, project_specification)
       grouped.other.push(normalizeEntity(entity));
@@ -1675,7 +1679,9 @@ export async function normalize(rawEntities, options, logger) {
       ...(grouped.structural_systems.length > 0 && { structural_systems: grouped.structural_systems }),
       ...(grouped.issues.length > 0 && { issues: grouped.issues }),
       ...(grouped.commissioning_tests.length > 0 && { commissioning_tests: grouped.commissioning_tests }),
-      ...(grouped.circulation_routes.length > 0 && { circulation_routes: grouped.circulation_routes })
+      ...(grouped.circulation_routes.length > 0 && { circulation_routes: grouped.circulation_routes }),
+      // v2.2 entity types
+      ...(grouped.telemetry_streams.length > 0 && { telemetry_streams: grouped.telemetry_streams })
     },
     metadata: {
       totalEntities: rawEntities.length,
@@ -1707,7 +1713,9 @@ export async function normalize(rawEntities, options, logger) {
         structural_systems: grouped.structural_systems.length,
         issues: grouped.issues.length,
         commissioning_tests: grouped.commissioning_tests.length,
-        circulation_routes: grouped.circulation_routes.length
+        circulation_routes: grouped.circulation_routes.length,
+        // v2.2 entity types
+        telemetry_streams: grouped.telemetry_streams.length
       }
     }
   };

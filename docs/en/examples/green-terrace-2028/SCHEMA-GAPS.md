@@ -1,5 +1,10 @@
 # SBM v2.2 — schema gaps surfaced by the operation-phase example
 
+> **Update 2026-05-24:** Gaps #1 (`telemetry_stream`) and #2
+> (`asset.operationalHistory`) are **RESOLVED in SBM v2.2** (this
+> example now uses both — see the `telemetry-streams/` directory).
+> Gaps #3-#5 remain candidates for future v2.3+ work.
+
 Building the Green Terrace 2028 example revealed five places where the
 v2.0 schema doesn't cleanly model what the operation phase needs. None
 is fatal — every gap has a workable v2.0 representation — but each is
