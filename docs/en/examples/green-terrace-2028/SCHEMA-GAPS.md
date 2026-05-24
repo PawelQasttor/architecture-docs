@@ -1,9 +1,17 @@
 # SBM v2.2 — schema gaps surfaced by the operation-phase example
 
-> **Update 2026-05-24:** Gaps #1 (`telemetry_stream`) and #2
-> (`asset.operationalHistory`) are **RESOLVED in SBM v2.2** (this
-> example now uses both — see the `telemetry-streams/` directory).
-> Gaps #3-#5 remain candidates for future v2.3+ work.
+> **Update 2026-05-24 (later same day):** **ALL FIVE GAPS RESOLVED.**
+> - Gaps #1 (`telemetry_stream`) + #2 (`asset.operationalHistory`)
+>   shipped in SBM v2.2 (see `telemetry-streams/`).
+> - Gaps #3 (`occupant_survey`) + #4 (`energy_verification_record`) +
+>   #5 (`retrocx_recommendation`) shipped in SBM v2.3 (see
+>   `occupant-surveys/`, `energy-verification-records/`,
+>   `retrocx-recommendations/`).
+>
+> This document is kept as the historical record of why each entity
+> type was added. The narrative companion pages
+> (`tenant-survey-summary`, `energy-verification`) remain alongside
+> the v2.3 entities as reader-friendly summaries.
 
 Building the Green Terrace 2028 example revealed five places where the
 v2.0 schema doesn't cleanly model what the operation phase needs. None

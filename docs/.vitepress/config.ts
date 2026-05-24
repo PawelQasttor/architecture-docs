@@ -359,7 +359,10 @@ export default defineConfig({
                     { text: 'Tenant IEQ survey 2027', link: '/en/examples/green-terrace-2028/tenant-survey-summary' },
                     { text: 'SCHEMA-GAPS (input to v2.2)', link: '/en/examples/green-terrace-2028/SCHEMA-GAPS' },
                     { text: 'Telemetry: CO₂ in Bedroom 4.02 (v2.2)', link: '/en/examples/green-terrace-2028/telemetry-streams/TEL-CO2-402-001' },
-                    { text: 'Telemetry: Heat pump COP (v2.2)', link: '/en/examples/green-terrace-2028/telemetry-streams/TEL-HP-COP-001' }
+                    { text: 'Telemetry: Heat pump COP (v2.2)', link: '/en/examples/green-terrace-2028/telemetry-streams/TEL-HP-COP-001' },
+                    { text: 'Occupant Survey 2027 IEQ (v2.3)', link: '/en/examples/green-terrace-2028/occupant-surveys/SURVEY-BLD-01-IEQ-2027' },
+                    { text: 'Energy Verification 2027 (v2.3)', link: '/en/examples/green-terrace-2028/energy-verification-records/EVR-BLD-01-2027' },
+                    { text: 'Retro-cx: MVHR rebalance (v2.3)', link: '/en/examples/green-terrace-2028/retrocx-recommendations/RCX-MVHR-001' }
                   ]
                 },
                 {
@@ -736,7 +739,10 @@ export default defineConfig({
                     { text: 'Ankieta IEQ mieszkańców 2027', link: '/pl/przyklady/zielony-taras-2028/podsumowanie-ankiety-mieszkancow' },
                     { text: 'SCHEMA-GAPS (wejście do v2.2)', link: '/pl/przyklady/zielony-taras-2028/SCHEMA-GAPS' },
                     { text: 'Telemetria: CO₂ w Sypialni 4.02 (v2.2)', link: '/pl/przyklady/zielony-taras-2028/strumienie-telemetrii/TEL-CO2-402-001' },
-                    { text: 'Telemetria: COP pompy ciepła (v2.2)', link: '/pl/przyklady/zielony-taras-2028/strumienie-telemetrii/TEL-HP-COP-001' }
+                    { text: 'Telemetria: COP pompy ciepła (v2.2)', link: '/pl/przyklady/zielony-taras-2028/strumienie-telemetrii/TEL-HP-COP-001' },
+                    { text: 'Ankieta mieszkańców IEQ 2027 (v2.3)', link: '/pl/przyklady/zielony-taras-2028/ankiety-mieszkancow/SURVEY-BLD-01-IEQ-2027' },
+                    { text: 'Weryfikacja energetyczna 2027 (v2.3)', link: '/pl/przyklady/zielony-taras-2028/zapisy-weryfikacji-energetycznej/EVR-BLD-01-2027' },
+                    { text: 'Retro-cx: Rebalans MVHR (v2.3)', link: '/pl/przyklady/zielony-taras-2028/rekomendacje-retrocx/RCX-MVHR-001' }
                   ]
                 },
                 {

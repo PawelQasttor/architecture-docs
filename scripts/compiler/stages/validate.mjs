@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
  * Load JSON schema
  */
 async function loadSchema() {
-  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v2.2.json');
+  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v2.3.json');
   const schemaContent = await fs.readFile(schemaPath, 'utf-8');
   return JSON.parse(schemaContent);
 }

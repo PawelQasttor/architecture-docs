@@ -69,6 +69,10 @@ function groupEntitiesByType(entities) {
     circulation_routes: [],
     // v2.2 entity types
     telemetry_streams: [],
+    // v2.3 entity types
+    occupant_surveys: [],
+    energy_verification_records: [],
+    retrocx_recommendations: [],
     other: [] // For legacy document types
   };
 
@@ -131,6 +135,12 @@ function groupEntitiesByType(entities) {
       grouped.circulation_routes.push(normalizeEntity(entity));
     } else if (type === 'telemetry_stream') {
       grouped.telemetry_streams.push(normalizeEntity(entity));
+    } else if (type === 'occupant_survey') {
+      grouped.occupant_surveys.push(normalizeEntity(entity));
+    } else if (type === 'energy_verification_record') {
+      grouped.energy_verification_records.push(normalizeEntity(entity));
+    } else if (type === 'retrocx_recommendation') {
+      grouped.retrocx_recommendations.push(normalizeEntity(entity));
     } else {
       // Legacy types (element_specification, project_specification)
       grouped.other.push(normalizeEntity(entity));
@@ -1681,7 +1691,11 @@ export async function normalize(rawEntities, options, logger) {
       ...(grouped.commissioning_tests.length > 0 && { commissioning_tests: grouped.commissioning_tests }),
       ...(grouped.circulation_routes.length > 0 && { circulation_routes: grouped.circulation_routes }),
       // v2.2 entity types
-      ...(grouped.telemetry_streams.length > 0 && { telemetry_streams: grouped.telemetry_streams })
+      ...(grouped.telemetry_streams.length > 0 && { telemetry_streams: grouped.telemetry_streams }),
+      // v2.3 entity types
+      ...(grouped.occupant_surveys.length > 0 && { occupant_surveys: grouped.occupant_surveys }),
+      ...(grouped.energy_verification_records.length > 0 && { energy_verification_records: grouped.energy_verification_records }),
+      ...(grouped.retrocx_recommendations.length > 0 && { retrocx_recommendations: grouped.retrocx_recommendations })
     },
     metadata: {
       totalEntities: rawEntities.length,
@@ -1715,7 +1729,11 @@ export async function normalize(rawEntities, options, logger) {
         commissioning_tests: grouped.commissioning_tests.length,
         circulation_routes: grouped.circulation_routes.length,
         // v2.2 entity types
-        telemetry_streams: grouped.telemetry_streams.length
+        telemetry_streams: grouped.telemetry_streams.length,
+        // v2.3 entity types
+        occupant_surveys: grouped.occupant_surveys.length,
+        energy_verification_records: grouped.energy_verification_records.length,
+        retrocx_recommendations: grouped.retrocx_recommendations.length
       }
     }
   };

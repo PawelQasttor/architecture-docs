@@ -6,6 +6,64 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [2.3.0] - 2026-05-24 — All operation-phase SCHEMA-GAPS resolved: occupant_survey + energy_verification_record + retrocx_recommendation
+
+Second schema bump in one day. Closes the remaining 3 gaps from the
+operation-phase SCHEMA-GAPS inventory. **All 5 gaps that triggered the
+v2.x operation-phase work are now resolved with first-class entities.**
+Additive only — every v2.2-conforming model is also v2.3-conforming.
+
+### Added
+
+- **New `occupant_survey` entity type (29th).** Structured Likert-scale
+  + free-text occupant feedback with anonymised quotes carrying
+  `affectedEntityId` + `triggeredIssueId` cross-links. ID `^SURVEY-...$`.
+- **New `energy_verification_record` entity type (30th).** In-use energy
+  reconciliation with measured vs designTargets blocks, verdict enum, and
+  `deltaAnalysis` per-factor attribution to assets / entities / related
+  issues. ID `^EVR-...$`.
+- **New `retrocx_recommendation` entity type (31st).** Retro-commissioning
+  as a first-class lifecycle distinct from generic Issue.
+  `triggeredByIssueIds` + `triggeredBySurveyId` + `triggeredByTelemetryStreamId`
+  capture the full causal chain; `expectedOutcome` + `verificationPlan`
+  add a typed verification loop. ID `^RCX-...$`.
+- **`schemas/sbm-schema-v2.3.json`** — new schema file (v2.0 + v2.2 stay
+  frozen for reference).
+- **3 v2.3 entities retrofitted into Green Terrace 2028** (EN + PL):
+  `SURVEY-BLD-01-IEQ-2027`, `EVR-BLD-01-2027` (with 3-factor delta
+  attribution to HP COP drift / MVHR HR drift / air-tightness slip),
+  `RCX-MVHR-001` (linking telemetry → issue → survey → recommendation →
+  verification as one structured record).
+- **3 new sidebar entries per locale** under the operation-phase example.
+
+### Changed
+
+- `sbm_version` "2.2" → "2.3" in compiler output + schema const.
+- Compiler `VERSION` 2.2.0 → 2.3.0.
+- New `V2_3_ENTITY_TYPES` set in constants; `ALL_ENTITY_TYPES` extended.
+- Normalize: 3 new buckets + 3 new output spread entries + 3 new
+  metadata count entries.
+- Tests: 3 test files updated to assert `sbm_version: '2.3'`. 104/104 pass.
+- SCHEMA-GAPS.md gap-resolution banner updated to **"ALL FIVE GAPS RESOLVED"**.
+- Narrative companion pages (`tenant-survey-summary`, `energy-verification`)
+  kept alongside their v2.3 entity counterparts as reader-friendly summaries.
+
+### Migration
+
+- Bump `sbm_version` field to `"2.3"`. No other changes required
+  (additive schema only). All v2.0 + v2.2 models validate cleanly under v2.3.
+
+### Significance
+
+This release **completes the operation-phase modelling story** that
+started with the Green Terrace 2028 example. The SBM standard now has
+typed entities for every operation-phase pattern surfaced by that
+example: time-series telemetry, asset operational history, occupant
+feedback, in-use energy verification, and retro-commissioning. Future
+operation-phase examples can be authored entirely in structured form.
+
+---
+
 ## [2.2.0] - 2026-05-24 — Operation-phase schema extensions: telemetry_stream + asset.operationalHistory
 
 The first schema bump since v2.0. Additive only — every v2.0-conforming

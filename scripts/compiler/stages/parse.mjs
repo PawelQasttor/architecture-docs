@@ -71,6 +71,8 @@ async function parseFile(filePath, inputDir) {
     'issue', 'commissioning_test', 'circulation_route',
     // v2.2 entity types
     'telemetry_stream',
+    // v2.3 entity types
+    'occupant_survey', 'energy_verification_record', 'retrocx_recommendation',
     // Legacy
     'element_specification', 'project_specification', 'project'
   ];

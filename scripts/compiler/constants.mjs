@@ -118,7 +118,14 @@ export const V2_2_ENTITY_TYPES = new Set([
 ]);
 
 /**
- * All entity types recognized by the compiler (v1.x + v2.0 + v2.2)
+ * v2.3 entity types recognized by the compiler (additions beyond v2.2)
+ */
+export const V2_3_ENTITY_TYPES = new Set([
+  'occupant_survey', 'energy_verification_record', 'retrocx_recommendation'
+]);
+
+/**
+ * All entity types recognized by the compiler (v1.x + v2.0 + v2.2 + v2.3)
  */
 export const ALL_ENTITY_TYPES = new Set([
   'site', 'building', 'level', 'space', 'zone', 'system', 'asset', 'requirement',
@@ -128,5 +135,7 @@ export const ALL_ENTITY_TYPES = new Set([
   'campus', 'space_program', 'material_type', 'material',
   'structural_system', 'issue', 'commissioning_test', 'circulation_route',
   // v2.2
-  'telemetry_stream'
+  'telemetry_stream',
+  // v2.3
+  'occupant_survey', 'energy_verification_record', 'retrocx_recommendation'
 ]);

@@ -27,7 +27,7 @@ function createMockLogger() {
  */
 function createValidSbm(overrides = {}) {
   return {
-    sbm_version: '2.2',
+    sbm_version: '2.3',
     generatedAt: new Date().toISOString(),
     compiler: { version: '2.0.0', mode: 'production' },
     project: {
@@ -601,7 +601,7 @@ describe('validate', () => {
       assert.equal(result.valid, false, 'should fail without sbm_version');
     });
 
-    it('should fail when sbm_version is not "2.2"', async () => {
+    it('should fail when sbm_version is not "2.3"', async () => {
       const sbm = createValidSbm();
       sbm.sbm_version = '0.5';
 
