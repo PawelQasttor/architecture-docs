@@ -44,7 +44,7 @@ ifcMapping:
   globalId: "2O3fG9$rLBxv3VxEu2LPxR"
   objectType: "Bedroom"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "residential"
   - "sleeping"

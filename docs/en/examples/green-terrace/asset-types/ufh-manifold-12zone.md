@@ -3,7 +3,7 @@ entityType: "asset_type"
 id: "AT-UFH-MANIFOLD-12ZONE"
 typeName: "12-Zone Underfloor Heating Manifold"
 category: "hvac"
-version: "2.0.0"
+version: "2.1.0"
 description: "Stainless-steel underfloor heating distribution manifold with 12 individually actuated loop circuits, flow meters, and balancing valves."
 
 manufacturer: "Generic / specification-grade"

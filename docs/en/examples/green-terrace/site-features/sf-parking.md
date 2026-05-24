@@ -59,7 +59,7 @@ ifcMapping:
   ifcEntity: IfcCivilElement
   globalId: "5xSF-PARKING-SW-001"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "parking"
   - "permeable-paving"

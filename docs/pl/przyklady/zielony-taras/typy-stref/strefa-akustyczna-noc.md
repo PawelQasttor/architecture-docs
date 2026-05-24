@@ -21,7 +21,7 @@ properties:
   reverbTimeTarget: "0.5s"
   externalNoiseProtection: "Rw ≥ 30 dB"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "acoustic"
   - "sleeping"

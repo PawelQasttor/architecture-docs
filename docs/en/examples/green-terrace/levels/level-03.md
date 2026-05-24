@@ -2,7 +2,7 @@
 entityType: "level"
 id: "LVL-03"
 buildingId: "BLD-01"
-version: "2.0.0"
+version: "2.1.0"
 projectPhase: "design_development"
 bimLOD: "LOD_300"
 

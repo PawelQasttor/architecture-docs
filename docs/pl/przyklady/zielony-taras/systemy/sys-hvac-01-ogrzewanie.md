@@ -21,7 +21,7 @@ performance:
   flowTemperature: "35°C"
   designHeatLoad: "4750 W"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "hvac"
   - "heating"

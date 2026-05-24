@@ -27,7 +27,7 @@ performance:
   servedArea: 95.0
   unit: "m2"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "hvac"
   - "heat-pump"

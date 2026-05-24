@@ -1,7 +1,7 @@
 ---
 entityType: "space"
 id: "SP-BLD-01-L01-002"
-version: "0.4.0"
+version: "2.1.0"
 projectPhase: "design_development"
 bimLOD: "LOD_300"
 

@@ -27,7 +27,7 @@ ifcMapping:
   ifcEntity: "IfcZone"
   globalId: "3P4gH0$sLByv4WyFv3MQyR"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "fire-safety"
   - "zl-iv"

@@ -73,7 +73,7 @@ typicalPerformance:
   flowTemperatureUFH: "35°C"
   returnTemperatureUFH: "30°C"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "residential"
   - "mvhr"

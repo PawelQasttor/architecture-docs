@@ -3,7 +3,7 @@ entityType: "asset_type"
 id: "AT-UFH-MANIFOLD-12ZONE"
 typeName: "12-Zone Underfloor Heating Manifold"
 category: "hvac"
-version: "2.0.0"
+version: "2.1.0"
 description: "Rozdzielacz ogrzewania podłogowego ze stali nierdzewnej z 12 indywidualnie sterowanymi obwodami pętli, przepływomierzami i zaworami równoważącymi."
 
 manufacturer: "Generyczny / klasy specyfikacyjnej"

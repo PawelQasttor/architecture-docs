@@ -110,7 +110,7 @@ cost:
     sitePreparation: 75000
     utilityConnections: 50000
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "residential"
   - "warsaw"

@@ -193,7 +193,7 @@ cost:
   totalCost: 4300
   currency: "EUR"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "underfloor-heating"
   - "manifold"

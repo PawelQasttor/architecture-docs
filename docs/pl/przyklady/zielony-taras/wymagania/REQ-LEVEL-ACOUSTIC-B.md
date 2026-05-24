@@ -96,7 +96,7 @@ phases:
     status: completed
     deliverable: "Obliczenia akustyczne i specyfikacje przegród"
 
-  - phase: construction_documentation
+  - phase: construction_documents
     status: completed
     deliverable: "Detale konstrukcyjne z ciągłością uszczelnień akustycznych"
 
@@ -104,7 +104,7 @@ phases:
     status: in_progress
     deliverable: "Karty materiałowe i nadzór nad montażem"
 
-  - phase: handover
+  - phase: commissioning
     status: pending
     deliverable: "Raporty z odbiorowych badań akustycznych"
 
@@ -126,7 +126,7 @@ verification:
   phase:
     - design_development
     - construction
-    - as_built
+    - commissioning
   frequency: pre_completion
   standard: "PN-B-02151-4"
   responsible: "Konsultant ds. akustyki"
@@ -165,7 +165,7 @@ notes: |
 
 createdBy: "Konsultant ds. akustyki"
 lastModified: "2026-02-27"
-version: "1.0.0"
+version: "2.1.0"
 ---
 
 # Izolacyjność akustyczna - klasa B

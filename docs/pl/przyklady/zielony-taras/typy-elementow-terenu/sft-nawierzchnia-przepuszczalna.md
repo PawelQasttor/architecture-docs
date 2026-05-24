@@ -47,7 +47,7 @@ ifcMapping:
   ifcEntity: IfcCivilElement
   globalId: "4xSFT-PERM-PAVE-001"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "nawierzchnia"
   - "przepuszczalna"

@@ -54,7 +54,7 @@ ifcMapping:
   globalId: "2xB3YO$rLBxv3VxEu2WIN2"
   objectType: "Window_Internorm_KF410_1800x1500"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "window"
   - "north-facade"

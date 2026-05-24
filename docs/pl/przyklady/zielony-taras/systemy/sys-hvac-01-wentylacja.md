@@ -19,7 +19,7 @@ performance:
   totalAirflow: "220 m³/h"
   airChangeRate: "0.53 ACH"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "hvac"
   - "ventilation"

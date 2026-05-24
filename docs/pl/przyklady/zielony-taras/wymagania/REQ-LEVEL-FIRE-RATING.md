@@ -45,7 +45,7 @@ phases:
     status: specified
     deliverable: "Specyfikacje przegród o określonej odporności ogniowej"
 
-  - phase: construction_documentation
+  - phase: construction_documents
     status: specified
     deliverable: "Detale konstrukcyjne pokazujące rozwiązania barier ogniowych"
 
@@ -53,7 +53,7 @@ phases:
     status: specified
     deliverable: "Karty materiałowe i raporty z badań"
 
-  - phase: handover
+  - phase: commissioning
     status: pending
     deliverable: "Końcowa certyfikacja bezpieczeństwa pożarowego"
 
@@ -73,9 +73,9 @@ regulatoryReferences:
 verification:
   method: inspection
   phase:
-    - construction_documentation
+    - construction_documents
     - construction
-    - as_built
+    - commissioning
   frequency: one_time
   standard: "PN-EN 13501-2"
   responsible: "Inżynier ds. bezpieczeństwa pożarowego / Inspektor budowlany"
@@ -104,7 +104,7 @@ notes: |
 
 createdBy: "Inżynier ds. bezpieczeństwa pożarowego"
 lastModified: "2026-02-27"
-version: "1.0.0"
+version: "2.1.0"
 ---
 
 # Odporność ogniowa kondygnacji

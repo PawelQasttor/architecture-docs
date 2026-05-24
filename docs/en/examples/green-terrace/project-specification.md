@@ -1,14 +1,13 @@
 ---
-documentType: "project"
 entityType: "project"
 id: "PRJ-GREEN-TERRACE"
-version: "0.4.0"
+version: "2.1.0"
 
 # Project Identity
 projectName: "Residential Building Green Terrace"
 projectLocation: "Warsaw, Poland"
 country: "PL"
-phase: 4  # Phase 4: Construction Documentation
+phase: "construction_documents"   # canonical 10-phase lifecycle name (v2.0)
 
 # Building Classification
 buildingClassification:
@@ -115,7 +114,7 @@ simulationStrategy:
         status: "completed"
         completionDate: "2025-11-15"
         result: "45 kWh/m²/year heating demand"
-      - phase: "construction_documentation"
+      - phase: "construction_documents"
         status: "completed"
         completionDate: "2026-02-10"
         result: "Confirmed 45 kWh/m²/year, Energy class B"
@@ -165,7 +164,7 @@ simulationStrategy:
       - phase: "design_development"
         status: "completed"
         completionDate: "2025-10-30"
-      - phase: "construction_documentation"
+      - phase: "construction_documents"
         status: "completed"
         completionDate: "2026-02-15"
 
@@ -326,9 +325,12 @@ authors:
     license: "PZITB 5678"
 
 changelog:
+  - version: "2.1.0"
+    date: "2026-05-24"
+    description: "Example refresh — canonical entityType, unified 10-phase lifecycle (phase: construction_documents), version aligned with v2.1.0 example refresh"
   - version: "0.4.0"
     date: "2026-02-27"
-    description: "Updated to SBM v0.4.0 with budget tracking, simulation strategy, and comprehensive BIM integration configuration"
+    description: "Added budget tracking, simulation strategy, and BIM integration configuration"
   - version: "2.0.0"
     date: "2026-02-20"
     description: "Construction documentation phase update"
@@ -364,25 +366,25 @@ changelog:
 | **Estimated Occupants** | 54 | persons |
 | **Parking Spaces** | 22 | (2 accessible) |
 
-### 1.3 SBM v0.4 Features Summary
+### 1.3 Project Status Summary
 
-**✅ Budget & Cost Tracking**
+**Budget & Cost Tracking**
 - **Total Budget:** €1,800,000 (€1,000/m² gross area)
 - **Contingency:** €90,000 (5%)
-- **Forecast:** €1,750,000 (2.8% under budget) ✅
-- **Status:** On track - 30% complete, €540,000 spent
+- **Forecast:** €1,750,000 (2.8% under budget)
+- **Status:** On track — 30% complete, €540,000 spent
 
-**✅ Simulation Strategy**
-- **Energy:** EnergyPlus - 45 kWh/m²/year ✅ COMPLIANT
-- **Daylighting:** DIVA - 18/18 units meet DF ≥2.0% ✅ COMPLIANT
-- **Thermal Comfort:** All spaces PMV ±0.5 ✅ COMPLIANT
-- **Acoustic:** Facade Rw ≥36 dB, Party walls Rw ≥52 dB ✅ COMPLIANT
+**Simulation Strategy**
+- **Energy:** EnergyPlus — 45 kWh/m²/year — compliant
+- **Daylighting:** DIVA — 18/18 units meet DF ≥ 2.0% — compliant
+- **Thermal Comfort:** All spaces PMV ±0.5 — compliant
+- **Acoustic:** Façade Rw ≥ 36 dB, party walls Rw ≥ 52 dB — compliant
 
-**✅ BIM Integration**
-- **IFC Models:** 4 models (architecture, structure, MEP, federated) - LOD 400
-- **IDS Validation:** 35/35 requirements passed ✅
-- **BCF Issues:** 0 open, 147 resolved ✅
-- **Clash Detection:** 0 critical, 0 major, 2 minor ✅
+**BIM Integration**
+- **IFC Models:** 4 models (architecture, structure, MEP, federated) at LOD 400
+- **IDS Validation:** 35/35 requirements passed
+- **BCF Issues:** 0 open, 147 resolved
+- **Clash Detection:** 0 critical, 0 major, 2 minor
 
 ### 1.4 Building Classification
 
@@ -652,7 +654,7 @@ All elements include:
 - Pset_GreenTerrace_Compliance - Regulatory compliance
 - Pset_GreenTerrace_Materials - Material specifications
 
-### 6.3 Model Files (UPDATED v0.4)
+### 6.3 Model Files
 
 **Location:** `/bim/green-terrace/`
 
@@ -663,8 +665,7 @@ All elements include:
 | `green-terrace-mep.ifc` | MEP | ✅ Current | 2026-02-25 | 400 |
 | `green-terrace-federated.ifc` | Federated | ✅ Current | 2026-02-27 | 400 |
 
-### 6.4 IDS Validation (NEW v0.4)
-
+### 6.4 IDS Validation
 **IDS (Information Delivery Specification)** - Machine-checkable requirements
 
 | Specification | Requirements | Status |
@@ -683,8 +684,7 @@ All elements include:
 - All apartment doors have clear width ≥95 cm ✅
 - All corridors have width ≥140 cm ✅
 
-### 6.5 BCF Issue Tracking (NEW v0.4)
-
+### 6.5 BCF Issue Tracking
 **BCF (BIM Collaboration Format)** - Issue tracking system
 
 | Category | Open | Resolved | Total |
@@ -756,8 +756,7 @@ All elements include:
 
 ---
 
-## 9. Budget & Cost Tracking (NEW v0.4)
-
+## 9. Budget & Cost Tracking
 ### 9.1 Budget Breakdown
 
 | Category | Budget | % | Forecast | Variance |
@@ -792,8 +791,7 @@ All elements include:
 
 ---
 
-## 10. Simulation Strategy & Results (NEW v0.4)
-
+## 10. Simulation Strategy & Results
 ### 10.1 Energy Modeling
 
 **Tool:** EnergyPlus v23.1 | **Weather:** POL_Warsaw_123750_IWEC.epw
@@ -885,59 +883,36 @@ All elements include:
 
 ---
 
-## SBM v0.4 Summary
+## Status Summary
 
-**Document Version:** v0.4.0
-**Last Updated:** 2026-02-27
-**Status:** Construction Documentation (LOD 400)
-
-### New v0.4 Features
-
-**✅ Budget & Cost Tracking**
-- Total budget: €1,800,000 (€1,000/m² gross)
-- Forecast: €1,750,000 (2.8% under budget)
-- Status: On track - 30% complete, €540k spent
-- Cost breakdown by category with variance tracking
-
-**✅ Simulation Strategy**
-- 5 simulation types completed and compliant
-- Energy: 45 kWh/m²/year ✅ Energy Class B
-- Daylighting: 18/18 units DF ≥2.0% ✅
-- Thermal comfort: PMV/PPD compliant ✅
-- Acoustic: All requirements met ✅
-- Structural: Code compliant ✅
-
-**✅ BIM Integration**
-- 4 IFC models (architecture, structure, MEP, federated) - LOD 400
-- IDS validation: 35/35 requirements passed ✅
-- BCF tracking: 0 open issues, 147 resolved ✅
-- Clash detection: 0 critical, 0 major, 2 minor ✅
-- Weekly coordination meetings
+**Document Version:** v2.1.0 (example refresh)
+**SBM Schema:** v2.0
+**Last Updated:** 2026-05-24
+**Lifecycle Phase:** `construction_documents` (LOD 400)
 
 ### Project Status Dashboard
 
 | Category | Status | Details |
 |----------|--------|---------|
-| **Budget** | ✅ On track | 2.8% under budget |
-| **Schedule** | ✅ On track | 30% complete (foundation/structure phase) |
-| **Quality** | ✅ Compliant | All simulations passed |
-| **BIM Coordination** | ✅ Clean | 0 critical clashes |
-| **Requirements** | ✅ Met | 35/35 IDS checks passed |
-| **Issues** | ✅ Clear | 0 open BCF issues |
+| **Budget** | On track | 2.8% under budget |
+| **Schedule** | On track | 30% complete (foundation / structure phase) |
+| **Quality** | Compliant | All simulations passed |
+| **BIM Coordination** | Clean | 0 critical clashes |
+| **Requirements** | Met | 35/35 IDS checks passed |
+| **Issues** | Clear | 0 open BCF issues |
 
 ### Next Milestones
 
 | Milestone | Target Date | Status |
 |-----------|-------------|--------|
-| Structure to roof | Sep 2025 | ✅ Complete |
-| Building envelope | Nov 2025 | ✅ Complete |
-| MEP rough-in | Nov 2025 | ✅ Complete |
-| Finishes | Feb 2026 | 🔄 In progress (80%) |
-| Commissioning | Feb 2026 | ⏳ Upcoming |
-| **Completion** | **Mar 2026** | ⏳ On schedule |
+| Structure to roof | Sep 2025 | Complete |
+| Building envelope | Nov 2025 | Complete |
+| MEP rough-in | Nov 2025 | Complete |
+| Finishes | Feb 2026 | In progress (80%) |
+| Commissioning | Feb 2026 | Upcoming |
+| **Completion** | **Mar 2026** | On schedule |
 
 ---
 
-**SBM Version:** v0.4.0 - Complete semantic model with cost, performance, simulation, and BIM integration
-**Build Status:** ✅ All validations passed
-**Compliance:** ✅ All regulatory requirements met
+**Build Status:** All validations passed
+**Compliance:** All regulatory requirements met

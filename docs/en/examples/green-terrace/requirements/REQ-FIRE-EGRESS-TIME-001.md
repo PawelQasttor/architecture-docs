@@ -96,7 +96,7 @@ phases:
     status: completed
     deliverable: "Fire egress simulation (Pathfinder)"
 
-  - phase: construction_documentation
+  - phase: construction_documents
     status: completed
     deliverable: "Escape route details and door schedules"
 
@@ -104,7 +104,7 @@ phases:
     status: in_progress
     deliverable: "As-built verification of egress routes"
 
-  - phase: handover
+  - phase: commissioning
     status: pending
     deliverable: "Evacuation drill and final certification"
 
@@ -134,10 +134,10 @@ regulatoryReferences:
 verification:
   method: simulation
   phase:
-    - schematic
+    - schematic_design
     - design_development
-    - construction_documentation
-    - as_built
+    - construction_documents
+    - commissioning
   frequency: pre_occupancy
   tool: "Pathfinder"
   standard: "PD 7974-6"
@@ -195,7 +195,7 @@ notes: |
 
 createdBy: "Fire Safety Engineer"
 lastModified: "2026-02-27"
-version: "1.0.0"
+version: "2.1.0"
 ---
 
 # Fire Egress Time Limit

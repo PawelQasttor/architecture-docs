@@ -96,7 +96,7 @@ phases:
     status: completed
     deliverable: "Symulacja ewakuacji pożarowej (Pathfinder)"
 
-  - phase: construction_documentation
+  - phase: construction_documents
     status: completed
     deliverable: "Detale dróg ewakuacyjnych i zestawienia drzwi"
 
@@ -104,7 +104,7 @@ phases:
     status: in_progress
     deliverable: "Weryfikacja powykonawcza dróg ewakuacyjnych"
 
-  - phase: handover
+  - phase: commissioning
     status: pending
     deliverable: "Próbna ewakuacja i certyfikacja końcowa"
 
@@ -134,10 +134,10 @@ regulatoryReferences:
 verification:
   method: simulation
   phase:
-    - schematic
+    - schematic_design
     - design_development
-    - construction_documentation
-    - as_built
+    - construction_documents
+    - commissioning
   frequency: pre_occupancy
   tool: "Pathfinder"
   standard: "PD 7974-6"
@@ -195,7 +195,7 @@ notes: |
 
 createdBy: "Inżynier ds. bezpieczeństwa pożarowego"
 lastModified: "2026-02-27"
-version: "1.0.0"
+version: "2.1.0"
 ---
 
 # Limit czasu ewakuacji pożarowej

@@ -3,7 +3,7 @@ entityType: "asset_type"
 id: "AT-MVHR-RESIDENTIAL"
 typeName: "Residential MVHR Unit"
 category: "hvac"
-version: "2.0.0"
+version: "2.1.0"
 description: "Centrala wentylacyjna z odzyskiem ciepła (MVHR) dla lokali mieszkalnych — zrównoważony nawiew/wywiew z wysokosprawnym wymiennikiem przeciwprądowym."
 
 manufacturer: "Generyczny / klasy specyfikacyjnej"

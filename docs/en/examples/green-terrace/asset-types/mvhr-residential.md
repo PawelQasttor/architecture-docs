@@ -3,7 +3,7 @@ entityType: "asset_type"
 id: "AT-MVHR-RESIDENTIAL"
 typeName: "Residential MVHR Unit"
 category: "hvac"
-version: "2.0.0"
+version: "2.1.0"
 description: "Mechanical ventilation with heat recovery unit for residential dwellings — balanced supply/extract with high-efficiency counter-flow heat exchanger."
 
 manufacturer: "Generic / specification-grade"

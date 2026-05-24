@@ -2,7 +2,7 @@
 entityType: "building"
 id: "BLD-01"
 name: "Budynek Mieszkalny Zielony Taras"
-version: "2.0.0"
+version: "2.1.0"
 projectPhase: "design_development"
 bimLOD: "LOD_300"
 

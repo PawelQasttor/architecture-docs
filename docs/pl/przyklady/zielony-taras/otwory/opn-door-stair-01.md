@@ -82,7 +82,7 @@ ifcMapping:
   globalId: "2xB3YO$rLBxv3VxEu2DR01"
   objectType: "FireDoor_EI30_Stairwell_L01"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "drzwi-pozarowe"
   - "klatka-schodowa"

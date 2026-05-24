@@ -153,7 +153,7 @@ cost:
   totalCost: 4700
   currency: "EUR"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "mvhr"
   - "ventilation"

@@ -53,7 +53,7 @@ ifcMapping:
   ifcEntity: IfcWorkSchedule
   globalId: "6xCP-ENVLP-001"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "envelope"
   - "facade"

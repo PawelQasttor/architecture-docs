@@ -54,7 +54,7 @@ ifcMapping:
   objectType: "Bedroom"
 
 # Metadata
-version: "1.0.0"
+version: "2.1.0"
 lastReviewed: "2026-02-20"
 authors:
   - name: "Anna Nowak"

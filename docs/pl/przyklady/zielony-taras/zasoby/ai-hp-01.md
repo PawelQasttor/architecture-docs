@@ -37,7 +37,7 @@ maintenance:
   nextServiceDue: "2025-06-15"
   maintenanceContractor: "HVAC Services Ltd."
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "heat-pump"
   - "building-01"

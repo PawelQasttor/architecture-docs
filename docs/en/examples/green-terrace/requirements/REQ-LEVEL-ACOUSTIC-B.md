@@ -96,7 +96,7 @@ phases:
     status: completed
     deliverable: "Acoustic design calculations and assembly specifications"
 
-  - phase: construction_documentation
+  - phase: construction_documents
     status: completed
     deliverable: "Construction details with acoustic seal continuity"
 
@@ -104,7 +104,7 @@ phases:
     status: in_progress
     deliverable: "Product submittals and installation supervision"
 
-  - phase: handover
+  - phase: commissioning
     status: pending
     deliverable: "Acoustic commissioning test reports"
 
@@ -126,7 +126,7 @@ verification:
   phase:
     - design_development
     - construction
-    - as_built
+    - commissioning
   frequency: pre_completion
   standard: "PN-B-02151-4"
   responsible: "Acoustic Consultant"
@@ -165,7 +165,7 @@ notes: |
 
 createdBy: "Acoustic Consultant"
 lastModified: "2026-02-27"
-version: "1.0.0"
+version: "2.1.0"
 ---
 
 # Acoustic Performance - Class B

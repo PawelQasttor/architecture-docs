@@ -24,7 +24,7 @@ properties:
   occupancyControl: false
   nightSetback: 18.0
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "hvac"
   - "residential"

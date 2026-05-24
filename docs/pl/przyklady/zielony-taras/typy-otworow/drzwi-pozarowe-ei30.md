@@ -39,7 +39,7 @@ ifcMapping:
   ifcEntity: IfcDoorType
   objectType: "FireDoor_EI30_Steel"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "drzwi-pozarowe"
   - "ei30"

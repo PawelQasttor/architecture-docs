@@ -54,7 +54,7 @@ cost:
   installationCost: 1200
   currency: "EUR"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "heat-pump"
   - "r32"

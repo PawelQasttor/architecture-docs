@@ -58,7 +58,7 @@ ifcMapping:
   globalId: "2xB3YO$rLBxv3VxEu2WIN1"
   objectType: "Window_Internorm_KF410_1200x1500"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "okno"
   - "elewacja-polnocna"

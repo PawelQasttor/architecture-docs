@@ -31,7 +31,7 @@ ifcMapping:
   globalId: "2P3gH0$sLByv4WyFv3MQzT"
   name: "Level 01"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "residential"
   - "first-floor"

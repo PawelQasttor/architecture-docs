@@ -1,0 +1,100 @@
+---
+entityType: "material_type"
+id: "MT-CONCRETE-C30-37"
+version: "2.1.0"
+projectPhase: "design_development"
+
+materialName: "Beton C30/37 — ekspozycja XC1/XC4"
+materialCategory: "concrete"
+description: |
+  Beton towarowy układany na mokro, klasa wytrzymałości C30/37 wg PN-EN 206-1,
+  stosowany do wszystkich ścian nośnych i stropów płytowych w konstrukcji
+  Zielonego Tarasu. Klasa ekspozycji XC1 dla elementów wewnętrznych
+  i XC4 dla powierzchni narażonych na warunki zewnętrzne (attyki, krawędzie tarasów).
+
+manufacturer: "Lafarge Polska (planowany dostawca)"
+productCode: "Agilia C30/37 XC4"
+standard: "PN-EN 206-1"
+
+physicalProperties:
+  density: 2400
+  thermalConductivity: 1.65
+  specificHeatCapacity: 880
+  compressiveStrength: 30
+  tensileStrength: 2.9
+  modulusOfElasticity: 33
+
+fireProperties:
+  reactionToFire: "A1"
+  fireResistance: "REI 90"
+
+sustainability:
+  embodiedCarbonKgCO2ePerM3: 320
+  epdReference: "Lafarge EPD-AGILIA-2024-01"
+  recycledContent: 8
+  responsibleSourcing: "BES 6001 Very Good"
+
+constructionPackageId: "CP-STRUCTURE"
+
+sources:
+  - id: "SRC-MT-CONCRETE-C30-37-01"
+    title: "Zielony Taras — specyfikacja konstrukcyjna §3.2"
+    type: "other"
+    documentType: "material_specification"
+    date: "2026-02-15"
+    author: "Piotr Kowalski"
+  - id: "SRC-MT-CONCRETE-C30-37-02"
+    title: "EPD Lafarge Agilia"
+    type: "manufacturer_spec"
+    documentType: "manufacturer_epd"
+    date: "2024-06-01"
+    author: "Lafarge Polska"
+
+tags:
+  - "artefakt-fazy-projektu-budowlanego"
+
+notes: |
+  Ślad węglowy jest dominującym aspektem zrównoważoności tego materiału.
+  Przy 2 400 kg/m³ × 320 kgCO₂e/m³ × szacowanych 380 m³ betonu konstrukcyjnego,
+  konstrukcja niesie około **122 tCO₂e A1-A3** — ok. 30 % całkowitego śladu
+  węglowego materiałowego budynku. Specyfikacja spoiwa CEM II/B (zamiast
+  czystego CEM I) mogłaby zredukować to o ok. 25 %.
+
+changelog:
+  - version: "2.1.0"
+    date: "2026-05-24"
+    description: "Dodano w ramach odświeżenia przykładu v2.1.0 — uwidacznia dominujący materiał konstrukcyjny jako spec wielokrotnego użytku"
+---
+
+# Beton C30/37 (MT-CONCRETE-C30-37)
+
+Beton towarowy C30/37 to podstawowy materiał konstrukcyjny Zielonego
+Tarasu — ściany, stropy, fundamenty. Ta encja `material_type` czyni
+specyfikację **wielokrotnego użytku**: każdy Pakiet Wykonawczy lub System
+Konstrukcyjny potrzebujący C30/37 referuje do tego jednego ID.
+
+| Właściwość | Wartość |
+|---|---|
+| Klasa wytrzymałości | C30/37 (fck = 30 MPa) |
+| Gęstość | 2 400 kg/m³ |
+| Przewodność cieplna | 1,65 W/(m·K) |
+| Moduł sprężystości | 33 GPa |
+| Reakcja na ogień | A1 (niepalny) |
+| Ślad węglowy | 320 kgCO₂e/m³ (A1-A3) |
+| Zawartość recyklatu | 8 % |
+
+## Dlaczego ta encja istnieje
+
+Przed v2.1 "C30/37" pojawiało się w narracji w trzech różnych plikach
+(specyfikacja-projektu, budynek, opisy rysunków konstrukcyjnych) — i nikt
+nie mógł być pewien, że wszystkie odnoszą się do **tego samego** projektu mieszanki.
+Wydobycie tego jako encji `material_type` daje:
+
+- **Jedno źródło prawdy** dla wytrzymałości, gęstości, klasy ogniowej, śladu węglowego
+- **Agregację zakupową** — kompilator może sumować łączne m³ przez wszystkie pakiety
+- **Raportowanie zrównoważoności** — wymiana referencji EPD aktualizuje GWP całego budynku
+
+## Używany przez
+
+- [System konstrukcyjny `STR-GREEN-TERRACE`](../systemy-konstrukcyjne/STR-GREEN-TERRACE) — główny element nośny
+- [Pakiet wykonawczy `CP-STRUCTURE`](../pakiety-budowlane/cp-konstrukcja)

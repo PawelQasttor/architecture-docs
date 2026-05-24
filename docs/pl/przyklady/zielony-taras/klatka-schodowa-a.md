@@ -108,7 +108,7 @@ sources:
     date: "2025-10-20"
     type: "other"
 
-version: "1.0.0"
+version: "2.1.0"
 tags: ["fire-escape", "protected", "residential"]
 ---
 

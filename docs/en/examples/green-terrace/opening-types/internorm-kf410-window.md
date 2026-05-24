@@ -38,7 +38,7 @@ ifcMapping:
   ifcEntity: IfcWindowType
   objectType: "Internorm_KF410_Triple"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "window"
   - "triple-glazed"

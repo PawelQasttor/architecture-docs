@@ -202,7 +202,7 @@ notes: |
 
 createdBy: "Green Terrace Design Team"
 lastModified: "2026-02-27"
-version: "1.0.0"
+version: "2.1.0"
 ---
 
 # Standard Bedroom Type A

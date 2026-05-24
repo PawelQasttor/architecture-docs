@@ -319,7 +319,18 @@ export default defineConfig({
                     { text: 'CP: Structure', link: '/en/examples/green-terrace/construction-packages/cp-structure' },
                     { text: 'CP: Envelope', link: '/en/examples/green-terrace/construction-packages/cp-envelope' },
                     { text: 'CP: MEP', link: '/en/examples/green-terrace/construction-packages/cp-mep' },
-                    { text: 'CP: Finishes', link: '/en/examples/green-terrace/construction-packages/cp-finishes' }
+                    { text: 'CP: Finishes', link: '/en/examples/green-terrace/construction-packages/cp-finishes' },
+                    { text: 'Program: Standard Bedrooms (Brief)', link: '/en/examples/green-terrace/space-programs/PROG-BEDROOM-STANDARD' },
+                    { text: 'Structural System', link: '/en/examples/green-terrace/structural-systems/STR-GREEN-TERRACE' },
+                    { text: 'Material: Concrete C30/37', link: '/en/examples/green-terrace/materials/MT-CONCRETE-C30-37' },
+                    { text: 'Material: PIR Insulation 150', link: '/en/examples/green-terrace/materials/MT-INSULATION-PIR-150' },
+                    { text: 'Circulation Route: Fire Egress L01', link: '/en/examples/green-terrace/circulation-routes/CR-FIRE-EGRESS-L01' },
+                    { text: 'Issue: Bid Addendum 01', link: '/en/examples/green-terrace/issues/ISS-BID-001' },
+                    { text: 'Issue: RFI 001', link: '/en/examples/green-terrace/issues/ISS-RFI-001' },
+                    { text: 'Issue: Change Order 001', link: '/en/examples/green-terrace/issues/ISS-CO-001' },
+                    { text: 'Test: MVHR Balancing', link: '/en/examples/green-terrace/commissioning-tests/CT-MVHR-001' },
+                    { text: 'Test: Air-tightness', link: '/en/examples/green-terrace/commissioning-tests/CT-AIRTIGHTNESS-001' },
+                    { text: 'Test: Fire Drill', link: '/en/examples/green-terrace/commissioning-tests/CT-FIRE-DRILL-001' }
                   ]
                 }
               ]
@@ -637,7 +648,18 @@ export default defineConfig({
                     { text: 'PB: Konstrukcja', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-konstrukcja' },
                     { text: 'PB: Przegrody', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-przegroda' },
                     { text: 'PB: Instalacje', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-instalacje' },
-                    { text: 'PB: Wykończenia', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-wykonczenie' }
+                    { text: 'PB: Wykończenia', link: '/pl/przyklady/zielony-taras/pakiety-budowlane/cp-wykonczenie' },
+                    { text: 'Program: Sypialnie standardowe (brief)', link: '/pl/przyklady/zielony-taras/programy-przestrzeni/PROG-BEDROOM-STANDARD' },
+                    { text: 'System konstrukcyjny', link: '/pl/przyklady/zielony-taras/systemy-konstrukcyjne/STR-GREEN-TERRACE' },
+                    { text: 'Materiał: Beton C30/37', link: '/pl/przyklady/zielony-taras/materialy/MT-CONCRETE-C30-37' },
+                    { text: 'Materiał: Izolacja PIR 150', link: '/pl/przyklady/zielony-taras/materialy/MT-INSULATION-PIR-150' },
+                    { text: 'Droga cyrkulacji: Ewakuacja poż. L01', link: '/pl/przyklady/zielony-taras/drogi-cyrkulacji/CR-FIRE-EGRESS-L01' },
+                    { text: 'Zgłoszenie: Aneks przetargowy 01', link: '/pl/przyklady/zielony-taras/zgloszenia/ISS-BID-001' },
+                    { text: 'Zgłoszenie: RFI 001', link: '/pl/przyklady/zielony-taras/zgloszenia/ISS-RFI-001' },
+                    { text: 'Zgłoszenie: Zmiana 001', link: '/pl/przyklady/zielony-taras/zgloszenia/ISS-CO-001' },
+                    { text: 'Test: Regulacja MVHR', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-MVHR-001' },
+                    { text: 'Test: Szczelność powietrzna', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-AIRTIGHTNESS-001' },
+                    { text: 'Test: Próbna ewakuacja', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-FIRE-DRILL-001' }
                   ]
                 }
               ]

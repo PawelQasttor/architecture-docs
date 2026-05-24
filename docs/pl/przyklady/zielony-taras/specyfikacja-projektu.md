@@ -1,8 +1,14 @@
 ---
-documentType: "project_specification"
-projectName: "Residential Building Green Terrace"
-projectLocation: "Warsaw, Poland"
-projectPhase: "construction_documentation"
+entityType: "project"
+id: "PRJ-ZIELONY-TARAS"
+version: "2.1.0"
+
+# Tożsamość projektu
+projectName: "Budynek Mieszkalny Zielony Taras"
+projectLocation: "Warszawa, Polska"
+country: "PL"
+phase: "construction_documents"   # kanoniczna nazwa fazy z cyklu życia v2.0
+
 buildingClassification:
   category: "A"
   type: "residential_multi_family"
@@ -22,8 +28,7 @@ regulatoryCompliance:
   - standard: "PN-EN_1996"
   - standard: "PN-EN_1992"
 bimLOD: "LOD_400"
-version: "2.0.0"
-lastReviewed: "2026-02-20"
+lastReviewed: "2026-05-24"
 authors:
   - name: "Anna Nowak"
     role: "lead_architect"
@@ -31,6 +36,13 @@ authors:
   - name: "Piotr Kowalski"
     role: "structural_engineer"
     license: "PZITB 1234"
+changelog:
+  - version: "2.1.0"
+    date: "2026-05-24"
+    description: "Aktualizacja przykładu — kanoniczne entityType, zunifikowany 10-fazowy cykl życia (phase: construction_documents), wersja zsynchronizowana z odświeżeniem przykładu v2.1.0"
+  - version: "2.0.0"
+    date: "2026-02-20"
+    description: "Aktualizacja dla fazy dokumentacji budowlanej"
 ---
 
 # Specyfikacja Projektu: Budynek Mieszkalny "Zielony Taras"

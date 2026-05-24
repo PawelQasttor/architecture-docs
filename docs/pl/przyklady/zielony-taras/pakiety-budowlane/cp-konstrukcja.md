@@ -50,7 +50,7 @@ ifcMapping:
   ifcEntity: IfcWorkSchedule
   globalId: "6xCP-STRUCT-001"
 
-version: "1.0.0"
+version: "2.1.0"
 tags:
   - "konstrukcja"
   - "fundamenty"
