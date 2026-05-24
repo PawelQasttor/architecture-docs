@@ -610,4 +610,187 @@ describe('validate', () => {
       assert.equal(result.valid, false, 'should fail with wrong sbm_version');
     });
   });
+
+  describe('telemetry_stream entity (v2.2)', () => {
+    function makeStream(overrides = {}) {
+      return {
+        id: 'TEL-CO2-TEST-001',
+        entityType: 'telemetry_stream',
+        sensorChannel: 'co2_ppm',
+        measuredEntityId: 'SP-TEST-001',
+        measuredEntityType: 'space',
+        unit: 'ppm',
+        version: '2.3.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid telemetry_stream', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.telemetry_streams = [makeStream()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject telemetry_stream with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.telemetry_streams = [makeStream({ id: 'SENSOR-001' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-TEL- ID prefix');
+    });
+
+    it('should reject telemetry_stream missing required sensorChannel', async () => {
+      const sbm = createValidSbm();
+      const stream = makeStream();
+      delete stream.sensorChannel;
+      sbm.entities.telemetry_streams = [stream];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail without sensorChannel');
+    });
+
+    it('should reject telemetry_stream with invalid measuredEntityType', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.telemetry_streams = [makeStream({ measuredEntityType: 'random_thing' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum measuredEntityType');
+    });
+  });
+
+  describe('occupant_survey entity (v2.3)', () => {
+    function makeSurvey(overrides = {}) {
+      return {
+        id: 'SURVEY-TEST-001',
+        entityType: 'occupant_survey',
+        surveyType: 'ieq_satisfaction',
+        version: '2.3.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid occupant_survey', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.occupant_surveys = [makeSurvey()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject occupant_survey with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.occupant_surveys = [makeSurvey({ id: 'SURV-001' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-SURVEY- ID prefix');
+    });
+
+    it('should reject occupant_survey with off-enum surveyType', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.occupant_surveys = [makeSurvey({ surveyType: 'random_survey' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum surveyType');
+    });
+  });
+
+  describe('energy_verification_record entity (v2.3)', () => {
+    function makeEvr(overrides = {}) {
+      return {
+        id: 'EVR-TEST-001',
+        entityType: 'energy_verification_record',
+        buildingId: 'BLD-TEST',
+        period: { start: '2027-01-01', end: '2027-12-31' },
+        version: '2.3.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid energy_verification_record', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.energy_verification_records = [makeEvr()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject energy_verification_record with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.energy_verification_records = [makeEvr({ id: 'ENERGY-001' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-EVR- ID prefix');
+    });
+
+    it('should reject energy_verification_record with off-enum verdict', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.energy_verification_records = [makeEvr({ verdict: 'kinda_ok' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum verdict');
+    });
+  });
+
+  describe('retrocx_recommendation entity (v2.3)', () => {
+    function makeRcx(overrides = {}) {
+      return {
+        id: 'RCX-TEST-001',
+        entityType: 'retrocx_recommendation',
+        recommendationTitle: 'Test retro-cx recommendation',
+        status: 'proposed',
+        version: '2.3.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid retrocx_recommendation', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.retrocx_recommendations = [makeRcx()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject retrocx_recommendation with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.retrocx_recommendations = [makeRcx({ id: 'RETROCX-001' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-RCX- ID prefix');
+    });
+
+    it('should reject retrocx_recommendation with off-enum status', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.retrocx_recommendations = [makeRcx({ status: 'maybe' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum status');
+    });
+
+    it('should reject retrocx_recommendation missing required recommendationTitle', async () => {
+      const sbm = createValidSbm();
+      const rcx = makeRcx();
+      delete rcx.recommendationTitle;
+      sbm.entities.retrocx_recommendations = [rcx];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail without recommendationTitle');
+    });
+  });
 });

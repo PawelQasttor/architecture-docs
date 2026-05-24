@@ -399,6 +399,26 @@
           "type": "array",
           "items": { "$ref": "#/definitions/circulation_route" },
           "description": "Egress and accessibility circulation routes connecting spaces (v2.0)"
+        },
+        "telemetry_streams": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/telemetry_stream" },
+          "description": "Time-series telemetry streams from BMS, sub-meters, IoT devices (v2.2)"
+        },
+        "occupant_surveys": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/occupant_survey" },
+          "description": "Structured occupant feedback surveys (v2.3)"
+        },
+        "energy_verification_records": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/energy_verification_record" },
+          "description": "In-use annual energy verification records (v2.3)"
+        },
+        "retrocx_recommendations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/retrocx_recommendation" },
+          "description": "Retro-commissioning recommendations with verification loop (v2.3)"
         }
       }
     },
@@ -3489,7 +3509,7 @@
               "respondentApartmentId": { "type": "string", "description": "Anonymised apartment identifier (do NOT use occupant name)" },
               "affectedEntityId": { "type": "string", "description": "ID of space/system/asset the comment relates to" },
               "affectedEntityType": { "type": "string", "enum": ["space", "system", "asset", "building", "level", "envelope", "site_feature"] },
-              "triggeredIssueId": { "type": "string", "description": "ID of the operation-phase Issue this response triggered (if any)" }
+              "triggeredIssueId": { "type": ["string", "null"], "description": "ID of the operation-phase Issue this response triggered (if any). Null when the response didn't escalate." }
             }
           }
         },
@@ -3644,7 +3664,7 @@
           "type": "object",
           "properties": {
             "method": { "type": "string", "description": "How the outcome will be verified" },
-            "verificationTestId": { "type": "string", "description": "Forward link to the commissioning_test that will verify the outcome (if any)" },
+            "verificationTestId": { "type": ["string", "null"], "description": "Forward link to the commissioning_test that will verify the outcome (if any). Null when verification is informal or pending scheduling." },
             "verificationDueDate": { "type": "string", "format": "date" }
           }
         },
