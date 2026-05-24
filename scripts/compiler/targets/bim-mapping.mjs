@@ -641,6 +641,115 @@ function detectDynamicProperties(sbm) {
  * @param {object} logger - Logger instance
  * @returns {object} - BIM mapping configuration
  */
+/**
+ * v2.2 + v2.3: emit IFC property sets for the new operation-phase entity
+ * types. telemetry_stream maps to IfcSensor/Pset_Sensor_TypeCommon-style
+ * pattern; asset.operationalHistory extends the existing Pset_SBM_Asset
+ * with runtime hours, cycle count, and service tally fields.
+ */
+function generateV22V23PropertySets(sbm) {
+  const sets = [];
+
+  if ((sbm.entities.telemetry_streams || []).length > 0) {
+    sets.push({
+      name: 'Pset_SBM_TelemetryStream',
+      ifcType: 'IfcSensor',
+      sbmVersion: '2.2',
+      description: 'Time-series telemetry stream metadata for operation-phase sensors',
+      properties: [
+        { name: 'TelemetryStreamId', type: 'IfcIdentifier', sbmField: 'id' },
+        { name: 'SensorChannel', type: 'IfcLabel', sbmField: 'sensorChannel' },
+        { name: 'Unit', type: 'IfcText', sbmField: 'unit' },
+        { name: 'SamplingFrequency', type: 'IfcLabel', sbmField: 'samplingFrequency' },
+        { name: 'CurrentRollingMeanValue', type: 'IfcReal', sbmField: 'summaryStatistics.rollingMeans[0].value' },
+        { name: 'CurrentRollingMeanWindow', type: 'IfcLabel', sbmField: 'summaryStatistics.rollingMeans[0].window' },
+        { name: 'DesignTargetExceeded', type: 'IfcBoolean', sbmField: 'summaryStatistics.thresholds[kind=design_target].currentlyExceeded' },
+        { name: 'RegulatoryLimitExceeded', type: 'IfcBoolean', sbmField: 'summaryStatistics.thresholds[kind=regulatory_limit].currentlyExceeded' },
+        { name: 'DataReferenceProtocol', type: 'IfcLabel', sbmField: 'dataReference.protocol' },
+        { name: 'DataReferencePath', type: 'IfcURIReference', sbmField: 'dataReference.path' },
+        { name: 'Coverage', type: 'IfcRatioMeasure', sbmField: 'qualityMetadata.coverage' },
+        { name: 'CalibrationDue', type: 'IfcDate', sbmField: 'qualityMetadata.calibrationDue' }
+      ]
+    });
+  }
+
+  // Extend the asset property set with operationalHistory fields if any asset uses it
+  const assetsWithOpsHistory = (sbm.entities.assets || []).filter(a => a.operationalHistory);
+  if (assetsWithOpsHistory.length > 0) {
+    sets.push({
+      name: 'Pset_SBM_AssetOperationalHistory',
+      ifcType: 'IfcDistributionElement',
+      sbmVersion: '2.2',
+      description: 'Asset operational-history fields (runtime, service log, performance trend)',
+      properties: [
+        { name: 'RuntimeHours', type: 'IfcReal', sbmField: 'operationalHistory.runtimeHours' },
+        { name: 'RuntimeHoursAsOf', type: 'IfcDate', sbmField: 'operationalHistory.runtimeHoursAsOf' },
+        { name: 'CycleCount', type: 'IfcInteger', sbmField: 'operationalHistory.cycleCount' },
+        { name: 'EnergyConsumedKWh', type: 'IfcEnergyMeasure', sbmField: 'operationalHistory.energyConsumed_kWh' },
+        { name: 'ServiceEventCount', type: 'IfcInteger', sbmField: 'operationalHistory.servicedAt[].length' },
+        { name: 'LastServiceDate', type: 'IfcDate', sbmField: 'operationalHistory.servicedAt[-1].date' },
+        { name: 'LastServiceType', type: 'IfcLabel', sbmField: 'operationalHistory.servicedAt[-1].type' }
+      ]
+    });
+  }
+
+  if ((sbm.entities.occupant_surveys || []).length > 0) {
+    sets.push({
+      name: 'Pset_SBM_OccupantSurvey',
+      ifcType: 'IfcBuilding',
+      sbmVersion: '2.3',
+      description: 'Occupant feedback survey aggregate scores at building level',
+      properties: [
+        { name: 'SurveyId', type: 'IfcIdentifier', sbmField: 'id' },
+        { name: 'SurveyType', type: 'IfcLabel', sbmField: 'surveyType' },
+        { name: 'PeriodStart', type: 'IfcDate', sbmField: 'period.start' },
+        { name: 'PeriodEnd', type: 'IfcDate', sbmField: 'period.end' },
+        { name: 'ResponseRatePercent', type: 'IfcRatioMeasure', sbmField: 'responseRate.percent' },
+        { name: 'FlaggedDimensionCount', type: 'IfcInteger', sbmField: 'dimensions[flagged=true].length' }
+      ]
+    });
+  }
+
+  if ((sbm.entities.energy_verification_records || []).length > 0) {
+    sets.push({
+      name: 'Pset_SBM_EnergyVerification',
+      ifcType: 'IfcBuilding',
+      sbmVersion: '2.3',
+      description: 'In-use energy verification record at building level',
+      properties: [
+        { name: 'VerificationRecordId', type: 'IfcIdentifier', sbmField: 'id' },
+        { name: 'PeriodStart', type: 'IfcDate', sbmField: 'period.start' },
+        { name: 'PeriodEnd', type: 'IfcDate', sbmField: 'period.end' },
+        { name: 'MeasuredHeatingDemand', type: 'IfcReal', sbmField: 'measured.heatingDemand' },
+        { name: 'MeasuredPrimaryEnergy', type: 'IfcReal', sbmField: 'measured.primaryEnergy' },
+        { name: 'MeasuredEnergyClass', type: 'IfcLabel', sbmField: 'measured.energyClass' },
+        { name: 'DesignEnergyClass', type: 'IfcLabel', sbmField: 'designTargets.energyClass' },
+        { name: 'Verdict', type: 'IfcLabel', sbmField: 'verdict' }
+      ]
+    });
+  }
+
+  if ((sbm.entities.retrocx_recommendations || []).length > 0) {
+    sets.push({
+      name: 'Pset_SBM_RetrocxRecommendation',
+      ifcType: 'IfcSystem',
+      sbmVersion: '2.3',
+      description: 'Retro-commissioning recommendation tracking',
+      properties: [
+        { name: 'RecommendationId', type: 'IfcIdentifier', sbmField: 'id' },
+        { name: 'Title', type: 'IfcLabel', sbmField: 'recommendationTitle' },
+        { name: 'Status', type: 'IfcLabel', sbmField: 'status' },
+        { name: 'ProposedDate', type: 'IfcDate', sbmField: 'proposedDate' },
+        { name: 'ExecutedDate', type: 'IfcDate', sbmField: 'executedDate' },
+        { name: 'VerificationDueDate', type: 'IfcDate', sbmField: 'verificationPlan.verificationDueDate' },
+        { name: 'CostEstimateEur', type: 'IfcMonetaryMeasure', sbmField: 'costEstimate_eur' }
+      ]
+    });
+  }
+
+  return sets;
+}
+
 export function generateBimMapping(sbm, logger) {
   logger.debug('Generating BIM mapping configuration...');
 
@@ -648,7 +757,9 @@ export function generateBimMapping(sbm, logger) {
   logger.debug(`Generated ${revitSharedParameters.groups.length} Revit shared parameter groups`);
 
   const ifcPropertySets = generateIfcPropertySets(sbm);
-  logger.debug(`Generated ${ifcPropertySets.propertySets.length} IFC property sets`);
+  const v22v23PropertySets = generateV22V23PropertySets(sbm);
+  ifcPropertySets.propertySets.push(...v22v23PropertySets);
+  logger.debug(`Generated ${ifcPropertySets.propertySets.length} IFC property sets (${v22v23PropertySets.length} from v2.2/v2.3 entities)`);
 
   const parameterMappings = generateParameterMappings(sbm);
   logger.debug(`Generated parameter mappings for ${Object.keys(parameterMappings.mappings).length} entity types`);

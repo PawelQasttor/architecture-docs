@@ -116,6 +116,24 @@ const QUALITY_PROFILES = {
   circulation_route: {
     critical: ['routeName', 'routeType', 'buildingId'],
     important: ['waypoints', 'totalTravelDistance', 'maxTravelDistance', 'minimumWidth']
+  },
+  // v2.2 entity type profiles
+  telemetry_stream: {
+    critical: ['sensorChannel', 'measuredEntityId', 'measuredEntityType', 'unit'],
+    important: ['dataReference', 'summaryStatistics', 'qualityMetadata', 'sourceDeviceId']
+  },
+  // v2.3 entity type profiles
+  occupant_survey: {
+    critical: ['surveyType'],
+    important: ['period', 'responseRate', 'dimensions', 'methodology']
+  },
+  energy_verification_record: {
+    critical: ['buildingId', 'period', 'measured', 'designTargets'],
+    important: ['verdict', 'deltaAnalysis', 'dataReference', 'status']
+  },
+  retrocx_recommendation: {
+    critical: ['recommendationTitle', 'status'],
+    important: ['proposedIntervention', 'expectedOutcome', 'verificationPlan', 'affectedSystemIds']
   }
 };
 

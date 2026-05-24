@@ -89,6 +89,22 @@ const I18N = {
       review_required: 'review required', not_applicable: 'not applicable',
       non_compliant: 'non-compliant', partial: 'partial',
     },
+    // v2.2/v2.3 operation-phase section
+    opsHeader: 'Operation-phase signals',
+    opsIntro: 'Live signals from telemetry streams, occupant surveys, energy verification, and retro-commissioning.',
+    opsTelHeader: 'Telemetry streams',
+    opsTelStreams: (n) => `${n} stream(s) tracked`,
+    opsTelBreach: (n) => `${n} currently breach a design target or regulatory limit`,
+    opsTelNoBreach: 'All streams within design + regulatory thresholds',
+    opsSurveyHeader: 'Occupant surveys',
+    opsSurveyTotal: (n) => `${n} survey(s)`,
+    opsSurveyFlagged: (n) => `${n} flagged dimension(s) below satisfaction threshold`,
+    opsEvrHeader: 'In-use energy verification',
+    opsEvrPeriod: (start, end) => `Period: ${start} → ${end}`,
+    opsEvrNone: 'No energy verification records yet',
+    opsRcxHeader: 'Retro-commissioning',
+    opsRcxTotal: (n) => `${n} recommendation(s)`,
+    opsRcxAwaiting: (n) => `${n} awaiting verification`,
   },
   pl: {
     htmlLang: 'pl',
@@ -143,6 +159,22 @@ const I18N = {
       review_required: 'do przeglądu', not_applicable: 'nie dotyczy',
       non_compliant: 'niezgodne', partial: 'częściowe',
     },
+    // v2.2/v2.3 operation-phase section
+    opsHeader: 'Sygnały z fazy eksploatacji',
+    opsIntro: 'Sygnały na żywo ze strumieni telemetrii, ankiet mieszkańców, weryfikacji energetycznej i retro-commissioningu.',
+    opsTelHeader: 'Strumienie telemetrii',
+    opsTelStreams: (n) => `Śledzone strumienie: ${n}`,
+    opsTelBreach: (n) => `${n} aktualnie przekracza cel projektowy lub limit regulacyjny`,
+    opsTelNoBreach: 'Wszystkie strumienie w granicach progów projektowych i regulacyjnych',
+    opsSurveyHeader: 'Ankiety mieszkańców',
+    opsSurveyTotal: (n) => `Ankiety: ${n}`,
+    opsSurveyFlagged: (n) => `${n} oznaczonych wymiarów poniżej progu zadowolenia`,
+    opsEvrHeader: 'Weryfikacja energii w użyciu',
+    opsEvrPeriod: (start, end) => `Okres: ${start} → ${end}`,
+    opsEvrNone: 'Brak zapisów weryfikacji energetycznej',
+    opsRcxHeader: 'Retro-commissioning',
+    opsRcxTotal: (n) => `Rekomendacje: ${n}`,
+    opsRcxAwaiting: (n) => `${n} oczekuje na weryfikację`,
   },
 };
 
@@ -152,6 +184,87 @@ function locItem(item, L) {
   const fn = item && item.code && L.rec && L.rec[item.code];
   if (fn) return esc(fn(item.count, item.phase));
   return esc((item && (item.action || item.rule)) || item);
+}
+
+/**
+ * Render the v2.2/v2.3 operation-phase signals section, if the model has any.
+ * Returns empty string for design-phase projects (no telemetry/survey/EVR/retrocx).
+ */
+function renderOperationPhaseSection(sbm, complianceReport, L) {
+  const signals = complianceReport?.operationPhaseSignals;
+  if (!signals) return '';
+
+  const tel = signals.telemetry || {};
+  const survey = signals.occupantSurveys || {};
+  const evr = signals.energyVerification;
+  const rcx = signals.retroCommissioning || {};
+
+  // Build per-section blocks; skip ones with no data
+  const blocks = [];
+
+  if (tel.totalStreams > 0) {
+    const breachCount = tel.streamsWithActiveBreach || 0;
+    const rows = (tel.breachingStreams || []).slice(0, 5).map(s =>
+      `<tr><td>${esc(s.streamId)}</td><td>${esc(s.sensorChannel)}</td><td>${esc(s.measuredEntityId)}</td><td>${
+        s.breaches.map(b => `<span class="badge warn">${esc(b.kind)}: ≤${b.value}</span>`).join(' ')
+      }</td></tr>`
+    ).join('');
+    blocks.push(`<div class="panel" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>${esc(L.opsTelHeader)}</strong> · ${esc(L.opsTelStreams(tel.totalStreams))}
+      · ${breachCount > 0
+        ? `<span class="badge warn">${esc(L.opsTelBreach(breachCount))}</span>`
+        : `<span class="badge ok">${esc(L.opsTelNoBreach)}</span>`}</p>
+      ${rows ? `<table style="margin-top:10px"><tr><th>Stream</th><th>Channel</th><th>Measures</th><th>Breach</th></tr>${rows}</table>` : ''}
+    </div>`);
+  }
+
+  if (survey.totalSurveys > 0) {
+    const flaggedCount = (survey.flaggedDimensions || []).length;
+    const rows = (survey.flaggedDimensions || []).slice(0, 5).map(d =>
+      `<tr><td>${esc(d.surveyId)}</td><td>${esc(d.dimension)}</td><td>${d.meanScore}</td><td>${d.percentSatisfied}%</td></tr>`
+    ).join('');
+    blocks.push(`<div class="panel" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>${esc(L.opsSurveyHeader)}</strong> · ${esc(L.opsSurveyTotal(survey.totalSurveys))}
+      · ${flaggedCount > 0
+        ? `<span class="badge warn">${esc(L.opsSurveyFlagged(flaggedCount))}</span>`
+        : `<span class="badge ok">0 flagged</span>`}</p>
+      ${rows ? `<table style="margin-top:10px"><tr><th>Survey</th><th>Dimension</th><th>Mean</th><th>% satisfied</th></tr>${rows}</table>` : ''}
+    </div>`);
+  }
+
+  if (evr) {
+    const verdictBadge = evr.designClassConfirmed
+      ? `<span class="badge ok">${esc(evr.verdict)}</span>`
+      : `<span class="badge warn">${esc(evr.verdict)}</span>`;
+    const deltaRows = (evr.deltaFactors || []).map(f =>
+      `<tr><td>${esc(f.factor)}</td><td>+${f.contribution_kWh_per_m2} kWh/m²/yr</td><td>${esc(f.relatedIssueId || '—')}</td></tr>`
+    ).join('');
+    blocks.push(`<div class="panel" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>${esc(L.opsEvrHeader)}</strong> · ${esc(evr.latestRecordId)} ${verdictBadge}</p>
+      <p style="margin:4px 0;color:var(--mut);font-size:13px">${esc(L.opsEvrPeriod(evr.latestPeriod?.start, evr.latestPeriod?.end))}</p>
+      ${deltaRows ? `<table style="margin-top:10px"><tr><th>Factor</th><th>Contribution</th><th>Related issue</th></tr>${deltaRows}</table>` : ''}
+    </div>`);
+  }
+
+  if (rcx.totalRecommendations > 0) {
+    const awaitingRows = (rcx.awaitingVerification || []).slice(0, 5).map(r =>
+      `<tr><td>${esc(r.id)}</td><td>${esc(r.title)}</td><td>${esc(r.verificationDueDate || '—')}</td></tr>`
+    ).join('');
+    const awaitingCount = (rcx.awaitingVerification || []).length;
+    blocks.push(`<div class="panel" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>${esc(L.opsRcxHeader)}</strong> · ${esc(L.opsRcxTotal(rcx.totalRecommendations))}
+      · ${awaitingCount > 0
+        ? `<span class="badge warn">${esc(L.opsRcxAwaiting(awaitingCount))}</span>`
+        : `<span class="badge ok">0 awaiting</span>`}</p>
+      ${awaitingRows ? `<table style="margin-top:10px"><tr><th>ID</th><th>Title</th><th>Due</th></tr>${awaitingRows}</table>` : ''}
+    </div>`);
+  }
+
+  if (blocks.length === 0) return '';
+
+  return `<h2>${esc(L.opsHeader)}</h2>
+  <p style="margin:-6px 0 12px;color:var(--mut);font-size:13px">${esc(L.opsIntro)}</p>
+  ${blocks.join('\n')}`;
 }
 
 export function generateHtmlReport(sbm, projectQuality, complianceReport, qualityReport, durationSec) {
@@ -265,6 +378,8 @@ ${plSections.length ? `<h2>${esc(L.compliance)} — ${esc(complianceReport.polan
   <tr><th>${esc(L.thSection)}</th><th>${esc(L.thDescription)}</th><th>${esc(L.thStatus)}</th></tr>
   ${plSections.slice(0, 12).map(s => `<tr><td>${esc(s.section)}</td><td>${esc(s.description)}</td><td>${esc(L.status[s.status] || s.status)}</td></tr>`).join('')}
 </table>` : ''}
+
+${renderOperationPhaseSection(sbm, complianceReport, L)}
 
 <h2>${esc(L.dataQuality)}</h2>
 <table>

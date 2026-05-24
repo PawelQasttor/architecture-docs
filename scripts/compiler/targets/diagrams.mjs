@@ -32,6 +32,12 @@ const I18N = {
     fireZone: 'Fire',
     hvacZone: 'HVAC',
     acousticZone: 'Acoustic',
+    healthTitle: 'Operation-phase health (v2.2/v2.3)',
+    healthTelemetry: 'Telemetry streams',
+    healthSurvey: 'Survey dimensions flagged',
+    healthRetrocx: 'Retrocx awaiting verification',
+    healthEvr: 'Energy class',
+    healthNone: 'no signals',
   },
   pl: {
     sectionTitle: 'Projekt w skrócie',
@@ -49,6 +55,12 @@ const I18N = {
     fireZone: 'Pożarowa',
     hvacZone: 'HVAC',
     acousticZone: 'Akustyczna',
+    healthTitle: 'Zdrowie fazy eksploatacji (v2.2/v2.3)',
+    healthTelemetry: 'Strumienie telemetrii',
+    healthSurvey: 'Oznaczone wymiary ankiety',
+    healthRetrocx: 'Retrocx oczek. weryfikacji',
+    healthEvr: 'Klasa energetyczna',
+    healthNone: 'brak sygnałów',
   },
 };
 
@@ -305,6 +317,65 @@ function adjacencySvg(sbm, L) {
 // ──────────────────────────────────────────────────────────────────────
 // Combined panel for embedding in the HTML report
 // ──────────────────────────────────────────────────────────────────────
+/**
+ * v2.2/v2.3 operation-phase health overlay.
+ * Renders a small 4-tile SVG with status counts when the model has any
+ * operation-phase entities. Returns null for design-phase projects.
+ */
+function operationHealthSvg(sbm, L) {
+  const telemetry = sbm.entities.telemetry_streams || [];
+  const surveys = sbm.entities.occupant_surveys || [];
+  const evrs = sbm.entities.energy_verification_records || [];
+  const retrocx = sbm.entities.retrocx_recommendations || [];
+
+  if (telemetry.length === 0 && surveys.length === 0 && evrs.length === 0 && retrocx.length === 0) {
+    return null;
+  }
+
+  // Telemetry: count breaching design target
+  const telBreach = telemetry.filter(t =>
+    (t.summaryStatistics?.thresholds || []).some(th => th.kind === 'design_target' && th.currentlyExceeded)
+  ).length;
+
+  // Surveys: count flagged dimensions across all surveys
+  const surveyFlagged = surveys.reduce(
+    (n, s) => n + (s.dimensions || []).filter(d => d.flagged).length,
+    0
+  );
+
+  // EVR: most recent verdict
+  const latestEvr = evrs.length
+    ? evrs.reduce((a, b) => ((a.period?.end || '') > (b.period?.end || '') ? a : b))
+    : null;
+  const evrClassMatched = latestEvr?.measured?.energyClass === latestEvr?.designTargets?.energyClass;
+  const evrLabel = latestEvr
+    ? `${latestEvr.measured?.energyClass || '—'} ${evrClassMatched ? '✓' : '↓'}`
+    : '—';
+
+  // Retro-cx: count awaiting verification
+  const rcxAwaiting = retrocx.filter(r => r.status === 'executed_awaiting_verification').length;
+
+  // Choose colour per tile (green = clean, amber = attention)
+  const tileBg = (warn) => warn ? '#fdf3df' : '#e7f5ee';
+  const tileInk = (warn) => warn ? '#9a6a00' : '#1a7f4b';
+
+  const tile = (x, label, big, warn) =>
+    `<g transform="translate(${x},0)">
+       <rect width="155" height="92" rx="8" fill="${tileBg(warn)}" stroke="${tileInk(warn)}" stroke-width="1.5"/>
+       <text x="77" y="46" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif"
+             font-size="28" font-weight="700" fill="${tileInk(warn)}">${esc(big)}</text>
+       <text x="77" y="72" text-anchor="middle" font-family="-apple-system,Segoe UI,sans-serif"
+             font-size="11" fill="${tileInk(warn)}">${esc(label)}</text>
+     </g>`;
+
+  return `<svg viewBox="0 0 660 92" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:660px;height:auto">
+    ${tile(0,   `${L.healthTelemetry}` + (telemetry.length ? ` (of ${telemetry.length})` : ''), telBreach || '0', telBreach > 0)}
+    ${tile(168, L.healthSurvey,    surveyFlagged || '0', surveyFlagged > 0)}
+    ${tile(336, L.healthRetrocx,   rcxAwaiting   || '0', rcxAwaiting > 0)}
+    ${tile(504, L.healthEvr,       evrLabel,     latestEvr && !evrClassMatched)}
+  </svg>`;
+}
+
 export function generateDiagrams(sbm, language = 'en') {
   const lang = String(language || 'en').toLowerCase().startsWith('pl') ? 'pl' : 'en';
   const L = I18N[lang];
@@ -312,8 +383,9 @@ export function generateDiagrams(sbm, language = 'en') {
   const m = massingSvg(sbm, L);
   const s = stackingSvg(sbm, L);
   const a = adjacencySvg(sbm, L);
+  const h = operationHealthSvg(sbm, L);
 
-  if (!m && !s && !a) return ''; // no data → no panel
+  if (!m && !s && !a && !h) return ''; // no data → no panel
 
   const cell = (title, svg, full = false) => svg
     ? `<div style="${full ? 'grid-column:1 / -1;' : ''}">
@@ -329,6 +401,7 @@ export function generateDiagrams(sbm, language = 'en') {
     ${cell(L.massingTitle, m)}
     ${cell(L.stackingTitle, s)}
     ${cell(L.adjacencyTitle, a, true)}
+    ${cell(L.healthTitle, h, true)}
   </div>
   <p style="margin:14px 0 0;color:var(--mut);font-size:12px;font-style:italic">${esc(L.schematicNote)}</p>
 </div>`;

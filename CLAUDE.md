@@ -102,23 +102,26 @@ When changing the schema or a pipeline stage, update the matching test in
 - **Adding a required schema field:** update *every* example file in *both*
   sibling examples (green-terrace/ + green-terrace-2028/, EN + PL) or
   `sbm:validate` and `sbm:validate:2028` will fail.
-- **Two sibling examples exist:** `green-terrace/` is the design-phase
-  reference (CD / LOD 400, 60 files per locale), `green-terrace-2028/` is
-  the operation-phase sibling (22 months post-handover, 22 files per locale).
-  Both compile to their own `build/<name>/sbm.json` via the corresponding
-  npm scripts.
+- **Three sibling examples exist:**
+  - `green-terrace/` — design-phase reference (CD / LOD 400, 60 files per locale)
+  - `green-terrace-2028/` — operation-phase sibling (22 months post-handover, ~30 files per locale)
+  - `green-terrace-park/` — Campus showcase (4 buildings at 4 different lifecycle phases, 13 files per locale)
+  Each compiles to its own `build/<name>/sbm.json` via dedicated npm scripts
+  (`sbm:compile`, `sbm:compile:2028`, `sbm:compile:park` and matching `:validate`).
 - **Versioning:** follow Keep a Changelog in `CHANGELOG.md`; releases are committed
-  directly to `master` with a `Release SBM vX.Y.Z: …` message (linear history).
+  directly to `master` with a `feat(schema)!: SBM vX.Y.Z` message and tagged
+  with `git tag -a vX.Y.Z` (linear history). Schema files are frozen at major
+  versions (`schemas/sbm-schema-v2.0.json`, `v2.2.json`, `v2.3.json`).
 
 ## Known open work
 
-- **v2.2 schema discussion**: `docs/en/examples/green-terrace-2028/SCHEMA-GAPS.md`
-  documents 5 operation-phase patterns the v2.0 schema doesn't model cleanly
-  (top: `telemetry_stream` entity, `asset.operationalHistory` sub-schema).
-  Top two are load-bearing for any future operation-phase work.
-- **Campus entity** is the only 1 of 27 SBM entity types with no working
-  example. A planned "Green Terrace Park" sibling example would close this gap.
-- **Legacy element-spec files**: `external-wall-type-a.md` (EN) and
-  `sciana-zewnetrzna-typ-a.md` (PL) are pre-v2 duplicates of the proper
-  Envelope entity (`envelope-external-wall-type-a.md`). ~20 cross-doc links
-  reference them, so deletion needs a coordinated link sweep.
+(All operation-phase SCHEMA-GAPS resolved as of v2.3.0. The example
+inventory is complete: 31 of 31 entity types have working examples.)
+
+- Pre-handover BIM consumer pilots (real Revit / Solibri / IFC validators)
+  would shake out any pset-mapping issues in the v2.2/v2.3 PSets added
+  to `bim-mapping.mjs`. No known issue today; just untested in tooling
+  outside the SBM project itself.
+- The bedroom-01 / corridor / level-01 narrative still references some
+  v0.4 simulation paths in the body. Functional but slightly dated;
+  could be retold in a v2.x voice later.
