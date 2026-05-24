@@ -332,6 +332,33 @@ export default defineConfig({
                     { text: 'Test: Air-tightness', link: '/en/examples/green-terrace/commissioning-tests/CT-AIRTIGHTNESS-001' },
                     { text: 'Test: Fire Drill', link: '/en/examples/green-terrace/commissioning-tests/CT-FIRE-DRILL-001' }
                   ]
+                },
+                {
+                  text: 'Green Terrace 2028 (Operation Phase)',
+                  collapsed: true,
+                  items: [
+                    { text: 'Operation Phase Overview', link: '/en/examples/green-terrace-2028/' },
+                    { text: 'Building (in operation)', link: '/en/examples/green-terrace-2028/building' },
+                    { text: 'Site', link: '/en/examples/green-terrace-2028/site' },
+                    { text: 'Level 04 (ops issues cluster)', link: '/en/examples/green-terrace-2028/levels/level-04' },
+                    { text: 'Bedroom 4.02 (CO₂ anomaly)', link: '/en/examples/green-terrace-2028/spaces/bedroom-402' },
+                    { text: 'System: HVAC (operational)', link: '/en/examples/green-terrace-2028/systems/sys-hvac-01' },
+                    { text: 'Heat pump (operational)', link: '/en/examples/green-terrace-2028/assets/ai-hp-01-ops' },
+                    { text: 'MVHR (operational)', link: '/en/examples/green-terrace-2028/assets/ai-mvhr-01-ops' },
+                    { text: 'UFH manifold (operational)', link: '/en/examples/green-terrace-2028/assets/ai-ufh-manifold-01-ops' },
+                    { text: 'Test: MVHR — executed (cond. pass)', link: '/en/examples/green-terrace-2028/commissioning-tests/CT-MVHR-001' },
+                    { text: 'Test: Air-tightness — executed + retest', link: '/en/examples/green-terrace-2028/commissioning-tests/CT-AIRTIGHTNESS-001' },
+                    { text: 'Test: Fire drill — executed (pass)', link: '/en/examples/green-terrace-2028/commissioning-tests/CT-FIRE-DRILL-001' },
+                    { text: 'Issue: Heat pump warranty', link: '/en/examples/green-terrace-2028/issues/ISS-WARRANTY-HP-001' },
+                    { text: 'Issue: Tenant maintenance request', link: '/en/examples/green-terrace-2028/issues/ISS-TENANT-MR-001' },
+                    { text: 'Issue: CO₂ sensor anomaly', link: '/en/examples/green-terrace-2028/issues/ISS-ANOMALY-CO2-001' },
+                    { text: 'Issue: Retro-cx MVHR rebalance', link: '/en/examples/green-terrace-2028/issues/ISS-RETROCX-MVHR-001' },
+                    { text: 'Issue: Fire inspection finding', link: '/en/examples/green-terrace-2028/issues/ISS-INSPECTION-FD-001' },
+                    { text: 'Issue: Air-tightness NCR', link: '/en/examples/green-terrace-2028/issues/ISS-NC-AIRTIGHTNESS-001' },
+                    { text: 'Energy verification 2027', link: '/en/examples/green-terrace-2028/energy-verification' },
+                    { text: 'Tenant IEQ survey 2027', link: '/en/examples/green-terrace-2028/tenant-survey-summary' },
+                    { text: 'SCHEMA-GAPS (input to v2.2)', link: '/en/examples/green-terrace-2028/SCHEMA-GAPS' }
+                  ]
                 }
               ]
             }
@@ -660,6 +687,33 @@ export default defineConfig({
                     { text: 'Test: Regulacja MVHR', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-MVHR-001' },
                     { text: 'Test: Szczelność powietrzna', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-AIRTIGHTNESS-001' },
                     { text: 'Test: Próbna ewakuacja', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-FIRE-DRILL-001' }
+                  ]
+                },
+                {
+                  text: 'Zielony Taras 2028 (faza eksploatacji)',
+                  collapsed: true,
+                  items: [
+                    { text: 'Przegląd fazy eksploatacji', link: '/pl/przyklady/zielony-taras-2028/' },
+                    { text: 'Budynek (w eksploatacji)', link: '/pl/przyklady/zielony-taras-2028/budynek' },
+                    { text: 'Działka', link: '/pl/przyklady/zielony-taras-2028/dzialka' },
+                    { text: 'Poziom 04 (skupisko ops)', link: '/pl/przyklady/zielony-taras-2028/poziomy/poziom-04' },
+                    { text: 'Sypialnia 4.02 (anomalia CO₂)', link: '/pl/przyklady/zielony-taras-2028/przestrzenie/sypialnia-402' },
+                    { text: 'System: HVAC (eksploatacja)', link: '/pl/przyklady/zielony-taras-2028/systemy/sys-hvac-01' },
+                    { text: 'Pompa ciepła (eksploatacja)', link: '/pl/przyklady/zielony-taras-2028/zasoby/ai-hp-01-ops' },
+                    { text: 'MVHR (eksploatacja)', link: '/pl/przyklady/zielony-taras-2028/zasoby/ai-mvhr-01-ops' },
+                    { text: 'Rozdzielacz UFH (eksploatacja)', link: '/pl/przyklady/zielony-taras-2028/zasoby/ai-ufh-manifold-01-ops' },
+                    { text: 'Test: MVHR — wykonano (war. zal.)', link: '/pl/przyklady/zielony-taras-2028/testy-rozruchowe/CT-MVHR-001' },
+                    { text: 'Test: Szczelność — wykonano + powtórny', link: '/pl/przyklady/zielony-taras-2028/testy-rozruchowe/CT-AIRTIGHTNESS-001' },
+                    { text: 'Test: Próbna ewakuacja — zaliczono', link: '/pl/przyklady/zielony-taras-2028/testy-rozruchowe/CT-FIRE-DRILL-001' },
+                    { text: 'Zgłoszenie: Gwarancja pompy ciepła', link: '/pl/przyklady/zielony-taras-2028/zgloszenia/ISS-WARRANTY-HP-001' },
+                    { text: 'Zgłoszenie: Konserwacja mieszkańca', link: '/pl/przyklady/zielony-taras-2028/zgloszenia/ISS-TENANT-MR-001' },
+                    { text: 'Zgłoszenie: Anomalia CO₂', link: '/pl/przyklady/zielony-taras-2028/zgloszenia/ISS-ANOMALY-CO2-001' },
+                    { text: 'Zgłoszenie: Retro-cx MVHR', link: '/pl/przyklady/zielony-taras-2028/zgloszenia/ISS-RETROCX-MVHR-001' },
+                    { text: 'Zgłoszenie: Inspekcja pożarowa', link: '/pl/przyklady/zielony-taras-2028/zgloszenia/ISS-INSPECTION-FD-001' },
+                    { text: 'Zgłoszenie: NCR szczelności', link: '/pl/przyklady/zielony-taras-2028/zgloszenia/ISS-NC-AIRTIGHTNESS-001' },
+                    { text: 'Weryfikacja energetyczna 2027', link: '/pl/przyklady/zielony-taras-2028/weryfikacja-energetyczna' },
+                    { text: 'Ankieta IEQ mieszkańców 2027', link: '/pl/przyklady/zielony-taras-2028/podsumowanie-ankiety-mieszkancow' },
+                    { text: 'SCHEMA-GAPS (wejście do v2.2)', link: '/pl/przyklady/zielony-taras-2028/SCHEMA-GAPS' }
                   ]
                 }
               ]

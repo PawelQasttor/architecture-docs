@@ -1,0 +1,100 @@
+---
+entityType: "issue"
+id: "ISS-NC-AIRTIGHTNESS-001"
+version: "2.1.0"
+projectPhase: "operation"
+
+issueTitle: "Niezgodność — 18-miesięczny powtórny test szczelności pogorszony z 1,6 do 1,7 ACH"
+issueType: "non_conformance"
+issueNumber: "NCR-001"
+status: "under_review"
+priority: "medium"
+
+description: |
+  18-miesięczny powtórny test szczelności powietrznej (drugi przebieg
+  CT-AIRTIGHTNESS-001) zmierzył n50 = 1,7 ACH, wobec wartości przy
+  przekazaniu 1,6 i celu projektowego 1,5. Budynek nadal spełnia limit
+  regulacyjny WT 2021 § 328 (n50 ≤ 2,5) z komfortowym marginesem, ale
+  margines projektowy się skompresował, a klasa energetyczna w użyciu
+  (47 kWh/m²/rok zmierzone vs 45 projektowe) odzwierciedla ten poślizg.
+
+  Inspekcja podwykonawcy przegród + testera ATTMA prześledziła degradację
+  do zużycia uszczelek obwodowych na ościeżach okien południowych Poziomu 04.
+  Zakres remediacji: wymienić 12 uszczelek obwodowych (~€2 800), następnie
+  ponownie przetestować. Do wykonania przed 36-miesięcznym serwisem.
+
+buildingId: "BLD-01"
+relatedEntityIds:
+  - "ENV-EW-01"
+  - "CT-AIRTIGHTNESS-001"
+
+initiatedBy:
+  name: "Marek Lis"
+  organization: "PowietrzPro Sp. z o.o."
+  role: "tester szczelności"
+  date: "2027-08-25"
+assignedTo:
+  name: "PolFasada Sp. z o.o."
+  organization: "Pierwotny podwykonawca przegród"
+  role: "remediacja w 2-letnim okresie wad"
+dueDate: "2028-02-15"
+responseDate: "2027-09-10"
+
+response:
+  respondedBy: "PolFasada Sp. z o.o."
+  responseDate: "2027-09-10"
+  responseText: |
+    Inspekcja 2027-09-05 potwierdziła degradację uszczelek obwodowych
+    na 12 z 18 ościeży okien południowych Poziomu 04. Przyczyna:
+    cyklowanie termiczne przyspieszyło zużycie spoiwa silikonowego
+    wyspecyfikowanego dla pierwotnego montażu (nie problem wykonawczy).
+    Wymienimy 12 dotkniętych uszczelek + dodamy rezerwę dla pozostałych 6,
+    jeśli degradacja będzie kontynuowana. Szacowany koszt €2 800 —
+    w 2-letnim okresie wad, brak obciążenia inwestora. Prace zaplanowane
+    na tydzień 2028-01-15.
+
+costImpact:
+  estimatedDeltaEur: 0
+  appliesTo: "defects_period"
+  notes: "W 2-letnim okresie wad przegród — brak obciążenia inwestora."
+
+scheduleImpact:
+  estimatedDelayDays: 0
+
+tags:
+  - "operation-phase-example"
+  - "niezgodnosc"
+  - "charakterystyka-energetyczna"
+
+changelog:
+  - version: "2.1.0"
+    date: "2026-05-24"
+    description: "Niezgodność podniesiona z 18-miesięcznego ponownego testu, prześledzona do zużycia uszczelki, remediacja w okresie wad — demonstruje pętlę test→NCR→remediacja→ponowny test"
+---
+
+# Zgłoszenie — Niezgodność szczelności powietrznej, degradacja uszczelki obwodowej (ISS-NC-AIRTIGHTNESS-001)
+
+**Zgłoszenie niezgodności** podniesione z rutynowego powtórnego testu.
+Budynek jest **nadal zgodny z regulacją**, ale **poza zgodnością z celem
+projektowym** — a cel projektowy ma znaczenie, ponieważ klasa energetyczna
+w użyciu od niego zależy.
+
+| Pole | Wartość |
+|---|---|
+| Typ | Niezgodność |
+| Status | W przeglądzie (remediacja zaplanowana) |
+| Zgłoszono | 2027-08-25 (wynik powtórnego testu CT-AIRTIGHTNESS) |
+| Remediacja zaplanowana | 2028-01-15 |
+| Koszt | €0 (w 2-letnim okresie wad) |
+
+## Cykl, który ujawnia to zgłoszenie
+
+Niezgodność prześledza się z powrotem do **zaplanowanego testu**, który
+został ustanowiony podczas rozruchu, który sam został wyspecyfikowany
+w pierwotnym **wymaganiu projektowym**. Ponowny test *jest* głosem projektu
+w eksploatacji — bez niego poślizg szczelności pozostałby niezauważony
+przez lata, a poślizg klasy energetycznej wraz z nim.
+
+To dokładnie pętla, którą SBM jest zbudowany nieść: wymaganie → plan testu →
+wykonanie testu → ponowny test → niezgodność → remediacja → ponowny test.
+Każdy krok jest dyskretną encją; razem tworzą ślad audytu.
