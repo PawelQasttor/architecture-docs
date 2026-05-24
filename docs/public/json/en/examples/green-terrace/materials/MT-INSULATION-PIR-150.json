@@ -1,0 +1,64 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\materials\\MT-INSULATION-PIR-150.md",
+    "extractedAt": "2026-05-24T19:47:14.095Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "material_type",
+  "id": "MT-INSULATION-PIR-150",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "materialName": "PIR rigid insulation board, 150 mm",
+  "materialCategory": "insulation",
+  "description": "Polyisocyanurate (PIR) rigid foam insulation board with mineral-fibre\nfacings, 150 mm thick. Used as primary insulation layer in the\nType A external wall and as roof insulation under the green roof\nbuild-up. Chosen for the combination of low U-value, dimensional\nstability, and compatibility with the ventilated cavity construction.\n",
+  "manufacturer": "Kingspan Insulation",
+  "productCode": "Kooltherm K15 — 150 mm",
+  "standard": "PN-EN 13165",
+  "physicalProperties": {
+    "density": 35,
+    "thermalConductivity": 0.022,
+    "specificHeatCapacity": 1400,
+    "vaporResistanceFactor": 60,
+    "waterAbsorption": 0.5
+  },
+  "fireProperties": {
+    "reactionToFire": "B-s1,d0"
+  },
+  "sustainability": {
+    "embodiedCarbonKgCO2ePerM3": 280,
+    "epdReference": "Kingspan EPD-KOOLTHERM-K15-2024",
+    "recycledContent": 0,
+    "responsibleSourcing": "Kingspan IMS — ISO 14001 + ISO 50001",
+    "endOfLife": "Mechanical recycling pilot programme; default route is energy recovery"
+  },
+  "constructionPackageId": "CP-ENVELOPE",
+  "sources": [
+    {
+      "id": "SRC-MT-INSULATION-PIR-150-01",
+      "title": "Green Terrace — Envelope Spec §4.1, External Wall Type A",
+      "type": "other",
+      "documentType": "envelope_specification",
+      "date": "2026-01-20",
+      "author": "Anna Nowak"
+    },
+    {
+      "id": "SRC-MT-INSULATION-PIR-150-02",
+      "title": "Kingspan Kooltherm K15 EPD",
+      "type": "manufacturer_spec",
+      "documentType": "manufacturer_epd",
+      "date": "2024-09-01",
+      "author": "Kingspan Insulation"
+    }
+  ],
+  "tags": [
+    "design-development-artifact"
+  ],
+  "notes": "Contribution to wall U-value: at λ = 0.022 W/(m·K) and 150 mm thickness,\nPIR alone contributes R = 6.82 m²K/W to the assembly — accounting for\nabout 90 % of the wall's total thermal resistance. The reaction-to-fire\nclass B-s1,d0 satisfies WT 2021 for a 6-storey residential building\nwith a ventilated cavity (height < 25 m).\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — extracts envelope insulation as reusable material entity"
+    }
+  ]
+}

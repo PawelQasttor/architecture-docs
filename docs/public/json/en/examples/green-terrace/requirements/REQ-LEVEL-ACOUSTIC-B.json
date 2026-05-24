@@ -1,0 +1,152 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-LEVEL-ACOUSTIC-B.md",
+    "extractedAt": "2026-05-24T19:47:14.103Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "requirement",
+  "id": "REQ-LEVEL-ACOUSTIC-B",
+  "requirementName": "Acoustic Performance - Class B",
+  "description": "Enhanced acoustic insulation requirements for residential spaces on Level 01",
+  "requirementType": "performance",
+  "countryScope": "poland_specific",
+  "priority": "high",
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": [
+      "bedroom",
+      "living_room",
+      "bathroom"
+    ]
+  },
+  "airborneInsulation": {
+    "metric": "airborne_sound_insulation",
+    "operator": ">=",
+    "value": 52,
+    "unit": "dB",
+    "testMethod": "PN-EN ISO 717-1",
+    "description": "Weighted sound reduction index (Rw) between dwelling units"
+  },
+  "impactInsulation": {
+    "metric": "impact_sound_insulation",
+    "operator": "<=",
+    "value": 53,
+    "unit": "dB",
+    "testMethod": "PN-EN ISO 717-2",
+    "description": "Weighted impact sound pressure level (L'nw) for floors"
+  },
+  "facadeInsulation": {
+    "metric": "facade_sound_insulation",
+    "operator": ">=",
+    "value": 33,
+    "unit": "dB",
+    "testMethod": "PN-EN ISO 717-1",
+    "description": "Weighted façade insulation (D2m,nT,w) against external noise"
+  },
+  "backgroundNoise": {
+    "metric": "background_noise_level",
+    "operator": "<=",
+    "value": 30,
+    "unit": "dBA",
+    "testMethod": "PN-EN ISO 1996-2",
+    "description": "Maximum background noise level in bedrooms at night"
+  },
+  "acceptanceCriteria": [
+    "Airborne sound insulation (between units): Rw ≥ 52 dB",
+    "Impact sound insulation (floors): L'nw ≤ 53 dB",
+    "Façade sound insulation: D2m,nT,w ≥ 33 dB",
+    "Background noise: ≤ 30 dBA in bedrooms, ≤ 35 dBA in living rooms"
+  ],
+  "qualitativeDescription": "Level 01 residential spaces must achieve Class B acoustic performance:\n1. Airborne sound insulation (between units): Rw ≥ 52 dB (exceeds minimum WT 2021 requirement of 50 dB)\n2. Impact sound insulation (floors): L'nw ≤ 53 dB (exceeds minimum WT 2021 requirement of 58 dB)\n3. Façade sound insulation: D2m,nT,w ≥ 33 dB (appropriate for suburban location)\n4. Background noise (HVAC, services): ≤ 30 dBA in bedrooms, ≤ 35 dBA in living rooms\n",
+  "evidenceRequired": [
+    "Acoustic test reports (pre-completion testing per PN-B-02151-4)",
+    "Product technical datasheets for sound-rated assemblies",
+    "Construction details showing acoustic separation",
+    "HVAC system noise calculation report",
+    "Final acoustic commissioning report"
+  ],
+  "constructionRequirements": {
+    "partitions": {
+      "description": "Double-stud walls or concrete block with acoustic treatment",
+      "specification": "Rw ≥ 52 dB"
+    },
+    "floors": {
+      "description": "Concrete slab with floating floor finish and resilient layer",
+      "specification": "L'nw ≤ 53 dB"
+    },
+    "windows": {
+      "description": "Double-glazed units with laminated glass and asymmetric cavity",
+      "specification": "Rw ≥ 33 dB"
+    },
+    "doors": {
+      "description": "Solid core doors with acoustic seals",
+      "specification": "Rw ≥ 32 dB"
+    }
+  },
+  "phases": [
+    {
+      "phase": "design_development",
+      "status": "completed",
+      "deliverable": "Acoustic design calculations and assembly specifications"
+    },
+    {
+      "phase": "construction_documents",
+      "status": "completed",
+      "deliverable": "Construction details with acoustic seal continuity"
+    },
+    {
+      "phase": "construction",
+      "status": "in_progress",
+      "deliverable": "Product submittals and installation supervision"
+    },
+    {
+      "phase": "commissioning",
+      "status": "pending",
+      "deliverable": "Acoustic commissioning test reports"
+    }
+  ],
+  "regulatoryReferences": [
+    {
+      "code": "WT 2021",
+      "section": "§ 323",
+      "description": "Acoustic protection in residential buildings",
+      "status": "applicable"
+    },
+    {
+      "code": "PN-B-02151-4",
+      "section": "Building acoustics",
+      "description": "Requirements for acoustic insulation in buildings",
+      "status": "applicable"
+    }
+  ],
+  "verification": {
+    "method": "testing",
+    "phase": [
+      "design_development",
+      "construction",
+      "commissioning"
+    ],
+    "frequency": "pre_completion",
+    "standard": "PN-B-02151-4",
+    "responsible": "Acoustic Consultant"
+  },
+  "relatedRequirements": [
+    "REQ-BEDROOM-MIN-AREA",
+    "REQ-HVAC-NOISE-LEVEL"
+  ],
+  "estimatedCostImpact": {
+    "description": "Enhanced acoustic performance adds approximately 5-7% to partition and floor costs compared to code minimum",
+    "magnitude": "medium",
+    "value": 15000,
+    "currency": "EUR"
+  },
+  "performanceClass": {
+    "standard": "PN-B-02151-4",
+    "class": "B",
+    "description": "Enhanced acoustic comfort - suitable for high-quality residential"
+  },
+  "notes": "Class B acoustic performance exceeds minimum Polish building code\nrequirements (Class C) to provide enhanced residential comfort.\n\nKey improvements over code minimum:\n- Airborne insulation: 52 dB vs 50 dB minimum (+2 dB)\n- Impact insulation: 53 dB vs 58 dB maximum (-5 dB improvement)\n\nTesting protocol:\n- Pre-completion testing on 10% of units (minimum 2 units)\n- Any failures require remediation and re-testing\n- Final acceptance requires 100% pass rate\n",
+  "createdBy": "Acoustic Consultant",
+  "lastModified": "2026-02-27",
+  "version": "2.1.0"
+}

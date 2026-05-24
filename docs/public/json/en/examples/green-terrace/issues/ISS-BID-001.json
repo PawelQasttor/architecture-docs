@@ -1,0 +1,74 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-BID-001.md",
+    "extractedAt": "2026-05-24T19:47:14.087Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-BID-001",
+  "version": "2.1.0",
+  "projectPhase": "bidding_procurement",
+  "issueTitle": "Bid Addendum 01 — clarify ventilated-cavity ties for External Wall Type A",
+  "issueType": "design_clarification",
+  "issueNumber": "BA-001",
+  "status": "closed",
+  "priority": "medium",
+  "description": "During the open bid period, two of the three short-listed envelope\nsubcontractors asked which proprietary cavity-tie system was assumed\nby the structural calculations for the ventilated-cavity rainscreen\non External Wall Type A. The construction documents named \"stainless-steel\nhelical ties to manufacturer's specification\" without naming a manufacturer,\nwhich left bidders to price three different products with materially\ndifferent cost and installation rates.\n\nAddendum 01 resolves the ambiguity by naming Halfen HK4 as the basis-of-\ndesign product, while explicitly allowing equivalent products subject to\nstructural-engineer approval. This levels the bid playing field without\nlocking the contract to a single supplier.\n",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-ENVELOPE",
+  "relatedEntityIds": [
+    "ENV-EW-01"
+  ],
+  "initiatedBy": {
+    "name": "Tendering subcontractors (PolFasada Sp. z o.o. and Stylbud Sp. z o.o.)",
+    "organization": "External — bidding period",
+    "role": "bidder",
+    "date": "2026-03-08"
+  },
+  "assignedTo": {
+    "name": "Piotr Kowalski",
+    "organization": "Kowalski Structural Engineering",
+    "role": "Structural Engineer of Record"
+  },
+  "dueDate": "2026-03-15",
+  "responseDate": "2026-03-12",
+  "closedDate": "2026-03-15",
+  "response": {
+    "respondedBy": "Piotr Kowalski",
+    "responseDate": "2026-03-12",
+    "responseText": "Basis-of-design product is Halfen HK4 stainless-steel helical cavity tie\nat 600 mm horizontal × 450 mm vertical centres (additional ties at\nopenings per detail 04/A-501). Equivalent products from Ancon, Wienerberger\nor other manufacturers are acceptable subject to: (a) declared characteristic\ntensile + compressive resistance ≥ Halfen HK4 values per ETA-12/0260,\n(b) stainless-steel grade A4 (or equivalent), (c) submission of an EAD-compliant\nETA + manufacturer installation guide as part of the subcontractor submittal.\n",
+    "attachments": [
+      "Addendum-01-CavityTies.pdf",
+      "Detail-04-A-501-Updated.pdf"
+    ]
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 0,
+    "appliesTo": "envelope_subcontract",
+    "notes": "Equalises bids — does not change the project budget."
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0
+  },
+  "sources": [
+    {
+      "id": "SRC-ISS-BID-001-01",
+      "title": "Green Terrace — Bid Addendum 01",
+      "type": "other",
+      "documentType": "addendum",
+      "date": "2026-03-12",
+      "author": "Project Architect (Anna Nowak) + Structural Engineer (Piotr Kowalski)"
+    }
+  ],
+  "tags": [
+    "bidding-procurement-artifact"
+  ],
+  "notes": "Issued during the 3-week open bid period (2026-03-01 → 2026-03-22).\nResolved before bids were due, so no extension was required.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — first bidding-phase artifact in the example"
+    }
+  ]
+}

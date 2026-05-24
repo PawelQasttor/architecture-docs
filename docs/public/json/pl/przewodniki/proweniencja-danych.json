@@ -1,0 +1,9 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przewodniki\\proweniencja-danych.md",
+    "extractedAt": "2026-05-24T19:47:14.174Z",
+    "format": "yaml-frontmatter"
+  },
+  "title": "Proweniencja danych",
+  "description": "Jak śledzić źródło każdego punktu danych w modelu SBM za pomocą adnotacji na poziomie pól, poziomów pewności i referencji do źródeł."
+}

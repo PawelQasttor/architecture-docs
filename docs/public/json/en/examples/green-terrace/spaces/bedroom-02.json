@@ -1,0 +1,334 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-02.md",
+    "extractedAt": "2026-05-24T19:47:14.111Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-002",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "spaceName": "Bedroom 02",
+  "spaceTypeId": "ST-BEDROOM-STANDARD-A",
+  "roomNumber": "1.01.2",
+  "accessibilityLevel": "standard",
+  "departmentId": "DEPT-RESIDENTIAL-A",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": [
+    "ZONE-FIRE-ZL-IV",
+    "ZONE-HVAC-NORTH",
+    "ZONE-ACOUSTIC-NIGHT"
+  ],
+  "designArea": 12.8,
+  "designVolume": 34.6,
+  "unit": "m",
+  "requirements": [],
+  "requirements_meta": {
+    "confidence": "specified",
+    "source": "Green Terrace Design Requirements Specification",
+    "specifiedBy": "Architect - Project Team",
+    "date": "2026-02-27",
+    "notes": "Requirements auto-merged from level requirements (LVL-01), space type requirements (ST-BEDROOM-STANDARD-A), and Poland jurisdiction pack (WT 2021)",
+    "mergeStrategy": "union",
+    "inheritedFrom": [
+      "LVL-01.levelRequirements",
+      "ST-BEDROOM-STANDARD-A.requirementTemplate",
+      "jurisdiction_pack_PL"
+    ]
+  },
+  "cost": {
+    "totalCost": 22144,
+    "currency": "EUR",
+    "basis": "calculated_from_type",
+    "breakdown": {
+      "construction": 15360,
+      "fitout": 4480,
+      "equipment": 2304
+    },
+    "_meta": {
+      "confidence": "estimated",
+      "source": "space_type_cost_profile",
+      "sourceRef": "ST-BEDROOM-STANDARD-A",
+      "calculatedDate": "2026-02-27T10:00:00Z"
+    }
+  },
+  "performanceTargets": {
+    "daylighting": {
+      "daylightFactor": 2,
+      "spatialDaylightAutonomy": 75,
+      "annualSunlightExposure": 10,
+      "illuminanceTarget": 300,
+      "uniformityRatio": 0.4,
+      "viewQuality": "exterior_views_required",
+      "glareControl": "manual_blinds",
+      "basis": "EN 17037:2018"
+    },
+    "indoorAirQuality": {
+      "co2Maximum": 1000,
+      "vocMaximum": 400,
+      "particulatePM25": 10,
+      "particulatePM10": 20,
+      "outdoorAirPerPerson": 30,
+      "airChangeEffectiveness": 0.8,
+      "basis": "ASHRAE 62.1 + WHO guidelines"
+    },
+    "acousticPerformance": {
+      "backgroundNoise": 35,
+      "reverberation": {
+        "t60": 0.5,
+        "target": "speech_intelligibility"
+      },
+      "soundIsolation": {
+        "airborneRw": 52,
+        "impactLnw": 58,
+        "facadeRw": 36,
+        "frequencyRange": "50-5000Hz"
+      },
+      "privacyRating": "high",
+      "basis": "ISO 140 series"
+    },
+    "thermalComfort": {
+      "winterDesignTemp": 21,
+      "summerDesignTemp": 24,
+      "operativeTemperature": {
+        "min": 20,
+        "max": 26
+      },
+      "relativeHumidity": {
+        "min": 30,
+        "max": 60
+      },
+      "airVelocity": 0.15,
+      "radiantAsymmetry": 5,
+      "verticalTempGradient": 3,
+      "thermalMass": {
+        "effectiveMass": 150,
+        "thermalLag": 8,
+        "passiveSurvivability": 48
+      },
+      "basis": "ISO 7730 PMV/PPD"
+    },
+    "energyPerformance": {
+      "heatingDemand": 45,
+      "coolingDemand": 15,
+      "lightingDemand": 8,
+      "plugLoadDemand": 12,
+      "totalEnergyUse": 80,
+      "renewableGeneration": 15,
+      "netEnergyUse": 65,
+      "primaryEnergyRating": "A",
+      "basis": "NZEB_target"
+    },
+    "embodiedCarbon": {
+      "construction": {
+        "structuralFrame": 180,
+        "envelope": 95,
+        "finishes": 45,
+        "services": 80,
+        "total": 400
+      },
+      "operations": {
+        "annualOperationalCarbon": 15,
+        "lifespan": 60,
+        "totalOperational": 900
+      },
+      "endOfLife": {
+        "deconstruction": -50
+      },
+      "wholeLife": {
+        "total": 1250,
+        "target": 1000,
+        "status": "needs_improvement"
+      },
+      "basis": "RICS Whole Life Carbon + LETI targets"
+    }
+  },
+  "simulations": [
+    {
+      "id": "SIM-DAYLIGHT-BEDROOM-02",
+      "type": "daylighting",
+      "tool": "DIVA",
+      "version": "5.0",
+      "status": "completed",
+      "executionDate": "2026-03-15T15:00:00Z",
+      "executedBy": "anna.nowak@architecture.pl",
+      "inputs": {
+        "weatherFile": "POL_Warsaw_123750_IWEC.epw",
+        "analysisGrid": "0.5m_grid_work_plane_0.75m_height",
+        "blindControl": "manual",
+        "occupancySchedule": "residential_bedroom_8h_night",
+        "reflectances": {
+          "floor": 0.2,
+          "walls": 0.7,
+          "ceiling": 0.8,
+          "ground": 0.15
+        },
+        "glazing": {
+          "area": 1.68,
+          "visibleTransmittance": 0.68,
+          "uValue": 1.1,
+          "gValue": 0.55
+        }
+      },
+      "targets": {
+        "daylightFactor": 2,
+        "spatialDaylightAutonomy": 75,
+        "annualSunlightExposure": 10
+      },
+      "results": {
+        "daylightFactor": 2.6,
+        "spatialDaylightAutonomy": 82,
+        "annualSunlightExposure": 8,
+        "outcome": "compliant"
+      },
+      "files": {
+        "inputModel": "simulations/bedroom-02-daylight-model.rad",
+        "weatherData": "simulations/POL_Warsaw.epw",
+        "resultImages": [
+          "simulations/bedroom-02-df-false-color.png",
+          "simulations/bedroom-02-sda-annual.png"
+        ],
+        "resultData": "simulations/bedroom-02-results.csv",
+        "report": "simulations/bedroom-02-daylight-report.pdf"
+      },
+      "_meta": {
+        "confidence": "measured",
+        "source": "DIVA_simulation",
+        "validator": "anna.nowak@architecture.pl",
+        "validationDate": "2026-03-15T15:30:00Z"
+      }
+    },
+    {
+      "id": "SIM-THERMAL-BEDROOM-02",
+      "type": "thermal",
+      "tool": "EnergyPlus",
+      "version": "23.1",
+      "status": "planned",
+      "scheduledDate": "2026-04-01",
+      "targets": {
+        "heatingDemand": 45,
+        "coolingDemand": 15,
+        "peakHeatingLoad": 750,
+        "peakCoolingLoad": 380
+      }
+    }
+  ],
+  "bimIntegration": {
+    "geometryReference": {
+      "primarySource": "ifc",
+      "ifcSource": "../bim/Green-Terrace-2026-02-27.ifc",
+      "ifcGlobalId": "2O3fG9$rLBxv3VxEu2LPxR",
+      "ifcEntity": "IfcSpace",
+      "dwgFile": "../cad/Level-01-Floor-Plan.dwg",
+      "dwgLayer": "A-WALL-BEDROOM-02",
+      "dwgHandle": "1A30",
+      "lastSyncDate": "2026-02-27T10:35:00Z",
+      "syncedProperties": [
+        "area",
+        "height",
+        "adjacencies"
+      ],
+      "syncStatus": "current",
+      "ifcExtractedProperties": {
+        "area": 12.75,
+        "height": 2.7,
+        "volume": 34.4,
+        "lastExtracted": "2026-02-27T10:35:00Z"
+      },
+      "validation": {
+        "areaMatch": true,
+        "heightMatch": true,
+        "lastValidated": "2026-02-27T10:35:00Z"
+      },
+      "bcfIssues": []
+    },
+    "outline2D": {
+      "coordinates": [
+        [
+          0,
+          0
+        ],
+        [
+          3.6,
+          0
+        ],
+        [
+          3.6,
+          3.55
+        ],
+        [
+          0,
+          3.55
+        ]
+      ],
+      "unit": "m",
+      "origin": "level_origin",
+      "elevation": 3.2,
+      "azimuth": 0,
+      "source": "extracted_from_ifc",
+      "confidence": "measured"
+    },
+    "centroid": [
+      1.8,
+      1.775
+    ],
+    "bounds": {
+      "min": [
+        0,
+        0,
+        3.2
+      ],
+      "max": [
+        3.6,
+        3.55,
+        5.9
+      ]
+    }
+  },
+  "adjacentSpaces": [
+    {
+      "id": "SP-BLD-01-L01-001",
+      "relationship": "shares_wall",
+      "boundaryType": "standard_wall"
+    },
+    {
+      "id": "SP-BLD-01-L01-CORR",
+      "relationship": "connects_via_door"
+    }
+  ],
+  "maintenanceZone": "MZ-RESIDENTIAL-01",
+  "accessRestrictions": "private",
+  "lifecycleState": "design",
+  "lastReviewed": "2026-02-27",
+  "tags": [
+    "residential",
+    "sleeping",
+    "north-facing"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "0.4.0",
+      "date": "2026-02-27",
+      "description": "Updated to v0.4.0 with cost tracking, performance targets, simulations, and enhanced BIM integration"
+    },
+    {
+      "version": "2.1.0",
+      "date": "2026-02-23",
+      "description": "Updated to use property inheritance (v0.1.4)"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-22",
+      "description": "Migrated to type/instance pattern"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\space-programs\\PROG-BEDROOM-STANDARD.md",
+    "extractedAt": "2026-05-24T19:47:14.107Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space_program",
+  "id": "PROG-BEDROOM-STANDARD",
+  "version": "2.1.0",
+  "projectPhase": "concept",
+  "programName": "Standard Bedrooms (Brief)",
+  "description": "Concept-phase quantitative brief for standard bedrooms in the Green Terrace\nresidential development. Captures the client's program requirement — how many\nbedrooms of what size — independent of any specific floor plan. The compiler\ncross-checks designed bedroom instances against this target.\n",
+  "buildingId": "BLD-01",
+  "spaceTypeId": "ST-BEDROOM-STANDARD-A",
+  "spaceType": "bedroom",
+  "requiredQuantity": 27,
+  "requiredTotalArea": 405,
+  "requiredAreaPerUnit": {
+    "min": 10,
+    "max": 18,
+    "typical": 15
+  },
+  "priority": "critical",
+  "classification": {
+    "system": "Uniclass2015",
+    "code": "SL_25_10_05",
+    "title": "Bedrooms"
+  },
+  "sources": [
+    {
+      "id": "SRC-PROG-BEDROOM-STANDARD-01",
+      "title": "Green Terrace — Client Brief v1.0",
+      "type": "other",
+      "documentType": "client_brief",
+      "date": "2025-04-15",
+      "author": "Green Development Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "concept-phase-artifact",
+    "brief-to-design"
+  ],
+  "notes": "Programmed at concept phase (2025-04). Carries forward through schematic\ndesign, design development and construction documents — every later phase\nis judged against it. `designedQuantity`, `designedTotalArea`, and the\n`compliance` block are auto-computed by the SBM compiler from designed\nSpace instances that reference `spaceTypeId: ST-BEDROOM-STANDARD-A`.\n\n**Expected compiler warning in this example.** The Green Terrace docs ship\nwith only TWO sample bedroom files (`bedroom-01`, `bedroom-02`) for\npedagogical brevity, not the full 27. The compiler correctly flags this\nas `under_provision` — that IS the brief-to-design check working. In a\nreal project all 27 bedroom instances would exist and the compliance\nstatus would flip to `compliant`. The warning is intentional in the\nexample; it demonstrates the check fires.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — surfaces the concept-phase brief artifact that anchors the rest of the model"
+    }
+  ]
+}

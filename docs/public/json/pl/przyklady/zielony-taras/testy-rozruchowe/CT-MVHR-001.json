@@ -1,0 +1,88 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-MVHR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.202Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-MVHR-001",
+  "version": "2.1.0",
+  "projectPhase": "commissioning",
+  "testName": "Wydatki MVHR + sprawność odzysku ciepła — bilans całego budynku",
+  "testCategory": "balancing",
+  "status": "scheduled",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "SYS-HVAC-MVHR-01",
+    "AI-MVHR-01"
+  ],
+  "requirementIds": [
+    "REQ-VENTILATION-OCCUPIED-001"
+  ],
+  "testProcedure": {
+    "standard": "PN-EN 12599 (regulacja HVAC) + ISO 5801 (badania wentylatorów)",
+    "method": "Pomiar nawiewu/wyciągu w każdym lokalu na każdej kratce za pomocą\nkalibrowanego balometru (TSI 8380). Sprawność odzysku ciepła całego\nbudynku mierzona parami czujników temperatury i wilgotności przed/za\nrekuperatorem przez 24-godzinny okres zimowy (cel Δt > 15 °C na jednostce).\nSystem następnie zrównoważony względem schematu projektowego i wydany\nraport jako-zrównoważone.\n",
+    "equipment": [
+      "Balometr TSI 8380 (ważna kalibracja 2026-12)",
+      "Sondy Vaisala HMP155 T/RH (×4)",
+      "Miernik wielofunkcyjny TESTO 480"
+    ],
+    "conditions": "Temperatura zewnętrzna ≤ 5 °C dla 24-godzinnego pomiaru odzysku ciepła.\nWszystkie drzwi lokali zamknięte. Wyciągi łazienkowe w pełni otwarte.\nSekwencja testowa powtarzana w 6 losowych lokalach + najgorszy lokal\n(najwyższe piętro, ekspozycja północna).\n"
+  },
+  "scheduledDate": "2026-02-15",
+  "executedBy": {
+    "name": "Krzysztof Wójcik",
+    "organization": "VentBalance Sp. z o.o.",
+    "qualification": "Certyfikowany regulator TR/TR 2/2018",
+    "certificationNumber": "TR-1234"
+  },
+  "witnessedBy": [
+    {
+      "name": "Jan Wiśniewski",
+      "organization": "Projektant MEP odpowiedzialny",
+      "role": "przedstawiciel projektu"
+    },
+    {
+      "name": "Inżynier kontraktu (TBC)",
+      "organization": "Budimex S.A.",
+      "role": "przedstawiciel wykonawcy"
+    }
+  ],
+  "results": {
+    "expected": {
+      "perApartmentSupply": 60,
+      "perApartmentExtract": 110,
+      "heatRecoveryEfficiency": 85,
+      "specificFanPower": 0.45
+    },
+    "measured": null,
+    "passCriteria": {
+      "airflowTolerance": 10,
+      "heatRecoveryMinimum": 80,
+      "specificFanPowerMax": 0.5
+    },
+    "outcome": "pending"
+  },
+  "constructionPackageId": "CP-MEP",
+  "sources": [
+    {
+      "id": "SRC-CT-MVHR-001-01",
+      "title": "Zielony Taras — Plan rozruchu §5.3 (MVHR)",
+      "type": "other",
+      "documentType": "commissioning_plan",
+      "date": "2026-01-15",
+      "author": "Jan Wiśniewski + VentBalance Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-rozruchu"
+  ],
+  "notes": "Ten test weryfikuje **założenie projektowe** z encji sypialnia-01:\n60 m³/h nawiewu świeżego powietrza na osobę. Jeśli zmierzony wydatek\njest poniżej tolerancji 10 %, system wymaga ponownego zrównoważenia\nprzed końcowym odbiorem.\n\nSprawność odzysku ciepła poniżej 80 % wywołuje zgłoszenie niezgodności\n(encja `issue`, typ `non_conformance`) i ponowny test po naprawieniu.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — pierwszy test z fazy rozruchu w przykładzie"
+    }
+  ]
+}

@@ -1,0 +1,849 @@
+{
+  "technical_reference": [
+    {
+      "sourceFile": "en\\bim-integration\\ifc-entities.md"
+    },
+    {
+      "sourceFile": "en\\bim-integration\\lod-definitions.md"
+    },
+    {
+      "sourceFile": "pl\\integracja-bim\\definicje-lod.md"
+    },
+    {
+      "sourceFile": "pl\\integracja-bim\\encje-ifc.md"
+    }
+  ],
+  "unknown": [
+    {
+      "sourceFile": "en\\examples\\green-terrace\\asset-types\\bosch-heat-pump-7000i.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\asset-types\\mvhr-residential.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\asset-types\\ufh-manifold-12zone.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\assets\\ai-hp-01.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\assets\\ai-mvhr-01.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\assets\\ai-ufh-manifold-01.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\building.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\circulation-routes\\CR-FIRE-EGRESS-L01.md",
+      "projectPhase": "construction_documents"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-AIRTIGHTNESS-001.md",
+      "projectPhase": "commissioning"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-FIRE-DRILL-001.md",
+      "projectPhase": "commissioning"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-MVHR-001.md",
+      "projectPhase": "commissioning"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-envelope.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-finishes.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-mep.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-structure.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\envelope-external-wall-type-a.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-BID-001.md",
+      "projectPhase": "bidding_procurement"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-CO-001.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-RFI-001.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\levels\\level-00.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\levels\\level-01.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\levels\\level-02.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\levels\\level-03.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\levels\\level-04.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\levels\\level-05.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\materials\\MT-CONCRETE-C30-37.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\materials\\MT-INSULATION-PIR-150.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\opening-types\\fire-door-ei30.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\opening-types\\internorm-kf410-window.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\openings\\opn-door-stair-01.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\openings\\opn-win-n-001.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\openings\\opn-win-n-002.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\project-specification.md",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-FIRE-EGRESS-TIME-001.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-LEVEL-ACOUSTIC-B.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-LEVEL-FIRE-RATING.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\site-feature-types\\sft-permeable-paving.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\site-features\\sf-north-garden.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\site-features\\sf-parking.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\site.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\space-programs\\PROG-BEDROOM-STANDARD.md",
+      "projectPhase": "concept"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\space-types\\ST-BEDROOM-STANDARD-A.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-01.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-02.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\corridor.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\stairwell-void.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\staircase-a.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\structural-systems\\STR-GREEN-TERRACE.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\system-types\\hvac-residential-mvhr.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01-heating.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01-vent.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\zone-types\\acoustic-zone-night.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\zone-types\\fire-zone-zl-iv.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\zone-types\\hvac-zone-residential.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\zones\\acoustic-zone-night.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\zones\\fire-zone-zl-iv.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\zones\\hvac-zone-north.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-hp-01-ops.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-mvhr-01-ops.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-ufh-manifold-01-ops.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\building.md",
+      "projectPhase": "operation",
+      "bimLOD": "LOD_500"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-AIRTIGHTNESS-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-FIRE-DRILL-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-MVHR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\energy-verification-records\\EVR-BLD-01-2027.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-ANOMALY-CO2-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-INSPECTION-FD-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-NC-AIRTIGHTNESS-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-RETROCX-MVHR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-TENANT-MR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-WARRANTY-HP-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\levels\\level-04.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\occupant-surveys\\SURVEY-BLD-01-IEQ-2027.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\retrocx-recommendations\\RCX-MVHR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\site.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\spaces\\bedroom-402.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\systems\\sys-hvac-01.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\telemetry-streams\\TEL-CO2-402-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\telemetry-streams\\TEL-HP-COP-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-02-sunny-crescent.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-03-linden-court.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-04-oak-pavilion.md",
+      "projectPhase": "schematic_design",
+      "bimLOD": "LOD_200"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\campus.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\construction-packages\\CP-SITE-INFRASTRUCTURE.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\issues\\ISS-CAMPUS-PLANNING-001.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\project-specification.md",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-BIKE-STORAGE.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-COMMUNAL-GARDEN.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-EV-HUB.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-PLAYGROUND.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\site.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\systems\\SYS-DH-LOOP-CAMPUS.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\guides\\data-provenance.md"
+    },
+    {
+      "sourceFile": "en\\project-management\\change-management.md"
+    },
+    {
+      "sourceFile": "en\\project-management\\data-governance.md"
+    },
+    {
+      "sourceFile": "en\\project-management\\document-control.md"
+    },
+    {
+      "sourceFile": "en\\project-management\\governance.md"
+    },
+    {
+      "sourceFile": "en\\project-management\\index.md"
+    },
+    {
+      "sourceFile": "en\\project-management\\risk-management.md"
+    },
+    {
+      "sourceFile": "en\\quality\\index.md"
+    },
+    {
+      "sourceFile": "en\\quality\\phase-gates.md"
+    },
+    {
+      "sourceFile": "en\\quality\\review-procedures.md"
+    },
+    {
+      "sourceFile": "en\\sustainability\\energy-carbon.md"
+    },
+    {
+      "sourceFile": "en\\sustainability\\index.md"
+    },
+    {
+      "sourceFile": "en\\sustainability\\indoor-quality.md"
+    },
+    {
+      "sourceFile": "en\\sustainability\\water.md"
+    },
+    {
+      "sourceFile": "index.md"
+    },
+    {
+      "sourceFile": "pl\\index.md"
+    },
+    {
+      "sourceFile": "pl\\przewodniki\\proweniencja-danych.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\budynek.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\drogi-cyrkulacji\\CR-FIRE-EGRESS-L01.md",
+      "projectPhase": "construction_documents"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\dzialka.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\elementy-terenu\\sf-ogrod-polnocny.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\elementy-terenu\\sf-parking.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\klatka-schodowa-a.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\materialy\\MT-CONCRETE-C30-37.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\materialy\\MT-INSULATION-PIR-150.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-door-stair-01.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-win-n-001.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-win-n-002.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-instalacje.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-konstrukcja.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-przegroda.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-wykonczenie.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-00.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-01.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-02.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-03.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-04.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-05.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\programy-przestrzeni\\PROG-BEDROOM-STANDARD.md",
+      "projectPhase": "concept"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przegroda-sciana-zewnetrzna-typ-a.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\korytarz.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\pustka-klatki-schodowej.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-01.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-02.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\specyfikacja-projektu.md",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\strefy\\strefa-akustyczna-noc.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\strefy\\strefa-hvac-polnoc.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\strefy\\strefa-pozarowa-zl-iv.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\systemy\\sys-hvac-01-ogrzewanie.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\systemy\\sys-hvac-01-wentylacja.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\systemy\\sys-hvac-01.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\systemy-konstrukcyjne\\STR-GREEN-TERRACE.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-AIRTIGHTNESS-001.md",
+      "projectPhase": "commissioning"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-FIRE-DRILL-001.md",
+      "projectPhase": "commissioning"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-MVHR-001.md",
+      "projectPhase": "commissioning"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-elementow-terenu\\sft-nawierzchnia-przepuszczalna.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-otworow\\drzwi-pozarowe-ei30.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-otworow\\okno-internorm-kf410.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-przestrzeni\\ST-BEDROOM-STANDARD-A.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-stref\\strefa-akustyczna-noc.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-stref\\strefa-hvac-mieszkalna.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-stref\\strefa-pozarowa-zl-iv.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-systemow\\hvac-mieszkalny-mvhr.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-zasobow\\mvhr-mieszkalny.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-zasobow\\pompa-ciepla-bosch-7000i.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\typy-zasobow\\rozdzielacz-ufh-12-stref.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-FIRE-EGRESS-TIME-001.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-LEVEL-ACOUSTIC-B.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-LEVEL-FIRE-RATING.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\zasoby\\ai-hp-01.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\zasoby\\ai-mvhr-01.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\zasoby\\ai-ufh-manifold-01.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-BID-001.md",
+      "projectPhase": "bidding_procurement"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-CO-001.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-RFI-001.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\ankiety-mieszkancow\\SURVEY-BLD-01-IEQ-2027.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\budynek.md",
+      "projectPhase": "operation",
+      "bimLOD": "LOD_500"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\dzialka.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\poziomy\\poziom-04.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przestrzenie\\sypialnia-402.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\rekomendacje-retrocx\\RCX-MVHR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\strumienie-telemetrii\\TEL-CO2-402-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\strumienie-telemetrii\\TEL-HP-COP-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\systemy\\sys-hvac-01.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-AIRTIGHTNESS-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-FIRE-DRILL-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-MVHR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zapisy-weryfikacji-energetycznej\\EVR-BLD-01-2027.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zasoby\\ai-hp-01-ops.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zasoby\\ai-mvhr-01-ops.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zasoby\\ai-ufh-manifold-01-ops.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-ANOMALY-CO2-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-INSPECTION-FD-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-NC-AIRTIGHTNESS-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-RETROCX-MVHR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-TENANT-MR-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-WARRANTY-HP-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-02-sloneczny-polksiezyc.md",
+      "projectPhase": "construction",
+      "bimLOD": "LOD_400"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-03-dziedziniec-lipowy.md",
+      "projectPhase": "design_development",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-04-pawilon-debowy.md",
+      "projectPhase": "schematic_design",
+      "bimLOD": "LOD_200"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\dzialka.md",
+      "projectPhase": "design_development"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-BIKE-STORAGE.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-COMMUNAL-GARDEN.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-EV-HUB.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-PLAYGROUND.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\kampus.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\pakiety-budowlane\\CP-SITE-INFRASTRUCTURE.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\specyfikacja-projektu.md",
+      "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\systemy\\SYS-DH-LOOP-CAMPUS.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\zgloszenia\\ISS-CAMPUS-PLANNING-001.md",
+      "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\zarzadzanie-projektem\\index.md"
+    },
+    {
+      "sourceFile": "pl\\zarzadzanie-projektem\\kontrola-dokumentow.md"
+    },
+    {
+      "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie-danymi.md"
+    },
+    {
+      "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie-ryzykiem.md"
+    },
+    {
+      "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie-zmianami.md"
+    },
+    {
+      "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie.md"
+    },
+    {
+      "sourceFile": "pl\\zrownowazonosc\\energia-karbon.md"
+    },
+    {
+      "sourceFile": "pl\\zrownowazonosc\\index.md"
+    },
+    {
+      "sourceFile": "pl\\zrownowazonosc\\jakosc-wnetrz.md"
+    },
+    {
+      "sourceFile": "pl\\zrownowazonosc\\woda.md"
+    }
+  ],
+  "regulatory_reference": [
+    {
+      "sourceFile": "en\\regulations\\prawo-budowlane.md"
+    },
+    {
+      "sourceFile": "en\\regulations\\wt-2021.md"
+    },
+    {
+      "sourceFile": "pl\\przepisy\\prawo-budowlane.md"
+    },
+    {
+      "sourceFile": "pl\\przepisy\\wt-2021.md"
+    }
+  ]
+}

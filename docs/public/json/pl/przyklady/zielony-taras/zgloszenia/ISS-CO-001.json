@@ -1,0 +1,77 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-CO-001.md",
+    "extractedAt": "2026-05-24T19:47:14.218Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-CO-001",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "issueTitle": "Zmiana 001 — substytucja produktu izolacji PIR",
+  "issueType": "change_order",
+  "issueNumber": "CO-001",
+  "status": "approved",
+  "priority": "medium",
+  "description": "Podwykonawca przegród zaproponował substytucję wyspecyfikowanej izolacji\nKingspan Kooltherm K15 PIR (`MT-INSULATION-PIR-150`) na Recticel\nPowerline-PIR-DUR o tej samej grubości 150 mm. Oba produkty noszą\ndeklarację PN-EN 13165; Recticel jest dostępny 4 tygodnie wcześniej\nod polskiego dystrybutora, i o około €3,40/m² taniej. Proponowana\nalternatywa ma równą lub lepszą deklarowaną λ (0,022 W/(m·K)), równą\nklasę reakcji na ogień (B-s1,d0) i opublikowane EPD.\n\nArchitekt i konstruktor przeanalizowali substytucję pod kątem obliczeń\nU-wartości przegrody i raportu strategii pożarowej. Zatwierdzone\nz warunkami wskazanymi w odpowiedzi.\n",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-ENVELOPE",
+  "relatedEntityIds": [
+    "ENV-EW-01",
+    "MT-INSULATION-PIR-150"
+  ],
+  "initiatedBy": {
+    "name": "Tomasz Maj",
+    "organization": "PolFasada Sp. z o.o. (podwykonawca przegród)",
+    "role": "Kierownik projektu",
+    "date": "2026-04-30"
+  },
+  "assignedTo": {
+    "name": "Anna Nowak",
+    "organization": "Nowak Architecture",
+    "role": "Architekt odpowiedzialny"
+  },
+  "dueDate": "2026-05-07",
+  "responseDate": "2026-05-06",
+  "closedDate": "2026-05-06",
+  "response": {
+    "respondedBy": "Anna Nowak",
+    "responseDate": "2026-05-06",
+    "responseText": "Substytucja ZATWIERDZONA pod warunkiem:\n(a) złożenia pełnej ETA + EPD przed dostawą,\n(b) aktualizacji encji materiałowej `MT-INSULATION-PIR-150` do referencji\n    EPD Recticel zamiast EPD Kingspan (kompilator przeliczy ślad węglowy —\n    zweryfikować, że suma projektowa pozostaje w celu),\n(c) detal odwodnienia dachu zielonego sprawdzony pod kątem kompatybilności\n    (brak wpływu na wymiary; ta sama grubość 150 mm),\n(d) kredyt €3,40/m² × 1 245 m² powierzchni brutto ściany = około\n    €4 230 do odzwierciedlenia w kolejnym kosztorysie miesięcznym.\n",
+    "attachments": [
+      "Recticel-EPD-2024.pdf",
+      "ETA-13-0142-Powerline.pdf",
+      "CO-001-List-Zatwierdzajacy.pdf"
+    ]
+  },
+  "costImpact": {
+    "estimatedDeltaEur": -4230,
+    "appliesTo": "envelope_subcontract",
+    "notes": "Kredyt dla inwestora — odzwierciedlony w kosztorysie z maja 2026."
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": -28,
+    "notes": "Oszczędza 4 tygodnie czasu dostawy względem oryginalnego dostawcy Kingspan."
+  },
+  "sources": [
+    {
+      "id": "SRC-ISS-CO-001-01",
+      "title": "Zielony Taras — Zmiana 001",
+      "type": "other",
+      "documentType": "change_order",
+      "date": "2026-05-06",
+      "author": "PolFasada Sp. z o.o. + Nowak Architecture"
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-budowy"
+  ],
+  "notes": "Ta zmiana ma efekt downstream, który kompilator może śledzić automatycznie:\ngdy `MT-INSULATION-PIR-150` zostanie zaktualizowany do wskazania EPD Recticel,\nponowne obliczenie śladu węglowego przegrody kaskaduje do całościowego\nraportu zrównoważoności budynku. To międzyencyjne falowanie jest właśnie\npowodem, dla którego zgłoszenia referują zarówno do **pakietu wykonawczego**,\njak i do **konkretnych encji**, na które wpływają.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — demonstruje zmianę z fazy budowy ze skutkami materiałowo-zrównoważoności"
+    }
+  ]
+}

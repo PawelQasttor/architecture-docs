@@ -1,0 +1,35 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\site.md",
+    "extractedAt": "2026-05-24T19:47:14.150Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site",
+  "id": "SITE-GTP-PHASE-2",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "siteName": "Green Terrace Park — Phase 2 site",
+  "country": "PL",
+  "address": {
+    "street": "ul. Słoneczna 47-51",
+    "city": "Warszawa",
+    "postalCode": "02-495",
+    "country": "PL"
+  },
+  "buildingIds": [
+    "BLD-02",
+    "BLD-03",
+    "BLD-04"
+  ],
+  "plotArea": 4150,
+  "tags": [
+    "campus-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Phase 2 site within Green Terrace Park campus — covers BLD-02, BLD-03, BLD-04"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-MVHR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.083Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-MVHR-001",
+  "version": "2.1.0",
+  "projectPhase": "commissioning",
+  "testName": "MVHR airflow + heat-recovery efficiency — full-building balance",
+  "testCategory": "balancing",
+  "status": "scheduled",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "SYS-HVAC-MVHR-01",
+    "AI-MVHR-01"
+  ],
+  "requirementIds": [
+    "REQ-VENTILATION-OCCUPIED-001"
+  ],
+  "testProcedure": {
+    "standard": "PN-EN 12599 (HVAC commissioning) + ISO 5801 (fan testing)",
+    "method": "Per-apartment supply/extract airflow measurement at each diffuser using\na calibrated balometer (TSI 8380). Whole-building heat-recovery efficiency\nmeasured by paired upstream/downstream temperature + humidity sensors over\na 24-hour winter period (target Δt > 15 °C across the unit). System then\nbalanced against the design schedule and the as-balanced report issued.\n",
+    "equipment": [
+      "TSI 8380 balometer (calibration valid 2026-12)",
+      "Vaisala HMP155 T/RH probes (×4)",
+      "TESTO 480 multifunction meter"
+    ],
+    "conditions": "External temperature ≤ 5 °C for the 24-hour heat-recovery measurement.\nAll apartment doors closed. Bathroom extract dampers fully open.\nTest sequence to be repeated on 6 random apartments + the worst-case\napartment (top floor, north-facing).\n"
+  },
+  "scheduledDate": "2026-02-15",
+  "executedBy": {
+    "name": "Krzysztof Wojcik",
+    "organization": "VentBalance Sp. z o.o.",
+    "qualification": "TR/TR 2/2018 certified balancer",
+    "certificationNumber": "TR-1234"
+  },
+  "witnessedBy": [
+    {
+      "name": "Jan Wiśniewski",
+      "organization": "MEP Engineer of Record",
+      "role": "design representative"
+    },
+    {
+      "name": "Site engineer (TBC)",
+      "organization": "Budimex S.A.",
+      "role": "contractor representative"
+    }
+  ],
+  "results": {
+    "expected": {
+      "perApartmentSupply": 60,
+      "perApartmentExtract": 110,
+      "heatRecoveryEfficiency": 85,
+      "specificFanPower": 0.45
+    },
+    "measured": null,
+    "passCriteria": {
+      "airflowTolerance": 10,
+      "heatRecoveryMinimum": 80,
+      "specificFanPowerMax": 0.5
+    },
+    "outcome": "pending"
+  },
+  "constructionPackageId": "CP-MEP",
+  "sources": [
+    {
+      "id": "SRC-CT-MVHR-001-01",
+      "title": "Green Terrace — Commissioning Plan §5.3 (MVHR)",
+      "type": "other",
+      "documentType": "commissioning_plan",
+      "date": "2026-01-15",
+      "author": "Jan Wiśniewski + VentBalance Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "commissioning-artifact"
+  ],
+  "notes": "This test verifies the **design assumption** from the bedroom-01 entity:\n60 m³/h fresh-air supply per occupant. If measured airflow is below the\n10 % tolerance, the system requires re-balancing before final acceptance.\n\nHeat-recovery efficiency below 80 % triggers a non-conformance issue\n(`issue` entity, type `non_conformance`) and re-test after rectification.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — first commissioning-phase test in the example"
+    }
+  ]
+}

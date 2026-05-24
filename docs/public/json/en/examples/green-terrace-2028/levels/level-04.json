@@ -1,0 +1,28 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\levels\\level-04.md",
+    "extractedAt": "2026-05-24T19:47:14.134Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "level",
+  "id": "LVL-04",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "levelName": "Level 04 — Fourth Floor",
+  "levelNumber": 4,
+  "elevation": 12.2,
+  "buildingId": "BLD-01",
+  "typicalCeilingHeight": 2.7,
+  "unit": "m",
+  "operationalNotes": "Level 04 has been the source of more than half the operation-phase\nissues to date: the south-facing apartments (4.01, 4.02, 4.03) report\noverheating in summer, the heat pump warranty claim originated from a\nLevel 04 zone, and the CO2 anomaly is in Bedroom 01 of apartment 4.02.\nWhether this is a Level 04 problem or a \"top-of-stack\" effect (Level 05\nhas a green roof) is still being investigated.\n",
+  "tags": [
+    "operation-phase-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Operation-phase Level 04 — added to give the operation example a level context where the issues cluster"
+    }
+  ]
+}

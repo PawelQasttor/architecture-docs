@@ -1,0 +1,97 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-AIRTIGHTNESS-001.md",
+    "extractedAt": "2026-05-24T19:47:14.227Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-AIRTIGHTNESS-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "testName": "Test szczelności powietrznej całego budynku (blower-door) — WYKONANO + PONOWNY TEST",
+  "testCategory": "air_tightness",
+  "status": "conditional_pass",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "ENV-EW-01"
+  ],
+  "requirementIds": [
+    "REQ-PL-WT-328-001",
+    "REQ-ENERGY-PERFORMANCE-001"
+  ],
+  "testProcedure": {
+    "standard": "PN-EN ISO 9972",
+    "method": "Metoda 1 — budynek w użyciu. Dwa cykle testowe: wstępny (2026-02-20) i 18-miesięczny powtórny (2027-08-25)."
+  },
+  "scheduledDate": "2026-02-20",
+  "executedDate": "2026-02-20",
+  "executedBy": {
+    "name": "Marek Lis",
+    "organization": "PowietrzPro Sp. z o.o.",
+    "qualification": "Tester szczelności poziomu 2 ATTMA",
+    "certificationNumber": "ATTMA-2456"
+  },
+  "witnessedBy": [
+    {
+      "name": "Anna Nowak",
+      "organization": "Nowak Architecture",
+      "role": "Architekt odpowiedzialny"
+    }
+  ],
+  "results": {
+    "expected": {
+      "n50": 1.5,
+      "aT50": 1.2
+    },
+    "measured": {
+      "n50_initial": 1.6,
+      "n50_retest": 1.7,
+      "aT50_initial": 1.28,
+      "aT50_retest": 1.36,
+      "retestDate": "2027-08-25",
+      "retestReason": "Rutynowa weryfikacja 18-miesięczna wg planu rozruchu. Wynik wywołał NCR.",
+      "measurementDate": "2026-02-20",
+      "notes": "Test wstępny 1,6 ACH przy przekazaniu — przekracza cel projektowy 1,5,\nale komfortowo w limicie regulacyjnym 2,5. 18-miesięczny powtórny test\npokazał spadek do 1,7 ACH, prześledzony do zużycia uszczelek obwodowych\nna ościeżach okien południowych Poziomu 04 (spójne ze stresem\ncyklowania termicznego latem).\n"
+    },
+    "passCriteria": {
+      "n50Max": 2.5,
+      "targetN50": 1.5
+    },
+    "outcome": "conditional_pass",
+    "outcomeNotes": "Zaliczenie regulacyjne (1,7 ACH < 2,5 limit). Niezaliczenie celu projektowego (1,7 > 1,5).\nNCR podniesione — patrz ISS-NC-AIRTIGHTNESS-001.\n"
+  },
+  "constructionPackageId": "CP-ENVELOPE",
+  "followUpIssueIds": [
+    "ISS-NC-AIRTIGHTNESS-001"
+  ],
+  "sources": [
+    {
+      "id": "SRC-CT-AIRTIGHTNESS-001-OPS-01",
+      "title": "Zielony Taras — Raport wstępnego testu szczelności powietrznej",
+      "type": "other",
+      "documentType": "commissioning_test_report",
+      "date": "2026-02-20",
+      "author": "Marek Lis / PowietrzPro Sp. z o.o."
+    },
+    {
+      "id": "SRC-CT-AIRTIGHTNESS-001-OPS-02",
+      "title": "Zielony Taras — Raport 18-miesięcznego powtórnego testu szczelności",
+      "type": "other",
+      "documentType": "commissioning_test_report",
+      "date": "2027-08-25",
+      "author": "Marek Lis / PowietrzPro Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "operation-phase-example",
+    "wykonany-test",
+    "charakterystyka-energetyczna"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Wykonanie CT-AIRTIGHTNESS-001 w fazie eksploatacji — wstępnie 1,6 ACH, 18-miesięczny powtórny 1,7 ACH, NCR podniesione"
+    }
+  ]
+}

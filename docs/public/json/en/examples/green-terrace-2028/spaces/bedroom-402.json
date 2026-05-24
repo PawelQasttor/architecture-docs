@@ -1,0 +1,54 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\spaces\\bedroom-402.md",
+    "extractedAt": "2026-05-24T19:47:14.137Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space",
+  "id": "SP-BLD-01-L04-002",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "spaceName": "Bedroom 01 in Apartment 4.02",
+  "spaceTypeId": "ST-BEDROOM-STANDARD-A",
+  "roomNumber": "4.02.1",
+  "accessibilityLevel": "standard",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-04",
+  "designArea": 14.5,
+  "designVolume": 39.15,
+  "unit": "m",
+  "operationalData": {
+    "occupancyStartDate": "2026-04-15",
+    "monthsOccupied": 21,
+    "measuredEnvironment": {
+      "avgCO2_ppm": 1180,
+      "avgCO2_basis": "rolling 90-day mean from BMS sensor BMS-CO2-402-001",
+      "avgWinterTemp_C": 21.3,
+      "avgSummerTemp_C": 25.8,
+      "measurementPeriod": "2026-06 to 2028-01",
+      "dataSource": "external CSV: telemetry/SP-BLD-01-L04-002-bms-2026-06-to-2028-01.csv"
+    },
+    "occupantFeedback": {
+      "surveyDate": "2027-09",
+      "overallSatisfaction": 4,
+      "flaggedConcerns": [
+        "stuffy_air_at_night",
+        "summer_overheating"
+      ],
+      "notes": "Occupant reports waking with headache 2-3 times a month, consistently after warmer days."
+    }
+  },
+  "activeIssueIds": [
+    "ISS-ANOMALY-CO2-001"
+  ],
+  "tags": [
+    "operation-phase-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Operation-phase bedroom — anchor space for the CO2 anomaly and occupant-feedback narrative"
+    }
+  ]
+}

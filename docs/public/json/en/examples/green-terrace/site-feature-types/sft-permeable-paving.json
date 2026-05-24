@@ -1,0 +1,70 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\site-feature-types\\sft-permeable-paving.md",
+    "extractedAt": "2026-05-24T19:47:14.104Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site_feature_type",
+  "id": "SFT-PERMEABLE-PAVING",
+  "featureTypeName": "Permeable Block Paving",
+  "featureCategory": "hardscape",
+  "description": "Permeable interlocking concrete block paving for pedestrian and light vehicle areas. Allows rainwater infiltration, reducing surface runoff.",
+  "materials": [
+    {
+      "material": "Interlocking concrete blocks (80mm)",
+      "quantity": 1,
+      "unit": "m2"
+    },
+    {
+      "material": "Jointing aggregate (2-5mm gravel)",
+      "quantity": 0.01,
+      "unit": "m3/m2"
+    },
+    {
+      "material": "Bedding layer (grit 4-6mm)",
+      "quantity": 0.05,
+      "unit": "m3/m2"
+    },
+    {
+      "material": "Sub-base (MOT Type 3)",
+      "quantity": 0.25,
+      "unit": "m3/m2"
+    }
+  ],
+  "manufacturer": "Semmelrock",
+  "expectedLifeYears": 30,
+  "maintenanceRequirements": {
+    "frequency": "annual",
+    "tasks": [
+      "Inspect for settlement and heave",
+      "Re-level displaced blocks",
+      "Clean jointing aggregate",
+      "Check drainage outlets"
+    ],
+    "seasonalTasks": [
+      "Spring: clear winter debris, check for frost damage",
+      "Autumn: remove fallen leaves from joints"
+    ]
+  },
+  "sustainabilityMetrics": {
+    "permeability": 0.85,
+    "biodiversityValue": "low",
+    "heatIslandReduction": true
+  },
+  "cost": {
+    "totalCost": 65,
+    "currency": "EUR",
+    "basis": "per_m2_installed"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcCivilElement",
+    "globalId": "4xSFT-PERM-PAVE-001"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "paving",
+    "permeable",
+    "suds",
+    "hardscape"
+  ]
+}

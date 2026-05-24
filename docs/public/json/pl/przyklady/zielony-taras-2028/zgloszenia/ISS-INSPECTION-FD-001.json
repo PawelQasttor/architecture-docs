@@ -1,0 +1,61 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-INSPECTION-FD-001.md",
+    "extractedAt": "2026-05-24T19:47:14.234Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-INSPECTION-FD-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "issueTitle": "Roczna inspekcja pożarowa — degradacja uszczelki obwodowej drzwi pożarowych Poziomu 02",
+  "issueType": "inspection",
+  "issueNumber": "INSP-2027-04",
+  "status": "responded",
+  "priority": "high",
+  "description": "Roczna inspekcja pożarowa przeprowadzona przez Komendę Miejską PSP Warszawa\nStacja 12 dnia 2027-11-15 zidentyfikowała zużycie uszczelki obwodowej\nna drzwiach pożarowych EI 30 przy wejściu do klatki schodowej Poziomu 02\n(drzwi OPN-DOOR-STAIR-02). Ściśliwość uszczelki zmierzona na 40 %\nwartości jak-zamontowanej, obniżając efektywną odporność ogniową drzwi\nz EI 30 do szacowanych EI 20 (poniżej minimum regulacyjnego).\n\nZamienna uszczelka zamówiona + zainstalowana w ciągu 14 dni;\nre-inspekcja zaplanowana w celu potwierdzenia przywrócenia do EI 30.\n",
+  "buildingId": "BLD-01",
+  "relatedEntityIds": [
+    "OPN-DOOR-STAIR-01",
+    "VC-STAIR-A",
+    "CR-FIRE-EGRESS-L01"
+  ],
+  "initiatedBy": {
+    "name": "Kapitan Krzysztof Borowski",
+    "organization": "Komenda Miejska PSP Warszawa — Stacja 12",
+    "role": "inspektor regulacyjny",
+    "date": "2027-11-15"
+  },
+  "assignedTo": {
+    "name": "GreenFM Sp. z o.o.",
+    "organization": "Wykonawca FM",
+    "role": "remediacja"
+  },
+  "dueDate": "2027-11-29",
+  "responseDate": "2027-11-28",
+  "response": {
+    "respondedBy": "GreenFM Sp. z o.o.",
+    "responseDate": "2027-11-28",
+    "responseText": "Zamienny zestaw uszczelki obwodowej EI 30 zamówiony od oryginalnego\nproducenta drzwi 2027-11-16. Zainstalowany 2027-11-26. Ściśliwość\nuszczelki ponownie zmierzona po montażu: wartość nominalna jak-zamontowana.\nRe-inspekcja przez KM PSP Warszawa zaplanowana 2027-12-10.\n"
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 320,
+    "appliesTo": "operations_budget"
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0,
+    "notes": "Rozwiązane w regulacyjnym oknie remediacji 14 dni."
+  },
+  "tags": [
+    "operation-phase-example",
+    "inspekcja-regulacyjna",
+    "krytyczne-bezpieczeństwo"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Wynik rocznej inspekcji pożarowej — zużycie uszczelki, wymieniona w oknie regulacyjnym. Demonstruje cykl regularnych inspekcji."
+    }
+  ]
+}

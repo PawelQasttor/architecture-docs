@@ -1,0 +1,38 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\zones\\acoustic-zone-night.md",
+    "extractedAt": "2026-05-24T19:47:14.120Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "zone",
+  "id": "ZONE-ACOUSTIC-NIGHT",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "zoneName": "Acoustic Zone - Night",
+  "zoneType": "acoustic",
+  "buildingId": "BLD-01",
+  "levelIds": [
+    "LVL-01"
+  ],
+  "properties": {
+    "acousticClass": "B",
+    "usageType": "sleeping_spaces",
+    "soundInsulationRequirement": 52,
+    "impactSoundRequirement": 53,
+    "unit": "dB"
+  },
+  "requirements": [
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-PL-ACOUSTIC-PARTITION-001"
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcZone",
+    "globalId": "3P4gH0$sLByv4WyFv3MQyT"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "acoustic",
+    "sleeping",
+    "class-b"
+  ]
+}

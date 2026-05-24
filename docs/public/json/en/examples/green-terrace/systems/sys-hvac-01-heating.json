@@ -1,0 +1,33 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01-heating.md",
+    "extractedAt": "2026-05-24T19:47:14.117Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "system",
+  "id": "SYS-HVAC-01-HEATING",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "systemName": "Heating Subsystem (Heat Pump + UFH)",
+  "systemCategory": "hvac",
+  "parentSystemId": "SYS-HVAC-01",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-MEP",
+  "assetIds": [
+    "AST-HP-01",
+    "AST-UFH-MANIFOLD-01"
+  ],
+  "performance": {
+    "installedHeatingCapacity": "12 kW",
+    "measuredCOP": 4.3,
+    "flowTemperature": "35°C",
+    "designHeatLoad": "4750 W"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "hvac",
+    "heating",
+    "heat-pump",
+    "underfloor-heating"
+  ]
+}

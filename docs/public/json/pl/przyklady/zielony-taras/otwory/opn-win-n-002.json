@@ -1,0 +1,67 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-win-n-002.md",
+    "extractedAt": "2026-05-24T19:47:14.182Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "opening",
+  "id": "OPN-WIN-N-002",
+  "openingName": "Okno Salonu Północne",
+  "openingCategory": "window",
+  "envelopeId": "ENV-EW-01",
+  "openingTypeId": "OT-INTERNORM-KF410",
+  "levelId": "LVL-01",
+  "spaceIds": [
+    "SP-BLD-01-L01-001"
+  ],
+  "dimensions": {
+    "width": 1800,
+    "height": 1500,
+    "area": 2.7
+  },
+  "sillHeight": 900,
+  "orientation": "N",
+  "thermalPerformance": {
+    "uValue": 0.9,
+    "uValueRequired": 0.9,
+    "gValue": 0.5
+  },
+  "thermalPerformance_meta": {
+    "confidence": "specified",
+    "source": "manufacturer_datasheet"
+  },
+  "acousticPerformance": {
+    "rw": 35,
+    "rwRequired": 25
+  },
+  "constructionPackageId": "CP-ENVELOPE",
+  "installationData": {
+    "installationDate": "2024-08-11",
+    "installedBy": "Okna Plus Sp. z o.o.",
+    "commissioningDate": "2024-08-12"
+  },
+  "warranty": {
+    "warrantyStart": "2024-08-11",
+    "warrantyEnd": "2034-08-11",
+    "warrantyProvider": "Internorm"
+  },
+  "manufacturer": "Internorm",
+  "productCode": "KF410-TT-1800x1500",
+  "cost": {
+    "totalCost": 1350,
+    "currency": "EUR",
+    "basis": "installed_cost"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcWindow",
+    "globalId": "2xB3YO$rLBxv3VxEu2WIN2",
+    "objectType": "Window_Internorm_KF410_1800x1500"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "okno",
+    "elewacja-polnocna",
+    "salon",
+    "poziom-01"
+  ]
+}

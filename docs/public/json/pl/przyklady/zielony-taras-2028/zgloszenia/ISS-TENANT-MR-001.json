@@ -1,0 +1,60 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-TENANT-MR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.236Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-TENANT-MR-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "issueTitle": "Zgłoszenie mieszkańca — wyciek z odpływu łazienki, mieszkanie 4.02",
+  "issueType": "field_observation",
+  "issueNumber": "TMR-001",
+  "status": "closed",
+  "priority": "medium",
+  "description": "Mieszkaniec mieszkania 4.02 zgłosił powolny wyciek z rury odpływu łazienki\nna styku podłoga-ściana. Wniknięcie wody niewidoczne dla mieszkań poniżej\n(zatrzymane przez membranę przeciwwilgociową). Podwykonawca hydrauliczny\nwrócił w ramach 12-miesięcznej gwarancji wykonawczej.\n",
+  "buildingId": "BLD-01",
+  "relatedEntityIds": [
+    "SP-BLD-01-L04-002",
+    "SYS-HVAC-01"
+  ],
+  "initiatedBy": {
+    "name": "Mieszkaniec (mieszkanie 4.02)",
+    "organization": "Rezydent",
+    "role": "mieszkaniec",
+    "date": "2026-09-08"
+  },
+  "assignedTo": {
+    "name": "PlumbingPro Sp. z o.o.",
+    "organization": "Pierwotny podwykonawca hydrauliczny",
+    "role": "12-miesięczna gwarancja wykonawcza"
+  },
+  "dueDate": "2026-09-15",
+  "responseDate": "2026-09-11",
+  "closedDate": "2026-09-12",
+  "response": {
+    "respondedBy": "PlumbingPro Sp. z o.o.",
+    "responseDate": "2026-09-11",
+    "responseText": "Inspekcja łazienki mieszkania 4.02 2026-09-09. Potwierdzono powolny\nwyciek na połączeniu syfonu (nieprawidłowe zaciskanie podczas montażu).\nPołączenie przerobione + test ciśnieniowy. Brak prac naprawczych\nmembrany — wyciek wychwycony przed jakimkolwiek przebiciem strukturalnym.\nNaprawa pokryta 12-miesięczną gwarancją wykonawczą.\n"
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 0,
+    "appliesTo": "12_month_warranty"
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0,
+    "notes": "Rozwiązane w 3 dni. Łazienka mieszkania 4.02 wyłączona z użytku przez 2 godziny podczas naprawy."
+  },
+  "tags": [
+    "operation-phase-example",
+    "zgloszenie-mieszkanca"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Zgłoszenie konserwacji mieszkańca — wyciek z odpływu łazienki, rozwiązane w ramach 12-miesięcznej gwarancji wykonawczej"
+    }
+  ]
+}

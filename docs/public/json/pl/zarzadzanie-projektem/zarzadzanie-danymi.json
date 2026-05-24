@@ -1,0 +1,9 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie-danymi.md",
+    "extractedAt": "2026-05-24T19:47:14.250Z",
+    "format": "yaml-frontmatter"
+  },
+  "title": "Zarządzanie danymi",
+  "description": "Jak przechwytywać, przetwarzać i śledzić surowe dane projektowe z e-maili, PDF-ów, nagrań audio, pomiarów geodezyjnych i innych źródeł do strukturyzowanych encji SBM."
+}

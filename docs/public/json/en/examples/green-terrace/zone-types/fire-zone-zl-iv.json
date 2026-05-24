@@ -1,0 +1,36 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\zone-types\\fire-zone-zl-iv.md",
+    "extractedAt": "2026-05-24T19:47:14.119Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "zone_type",
+  "id": "ZT-FIRE-ZL-IV",
+  "typeName": "Fire Zone ZL-IV Standard",
+  "zoneType": "fire",
+  "description": "Standard fire safety zone for residential buildings per Polish regulations (ZL-IV category)",
+  "requirements": [
+    "REQ-PL-FIRE-SEPARATION-001",
+    "REQ-FIRE-EGRESS-TIME-001",
+    "REQ-FIRE-COMPARTMENTATION-001",
+    "REQ-FIRE-DETECTION-SMOKE-001"
+  ],
+  "properties": {
+    "fireResistanceClass": "ZL-IV",
+    "fireResistanceRating": "REI 60",
+    "maxEscapeDistance": 40,
+    "compartmentationRequired": true,
+    "smokeControlStrategy": "natural",
+    "evacuationStrategy": "protected_egress",
+    "fireDetectionType": "smoke",
+    "emergencyLightingRequired": true,
+    "fireLoadCategory": "low"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "fire-safety",
+    "residential",
+    "polish-code",
+    "zl-iv"
+  ]
+}

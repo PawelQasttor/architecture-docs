@@ -1,0 +1,9 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\project-management\\data-governance.md",
+    "extractedAt": "2026-05-24T19:47:14.154Z",
+    "format": "yaml-frontmatter"
+  },
+  "title": "Data Governance",
+  "description": "How to capture, process, and trace raw project data from emails, PDFs, audio recordings, site surveys, and other sources into structured SBM entities."
+}

@@ -1,0 +1,80 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\site-features\\sf-north-garden.md",
+    "extractedAt": "2026-05-24T19:47:14.105Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site_feature",
+  "id": "SF-GARDEN-01",
+  "featureName": "North Garden",
+  "featureCategory": "vegetation",
+  "siteId": "SITE-GREEN-TERRACE",
+  "location": {
+    "description": "North side of the building, between the building facade and the site boundary",
+    "zone": "north garden"
+  },
+  "dimensions": {
+    "length": 25,
+    "width": 8,
+    "area": 200
+  },
+  "materials": [
+    {
+      "material": "Topsoil (300mm depth)",
+      "quantity": 60,
+      "unit": "m3",
+      "supplier": "Ogrodnik Sp. z o.o."
+    },
+    {
+      "material": "Native shrub mix",
+      "quantity": 45,
+      "unit": "plants",
+      "supplier": "Szkółka Zielona Sp. z o.o."
+    },
+    {
+      "material": "Lawn seed (shade-tolerant)",
+      "quantity": 10,
+      "unit": "kg",
+      "supplier": "Barenbrug"
+    }
+  ],
+  "condition": "new",
+  "installationData": {
+    "installationDate": "2024-09-15",
+    "installedBy": "Ogrodnik Sp. z o.o.",
+    "supplier": "Szkółka Zielona Sp. z o.o."
+  },
+  "maintenanceSchedule": {
+    "frequency": "monthly_growing_season",
+    "lastMaintenance": "2025-01-15",
+    "nextMaintenance": "2025-04-01",
+    "contractor": "Ogrodnik Sp. z o.o."
+  },
+  "sustainabilityMetrics": {
+    "carbonSequestration": 120,
+    "permeability": 0.95,
+    "biodiversityScore": "medium",
+    "rainfallRetention": 45
+  },
+  "constructionPackageId": "CP-FINISHES",
+  "cost": {
+    "totalCost": 12000,
+    "currency": "EUR",
+    "basis": "landscape_contractor_quote"
+  },
+  "cost_meta": {
+    "confidence": "estimated",
+    "source": "landscape_quote"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcGeographicElement",
+    "globalId": "5xSF-GARDEN-N-001"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "garden",
+    "vegetation",
+    "north",
+    "biodiversity"
+  ]
+}

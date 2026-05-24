@@ -1,0 +1,36 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\zone-types\\hvac-zone-residential.md",
+    "extractedAt": "2026-05-24T19:47:14.120Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "zone_type",
+  "id": "ZT-HVAC-RESIDENTIAL",
+  "typeName": "HVAC Zone - Residential Standard",
+  "zoneType": "hvac",
+  "description": "Standard residential HVAC zone with underfloor heating and mechanical ventilation for thermal comfort",
+  "requirements": [
+    "REQ-THERMAL-COMFORT-001",
+    "REQ-VENTILATION-OCCUPIED-001",
+    "REQ-PL-THERMAL-WALLS-001",
+    "REQ-ENERGY-EFFICIENCY-HVAC"
+  ],
+  "properties": {
+    "heatingSystem": "underfloor_heating",
+    "coolingSystem": "mechanical_ventilation",
+    "ventilationStrategy": "balanced_mechanical",
+    "heatingSetpoint": 21,
+    "coolingSetpoint": 26,
+    "airChangeRate": 0.5,
+    "controlStrategy": "individual_room_thermostats",
+    "occupancyControl": false,
+    "nightSetback": 18
+  },
+  "version": "2.1.0",
+  "tags": [
+    "hvac",
+    "residential",
+    "thermal-comfort",
+    "underfloor-heating"
+  ]
+}

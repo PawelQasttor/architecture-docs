@@ -1,0 +1,58 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\retrocx-recommendations\\RCX-MVHR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.136Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "retrocx_recommendation",
+  "id": "RCX-MVHR-001",
+  "version": "2.3.0",
+  "projectPhase": "operation",
+  "recommendationTitle": "MVHR airflow rebalance for Level 04 south-facing apartments",
+  "buildingId": "BLD-01",
+  "triggeredByIssueIds": [
+    "ISS-ANOMALY-CO2-001"
+  ],
+  "triggeredBySurveyId": "SURVEY-BLD-01-IEQ-2027",
+  "triggeredByTelemetryStreamId": "TEL-CO2-402-001",
+  "affectedSystemIds": [
+    "SYS-HVAC-01"
+  ],
+  "affectedSpaceIds": [
+    "SP-BLD-01-L04-002"
+  ],
+  "affectedAssetIds": [
+    "AST-MVHR-01"
+  ],
+  "proposedIntervention": "Increase bedroom-diffuser supply on apartments 4.01, 4.02, 4.03 (Level\n04 south-facing cluster) from the original 60 m³/h to 70 m³/h\n(17 % increase). No hardware change required — purely a control + damper\nsetting adjustment performed by the rebalancing contractor.\n",
+  "expectedOutcome": {
+    "metric": "co2_90day_mean",
+    "affectedSpaceIds": [
+      "SP-BLD-01-L04-002"
+    ],
+    "currentValue": 1180,
+    "targetValue": 1000,
+    "unit": "ppm"
+  },
+  "verificationPlan": {
+    "method": "Re-measure 90-day rolling mean of CO2 in apartment 4.02 Bedroom 01\none month after rebalance. If still > 1000 ppm, escalate to deeper\ninvestigation (MVHR fan curve, duct losses, occupant patterns).\n",
+    "verificationTestId": null,
+    "verificationDueDate": "2027-09-30"
+  },
+  "costEstimate_eur": 1200,
+  "status": "executed_awaiting_verification",
+  "proposedDate": "2027-08-04",
+  "executedDate": "2027-08-30",
+  "tags": [
+    "operation-phase-example",
+    "retrocx",
+    "v2-3-feature"
+  ],
+  "changelog": [
+    {
+      "version": "2.3.0",
+      "date": "2026-05-24",
+      "description": "First retrocx_recommendation entity — replaces the awkward use of generic Issue (issueType: design_clarification) with a proper retro-cx lifecycle entity. The original ISS-RETROCX-MVHR-001 stays as the contractor-facing work-order narrative; this entity is the data-quality + verification narrative."
+    }
+  ]
+}

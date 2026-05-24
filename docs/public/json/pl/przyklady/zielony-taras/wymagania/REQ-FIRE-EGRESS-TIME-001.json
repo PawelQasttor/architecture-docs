@@ -1,0 +1,180 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-FIRE-EGRESS-TIME-001.md",
+    "extractedAt": "2026-05-24T19:47:14.212Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "requirement",
+  "id": "REQ-FIRE-EGRESS-TIME-001",
+  "requirementName": "Limit czasu ewakuacji pożarowej",
+  "description": "Maksymalny czas ewakuacji z dowolnego punktu Poziomu 01 do chronionej klatki schodowej",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+  "priority": "critical",
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": [
+      "corridor",
+      "bedroom",
+      "living_room",
+      "common_area"
+    ]
+  },
+  "egressTime": {
+    "metric": "egress_time",
+    "operator": "<=",
+    "value": 2.5,
+    "unit": "minutes",
+    "testMethod": "Symulacja (Pathfinder / obliczenie RSET)",
+    "description": "Maksymalny czas dotarcia do chronionej klatki schodowej z dowolnej przestrzeni użytkowej"
+  },
+  "travelDistance": {
+    "metric": "egress_distance",
+    "operator": "<=",
+    "value": 40,
+    "unit": "m",
+    "testMethod": "Pomiar wzdłuż osi drogi ewakuacyjnej",
+    "description": "Maksymalna długość dojścia ewakuacyjnego do najbliższej klatki schodowej"
+  },
+  "corridorWidth": {
+    "metric": "corridor_width",
+    "operator": ">=",
+    "value": 1.4,
+    "unit": "m",
+    "testMethod": "Pomiar powykonawczy",
+    "description": "Minimalna szerokość w świetle głównego korytarza ewakuacyjnego"
+  },
+  "doorWidth": {
+    "metric": "door_clear_width",
+    "operator": ">=",
+    "value": 0.9,
+    "unit": "m",
+    "testMethod": "Pomiar powykonawczy",
+    "description": "Minimalna szerokość w świetle otworu drzwi na drodze ewakuacyjnej"
+  },
+  "acceptanceCriteria": [
+    "Czas ewakuacji: maksymalnie 2,5 minuty RSET do chronionej klatki schodowej",
+    "Długość dojścia: maksymalnie 40 metrów wzdłuż drogi ewakuacyjnej",
+    "Przepustowość korytarza: główny korytarz ≥1,40 m szerokości w świetle",
+    "Parametry drzwi: minimum 0,90 m szerokości otworu w świetle, drzwi pożarowe samozamykające (EI 30)",
+    "Przepustowość klatki schodowej: minimum 1,20 m szerokości w świetle w obudowie chronionej (REI 60)"
+  ],
+  "qualitativeDescription": "Ewakuacja pożarowa Poziomu 01 musi spełniać następujące kryteria:\n1. Czas ewakuacji: maksymalnie 2,5 minuty RSET (wymagany bezpieczny czas ewakuacji) z dowolnego punktu użytkowego do wejścia chronionej klatki schodowej (założono prędkość marszu 1,2 m/s, zwłokę przy drzwiach 2 s)\n2. Długość dojścia: maksymalnie 40 metrów mierzone wzdłuż drogi ewakuacyjnej od najdalszego punktu w lokalu do najbliższych drzwi chronionej klatki schodowej\n3. Przepustowość korytarzy: korytarz główny ≥1,40 m w świetle, korytarze drugorzędne ≥1,20 m w świetle, brak przeszkód na drogach ewakuacyjnych\n4. Parametry drzwi: minimum 0,90 m szerokości otworu w świetle, drzwi pożarowe samozamykające (minimum EI 30), kierunek otwierania zgodny z kierunkiem ewakuacji, okucia antypaniczne na drzwiach klatki (jeśli wymagane)\n5. Przepustowość klatki schodowej: minimum 1,20 m w świetle, przepustowość wystarczająca do jednoczesnej ewakuacji, obudowa chroniona (REI 60)\n",
+  "evidenceRequired": [
+    "Raport z symulacji ewakuacji pożarowej (Pathfinder lub równoważny)",
+    "Rysunki powykonawcze pokazujące drogi ewakuacyjne i długości dojść",
+    "Zestawienie drzwi z wymiarami otworów w świetle",
+    "Certyfikaty montażu drzwi pożarowych",
+    "Wyniki próby napowietrzania klatki schodowej (jeśli dotyczy)",
+    "Certyfikat próby oświetlenia awaryjnego",
+    "Raport z próbnej ewakuacji"
+  ],
+  "designAssumptions": {
+    "occupantDensity": 0.02,
+    "walkingSpeed": 1.2,
+    "doorFlowRate": 1.33,
+    "doorDelay": 2,
+    "preMovementTime": 60,
+    "safetyFactor": 1.5
+  },
+  "phases": [
+    {
+      "phase": "schematic_design",
+      "status": "completed",
+      "deliverable": "Wstępna analiza ewakuacji i układ funkcjonalny"
+    },
+    {
+      "phase": "design_development",
+      "status": "completed",
+      "deliverable": "Symulacja ewakuacji pożarowej (Pathfinder)"
+    },
+    {
+      "phase": "construction_documents",
+      "status": "completed",
+      "deliverable": "Detale dróg ewakuacyjnych i zestawienia drzwi"
+    },
+    {
+      "phase": "construction",
+      "status": "in_progress",
+      "deliverable": "Weryfikacja powykonawcza dróg ewakuacyjnych"
+    },
+    {
+      "phase": "commissioning",
+      "status": "pending",
+      "deliverable": "Próbna ewakuacja i certyfikacja końcowa"
+    }
+  ],
+  "regulatoryReferences": [
+    {
+      "code": "WT 2021",
+      "section": "§ 256",
+      "description": "Drogi ewakuacyjne w budynkach mieszkalnych",
+      "status": "applicable"
+    },
+    {
+      "code": "WT 2021",
+      "section": "§ 257",
+      "description": "Drzwi na drogach ewakuacyjnych",
+      "status": "applicable"
+    },
+    {
+      "code": "WT 2021",
+      "section": "§ 234",
+      "description": "Oddzielenia i zabezpieczenia przeciwpożarowe",
+      "status": "applicable"
+    },
+    {
+      "code": "PD 7974-6",
+      "section": "Human factors: Life safety strategies",
+      "description": "Metodyka obliczenia RSET",
+      "status": "reference"
+    }
+  ],
+  "verification": {
+    "method": "simulation",
+    "phase": [
+      "schematic_design",
+      "design_development",
+      "construction_documents",
+      "commissioning"
+    ],
+    "frequency": "pre_occupancy",
+    "tool": "Pathfinder",
+    "standard": "PD 7974-6",
+    "responsible": "Inżynier ds. bezpieczeństwa pożarowego"
+  },
+  "simulationResults": {
+    "software": "Pathfinder 2024",
+    "scenario": "Jednoczesna ewakuacja Poziomu 01 (przypadek najbardziej niekorzystny)",
+    "results": {
+      "maxRSET": 2.1,
+      "maxTravelDistance": 38.5,
+      "bottleneck": "Skrzyżowanie korytarzy przy lokalach 5–6",
+      "status": "PASS"
+    }
+  },
+  "relatedRequirements": [
+    "REQ-LEVEL-FIRE-RATING",
+    "REQ-EMERGENCY-LIGHTING",
+    "REQ-SMOKE-CONTROL"
+  ],
+  "estimatedCostImpact": {
+    "description": "Wymagania ewakuacyjne wpływają na szerokość korytarzy i specyfikację drzwi",
+    "magnitude": "low",
+    "value": 5000,
+    "currency": "EUR"
+  },
+  "safetyCritical": true,
+  "failureMode": "Opóźniona ewakuacja, potencjalne zagrożenie życia",
+  "mitigationMeasures": [
+    "Dwie niezależne drogi ewakuacyjne z każdego lokalu",
+    "Drzwi pożarowe samozamykające na wszystkich drogach ewakuacyjnych",
+    "Oświetlenie awaryjne z 3-godzinnym podtrzymaniem bateryjnym",
+    "System detekcji dymu i sygnalizacji pożaru",
+    "Coroczne próbne ewakuacje"
+  ],
+  "notes": "To jest KRYTYCZNE wymaganie bezpieczeństwa. Wszelkie zmiany układu\nPoziomu 01 wpływające na drogi ewakuacyjne MUSZĄ zostać ponownie ocenione.\n\nObliczenie RSET obejmuje:\n- Czas detekcji: 30 sekund (czujki dymu)\n- Czas przeddziałania: 60 sekund (zabudowa mieszkalna)\n- Czas przejścia: ~70 sekund (38,5 m przy 1,2 m/s + zwłoki przy drzwiach)\n- Współczynnik bezpieczeństwa: ×1,5\n- Łączny RSET: 2,1 minuty (w granicach limitu 2,5 minuty)\n\nSymulacja zweryfikowana w scenariuszu najbardziej niekorzystnym:\n- Jednoczesna ewakuacja wszystkich 18 lokali na Poziomie 01\n- Jedna klatka schodowa zablokowana (mieszkańcy korzystają z drogi zapasowej)\n- Żadne zwężenie nie przekroczyło progu 2,5 minuty\n",
+  "createdBy": "Inżynier ds. bezpieczeństwa pożarowego",
+  "lastModified": "2026-02-27",
+  "version": "2.1.0"
+}

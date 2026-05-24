@@ -1,0 +1,72 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-win-n-001.md",
+    "extractedAt": "2026-05-24T19:47:14.182Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "opening",
+  "id": "OPN-WIN-N-001",
+  "openingName": "Okno Sypialni Północne 01",
+  "openingCategory": "window",
+  "envelopeId": "ENV-EW-01",
+  "openingTypeId": "OT-INTERNORM-KF410",
+  "levelId": "LVL-01",
+  "spaceIds": [
+    "SP-BLD-01-L01-001"
+  ],
+  "dimensions": {
+    "width": 1200,
+    "height": 1500,
+    "area": 1.8
+  },
+  "sillHeight": 900,
+  "orientation": "N",
+  "thermalPerformance": {
+    "uValue": 0.9,
+    "uValueRequired": 0.9,
+    "gValue": 0.5
+  },
+  "thermalPerformance_meta": {
+    "confidence": "specified",
+    "source": "manufacturer_datasheet",
+    "sourceRef": "Internorm KF 410 dane produktowe"
+  },
+  "acousticPerformance": {
+    "rw": 35,
+    "rwRequired": 25
+  },
+  "acousticPerformance_meta": {
+    "confidence": "specified",
+    "source": "manufacturer_datasheet"
+  },
+  "constructionPackageId": "CP-ENVELOPE",
+  "installationData": {
+    "installationDate": "2024-08-10",
+    "installedBy": "Okna Plus Sp. z o.o.",
+    "commissioningDate": "2024-08-12"
+  },
+  "warranty": {
+    "warrantyStart": "2024-08-10",
+    "warrantyEnd": "2034-08-10",
+    "warrantyProvider": "Internorm"
+  },
+  "manufacturer": "Internorm",
+  "productCode": "KF410-TT-1200x1500",
+  "cost": {
+    "totalCost": 950,
+    "currency": "EUR",
+    "basis": "installed_cost"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcWindow",
+    "globalId": "2xB3YO$rLBxv3VxEu2WIN1",
+    "objectType": "Window_Internorm_KF410_1200x1500"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "okno",
+    "elewacja-polnocna",
+    "sypialnia",
+    "poziom-01"
+  ]
+}

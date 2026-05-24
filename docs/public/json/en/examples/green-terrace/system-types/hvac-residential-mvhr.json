@@ -1,0 +1,95 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\system-types\\hvac-residential-mvhr.md",
+    "extractedAt": "2026-05-24T19:47:14.115Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "system_type",
+  "id": "SYT-HVAC-RESIDENTIAL-MVHR",
+  "typeName": "Residential HVAC - MVHR + Heat Pump",
+  "systemCategory": "hvac",
+  "description": "Standard residential HVAC system combining mechanical ventilation with heat recovery (MVHR), air-to-water heat pump heating, and underfloor heating distribution for energy-efficient residential buildings",
+  "requirements": [
+    "REQ-HVAC-VENTILATION-RATE",
+    "REQ-HVAC-HEAT-RECOVERY",
+    "REQ-ENERGY-EFFICIENCY-HVAC",
+    "REQ-ACOUSTIC-HVAC-NOISE",
+    "REQ-THERMAL-COMFORT-001"
+  ],
+  "components": [
+    {
+      "category": "air_handling",
+      "description": "Heat recovery ventilation unit (MVHR)",
+      "specification": "MVHR with 90% heat recovery efficiency, EC fans, F7 filters",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Air-to-water heat pump",
+      "specification": "12 kW heating capacity, COP 4.2 at A7/W35, R-32 refrigerant",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Underfloor heating manifold with zone valves",
+      "specification": "8-zone manifold with thermostatic controls, mixing valve",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Circulation pump (heating)",
+      "specification": "Class A high-efficiency pump, variable speed",
+      "quantity": 1
+    },
+    {
+      "category": "ventilation",
+      "description": "Supply air diffusers",
+      "specification": "Ceiling-mounted adjustable diffusers, low-noise",
+      "quantity": 8
+    },
+    {
+      "category": "ventilation",
+      "description": "Extract air grilles",
+      "specification": "Bathroom/kitchen extract grilles with acoustic dampers",
+      "quantity": 4
+    },
+    {
+      "category": "controls",
+      "description": "Room thermostats",
+      "specification": "Wireless programmable thermostats, LCD display",
+      "quantity": 8
+    },
+    {
+      "category": "controls",
+      "description": "MVHR control panel",
+      "specification": "Wall-mounted with boost/holiday/night modes",
+      "quantity": 1
+    },
+    {
+      "category": "controls",
+      "description": "Weather compensation controller",
+      "specification": "Outdoor sensor + controller for heat pump optimization",
+      "quantity": 1
+    }
+  ],
+  "typicalPerformance": {
+    "heatingCapacity": "12 kW",
+    "ventilationRate": "0.5 ACH",
+    "heatRecovery": "90%",
+    "energyEfficiency": "A+++",
+    "copHeating": 4.2,
+    "noiseLevel": "25 dB(A)",
+    "designTemperatureHeating": "21-24°C",
+    "relativeHumidity": "40-60%",
+    "flowTemperatureUFH": "35°C",
+    "returnTemperatureUFH": "30°C"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "residential",
+    "mvhr",
+    "heat-pump",
+    "underfloor-heating",
+    "energy-efficient"
+  ]
+}

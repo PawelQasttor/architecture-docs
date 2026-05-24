@@ -1,0 +1,11 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\bim-integration\\lod-definitions.md",
+    "extractedAt": "2026-05-24T19:47:14.036Z",
+    "format": "yaml-frontmatter"
+  },
+  "documentType": "technical_reference",
+  "subject": "BIM_LOD",
+  "standard": "AIA_G202_2013",
+  "lastUpdated": "2026-02-20"
+}

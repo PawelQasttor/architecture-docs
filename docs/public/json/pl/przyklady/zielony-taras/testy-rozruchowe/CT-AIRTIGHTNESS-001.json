@@ -1,0 +1,81 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-AIRTIGHTNESS-001.md",
+    "extractedAt": "2026-05-24T19:47:14.200Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-AIRTIGHTNESS-001",
+  "version": "2.1.0",
+  "projectPhase": "commissioning",
+  "testName": "Test szczelności powietrznej całego budynku (blower-door)",
+  "testCategory": "air_tightness",
+  "status": "scheduled",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "ENV-EW-01"
+  ],
+  "requirementIds": [
+    "REQ-PL-WT-328-001",
+    "REQ-ENERGY-PERFORMANCE-001"
+  ],
+  "testProcedure": {
+    "standard": "PN-EN ISO 9972 (zastępuje PN-EN 13829)",
+    "method": "Metoda 1 (test budynku w użyciu) — podciśnienie i nadciśnienie w całym\nbudynku do ±50 Pa za pomocą kalibrowanego urządzenia blower-door\nuszczelnionego w wejściu głównym, z rejestracją wskaźnika nieszczelności\nw odstępach co 10 Pa od 50 Pa w dół do 10 Pa, następnie wyliczenie\nwskaźnika n50 (krotność wymian powietrza przy 50 Pa). Wszystkie celowe\notwory (kratki wyciągowe, czerpnia/wyrzutnia MVHR) uszczelnione\npodczas testu zgodnie z normą.\n",
+    "equipment": [
+      "Minneapolis Blower Door Model 3 + manometr DG-1000",
+      "Rejestrator danych środowiskowych TESTO 480",
+      "Ołówek dymowy + kamera termowizyjna do identyfikacji nieszczelności"
+    ],
+    "conditions": "Prędkość wiatru zewnętrznego < 6 m/s. Różnica temperatur wewnątrz-na zewnątrz\n≥ 5 °C zalecana dla wizualizacji nieszczelności dymem/termowizją. Budynek\nw znaczącym stopniu ukończony (przegrody w pełni uszczelnione, brak otworów\nbudowlanych).\n"
+  },
+  "scheduledDate": "2026-02-20",
+  "executedBy": {
+    "name": "Marek Lis",
+    "organization": "PowietrzPro Sp. z o.o.",
+    "qualification": "Tester szczelności poziomu 2 ATTMA",
+    "certificationNumber": "ATTMA-2456"
+  },
+  "witnessedBy": [
+    {
+      "name": "Anna Nowak",
+      "organization": "Nowak Architecture",
+      "role": "Architekt odpowiedzialny"
+    }
+  ],
+  "results": {
+    "expected": {
+      "n50": 1.5,
+      "aT50": 1.2
+    },
+    "measured": null,
+    "passCriteria": {
+      "n50Max": 2.5,
+      "targetN50": 1.5
+    },
+    "outcome": "pending"
+  },
+  "constructionPackageId": "CP-ENVELOPE",
+  "sources": [
+    {
+      "id": "SRC-CT-AIRTIGHTNESS-001-01",
+      "title": "Zielony Taras — Plan rozruchu §4.2 (Przegrody)",
+      "type": "other",
+      "documentType": "commissioning_plan",
+      "date": "2026-01-15",
+      "author": "Anna Nowak + PowietrzPro Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-rozruchu",
+    "charakterystyka-energetyczna"
+  ],
+  "notes": "Szczelność powietrzna jest decydującym testem dla klasy energetycznej budynku.\nPrzy n50 ≤ 1,5 projekt wspiera Klasę Energetyczną B (45 kWh/m²/rok ogrzewania);\nprzy n50 > 2,5 budynek nie spełnia WT 2021. Margines 1,0 ACH między celem\na limitem regulacyjnym daje pewną tolerancję wykonawczą, ale źle wykonany\nościeże lub przeoczone uszczelnienie obwodowe mogą łatwo podwoić n50 —\ndlatego test odbywa się podczas rozruchu, a nie przy przekazaniu.\n\nJeśli n50 > 2,5, termowizja w trybie awaryjnym (dym + kamera termowizyjna)\nidentyfikuje lokalizacje nieszczelności i musi zostać zgłoszone `non_conformance`\ndla podwykonawcy przegród do naprawy przed ponownym testem.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — drugi test z fazy rozruchu demonstrujący weryfikację przegród"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\index.md",
+    "extractedAt": "2026-05-24T19:47:14.169Z",
+    "format": "yaml-frontmatter"
+  },
+  "layout": "home",
+  "hero": {
+    "name": "Semantyczny Model Budynku",
+    "text": "Standard Dokumentacji Projektów Budowlanych",
+    "tagline": "Jeden plik tekstowy na pomieszczenie, strefę i instalację. Dane strukturalne, które czytają ludzie i komputery. Bez specjalnego oprogramowania — tylko foldery i pliki.",
+    "actions": [
+      {
+        "theme": "brand",
+        "text": "Czym jest SBM?",
+        "link": "/pl/standardy/wprowadzenie"
+      },
+      {
+        "theme": "alt",
+        "text": "Szybki Start (5 min)",
+        "link": "/pl/standardy/szybki-start"
+      },
+      {
+        "theme": "alt",
+        "text": "English",
+        "link": "/"
+      }
+    ]
+  },
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "10x Szybsza Dokumentacja",
+      "details": "To, co zajmowało 5 dni, teraz zajmuje 5 minut. Raport zgodności pożarowej? Automatyczny. Rejestr wyposażenia? Automatyczny. Zestawienie pomieszczeń? Automatyczne."
+    },
+    {
+      "icon": "✅",
+      "title": "Jeden Plik. Jedna Prawda.",
+      "details": "Każde pomieszczenie w jednym pliku tekstowym. Powierzchnia, wysokość, wykończenia, wyposażenie, zgodność—wszystko w jednym miejscu. Zmienisz raz, poprawne wszędzie."
+    },
+    {
+      "icon": "😤",
+      "title": "Koniec z Rozjeżdżającymi Się Danymi",
+      "details": "Rysunki mówią 2,70m, specyfikacja 2,80m, Excel 2,75m. Która wartość jest poprawna? Z tym standardem: niemożliwy problem. Jeden plik = jedna wartość."
+    },
+    {
+      "icon": "📧",
+      "title": "Odpowiadasz Raz, Nie Pięć Razy",
+      "details": "Wykonawca pyta o wykończenia. Zamiast szukać w AutoCAD, Excel, Word—wysyłasz jeden plik. Wszystko, czego potrzebuje, w jednym miejscu."
+    },
+    {
+      "icon": "📝",
+      "title": "Działa z Narzędziami, Które Już Masz",
+      "details": "Bez specjalnego oprogramowania. Edytujesz w Notatniku, przechowujesz w Google Drive. Przyszłościowy czysty tekst. Bez uzależnienia od dostawcy."
+    },
+    {
+      "icon": "🤝",
+      "title": "Czytają Ludzie I Komputery",
+      "details": "Ten sam plik służy architektom (czytelny dokument), Revit (parametry BIM), inspektorom (raporty zgodności), zarządcom (harmonogramy konserwacji)."
+    }
+  ]
+}

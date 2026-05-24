@@ -1,0 +1,57 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\budynek.md",
+    "extractedAt": "2026-05-24T19:47:14.221Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "building",
+  "id": "BLD-01",
+  "name": "Budynek mieszkalny Zielony Taras (w eksploatacji)",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "bimLOD": "LOD_500",
+  "siteId": "SITE-GREEN-TERRACE",
+  "usage": "residential",
+  "buildingType": "residential_multifamily",
+  "grossFloorArea": 1800,
+  "netFloorArea": 1620,
+  "footprintArea": 320,
+  "numberOfStoreys": {
+    "aboveGround": 6,
+    "belowGround": 0,
+    "total": 6
+  },
+  "buildingHeight": 18,
+  "eaveHeight": 16,
+  "unit": "m",
+  "occupancyClassification": "ZL_IV",
+  "constructionClass": "C",
+  "accessibilityCompliance": "standard",
+  "operationalStatus": {
+    "handoverDate": "2026-03-15",
+    "occupiedSince": "2026-04-01",
+    "monthsInOperation": 22,
+    "occupancyRate": 1,
+    "notes": "Pełne wynajęcie od 2 miesiąca; jedna krótka rotacja najemcy w mieszkaniu 3.04 (miesiąc 11→12)."
+  },
+  "cost": {
+    "totalCost": 1745800,
+    "currency": "EUR",
+    "basis": "as_built",
+    "_meta": {
+      "confidence": "measured",
+      "source": "final_cost_account_2026-04"
+    }
+  },
+  "tags": [
+    "operation-phase-example",
+    "flagship-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Zrzut z fazy eksploatacji BLD-01 — ten sam budynek co w przykładzie projektowym, 22 miesiące po przekazaniu"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-01.md",
+    "extractedAt": "2026-05-24T19:47:14.187Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "level",
+  "id": "LVL-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "levelName": "First Floor",
+  "levelNumber": 1,
+  "buildingId": "BLD-01",
+  "elevation": 3.2,
+  "floorToFloorHeight": 3.2,
+  "clearHeight": 2.7,
+  "unit": "m",
+  "spaceIds": [
+    "SP-BLD-01-L01-001",
+    "SP-BLD-01-L01-002",
+    "SP-BLD-01-L01-CORR"
+  ],
+  "zoneIds": [
+    "ZONE-FIRE-ZL-IV",
+    "ZONE-ACOUSTIC-NIGHT",
+    "ZONE-HVAC-NORTH"
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcBuildingStorey",
+    "globalId": "2P3gH0$sLByv4WyFv3MQzT",
+    "name": "Level 01"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "residential",
+    "first-floor"
+  ]
+}

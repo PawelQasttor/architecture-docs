@@ -1,0 +1,52 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-COMMUNAL-GARDEN.md",
+    "extractedAt": "2026-05-24T19:47:14.148Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site_feature",
+  "id": "SF-COMMUNAL-GARDEN",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "featureName": "Campus communal garden",
+  "featureType": "garden",
+  "featureCategory": "vegetation",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "siteId": "SITE-GTP-PHASE-2",
+  "description": "Native-planted communal garden + raised allotment beds connecting the\n4 campus buildings. ~800 m² total, with 24 allotment beds (one per\napartment for the smaller buildings, two-tier waiting list for the\nlarger ones). Drought-tolerant native species reduce irrigation\nto <5 L/m²/week in summer.\n",
+  "area": 800,
+  "allotmentBeds": 24,
+  "unit": "m",
+  "biodiversityFeatures": [
+    "20% native flowering species for pollinators",
+    "Insect hotel + bat box on north boundary fence",
+    "Bird feeder + bath stations (operated by residents committee)",
+    "Compost system (3 bays, rotating)"
+  ],
+  "maintenanceResponsibility": "Residents' garden committee + quarterly landscape contractor visits",
+  "expectedAnnualOpex": 4200,
+  "servedBuildingIds": [
+    "BLD-01",
+    "BLD-02",
+    "BLD-03",
+    "BLD-04"
+  ],
+  "constructionPackageId": "CP-SITE-INFRASTRUCTURE",
+  "cost": {
+    "totalCost": 42000,
+    "currency": "EUR",
+    "basis": "tender_award"
+  },
+  "tags": [
+    "campus-example",
+    "shared-amenity",
+    "biodiversity"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Campus communal garden — added with Campus showcase"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\systemy\\sys-hvac-01.md",
+    "extractedAt": "2026-05-24T19:47:14.227Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "system",
+  "id": "SYS-HVAC-01",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "systemName": "System HVAC — główny",
+  "systemTypeId": "SYS-HVAC-RESIDENTIAL-MVHR",
+  "buildingId": "BLD-01",
+  "systemCategory": "hvac",
+  "operationalSummary": {
+    "monthsOperational": 22,
+    "measuredEfficiency": {
+      "heatPumpAvgCOP": 3.4,
+      "mvhrAvgHeatRecovery": 83,
+      "overallSystemUptime": 99.2
+    },
+    "serviceEvents": {
+      "plannedMaintenance": 4,
+      "unplannedInterventions": 2,
+      "rebalancingEvents": 1
+    },
+    "dataSource": "zewnętrzny CSV: telemetry/SYS-HVAC-01-bms-2026-04-to-2028-01.csv"
+  },
+  "activeIssueIds": [
+    "ISS-WARRANTY-HP-001",
+    "ISS-RETROCX-MVHR-001",
+    "ISS-ANOMALY-CO2-001"
+  ],
+  "tags": [
+    "operation-phase-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "System HVAC w fazie eksploatacji — niesie zmierzoną sprawność, zliczenia zdarzeń serwisowych i ref. do aktywnych zgłoszeń"
+    }
+  ]
+}

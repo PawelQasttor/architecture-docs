@@ -1,0 +1,100 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-FIRE-DRILL-001.md",
+    "extractedAt": "2026-05-24T19:47:14.229Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-FIRE-DRILL-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "testName": "Próbna ewakuacja pożarowa całego budynku — WYKONANO",
+  "testCategory": "emergency_systems",
+  "status": "passed",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "VC-STAIR-A",
+    "SP-BLD-01-L01-CORR",
+    "CR-FIRE-EGRESS-L01"
+  ],
+  "requirementIds": [
+    "REQ-FIRE-EGRESS-TIME-001"
+  ],
+  "testProcedure": {
+    "standard": "PD 7974-6",
+    "method": "Symulowana ewakuacja przed przekazaniem z ochotnikami reprezentującymi pełne obciążenie budynku. Wg planu rozruchu z fazy projektowej."
+  },
+  "scheduledDate": "2026-02-25",
+  "executedDate": "2026-02-25",
+  "executedBy": {
+    "name": "Anna Zielińska",
+    "organization": "Zielińska Fire Safety Consultancy",
+    "qualification": "Specjalista ds. bezpieczeństwa pożarowego PIIB + członek IFE",
+    "certificationNumber": "MZ-7891"
+  },
+  "witnessedBy": [
+    {
+      "name": "Kapitan Krzysztof Borowski",
+      "organization": "Komenda Miejska PSP Warszawa — Stacja 12",
+      "role": "obserwator regulacyjny"
+    },
+    {
+      "name": "Anna Nowak",
+      "organization": "Nowak Architecture",
+      "role": "Architekt odpowiedzialny"
+    }
+  ],
+  "results": {
+    "expected": {
+      "maxEvacuationTimeMinutes": 2.5,
+      "pathfinderRSET": 2.1
+    },
+    "measured": {
+      "scenario1_StairABlocked_minutes": 2.3,
+      "scenario2_StairBBlocked_minutes": 2.2,
+      "averageEvacuationTime": 2.25,
+      "bottleneckLocation": "Półpiętro klatki B na Poziomie 02 — drobny zator na 110-120 s",
+      "measurementDate": "2026-02-25",
+      "notes": "Pathfinder przewidywał 2,1 min najgorszego scenariusza. Wynik realny 2,3 min —\n9 % niekorzystna różnica od prognozy (w typowych 10-15 % niekorzystnej różnicy\nrealne-vs-symulacja dla ewakuacji mieszkalnych). Dwóch ochotników wymagało\npodpowiedzi personelu w punktach decyzyjnych; brak rzeczywistego opóźnienia.\nObserwator straży pożarnej nie odnotował naruszeń reguł zaangażowania.\n"
+    },
+    "passCriteria": {
+      "actualEvacuationTimeMinutes": 2.5,
+      "noOccupantStranded": true,
+      "allAssistiveEquipmentFunctional": true
+    },
+    "outcome": "passed",
+    "outcomeNotes": "Najgorszy scenariusz 2,3 minuty ≤ 2,5 minuty limitu regulacyjnego.\nŻaden mieszkaniec nie został pozostawiony; wszystkie 4 krzesła\newakuacyjne pomyślnie zademonstrowane. Zalecane, by podobna próbna\newakuacja została powtórzona po 36 miesiącach z rzeczywistymi\nmieszkańcami, by zweryfikować zachowanie teraz, gdy zasiedlenie\nsię ustabilizowało.\n"
+  },
+  "constructionPackageId": "CP-MEP",
+  "followUpIssueIds": [],
+  "sources": [
+    {
+      "id": "SRC-CT-FIRE-DRILL-001-OPS-01",
+      "title": "Zielony Taras — Raport próbnej ewakuacji pożarowej",
+      "type": "other",
+      "documentType": "commissioning_test_report",
+      "date": "2026-02-25",
+      "author": "Anna Zielińska / Zielińska Fire Safety Consultancy"
+    },
+    {
+      "id": "SRC-CT-FIRE-DRILL-001-OPS-02",
+      "title": "Komenda Miejska PSP Warszawa — Raport obserwacji, Stacja 12",
+      "type": "regulatory_code",
+      "documentType": "fire_brigade_observation",
+      "date": "2026-02-26",
+      "author": "Kapitan Krzysztof Borowski, KM PSP Warszawa"
+    }
+  ],
+  "tags": [
+    "operation-phase-example",
+    "wykonany-test",
+    "krytyczne-bezpieczeństwo"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Wykonanie CT-FIRE-DRILL-001 w fazie eksploatacji — zaliczono przy 2,3 min wobec limitu 2,5; 9% niekorzystna różnica od prognozy Pathfinder"
+    }
+  ]
+}

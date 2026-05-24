@@ -1,0 +1,52 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-COMMUNAL-GARDEN.md",
+    "extractedAt": "2026-05-24T19:47:14.242Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site_feature",
+  "id": "SF-COMMUNAL-GARDEN",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "featureName": "Ogród wspólnotowy kampusu",
+  "featureType": "garden",
+  "featureCategory": "vegetation",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "siteId": "SITE-GTP-PHASE-2",
+  "description": "Ogród wspólnotowy z natywnymi nasadzeniami + podniesione grzędy\ndziałkowe łączące 4 budynki kampusu. ~800 m² łącznie, z 24 grzędami\ndziałkowymi (jedna na mieszkanie dla mniejszych budynków, dwupoziomowa\nlista oczekujących dla większych). Gatunki natywne odporne na suszę\nredukują nawadnianie do <5 L/m²/tydzień latem.\n",
+  "area": 800,
+  "allotmentBeds": 24,
+  "unit": "m",
+  "biodiversityFeatures": [
+    "20% natywnych gatunków kwitnących dla zapylaczy",
+    "Hotel dla owadów + budka dla nietoperzy na płocie północnym",
+    "Karmnik dla ptaków + stacje kąpieli (obsługiwane przez komitet mieszkańców)",
+    "System kompostowania (3 zasoby, rotacyjne)"
+  ],
+  "maintenanceResponsibility": "Komitet ogrodowy mieszkańców + wizyty wykonawcy krajobrazowego raz na kwartał",
+  "expectedAnnualOpex": 4200,
+  "servedBuildingIds": [
+    "BLD-01",
+    "BLD-02",
+    "BLD-03",
+    "BLD-04"
+  ],
+  "constructionPackageId": "CP-SITE-INFRASTRUCTURE",
+  "cost": {
+    "totalCost": 42000,
+    "currency": "EUR",
+    "basis": "tender_award"
+  },
+  "tags": [
+    "campus-example",
+    "shared-amenity",
+    "bioroznorodnosc"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Ogród wspólnotowy kampusu — dodany z przykładem Kampusu"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-RETROCX-MVHR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.235Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-RETROCX-MVHR-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "issueTitle": "Zalecenie retro-commissioning — rebalansowanie nawiewu MVHR dla mieszkań Poziomu 04",
+  "issueType": "design_clarification",
+  "issueNumber": "RCX-001",
+  "status": "responded",
+  "priority": "medium",
+  "description": "W następstwie anomalii CO₂ (ISS-ANOMALY-CO2-001) w mieszkaniu 4.02 oraz\nkorroborujących opinii mieszkańców z ankiety IEQ z 2027, GreenFM i\nProjektant MEP odpowiedzialny wspólnie zalecają częściowe retro-commissioning\nnawiewu MVHR do trzech mieszkań od południa na Poziomie 04 (4.01, 4.02, 4.03).\n\nPropozycja: zwiększyć nawiew z nawiewników sypialni w tych mieszkaniach\nz pierwotnych 60 m³/h do 70 m³/h (17 % wzrost). SFP całobudynkowy\nponownie sprawdzony.\n",
+  "buildingId": "BLD-01",
+  "relatedEntityIds": [
+    "AST-MVHR-01",
+    "SYS-HVAC-01",
+    "SP-BLD-01-L04-002"
+  ],
+  "initiatedBy": {
+    "name": "Jan Wiśniewski + GreenFM",
+    "organization": "Projektant MEP + wykonawca FM",
+    "role": "wspólne zalecenie",
+    "date": "2027-08-04"
+  },
+  "assignedTo": {
+    "name": "Krzysztof Wójcik",
+    "organization": "VentBalance Sp. z o.o.",
+    "role": "wykonawca rebalansowania"
+  },
+  "dueDate": "2027-09-15",
+  "responseDate": "2027-08-30",
+  "response": {
+    "respondedBy": "Krzysztof Wójcik (VentBalance)",
+    "responseDate": "2027-08-30",
+    "responseText": "Pełne rebalansowanie wykonano 2027-08-30 wg zalecenia. Nawiew z nawiewników\nsypialni zwiększony z 60 do 70 m³/h w mieszkaniach 4.01, 4.02, 4.03.\nSFP całobudynkowy ponownie sprawdzony przy 0,48 W/(l/s) — lekko powyżej\nprojektowego 0,45, ale w limicie regulacyjnym 0,5. Koszt €1 200.\n\nOczekiwanie na 1-miesięczny ponowny pomiar poziomów CO₂ w Sypialni 01\nmieszkania 4.02 by potwierdzić rozwiązanie anomalii.\n"
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 1200,
+    "appliesTo": "operations_budget"
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0
+  },
+  "tags": [
+    "operation-phase-example",
+    "retro-commissioning"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Zalecenie retro-cx, które stało się rebalansowaniem — demonstruje pętlę akcji w fazie eksploatacji"
+    }
+  ]
+}

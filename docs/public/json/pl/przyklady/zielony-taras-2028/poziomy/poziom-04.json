@@ -1,0 +1,28 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\poziomy\\poziom-04.md",
+    "extractedAt": "2026-05-24T19:47:14.223Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "level",
+  "id": "LVL-04",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "levelName": "Poziom 04 — czwarta kondygnacja",
+  "levelNumber": 4,
+  "elevation": 12.2,
+  "buildingId": "BLD-01",
+  "typicalCeilingHeight": 2.7,
+  "unit": "m",
+  "operationalNotes": "Poziom 04 jest źródłem ponad połowy zgłoszeń z fazy eksploatacji\ndo tej pory: mieszkania od południa (4.01, 4.02, 4.03) zgłaszają\nprzegrzewanie latem, roszczenie gwarancyjne pompy ciepła pochodziło\nze strefy Poziomu 04, a anomalia CO2 jest w Sypialni 01 mieszkania 4.02.\nCzy to problem Poziomu 04, czy efekt \"wierzchołka stosu\" (Poziom 05\nma dach zielony), pozostaje przedmiotem badania.\n",
+  "tags": [
+    "operation-phase-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Poziom 04 w fazie eksploatacji — dodano, by dać przykładowi eksploatacji kontekst kondygnacji, w której skupiają się zgłoszenia"
+    }
+  ]
+}

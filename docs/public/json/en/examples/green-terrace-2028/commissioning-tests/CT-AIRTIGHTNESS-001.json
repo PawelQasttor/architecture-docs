@@ -1,0 +1,97 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-AIRTIGHTNESS-001.md",
+    "extractedAt": "2026-05-24T19:47:14.126Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-AIRTIGHTNESS-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "testName": "Whole-building air-tightness test (blower-door) — EXECUTED + RETEST",
+  "testCategory": "air_tightness",
+  "status": "conditional_pass",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "ENV-EW-01"
+  ],
+  "requirementIds": [
+    "REQ-PL-WT-328-001",
+    "REQ-ENERGY-PERFORMANCE-001"
+  ],
+  "testProcedure": {
+    "standard": "PN-EN ISO 9972 (replaces PN-EN 13829)",
+    "method": "Method 1 — building in use. Two test runs: initial (2026-02-20) and 18-month retest (2027-08-25)."
+  },
+  "scheduledDate": "2026-02-20",
+  "executedDate": "2026-02-20",
+  "executedBy": {
+    "name": "Marek Lis",
+    "organization": "PowietrzPro Sp. z o.o.",
+    "qualification": "ATTMA Level 2 air-tightness tester",
+    "certificationNumber": "ATTMA-2456"
+  },
+  "witnessedBy": [
+    {
+      "name": "Anna Nowak",
+      "organization": "Nowak Architecture",
+      "role": "Architect of Record"
+    }
+  ],
+  "results": {
+    "expected": {
+      "n50": 1.5,
+      "aT50": 1.2
+    },
+    "measured": {
+      "n50_initial": 1.6,
+      "n50_retest": 1.7,
+      "aT50_initial": 1.28,
+      "aT50_retest": 1.36,
+      "retestDate": "2027-08-25",
+      "retestReason": "Routine 18-month verification per commissioning plan. Result triggered NCR.",
+      "measurementDate": "2026-02-20",
+      "notes": "Initial test 1.6 ACH at handover — exceeds design target 1.5 but\ncomfortably within regulatory 2.5 limit. 18-month retest showed\ndegradation to 1.7 ACH, traced to perimeter-seal wear on\nLevel 04 south-facing window reveals (consistent with summer\nthermal-cycling stress).\n"
+    },
+    "passCriteria": {
+      "n50Max": 2.5,
+      "targetN50": 1.5
+    },
+    "outcome": "conditional_pass",
+    "outcomeNotes": "Regulatory pass (1.7 ACH < 2.5 limit). Design-target failure (1.7 > 1.5).\nNCR raised — see ISS-NC-AIRTIGHTNESS-001.\n"
+  },
+  "constructionPackageId": "CP-ENVELOPE",
+  "followUpIssueIds": [
+    "ISS-NC-AIRTIGHTNESS-001"
+  ],
+  "sources": [
+    {
+      "id": "SRC-CT-AIRTIGHTNESS-001-OPS-01",
+      "title": "Green Terrace — Air-tightness Initial Test Report",
+      "type": "other",
+      "documentType": "commissioning_test_report",
+      "date": "2026-02-20",
+      "author": "Marek Lis / PowietrzPro Sp. z o.o."
+    },
+    {
+      "id": "SRC-CT-AIRTIGHTNESS-001-OPS-02",
+      "title": "Green Terrace — Air-tightness 18-month Retest Report",
+      "type": "other",
+      "documentType": "commissioning_test_report",
+      "date": "2027-08-25",
+      "author": "Marek Lis / PowietrzPro Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "operation-phase-example",
+    "executed-test",
+    "energy-performance"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Operation-phase execution of CT-AIRTIGHTNESS-001 — initial 1.6 ACH, 18-month retest 1.7 ACH, NCR raised"
+    }
+  ]
+}

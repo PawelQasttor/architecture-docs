@@ -1,0 +1,13 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przepisy\\prawo-budowlane.md",
+    "extractedAt": "2026-05-24T19:47:14.171Z",
+    "format": "yaml-frontmatter"
+  },
+  "documentType": "regulatory_reference",
+  "regulation": "Prawo_budowlane",
+  "jurisdiction": "Poland",
+  "lastUpdated": "2024-01-01",
+  "officialSource": "https://isap.sejm.gov.pl/",
+  "language": "pl"
+}

@@ -1,0 +1,99 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-MVHR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.229Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-MVHR-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "testName": "Wydatki MVHR + sprawność odzysku ciepła — bilans całego budynku (WYKONANO)",
+  "testCategory": "balancing",
+  "status": "conditional_pass",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "SYS-HVAC-01",
+    "AST-MVHR-01"
+  ],
+  "requirementIds": [
+    "REQ-VENTILATION-OCCUPIED-001"
+  ],
+  "testProcedure": {
+    "standard": "PN-EN 12599 + ISO 5801",
+    "method": "Wg harmonogramu — patrz CT-MVHR-001 z fazy projektowej."
+  },
+  "scheduledDate": "2026-02-15",
+  "executedDate": "2026-02-15",
+  "executedBy": {
+    "name": "Krzysztof Wójcik",
+    "organization": "VentBalance Sp. z o.o.",
+    "qualification": "Certyfikowany regulator TR/TR 2/2018",
+    "certificationNumber": "TR-1234"
+  },
+  "witnessedBy": [
+    {
+      "name": "Jan Wiśniewski",
+      "organization": "Projektant MEP odpowiedzialny",
+      "role": "przedstawiciel projektu"
+    },
+    {
+      "name": "Maciej Szymański",
+      "organization": "Budimex S.A.",
+      "role": "przedstawiciel wykonawcy"
+    }
+  ],
+  "results": {
+    "expected": {
+      "perApartmentSupply": 60,
+      "perApartmentExtract": 110,
+      "heatRecoveryEfficiency": 85,
+      "specificFanPower": 0.45
+    },
+    "measured": {
+      "perApartmentSupply_min": 54,
+      "perApartmentSupply_avg": 58.5,
+      "perApartmentSupply_max": 63,
+      "perApartmentExtract_min": 102,
+      "perApartmentExtract_avg": 108,
+      "perApartmentExtract_max": 116,
+      "heatRecoveryEfficiency": 83,
+      "specificFanPower": 0.47,
+      "measurementDate": "2026-02-15",
+      "notes": "Nawiew do mieszkania 4.02 10 % niżej niż projektowo; zalecono dalsze badanie."
+    },
+    "passCriteria": {
+      "airflowTolerance": 10,
+      "heatRecoveryMinimum": 80,
+      "specificFanPowerMax": 0.5
+    },
+    "outcome": "conditional_pass",
+    "outcomeNotes": "Wszystkie mieszkania w tolerancji ±10 % dla wydatku. Odzysk ciepła 83 %\nprzekracza minimum zaliczenia 80 %, ale nie osiąga celu projektowego 85 %.\nSFP 0,47 lekko powyżej projektowego 0,45, ale w limicie regulacyjnym 0,5 W/(l/s).\n\nMieszkanie 4.02 — nawiew na dolnej granicy tolerancji (60 - 10 % = 54 m³/h,\nzmierzono dokładnie 54). To okaże się być mieszkaniem, które później\nujawnia anomalię CO₂ (patrz ISS-ANOMALY-CO2-001) i zostało zrebalansowane\n18 miesięcy później pod ISS-RETROCX-MVHR-001.\n"
+  },
+  "constructionPackageId": "CP-MEP",
+  "followUpIssueIds": [
+    "ISS-RETROCX-MVHR-001",
+    "ISS-ANOMALY-CO2-001"
+  ],
+  "sources": [
+    {
+      "id": "SRC-CT-MVHR-001-OPS-01",
+      "title": "Zielony Taras — Raport testu rozruchowego MVHR, 2026-02-15",
+      "type": "other",
+      "documentType": "commissioning_test_report",
+      "date": "2026-02-15",
+      "author": "Krzysztof Wójcik / VentBalance Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "operation-phase-example",
+    "wykonany-test"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Wykonanie CT-MVHR-001 w fazie eksploatacji — warunkowe zaliczenie, ujawnia słabość mieszkania 4.02, która staje się anomalią CO2 21 miesięcy później"
+    }
+  ]
+}

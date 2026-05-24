@@ -1,0 +1,65 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\materials\\MT-CONCRETE-C30-37.md",
+    "extractedAt": "2026-05-24T19:47:14.095Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "material_type",
+  "id": "MT-CONCRETE-C30-37",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "materialName": "Concrete C30/37 — exposure XC1/XC4",
+  "materialCategory": "concrete",
+  "description": "Cast-in-place ready-mix concrete, strength class C30/37 per PN-EN 206-1,\nused for all loadbearing walls and flat slabs in the Green Terrace\nstructure. Exposure class is XC1 for interior elements and XC4 for\nexternally-exposed faces (parapets, terrace upstands).\n",
+  "manufacturer": "Lafarge Polska (planned supplier)",
+  "productCode": "Agilia C30/37 XC4",
+  "standard": "PN-EN 206-1",
+  "physicalProperties": {
+    "density": 2400,
+    "thermalConductivity": 1.65,
+    "specificHeatCapacity": 880,
+    "compressiveStrength": 30,
+    "tensileStrength": 2.9,
+    "modulusOfElasticity": 33
+  },
+  "fireProperties": {
+    "reactionToFire": "A1",
+    "fireResistance": "REI 90"
+  },
+  "sustainability": {
+    "embodiedCarbonKgCO2ePerM3": 320,
+    "epdReference": "Lafarge EPD-AGILIA-2024-01",
+    "recycledContent": 8,
+    "responsibleSourcing": "BES 6001 Very Good"
+  },
+  "constructionPackageId": "CP-STRUCTURE",
+  "sources": [
+    {
+      "id": "SRC-MT-CONCRETE-C30-37-01",
+      "title": "Green Terrace — Structural Specification §3.2",
+      "type": "other",
+      "documentType": "material_specification",
+      "date": "2026-02-15",
+      "author": "Piotr Kowalski"
+    },
+    {
+      "id": "SRC-MT-CONCRETE-C30-37-02",
+      "title": "Lafarge Agilia EPD",
+      "type": "manufacturer_spec",
+      "documentType": "manufacturer_epd",
+      "date": "2024-06-01",
+      "author": "Lafarge Polska"
+    }
+  ],
+  "tags": [
+    "design-development-artifact"
+  ],
+  "notes": "Embodied carbon is the dominant sustainability concern for this material.\nAt 2,400 kg/m³ × 320 kgCO₂e/m³ × estimated 380 m³ structural concrete,\nthe structure carries roughly **122 tCO₂e A1-A3** — about 30 % of the\nbuilding's total upfront embodied carbon. Specifying a CEM II/B blended\nbinder (rather than pure OPC) could cut this by ~25 %.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — surfaces the dominant structural material as a reusable spec"
+    }
+  ]
+}

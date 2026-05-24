@@ -1,0 +1,96 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-door-stair-01.md",
+    "extractedAt": "2026-05-24T19:47:14.181Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "opening",
+  "id": "OPN-DOOR-STAIR-01",
+  "openingName": "Drzwi Pożarowe Klatki Schodowej - Poziom 01",
+  "openingCategory": "door",
+  "envelopeId": "ENV-EW-01",
+  "openingTypeId": "OT-FIRE-DOOR-EI30",
+  "levelId": "LVL-01",
+  "spaceIds": [
+    "SP-BLD-01-VOID-STAIR",
+    "SP-BLD-01-L01-CORR"
+  ],
+  "dimensions": {
+    "width": 1000,
+    "height": 2100,
+    "area": 2.1
+  },
+  "orientation": "not_applicable",
+  "frameMaterial": "steel",
+  "glazingType": "none",
+  "operability": "hinged",
+  "firePerformance": {
+    "fireRating": "EI 30",
+    "fireRatingRequired": "EI 30",
+    "smokeControl": true,
+    "selfClosing": true,
+    "testCertificate": "FR2024-5678"
+  },
+  "firePerformance_meta": {
+    "confidence": "measured",
+    "source": "FR2024-5678",
+    "sourceRef": "Badanie ogniowe wg PN-EN 1634-1"
+  },
+  "acousticPerformance": {
+    "rw": 37,
+    "rwRequired": 30,
+    "testCertificate": "AC2024-9012"
+  },
+  "hardware": {
+    "hingeType": "concealed_3d_adjustable",
+    "lockType": "panic_bar_EN1125",
+    "handleType": "lever_handle_stainless",
+    "closerType": "concealed_overhead_EN1154",
+    "threshold": "flush_intumescent",
+    "holdOpen": false,
+    "intumescentStrip": true
+  },
+  "accessibilityData": {
+    "clearWidth": 900,
+    "thresholdHeight": 0,
+    "closingForce": 22,
+    "visionPanelHeight": 800,
+    "automatedOpener": false
+  },
+  "constructionPackageId": "CP-ENVELOPE",
+  "installationData": {
+    "installationDate": "2024-07-20",
+    "installedBy": "Doors & More Sp. z o.o.",
+    "commissioningDate": "2024-07-22"
+  },
+  "warranty": {
+    "warrantyStart": "2024-07-20",
+    "warrantyEnd": "2029-07-20",
+    "warrantyProvider": "Hormann"
+  },
+  "maintenance": {
+    "lastServiceDate": "2024-12-20",
+    "nextServiceDue": "2025-06-20",
+    "maintenanceContractor": "Doors & More Sp. z o.o."
+  },
+  "manufacturer": "Hormann",
+  "productCode": "HOR-T30-1-1000",
+  "cost": {
+    "totalCost": 1450,
+    "currency": "EUR",
+    "basis": "installed_cost"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcDoor",
+    "globalId": "2xB3YO$rLBxv3VxEu2DR01",
+    "objectType": "FireDoor_EI30_Stairwell_L01"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "drzwi-pozarowe",
+    "klatka-schodowa",
+    "ei30",
+    "poziom-01",
+    "bezpieczenstwo"
+  ]
+}

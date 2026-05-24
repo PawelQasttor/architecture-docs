@@ -1,0 +1,88 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-FIRE-DRILL-001.md",
+    "extractedAt": "2026-05-24T19:47:14.201Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-FIRE-DRILL-001",
+  "version": "2.1.0",
+  "projectPhase": "commissioning",
+  "testName": "Próbna ewakuacja pożarowa całego budynku",
+  "testCategory": "emergency_systems",
+  "status": "planned",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "VC-STAIR-A",
+    "SP-BLD-01-L01-CORR",
+    "CR-FIRE-EGRESS-L01"
+  ],
+  "requirementIds": [
+    "REQ-FIRE-EGRESS-TIME-001"
+  ],
+  "testProcedure": {
+    "standard": "PD 7974-6 — Human factors: Life safety strategies",
+    "method": "Symulowana ewakuacja najgorszego scenariusza: pełne obciążenie budynku\n54 osobami (ochotnicy przed przekazaniem; rzeczywiści mieszkańcy po\nprzekazaniu), uruchomienie alarmu pożarowego z najgorszego pomieszczenia\npochodzenia (sypialnia na Poziomie 05), klatka schodowa A sztucznie\nzadeklarowana jako \"zablokowana\", więc wszyscy mieszkańcy muszą użyć\nklatki B. Mierzony czas od aktywacji alarmu do wyjścia ostatniego\nmieszkańca z budynku. Powtórzyć w tych samych warunkach, ale z zablokowaną\nklatką B.\n",
+    "equipment": [
+      "Stoper + arkusze do liczenia osób przy wszystkich wyjściach ewakuacyjnych",
+      "Panel testowy alarmu pożarowego (tryb testowy producenta)",
+      "Nagranie wideo punktów decyzyjnych (za zgodą mieszkańców)"
+    ],
+    "conditions": "Przeprowadzone w godzinach dziennych dla bezpieczeństwa mieszkańców.\nLokalna straż pożarna powiadomiona z wyprzedzeniem. Cały sprzęt do\newakuacji wspomaganej (krzesła ewakuacyjne w klatkach schodowych)\nfizycznie zademonstrowany, nie tylko sprawdzony wzrokowo.\n"
+  },
+  "scheduledDate": "2026-02-25",
+  "executedBy": {
+    "name": "Anna Zielińska",
+    "organization": "Zielińska Fire Safety Consultancy",
+    "qualification": "Specjalista ds. bezpieczeństwa pożarowego PIIB + członek IFE",
+    "certificationNumber": "MZ-7891"
+  },
+  "witnessedBy": [
+    {
+      "name": "Kapitan (TBC)",
+      "organization": "Komenda Miejska PSP w Warszawie",
+      "role": "obserwator regulacyjny"
+    },
+    {
+      "name": "Anna Nowak",
+      "organization": "Nowak Architecture",
+      "role": "Architekt odpowiedzialny"
+    }
+  ],
+  "results": {
+    "expected": {
+      "maxEvacuationTimeMinutes": 2.5,
+      "pathfinderRSET": 2.1
+    },
+    "measured": null,
+    "passCriteria": {
+      "actualEvacuationTimeMinutes": 2.5,
+      "noOccupantStranded": true,
+      "allAssistiveEquipmentFunctional": true
+    },
+    "outcome": "pending"
+  },
+  "constructionPackageId": "CP-MEP",
+  "sources": [
+    {
+      "id": "SRC-CT-FIRE-DRILL-001-01",
+      "title": "Zielony Taras — Plan rozruchu §6.1 (Próbna ewakuacja)",
+      "type": "other",
+      "documentType": "commissioning_plan",
+      "date": "2026-01-15",
+      "author": "Anna Zielińska + Anna Nowak"
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-rozruchu",
+    "krytyczne-bezpieczeństwo"
+  ],
+  "notes": "To jest **rzeczywisty odpowiednik** symulacji Pathfinder zarejestrowanej\nw REQ-FIRE-EGRESS-TIME-001 (RSET 2,1 min). Symulacja daje *zaufanie\nz fazy projektowej*; próbna ewakuacja daje *weryfikację z fazy przekazania*.\n\nJeśli rzeczywisty czas ewakuacji przekroczy 2,5 minuty, musi zostać\notwarte zgłoszenie niezgodności i budynek nie może być przekazany,\ndopóki: (a) droga zostanie naprawiona i próbna ewakuacja powtórzona,\nalbo (b) procedury operacyjne (np. zmniejszona pojemność) zostaną\nprzyjęte za zgodą organów.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — łączy symulację ewakuacji z fazy projektowej z weryfikacją w fazie rozruchu"
+    }
+  ]
+}

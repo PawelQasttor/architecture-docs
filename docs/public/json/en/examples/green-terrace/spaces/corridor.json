@@ -1,0 +1,295 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\spaces\\corridor.md",
+    "extractedAt": "2026-05-24T19:47:14.112Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-CORR",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "spaceName": "First Floor Corridor",
+  "spaceType": "corridor",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": [
+    "ZONE-FIRE-ZL-IV"
+  ],
+  "designArea": 8.2,
+  "designVolume": 22.1,
+  "unit": "m",
+  "finishOverrides": {
+    "floor": "Ceramic tiles non-slip R10"
+  },
+  "cost": {
+    "totalCost": 11890,
+    "currency": "EUR",
+    "basis": "calculated_custom",
+    "breakdown": {
+      "construction": 6560,
+      "fitout": 4920,
+      "equipment": 410
+    },
+    "_meta": {
+      "confidence": "estimated",
+      "source": "custom_calculation",
+      "sourceRef": "corridor_cost_profile",
+      "calculatedDate": "2026-02-27T11:00:00Z",
+      "notes": "Circulation spaces have lower construction cost but higher fitout cost (durable finishes)"
+    }
+  },
+  "performanceTargets": {
+    "daylighting": {
+      "daylightFactor": 1,
+      "illuminanceTarget": 100,
+      "uniformityRatio": 0.3,
+      "emergencyLighting": true,
+      "emergencyLightingDuration": 90,
+      "basis": "EN 17037:2018 (circulation category)"
+    },
+    "indoorAirQuality": {
+      "co2Maximum": 1200,
+      "outdoorAirPerPerson": 20,
+      "airChangeEffectiveness": 0.7,
+      "basis": "ASHRAE 62.1 (circulation)"
+    },
+    "acousticPerformance": {
+      "backgroundNoise": 40,
+      "reverberation": {
+        "t60": 0.6,
+        "target": "speech_clarity"
+      },
+      "soundIsolation": {
+        "doorRw": 38
+      },
+      "privacyRating": "medium",
+      "basis": "ISO 140 series (circulation)"
+    },
+    "thermalComfort": {
+      "winterDesignTemp": 20,
+      "summerDesignTemp": 25,
+      "operativeTemperature": {
+        "min": 18,
+        "max": 27
+      },
+      "basis": "ISO 7730 (circulation - Category II)"
+    },
+    "energyPerformance": {
+      "heatingDemand": 40,
+      "coolingDemand": 10,
+      "lightingDemand": 5,
+      "totalEnergyUse": 55,
+      "primaryEnergyRating": "A",
+      "basis": "NZEB_target"
+    },
+    "embodiedCarbon": {
+      "construction": {
+        "structuralFrame": 120,
+        "envelope": 60,
+        "finishes": 80,
+        "services": 40,
+        "total": 300
+      },
+      "operations": {
+        "annualOperationalCarbon": 10,
+        "lifespan": 60,
+        "totalOperational": 600
+      },
+      "endOfLife": {
+        "deconstruction": -40
+      },
+      "wholeLife": {
+        "total": 860,
+        "target": 1000,
+        "status": "compliant"
+      },
+      "basis": "RICS Whole Life Carbon + LETI targets"
+    }
+  },
+  "simulations": [
+    {
+      "id": "SIM-EMERGENCY-LIGHTING-CORRIDOR",
+      "type": "emergency_lighting",
+      "tool": "DIALux",
+      "version": "10.2",
+      "status": "completed",
+      "executionDate": "2026-03-10T10:00:00Z",
+      "executedBy": "anna.nowak@architecture.pl",
+      "inputs": {
+        "luminaireType": "LED_emergency_90min",
+        "luminaireCount": 2,
+        "mountingHeight": 2.7,
+        "reflectances": {
+          "floor": 0.3,
+          "walls": 0.7,
+          "ceiling": 0.8
+        }
+      },
+      "targets": {
+        "minIlluminance": 1,
+        "uniformity": 0.25
+      },
+      "results": {
+        "minIlluminance": 1.2,
+        "avgIlluminance": 3.5,
+        "uniformity": 0.34,
+        "outcome": "compliant"
+      },
+      "files": {
+        "inputModel": "simulations/corridor-emergency-light.ldt",
+        "resultImages": [
+          "simulations/corridor-emergency-false-color.png"
+        ],
+        "resultData": "simulations/corridor-emergency-results.csv",
+        "report": "simulations/corridor-emergency-report.pdf"
+      },
+      "_meta": {
+        "confidence": "measured",
+        "source": "DIALux_simulation",
+        "validator": "anna.nowak@architecture.pl",
+        "validationDate": "2026-03-10T11:00:00Z"
+      }
+    }
+  ],
+  "bimIntegration": {
+    "geometryReference": {
+      "primarySource": "ifc",
+      "ifcSource": "../bim/Green-Terrace-2026-02-27.ifc",
+      "ifcGlobalId": "2O3fG9$rLBxv3VxEu2LPxS",
+      "ifcEntity": "IfcSpace",
+      "dwgFile": "../cad/Level-01-Floor-Plan.dwg",
+      "dwgLayer": "A-WALL-CORRIDOR",
+      "dwgHandle": "1A32",
+      "lastSyncDate": "2026-02-27T10:35:00Z",
+      "syncedProperties": [
+        "area",
+        "height",
+        "adjacencies",
+        "width"
+      ],
+      "syncStatus": "current",
+      "ifcExtractedProperties": {
+        "area": 8.15,
+        "height": 2.7,
+        "volume": 22,
+        "width": 1.25,
+        "lastExtracted": "2026-02-27T10:35:00Z"
+      },
+      "validation": {
+        "areaMatch": true,
+        "heightMatch": true,
+        "widthMatch": true,
+        "lastValidated": "2026-02-27T10:35:00Z"
+      },
+      "bcfIssues": []
+    },
+    "outline2D": {
+      "coordinates": [
+        [
+          0,
+          0
+        ],
+        [
+          6.5,
+          0
+        ],
+        [
+          6.5,
+          1.25
+        ],
+        [
+          0,
+          1.25
+        ]
+      ],
+      "unit": "m",
+      "origin": "level_origin",
+      "elevation": 3.2,
+      "azimuth": 90,
+      "source": "extracted_from_ifc",
+      "confidence": "measured"
+    },
+    "centroid": [
+      3.25,
+      0.625
+    ],
+    "bounds": {
+      "min": [
+        0,
+        0,
+        3.2
+      ],
+      "max": [
+        6.5,
+        1.25,
+        5.9
+      ]
+    }
+  },
+  "requirements": [
+    "REQ-PL-WT-CORRIDOR-WIDTH-001",
+    "REQ-FIRE-EGRESS-TIME-001",
+    "REQ-PL-FIRE-SEPARATION-001"
+  ],
+  "requirements_meta": {
+    "confidence": "specified",
+    "source": "Green Terrace Design Requirements Specification",
+    "specifiedBy": "Architect - Project Team",
+    "date": "2026-02-27",
+    "notes": "Requirements specified by design team and merged with level requirements and jurisdiction pack auto-assignment"
+  },
+  "occupancy": {
+    "maxOccupants": 4,
+    "usagePattern": "circulation",
+    "hoursPerDay": 2,
+    "daysPerWeek": 7
+  },
+  "adjacentSpaces": [
+    {
+      "id": "SP-BLD-01-L01-001",
+      "relationship": "connects_via_door",
+      "boundaryType": "fire_wall",
+      "fireRating": "EI 30"
+    },
+    {
+      "id": "SP-BLD-01-L01-002",
+      "relationship": "connects_via_door",
+      "boundaryType": "fire_wall",
+      "fireRating": "EI 30"
+    }
+  ],
+  "maintenanceZone": "MZ-RESIDENTIAL-01",
+  "accessRestrictions": "residents",
+  "lifecycleState": "design",
+  "tags": [
+    "circulation",
+    "fire-egress",
+    "protected"
+  ],
+  "lastReviewed": "2026-02-27",
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "0.4.0",
+      "date": "2026-02-27",
+      "description": "Updated to v0.4.0 with cost tracking, performance targets (circulation-appropriate), emergency lighting simulation, and enhanced BIM integration"
+    },
+    {
+      "version": "1.1.0",
+      "date": "2026-02-23",
+      "description": "Updated to use property inheritance (v0.1.4) - ceiling height inherited, floor finish overridden"
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-22",
+      "description": "Initial creation"
+    }
+  ]
+}

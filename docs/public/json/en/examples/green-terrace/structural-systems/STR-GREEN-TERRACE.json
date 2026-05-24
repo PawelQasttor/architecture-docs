@@ -1,0 +1,98 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\structural-systems\\STR-GREEN-TERRACE.md",
+    "extractedAt": "2026-05-24T19:47:14.115Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "structural_system",
+  "id": "STR-GREEN-TERRACE",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "systemName": "Green Terrace — main structure",
+  "structuralCategory": "superstructure",
+  "buildingId": "BLD-01",
+  "description": "Cast-in-place reinforced-concrete loadbearing wall + flat slab system\nfor the 6-storey Green Terrace residential building. Strip foundations on\ncohesive subsoil. Designed to Eurocodes (PN-EN 1990 / PN-EN 1992 /\nPN-EN 1997 / PN-EN 1998-1).\n",
+  "structuralType": "reinforced_concrete_frame",
+  "designParameters": {
+    "designLife": 50,
+    "importanceClass": "CC2",
+    "exposureClass": "XC1",
+    "fireResistance": "REI 90",
+    "seismicDesignCategory": "low_seismicity",
+    "peakGroundAcceleration": 0.4,
+    "soilCategory": "C",
+    "windZone": "PL_Zone_I",
+    "snowZone": "PL_Zone_2"
+  },
+  "loads": {
+    "deadLoadKPa": 5,
+    "liveLoadKPa": 2,
+    "roofLiveLoadKPa": 0.4,
+    "snowLoadKPa": 0.9,
+    "windPressureKPa": 0.6
+  },
+  "foundationDetails": {
+    "type": "strip",
+    "depth": 1.8,
+    "bearingCapacity": 250,
+    "groundwaterManagement": "Perimeter drainage to municipal storm system"
+  },
+  "gridSystem": {
+    "xSpacing": [
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "ySpacing": [
+      5.5,
+      5.5
+    ],
+    "origin": "Grid intersection 1/A at building NE corner"
+  },
+  "materials": [
+    {
+      "materialTypeId": "MT-CONCRETE-C30-37",
+      "role": "primary_loadbearing"
+    },
+    {
+      "materialTypeId": "MT-REBAR-B500SP",
+      "role": "reinforcement"
+    }
+  ],
+  "verification": {
+    "designedBy": {
+      "name": "Piotr Kowalski",
+      "organization": "Kowalski Structural Engineering Sp. z o.o.",
+      "qualification": "PZITB 1234, design rights for general construction"
+    },
+    "checkedBy": {
+      "name": "Independent third-party reviewer (TBD at bidding)"
+    },
+    "software": "Robot Structural Analysis 2025",
+    "lastAnalysisDate": "2026-02-15"
+  },
+  "constructionPackageId": "CP-STRUCTURE",
+  "sources": [
+    {
+      "id": "SRC-STR-GREEN-TERRACE-01",
+      "title": "Green Terrace — Structural Design Report, Rev. C",
+      "type": "structural_drawing",
+      "documentType": "structural_design_report",
+      "date": "2026-02-15",
+      "author": "Piotr Kowalski"
+    }
+  ],
+  "tags": [
+    "design-development-artifact"
+  ],
+  "notes": "Structure was implicit in the example before v2.1 — the building file\nmentioned \"construction class C\" and \"reinforced concrete\" in prose, but no\nentity carried the load cases, exposure classes, or seismic parameters\nthat the MEP and envelope teams need to reference. This `structural_system`\nentity makes them explicit, machine-readable, and version-controlled.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — extracts structural design data from prose into a queryable entity"
+    }
+  ]
+}

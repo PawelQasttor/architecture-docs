@@ -1,0 +1,56 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\korytarz.md",
+    "extractedAt": "2026-05-24T19:47:14.191Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-CORR",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "spaceName": "First Floor Corridor",
+  "spaceType": "corridor",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": [
+    "ZONE-FIRE-ZL-IV"
+  ],
+  "designArea": 8.2,
+  "designHeight": 2.7,
+  "designVolume": 22.1,
+  "unit": "m",
+  "requirements": [
+    "REQ-PL-WT-CORRIDOR-WIDTH-001",
+    "REQ-FIRE-EGRESS-TIME-001",
+    "REQ-PL-FIRE-SEPARATION-001"
+  ],
+  "occupancy": {
+    "maxOccupants": 4,
+    "usagePattern": "circulation",
+    "hoursPerDay": 2,
+    "daysPerWeek": 7
+  },
+  "maintenanceZone": "MZ-RESIDENTIAL-01",
+  "accessRestrictions": "residents",
+  "adjacentSpaces": [
+    {
+      "id": "SP-BLD-01-L01-001",
+      "relationship": "connects_via_door"
+    },
+    {
+      "id": "SP-BLD-01-L01-002",
+      "relationship": "connects_via_door"
+    }
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcSpace",
+    "globalId": "2O3fG9$rLBxv3VxEu2LPxS",
+    "objectType": "Corridor"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "circulation",
+    "fire-egress",
+    "protected"
+  ]
+}

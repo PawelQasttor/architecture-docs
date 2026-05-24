@@ -1,0 +1,65 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-03-linden-court.md",
+    "extractedAt": "2026-05-24T19:47:14.142Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "building",
+  "id": "BLD-03",
+  "name": "Linden Court — accessible-design residential building",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "siteId": "SITE-GTP-PHASE-2",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "usage": "residential",
+  "buildingType": "residential_multifamily",
+  "grossFloorArea": 1800,
+  "netFloorArea": 1620,
+  "footprintArea": 360,
+  "numberOfStoreys": {
+    "aboveGround": 5,
+    "belowGround": 0,
+    "total": 5
+  },
+  "buildingHeight": 16.5,
+  "eaveHeight": 14.5,
+  "unit": "m",
+  "occupancyClassification": "ZL_IV",
+  "constructionClass": "C",
+  "accessibilityCompliance": "enhanced",
+  "unitMix": {
+    "oneBedroom": 8,
+    "twoBedroom": 8,
+    "threeBedroom": 2,
+    "totalUnits": 18,
+    "accessibilityNotes": "100% of apartments designed to Polish \"Lokal Dostępny\" enhanced\naccessibility spec: 1500 mm turning circles, 950 mm clear doorways,\naccessible WC + bathroom, ground-floor outdoor terrace access on\naccessible-route side.\n"
+  },
+  "cost": {
+    "totalCost": 1900000,
+    "currency": "EUR",
+    "basis": "DD_estimate",
+    "_meta": {
+      "confidence": "estimated",
+      "source": "DD-phase QS estimate, Class 3"
+    }
+  },
+  "designProgress": {
+    "ddStarted": "2026-04-01",
+    "ddTargetCompletion": "2026-10-31",
+    "cdTargetStart": "2026-11-01",
+    "expectedHandover": "2028-06-15"
+  },
+  "tags": [
+    "campus-example",
+    "sibling-building",
+    "accessible-design"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of Campus showcase example — sibling building in DD phase, accessible-design variant"
+    }
+  ]
+}

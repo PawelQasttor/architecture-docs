@@ -1,0 +1,63 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-02-sloneczny-polksiezyc.md",
+    "extractedAt": "2026-05-24T19:47:14.238Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "building",
+  "id": "BLD-02",
+  "name": "Słoneczny Półksiężyc — blok rodzinny",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "bimLOD": "LOD_400",
+  "siteId": "SITE-GTP-PHASE-2",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "usage": "residential",
+  "buildingType": "residential_multifamily",
+  "grossFloorArea": 2400,
+  "netFloorArea": 2160,
+  "footprintArea": 480,
+  "numberOfStoreys": {
+    "aboveGround": 5,
+    "belowGround": 0,
+    "total": 5
+  },
+  "buildingHeight": 16.5,
+  "eaveHeight": 14.5,
+  "unit": "m",
+  "occupancyClassification": "ZL_IV",
+  "constructionClass": "C",
+  "accessibilityCompliance": "standard",
+  "unitMix": {
+    "oneBedroom": 4,
+    "twoBedroom": 12,
+    "threeBedroom": 8,
+    "totalUnits": 24
+  },
+  "cost": {
+    "totalCost": 2200000,
+    "currency": "EUR",
+    "basis": "as_construction_progresses",
+    "_meta": {
+      "confidence": "estimated",
+      "source": "Harmonogram wartości wykonawcy Fazy 2a"
+    }
+  },
+  "constructionProgress": {
+    "startDate": "2026-09-01",
+    "expectedCompletion": "2027-09-15",
+    "currentMilestone": "Konstrukcja zakończona, przegrody 60%",
+    "percentComplete": 55
+  },
+  "tags": [
+    "campus-example",
+    "sibling-building"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodany z przykładem Kampusu — siostrzany budynek w fazie konstrukcji"
+    }
+  ]
+}

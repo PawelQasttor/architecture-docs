@@ -1,0 +1,33 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\zone-types\\acoustic-zone-night.md",
+    "extractedAt": "2026-05-24T19:47:14.118Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "zone_type",
+  "id": "ZT-ACOUSTIC-NIGHT",
+  "typeName": "Acoustic Zone - Night (Sleeping Spaces)",
+  "zoneType": "acoustic",
+  "description": "Enhanced acoustic zone for sleeping spaces requiring high sound insulation per Polish standards",
+  "requirements": [
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-PL-ACOUSTIC-PARTITION-001",
+    "REQ-ACOUSTIC-FLOOR-IMPACT-001"
+  ],
+  "properties": {
+    "acousticClass": "B",
+    "usageType": "sleeping_spaces",
+    "soundInsulationRequirement": "Rw ≥ 52 dB",
+    "impactSoundRequirement": "Ln,w ≤ 53 dB",
+    "backgroundNoiseLimit": "NR 25",
+    "reverbTimeTarget": "0.5s",
+    "externalNoiseProtection": "Rw ≥ 30 dB"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "acoustic",
+    "sleeping",
+    "class-b",
+    "residential"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-ANOMALY-CO2-001.md",
+    "extractedAt": "2026-05-24T19:47:14.130Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-ANOMALY-CO2-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "issueTitle": "CO₂ sensor anomaly — apartment 4.02 Bedroom 01 consistently above design target",
+  "issueType": "field_observation",
+  "issueNumber": "ANOM-CO2-001",
+  "status": "under_review",
+  "priority": "medium",
+  "description": "CO₂ sensor BMS-CO2-402-001 in apartment 4.02 Bedroom 01 has been logging\n90-day rolling mean of 1,180 ppm, against the design target of ≤1,000 ppm\n(regulatory hard limit 1,500 ppm — building is compliant). Tenant has\nseparately reported \"stuffy air at night\" in the 2027 IEQ survey,\ncorroborating the sensor data.\n\nRoot cause hypothesised to be **insufficient MVHR supply** to this\nbedroom — the original commissioning test (CT-MVHR-001) confirmed\nsupply at 54 m³/h (10 % below the 60 m³/h design), at the bottom of\nthe ±10 % tolerance band. See related retro-commissioning\nrecommendation ISS-RETROCX-MVHR-001.\n",
+  "buildingId": "BLD-01",
+  "relatedEntityIds": [
+    "SP-BLD-01-L04-002",
+    "AST-MVHR-01",
+    "SYS-HVAC-01"
+  ],
+  "initiatedBy": {
+    "name": "GreenFM BMS analytics",
+    "organization": "GreenFM Sp. z o.o.",
+    "role": "automated anomaly detection (90-day rolling threshold)",
+    "date": "2027-07-15"
+  },
+  "assignedTo": {
+    "name": "Jan Wiśniewski + Krzysztof Wójcik",
+    "organization": "MEP Engineer of Record + VentBalance",
+    "role": "diagnostic investigation"
+  },
+  "dueDate": "2027-09-30",
+  "costImpact": {
+    "estimatedDeltaEur": 1200,
+    "appliesTo": "operations_budget",
+    "notes": "Rebalance cost — see ISS-RETROCX-MVHR-001 for the execution"
+  },
+  "tags": [
+    "operation-phase-example",
+    "sensor-anomaly"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Operation-phase anomaly — CO2 sensor consistently above design target, tied to design-marginal MVHR supply; triggered retro-cx recommendation"
+    }
+  ]
+}

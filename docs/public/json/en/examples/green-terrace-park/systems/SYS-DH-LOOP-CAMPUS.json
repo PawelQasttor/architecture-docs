@@ -1,0 +1,71 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\systems\\SYS-DH-LOOP-CAMPUS.md",
+    "extractedAt": "2026-05-24T19:47:14.150Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "system",
+  "id": "SYS-DH-LOOP-CAMPUS",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "systemName": "Campus district heating loop",
+  "systemCategory": "hvac",
+  "buildingId": "BLD-01",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "buildingIds": [
+    "BLD-01",
+    "BLD-02",
+    "BLD-03",
+    "BLD-04"
+  ],
+  "description": "Central air-source heat-pump plant + buried pre-insulated mains feeding\nall 4 Green Terrace Park buildings. Plant is sized at 320 kW nominal\nwith hydraulic capacity for 400 kW so the BLD-04 connection can be made\nin 2029 without main-plant replacement.\n",
+  "configuration": {
+    "plantType": "air_source_heat_pump_cascade",
+    "plantLocation": "Central plant room, semi-buried under shared parking",
+    "nominalCapacityKW": 320,
+    "expandableCapacityKW": 400,
+    "primaryFlowTempC": 65,
+    "primaryReturnTempC": 45,
+    "secondaryFlowTempC": 55,
+    "ductMaterial": "Pre-insulated steel, 200 mm DN",
+    "serviceLifeYears": 25
+  },
+  "buildingConnections": [
+    {
+      "buildingId": "BLD-01",
+      "status": "connected_operational",
+      "connectionDate": "2026-02-12",
+      "designLoadKW": 75
+    },
+    {
+      "buildingId": "BLD-02",
+      "status": "connected_pending_commissioning",
+      "expectedConnectionDate": "2027-08-01",
+      "designLoadKW": 90
+    },
+    {
+      "buildingId": "BLD-03",
+      "status": "design_phase",
+      "expectedConnectionDate": "2028-05-01",
+      "designLoadKW": 80
+    },
+    {
+      "buildingId": "BLD-04",
+      "status": "scope_pending",
+      "expectedConnectionDate": "2029-10-01",
+      "designLoadKW": 60
+    }
+  ],
+  "constructionPackageId": "CP-SITE-INFRASTRUCTURE",
+  "tags": [
+    "campus-example",
+    "cross-building-system"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Campus-wide district heating system — added with the Campus showcase example. Demonstrates a System with multiple buildingIds."
+    }
+  ]
+}

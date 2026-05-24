@@ -1,0 +1,9 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\guides\\data-provenance.md",
+    "extractedAt": "2026-05-24T19:47:14.151Z",
+    "format": "yaml-frontmatter"
+  },
+  "title": "Data Provenance",
+  "description": "How to track where every data point comes from in your SBM model using field-level annotations, confidence levels, and source references."
+}

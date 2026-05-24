@@ -1,0 +1,106 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\campus.md",
+    "extractedAt": "2026-05-24T19:47:14.144Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "campus",
+  "id": "CAM-GREEN-TERRACE-PARK",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "campusName": "Green Terrace Park",
+  "campusType": "residential_estate",
+  "description": "A 4-building residential campus on a 5,400 m² site in southern Warsaw.\nThe flagship Green Terrace block (BLD-01) was occupied March 2026;\nthree sibling blocks (BLD-02, BLD-03, BLD-04) are at progressively\nearlier stages of design and construction as the campus rolls out\nover 2026-2029.\n",
+  "siteIds": [
+    "SITE-GREEN-TERRACE",
+    "SITE-GTP-PHASE-2"
+  ],
+  "totalArea": 5400,
+  "totalGFA": 7200,
+  "sharedInfrastructure": [
+    {
+      "type": "district_heating",
+      "description": "Central air-source heat-pump plant feeding all 4 buildings via insulated buried mains",
+      "capacity": "320 kW thermal nominal, expandable to 400 kW for BLD-04 connection",
+      "servedBuildingIds": [
+        "BLD-01",
+        "BLD-02",
+        "BLD-03",
+        "BLD-04"
+      ]
+    },
+    {
+      "type": "shared_parking",
+      "description": "Surface lot for 64 cars (22 BLD-01 + 28 BLD-02 + 14 BLD-03/04 shared)",
+      "capacity": "64 spaces, of which 6 accessible + 12 EV-ready",
+      "servedBuildingIds": [
+        "BLD-01",
+        "BLD-02",
+        "BLD-03",
+        "BLD-04"
+      ]
+    },
+    {
+      "type": "stormwater",
+      "description": "SuDS — permeable paving, swales, and an underground attenuation tank discharging at greenfield rate",
+      "capacity": "1 in 100 year storm with 30% climate-change allowance",
+      "servedBuildingIds": [
+        "BLD-01",
+        "BLD-02",
+        "BLD-03",
+        "BLD-04"
+      ]
+    },
+    {
+      "type": "data_network",
+      "description": "Fibre-to-the-apartment via shared campus head-end; one ISP onboard, second TBC",
+      "servedBuildingIds": [
+        "BLD-01",
+        "BLD-02",
+        "BLD-03",
+        "BLD-04"
+      ]
+    }
+  ],
+  "masterPlan": {
+    "reference": "Green Terrace Park — Master Plan, Rev. C (Approved 2024-11-20)",
+    "date": "2024-11-20",
+    "phasingStrategy": "Phase 1: BLD-01 (Green Terrace) — handover March 2026 (complete)\nPhase 2a: BLD-02 (Sunny Crescent) — handover September 2027\nPhase 2b: BLD-03 (Linden Court) — handover June 2028\nPhase 3:  BLD-04 (Oak Pavilion) — handover December 2029 (subject to BLD-03 sales velocity)\n"
+  },
+  "location": {
+    "latitude": 52.1843,
+    "longitude": 20.9712
+  },
+  "address": {
+    "street": "ul. Słoneczna 45-51",
+    "city": "Warszawa",
+    "postalCode": "02-495",
+    "country": "PL"
+  },
+  "classification": {
+    "system": "Uniclass2015",
+    "code": "Co_25_30",
+    "title": "Residential developments"
+  },
+  "tags": [
+    "campus-example",
+    "phase-rollup-demo"
+  ],
+  "sources": [
+    {
+      "id": "SRC-CAM-GTP-MASTER-001",
+      "title": "Green Terrace Park Master Plan Rev. C",
+      "type": "other",
+      "documentType": "master_plan",
+      "date": "2024-11-20",
+      "author": "Green Development Sp. z o.o. + Nowak Architecture"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Initial Campus entity — added with the Campus showcase example, closes the last 1-of-27 entity-type gap"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-BID-001.md",
+    "extractedAt": "2026-05-24T19:47:14.217Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-BID-001",
+  "version": "2.1.0",
+  "projectPhase": "bidding_procurement",
+  "issueTitle": "Aneks do przetargu 01 — wyjaśnienie kotew szczeliny wentylowanej dla Ściany Zewnętrznej Typ A",
+  "issueType": "design_clarification",
+  "issueNumber": "BA-001",
+  "status": "closed",
+  "priority": "medium",
+  "description": "W otwartym okresie składania ofert dwóch z trzech wybranych podwykonawców\nprzegród zapytało, jaki system kotew szczeliny wentylowanej był zakładany\nw obliczeniach konstrukcyjnych dla rainscreen Ściany Zewnętrznej Typ A.\nDokumentacja wykonawcza wskazywała \"stalowe nierdzewne kotwy spiralne\nzgodnie ze specyfikacją producenta\" bez nazwy producenta, co zmusiło\noferentów do wyceniania trzech różnych produktów o istotnie różnych\nkosztach i tempie montażu.\n\nAneks 01 rozwiązuje niejednoznaczność, wskazując Halfen HK4 jako produkt\nbazowy projektu, jednocześnie wyraźnie dopuszczając produkty równoważne\npod warunkiem zatwierdzenia przez konstruktora. To wyrównuje pole\nstartowe oferentów bez wiązania kontraktu z jednym dostawcą.\n",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-ENVELOPE",
+  "relatedEntityIds": [
+    "ENV-EW-01"
+  ],
+  "initiatedBy": {
+    "name": "Podwykonawcy przetargowi (PolFasada Sp. z o.o. i Stylbud Sp. z o.o.)",
+    "organization": "Zewnętrzni — okres ofertowy",
+    "role": "oferent",
+    "date": "2026-03-08"
+  },
+  "assignedTo": {
+    "name": "Piotr Kowalski",
+    "organization": "Kowalski Structural Engineering",
+    "role": "Konstruktor odpowiedzialny"
+  },
+  "dueDate": "2026-03-15",
+  "responseDate": "2026-03-12",
+  "closedDate": "2026-03-15",
+  "response": {
+    "respondedBy": "Piotr Kowalski",
+    "responseDate": "2026-03-12",
+    "responseText": "Produkt bazowy projektu to Halfen HK4 — stalowa nierdzewna kotwa\nspiralna szczeliny w rozstawie 600 mm poziomo × 450 mm pionowo\n(dodatkowe kotwy przy otworach wg detalu 04/A-501). Produkty równoważne\nod Ancon, Wienerberger lub innych producentów są akceptowalne pod\nwarunkiem: (a) deklarowanej charakterystycznej nośności na rozciąganie\ni ściskanie ≥ wartości Halfen HK4 wg ETA-12/0260, (b) klasy stali\nnierdzewnej A4 (lub równoważnej), (c) przedłożenia ETA zgodnej z EAD\n+ instrukcji montażu producenta w ramach kart materiałowych podwykonawcy.\n",
+    "attachments": [
+      "Aneks-01-KotwySzczeliny.pdf",
+      "Detal-04-A-501-Aktualizacja.pdf"
+    ]
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 0,
+    "appliesTo": "envelope_subcontract",
+    "notes": "Wyrównuje oferty — nie zmienia budżetu projektu."
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0
+  },
+  "sources": [
+    {
+      "id": "SRC-ISS-BID-001-01",
+      "title": "Zielony Taras — Aneks do przetargu 01",
+      "type": "other",
+      "documentType": "addendum",
+      "date": "2026-03-12",
+      "author": "Architekt prowadzący (Anna Nowak) + Konstruktor (Piotr Kowalski)"
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-przetargowo-zakupowej"
+  ],
+  "notes": "Wydany w 3-tygodniowym okresie otwartego przetargu (2026-03-01 → 2026-03-22).\nRozwiązany przed terminem składania ofert, więc nie wymagał przedłużenia.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — pierwszy artefakt fazy przetargowej w przykładzie"
+    }
+  ]
+}

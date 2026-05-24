@@ -1,0 +1,75 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-RFI-001.md",
+    "extractedAt": "2026-05-24T19:47:14.219Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-RFI-001",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "issueTitle": "RFI 001 — krawędź stropu na attyce tarasu zielonego Poziom 05",
+  "issueType": "rfi",
+  "issueNumber": "RFI-001",
+  "status": "responded",
+  "priority": "high",
+  "description": "Podczas montażu szalunków na Poziomie 05 (kondygnacja tarasu zielonego)\nwykonawca szalunków zidentyfikował, że dokumentacja wykonawcza pokazuje\nattykę krawędzi stropu o wysokości 300 mm (Detal 12/A-503), natomiast\nrysunki konstrukcyjne pokazują 250 mm (Detal S-403). Rozbieżność wpływa\nna zestawienie zbrojenia i detal odwodnienia dachu zielonego. Budowa\nobecnie wstrzymana na betonowaniu attyki w oczekiwaniu na wyjaśnienie.\n",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-STRUCTURE",
+  "relatedEntityIds": [
+    "STR-GREEN-TERRACE",
+    "ENV-EW-01"
+  ],
+  "initiatedBy": {
+    "name": "Marek Nowicki",
+    "organization": "Budimex S.A. (generalny wykonawca)",
+    "role": "Inżynier kontraktu",
+    "date": "2026-04-22"
+  },
+  "assignedTo": {
+    "name": "Anna Nowak",
+    "organization": "Nowak Architecture",
+    "role": "Architekt odpowiedzialny"
+  },
+  "dueDate": "2026-04-25",
+  "responseDate": "2026-04-24",
+  "response": {
+    "respondedBy": "Anna Nowak (architektura) + Piotr Kowalski (konstrukcja)",
+    "responseDate": "2026-04-24",
+    "responseText": "Prawidłowa wysokość attyki to 300 mm, zgodnie z detalem architektonicznym.\nRysunek konstrukcyjny S-403 zostanie zrewidowany (data wydania 2026-04-26).\nUzasadnienie: wysokość 300 mm wymuszona przez warstwy odwodnienia dachu\nzielonego (75 mm drenaż + 150 mm substrat + 75 mm zapas ponad warstwą\nwegetacyjną) — jest wymiarowo zdeterminowana i nie może być obniżona.\nKontynuować szalowanie i zbrojenie do 300 mm. Wpływ kosztowy i harmonogramowy\noceniony jako zerowy (szalunki jeszcze nie zdjęte; zestawienie zbrojenia\nzrewidowane przed produkcją prętów).\n",
+    "attachments": [
+      "RFI-001-Odpowiedz-Szkic.pdf",
+      "S-403-Rew-B.pdf"
+    ]
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 0,
+    "appliesTo": "structural_subcontract",
+    "notes": "Brak dodatkowych kosztów — zmiana zbrojenia wchłonięta przez biuro detalujące."
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0,
+    "notes": "Rozwiązane w ciągu 48 h; brak wpływu na ścieżkę krytyczną."
+  },
+  "sources": [
+    {
+      "id": "SRC-ISS-RFI-001-01",
+      "title": "Zielony Taras — RFI 001",
+      "type": "other",
+      "documentType": "rfi",
+      "date": "2026-04-22",
+      "author": "Budimex S.A."
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-budowy"
+  ],
+  "notes": "Demonstruje wartość koordynacji międzybranżowej w fazie odkrywania\ndokumentacji w przykładzie: wykonawca zgłosił niezgodność, którą\nprojektanci przeoczyli, a odpowiedź referuje zarówno do encji\narchitektonicznej, jak i konstrukcyjnej, aby federacja BIM mogła być\nzaktualizowana spójnie.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — pierwsze RFI z fazy budowy"
+    }
+  ]
+}

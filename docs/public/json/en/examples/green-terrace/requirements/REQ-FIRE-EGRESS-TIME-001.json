@@ -1,0 +1,180 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-FIRE-EGRESS-TIME-001.md",
+    "extractedAt": "2026-05-24T19:47:14.102Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "requirement",
+  "id": "REQ-FIRE-EGRESS-TIME-001",
+  "requirementName": "Fire Egress Time Limit",
+  "description": "Maximum evacuation time from any point on Level 01 to protected stairwell",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+  "priority": "critical",
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": [
+      "corridor",
+      "bedroom",
+      "living_room",
+      "common_area"
+    ]
+  },
+  "egressTime": {
+    "metric": "egress_time",
+    "operator": "<=",
+    "value": 2.5,
+    "unit": "minutes",
+    "testMethod": "Simulation (Pathfinder / RSET calculation)",
+    "description": "Maximum time to reach protected stairwell from any occupied space"
+  },
+  "travelDistance": {
+    "metric": "egress_distance",
+    "operator": "<=",
+    "value": 40,
+    "unit": "m",
+    "testMethod": "Measured along escape route centerline",
+    "description": "Maximum travel distance to nearest stairwell"
+  },
+  "corridorWidth": {
+    "metric": "corridor_width",
+    "operator": ">=",
+    "value": 1.4,
+    "unit": "m",
+    "testMethod": "As-built measurement",
+    "description": "Minimum clear width for primary escape corridor"
+  },
+  "doorWidth": {
+    "metric": "door_clear_width",
+    "operator": ">=",
+    "value": 0.9,
+    "unit": "m",
+    "testMethod": "As-built measurement",
+    "description": "Minimum clear opening width for escape route doors"
+  },
+  "acceptanceCriteria": [
+    "Egress Time: Maximum 2.5 minutes RSET to protected stairwell",
+    "Travel Distance: Maximum 40 meters along escape route",
+    "Corridor Capacity: Primary corridor ≥1.40m clear width",
+    "Door Performance: Minimum 0.90m clear opening width with self-closing fire doors (EI 30)",
+    "Stairwell Capacity: Minimum 1.20m clear width in protected enclosure (REI 60)"
+  ],
+  "qualitativeDescription": "Level 01 fire egress must meet the following performance criteria:\n1. Egress Time: Maximum 2.5 minutes RSET (Required Safe Egress Time) from any occupied point to protected stairwell entrance (assumes walking speed 1.2 m/s, door delay 2 sec)\n2. Travel Distance: Maximum 40 meters measured along escape route from furthest point in any dwelling unit to nearest protected stairwell door\n3. Corridor Capacity: Primary corridor ≥1.40m clear width, Secondary corridors ≥1.20m clear width, No obstructions in escape routes\n4. Door Performance: Minimum 0.90m clear opening width, Self-closing fire doors (EI 30 minimum), Direction of escape opening, Panic hardware on stairwell doors (if required)\n5. Stairwell Capacity: Minimum 1.20m clear width, Adequate capacity for simultaneous evacuation, Protected enclosure (REI 60)\n",
+  "evidenceRequired": [
+    "Fire egress simulation report (Pathfinder or equivalent)",
+    "As-built drawings showing escape routes and distances",
+    "Door schedule with clear opening dimensions",
+    "Fire door installation certificates",
+    "Stairwell pressurization test results (if applicable)",
+    "Emergency lighting test certificate",
+    "Evacuation drill report"
+  ],
+  "designAssumptions": {
+    "occupantDensity": 0.02,
+    "walkingSpeed": 1.2,
+    "doorFlowRate": 1.33,
+    "doorDelay": 2,
+    "preMovementTime": 60,
+    "safetyFactor": 1.5
+  },
+  "phases": [
+    {
+      "phase": "schematic_design",
+      "status": "completed",
+      "deliverable": "Preliminary egress analysis and layout"
+    },
+    {
+      "phase": "design_development",
+      "status": "completed",
+      "deliverable": "Fire egress simulation (Pathfinder)"
+    },
+    {
+      "phase": "construction_documents",
+      "status": "completed",
+      "deliverable": "Escape route details and door schedules"
+    },
+    {
+      "phase": "construction",
+      "status": "in_progress",
+      "deliverable": "As-built verification of egress routes"
+    },
+    {
+      "phase": "commissioning",
+      "status": "pending",
+      "deliverable": "Evacuation drill and final certification"
+    }
+  ],
+  "regulatoryReferences": [
+    {
+      "code": "WT 2021",
+      "section": "§ 256",
+      "description": "Escape routes in residential buildings",
+      "status": "applicable"
+    },
+    {
+      "code": "WT 2021",
+      "section": "§ 257",
+      "description": "Doors on escape routes",
+      "status": "applicable"
+    },
+    {
+      "code": "WT 2021",
+      "section": "§ 234",
+      "description": "Fire compartmentation and protection",
+      "status": "applicable"
+    },
+    {
+      "code": "PD 7974-6",
+      "section": "Human factors: Life safety strategies",
+      "description": "RSET calculation methodology",
+      "status": "reference"
+    }
+  ],
+  "verification": {
+    "method": "simulation",
+    "phase": [
+      "schematic_design",
+      "design_development",
+      "construction_documents",
+      "commissioning"
+    ],
+    "frequency": "pre_occupancy",
+    "tool": "Pathfinder",
+    "standard": "PD 7974-6",
+    "responsible": "Fire Safety Engineer"
+  },
+  "simulationResults": {
+    "software": "Pathfinder 2024",
+    "scenario": "Simultaneous evacuation of Level 01 (worst case)",
+    "results": {
+      "maxRSET": 2.1,
+      "maxTravelDistance": 38.5,
+      "bottleneck": "Corridor junction near units 5-6",
+      "status": "PASS"
+    }
+  },
+  "relatedRequirements": [
+    "REQ-LEVEL-FIRE-RATING",
+    "REQ-EMERGENCY-LIGHTING",
+    "REQ-SMOKE-CONTROL"
+  ],
+  "estimatedCostImpact": {
+    "description": "Egress requirements impact corridor width and door specifications",
+    "magnitude": "low",
+    "value": 5000,
+    "currency": "EUR"
+  },
+  "safetyCritical": true,
+  "failureMode": "Delayed evacuation, potential loss of life",
+  "mitigationMeasures": [
+    "Dual egress routes from each dwelling unit",
+    "Self-closing fire doors on all escape routes",
+    "Emergency lighting with 3-hour battery backup",
+    "Smoke detection and alarm system",
+    "Annual evacuation drills"
+  ],
+  "notes": "This is a CRITICAL safety requirement. Any changes to Level 01 layout\nthat affect egress routes MUST be re-evaluated.\n\nRSET calculation includes:\n- Detection time: 30 seconds (smoke detectors)\n- Pre-movement time: 60 seconds (residential occupancy)\n- Travel time: ~70 seconds (38.5m at 1.2 m/s + door delays)\n- Safety factor: ×1.5\n- Total RSET: 2.1 minutes (within 2.5 minute limit)\n\nSimulation verified under worst-case scenario:\n- Simultaneous evacuation of all 18 units on Level 01\n- Single stairwell blocked (residents use secondary route)\n- No bottleneck exceeded 2.5 minute threshold\n",
+  "createdBy": "Fire Safety Engineer",
+  "lastModified": "2026-02-27",
+  "version": "2.1.0"
+}

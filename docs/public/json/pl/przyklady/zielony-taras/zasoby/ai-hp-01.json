@@ -1,0 +1,44 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\zasoby\\ai-hp-01.md",
+    "extractedAt": "2026-05-24T19:47:14.215Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "asset",
+  "id": "AST-HP-01",
+  "projectPhase": "construction",
+  "bimLOD": "LOD_400",
+  "assetTypeId": "AT-BOSCH-COMPRESS-7000I-12KW",
+  "category": "hvac",
+  "identifiers": {
+    "assetTag": "HP-01",
+    "serial": "BCS7000i-2024-001234",
+    "barcode": "7612345678901"
+  },
+  "buildingId": "BLD-01",
+  "locatedInSpaceId": "SP-EXTERNAL-NORTH",
+  "systemId": "SYS-HVAC-01",
+  "installationData": {
+    "installationDate": "2024-06-15",
+    "installedBy": "HVAC Services Ltd.",
+    "installer": "Jan Kowalski (MCS #12345)",
+    "commissioningDate": "2024-06-20",
+    "commissionedBy": "HVAC Services Ltd."
+  },
+  "warranty": {
+    "warrantyStart": "2024-06-15",
+    "warrantyEnd": "2029-06-15",
+    "warrantyProvider": "Bosch Thermotechnology"
+  },
+  "maintenance": {
+    "lastServiceDate": "2024-12-15",
+    "nextServiceDue": "2025-06-15",
+    "maintenanceContractor": "HVAC Services Ltd."
+  },
+  "version": "2.1.0",
+  "tags": [
+    "heat-pump",
+    "building-01",
+    "commissioned"
+  ]
+}

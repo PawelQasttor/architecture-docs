@@ -1,0 +1,78 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\energy-verification-records\\EVR-BLD-01-2027.md",
+    "extractedAt": "2026-05-24T19:47:14.129Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "energy_verification_record",
+  "id": "EVR-BLD-01-2027",
+  "version": "2.3.0",
+  "projectPhase": "operation",
+  "buildingId": "BLD-01",
+  "period": {
+    "start": "2027-01-01",
+    "end": "2027-12-31",
+    "normalisedFor": [
+      "actual_occupancy",
+      "actual_weather",
+      "actual_hwd"
+    ]
+  },
+  "measured": {
+    "heatingDemand": 47,
+    "coolingDemand": 13,
+    "primaryEnergy": 88,
+    "renewableGeneration": 14,
+    "netEnergyUse": 70,
+    "energyClass": "B"
+  },
+  "designTargets": {
+    "heatingDemand": 45,
+    "coolingDemand": 15,
+    "primaryEnergy": 85,
+    "renewableGeneration": 15,
+    "netEnergyUse": 65,
+    "energyClass": "B"
+  },
+  "verdict": "design_target_exceeded_class_confirmed",
+  "deltaAnalysis": [
+    {
+      "factor": "heat_pump_cop_drift",
+      "contribution_kWh_per_m2": 0.7,
+      "attributedToAssetId": "AST-HP-01",
+      "relatedIssueId": "ISS-WARRANTY-HP-001"
+    },
+    {
+      "factor": "mvhr_heat_recovery_drift",
+      "contribution_kWh_per_m2": 0.5,
+      "attributedToAssetId": "AST-MVHR-01",
+      "relatedIssueId": "ISS-RETROCX-MVHR-001"
+    },
+    {
+      "factor": "airtightness_slip",
+      "contribution_kWh_per_m2": 0.8,
+      "attributedToEntityId": "ENV-EW-01",
+      "relatedIssueId": "ISS-NC-AIRTIGHTNESS-001"
+    }
+  ],
+  "dataReference": {
+    "protocol": "file_csv",
+    "path": "telemetry/BLD-01-energy-meters-2027-annual.csv"
+  },
+  "preparedBy": "Jan Wiśniewski (MEP Engineer of Record)",
+  "reviewedBy": "Anna Nowak (Architect of Record) + GreenFM",
+  "issuedDate": "2028-02-10",
+  "status": "final",
+  "tags": [
+    "operation-phase-example",
+    "energy-verification",
+    "v2-3-feature"
+  ],
+  "changelog": [
+    {
+      "version": "2.3.0",
+      "date": "2026-05-24",
+      "description": "First energy_verification_record entity — replaces the narrative energy-verification with a queryable v2.3 entity. Per-factor delta attribution links each contributor to the relevant asset/entity + issue."
+    }
+  ]
+}

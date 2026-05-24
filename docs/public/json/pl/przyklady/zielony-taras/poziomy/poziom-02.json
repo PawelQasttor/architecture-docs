@@ -1,0 +1,25 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-02.md",
+    "extractedAt": "2026-05-24T19:47:14.187Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "level",
+  "id": "LVL-02",
+  "buildingId": "BLD-01",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "levelName": "Second Floor",
+  "levelNumber": 2,
+  "order": 2,
+  "elevation": 6.4,
+  "height": 3.2,
+  "unit": "m",
+  "typicalCeilingHeight": 2.7,
+  "levelRequirements": [
+    "REQ-PL-WT-ROOM-HEIGHT-001",
+    "REQ-LEVEL-FIRE-RATING",
+    "REQ-LEVEL-ACOUSTIC-B"
+  ]
+}

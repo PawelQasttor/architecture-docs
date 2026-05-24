@@ -1,0 +1,38 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\dzialka.md",
+    "extractedAt": "2026-05-24T19:47:14.222Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site",
+  "id": "SITE-GREEN-TERRACE",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "siteName": "Działka Zielony Taras",
+  "country": "PL",
+  "address": {
+    "street": "ul. Słoneczna 45",
+    "city": "Warszawa",
+    "postalCode": "02-495",
+    "country": "PL"
+  },
+  "buildingIds": [
+    "BLD-01"
+  ],
+  "plotArea": 1250,
+  "buildingFootprint": 320,
+  "operationalStatus": {
+    "handoverDate": "2026-03-15",
+    "monthsInOperation": 22
+  },
+  "tags": [
+    "operation-phase-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Encja działki w fazie eksploatacji — minimalny kontekst dla przykładu 2028"
+    }
+  ]
+}

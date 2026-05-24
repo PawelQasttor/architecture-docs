@@ -158,7 +158,7 @@ Współczesny budynek mieszkalny z naciskiem na:
 - Grubość całkowita: 447,5 mm
 - Wartość U: 0,18 W/(m²·K)
 - Klasa odporności ogniowej: REI 60
-- Zobacz [Specyfikacja Ściany Zewnętrznej Typ A](sciana-zewnetrzna-typ-a.md)
+- Zobacz [Przegroda ścienna ENV-EW-01](przegroda-sciana-zewnetrzna-typ-a.md)
 
 **Dach:**
 - Konstrukcja dachu zielonego
@@ -408,7 +408,7 @@ Wszystkie elementy zawierają:
 
 ## 10. Powiązana Dokumentacja
 
-- [Ściana Zewnętrzna Typ A →](sciana-zewnetrzna-typ-a.md)
+- [Przegroda ścienna ENV-EW-01 →](przegroda-sciana-zewnetrzna-typ-a.md)
 - Strop Typ A
 - Okno Typ A
 - Specyfikacja Materiałowa

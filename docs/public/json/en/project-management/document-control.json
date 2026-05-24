@@ -1,0 +1,9 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\project-management\\document-control.md",
+    "extractedAt": "2026-05-24T19:47:14.155Z",
+    "format": "yaml-frontmatter"
+  },
+  "title": "Document Control",
+  "description": "Folder structures, file naming conventions, revision tracking, approval gates, and status codes for architecture project documentation."
+}

@@ -1,0 +1,112 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\circulation-routes\\CR-FIRE-EGRESS-L01.md",
+    "extractedAt": "2026-05-24T19:47:14.079Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "circulation_route",
+  "id": "CR-FIRE-EGRESS-L01",
+  "version": "2.1.0",
+  "projectPhase": "construction_documents",
+  "routeName": "Primary fire egress route — Level 01",
+  "routeType": "primary_egress",
+  "buildingId": "BLD-01",
+  "levelIds": [
+    "LVL-01"
+  ],
+  "waypoints": [
+    {
+      "sequence": 1,
+      "entityId": "SP-BLD-01-L01-001",
+      "entityType": "space",
+      "isDecisionPoint": false
+    },
+    {
+      "sequence": 2,
+      "entityId": "OPN-DOOR-CORR-001",
+      "entityType": "opening",
+      "isDecisionPoint": false
+    },
+    {
+      "sequence": 3,
+      "entityId": "SP-BLD-01-L01-CORR",
+      "entityType": "space",
+      "isDecisionPoint": true
+    },
+    {
+      "sequence": 4,
+      "entityId": "OPN-DOOR-STAIR-01",
+      "entityType": "opening",
+      "isDecisionPoint": false
+    },
+    {
+      "sequence": 5,
+      "entityId": "VC-STAIR-A",
+      "entityType": "vertical_circulation",
+      "isDecisionPoint": false
+    }
+  ],
+  "totalTravelDistance": 38.5,
+  "maxTravelDistance": 40,
+  "minimumWidth": 1400,
+  "requiredWidth": 1400,
+  "isAccessible": true,
+  "isFireEscape": true,
+  "occupantCapacity": 54,
+  "estimatedEvacuationTime": 2.1,
+  "requirementIds": [
+    "REQ-FIRE-EGRESS-TIME-001",
+    "REQ-PL-WT-256-001",
+    "REQ-PL-WT-CORRIDOR-WIDTH-001"
+  ],
+  "verification": {
+    "method": "simulation",
+    "tool": "Pathfinder 2024",
+    "standard": "PD 7974-6",
+    "responsible": "Fire Safety Engineer (Anna Zielińska)",
+    "lastVerified": "2026-02-10",
+    "result": "PASS — 2.1 min RSET vs 2.5 min limit; 38.5 m travel vs 40 m limit"
+  },
+  "regulatoryReferences": [
+    {
+      "code": "WT 2021",
+      "section": "§ 256",
+      "description": "Maksymalna długość drogi ewakuacyjnej w budynkach mieszkalnych"
+    },
+    {
+      "code": "WT 2021",
+      "section": "§ 257",
+      "description": "Drzwi na drogach ewakuacyjnych"
+    }
+  ],
+  "sources": [
+    {
+      "id": "SRC-CR-FIRE-EGRESS-L01-01",
+      "title": "Green Terrace — Fire Safety Strategy, Rev. B",
+      "type": "other",
+      "documentType": "fire_safety_report",
+      "date": "2026-02-10",
+      "author": "Anna Zielińska, Fire Safety Engineer"
+    },
+    {
+      "id": "SRC-CR-FIRE-EGRESS-L01-02",
+      "title": "Pathfinder Simulation — Worst-Case Level 01 Evacuation",
+      "type": "other",
+      "documentType": "egress_simulation",
+      "date": "2026-02-08",
+      "author": "Fire Safety Consultancy"
+    }
+  ],
+  "tags": [
+    "construction-documents-artifact",
+    "safety-critical"
+  ],
+  "notes": "This is the **worst-case** Level 01 egress path: from the furthest bedroom\n(Bedroom 01, north end of the corridor) to the nearest protected\nstairwell. The route has 38.5 m of travel distance against a 40 m\nregulatory limit, giving 1.5 m of margin — narrow enough that any future\nlayout change on Level 01 must re-verify this route.\n\nPathfinder simulation (2026-02-08) confirmed 2.1 minutes RSET under\nsimultaneous evacuation of all 18 units assuming one stairwell blocked\n(a worst-case assumption beyond code requirements).\n\nOther levels share the same general route topology but each must be\nmodelled separately because room layouts and corridor lengths differ.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — extracts the egress path from REQ narrative into a queryable circulation route"
+    }
+  ]
+}

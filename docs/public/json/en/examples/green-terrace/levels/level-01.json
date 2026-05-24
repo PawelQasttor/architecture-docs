@@ -1,0 +1,156 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\levels\\level-01.md",
+    "extractedAt": "2026-05-24T19:47:14.091Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "level",
+  "id": "LVL-01",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "levelName": "First Floor",
+  "levelNumber": 1,
+  "buildingId": "BLD-01",
+  "elevation": 3.2,
+  "floorToFloorHeight": 3.2,
+  "unit": "m",
+  "typicalCeilingHeight": 2.7,
+  "typicalFinishes": {
+    "floor": "Oak engineered 3-layer 15mm",
+    "walls": "Acrylic paint white RAL 9010",
+    "ceiling": "Acrylic paint white RAL 9010",
+    "baseboard": "MDF white baseboard 80mm"
+  },
+  "typicalEnvironmentalConditions": {
+    "temperatureRange": {
+      "min": 20,
+      "max": 24,
+      "unit": "C"
+    },
+    "humidityRange": {
+      "min": 40,
+      "max": 60
+    },
+    "ventilationRate": {
+      "value": 0.5,
+      "unit": "ACH"
+    },
+    "pressurization": "neutral"
+  },
+  "levelRequirements": [
+    "REQ-PL-WT-ROOM-HEIGHT-001",
+    "REQ-LEVEL-FIRE-RATING",
+    "REQ-LEVEL-ACOUSTIC-B"
+  ],
+  "spaceIds": [
+    "SP-BLD-01-L01-001",
+    "SP-BLD-01-L01-002",
+    "SP-BLD-01-L01-CORR"
+  ],
+  "zoneIds": [
+    "ZONE-FIRE-ZL-IV",
+    "ZONE-ACOUSTIC-NIGHT",
+    "ZONE-HVAC-NORTH"
+  ],
+  "bimIntegration": {
+    "geometryReference": {
+      "primarySource": "ifc",
+      "ifcSource": "../bim/Green-Terrace-2026-02-27.ifc",
+      "ifcGlobalId": "2P3gH0$sLByv4WyFv3MQzT",
+      "ifcEntity": "IfcBuildingStorey",
+      "ifcName": "Level 01",
+      "lastSyncDate": "2026-02-27T10:30:00Z",
+      "syncedProperties": [
+        "elevation",
+        "floorToFloorHeight",
+        "spaces"
+      ],
+      "syncStatus": "current",
+      "ifcExtractedProperties": {
+        "elevation": 3.2,
+        "floorToFloorHeight": 3.2,
+        "grossFloorArea": 450,
+        "lastExtracted": "2026-02-27T10:30:00Z"
+      },
+      "validation": {
+        "elevationMatch": true,
+        "heightMatch": true,
+        "lastValidated": "2026-02-27T10:30:00Z"
+      },
+      "bcfIssues": []
+    },
+    "outline2D": {
+      "coordinates": [
+        [
+          0,
+          0
+        ],
+        [
+          20,
+          0
+        ],
+        [
+          20,
+          22.5
+        ],
+        [
+          0,
+          22.5
+        ]
+      ],
+      "unit": "m",
+      "origin": "building_origin",
+      "elevation": 3.2,
+      "azimuth": 0,
+      "source": "extracted_from_ifc",
+      "confidence": "measured"
+    },
+    "centroid": [
+      10,
+      11.25,
+      3.2
+    ],
+    "bounds": {
+      "min": [
+        0,
+        0,
+        3.2
+      ],
+      "max": [
+        20,
+        22.5,
+        6.4
+      ]
+    }
+  },
+  "tags": [
+    "residential",
+    "first-floor"
+  ],
+  "lastReviewed": "2026-02-27",
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "0.4.0",
+      "date": "2026-02-27",
+      "description": "Updated to v0.4.0 with enhanced BIM integration (IFC validation, 2D outline, bounds)"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-23",
+      "description": "Added property inheritance (v0.1.4) - typical ceiling, finishes, environment"
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-02-22",
+      "description": "Initial level definition"
+    }
+  ]
+}

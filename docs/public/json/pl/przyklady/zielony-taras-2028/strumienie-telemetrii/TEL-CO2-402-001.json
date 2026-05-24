@@ -1,0 +1,77 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\strumienie-telemetrii\\TEL-CO2-402-001.md",
+    "extractedAt": "2026-05-24T19:47:14.225Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "telemetry_stream",
+  "id": "TEL-CO2-402-001",
+  "version": "2.2.0",
+  "projectPhase": "operation",
+  "sensorChannel": "co2_ppm",
+  "sourceDeviceId": "BMS-CO2-402-001",
+  "measuredEntityId": "SP-BLD-01-L04-002",
+  "measuredEntityType": "space",
+  "samplingFrequency": "5min",
+  "unit": "ppm",
+  "buildingId": "BLD-01",
+  "dataReference": {
+    "protocol": "file_csv",
+    "path": "telemetry/SP-BLD-01-L04-002-co2-2026-04-to-2028-01.csv",
+    "rowCountAsOf": 184320,
+    "periodStart": "2026-04-15T00:00:00Z",
+    "periodEnd": "2028-01-31T23:59:59Z"
+  },
+  "summaryStatistics": {
+    "basis": "human_asserted",
+    "min": 410,
+    "max": 1850,
+    "mean": 1080,
+    "median": 1150,
+    "rollingMeans": [
+      {
+        "window": "90d",
+        "value": 1180,
+        "asOf": "2028-01-31"
+      },
+      {
+        "window": "30d",
+        "value": 1240,
+        "asOf": "2028-01-31"
+      }
+    ],
+    "thresholds": [
+      {
+        "kind": "design_target",
+        "operator": "<=",
+        "value": 1000,
+        "currentlyExceeded": true,
+        "exceededSince": "2027-06-15"
+      },
+      {
+        "kind": "regulatory_limit",
+        "operator": "<=",
+        "value": 1500,
+        "currentlyExceeded": false
+      }
+    ]
+  },
+  "qualityMetadata": {
+    "coverage": 0.987,
+    "outageEvents": 3,
+    "calibrationDate": "2026-04-01",
+    "calibrationDue": "2028-04-01"
+  },
+  "tags": [
+    "operation-phase-example",
+    "telemetria",
+    "v2-2-feature"
+  ],
+  "changelog": [
+    {
+      "version": "2.2.0",
+      "date": "2026-05-24",
+      "description": "Pierwsza encja telemetry_stream w przykładzie — CO2 w Sypialni 4.02 napędzający zgłoszenie anomalii. Demonstruje nowy typ encji v2.2."
+    }
+  ]
+}

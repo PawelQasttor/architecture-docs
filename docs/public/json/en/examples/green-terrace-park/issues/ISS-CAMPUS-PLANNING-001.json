@@ -1,0 +1,78 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\issues\\ISS-CAMPUS-PLANNING-001.md",
+    "extractedAt": "2026-05-24T19:47:14.146Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-CAMPUS-PLANNING-001",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "issueTitle": "Planning condition 14b — Phase-2 wayfinding signage scheme",
+  "issueType": "design_clarification",
+  "issueNumber": "PC-14B",
+  "status": "responded",
+  "priority": "medium",
+  "description": "Warsaw city planning condition 14b (attached to the campus master plan\napproval, 2024-11-20) requires a coordinated wayfinding signage scheme\ncovering all 4 campus buildings + shared amenities, to be submitted\nfor approval before Phase-2a building (BLD-02) handover. Scheme must\nuse a single visual identity across all buildings, comply with PN-EN\nISO 7010 pictograms, and address accessibility per WT 2021 § 56.\n\nThis is a **campus-scope issue** — it affects all 4 buildings but\nbelongs to none of them individually. The Campus entity is the right\nowner.\n",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "relatedEntityIds": [
+    "CAM-GREEN-TERRACE-PARK",
+    "BLD-01",
+    "BLD-02",
+    "BLD-03",
+    "BLD-04",
+    "SF-PLAYGROUND",
+    "SF-BIKE-STORAGE",
+    "SF-EV-HUB",
+    "SF-COMMUNAL-GARDEN"
+  ],
+  "initiatedBy": {
+    "name": "Warsaw City Planning Department",
+    "organization": "Wydział Architektury i Budownictwa, m.st. Warszawa",
+    "role": "planning authority",
+    "date": "2024-11-20"
+  },
+  "assignedTo": {
+    "name": "Anna Nowak",
+    "organization": "Nowak Architecture",
+    "role": "campus design coordinator"
+  },
+  "dueDate": "2027-06-30",
+  "responseDate": "2027-04-15",
+  "response": {
+    "respondedBy": "Anna Nowak + brand-consultancy (Studio Marka)",
+    "responseDate": "2027-04-15",
+    "responseText": "Coordinated wayfinding scheme submitted to Wydział Architektury 2027-04-15.\nScheme uses the Green Terrace brand identity (sage green + dark wood)\nconsistently across all 4 buildings. PN-EN ISO 7010 pictograms used\nthroughout. Tactile + Braille signage at accessible-route decision\npoints (compliant with WT 2021 § 56). Awaiting approval.\n"
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 14500,
+    "appliesTo": "operations_budget",
+    "notes": "Design + production cost spread across all 4 buildings"
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0,
+    "notes": "Planning condition was always inside the BLD-02 commissioning critical path; no slippage."
+  },
+  "sources": [
+    {
+      "id": "SRC-ISS-CAMPUS-PC-14B-01",
+      "title": "Decyzja o pozwoleniu na budowę — Zielony Taras Park, warunek 14b",
+      "type": "regulatory_code",
+      "documentType": "planning_decision",
+      "date": "2024-11-20",
+      "author": "Wydział Architektury, m.st. Warszawa"
+    }
+  ],
+  "tags": [
+    "campus-example",
+    "campus-scope-issue",
+    "regulatory"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Campus-scope planning condition — demonstrates an Issue owned by the Campus, not by any single Building"
+    }
+  ]
+}

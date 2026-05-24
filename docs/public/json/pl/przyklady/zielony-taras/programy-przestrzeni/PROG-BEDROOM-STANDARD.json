@@ -1,0 +1,51 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\programy-przestrzeni\\PROG-BEDROOM-STANDARD.md",
+    "extractedAt": "2026-05-24T19:47:14.189Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space_program",
+  "id": "PROG-BEDROOM-STANDARD",
+  "version": "2.1.0",
+  "projectPhase": "concept",
+  "programName": "Sypialnie standardowe (brief)",
+  "description": "Brief z fazy koncepcyjnej dla sypialni standardowych w inwestycji mieszkaniowej\nZielony Taras. Określa wymaganie ilościowe inwestora — ile sypialni jakiej\nwielkości — niezależnie od konkretnego rzutu. Kompilator porównuje\nzaprojektowane instancje sypialni z tym celem.\n",
+  "buildingId": "BLD-01",
+  "spaceTypeId": "ST-BEDROOM-STANDARD-A",
+  "spaceType": "bedroom",
+  "requiredQuantity": 27,
+  "requiredTotalArea": 405,
+  "requiredAreaPerUnit": {
+    "min": 10,
+    "max": 18,
+    "typical": 15
+  },
+  "priority": "critical",
+  "classification": {
+    "system": "Uniclass2015",
+    "code": "SL_25_10_05",
+    "title": "Sypialnie"
+  },
+  "sources": [
+    {
+      "id": "SRC-PROG-BEDROOM-STANDARD-01",
+      "title": "Zielony Taras — brief klienta v1.0",
+      "type": "other",
+      "documentType": "client_brief",
+      "date": "2025-04-15",
+      "author": "Green Development Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-koncepcyjnej",
+    "brief-do-projektu"
+  ],
+  "notes": "Programowany w fazie koncepcyjnej (2025-04). Przechodzi przez kolejne fazy —\nprojekt schematyczny, projekt budowlany, dokumentację wykonawczą — każda\nfaza jest mierzona względem niego. Pola `designedQuantity`, `designedTotalArea`\noraz blok `compliance` są automatycznie wyliczane przez kompilator SBM\nz zaprojektowanych instancji Przestrzeni, które referują\n`spaceTypeId: ST-BEDROOM-STANDARD-A`.\n\n**Spodziewane ostrzeżenie kompilatora w tym przykładzie.** Dokumentacja\nZielonego Tarasu zawiera tylko DWA przykładowe pliki sypialni\n(`sypialnia-01`, `sypialnia-02`) dla zwięzłości dydaktycznej, nie wszystkie 27.\nKompilator poprawnie sygnalizuje to jako `under_provision` — to JEST\ndziałająca kontrola brief-do-projektu. W rzeczywistym projekcie wszystkie 27\ninstancji sypialni istniałoby i status zgodności zmieniłby się na `compliant`.\nOstrzeżenie jest intencjonalne w przykładzie; demonstruje, że kontrola działa.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — uwidacznia artefakt briefu z fazy koncepcyjnej, który kotwiczy resztę modelu"
+    }
+  ]
+}

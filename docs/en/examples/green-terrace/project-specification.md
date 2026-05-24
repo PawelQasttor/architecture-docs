@@ -472,7 +472,7 @@ Contemporary residential building with focus on:
 - Total thickness: 447.5mm
 - U-value: 0.18 W/(m²·K)
 - Fire rating: REI 60
-- See [External Wall Type A specification](external-wall-type-a.md)
+- See [External Wall envelope ENV-EW-01](envelope-external-wall-type-a.md)
 
 **Roof:**
 - Green roof assembly
@@ -864,7 +864,7 @@ All elements include:
 
 ## 11. Related Documentation
 
-- [External Wall Type A →](external-wall-type-a.md)
+- [External Wall envelope ENV-EW-01 →](envelope-external-wall-type-a.md)
 - Floor Slab Type A
 - Window Type A
 - Materials Specification

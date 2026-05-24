@@ -1,0 +1,98 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\systemy-konstrukcyjne\\STR-GREEN-TERRACE.md",
+    "extractedAt": "2026-05-24T19:47:14.199Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "structural_system",
+  "id": "STR-GREEN-TERRACE",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "systemName": "Zielony Taras — konstrukcja główna",
+  "structuralCategory": "superstructure",
+  "buildingId": "BLD-01",
+  "description": "Monolityczna konstrukcja żelbetowa: ściany nośne i stropy płytowe dla\n6-kondygnacyjnego budynku mieszkalnego Zielony Taras. Fundamenty\npaskowe na gruntach spoistych. Projekt zgodny z Eurokodami i polskimi\nzałącznikami krajowymi (PN-EN 1990 / 1991 / 1992 / 1997 / 1998-1).\n",
+  "structuralType": "reinforced_concrete_frame",
+  "designParameters": {
+    "designLife": 50,
+    "importanceClass": "CC2",
+    "exposureClass": "XC1",
+    "fireResistance": "REI 90",
+    "seismicDesignCategory": "low_seismicity",
+    "peakGroundAcceleration": 0.4,
+    "soilCategory": "C",
+    "windZone": "PL_Zone_I",
+    "snowZone": "PL_Zone_2"
+  },
+  "loads": {
+    "deadLoadKPa": 5,
+    "liveLoadKPa": 2,
+    "roofLiveLoadKPa": 0.4,
+    "snowLoadKPa": 0.9,
+    "windPressureKPa": 0.6
+  },
+  "foundationDetails": {
+    "type": "strip",
+    "depth": 1.8,
+    "bearingCapacity": 250,
+    "groundwaterManagement": "Drenaż obwodowy do miejskiej kanalizacji deszczowej"
+  },
+  "gridSystem": {
+    "xSpacing": [
+      6,
+      6,
+      6,
+      6,
+      6
+    ],
+    "ySpacing": [
+      5.5,
+      5.5
+    ],
+    "origin": "Przecięcie osi 1/A w narożniku NE budynku"
+  },
+  "materials": [
+    {
+      "materialTypeId": "MT-CONCRETE-C30-37",
+      "role": "primary_loadbearing"
+    },
+    {
+      "materialTypeId": "MT-REBAR-B500SP",
+      "role": "reinforcement"
+    }
+  ],
+  "verification": {
+    "designedBy": {
+      "name": "Piotr Kowalski",
+      "organization": "Kowalski Structural Engineering Sp. z o.o.",
+      "qualification": "PZITB 1234, uprawnienia projektowe w specjalności konstrukcyjno-budowlanej"
+    },
+    "checkedBy": {
+      "name": "Niezależny weryfikator zewnętrzny (TBD na etapie przetargu)"
+    },
+    "software": "Robot Structural Analysis 2025",
+    "lastAnalysisDate": "2026-02-15"
+  },
+  "constructionPackageId": "CP-STRUCTURE",
+  "sources": [
+    {
+      "id": "SRC-STR-GREEN-TERRACE-01",
+      "title": "Zielony Taras — Raport projektu konstrukcyjnego, Rew. C",
+      "type": "structural_drawing",
+      "documentType": "structural_design_report",
+      "date": "2026-02-15",
+      "author": "Piotr Kowalski"
+    }
+  ],
+  "tags": [
+    "artefakt-fazy-projektu-budowlanego"
+  ],
+  "notes": "Konstrukcja przed v2.1 istniała w przykładzie tylko niejawnie —\nplik budynku wspominał \"klasę konstrukcyjną C\" oraz \"żelbet\" prozą,\nale żadna encja nie nosiła parametrów obciążeń, klas ekspozycji ani\nparametrów sejsmicznych, do których referencji potrzebują zespoły MEP\ni przegród. Ta encja `structural_system` czyni je jawnymi,\nczytelnymi maszynowo i objętymi kontrolą wersji.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Dodano w ramach odświeżenia przykładu v2.1.0 — przenosi dane projektowe konstrukcji z prozy do encji"
+    }
+  ]
+}

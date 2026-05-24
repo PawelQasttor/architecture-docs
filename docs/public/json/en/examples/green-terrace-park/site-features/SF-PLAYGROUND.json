@@ -1,0 +1,48 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-PLAYGROUND.md",
+    "extractedAt": "2026-05-24T19:47:14.149Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site_feature",
+  "id": "SF-PLAYGROUND",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "featureName": "Campus communal playground",
+  "featureType": "playground",
+  "featureCategory": "playground",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "siteId": "SITE-GTP-PHASE-2",
+  "description": "Communal playground at the centre of the Phase 2 plot, designed to serve\nchildren aged 3-12 from all 4 campus buildings. Approximately equidistant\nfrom all 4 building entrances. EN 1176 compliant equipment + EN 1177\nimpact-attenuating surface.\n",
+  "area": 220,
+  "unit": "m",
+  "designStandards": [
+    "EN 1176 — Playground equipment safety",
+    "EN 1177 — Impact-attenuating surfaces",
+    "WT 2021 § 40 — Children's play areas in residential developments"
+  ],
+  "servedBuildingIds": [
+    "BLD-01",
+    "BLD-02",
+    "BLD-03",
+    "BLD-04"
+  ],
+  "expectedDailyUsers": 45,
+  "constructionPackageId": "CP-SITE-INFRASTRUCTURE",
+  "cost": {
+    "totalCost": 28000,
+    "currency": "EUR",
+    "basis": "tender_award"
+  },
+  "tags": [
+    "campus-example",
+    "shared-amenity"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Communal playground — added with the Campus showcase example, demonstrates a Site Feature owned by the Campus"
+    }
+  ]
+}

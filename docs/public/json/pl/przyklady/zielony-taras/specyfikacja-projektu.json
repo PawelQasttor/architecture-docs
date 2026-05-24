@@ -1,0 +1,79 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\specyfikacja-projektu.md",
+    "extractedAt": "2026-05-24T19:47:14.194Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "project",
+  "id": "PRJ-ZIELONY-TARAS",
+  "version": "2.1.0",
+  "projectName": "Budynek Mieszkalny Zielony Taras",
+  "projectLocation": "Warszawa, Polska",
+  "country": "PL",
+  "phase": "construction_documents",
+  "buildingClassification": {
+    "category": "A",
+    "type": "residential_multi_family",
+    "description": "Budynek wielorodzinny"
+  },
+  "buildingData": {
+    "height": 18.5,
+    "floors": 6,
+    "grossFloorArea": 1800,
+    "usableArea": 1620,
+    "dwellingUnits": 18,
+    "estimatedOccupants": 54
+  },
+  "regulatoryCompliance": [
+    {
+      "regulation": "Prawo_budowlane",
+      "articles": [
+        "Art. 5",
+        "Art. 20",
+        "Art. 34"
+      ]
+    },
+    {
+      "standard": "WT_2021",
+      "sections": [
+        "§ 328",
+        "§ 234",
+        "§ 55",
+        "§ 206",
+        "§ 132"
+      ]
+    },
+    {
+      "standard": "PN-EN_1996"
+    },
+    {
+      "standard": "PN-EN_1992"
+    }
+  ],
+  "bimLOD": "LOD_400",
+  "lastReviewed": "2026-05-24",
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "lead_architect",
+      "license": "IARP 5678"
+    },
+    {
+      "name": "Piotr Kowalski",
+      "role": "structural_engineer",
+      "license": "PZITB 1234"
+    }
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Aktualizacja przykładu — kanoniczne entityType, zunifikowany 10-fazowy cykl życia (phase: construction_documents), wersja zsynchronizowana z odświeżeniem przykładu v2.1.0"
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-02-20",
+      "description": "Aktualizacja dla fazy dokumentacji budowlanej"
+    }
+  ]
+}

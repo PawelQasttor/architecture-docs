@@ -1,0 +1,33 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01.md",
+    "extractedAt": "2026-05-24T19:47:14.118Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "system",
+  "id": "SYS-HVAC-01",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "systemName": "HVAC System Building 01",
+  "systemTypeId": "SYT-HVAC-RESIDENTIAL-MVHR",
+  "systemCategory": "hvac",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-MEP",
+  "servedZoneIds": [
+    "ZONE-HVAC-NORTH"
+  ],
+  "performance": {
+    "installedHeatingCapacity": "12 kW",
+    "actualHeatRecovery": "92%",
+    "measuredCOP": 4.3,
+    "servedArea": 95,
+    "unit": "m2"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "hvac",
+    "heat-pump",
+    "mvhr",
+    "building-01"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-LEVEL-FIRE-RATING.md",
+    "extractedAt": "2026-05-24T19:47:14.104Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "requirement",
+  "id": "REQ-LEVEL-FIRE-RATING",
+  "requirementName": "Level Fire Resistance Rating",
+  "description": "Fire resistance rating for structural elements and fire compartmentation at Level 01",
+  "requirementType": "safety",
+  "countryScope": "poland_specific",
+  "priority": "high",
+  "scope": {
+    "entityType": "space",
+    "spaceTypes": [
+      "bedroom",
+      "corridor",
+      "common_area"
+    ]
+  },
+  "qualitativeDescription": "Level 01 structural elements and compartmentation must achieve:\n- Floor slab: REI 60 (60 minutes fire resistance)\n- Corridor walls: EI 30 (30 minutes integrity and insulation)\n- Unit separation walls: REI 60 (60 minutes full protection)\n- Apartment entry doors: EI 30 (30 minutes)\n- Fire doors to stairwell: EI 60-C (60 minutes, self-closing)\n",
+  "acceptanceCriteria": [
+    "Floor slab: REI 60 (60 minutes fire resistance)",
+    "Corridor walls: EI 30 (30 minutes integrity and insulation)",
+    "Unit separation walls: REI 60 (60 minutes full protection)",
+    "Apartment entry doors: EI 30 (30 minutes)",
+    "Fire doors to stairwell: EI 60-C (60 minutes, self-closing)"
+  ],
+  "evidenceRequired": [
+    "Product technical datasheets for fire-rated assemblies",
+    "Third-party test reports (PN-EN 13501-2)",
+    "As-built construction details showing fire barrier continuity",
+    "Fire door installation certificates",
+    "Building inspection approval"
+  ],
+  "phases": [
+    {
+      "phase": "design_development",
+      "status": "specified",
+      "deliverable": "Fire-rated assembly specifications"
+    },
+    {
+      "phase": "construction_documents",
+      "status": "specified",
+      "deliverable": "Construction details showing fire barrier details"
+    },
+    {
+      "phase": "construction",
+      "status": "specified",
+      "deliverable": "Product submittals and test reports"
+    },
+    {
+      "phase": "commissioning",
+      "status": "pending",
+      "deliverable": "Final fire safety certification"
+    }
+  ],
+  "regulatoryReferences": [
+    {
+      "code": "WT 2021",
+      "section": "§ 234",
+      "description": "Fire compartmentation requirements for residential buildings",
+      "status": "applicable"
+    },
+    {
+      "code": "PN-EN 13501-2",
+      "section": "Classification of construction products",
+      "description": "Fire resistance testing and classification",
+      "status": "applicable"
+    }
+  ],
+  "verification": {
+    "method": "inspection",
+    "phase": [
+      "construction_documents",
+      "construction",
+      "commissioning"
+    ],
+    "frequency": "one_time",
+    "standard": "PN-EN 13501-2",
+    "responsible": "Fire Safety Engineer / Building Inspector"
+  },
+  "relatedRequirements": [
+    "REQ-FIRE-EGRESS-TIME-001",
+    "REQ-SMOKE-CONTROL"
+  ],
+  "estimatedCostImpact": {
+    "description": "Fire-rated construction adds approximately 8-12% to structural and partition costs",
+    "magnitude": "medium"
+  },
+  "notes": "This requirement applies to all spaces on Level 01. Individual spaces\nmay have additional fire safety requirements based on occupancy type.\n\nFire resistance ratings follow European classification:\n- R: Load-bearing capacity\n- E: Integrity (no flames/hot gases)\n- I: Insulation (temperature rise limits)\n- C: Self-closing (for doors)\n",
+  "createdBy": "Fire Safety Engineer",
+  "lastModified": "2026-02-27",
+  "version": "2.1.0"
+}

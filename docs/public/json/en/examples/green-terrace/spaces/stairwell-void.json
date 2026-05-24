@@ -1,0 +1,42 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\spaces\\stairwell-void.md",
+    "extractedAt": "2026-05-24T19:47:14.113Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space",
+  "id": "SP-BLD-01-VOID-STAIR",
+  "spaceName": "Stairwell Void",
+  "spaceType": "staircase",
+  "levelId": "LVL-01",
+  "levelIds": [
+    "LVL-01",
+    "LVL-00"
+  ],
+  "buildingId": "BLD-01",
+  "zoneIds": [
+    "ZONE-FIRE-ZL-IV"
+  ],
+  "designArea": 8.4,
+  "designHeight": 6,
+  "designVolume": 50.4,
+  "unit": "m2",
+  "cost": {
+    "totalCost": 0,
+    "currency": "EUR",
+    "basis": "override",
+    "override": "Void has no independent construction cost — fabric cost carried by VC-STAIR-A / CP-STRUCTURE",
+    "_meta": {
+      "confidence": "specified",
+      "source": "Cost carried by VC-STAIR-A / CP-STRUCTURE"
+    }
+  },
+  "constructionPackageId": "CP-STRUCTURE",
+  "version": "2.1.0",
+  "tags": [
+    "multi-level",
+    "void",
+    "stairwell",
+    "fire-safety"
+  ]
+}

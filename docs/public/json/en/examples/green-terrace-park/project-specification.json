@@ -1,0 +1,36 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\project-specification.md",
+    "extractedAt": "2026-05-24T19:47:14.146Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "project",
+  "id": "PRJ-GREEN-TERRACE-PARK",
+  "version": "2.1.0",
+  "phase": "construction",
+  "projectName": "Green Terrace Park residential campus",
+  "projectLocation": "Warsaw, Poland",
+  "country": "PL",
+  "budget": {
+    "totalBudget": 7900000,
+    "currency": "EUR"
+  },
+  "bimLOD": "LOD_300",
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "lead_architect",
+      "license": "IARP 5678"
+    }
+  ],
+  "tags": [
+    "campus-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Minimal project entity for the Campus showcase example — fixes EUR/PLN currency mismatch warnings"
+    }
+  ]
+}

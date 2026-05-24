@@ -1,0 +1,49 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\opening-types\\internorm-kf410-window.md",
+    "extractedAt": "2026-05-24T19:47:14.097Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "opening_type",
+  "id": "OT-INTERNORM-KF410",
+  "openingTypeName": "Internorm KF 410 Triple-Glazed Window",
+  "category": "window",
+  "description": "High-performance triple-glazed PVC window system with tilt-turn operation. Passive house suitable, Uw 0.90 W/(m2K).",
+  "frameMaterial": "pvc",
+  "glazingType": "triple",
+  "operability": "tilt_turn",
+  "thermalPerformance": {
+    "uValue": 0.9,
+    "gValue": 0.5,
+    "psiInstallation": 0.04
+  },
+  "acousticPerformance": {
+    "rw": 35
+  },
+  "securityRating": "RC2",
+  "accessibilityCompliance": {
+    "clearWidth": 900,
+    "threshold": "flush",
+    "closingForce": 30
+  },
+  "manufacturer": "Internorm",
+  "modelNumber": "KF 410",
+  "productCode": "KF410-TT-1200x1500",
+  "expectedLifeYears": 40,
+  "cost": {
+    "totalCost": 850,
+    "currency": "EUR",
+    "basis": "manufacturer_list_price"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcWindowType",
+    "objectType": "Internorm_KF410_Triple"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "window",
+    "triple-glazed",
+    "passive-house",
+    "pvc"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-04-oak-pavilion.md",
+    "extractedAt": "2026-05-24T19:47:14.143Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "building",
+  "id": "BLD-04",
+  "name": "Oak Pavilion — 1BR-heavy residential building",
+  "version": "2.1.0",
+  "projectPhase": "schematic_design",
+  "bimLOD": "LOD_200",
+  "siteId": "SITE-GTP-PHASE-2",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "usage": "residential",
+  "buildingType": "residential_multifamily",
+  "grossFloorArea": 1200,
+  "netFloorArea": 1080,
+  "footprintArea": 240,
+  "numberOfStoreys": {
+    "aboveGround": 5,
+    "belowGround": 0,
+    "total": 5
+  },
+  "buildingHeight": 16.5,
+  "eaveHeight": 14.5,
+  "unit": "m",
+  "occupancyClassification": "ZL_IV",
+  "constructionClass": "C",
+  "accessibilityCompliance": "standard",
+  "unitMix": {
+    "oneBedroom": 9,
+    "twoBedroom": 3,
+    "threeBedroom": 0,
+    "totalUnits": 12
+  },
+  "cost": {
+    "totalCost": 1300000,
+    "currency": "EUR",
+    "basis": "SD_placeholder",
+    "_meta": {
+      "confidence": "assumed",
+      "source": "SD-phase order-of-magnitude estimate, Class 5"
+    }
+  },
+  "designProgress": {
+    "sdStarted": "2026-05-01",
+    "sdTargetCompletion": "2026-12-31",
+    "planningSubmission": "2027-02-15",
+    "planningApprovalExpected": "2027-08-15",
+    "ddTargetStart": "2027-09-01",
+    "expectedHandover": "2029-12-15"
+  },
+  "notes": "Subject to BLD-03 sales velocity — if BLD-03 does not pre-sell at\nleast 60% of units within 6 months of marketing launch, BLD-04\nscope/cost may be revised or the project deferred. Construction is\nnot committed.\n",
+  "tags": [
+    "campus-example",
+    "sibling-building",
+    "schematic-stage"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of Campus showcase example — sibling building at the earliest lifecycle phase represented in the campus"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\rekomendacje-retrocx\\RCX-MVHR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.224Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "retrocx_recommendation",
+  "id": "RCX-MVHR-001",
+  "version": "2.3.0",
+  "projectPhase": "operation",
+  "recommendationTitle": "Rebalansowanie nawiewu MVHR dla mieszkań od południa Poziomu 04",
+  "buildingId": "BLD-01",
+  "triggeredByIssueIds": [
+    "ISS-ANOMALY-CO2-001"
+  ],
+  "triggeredBySurveyId": "SURVEY-BLD-01-IEQ-2027",
+  "triggeredByTelemetryStreamId": "TEL-CO2-402-001",
+  "affectedSystemIds": [
+    "SYS-HVAC-01"
+  ],
+  "affectedSpaceIds": [
+    "SP-BLD-01-L04-002"
+  ],
+  "affectedAssetIds": [
+    "AST-MVHR-01"
+  ],
+  "proposedIntervention": "Zwiększyć nawiew z nawiewników sypialni w mieszkaniach 4.01, 4.02, 4.03\n(klaster od południa Poziomu 04) z oryginalnych 60 m³/h do 70 m³/h\n(17 % wzrost). Brak zmiany sprzętu — wyłącznie regulacja sterowania\ni ustawień przepustnic wykonana przez wykonawcę rebalansowania.\n",
+  "expectedOutcome": {
+    "metric": "co2_90day_mean",
+    "affectedSpaceIds": [
+      "SP-BLD-01-L04-002"
+    ],
+    "currentValue": 1180,
+    "targetValue": 1000,
+    "unit": "ppm"
+  },
+  "verificationPlan": {
+    "method": "Ponowny pomiar 90-dniowej kroczącej średniej CO2 w Sypialni 01\nmieszkania 4.02 jeden miesiąc po rebalansowaniu. Jeśli nadal > 1000 ppm,\neskalować do głębszego dochodzenia.\n",
+    "verificationTestId": null,
+    "verificationDueDate": "2027-09-30"
+  },
+  "costEstimate_eur": 1200,
+  "status": "executed_awaiting_verification",
+  "proposedDate": "2027-08-04",
+  "executedDate": "2027-08-30",
+  "tags": [
+    "operation-phase-example",
+    "retrocx",
+    "v2-3-feature"
+  ],
+  "changelog": [
+    {
+      "version": "2.3.0",
+      "date": "2026-05-24",
+      "description": "Pierwsza encja retrocx_recommendation — zastępuje niezgrabne użycie ogólnego Zgłoszenia (issueType: design_clarification) właściwą encją cyklu życia retro-cx."
+    }
+  ]
+}

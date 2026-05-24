@@ -1,0 +1,95 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\typy-systemow\\hvac-mieszkalny-mvhr.md",
+    "extractedAt": "2026-05-24T19:47:14.209Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "system_type",
+  "id": "SYT-HVAC-RESIDENTIAL-MVHR",
+  "typeName": "Residential HVAC - MVHR + Heat Pump",
+  "systemCategory": "hvac",
+  "description": "Standardowy mieszkaniowy system HVAC łączący wentylację mechaniczną z odzyskiem ciepła (MVHR), ogrzewanie pompą ciepła powietrze-woda oraz rozprowadzenie ogrzewania podłogowego dla energooszczędnych budynków mieszkalnych",
+  "requirements": [
+    "REQ-HVAC-VENTILATION-RATE",
+    "REQ-HVAC-HEAT-RECOVERY",
+    "REQ-ENERGY-EFFICIENCY-HVAC",
+    "REQ-ACOUSTIC-HVAC-NOISE",
+    "REQ-THERMAL-COMFORT-001"
+  ],
+  "components": [
+    {
+      "category": "air_handling",
+      "description": "Centrala wentylacyjna z odzyskiem ciepła (MVHR)",
+      "specification": "MVHR o sprawności odzysku ciepła 90%, wentylatory EC, filtry F7",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Pompa ciepła powietrze-woda",
+      "specification": "Moc grzewcza 12 kW, COP 4,2 przy A7/W35, czynnik R-32",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Rozdzielacz ogrzewania podłogowego z zaworami strefowymi",
+      "specification": "Rozdzielacz 8-strefowy ze sterowaniem termostatycznym, zawór mieszający",
+      "quantity": 1
+    },
+    {
+      "category": "heating",
+      "description": "Circulation pump (heating)",
+      "specification": "Class A high-efficiency pump, variable speed",
+      "quantity": 1
+    },
+    {
+      "category": "ventilation",
+      "description": "Nawiewniki powietrza",
+      "specification": "Nawiewniki sufitowe regulowane, niskoszumowe",
+      "quantity": 8
+    },
+    {
+      "category": "ventilation",
+      "description": "Kratki wywiewne",
+      "specification": "Kratki wywiewne z łazienek/kuchni z tłumikami akustycznymi",
+      "quantity": 4
+    },
+    {
+      "category": "controls",
+      "description": "Termostaty pomieszczeniowe",
+      "specification": "Bezprzewodowe termostaty programowalne, wyświetlacz LCD",
+      "quantity": 8
+    },
+    {
+      "category": "controls",
+      "description": "Panel sterowania MVHR",
+      "specification": "Montaż naścienny z trybami boost/urlopowy/nocny",
+      "quantity": 1
+    },
+    {
+      "category": "controls",
+      "description": "Sterownik pogodowy",
+      "specification": "Czujnik zewnętrzny + sterownik do optymalizacji pompy ciepła",
+      "quantity": 1
+    }
+  ],
+  "typicalPerformance": {
+    "heatingCapacity": "12 kW",
+    "ventilationRate": "0.5 ACH",
+    "heatRecovery": "90%",
+    "energyEfficiency": "A+++",
+    "copHeating": 4.2,
+    "noiseLevel": "25 dB(A)",
+    "designTemperatureHeating": "21-24°C",
+    "relativeHumidity": "40-60%",
+    "flowTemperatureUFH": "35°C",
+    "returnTemperatureUFH": "30°C"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "residential",
+    "mvhr",
+    "heat-pump",
+    "underfloor-heating",
+    "energy-efficient"
+  ]
+}

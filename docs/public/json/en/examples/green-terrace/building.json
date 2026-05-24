@@ -1,0 +1,42 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\building.md",
+    "extractedAt": "2026-05-24T19:47:14.078Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "building",
+  "id": "BLD-01",
+  "name": "Green Terrace Residential Building",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "siteId": "SITE-GREEN-TERRACE",
+  "usage": "residential",
+  "buildingType": "residential_multifamily",
+  "grossFloorArea": 1800,
+  "netFloorArea": 1620,
+  "footprintArea": 320,
+  "numberOfStoreys": {
+    "aboveGround": 6,
+    "belowGround": 0,
+    "total": 6
+  },
+  "buildingHeight": 18,
+  "eaveHeight": 16,
+  "unit": "m",
+  "occupancyClassification": "ZL_IV",
+  "constructionClass": "C",
+  "accessibilityCompliance": "standard",
+  "cost": {
+    "totalCost": 1800000,
+    "currency": "EUR",
+    "basis": "project_budget",
+    "_meta": {
+      "confidence": "estimated",
+      "source": "project_specification.budget"
+    }
+  },
+  "tags": [
+    "flagship-example"
+  ]
+}

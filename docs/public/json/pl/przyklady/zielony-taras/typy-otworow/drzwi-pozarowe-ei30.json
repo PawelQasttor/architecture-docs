@@ -1,0 +1,50 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\typy-otworow\\drzwi-pozarowe-ei30.md",
+    "extractedAt": "2026-05-24T19:47:14.203Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "opening_type",
+  "id": "OT-FIRE-DOOR-EI30",
+  "openingTypeName": "Drzwi Przeciwpożarowe EI 30 - Rama Stalowa",
+  "category": "door",
+  "description": "Drzwi przeciwpożarowe w ramie stalowej z uszczelkami pęczniejącymi, samozamykaczem i kontrolą dymu. Stosowane do drzwi wejściowych mieszkań i dostępu do klatki schodowej.",
+  "frameMaterial": "steel",
+  "glazingType": "none",
+  "operability": "hinged",
+  "firePerformance": {
+    "fireRating": "EI 30",
+    "smokeControl": true,
+    "selfClosing": true
+  },
+  "acousticPerformance": {
+    "rw": 37
+  },
+  "securityRating": "RC3",
+  "accessibilityCompliance": {
+    "clearWidth": 900,
+    "threshold": "flush",
+    "closingForce": 22,
+    "visionPanel": true
+  },
+  "manufacturer": "Hormann",
+  "modelNumber": "T30-1 H8-5",
+  "productCode": "HOR-T30-1-900",
+  "expectedLifeYears": 30,
+  "cost": {
+    "totalCost": 1200,
+    "currency": "EUR",
+    "basis": "manufacturer_list_price"
+  },
+  "ifcMapping": {
+    "ifcEntity": "IfcDoorType",
+    "objectType": "FireDoor_EI30_Steel"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "drzwi-pozarowe",
+    "ei30",
+    "stal",
+    "samozamykacz"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-02-sunny-crescent.md",
+    "extractedAt": "2026-05-24T19:47:14.141Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "building",
+  "id": "BLD-02",
+  "name": "Sunny Crescent — family-block residential building",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "bimLOD": "LOD_400",
+  "siteId": "SITE-GTP-PHASE-2",
+  "campusId": "CAM-GREEN-TERRACE-PARK",
+  "usage": "residential",
+  "buildingType": "residential_multifamily",
+  "grossFloorArea": 2400,
+  "netFloorArea": 2160,
+  "footprintArea": 480,
+  "numberOfStoreys": {
+    "aboveGround": 5,
+    "belowGround": 0,
+    "total": 5
+  },
+  "buildingHeight": 16.5,
+  "eaveHeight": 14.5,
+  "unit": "m",
+  "occupancyClassification": "ZL_IV",
+  "constructionClass": "C",
+  "accessibilityCompliance": "standard",
+  "unitMix": {
+    "oneBedroom": 4,
+    "twoBedroom": 12,
+    "threeBedroom": 8,
+    "totalUnits": 24
+  },
+  "cost": {
+    "totalCost": 2200000,
+    "currency": "EUR",
+    "basis": "as_construction_progresses",
+    "_meta": {
+      "confidence": "estimated",
+      "source": "Phase 2a contractor schedule of values"
+    }
+  },
+  "constructionProgress": {
+    "startDate": "2026-09-01",
+    "expectedCompletion": "2027-09-15",
+    "currentMilestone": "Structure complete, envelope at 60%",
+    "percentComplete": 55
+  },
+  "tags": [
+    "campus-example",
+    "sibling-building"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of Campus showcase example — sibling building in construction phase"
+    }
+  ]
+}

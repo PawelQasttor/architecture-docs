@@ -1,0 +1,35 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-park\\dzialka.md",
+    "extractedAt": "2026-05-24T19:47:14.240Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "site",
+  "id": "SITE-GTP-PHASE-2",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "siteName": "Zielony Taras Park — działka Fazy 2",
+  "country": "PL",
+  "address": {
+    "street": "ul. Słoneczna 47-51",
+    "city": "Warszawa",
+    "postalCode": "02-495",
+    "country": "PL"
+  },
+  "buildingIds": [
+    "BLD-02",
+    "BLD-03",
+    "BLD-04"
+  ],
+  "plotArea": 4150,
+  "tags": [
+    "campus-example"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Działka Fazy 2 w kampusie Zielony Taras Park — obejmuje BLD-02, BLD-03, BLD-04"
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\assets\\ai-mvhr-01.md",
+    "extractedAt": "2026-05-24T19:47:14.075Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "asset",
+  "id": "AST-MVHR-01",
+  "assetName": "MVHR Unit - Level 01",
+  "projectPhase": "construction",
+  "bimLOD": "LOD_400",
+  "assetTypeId": "AT-MVHR-RESIDENTIAL",
+  "category": "hvac",
+  "identifiers": {
+    "assetTag": "MVHR-01",
+    "serial": "MVHR-2024-L01-789",
+    "barcode": "7612345678918"
+  },
+  "buildingId": "BLD-01",
+  "locatedInSpaceId": "SP-BLD-01-L01-TECH",
+  "systemId": "SYS-HVAC-01",
+  "specifications": {
+    "airflow": 300,
+    "heatRecoveryEfficiency": 92,
+    "filterClass": "F7 / G4",
+    "powerConsumption": 65,
+    "soundPressureLevel": 28,
+    "dimensions": {
+      "width": 800,
+      "depth": 600,
+      "height": 400,
+      "unit": "mm"
+    }
+  },
+  "installationData": {
+    "installationDate": "2024-05-10",
+    "installedBy": "Ventilation Systems Sp. z o.o.",
+    "installer": "Piotr Nowak (certified MVHR installer #VT-5678)",
+    "commissioningDate": "2024-05-15",
+    "commissionedBy": "Ventilation Systems Sp. z o.o.",
+    "commissioningNotes": "- Airflow balanced to 300 m³/h\n- Heat recovery efficiency tested: 92.3%\n- Pressure tested, no leaks detected\n- All ductwork sealed and insulated\n- Bypass damper operation verified\n"
+  },
+  "warranty": {
+    "warrantyStart": "2024-05-10",
+    "warrantyEnd": "2029-05-10",
+    "warrantyProvider": "MVHR Manufacturer",
+    "warrantyTerms": "5 years parts and labor, extended heat exchanger warranty (10 years)"
+  },
+  "maintenance": {
+    "lastServiceDate": "2024-11-10",
+    "nextServiceDue": "2025-05-10",
+    "maintenanceContractor": "Ventilation Systems Sp. z o.o.",
+    "serviceIntervalMonths": 6,
+    "maintenanceSchedule": [
+      {
+        "interval": "3 months",
+        "task": "Filter inspection and cleaning (user)"
+      },
+      {
+        "interval": "6 months",
+        "task": "Filter replacement (G4 supply filter)"
+      },
+      {
+        "interval": "12 months",
+        "task": "Filter replacement (F7 extract filter), heat exchanger inspection, fan cleaning"
+      }
+    ],
+    "expectedLifetimeYears": 15
+  },
+  "serviceHistory": [
+    {
+      "date": "2024-05-15",
+      "type": "commissioning",
+      "performedBy": "Ventilation Systems Sp. z o.o.",
+      "notes": "Initial commissioning - heat recovery efficiency 92.3%, all tests passed"
+    },
+    {
+      "date": "2024-08-10",
+      "type": "filter_replacement",
+      "performedBy": "Building Manager",
+      "notes": "G4 supply filter replaced (3-month interval)"
+    },
+    {
+      "date": "2024-11-10",
+      "type": "annual_service",
+      "performedBy": "Ventilation Systems Sp. z o.o.",
+      "notes": "F7 extract filter replaced, heat exchanger cleaned, fan inspected - no issues"
+    }
+  ],
+  "spareParts": [
+    {
+      "partName": "G4 Supply Filter 800x600",
+      "partNumber": "MVHR-F-G4-800x600",
+      "quantity": 2,
+      "location": "Technical room shelf"
+    },
+    {
+      "partName": "F7 Extract Filter 800x600",
+      "partNumber": "MVHR-F-F7-800x600",
+      "quantity": 1,
+      "location": "Technical room shelf"
+    }
+  ],
+  "performanceData": {
+    "measuredEfficiency": 92.3,
+    "measuredAirflow": 305,
+    "extractAirflow": 300,
+    "powerDraw": 62,
+    "measuredDate": "2024-05-15"
+  },
+  "bimIntegration": {
+    "geometryReference": {
+      "primarySource": "ifc",
+      "ifcSource": "../bim/Green-Terrace-2026-02-27.ifc",
+      "ifcGlobalId": "3M4vK1$tNCzw5XzGw4NRaU",
+      "ifcEntity": "IfcFlowMovingDevice",
+      "ifcExtractedProperties": {
+        "nominalAirflow": 300,
+        "dimensions": [
+          800,
+          600,
+          400
+        ],
+        "lastExtracted": "2026-02-27T10:30:00Z"
+      },
+      "validation": {
+        "locationMatch": true,
+        "dimensionsMatch": true,
+        "lastValidated": "2026-02-27T10:30:00Z"
+      }
+    }
+  },
+  "iotDevices": [
+    {
+      "deviceId": "sensor_mvhr01_supply_temp",
+      "type": "temperature_sensor",
+      "location": "supply_duct",
+      "dataPoint": "supply_air_temperature"
+    },
+    {
+      "deviceId": "sensor_mvhr01_extract_temp",
+      "type": "temperature_sensor",
+      "location": "extract_duct",
+      "dataPoint": "extract_air_temperature"
+    },
+    {
+      "deviceId": "sensor_mvhr01_outdoor_temp",
+      "type": "temperature_sensor",
+      "location": "outdoor_intake",
+      "dataPoint": "outdoor_air_temperature"
+    },
+    {
+      "deviceId": "sensor_mvhr01_exhaust_temp",
+      "type": "temperature_sensor",
+      "location": "exhaust_duct",
+      "dataPoint": "exhaust_air_temperature"
+    },
+    {
+      "deviceId": "sensor_mvhr01_supply_pressure",
+      "type": "pressure_sensor",
+      "location": "supply_duct",
+      "dataPoint": "supply_duct_pressure"
+    },
+    {
+      "deviceId": "sensor_mvhr01_extract_pressure",
+      "type": "pressure_sensor",
+      "location": "extract_duct",
+      "dataPoint": "extract_duct_pressure"
+    }
+  ],
+  "cost": {
+    "purchasePrice": 3500,
+    "installationCost": 1200,
+    "totalCost": 4700,
+    "currency": "EUR"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "mvhr",
+    "ventilation",
+    "heat-recovery",
+    "building-01",
+    "level-01",
+    "commissioned"
+  ]
+}

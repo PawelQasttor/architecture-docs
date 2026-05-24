@@ -1,0 +1,25 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\levels\\level-05.md",
+    "extractedAt": "2026-05-24T19:47:14.094Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "level",
+  "id": "LVL-05",
+  "buildingId": "BLD-01",
+  "version": "2.1.0",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "levelName": "Fifth Floor",
+  "levelNumber": 5,
+  "order": 5,
+  "elevation": 16,
+  "height": 3.2,
+  "unit": "m",
+  "typicalCeilingHeight": 2.7,
+  "levelRequirements": [
+    "REQ-PL-WT-ROOM-HEIGHT-001",
+    "REQ-LEVEL-FIRE-RATING",
+    "REQ-LEVEL-ACOUSTIC-B"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-MVHR-001.md",
+    "extractedAt": "2026-05-24T19:47:14.128Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-MVHR-001",
+  "version": "2.1.0",
+  "projectPhase": "operation",
+  "testName": "MVHR airflow + heat-recovery efficiency — full-building balance (EXECUTED)",
+  "testCategory": "balancing",
+  "status": "conditional_pass",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "SYS-HVAC-01",
+    "AST-MVHR-01"
+  ],
+  "requirementIds": [
+    "REQ-VENTILATION-OCCUPIED-001"
+  ],
+  "testProcedure": {
+    "standard": "PN-EN 12599 (HVAC commissioning) + ISO 5801 (fan testing)",
+    "method": "As scheduled — see design-phase CT-MVHR-001."
+  },
+  "scheduledDate": "2026-02-15",
+  "executedDate": "2026-02-15",
+  "executedBy": {
+    "name": "Krzysztof Wójcik",
+    "organization": "VentBalance Sp. z o.o.",
+    "qualification": "TR/TR 2/2018 certified balancer",
+    "certificationNumber": "TR-1234"
+  },
+  "witnessedBy": [
+    {
+      "name": "Jan Wiśniewski",
+      "organization": "MEP Engineer of Record",
+      "role": "design representative"
+    },
+    {
+      "name": "Maciej Szymański",
+      "organization": "Budimex S.A.",
+      "role": "contractor representative"
+    }
+  ],
+  "results": {
+    "expected": {
+      "perApartmentSupply": 60,
+      "perApartmentExtract": 110,
+      "heatRecoveryEfficiency": 85,
+      "specificFanPower": 0.45
+    },
+    "measured": {
+      "perApartmentSupply_min": 54,
+      "perApartmentSupply_avg": 58.5,
+      "perApartmentSupply_max": 63,
+      "perApartmentExtract_min": 102,
+      "perApartmentExtract_avg": 108,
+      "perApartmentExtract_max": 116,
+      "heatRecoveryEfficiency": 83,
+      "specificFanPower": 0.47,
+      "measurementDate": "2026-02-15",
+      "notes": "Apartment 4.02 supply 10 % low vs design; recommended further investigation."
+    },
+    "passCriteria": {
+      "airflowTolerance": 10,
+      "heatRecoveryMinimum": 80,
+      "specificFanPowerMax": 0.5
+    },
+    "outcome": "conditional_pass",
+    "outcomeNotes": "All apartments within ±10 % tolerance for airflow. Heat recovery 83 %\nexceeds the 80 % minimum pass criterion but falls short of the 85 %\ndesign target. SFP 0.47 marginally above design 0.45 but within the\n0.5 W/(l/s) regulatory limit.\n\nApartment 4.02 supply at the bottom of the tolerance band (60 - 10 % = 54 m³/h,\nmeasured exactly 54). This proves to be the apartment that later\nsurfaces the CO₂ anomaly (see ISS-ANOMALY-CO2-001) and was\nrebalanced upward 18 months later under ISS-RETROCX-MVHR-001.\n"
+  },
+  "constructionPackageId": "CP-MEP",
+  "followUpIssueIds": [
+    "ISS-RETROCX-MVHR-001",
+    "ISS-ANOMALY-CO2-001"
+  ],
+  "sources": [
+    {
+      "id": "SRC-CT-MVHR-001-OPS-01",
+      "title": "Green Terrace — MVHR Commissioning Test Report, 2026-02-15",
+      "type": "other",
+      "documentType": "commissioning_test_report",
+      "date": "2026-02-15",
+      "author": "Krzysztof Wójcik / VentBalance Sp. z o.o."
+    }
+  ],
+  "tags": [
+    "operation-phase-example",
+    "executed-test"
+  ],
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Operation-phase execution of CT-MVHR-001 — conditional pass, surfaces the apartment 4.02 weakness that becomes the CO2 anomaly 21 months later"
+    }
+  ]
+}

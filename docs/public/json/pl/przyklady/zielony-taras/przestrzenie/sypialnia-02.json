@@ -1,0 +1,59 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-02.md",
+    "extractedAt": "2026-05-24T19:47:14.193Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space",
+  "id": "SP-BLD-01-L01-002",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "spaceName": "Bedroom 02",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "zoneIds": [
+    "ZONE-FIRE-ZL-IV",
+    "ZONE-HVAC-NORTH",
+    "ZONE-ACOUSTIC-NIGHT"
+  ],
+  "designArea": 12.8,
+  "designHeight": 2.7,
+  "designVolume": 34.6,
+  "unit": "m",
+  "requirements": [
+    "REQ-DAYLIGHT-SLEEPING-001",
+    "REQ-ACOUSTIC-SLEEPING-001",
+    "REQ-PL-WT-ROOM-HEIGHT-001",
+    "REQ-THERMAL-COMFORT-001"
+  ],
+  "occupancy": {
+    "maxOccupants": 2,
+    "usagePattern": "residential_sleeping",
+    "hoursPerDay": 8,
+    "daysPerWeek": 7
+  },
+  "maintenanceZone": "MZ-RESIDENTIAL-01",
+  "accessRestrictions": "private",
+  "adjacentSpaces": [
+    {
+      "id": "SP-BLD-01-L01-001",
+      "relationship": "shares_wall"
+    },
+    {
+      "id": "SP-BLD-01-L01-CORR",
+      "relationship": "connects_via_door"
+    }
+  ],
+  "ifcMapping": {
+    "ifcEntity": "IfcSpace",
+    "globalId": "2O3fG9$rLBxv3VxEu2LPxR",
+    "objectType": "Bedroom"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "residential",
+    "sleeping",
+    "north-facing"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01-vent.md",
+    "extractedAt": "2026-05-24T19:47:14.117Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "system",
+  "id": "SYS-HVAC-01-VENT",
+  "projectPhase": "design_development",
+  "bimLOD": "LOD_300",
+  "systemName": "Ventilation Subsystem (MVHR)",
+  "systemCategory": "hvac",
+  "parentSystemId": "SYS-HVAC-01",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-MEP",
+  "assetIds": [
+    "AST-MVHR-01"
+  ],
+  "performance": {
+    "heatRecoveryEfficiency": "92%",
+    "totalAirflow": "220 m³/h",
+    "airChangeRate": "0.53 ACH"
+  },
+  "version": "2.1.0",
+  "tags": [
+    "hvac",
+    "ventilation",
+    "mvhr",
+    "heat-recovery"
+  ]
+}

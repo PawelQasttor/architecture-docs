@@ -1,0 +1,88 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-FIRE-DRILL-001.md",
+    "extractedAt": "2026-05-24T19:47:14.082Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "commissioning_test",
+  "id": "CT-FIRE-DRILL-001",
+  "version": "2.1.0",
+  "projectPhase": "commissioning",
+  "testName": "Whole-building fire evacuation drill",
+  "testCategory": "emergency_systems",
+  "status": "planned",
+  "buildingId": "BLD-01",
+  "testedEntityIds": [
+    "VC-STAIR-A",
+    "SP-BLD-01-L01-CORR",
+    "CR-FIRE-EGRESS-L01"
+  ],
+  "requirementIds": [
+    "REQ-FIRE-EGRESS-TIME-001"
+  ],
+  "testProcedure": {
+    "standard": "PD 7974-6 — Human factors: Life safety strategies",
+    "method": "Simulated worst-case evacuation: full building occupancy of 54 persons\n(volunteer occupants if pre-handover; actual residents if post-handover),\nfire alarm initiated from worst-case room of origin (Bedroom on Level 05),\nstairwell A artificially declared \"blocked\" so all occupants must use\nstairwell B. Timed from alarm activation to last occupant out of building.\nRepeat under same conditions but with stairwell B blocked.\n",
+    "equipment": [
+      "Stopwatch + headcount sheets at all egress points",
+      "Fire alarm test panel (manufacturer's test mode)",
+      "Video recording of decision points (with occupant consent)"
+    ],
+    "conditions": "Conducted during daylight hours for occupant safety. Local fire brigade\nnotified in advance. All assistive-evacuation equipment (evacuation\nchairs in stairwells) physically demonstrated, not just visually inspected.\n"
+  },
+  "scheduledDate": "2026-02-25",
+  "executedBy": {
+    "name": "Anna Zielińska",
+    "organization": "Zielińska Fire Safety Consultancy",
+    "qualification": "PIIB fire-safety specialist + IFE Member",
+    "certificationNumber": "MZ-7891"
+  },
+  "witnessedBy": [
+    {
+      "name": "Captain (TBC)",
+      "organization": "Warsaw Fire Brigade — local station",
+      "role": "regulatory observer"
+    },
+    {
+      "name": "Anna Nowak",
+      "organization": "Nowak Architecture",
+      "role": "Architect of Record"
+    }
+  ],
+  "results": {
+    "expected": {
+      "maxEvacuationTimeMinutes": 2.5,
+      "pathfinderRSET": 2.1
+    },
+    "measured": null,
+    "passCriteria": {
+      "actualEvacuationTimeMinutes": 2.5,
+      "noOccupantStranded": true,
+      "allAssistiveEquipmentFunctional": true
+    },
+    "outcome": "pending"
+  },
+  "constructionPackageId": "CP-MEP",
+  "sources": [
+    {
+      "id": "SRC-CT-FIRE-DRILL-001-01",
+      "title": "Green Terrace — Commissioning Plan §6.1 (Fire Drill)",
+      "type": "other",
+      "documentType": "commissioning_plan",
+      "date": "2026-01-15",
+      "author": "Anna Zielińska + Anna Nowak"
+    }
+  ],
+  "tags": [
+    "commissioning-artifact",
+    "safety-critical"
+  ],
+  "notes": "This is the **real-world counterpart** to the Pathfinder simulation\nrecorded in REQ-FIRE-EGRESS-TIME-001 (2.1 min RSET). Simulation gives\n*design-phase confidence*; the drill gives *handover-phase verification*.\n\nIf actual evacuation time exceeds 2.5 minutes, a non-conformance issue\nmust be opened and the building cannot be handed over until either\n(a) the path is rectified and the drill re-run, or (b) operating\nprocedures (e.g., reduced occupancy) are adopted with regulatory approval.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — links the design-phase egress simulation to a commissioning-phase verification"
+    }
+  ]
+}

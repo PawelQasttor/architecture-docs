@@ -1,0 +1,128 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\ankiety-mieszkancow\\SURVEY-BLD-01-IEQ-2027.md",
+    "extractedAt": "2026-05-24T19:47:14.220Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "occupant_survey",
+  "id": "SURVEY-BLD-01-IEQ-2027",
+  "version": "2.3.0",
+  "projectPhase": "operation",
+  "surveyType": "ieq_satisfaction",
+  "surveyTitle": "Zielony Taras 2027 roczna ankieta IEQ",
+  "buildingId": "BLD-01",
+  "period": {
+    "start": "2027-09-01",
+    "end": "2027-10-15"
+  },
+  "responseRate": {
+    "invited": 18,
+    "returned": 12,
+    "percent": 67
+  },
+  "dimensions": [
+    {
+      "name": "overall_satisfaction",
+      "scaleMax": 5,
+      "meanScore": 4.3,
+      "percentSatisfied": 92,
+      "flagged": false,
+      "satisfactionThreshold": 4
+    },
+    {
+      "name": "thermal_comfort_winter",
+      "scaleMax": 5,
+      "meanScore": 4.4,
+      "percentSatisfied": 92,
+      "flagged": false,
+      "satisfactionThreshold": 4
+    },
+    {
+      "name": "thermal_comfort_summer",
+      "scaleMax": 5,
+      "meanScore": 3.7,
+      "percentSatisfied": 67,
+      "flagged": true,
+      "satisfactionThreshold": 4
+    },
+    {
+      "name": "indoor_air_quality",
+      "scaleMax": 5,
+      "meanScore": 4,
+      "percentSatisfied": 75,
+      "flagged": false,
+      "satisfactionThreshold": 4
+    },
+    {
+      "name": "acoustic_privacy",
+      "scaleMax": 5,
+      "meanScore": 4.5,
+      "percentSatisfied": 92,
+      "flagged": false,
+      "satisfactionThreshold": 4
+    },
+    {
+      "name": "daylight",
+      "scaleMax": 5,
+      "meanScore": 4.6,
+      "percentSatisfied": 100,
+      "flagged": false,
+      "satisfactionThreshold": 4
+    },
+    {
+      "name": "lighting_artificial",
+      "scaleMax": 5,
+      "meanScore": 4.3,
+      "percentSatisfied": 92,
+      "flagged": false,
+      "satisfactionThreshold": 4
+    }
+  ],
+  "freeTextHighlights": [
+    {
+      "text": "Sypialnia robi się duszna w nocy, szczególnie latem",
+      "respondentApartmentId": "APT-4.02-ANON",
+      "affectedEntityId": "SP-BLD-01-L04-002",
+      "affectedEntityType": "space",
+      "triggeredIssueId": "ISS-ANOMALY-CO2-001"
+    },
+    {
+      "text": "Lato jest za ciepłe — temperatura popołudniowa sięga 26-27 °C",
+      "respondentApartmentId": "APT-4.01-4.02-4.03-CLUSTER-ANON",
+      "affectedEntityId": "LVL-04",
+      "affectedEntityType": "level",
+      "triggeredIssueId": null
+    },
+    {
+      "text": "Pompa ciepła wydaje hałas przy uruchamianiu",
+      "respondentApartmentId": "APT-3.04-ANON",
+      "affectedEntityId": "AST-HP-01",
+      "affectedEntityType": "asset",
+      "triggeredIssueId": "ISS-WARRANTY-HP-001"
+    }
+  ],
+  "methodology": {
+    "scale": "5-punktowa skala Likerta",
+    "conductor": "GreenFM Sp. z o.o.",
+    "incentive": "brak",
+    "deliveryMethod": "hybrid"
+  },
+  "dataReference": {
+    "protocol": "file_csv",
+    "path": "surveys/BLD-01-IEQ-2027-responses.csv"
+  },
+  "preparedBy": "GreenFM Sp. z o.o.",
+  "reviewedBy": "Anna Nowak (Architekt odpowiedzialny)",
+  "tags": [
+    "operation-phase-example",
+    "opinie-mieszkancow",
+    "v2-3-feature"
+  ],
+  "changelog": [
+    {
+      "version": "2.3.0",
+      "date": "2026-05-24",
+      "description": "Pierwsza encja occupant_survey w przykładzie — zastępuje narracyjne podsumowanie ankiety encją zapytywalną v2.3."
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-RFI-001.md",
+    "extractedAt": "2026-05-24T19:47:14.089Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "issue",
+  "id": "ISS-RFI-001",
+  "version": "2.1.0",
+  "projectPhase": "construction",
+  "issueTitle": "RFI 001 — slab edge condition at Level 05 green terrace upstand",
+  "issueType": "rfi",
+  "issueNumber": "RFI-001",
+  "status": "responded",
+  "priority": "high",
+  "description": "During formwork installation on Level 05 (the green terrace level),\nthe framework contractor identified that the construction documents\nshow the slab edge upstand as 300 mm tall (Detail 12/A-503), but the\nstructural drawings show it as 250 mm (Detail S-403). The discrepancy\naffects the rebar schedule and the green-roof drainage detail. Site\nis currently paused on the upstand pour pending clarification.\n",
+  "buildingId": "BLD-01",
+  "constructionPackageId": "CP-STRUCTURE",
+  "relatedEntityIds": [
+    "STR-GREEN-TERRACE",
+    "ENV-EW-01"
+  ],
+  "initiatedBy": {
+    "name": "Marek Nowicki",
+    "organization": "Budimex S.A. (general contractor)",
+    "role": "Site Engineer",
+    "date": "2026-04-22"
+  },
+  "assignedTo": {
+    "name": "Anna Nowak",
+    "organization": "Nowak Architecture",
+    "role": "Architect of Record"
+  },
+  "dueDate": "2026-04-25",
+  "responseDate": "2026-04-24",
+  "response": {
+    "respondedBy": "Anna Nowak (architecture) + Piotr Kowalski (structure)",
+    "responseDate": "2026-04-24",
+    "responseText": "The correct upstand height is 300 mm, matching the architectural detail.\nThe structural drawing S-403 will be revised (issue date 2026-04-26).\nReason: the 300 mm height is driven by the green-roof drainage build-up\n(75 mm drainage + 150 mm growing medium + 75 mm freeboard above finished\ngrowing medium) — it is dimensionally fixed and cannot be reduced.\nProceed with formwork and rebar to 300 mm. Cost-impact and schedule-impact\nassessed as nil (formwork not yet stripped; rebar schedule revised before\nbar fabrication).\n",
+    "attachments": [
+      "RFI-001-Response-Sketch.pdf",
+      "S-403-Rev-B.pdf"
+    ]
+  },
+  "costImpact": {
+    "estimatedDeltaEur": 0,
+    "appliesTo": "structural_subcontract",
+    "notes": "No additional cost — rebar revision absorbed by detailer."
+  },
+  "scheduleImpact": {
+    "estimatedDelayDays": 0,
+    "notes": "Resolved within 48 h; no critical-path impact."
+  },
+  "sources": [
+    {
+      "id": "SRC-ISS-RFI-001-01",
+      "title": "Green Terrace — RFI 001",
+      "type": "other",
+      "documentType": "rfi",
+      "date": "2026-04-22",
+      "author": "Budimex S.A."
+    }
+  ],
+  "tags": [
+    "construction-artifact"
+  ],
+  "notes": "Demonstrates the value of cross-discipline coordination at the Document-\nDiscovery stage of the example: the contractor flagged a mismatch the\ndesigners had missed, and the response references both the architectural\nand structural entities so the BIM federation can be updated consistently.\n",
+  "changelog": [
+    {
+      "version": "2.1.0",
+      "date": "2026-05-24",
+      "description": "Added as part of v2.1.0 example refresh — first construction-phase RFI"
+    }
+  ]
+}

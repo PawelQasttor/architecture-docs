@@ -1,0 +1,9 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\quality\\index.md",
+    "extractedAt": "2026-05-24T19:47:14.157Z",
+    "format": "yaml-frontmatter"
+  },
+  "title": "Quality Assurance",
+  "description": "QA framework for architecture documentation — self-checks, peer reviews, and phase gates across all project stages."
+}
