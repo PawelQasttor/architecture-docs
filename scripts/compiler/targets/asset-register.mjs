@@ -9,6 +9,40 @@
  */
 
 /**
+ * Summarise the v2.2 `asset.operationalHistory` block, if present.
+ * Returns null for assets that don't carry operation-phase data.
+ */
+function summariseOperationalHistory(asset) {
+  const oh = asset.operationalHistory;
+  if (!oh) return null;
+
+  const services = Array.isArray(oh.servicedAt) ? oh.servicedAt : [];
+  const totalServiceCost = services.reduce((sum, s) => sum + (s.cost_eur || 0), 0);
+  const lastService = services.length
+    ? services.reduce((a, b) => (a.date > b.date ? a : b))
+    : null;
+
+  // Count services by type
+  const serviceCountByType = services.reduce((acc, s) => {
+    acc[s.type] = (acc[s.type] || 0) + 1;
+    return acc;
+  }, {});
+
+  return {
+    runtimeHours: oh.runtimeHours ?? null,
+    runtimeHoursAsOf: oh.runtimeHoursAsOf ?? null,
+    cycleCount: oh.cycleCount ?? null,
+    energyConsumed_kWh: oh.energyConsumed_kWh ?? null,
+    serviceEventCount: services.length,
+    serviceCountByType,
+    totalServiceCost_eur: totalServiceCost,
+    lastService: lastService ? { date: lastService.date, type: lastService.type } : null,
+    performanceTrend: oh.performanceTrend ?? null,
+    dataSource: oh.dataSource ?? null
+  };
+}
+
+/**
  * Derive asset status from available entity data
  */
 function deriveAssetStatus(asset) {
@@ -108,6 +142,12 @@ function generateAssetInventory(assets, systems, spaces, logger) {
       // BIM reference
       ifcGlobalId: asset.ifcMapping?.globalId || '',
       ifcEntity: asset.ifcMapping?.ifcEntity || '',
+
+      // Operational history summary (v2.2 schema field, surfaced in v2.3 target)
+      operationalSummary: summariseOperationalHistory(asset),
+
+      // Active operation-phase issues affecting this asset (v2.2 field)
+      activeIssueIds: asset.activeIssueIds || [],
 
       // Metadata
       version: asset.version,

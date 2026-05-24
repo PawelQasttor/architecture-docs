@@ -440,6 +440,9 @@ export function generateComplianceReport(sbm, logger) {
 
     spaceComplianceDetails: spaceComplianceResults,
 
+    // v2.3: operation-phase compliance signals from new entity types
+    operationPhaseSignals: generateOperationPhaseSignals(sbm, logger),
+
     verificationPlan: {
       currentPhase: sbm.project.phase || 3,
       verificationsCompleted: spaceComplianceResults.filter(r =>
@@ -466,6 +469,98 @@ export function generateComplianceReport(sbm, logger) {
 
   logger.debug('✓ Compliance report complete');
   return complianceReport;
+}
+
+/**
+ * v2.3: surface operation-phase compliance signals from the new entity
+ * types (occupant_survey, energy_verification_record, retrocx_recommendation)
+ * + the v2.2 telemetry_stream threshold breaches. Returns null if the
+ * model has none of these (i.e. design-phase project).
+ */
+function generateOperationPhaseSignals(sbm, logger) {
+  const surveys = sbm.entities.occupant_surveys || [];
+  const evrs = sbm.entities.energy_verification_records || [];
+  const retrocx = sbm.entities.retrocx_recommendations || [];
+  const telemetry = sbm.entities.telemetry_streams || [];
+
+  if (surveys.length === 0 && evrs.length === 0 && retrocx.length === 0 && telemetry.length === 0) {
+    return null;
+  }
+
+  // Occupant survey: flagged dimensions across all surveys
+  const flaggedDimensions = [];
+  for (const s of surveys) {
+    for (const d of (s.dimensions || [])) {
+      if (d.flagged) {
+        flaggedDimensions.push({
+          surveyId: s.id,
+          surveyPeriod: s.period,
+          dimension: d.name,
+          meanScore: d.meanScore,
+          percentSatisfied: d.percentSatisfied
+        });
+      }
+    }
+  }
+
+  // Energy verification: most recent record's verdict
+  const latestEvr = evrs.length
+    ? evrs.reduce((a, b) => ((a.period?.end || '') > (b.period?.end || '') ? a : b))
+    : null;
+
+  // Retro-cx: status counts
+  const retrocxByStatus = retrocx.reduce((acc, r) => {
+    acc[r.status] = (acc[r.status] || 0) + 1;
+    return acc;
+  }, {});
+  const retrocxAwaitingVerification = retrocx
+    .filter(r => r.status === 'executed_awaiting_verification')
+    .map(r => ({ id: r.id, title: r.recommendationTitle, verificationDueDate: r.verificationPlan?.verificationDueDate }));
+
+  // Telemetry: threshold breach summary
+  const breachingStreams = telemetry
+    .filter(t => (t.summaryStatistics?.thresholds || []).some(th => th.currentlyExceeded))
+    .map(t => ({
+      streamId: t.id,
+      sensorChannel: t.sensorChannel,
+      measuredEntityId: t.measuredEntityId,
+      breaches: (t.summaryStatistics.thresholds || [])
+        .filter(th => th.currentlyExceeded)
+        .map(th => ({ kind: th.kind, value: th.value, exceededSince: th.exceededSince }))
+    }));
+
+  logger.debug(
+    `Operation-phase signals: ${flaggedDimensions.length} flagged survey dims, ` +
+    `${evrs.length} EVRs, ${retrocx.length} retrocx recs, ${breachingStreams.length} breaching telemetry streams`
+  );
+
+  return {
+    occupantSurveys: {
+      totalSurveys: surveys.length,
+      flaggedDimensions
+    },
+    energyVerification: latestEvr ? {
+      latestRecordId: latestEvr.id,
+      latestPeriod: latestEvr.period,
+      verdict: latestEvr.verdict,
+      designClassConfirmed: latestEvr.measured?.energyClass === latestEvr.designTargets?.energyClass,
+      deltaFactors: (latestEvr.deltaAnalysis || []).map(d => ({
+        factor: d.factor,
+        contribution_kWh_per_m2: d.contribution_kWh_per_m2,
+        relatedIssueId: d.relatedIssueId
+      }))
+    } : null,
+    retroCommissioning: {
+      totalRecommendations: retrocx.length,
+      byStatus: retrocxByStatus,
+      awaitingVerification: retrocxAwaitingVerification
+    },
+    telemetry: {
+      totalStreams: telemetry.length,
+      streamsWithActiveBreach: breachingStreams.length,
+      breachingStreams
+    }
+  };
 }
 
 /**

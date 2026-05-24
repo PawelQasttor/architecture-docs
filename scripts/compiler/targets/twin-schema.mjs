@@ -446,6 +446,49 @@ function generateIoTDeviceRegistry(spaceSensorBindings, bmsIntegration, logger) 
  * @param {object} logger - Logger instance
  * @returns {object} - Digital twin schema
  */
+/**
+ * v2.2: surface telemetry_stream entities in the twin schema output.
+ * The compiler-derived sensor bindings above are "what we predict the BMS
+ * should expose"; telemetry_streams are "what the model says is actually
+ * being measured today" — closer to live runtime data.
+ */
+function summariseTelemetryStreams(streams, logger) {
+  const summarised = streams.map(stream => {
+    const thresholds = stream.summaryStatistics?.thresholds || [];
+    const designTargetBreached = thresholds.some(
+      t => t.kind === 'design_target' && t.currentlyExceeded === true
+    );
+    const regulatoryLimitBreached = thresholds.some(
+      t => t.kind === 'regulatory_limit' && t.currentlyExceeded === true
+    );
+
+    return {
+      streamId: stream.id,
+      sensorChannel: stream.sensorChannel,
+      unit: stream.unit,
+      measuredEntityId: stream.measuredEntityId,
+      measuredEntityType: stream.measuredEntityType,
+      samplingFrequency: stream.samplingFrequency,
+      dataReference: stream.dataReference,
+      currentRollingMean: stream.summaryStatistics?.rollingMeans?.[0] || null,
+      designTargetBreached,
+      regulatoryLimitBreached,
+      coverage: stream.qualityMetadata?.coverage ?? null,
+      calibrationDue: stream.qualityMetadata?.calibrationDue ?? null
+    };
+  });
+
+  if (summarised.length > 0) {
+    const breachCount = summarised.filter(s => s.designTargetBreached || s.regulatoryLimitBreached).length;
+    logger.debug(`Surfaced ${summarised.length} telemetry streams (${breachCount} with active threshold breach)`);
+  }
+
+  return {
+    streams: summarised,
+    note: 'v2.2 entity type. Sensor bindings above are compiler-derived from space requirements; these telemetry_streams are model-asserted measurement streams with current threshold-breach state.'
+  };
+}
+
 export function generateDigitalTwinSchema(sbm, logger) {
   logger.debug('Generating digital twin schema...');
 
@@ -473,6 +516,9 @@ export function generateDigitalTwinSchema(sbm, logger) {
   const evaluationRules = generateRequirementEvaluationRules(sbm, spaceSensorBindings, logger);
   const iotDeviceRegistry = generateIoTDeviceRegistry(spaceSensorBindings, bmsIntegration, logger);
 
+  // v2.2: surface real telemetry_stream entities alongside the derived sensor bindings
+  const telemetryStreams = summariseTelemetryStreams(sbm.entities.telemetry_streams || [], logger);
+
   const totalSensors = spaceSensorBindings.reduce((sum, b) => sum + b.sensors.length, 0);
 
   // Count sensors by type dynamically
@@ -482,7 +528,7 @@ export function generateDigitalTwinSchema(sbm, logger) {
   }
 
   const twinSchema = {
-    version: "0.2",
+    version: "0.3",
     generatedAt: new Date().toISOString(),
     projectId: sbm.project.id,
     projectName: sbm.project.name,
@@ -492,13 +538,17 @@ export function generateDigitalTwinSchema(sbm, logger) {
       totalSensors: totalSensors,
       sensorsByType,
       evaluationRules: evaluationRules.length,
-      bmsDevices: bmsIntegration.deviceRegistry.length
+      bmsDevices: bmsIntegration.deviceRegistry.length,
+      // v2.2: real telemetry streams from the model (vs derived sensor bindings)
+      telemetryStreamCount: telemetryStreams.streams.length,
+      telemetryStreamsBreachingDesignTarget: telemetryStreams.streams.filter(s => s.designTargetBreached).length
     },
 
     spaceSensorBindings,
     bmsIntegration,
     evaluationRules,
     iotDeviceRegistry,
+    telemetryStreams: telemetryStreams.streams.length > 0 ? telemetryStreams : undefined,
 
     runtimeArchitecture: {
       dataFlow: [
