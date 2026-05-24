@@ -24,7 +24,7 @@ finishOverrides:
   # walls: white paint ← INHERITED from level
   # ceiling: white paint ← INHERITED from level
 
-# NEW v0.4: Cost tracking
+# Cost tracking
 cost:
   totalCost: 11890
   currency: "EUR"
@@ -40,7 +40,7 @@ cost:
     calculatedDate: "2026-02-27T11:00:00Z"
     notes: "Circulation spaces have lower construction cost but higher fitout cost (durable finishes)"
 
-# NEW v0.4: Performance targets (reduced for circulation space)
+# Performance targets (reduced for circulation space)
 performanceTargets:
   daylighting:
     daylightFactor: 1.0  # Lower requirement for circulation
@@ -101,7 +101,7 @@ performanceTargets:
       status: "compliant"
     basis: "RICS Whole Life Carbon + LETI targets"
 
-# NEW v0.4: Simulations
+# Simulations
 simulations:
   - id: "SIM-EMERGENCY-LIGHTING-CORRIDOR"
     type: "emergency_lighting"
@@ -143,7 +143,7 @@ simulations:
       validator: "anna.nowak@architecture.pl"
       validationDate: "2026-03-10T11:00:00Z"
 
-# NEW v0.4: BIM integration
+# BIM integration
 bimIntegration:
   geometryReference:
     primarySource: "ifc"
@@ -308,7 +308,7 @@ This corridor is part of the protected egress route from bedrooms to the stairca
 - **Emergency Lighting:** Battery-backed LED luminaires with 90-minute autonomy
 - **Maximum Travel Distance:** 40 m to protected staircase (compliant)
 
-## Compliance Status (v0.4 Enhanced)
+## Compliance Status
 
 | Requirement | Target Value | Actual Value | Status |
 |-------------|--------------|--------------|--------|
@@ -330,7 +330,7 @@ This corridor is part of the protected egress route from bedrooms to the stairca
 | **Energy** | ≤40/10 kWh/m²/year | ✅ Target | Lower than bedrooms (circulation) |
 | **Embodied Carbon** | ≤1000 kgCO₂e/m² | ✅ Compliant | 860 kgCO₂e/m² (below target) |
 
-### Cost Breakdown (NEW v0.4)
+### Cost Breakdown
 
 | Category | Cost | €/m² | % of Total | Notes |
 |----------|------|------|------------|-------|
@@ -341,7 +341,7 @@ This corridor is part of the protected egress route from bedrooms to the stairca
 
 **Cost comparison:** Corridor costs €1,450/m² vs bedrooms €1,730/m² (-16% due to lower construction/equipment requirements, but higher finishes for durability)
 
-### BIM Integration Status (NEW v0.4)
+### BIM Integration Status
 
 | Item | Source | SBM Value | IFC Value | Match |
 |------|--------|-----------|-----------|-------|
@@ -383,23 +383,14 @@ Most finishes inherited from Level 01, with floor overridden for circulation use
 ---
 
 **Document Status:** Design Development (LOD 300)
-**SBM Version:** v0.4.0
 **Last Review:** 2026-02-27
 **Next Review:** Design freeze before construction documentation phase
 
-**v0.4 Features:**
-- ✅ **Cost Tracking:** €11,890 total (€1,450/m²) - 16% lower than bedrooms
-- ✅ **Performance Targets:** 6 categories adapted for circulation space
-- ✅ **Simulations:** DIALux emergency lighting completed (COMPLIANT)
-- ✅ **BIM Integration:** IFC GlobalId validation, width validation (1.25m > 1.20m requirement)
-- ✅ **Property Inheritance:** Level→Space cascade with floor finish override (tile vs oak)
-- ✅ **No Space Type:** Pure level inheritance pattern demonstrated
-
 **Compliance Status:**
-- Emergency lighting: ✅ COMPLIANT (1.2 lux min, DIALux verified)
-- Width requirement: ✅ COMPLIANT (1.25m > 1.20m requirement, IFC validated)
-- Embodied carbon: ✅ COMPLIANT (860 vs 1000 kgCO₂e/m² target)
-- Fire egress: ✅ COMPLIANT (EI 30 doors, smoke detection, emergency lighting)
+- Emergency lighting: Compliant (1.2 lux min, DIALux verified)
+- Width requirement: Compliant (1.25 m > 1.20 m requirement, IFC validated)
+- Embodied carbon: Compliant (860 vs 1,000 kgCO₂e/m² target)
+- Fire egress: Compliant (EI 30 doors, smoke detection, emergency lighting)
 
 **Next Steps:**
 1. Post-construction: Verify emergency lighting performance

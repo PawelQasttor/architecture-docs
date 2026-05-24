@@ -24,7 +24,7 @@ buildingData:
   dwellingUnits: 18
   estimatedOccupants: 54
 
-# NEW v0.4: Budget & Cost Tracking
+# Budget & Cost Tracking
 budget:
   totalBudget: 1800000
   currency: "EUR"
@@ -72,7 +72,7 @@ budget:
     estimateDate: "2026-02-20"
     estimateClass: "Class 2 (Budget estimate, -10% to +15%)"
 
-# NEW v0.6: Construction Packages
+# Construction Packages
 constructionPackages:
   - id: "CP-STRUCTURE"
     name: "Structure & Foundation"
@@ -103,7 +103,7 @@ constructionPackages:
     plannedEnd: "2026-02-28"
     status: "planned"
 
-# NEW v0.4: Simulation Strategy
+# Simulation Strategy
 simulationStrategy:
   energyModeling:
     required: true
@@ -172,7 +172,7 @@ simulationStrategy:
     required: false
     reason: "Standard egress design, no performance-based approach needed"
 
-# NEW v0.4: BIM Integration Configuration
+# BIM Integration Configuration
 bimIntegration:
   ifc:
     enabled: true

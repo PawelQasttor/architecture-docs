@@ -52,7 +52,7 @@ zoneIds:
   - "ZONE-ACOUSTIC-NIGHT"
   - "ZONE-HVAC-NORTH"
 
-# NEW v0.4: Enhanced BIM Integration
+# Enhanced BIM Integration
 bimIntegration:
   geometryReference:
     primarySource: "ifc"
@@ -152,7 +152,7 @@ Individual spaces only need to override these values when different (e.g., bathr
 - **Typical Ceiling Height:** 2.70m (inherited by all spaces)
 - **Gross Floor Area:** 450 m² (IFC validated ✅)
 
-### BIM Integration (NEW v0.4)
+### BIM Integration
 
 **IFC Validation:**
 - GlobalId: `2P3gH0$sLByv4WyFv3MQzT`
@@ -206,29 +206,28 @@ All spaces inherit typical properties from this level:
 ---
 
 **Document Status:** Design Development (LOD 300)
-**SBM Version:** v0.4.0
 **Last Review:** 2026-02-27
 
-### v0.4 Features
+### BIM Integration
 
-**✅ Enhanced BIM Integration**
 - IFC GlobalId validation (elevation, height, area)
-- 2D outline extracted from IFC (20.0m × 22.5m)
+- 2D outline extracted from IFC (20.0 m × 22.5 m)
 - Centroid and bounding box for spatial analysis
-- 0 BCF issues ✅
+- 0 BCF issues
 
-**✅ Property Inheritance (v0.1.4)**
-- Typical ceiling height: 2.70m → 3/3 spaces inherit
+### Property Inheritance
+
+- Typical ceiling height: 2.70 m → 3/3 spaces inherit
 - Typical finishes: Oak/white → 2/3 spaces inherit, 1 overrides floor
-- Environmental conditions: 20-24°C → 3/3 spaces inherit
+- Environmental conditions: 20-24 °C → 3/3 spaces inherit
 - Level requirements: Merged into all 3 spaces
-- **Result:** 90% reduction in repetitive data specification
 
-**✅ Validation Status**
+### Validation Status
+
 - IFC sync: Current (2026-02-27)
-- Elevation match: ✅ Exact (3.20m)
-- Height match: ✅ Exact (3.20m)
-- Area match: ✅ Yes (450 m²)
+- Elevation match: Exact (3.20 m)
+- Height match: Exact (3.20 m)
+- Area match: Yes (450 m²)
 - BCF issues: 0 open
 
 **Next Steps:**

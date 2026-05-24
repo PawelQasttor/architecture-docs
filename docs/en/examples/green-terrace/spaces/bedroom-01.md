@@ -44,7 +44,7 @@ requirements_meta:
     - "ST-BEDROOM-STANDARD-A.requirementTemplate"
     - "jurisdiction_pack_PL"
 
-# NEW v0.4: Cost tracking
+# Cost tracking
 cost:
   totalCost: 25085
   currency: "EUR"
@@ -59,7 +59,7 @@ cost:
     sourceRef: "ST-BEDROOM-STANDARD-A"
     calculatedDate: "2026-02-27T10:00:00Z"
 
-# NEW v0.4: Performance targets
+# Performance targets
 performanceTargets:
   daylighting:
     daylightFactor: 2.0
@@ -141,7 +141,7 @@ performanceTargets:
       status: "needs_improvement"
     basis: "RICS Whole Life Carbon + LETI targets"
 
-# NEW v0.4: Simulations
+# Simulations
 simulations:
   - id: "SIM-DAYLIGHT-BEDROOM-01"
     type: "daylighting"
@@ -206,7 +206,7 @@ simulations:
       peakHeatingLoad: 850
       peakCoolingLoad: 420
 
-# NEW v0.4: BIM integration
+# BIM integration
 bimIntegration:
   geometryReference:
     primarySource: "ifc"
@@ -389,7 +389,7 @@ This bedroom is part of:
   - Connected to building alarm system
   - Positioned per manufacturer guidelines
 
-## Compliance Status (v0.4 Enhanced)
+## Compliance Status
 
 All requirements inherited from [Standard Bedroom Type A](#) are applicable, with simulation verification:
 
@@ -413,7 +413,7 @@ All requirements inherited from [Standard Bedroom Type A](#) are applicable, wit
 | **Energy** | ≤45/15 kWh/m²/year | ⏳ Simulate | EnergyPlus simulation planned April 2026 |
 | **Embodied Carbon** | ≤1000 kgCO₂e/m² | ⚠️ Over | 1250 kgCO₂e/m² - needs improvement |
 
-### Cost Breakdown (NEW v0.4)
+### Cost Breakdown
 
 | Category | Cost | €/m² | % of Total |
 |----------|------|------|------------|
@@ -422,7 +422,7 @@ All requirements inherited from [Standard Bedroom Type A](#) are applicable, wit
 | Equipment | €2,610 | €180/m² | 10.4% |
 | **Total** | **€25,085** | **€1,730/m²** | **100%** |
 
-### BIM Integration Status (NEW v0.4)
+### BIM Integration Status
 
 | Item | Source | SBM Value | IFC Value | Match |
 |------|--------|-----------|-----------|-------|
@@ -472,24 +472,15 @@ All requirements inherited from [Standard Bedroom Type A](#) are applicable, wit
 ---
 
 **Document Status:** Design Development (LOD 300)
-**SBM Version:** v0.4.0
 **Last Review:** 2026-02-27
 **Next Review:** Design freeze before construction documentation phase
 
-**v0.4 Features:**
-- ✅ **Cost Tracking:** €25,085 total (€1,730/m²) with breakdown
-- ✅ **Performance Targets:** 6 categories (daylighting, IAQ, acoustic, thermal, energy, carbon)
-- ✅ **Simulations:** DIVA daylighting completed (COMPLIANT), EnergyPlus thermal planned
-- ✅ **BIM Integration:** IFC GlobalId validation, 2D outline, centroid, bounds
-- ✅ **Property Inheritance:** Level→Space cascade (ceiling, finishes, environment)
-- ✅ **Type/Instance Pattern:** ST-BEDROOM-STANDARD-A template reference
-
 **Compliance Status:**
-- Daylighting: ✅ COMPLIANT (DF 2.3%, sDA 78% exceeds targets)
-- Energy: ⏳ Pending thermal simulation (April 2026)
-- Carbon: ⚠️ Needs improvement (1250 vs 1000 kgCO₂e/m² target)
+- Daylighting: Compliant (DF 2.3%, sDA 78% exceeds targets)
+- Energy: Pending thermal simulation (April 2026)
+- Carbon: Needs improvement (1,250 vs 1,000 kgCO₂e/m² target)
 
 **Next Steps:**
 1. Run EnergyPlus thermal simulation (scheduled 2026-04-01)
-2. Reduce embodied carbon to meet 1000 kgCO₂e/m² target
+2. Reduce embodied carbon to meet 1,000 kgCO₂e/m² target
 3. Post-construction: Verify acoustic performance (Rw measurement)
