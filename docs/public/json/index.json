@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-24T19:47:14.031Z",
+  "generatedAt": "2026-05-29T13:44:09.661Z",
   "totalDocuments": 221,
   "documents": [
     {
@@ -282,7 +282,7 @@
       "file": "en\\examples\\green-terrace\\spaces\\corridor.json",
       "documentType": "unknown",
       "projectPhase": "design_development",
-      "title": "designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight (v0.1.4)"
+      "title": "designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight"
     },
     {
       "file": "en\\examples\\green-terrace\\spaces\\stairwell-void.json",

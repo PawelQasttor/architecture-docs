@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "sourceFile": "en\\examples\\green-terrace\\levels\\level-01.md",
-    "extractedAt": "2026-05-24T19:47:14.091Z",
+    "extractedAt": "2026-05-29T13:44:09.678Z",
     "format": "yaml-frontmatter"
   },
   "entityType": "level",
@@ -138,14 +138,14 @@
   ],
   "changelog": [
     {
-      "version": "0.4.0",
+      "version": "2.1.0",
       "date": "2026-02-27",
-      "description": "Updated to v0.4.0 with enhanced BIM integration (IFC validation, 2D outline, bounds)"
+      "description": "Added IFC-validated BIM integration (2D outline, centroid, bounding box)"
     },
     {
       "version": "2.0.0",
       "date": "2026-02-23",
-      "description": "Added property inheritance (v0.1.4) - typical ceiling, finishes, environment"
+      "description": "Added property inheritance — typical ceiling height, finishes, and environmental conditions cascade to all spaces"
     },
     {
       "version": "1.0.0",

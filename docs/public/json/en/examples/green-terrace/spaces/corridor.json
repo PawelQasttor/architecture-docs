@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "sourceFile": "en\\examples\\green-terrace\\spaces\\corridor.md",
-    "extractedAt": "2026-05-24T19:47:14.112Z",
+    "extractedAt": "2026-05-29T13:44:09.690Z",
     "format": "yaml-frontmatter"
   },
   "entityType": "space",
@@ -277,14 +277,14 @@
   ],
   "changelog": [
     {
-      "version": "0.4.0",
+      "version": "2.1.0",
       "date": "2026-02-27",
-      "description": "Updated to v0.4.0 with cost tracking, performance targets (circulation-appropriate), emergency lighting simulation, and enhanced BIM integration"
+      "description": "Added cost tracking, circulation-appropriate performance targets, emergency lighting simulation, and IFC-validated BIM integration"
     },
     {
-      "version": "1.1.0",
+      "version": "2.0.0",
       "date": "2026-02-23",
-      "description": "Updated to use property inheritance (v0.1.4) - ceiling height inherited, floor finish overridden"
+      "description": "Adopted level property inheritance — ceiling height inherited, floor finish overridden for durability"
     },
     {
       "version": "1.0.0",

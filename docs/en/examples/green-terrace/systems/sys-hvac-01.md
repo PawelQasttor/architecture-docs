@@ -14,7 +14,7 @@ constructionPackageId: "CP-MEP"
 servedZoneIds:
   - "ZONE-HVAC-NORTH"
 
-# Subsystem hierarchy (v0.6) — assets moved to subsystems
+# Subsystem hierarchy — assets moved to subsystems
 # subsystemIds auto-computed by compiler: ["SYS-HVAC-01-HEATING", "SYS-HVAC-01-VENT"]
 
 # Instance-specific performance

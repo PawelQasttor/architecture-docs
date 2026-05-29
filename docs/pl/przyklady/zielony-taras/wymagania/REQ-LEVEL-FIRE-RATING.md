@@ -24,7 +24,7 @@ qualitativeDescription: |
   - Drzwi wejściowe do lokali: EI 30 (30 minut)
   - Drzwi pożarowe do klatki schodowej: EI 60-C (60 minut, samozamykające)
 
-# Acceptance Criteria (Array format for v0.3)
+# Acceptance Criteria (array format)
 acceptanceCriteria:
   - "Płyta stropowa: REI 60 (60 minut odporności ogniowej)"
   - "Ściany korytarzy: EI 30 (30 minut szczelności i izolacyjności)"

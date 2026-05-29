@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-02.md",
-    "extractedAt": "2026-05-24T19:47:14.111Z",
+    "extractedAt": "2026-05-29T13:44:09.690Z",
     "format": "yaml-frontmatter"
   },
   "entityType": "space",
@@ -316,19 +316,14 @@
   ],
   "changelog": [
     {
-      "version": "0.4.0",
-      "date": "2026-02-27",
-      "description": "Updated to v0.4.0 with cost tracking, performance targets, simulations, and enhanced BIM integration"
-    },
-    {
       "version": "2.1.0",
-      "date": "2026-02-23",
-      "description": "Updated to use property inheritance (v0.1.4)"
+      "date": "2026-02-27",
+      "description": "Added cost tracking, performance targets, simulations, and IFC-validated BIM integration; adopted level + type property inheritance"
     },
     {
       "version": "2.0.0",
       "date": "2026-02-22",
-      "description": "Migrated to type/instance pattern"
+      "description": "Migrated to type/instance pattern (Space + Space Type)"
     }
   ]
 }

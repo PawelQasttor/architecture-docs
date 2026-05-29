@@ -51,7 +51,7 @@ backgroundNoise:
   testMethod: "PN-EN ISO 1996-2"
   description: "Maximum background noise level in bedrooms at night"
 
-# Acceptance Criteria (Array format for v0.3)
+# Acceptance Criteria (array format)
 acceptanceCriteria:
   - "Airborne sound insulation (between units): Rw ≥ 52 dB"
   - "Impact sound insulation (floors): L'nw ≤ 53 dB"

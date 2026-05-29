@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "sourceFile": "en\\examples\\green-terrace\\project-specification.md",
-    "extractedAt": "2026-05-24T19:47:14.101Z",
+    "extractedAt": "2026-05-29T13:44:09.684Z",
     "format": "yaml-frontmatter"
   },
   "entityType": "project",
@@ -410,7 +410,7 @@
       "description": "Example refresh — canonical entityType, unified 10-phase lifecycle (phase: construction_documents), version aligned with v2.1.0 example refresh"
     },
     {
-      "version": "0.4.0",
+      "version": "2.0.1",
       "date": "2026-02-27",
       "description": "Added budget tracking, simulation strategy, and BIM integration configuration"
     },

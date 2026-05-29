@@ -52,7 +52,7 @@ doorWidth:
   testMethod: "As-built measurement"
   description: "Minimum clear opening width for escape route doors"
 
-# Acceptance Criteria (Array format for v0.3)
+# Acceptance Criteria (array format)
 acceptanceCriteria:
   - "Egress Time: Maximum 2.5 minutes RSET to protected stairwell"
   - "Travel Distance: Maximum 40 meters along escape route"

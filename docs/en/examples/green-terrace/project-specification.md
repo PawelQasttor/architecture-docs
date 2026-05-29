@@ -328,7 +328,7 @@ changelog:
   - version: "2.1.0"
     date: "2026-05-24"
     description: "Example refresh — canonical entityType, unified 10-phase lifecycle (phase: construction_documents), version aligned with v2.1.0 example refresh"
-  - version: "0.4.0"
+  - version: "2.0.1"
     date: "2026-02-27"
     description: "Added budget tracking, simulation strategy, and BIM integration configuration"
   - version: "2.0.0"

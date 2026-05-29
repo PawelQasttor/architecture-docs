@@ -52,7 +52,7 @@ doorWidth:
   testMethod: "Pomiar powykonawczy"
   description: "Minimalna szerokość w świetle otworu drzwi na drodze ewakuacyjnej"
 
-# Acceptance Criteria (Array format for v0.3)
+# Acceptance Criteria (array format)
 acceptanceCriteria:
   - "Czas ewakuacji: maksymalnie 2,5 minuty RSET do chronionej klatki schodowej"
   - "Długość dojścia: maksymalnie 40 metrów wzdłuż drogi ewakuacyjnej"

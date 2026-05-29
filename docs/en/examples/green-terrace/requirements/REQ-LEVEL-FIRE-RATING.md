@@ -24,7 +24,7 @@ qualitativeDescription: |
   - Apartment entry doors: EI 30 (30 minutes)
   - Fire doors to stairwell: EI 60-C (60 minutes, self-closing)
 
-# Acceptance Criteria (Array format for v0.3)
+# Acceptance Criteria (array format)
 acceptanceCriteria:
   - "Floor slab: REI 60 (60 minutes fire resistance)"
   - "Corridor walls: EI 30 (30 minutes integrity and insulation)"

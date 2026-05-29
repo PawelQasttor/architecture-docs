@@ -51,7 +51,7 @@ backgroundNoise:
   testMethod: "PN-EN ISO 1996-2"
   description: "Maksymalny poziom tła akustycznego w sypialniach w porze nocnej"
 
-# Acceptance Criteria (Array format for v0.3)
+# Acceptance Criteria (array format)
 acceptanceCriteria:
   - "Izolacyjność od dźwięków powietrznych (między lokalami): Rw ≥ 52 dB"
   - "Izolacyjność od dźwięków uderzeniowych (stropy): L'nw ≤ 53 dB"
