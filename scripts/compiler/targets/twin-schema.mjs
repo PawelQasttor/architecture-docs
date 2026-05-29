@@ -489,6 +489,37 @@ function summariseTelemetryStreams(streams, logger) {
   };
 }
 
+/**
+ * v2.4: surface regulatory_inspection entities — the statutory operation-phase
+ * inspection schedule (annual / 5-year / system inspections) with c-KOB digital
+ * logbook linkage. This is the compliance backbone a running twin must track.
+ */
+function summariseRegulatoryInspections(inspections, logger) {
+  const summarised = inspections.map(i => ({
+    inspectionId: i.id,
+    inspectionType: i.inspectionType,
+    statutoryBasis: i.statutoryBasis,
+    status: i.status,
+    targetEntityId: i.buildingId || i.campusId || i.assetId || null,
+    frequencyMonths: i.frequencyMonths ?? null,
+    performedDate: i.performedDate ?? null,
+    nextDueDate: i.nextDueDate ?? null,
+    outcome: i.result?.outcome ?? null,
+    openDeficiencies: (i.result?.deficiencies || []).length,
+    cKobRecorded: i.cKobEntry?.recorded ?? false
+  }));
+
+  if (summarised.length > 0) {
+    const overdue = summarised.filter(s => s.status === 'overdue' || s.status === 'due').length;
+    logger.debug(`Surfaced ${summarised.length} regulatory inspections (${overdue} due/overdue)`);
+  }
+
+  return {
+    inspections: summarised,
+    note: 'v2.4 entity type. Statutory periodic inspections (Prawo Budowlane Art. 62 etc.) the operating twin must keep current; cKobRecorded flags whether the result is logged in the digital building logbook (c-KOB).'
+  };
+}
+
 export function generateDigitalTwinSchema(sbm, logger) {
   logger.debug('Generating digital twin schema...');
 
@@ -519,6 +550,9 @@ export function generateDigitalTwinSchema(sbm, logger) {
   // v2.2: surface real telemetry_stream entities alongside the derived sensor bindings
   const telemetryStreams = summariseTelemetryStreams(sbm.entities.telemetry_streams || [], logger);
 
+  // v2.4: surface statutory regulatory_inspection schedule (operation-phase governance)
+  const regulatoryInspections = summariseRegulatoryInspections(sbm.entities.regulatory_inspections || [], logger);
+
   const totalSensors = spaceSensorBindings.reduce((sum, b) => sum + b.sensors.length, 0);
 
   // Count sensors by type dynamically
@@ -541,7 +575,10 @@ export function generateDigitalTwinSchema(sbm, logger) {
       bmsDevices: bmsIntegration.deviceRegistry.length,
       // v2.2: real telemetry streams from the model (vs derived sensor bindings)
       telemetryStreamCount: telemetryStreams.streams.length,
-      telemetryStreamsBreachingDesignTarget: telemetryStreams.streams.filter(s => s.designTargetBreached).length
+      telemetryStreamsBreachingDesignTarget: telemetryStreams.streams.filter(s => s.designTargetBreached).length,
+      // v2.4: statutory inspection schedule
+      regulatoryInspectionCount: regulatoryInspections.inspections.length,
+      regulatoryInspectionsDueOrOverdue: regulatoryInspections.inspections.filter(i => i.status === 'due' || i.status === 'overdue').length
     },
 
     spaceSensorBindings,
@@ -549,6 +586,7 @@ export function generateDigitalTwinSchema(sbm, logger) {
     evaluationRules,
     iotDeviceRegistry,
     telemetryStreams: telemetryStreams.streams.length > 0 ? telemetryStreams : undefined,
+    regulatoryInspections: regulatoryInspections.inspections.length > 0 ? regulatoryInspections : undefined,
 
     runtimeArchitecture: {
       dataFlow: [

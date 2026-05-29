@@ -105,6 +105,17 @@ const I18N = {
     opsRcxHeader: 'Retro-commissioning',
     opsRcxTotal: (n) => `${n} recommendation(s)`,
     opsRcxAwaiting: (n) => `${n} awaiting verification`,
+    delHeader: 'Delivery & approvals',
+    delIntro: 'Regulatory permits, phase-gate milestones, and statutory inspections that govern how the building gets built and operated.',
+    delPermits: (n) => `${n} permit(s)`,
+    delPermitsOutstanding: (n) => `${n} outstanding`,
+    delPermitsClear: 'All permits valid / decided',
+    delGates: (n) => `${n} gate(s)`,
+    delGatesOpen: (n) => `${n} not yet passed`,
+    delGatesClear: 'All gates passed / waived',
+    delInsp: (n) => `${n} inspection(s)`,
+    delInspAction: (n) => `${n} due / overdue / with deficiencies`,
+    delInspClear: 'All inspections current',
   },
   pl: {
     htmlLang: 'pl',
@@ -175,6 +186,17 @@ const I18N = {
     opsRcxHeader: 'Retro-commissioning',
     opsRcxTotal: (n) => `Rekomendacje: ${n}`,
     opsRcxAwaiting: (n) => `${n} oczekuje na weryfikację`,
+    delHeader: 'Realizacja i pozwolenia',
+    delIntro: 'Pozwolenia administracyjne, bramki fazowe (kamienie milowe) i przeglądy ustawowe, które regulują sposób realizacji i eksploatacji budynku.',
+    delPermits: (n) => `Pozwolenia: ${n}`,
+    delPermitsOutstanding: (n) => `${n} w toku`,
+    delPermitsClear: 'Wszystkie pozwolenia ważne / rozstrzygnięte',
+    delGates: (n) => `Bramki: ${n}`,
+    delGatesOpen: (n) => `${n} nie zaliczono`,
+    delGatesClear: 'Wszystkie bramki zaliczone / pominięte',
+    delInsp: (n) => `Przeglądy: ${n}`,
+    delInspAction: (n) => `${n} zaległe / wymagalne / z usterkami`,
+    delInspClear: 'Wszystkie przeglądy aktualne',
   },
 };
 
@@ -264,6 +286,65 @@ function renderOperationPhaseSection(sbm, complianceReport, L) {
 
   return `<h2>${esc(L.opsHeader)}</h2>
   <p style="margin:-6px 0 12px;color:var(--mut);font-size:13px">${esc(L.opsIntro)}</p>
+  ${blocks.join('\n')}`;
+}
+
+/**
+ * v2.4: render the delivery & approval section (permits, approval gates,
+ * regulatory inspections), if the model has any. Reads the deliveryAndApprovals
+ * block produced by the compliance report.
+ */
+function renderDeliverySection(sbm, complianceReport, L) {
+  const d = complianceReport?.deliveryAndApprovals;
+  if (!d) return '';
+
+  const badge = (clear, openLabel) => clear
+    ? `<span class="badge ok">${esc(openLabel)}</span>`
+    : `<span class="badge warn">${esc(openLabel)}</span>`;
+
+  const blocks = [];
+
+  if (d.permits?.total > 0) {
+    const outstanding = (d.permits.outstanding || []).length;
+    const rows = (d.permits.outstanding || []).slice(0, 6).map(p =>
+      `<tr><td>${esc(p.id)}</td><td>${esc(p.permitType)}</td><td>${esc(p.status)}</td></tr>`
+    ).join('');
+    blocks.push(`<div class="panel" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>${esc(L.delPermits(d.permits.total))}</strong> · ${
+        outstanding > 0 ? badge(false, L.delPermitsOutstanding(outstanding)) : badge(true, L.delPermitsClear)}</p>
+      ${rows ? `<table style="margin-top:10px"><tr><th>ID</th><th>Type</th><th>Status</th></tr>${rows}</table>` : ''}
+    </div>`);
+  }
+
+  if (d.approvalGates?.total > 0) {
+    const open = (d.approvalGates.open || []).length;
+    const rows = (d.approvalGates.open || []).slice(0, 6).map(g =>
+      `<tr><td>${esc(g.id)}</td><td>${esc(g.gateType)}</td><td>${esc(g.status)}</td></tr>`
+    ).join('');
+    blocks.push(`<div class="panel" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>${esc(L.delGates(d.approvalGates.total))}</strong> · ${
+        open > 0 ? badge(false, L.delGatesOpen(open)) : badge(true, L.delGatesClear)}</p>
+      ${rows ? `<table style="margin-top:10px"><tr><th>ID</th><th>Gate</th><th>Status</th></tr>${rows}</table>` : ''}
+    </div>`);
+  }
+
+  if (d.regulatoryInspections?.total > 0) {
+    const action = (d.regulatoryInspections.needingAction || []).length;
+    const rows = (d.regulatoryInspections.needingAction || []).slice(0, 6).map(i =>
+      `<tr><td>${esc(i.id)}</td><td>${esc(i.inspectionType)}</td><td>${esc(i.status)}</td><td>${esc(i.nextDueDate || i.dueDate || '—')}</td></tr>`
+    ).join('');
+    blocks.push(`<div class="panel" style="margin-top:14px">
+      <p style="margin:0 0 6px"><strong>${esc(L.delInsp(d.regulatoryInspections.total))}</strong> · ${
+        action > 0 ? badge(false, L.delInspAction(action)) : badge(true, L.delInspClear)}
+      · <span class="badge">c-KOB: ${d.regulatoryInspections.cKobRecorded}/${d.regulatoryInspections.total}</span></p>
+      ${rows ? `<table style="margin-top:10px"><tr><th>ID</th><th>Type</th><th>Status</th><th>Due</th></tr>${rows}</table>` : ''}
+    </div>`);
+  }
+
+  if (blocks.length === 0) return '';
+
+  return `<h2>${esc(L.delHeader)}</h2>
+  <p style="margin:-6px 0 12px;color:var(--mut);font-size:13px">${esc(L.delIntro)}</p>
   ${blocks.join('\n')}`;
 }
 
@@ -380,6 +461,8 @@ ${plSections.length ? `<h2>${esc(L.compliance)} — ${esc(complianceReport.polan
 </table>` : ''}
 
 ${renderOperationPhaseSection(sbm, complianceReport, L)}
+
+${renderDeliverySection(sbm, complianceReport, L)}
 
 <h2>${esc(L.dataQuality)}</h2>
 <table>

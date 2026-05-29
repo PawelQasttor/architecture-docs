@@ -443,6 +443,9 @@ export function generateComplianceReport(sbm, logger) {
     // v2.3: operation-phase compliance signals from new entity types
     operationPhaseSignals: generateOperationPhaseSignals(sbm, logger),
 
+    // v2.4: delivery & approval process layer (permits, gates, statutory inspections)
+    deliveryAndApprovals: generateDeliverySignals(sbm, logger),
+
     verificationPlan: {
       currentPhase: sbm.project.phase || 3,
       verificationsCompleted: spaceComplianceResults.filter(r =>
@@ -559,6 +562,79 @@ function generateOperationPhaseSignals(sbm, logger) {
       totalStreams: telemetry.length,
       streamsWithActiveBreach: breachingStreams.length,
       breachingStreams
+    }
+  };
+}
+
+/**
+ * v2.4: surface the delivery & approval process layer — permits (regulatory
+ * authorizations), approval_gates (phase-gate milestones), and
+ * regulatory_inspections (statutory periodic inspections with c-KOB linkage).
+ * Returns null if the model has none of these.
+ */
+function generateDeliverySignals(sbm, logger) {
+  const permits = sbm.entities.permits || [];
+  const gates = sbm.entities.approval_gates || [];
+  const inspections = sbm.entities.regulatory_inspections || [];
+
+  if (permits.length === 0 && gates.length === 0 && inspections.length === 0) {
+    return null;
+  }
+
+  const countBy = (arr, key) => arr.reduce((acc, e) => {
+    const k = e[key] || 'unspecified';
+    acc[k] = (acc[k] || 0) + 1;
+    return acc;
+  }, {});
+
+  // Permits not yet in a final/valid state need attention
+  const OPEN_PERMIT_STATES = new Set(['draft', 'submitted', 'under_review', 'deficiency_notice', 'awaiting_response', 'appealed']);
+  const outstandingPermits = permits
+    .filter(p => OPEN_PERMIT_STATES.has(p.status))
+    .map(p => ({ id: p.id, permitType: p.permitType, status: p.status, statutoryDeadlineDays: p.statutoryDeadlineDays }));
+
+  // Gates that are not yet cleared
+  const openGates = gates
+    .filter(g => g.status !== 'passed' && g.status !== 'waived')
+    .map(g => ({ id: g.id, gateType: g.gateType, status: g.status, phase: g.gatePhase }));
+
+  // Inspections that are due/overdue or closed with deficiencies
+  const inspectionsNeedingAction = inspections
+    .filter(i => ['due', 'overdue', 'scheduled', 'completed_with_deficiencies', 'failed'].includes(i.status))
+    .map(i => ({
+      id: i.id,
+      inspectionType: i.inspectionType,
+      status: i.status,
+      dueDate: i.dueDate,
+      nextDueDate: i.nextDueDate,
+      openDeficiencies: (i.result?.deficiencies || []).length
+    }));
+  const cKobRecorded = inspections.filter(i => i.cKobEntry?.recorded).length;
+
+  logger.debug(
+    `Delivery & approvals: ${permits.length} permits (${outstandingPermits.length} outstanding), ` +
+    `${gates.length} gates (${openGates.length} open), ${inspections.length} inspections ` +
+    `(${inspectionsNeedingAction.length} need action, ${cKobRecorded} c-KOB recorded)`
+  );
+
+  return {
+    permits: {
+      total: permits.length,
+      byType: countBy(permits, 'permitType'),
+      byStatus: countBy(permits, 'status'),
+      outstanding: outstandingPermits
+    },
+    approvalGates: {
+      total: gates.length,
+      byStatus: countBy(gates, 'status'),
+      open: openGates
+    },
+    regulatoryInspections: {
+      total: inspections.length,
+      byType: countBy(inspections, 'inspectionType'),
+      byStatus: countBy(inspections, 'status'),
+      cKobRecorded,
+      needingAction: inspectionsNeedingAction
     }
   };
 }
