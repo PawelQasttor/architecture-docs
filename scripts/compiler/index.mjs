@@ -22,6 +22,7 @@ import { generateAssetRegister } from './targets/asset-register.mjs';
 import { generateDigitalTwinSchema } from './targets/twin-schema.mjs';
 import { generateQualityReport } from './targets/quality-report.mjs';
 import { generateHtmlReport } from './targets/html-report.mjs';
+import { generateKnowledgeGraph } from './targets/knowledge-graph.mjs';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -29,7 +30,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '2.4.0';
+const VERSION = '2.5.0';
 
 // CLI argument parsing
 function parseArgs(args) {
@@ -167,12 +168,13 @@ async function compile(options) {
     const assetRegister = generateAssetRegister(sbm, logger);
     const digitalTwinSchema = generateDigitalTwinSchema(sbm, logger);
     const qualityReport = generateQualityReport(sbm, projectQuality, logger);
+    const knowledgeGraph = generateKnowledgeGraph(sbm, logger);
     const htmlReport = generateHtmlReport(
       sbm, projectQuality, complianceReport, qualityReport,
       Number(((Date.now() - startTime) / 1000).toFixed(2))
     );
 
-    logger.success('Generated 6 compilation targets (5 JSON + HTML report)');
+    logger.success('Generated 7 compilation targets (6 JSON + HTML report)');
 
     // Ensure output directory exists
     await fs.mkdir(options.output, { recursive: true });
@@ -192,7 +194,8 @@ async function compile(options) {
       ['compliance_report.json', complianceReport],
       ['asset_register.json', assetRegister],
       ['twin_schema.json', digitalTwinSchema],
-      ['quality_report.json', qualityReport]
+      ['quality_report.json', qualityReport],
+      ['knowledge_graph.json', knowledgeGraph]
     ];
 
     for (const [filename, data] of targets) {
