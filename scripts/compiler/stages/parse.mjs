@@ -75,6 +75,8 @@ async function parseFile(filePath, inputDir) {
     'occupant_survey', 'energy_verification_record', 'retrocx_recommendation',
     // v2.4 entity types
     'permit', 'approval_gate', 'regulatory_inspection',
+    // v2.5 entity types
+    'design_option',
     // Legacy
     'element_specification', 'project_specification', 'project'
   ];

@@ -77,6 +77,8 @@ function groupEntitiesByType(entities) {
     permits: [],
     approval_gates: [],
     regulatory_inspections: [],
+    // v2.5 entity types
+    design_options: [],
     other: [] // For legacy document types
   };
 
@@ -151,6 +153,8 @@ function groupEntitiesByType(entities) {
       grouped.approval_gates.push(normalizeEntity(entity));
     } else if (type === 'regulatory_inspection') {
       grouped.regulatory_inspections.push(normalizeEntity(entity));
+    } else if (type === 'design_option') {
+      grouped.design_options.push(normalizeEntity(entity));
     } else {
       // Legacy types (element_specification, project_specification)
       grouped.other.push(normalizeEntity(entity));
@@ -376,6 +380,7 @@ function computeRelationships(grouped) {
   if (grouped.space_programs && grouped.spaces) {
     for (const prog of grouped.space_programs) {
       const matchingSpaces = grouped.spaces.filter(s => {
+        if (s.designOptionId) return false; // v2.5: variants excluded from baseline program compliance
         if (prog.spaceTypeId && s.spaceTypeId === prog.spaceTypeId) return true;
         if (prog.spaceType && s.spaceType === prog.spaceType) return true;
         return false;
@@ -992,6 +997,8 @@ function performCostRollup(grouped, project, logger) {
       const contributingSpaces = [];
 
       for (const space of grouped.spaces) {
+        // v2.5: design-option variants are excluded from baseline rollups
+        if (space.designOptionId) continue;
         if (space.levelId === level.id && space.cost?.totalCost) {
           levelCost += space.cost.totalCost;
           contributingSpaces.push({
@@ -1093,6 +1100,7 @@ function performCostRollup(grouped, project, logger) {
       const contributingEnvelopes = [];
 
       for (const envelope of grouped.envelopes) {
+        if (envelope.designOptionId) continue; // v2.5: variants excluded from baseline rollup
         if (envelope.buildingId === building.id && envelope.cost?.totalCost) {
           envelopeCost += envelope.cost.totalCost;
           contributingEnvelopes.push({
@@ -1136,6 +1144,7 @@ function performCostRollup(grouped, project, logger) {
       const contributingAssets = [];
 
       for (const asset of grouped.assets) {
+        if (asset.designOptionId) continue; // v2.5: variants excluded from baseline rollup
         if (asset.systemId === system.id && asset.cost?.totalCost) {
           systemCost += asset.cost.totalCost;
           contributingAssets.push({
@@ -1447,6 +1456,7 @@ function performPerformanceAggregation(grouped, project, logger) {
     performanceSummary.totalSpaces = grouped.spaces.length;
 
     for (const space of grouped.spaces) {
+      if (space.designOptionId) continue; // v2.5: variants excluded from baseline carbon/perf aggregation
       let spaceHasTargets = false;
 
       if (space.performanceTargets) {
@@ -1709,7 +1719,9 @@ export async function normalize(rawEntities, options, logger) {
       // v2.4 entity types
       ...(grouped.permits.length > 0 && { permits: grouped.permits }),
       ...(grouped.approval_gates.length > 0 && { approval_gates: grouped.approval_gates }),
-      ...(grouped.regulatory_inspections.length > 0 && { regulatory_inspections: grouped.regulatory_inspections })
+      ...(grouped.regulatory_inspections.length > 0 && { regulatory_inspections: grouped.regulatory_inspections }),
+      // v2.5 entity types
+      ...(grouped.design_options.length > 0 && { design_options: grouped.design_options })
     },
     metadata: {
       totalEntities: rawEntities.length,
@@ -1751,7 +1763,9 @@ export async function normalize(rawEntities, options, logger) {
         // v2.4 entity types
         permits: grouped.permits.length,
         approval_gates: grouped.approval_gates.length,
-        regulatory_inspections: grouped.regulatory_inspections.length
+        regulatory_inspections: grouped.regulatory_inspections.length,
+        // v2.5 entity types
+        design_options: grouped.design_options.length
       }
     }
   };

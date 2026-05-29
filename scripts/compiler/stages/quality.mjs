@@ -147,6 +147,11 @@ const QUALITY_PROFILES = {
   regulatory_inspection: {
     critical: ['inspectionType', 'status'],
     important: ['statutoryBasis', 'buildingId', 'frequencyMonths', 'dueDate', 'result']
+  },
+  // v2.5 entity type profile (design options)
+  design_option: {
+    critical: ['optionName', 'status'],
+    important: ['comparison', 'rationale', 'decisionOwner', 'decisionDate']
   }
 };
 

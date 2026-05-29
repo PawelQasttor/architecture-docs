@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
  * Load JSON schema
  */
 async function loadSchema() {
-  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v2.4.json');
+  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v2.5.json');
   const schemaContent = await fs.readFile(schemaPath, 'utf-8');
   return JSON.parse(schemaContent);
 }
@@ -495,6 +495,44 @@ function checkReferentialIntegrity(sbm, logger) {
           });
         }
       }
+    }
+  }
+
+  // v2.5: design-option / temporal cross-entity checks
+  const designOptionIds = new Set((sbm.entities.design_options || []).map(o => o.id));
+  for (const [bucket, list] of Object.entries(sbm.entities || {})) {
+    if (!Array.isArray(list)) continue;
+    for (const e of list) {
+      if (e.designOptionId && !designOptionIds.has(e.designOptionId)) {
+        errors.push({
+          path: `${bucket}/${e.id}/designOptionId`,
+          message: `Referenced design_option "${e.designOptionId}" does not exist`
+        });
+      }
+      if (e.variantOf && !allIds.has(e.variantOf)) {
+        warnings.push({
+          path: `${bucket}/${e.id}/variantOf`,
+          message: `variantOf references "${e.variantOf}" which does not exist`
+        });
+      }
+    }
+  }
+  for (const opt of sbm.entities.design_options || []) {
+    if (opt.supersededByOptionId && !designOptionIds.has(opt.supersededByOptionId)) {
+      warnings.push({
+        path: `design_options/${opt.id}/supersededByOptionId`,
+        message: `Referenced design_option "${opt.supersededByOptionId}" does not exist`
+      });
+    }
+  }
+  // Business rule: when options exist, exactly one should be the selected scheme
+  if (designOptionIds.size > 0) {
+    const selected = (sbm.entities.design_options || []).filter(o => o.status === 'selected').length;
+    if (selected !== 1) {
+      warnings.push({
+        path: 'design_options',
+        message: `Expected exactly 1 design_option with status "selected"; found ${selected}`
+      });
     }
   }
 

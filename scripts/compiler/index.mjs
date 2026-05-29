@@ -23,6 +23,7 @@ import { generateDigitalTwinSchema } from './targets/twin-schema.mjs';
 import { generateQualityReport } from './targets/quality-report.mjs';
 import { generateHtmlReport } from './targets/html-report.mjs';
 import { generateKnowledgeGraph } from './targets/knowledge-graph.mjs';
+import { generateOptionComparison } from './targets/option-comparison.mjs';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -30,7 +31,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '2.5.0';
+const VERSION = '2.6.0';
 
 // CLI argument parsing
 function parseArgs(args) {
@@ -116,7 +117,7 @@ async function compile(options) {
 
     // Build SBM structure
     const sbm = {
-      sbm_version: '2.4',
+      sbm_version: '2.5',
       generatedAt: new Date().toISOString(),
       compiler: {
         version: VERSION,
@@ -169,12 +170,13 @@ async function compile(options) {
     const digitalTwinSchema = generateDigitalTwinSchema(sbm, logger);
     const qualityReport = generateQualityReport(sbm, projectQuality, logger);
     const knowledgeGraph = generateKnowledgeGraph(sbm, logger);
+    const optionComparison = generateOptionComparison(sbm, logger);
     const htmlReport = generateHtmlReport(
       sbm, projectQuality, complianceReport, qualityReport,
       Number(((Date.now() - startTime) / 1000).toFixed(2))
     );
 
-    logger.success('Generated 7 compilation targets (6 JSON + HTML report)');
+    logger.success('Generated 8 compilation targets (7 JSON + HTML report)');
 
     // Ensure output directory exists
     await fs.mkdir(options.output, { recursive: true });
@@ -195,7 +197,9 @@ async function compile(options) {
       ['asset_register.json', assetRegister],
       ['twin_schema.json', digitalTwinSchema],
       ['quality_report.json', qualityReport],
-      ['knowledge_graph.json', knowledgeGraph]
+      ['knowledge_graph.json', knowledgeGraph],
+      // option_comparison is null for models with no design_options — skip the file then
+      ...(optionComparison ? [['option_comparison.json', optionComparison]] : [])
     ];
 
     for (const [filename, data] of targets) {
@@ -295,7 +299,7 @@ async function main() {
 
       // Build SBM structure
       const sbm = {
-        sbm_version: '2.4',
+        sbm_version: '2.5',
         generatedAt: new Date().toISOString(),
         compiler: { version: VERSION, mode: options.mode },
         ...normalized

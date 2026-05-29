@@ -133,6 +133,14 @@ export const V2_4_ENTITY_TYPES = new Set([
 ]);
 
 /**
+ * v2.5 entity types recognized by the compiler (additions beyond v2.4) —
+ * the design-options / temporal-versioning layer.
+ */
+export const V2_5_ENTITY_TYPES = new Set([
+  'design_option'
+]);
+
+/**
  * All entity types recognized by the compiler (v1.x + v2.0 + v2.2 + v2.3 + v2.4)
  */
 export const ALL_ENTITY_TYPES = new Set([
@@ -147,5 +155,7 @@ export const ALL_ENTITY_TYPES = new Set([
   // v2.3
   'occupant_survey', 'energy_verification_record', 'retrocx_recommendation',
   // v2.4
-  'permit', 'approval_gate', 'regulatory_inspection'
+  'permit', 'approval_gate', 'regulatory_inspection',
+  // v2.5
+  'design_option'
 ]);
