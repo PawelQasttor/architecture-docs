@@ -122,6 +122,11 @@ inventory is complete: 31 of 31 entity types have working examples.)
   would shake out any pset-mapping issues in the v2.2/v2.3 PSets added
   to `bim-mapping.mjs`. No known issue today; just untested in tooling
   outside the SBM project itself.
-- The bedroom-01 / corridor / level-01 narrative still references some
-  v0.4 simulation paths in the body. Functional but slightly dated;
-  could be retold in a v2.x voice later.
+- The **entity reference manual** (`docs/{en,pl}/documentation/entities/*`,
+  plus `creating-entities.md` / `data-governance.md`) still carries
+  pre-v2.0 feature-provenance markers like `(v0.3.0)`, `(v0.2.0)`,
+  `(v0.6)` on field/section headings. These are arguably intentional
+  ("field introduced in version X"), so they were left as-is — a future
+  pass could either rebase them onto the v2.x numbering or drop them.
+  (The green-terrace *example* entities were fully swept to a v2.x voice
+  in commits `8a83380` + `f667c7e`.)
