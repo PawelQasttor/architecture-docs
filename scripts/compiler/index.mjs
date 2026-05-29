@@ -24,6 +24,8 @@ import { generateQualityReport } from './targets/quality-report.mjs';
 import { generateHtmlReport } from './targets/html-report.mjs';
 import { generateKnowledgeGraph } from './targets/knowledge-graph.mjs';
 import { generateOptionComparison } from './targets/option-comparison.mjs';
+import { runQuery, formatQueryText } from './query.mjs';
+import { diffModels, formatDiffText } from './model-diff.mjs';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -31,7 +33,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VERSION = '2.6.0';
+const VERSION = '2.7.0';
 
 // CLI argument parsing
 function parseArgs(args) {
@@ -42,7 +44,11 @@ function parseArgs(args) {
     country: 'PL',
     phase: 'design_development',
     verbose: false,
-    mode: 'production'
+    mode: 'production',
+    query: null,     // query expression (also accepted as a trailing positional)
+    from: null,      // diff: "before" sbm.json or build dir
+    to: null,        // diff: "after" sbm.json or build dir
+    format: 'text'   // query/diff output format: text | json
   };
 
   for (let i = 3; i < args.length; i++) {
@@ -67,6 +73,21 @@ function parseArgs(args) {
     } else if (arg === '--mode' && next) {
       options.mode = next;
       i++;
+    } else if (arg === '--query' && next) {
+      options.query = next;
+      i++;
+    } else if (arg === '--from' && next) {
+      options.from = next;
+      i++;
+    } else if (arg === '--to' && next) {
+      options.to = next;
+      i++;
+    } else if (arg === '--format' && next) {
+      options.format = next;
+      i++;
+    } else if (!arg.startsWith('--') && !options.query) {
+      // a bare trailing token is the query expression (e.g. query "list spaces")
+      options.query = arg;
     }
   }
 
@@ -83,6 +104,19 @@ function createLogger(verbose) {
     debug: (msg) => verbose && console.log(`🔍 ${msg}`),
     stage: (num, name) => console.log(`\n📍 Stage ${num}: ${name}`)
   };
+}
+
+// Load a compiled sbm.json from a file path or a build directory containing one.
+async function loadSbm(target) {
+  let file = target;
+  try {
+    const stat = await fs.stat(target);
+    if (stat.isDirectory()) file = path.join(target, 'sbm.json');
+  } catch {
+    throw new Error(`path not found: ${target}`);
+  }
+  const raw = await fs.readFile(file, 'utf-8');
+  return JSON.parse(raw);
 }
 
 // Main compile function
@@ -337,6 +371,53 @@ async function main() {
       process.exit(1);
     }
 
+  } else if (options.command === 'query') {
+    if (!options.input) {
+      console.error('Error: --input is required (path to sbm.json or a build directory)');
+      process.exit(1);
+    }
+    if (!options.query) {
+      console.error('Error: a query expression is required, e.g. query --input build/green-terrace "list spaces where designArea > 14"');
+      process.exit(1);
+    }
+    try {
+      const sbm = await loadSbm(options.input);
+      const result = runQuery(sbm, options.query, { logger: createLogger(options.verbose) });
+      if (options.format === 'json') {
+        console.log(JSON.stringify(result, null, 2));
+      } else {
+        console.log(formatQueryText(result));
+      }
+      if (result.error) process.exit(1);
+    } catch (error) {
+      console.error(`Query failed: ${error.message}`);
+      process.exit(1);
+    }
+
+  } else if (options.command === 'diff') {
+    if (!options.from || !options.to) {
+      console.error('Error: --from and --to are required (each a path to sbm.json or a build directory)');
+      process.exit(1);
+    }
+    try {
+      const [sbmA, sbmB] = await Promise.all([loadSbm(options.from), loadSbm(options.to)]);
+      const diff = diffModels(sbmA, sbmB, { logger: createLogger(options.verbose) });
+      if (options.output) {
+        await fs.mkdir(path.dirname(path.join(options.output, 'model_diff.json')), { recursive: true });
+        const outPath = path.join(options.output, 'model_diff.json');
+        await fs.writeFile(outPath, JSON.stringify(diff, null, 2), 'utf-8');
+        console.log(`Wrote ${outPath}`);
+      }
+      if (options.format === 'json' && !options.output) {
+        console.log(JSON.stringify(diff, null, 2));
+      } else {
+        console.log(formatDiffText(diff));
+      }
+    } catch (error) {
+      console.error(`Diff failed: ${error.message}`);
+      process.exit(1);
+    }
+
   } else if (options.command === 'version') {
     console.log(`Semantic Building Model Compiler v${VERSION}`);
 
@@ -350,8 +431,23 @@ USAGE:
 COMMANDS:
   compile     Compile semantic entities to SBM JSON
   validate    Validate entities without generating output files
+  query       Query a compiled sbm.json (list/count/get/neighbors)
+  diff        Semantic diff between two compiled sbm.json snapshots
   version     Show compiler version
   help        Show this help message
+
+QUERY (offline; over a compiled sbm.json or build dir):
+  query --input <sbm.json|dir> [--format text|json] "<expression>"
+    list <type> [where <path> <op> <value>]   ops: = != > < >= <= contains exists
+    count <type> [where ...]
+    get <id>
+    neighbors <id> [<relType>] [in|out]
+  e.g.  query --input build/green-terrace "list spaces where designArea > 14"
+        query --input build/green-terrace "neighbors SP-BLD-01-L01-001 must_satisfy out"
+
+DIFF (entity- and relationship-aware, between two snapshots):
+  diff --from <sbm.json|dir> --to <sbm.json|dir> [--output <dir>] [--format text|json]
+  e.g.  diff --from build/gt-sd --to build/gt-cd --format text
 
 OPTIONS:
   --input <path>      Input directory containing Markdown entities (required)
