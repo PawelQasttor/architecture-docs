@@ -18,11 +18,11 @@ was contamination and has been removed.
   language — author PL first, then mirror to EN)**
 - **Compiler:** Node.js ESM (`"type": "module"`), `node:test` runner, `ajv` + `ajv-formats`
   for JSON Schema validation. No build step for the compiler — run the `.mjs` directly.
-- **Schema:** JSON Schema at `schemas/sbm-schema-v2.0.json` (version 2.0.0,
-  `sbm_version` const `"2.0"`). Older schemas (v0.1–v1.1) kept for reference only.
+- **Schema:** JSON Schema at `schemas/sbm-schema-v2.4.json` (version 2.4.0,
+  `sbm_version` const `"2.4"`). Older schemas (v0.1–v2.3) kept frozen for reference.
 
-> Note: `package.json` `version` still reads `1.1.0` while the schema/compiler are
-> `2.0.0` — bump it when convenient; the compiler version is the source of truth.
+> Note: `package.json`, the schema, and the compiler are all aligned at `2.4.0`.
+> The compiler `VERSION` / schema `sbm_version` remain the source of truth.
 
 ## Common commands
 
@@ -49,7 +49,7 @@ docs/
         zarzadzanie-projektem jakosc przepisy standardy zrownowazonosc szablony
   .vitepress/config.ts   # sidebar + nav for BOTH locales — update on every doc add
   en/examples/green-terrace   # canonical worked example (PL: pl/.../przyklady/zielony-taras)
-schemas/sbm-schema-v2.0.json  # current JSON Schema
+schemas/sbm-schema-v2.4.json  # current JSON Schema (v2.0–v2.3 frozen for reference)
 scripts/
   compiler/
     index.mjs              # entry point — `compile` and `validate` modes
@@ -67,9 +67,12 @@ CHANGELOG.md               # version history (v0.1.0 -> v2.0.0), Keep a Changelo
 
 ## SBM model essentials
 
-- **Entities (WHAT):** 27 entity types using a **type/instance pattern**
+- **Entities (WHAT):** **34 entity types** using a **type/instance pattern**
   (e.g. Space Type → Space, System Type → System). `entityType` is the canonical
-  frontmatter field; `documentType` is deprecated (fallback only).
+  frontmatter field; `documentType` is deprecated (fallback only). Layers: 27
+  design/spatial (v2.0) + 4 operational (v2.2 telemetry_stream, v2.3
+  occupant_survey / energy_verification_record / retrocx_recommendation) + 3
+  delivery & approval (v2.4 permit / approval_gate / regulatory_inspection).
 - **Phases (WHEN):** a single unified **10-phase lifecycle** — concept,
   schematic_design, design_development, construction_documents,
   bidding_procurement, construction, commissioning, operation, renovation,
@@ -78,7 +81,7 @@ CHANGELOG.md               # version history (v0.1.0 -> v2.0.0), Keep a Changelo
   and a sustainability framework (embodied/operational carbon, EPC, certifications)
   are optional fields available on all entities.
 - The **schema and CHANGELOG are the source of truth** for entity fields and IDs —
-  consult `schemas/sbm-schema-v2.0.json` before asserting what a field does.
+  consult `schemas/sbm-schema-v2.4.json` before asserting what a field does.
 
 ## Compiler pipeline
 
@@ -111,12 +114,15 @@ When changing the schema or a pipeline stage, update the matching test in
 - **Versioning:** follow Keep a Changelog in `CHANGELOG.md`; releases are committed
   directly to `master` with a `feat(schema)!: SBM vX.Y.Z` message and tagged
   with `git tag -a vX.Y.Z` (linear history). Schema files are frozen at major
-  versions (`schemas/sbm-schema-v2.0.json`, `v2.2.json`, `v2.3.json`).
+  versions (`schemas/sbm-schema-v2.0.json`, `v2.2.json`, `v2.3.json`); the
+  current schema is `v2.4.json`.
 
 ## Known open work
 
-(All operation-phase SCHEMA-GAPS resolved as of v2.3.0. The example
-inventory is complete: 31 of 31 entity types have working examples.)
+(All operation-phase SCHEMA-GAPS resolved as of v2.3.0; the delivery & approval
+process layer — permit / approval_gate / regulatory_inspection — shipped in
+v2.4.0. The example inventory is complete: 34 of 34 entity types have working
+examples across the three sibling examples.)
 
 - Pre-handover BIM consumer pilots (real Revit / Solibri / IFC validators)
   would shake out any pset-mapping issues in the v2.2/v2.3 PSets added

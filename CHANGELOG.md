@@ -6,6 +6,78 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [2.4.0] - 2026-05-29 — Delivery & approval process layer: permit + approval_gate + regulatory_inspection
+
+Opens the **"how the building gets BUILT"** dimension that the original
+`SBM-EVALUATION-v1.1.md` named as the model's #1 remaining weakness. Where
+v2.2/v2.3 modelled *how the building performs* (operational analytics), v2.4
+models the **regulatory delivery & approval process** — permits, phase-gate
+milestones, and statutory inspections — grounded in the Polish building-delivery
+research (`docs/deep-research-report.md`). Additive only — every v2.3-conforming
+model is also v2.4-conforming. Brings the standard to **34 entity types**.
+
+### Added
+
+- **New `permit` entity type (32nd).** Regulatory authorizations / administrative
+  decisions: `permitType` covers zoning_decision (WZ), local_plan_extract (MPZP),
+  environmental_decision, building_permit, notification (zgłoszenie),
+  demolition_permit, occupancy_permit, completion_notice, heritage_approval,
+  utility_connection_conditions. Carries an inline `issuingAuthority` (typed
+  authority enum incl. PINB/WINB/conservator), `status` lifecycle (incl.
+  `silent_consent` for the silence-rule routes), `statutoryDeadlineDays`, decision
+  dates, `conditions[]`, fee, and supersession/appeal chain. ID `^PERMIT-...$`.
+- **New `approval_gate` entity type (33rd).** Phase-gate go/no-go milestones
+  (design_freeze, permit_ready, construction_start, completion_authorized,
+  operational_readiness, …) with `decisionOwner`, a `prerequisites[]` checklist,
+  `deliverableRefs`, `blockingIssueIds`, and `relatedPermitIds`. ID `^GATE-...$`.
+- **New `regulatory_inspection` entity type (34th).** Statutory periodic
+  inspections (annual / 5-year per Prawo Budowlane Art. 62, plus chimney/gas/
+  electrical/fire/lift) with `statutoryBasis`, schedule, inspector, result +
+  deficiencies, and a `cKobEntry` link to the digital building logbook (c-KOB —
+  Cyfrowa Książka Obiektu Budowlanego). ID `^INSP-...$`.
+- **`schemas/sbm-schema-v2.4.json`** — new schema file (v2.0 / v2.2 / v2.3 stay
+  frozen for reference).
+- **10 v2.4 entities demonstrated across all 3 sibling examples (EN + PL):**
+  green-terrace — `PERMIT-WZ-001`, `PERMIT-PB-001`, `GATE-DESIGN-FREEZE-CD`,
+  `GATE-PERMIT-READY`; green-terrace-2028 — `PERMIT-OCCUPANCY-001`,
+  `GATE-COMPLETION-AUTHORIZED`, `INSP-ANNUAL-2027`, `INSP-5YEAR-DUE-2028`
+  (c-KOB recorded); green-terrace-park — `PERMIT-CAMPUS-MASTER`,
+  `GATE-CAMPUS-PLANNING` (campus-level coordination, blocked by
+  `ISS-CAMPUS-PLANNING-001`).
+- **New sidebar entries** for every new page, in both locales.
+
+### Changed
+
+- `sbm_version` "2.3" → "2.4" in compiler output + schema const.
+- Compiler `VERSION` 2.3.0 → 2.4.0.
+- New `V2_4_ENTITY_TYPES` set in constants; `ALL_ENTITY_TYPES` extended; parse
+  `validTypes` extended.
+- Normalize: 3 new buckets + 3 output spread entries + 3 metadata count entries.
+- Validate: light v2.4 cross-entity rules (dangling `relatedEntityIds` / permit /
+  issue refs → warning; permit `expiryDate < validFrom` → error; a `passed`
+  approval_gate with an unmet prerequisite → warning).
+- Quality: profiles added for all 3 new entity types.
+- Targets: `compliance-report` gains a `deliveryAndApprovals` section (permits /
+  gates / inspections with outstanding-item rollups); `twin-schema` surfaces the
+  `regulatory_inspections` schedule; `html-report` gains a bilingual
+  "Delivery & approvals" section.
+- Tests: 3 new `describe` blocks (12 tests) in `validate.test.mjs`; `sbm_version`
+  fixtures bumped 2.3 → 2.4. **130/130 pass** (was 118).
+
+### Migration
+
+- Bump the `sbm_version` field to `"2.4"`. No other changes required — additive
+  schema only. All v2.0 / v2.2 / v2.3 models validate cleanly under v2.4.
+
+### Significance
+
+The SBM standard now spans the full lifecycle question set: *what the building
+**is*** (design/spatial entities), *how it **performs*** (operational analytics,
+v2.2/v2.3), and *how it gets **built and governed*** (regulatory delivery &
+approval, v2.4). The Polish examples show the same entity types at three
+lifecycle phases — front-end permitting, post-handover occupancy + statutory
+inspection, and multi-building campus coordination.
+
 ## [2.3.0] - 2026-05-24 — All operation-phase SCHEMA-GAPS resolved: occupant_survey + energy_verification_record + retrocx_recommendation
 
 Second schema bump in one day. Closes the remaining 3 gaps from the

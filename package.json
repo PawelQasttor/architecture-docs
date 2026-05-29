@@ -1,6 +1,6 @@
 {
   "name": "architecture-docs",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "AI-ready documentation standard for Polish architects",
   "type": "module",
   "scripts": {
