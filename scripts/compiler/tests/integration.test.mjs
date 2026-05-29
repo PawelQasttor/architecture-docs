@@ -52,7 +52,7 @@ async function buildSbm(inputDir, options, logger) {
   const rawEntities = await parseInput(inputDir, logger);
   const normalized = await normalize(rawEntities, options, logger);
   return {
-    sbm_version: '2.4',
+    sbm_version: '2.5',
     generatedAt: new Date().toISOString(),
     compiler: { version: '2.0.0', mode: 'production' },
     ...normalized
@@ -84,7 +84,7 @@ describe('Integration: minimal-project end-to-end', () => {
   });
 
   it('should have sbm_version field', () => {
-    assert.equal(sbm.sbm_version, '2.4');
+    assert.equal(sbm.sbm_version, '2.5');
   });
 
   it('should have generatedAt timestamp', () => {
@@ -278,14 +278,14 @@ describe('Integration: compile() function', () => {
     }
 
     assert.ok(result, 'compile should return SBM object');
-    assert.equal(result.sbm_version, '2.4');
+    assert.equal(result.sbm_version, '2.5');
 
     // Check output files were created
     const sbmJsonPath = path.join(tempOutput, 'sbm.json');
     const sbmContent = await fs.readFile(sbmJsonPath, 'utf-8');
     const sbmData = JSON.parse(sbmContent);
 
-    assert.equal(sbmData.sbm_version, '2.4');
+    assert.equal(sbmData.sbm_version, '2.5');
     assert.ok(sbmData.project, 'output should have project');
     assert.ok(sbmData.entities, 'output should have entities');
 

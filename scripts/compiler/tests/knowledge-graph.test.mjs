@@ -114,6 +114,20 @@ describe('knowledge-graph target', () => {
     assert.equal(g.summary.nodesByType.building, 1);
   });
 
+  it('maps designOptionId to in_option and variantOf to variant_of (v2.5)', () => {
+    const sbm = createSbm({
+      design_options: [{ id: 'OPT-A', entityType: 'design_option', optionName: 'A' }],
+      spaces: [
+        { id: 'SP-1', entityType: 'space', spaceName: 'Base' },
+        { id: 'SP-1-A', entityType: 'space', spaceName: 'Variant', designOptionId: 'OPT-A', variantOf: 'SP-1' }
+      ]
+    });
+    const g = generateKnowledgeGraph(sbm, logger);
+    const edges = g.edges.filter(e => e.from === 'SP-1-A').reduce((m, e) => (m[e.type] = e.to, m), {});
+    assert.equal(edges.in_option, 'OPT-A');
+    assert.equal(edges.variant_of, 'SP-1');
+  });
+
   it('emits a JSON-LD @graph with @context and grouped outgoing edges', () => {
     const sbm = createSbm({
       buildings: [{ id: 'BLD-01', entityType: 'building', name: 'A' }],

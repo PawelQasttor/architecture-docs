@@ -27,7 +27,7 @@ function createMockLogger() {
  */
 function createValidSbm(overrides = {}) {
   return {
-    sbm_version: '2.4',
+    sbm_version: '2.5',
     generatedAt: new Date().toISOString(),
     compiler: { version: '2.0.0', mode: 'production' },
     project: {
@@ -601,7 +601,7 @@ describe('validate', () => {
       assert.equal(result.valid, false, 'should fail without sbm_version');
     });
 
-    it('should fail when sbm_version is not "2.4"', async () => {
+    it('should fail when sbm_version is not "2.5"', async () => {
       const sbm = createValidSbm();
       sbm.sbm_version = '0.5';
 
@@ -944,6 +944,93 @@ describe('validate', () => {
       const result = await validate(sbm, logger);
 
       assert.equal(result.valid, false, 'should fail without inspectionType');
+    });
+  });
+
+  describe('design_option entity (v2.5)', () => {
+    function makeOption(overrides = {}) {
+      return {
+        id: 'OPT-TEST-A',
+        entityType: 'design_option',
+        optionName: 'Scheme A',
+        status: 'selected',
+        version: '2.5.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid design_option', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.design_options = [makeOption()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject design_option with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.design_options = [makeOption({ id: 'OPTION-A' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-OPT- ID prefix');
+    });
+
+    it('should reject design_option with off-enum status', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.design_options = [makeOption({ status: 'maybe' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum status');
+    });
+
+    it('should reject design_option missing required optionName', async () => {
+      const sbm = createValidSbm();
+      const opt = makeOption();
+      delete opt.optionName;
+      sbm.entities.design_options = [opt];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail without optionName');
+    });
+  });
+
+  describe('v2.5 cross-cutting fields (temporal + design-option tags)', () => {
+    it('should accept revision + revisionHistory on a space', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.spaces[0].revision = 2;
+      sbm.entities.spaces[0].revisionHistory = [
+        { rev: 1, date: '2025-06-15', author: 'J. Kowalski', summary: 'Initial' },
+        { rev: 2, date: '2025-09-20', author: 'M. Nowak', summary: 'Area increased' }
+      ];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should error when designOptionId references a missing design_option', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.spaces[0].designOptionId = 'OPT-DOES-NOT-EXIST';
+
+      const result = await validate(sbm, logger);
+
+      const refErr = result.errors.find(e => e.message?.includes('OPT-DOES-NOT-EXIST'));
+      assert.ok(refErr, 'should flag the dangling designOptionId reference');
+    });
+
+    it('should accept designOptionId that references an existing design_option', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.design_options = [{ id: 'OPT-A', entityType: 'design_option', optionName: 'A', status: 'selected', version: '2.5.0' }];
+      sbm.entities.spaces[0].designOptionId = 'OPT-A';
+
+      const result = await validate(sbm, logger);
+
+      const refErr = result.errors.find(e => e.message?.includes('does not exist') && e.path?.includes('designOptionId'));
+      assert.ok(!refErr, 'should not flag a valid designOptionId');
     });
   });
 });

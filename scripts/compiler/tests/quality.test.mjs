@@ -26,7 +26,7 @@ function createMockLogger() {
  */
 function createTestSbm(entities = {}) {
   return {
-    sbm_version: '2.4',
+    sbm_version: '2.5',
     generatedAt: new Date().toISOString(),
     compiler: { version: '1.1.0', mode: 'production' },
     project: {
