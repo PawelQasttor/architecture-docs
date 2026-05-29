@@ -18,14 +18,14 @@ was contamination and has been removed.
   language — author PL first, then mirror to EN)**
 - **Compiler:** Node.js ESM (`"type": "module"`), `node:test` runner, `ajv` + `ajv-formats`
   for JSON Schema validation. No build step for the compiler — run the `.mjs` directly.
-- **Schema:** JSON Schema at `schemas/sbm-schema-v2.4.json` (version 2.4.0,
-  `sbm_version` const `"2.4"`). Older schemas (v0.1–v2.3) kept frozen for reference.
+- **Schema:** JSON Schema at `schemas/sbm-schema-v2.5.json` (version 2.5.0,
+  `sbm_version` const `"2.5"`). Older schemas (v0.1–v2.4) kept frozen for reference.
 
-> Note: tooling (`package.json` + compiler `VERSION`) is at `2.5.0`, while the
-> **spec** (schema file + `sbm_version`) stays at `2.4` — v2.5.0 was a tooling-only
-> release (knowledge-graph target), spec unchanged. This tooling-ahead-of-spec
-> pattern mirrors the earlier v2.1.0 release. The compiler `VERSION` / schema
-> `sbm_version` remain the source of truth for their respective layers.
+> Note: tooling (`package.json` + compiler `VERSION`) is at `2.6.0`, while the
+> **spec** (schema file + `sbm_version`) is at `2.5`. The offset comes from the
+> tooling-only v2.5.0 release (knowledge-graph target, spec unchanged); the spec
+> then advanced to 2.5 in the temporal/design-options release (tooling 2.6.0). The
+> compiler `VERSION` / schema `sbm_version` remain the source of truth per layer.
 
 ## Common commands
 
@@ -52,7 +52,7 @@ docs/
         zarzadzanie-projektem jakosc przepisy standardy zrownowazonosc szablony
   .vitepress/config.ts   # sidebar + nav for BOTH locales — update on every doc add
   en/examples/green-terrace   # canonical worked example (PL: pl/.../przyklady/zielony-taras)
-schemas/sbm-schema-v2.4.json  # current JSON Schema (v2.0–v2.3 frozen for reference)
+schemas/sbm-schema-v2.5.json  # current JSON Schema (v2.0–v2.4 frozen for reference)
 scripts/
   compiler/
     index.mjs              # entry point — `compile` and `validate` modes
@@ -61,7 +61,8 @@ scripts/
     enrichers/             # jurisdiction-pack.mjs (country-specific enrichment)
     targets/               # output generators: asset-register, bim-mapping,
                            #   compliance-report, quality-report, twin-schema,
-                           #   html-report, diagrams, knowledge-graph (JSON-LD)
+                           #   html-report, diagrams, knowledge-graph (JSON-LD),
+                           #   option-comparison (per-design-option rollups)
     tests/*.test.mjs       # node:test (parse/normalize/validate/quality/integration)
   validate-frontmatter.js          # standalone frontmatter validator
   extract-frontmatter-to-json.mjs  # frontmatter -> JSON exporter
@@ -71,12 +72,15 @@ CHANGELOG.md               # version history (v0.1.0 -> v2.0.0), Keep a Changelo
 
 ## SBM model essentials
 
-- **Entities (WHAT):** **34 entity types** using a **type/instance pattern**
+- **Entities (WHAT):** **35 entity types** using a **type/instance pattern**
   (e.g. Space Type → Space, System Type → System). `entityType` is the canonical
   frontmatter field; `documentType` is deprecated (fallback only). Layers: 27
   design/spatial (v2.0) + 4 operational (v2.2 telemetry_stream, v2.3
   occupant_survey / energy_verification_record / retrocx_recommendation) + 3
-  delivery & approval (v2.4 permit / approval_gate / regulatory_inspection).
+  delivery & approval (v2.4 permit / approval_gate / regulatory_inspection) + 1
+  design-options (v2.5 design_option). v2.5 also adds two optional cross-cutting
+  axes on *every* entity: temporal (`revision` + `revisionHistory`) and
+  design-option tagging (`designOptionId` + `variantOf`).
 - **Phases (WHEN):** a single unified **10-phase lifecycle** — concept,
   schematic_design, design_development, construction_documents,
   bidding_procurement, construction, commissioning, operation, renovation,
@@ -85,7 +89,7 @@ CHANGELOG.md               # version history (v0.1.0 -> v2.0.0), Keep a Changelo
   and a sustainability framework (embodied/operational carbon, EPC, certifications)
   are optional fields available on all entities.
 - The **schema and CHANGELOG are the source of truth** for entity fields and IDs —
-  consult `schemas/sbm-schema-v2.4.json` before asserting what a field does.
+  consult `schemas/sbm-schema-v2.5.json` before asserting what a field does.
 
 ## Compiler pipeline
 
@@ -118,8 +122,8 @@ When changing the schema or a pipeline stage, update the matching test in
 - **Versioning:** follow Keep a Changelog in `CHANGELOG.md`; releases are committed
   directly to `master` with a `feat(schema)!: SBM vX.Y.Z` message and tagged
   with `git tag -a vX.Y.Z` (linear history). Schema files are frozen at major
-  versions (`schemas/sbm-schema-v2.0.json`, `v2.2.json`, `v2.3.json`); the
-  current schema is `v2.4.json`.
+  versions (`schemas/sbm-schema-v2.0.json`, `v2.2.json`, `v2.3.json`, `v2.4.json`);
+  the current schema is `v2.5.json`.
 
 ## Known open work
 

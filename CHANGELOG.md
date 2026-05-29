@@ -6,6 +6,67 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [2.5.0-spec / tooling 2.6.0] - 2026-05-29 — Temporal versioning + design-options
+
+Adds the two axes the model still couldn't express, both from `SBM-EVALUATION-v1.1.md`:
+**temporal versioning** (#10 — in-model revision audit trail) and **design-option
+comparison** (#18 — alternatives, "Scheme A vs B", with per-option rollups). Genuine spec
+bump: `sbm_version` → **"2.5"** (new `schemas/sbm-schema-v2.5.json`), **35 entity types**;
+tooling (`package.json` + compiler `VERSION`) → **2.6.0** (tooling-ahead-of-spec offset).
+Additive — every v2.4 model stays valid.
+
+> Note: this entry supersedes the earlier same-day "2.5.0 knowledge-graph" tooling entry
+> below; the knowledge-graph target shipped as tooling 2.5.0 with the spec still at 2.4. The
+> spec only now advances to 2.5 with this release.
+
+### Added
+
+- **New `design_option` entity type (35th)** — ID `^OPT-…$`. Describes one explored scheme
+  (`optionName`, `status` under_consideration/selected/rejected/superseded, `rationale`,
+  `decisionOwner`, `decisionDate`, `supersededByOptionId`, and headline `comparison`
+  metrics: gfa/unitCount/capexEur/embodiedCarbon/operationalCarbon).
+- **Two cross-cutting axes on every entity** (optional): temporal — `revision` (int) +
+  `revisionHistory` (array, reusing the long-dormant `revisionEntry` `$def`); design-options
+  — `designOptionId` (`^OPT-…$`) + `variantOf` (links a variant to its baseline/sibling).
+- **New `option-comparison` target** (`scripts/compiler/targets/option-comparison.mjs`)
+  → `option_comparison.json`: per-option rollups (baseline + that option's tagged entities)
+  of cost/area/embodied-carbon, a side-by-side `comparison` matrix with deltas vs the
+  selected option, and the `selected` option flagged. Skipped when no design_options.
+- **Green Terrace examples (EN+PL)**: `OPT-SCHEME-A` (selected, 16 m² bedrooms) +
+  `OPT-SCHEME-B` (rejected, 12 m², `supersededByOptionId` A) with representative variant
+  spaces (`SP-OPTA-BED-01` / `SP-OPTB-BED-01` linked by `variantOf`); `revisionHistory`
+  added to bedroom-01 / sypialnia-01 showing a 3-revision audit trail.
+
+### Changed
+
+- `sbm_version` "2.4" → "2.5"; schema const + compiler output. Compiler `VERSION` 2.5.0 →
+  2.6.0; `package.json` + lockfile → 2.6.0.
+- New `V2_5_ENTITY_TYPES` set; `ALL_ENTITY_TYPES` + parse `validTypes` extended; normalize
+  buckets/mapping/output/metadata for `design_options`.
+- **Double-count guard**: `performCostRollup` + area/carbon/space-program aggregations skip
+  any entity carrying a `designOptionId` — baseline totals are unchanged by adding variants
+  (verified: green-terrace baseline stays 4 spaces / 43.9 m²). Per-option totals live only
+  in `option_comparison.json`.
+- Validate: `designOptionId` must reference an existing design_option (error); `variantOf` /
+  `supersededByOptionId` dangling refs (warning); warning when ≠1 option is `selected`.
+- Quality: `design_option` profile. Knowledge-graph: `in_option` / `variant_of` /
+  `superseded_by` edge verbs (design_option nodes + edges surface automatically).
+- index.mjs now generates **8 compile targets (7 JSON + HTML)**.
+- Tests: **150/150 pass** (was 138) — design_option block, temporal/option cross-cutting
+  tests, new `option-comparison.test.mjs`, knowledge-graph option-edge test.
+
+### Migration
+
+- Bump `sbm_version` to `"2.5"`. No other changes required — additive. `revision`/
+  `revisionHistory`/`designOptionId`/`variantOf` are all optional.
+
+### Significance
+
+SBM can now express **how a design evolves** (revision trail) and **what alternatives were
+weighed** (design options with compiler-computed per-option cost/area/carbon) — the two
+early-design dimensions the evaluation flagged as missing. Both are queryable in the
+knowledge graph.
+
 ## [2.5.0] - 2026-05-29 — Knowledge-graph export target (AI-ready linked-data projection)
 
 Tooling-only release — **the spec is unchanged** (`sbm_version` stays `"2.4"`,
