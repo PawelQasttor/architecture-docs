@@ -1,0 +1,60 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-park\\bramki-zatwierdzen\\GATE-CAMPUS-PLANNING.md",
+    "extractedAt": "2026-05-29T15:31:59.694Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "approval_gate",
+  "id": "GATE-CAMPUS-PLANNING",
+  "version": "2.4.0",
+  "projectPhase": "design_development",
+  "gateType": "planning_path_confirmed",
+  "gateTitle": "Ścieżka planistyczna kampusu potwierdzona — etapowanie i sekwencja wspólnej infrastruktury",
+  "gatePhase": "concept",
+  "status": "in_progress",
+  "decisionOwner": {
+    "role": "investor",
+    "name": "Zielony Taras Park Development"
+  },
+  "prerequisites": [
+    {
+      "description": "Decyzja środowiskowa dla kampusu uzyskana",
+      "met": true,
+      "evidenceRef": "PERMIT-CAMPUS-MASTER"
+    },
+    {
+      "description": "Potwierdzona wydajność wspólnej pętli ciepłowniczej dla 4 budynków",
+      "met": true,
+      "evidenceRef": "SYS-DH-LOOP-CAMPUS"
+    },
+    {
+      "description": "Uzgodniona kolejność etapowania budynków (które pozwolenia w jakiej kolejności)",
+      "met": false
+    },
+    {
+      "description": "Pakiet budowy wspólnej infrastruktury terenu zsekwencjonowany",
+      "met": false,
+      "evidenceRef": "CP-SITE-INFRASTRUCTURE"
+    }
+  ],
+  "deliverableRefs": [
+    "PERMIT-CAMPUS-MASTER",
+    "CP-SITE-INFRASTRUCTURE"
+  ],
+  "blockingIssueIds": [
+    "ISS-CAMPUS-PLANNING-001"
+  ],
+  "relatedPermitIds": [
+    "PERMIT-CAMPUS-MASTER"
+  ],
+  "relatedEntityIds": [
+    "CAM-GREEN-TERRACE-PARK"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

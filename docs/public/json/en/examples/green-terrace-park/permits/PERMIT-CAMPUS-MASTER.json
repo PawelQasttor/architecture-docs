@@ -1,0 +1,63 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\permits\\PERMIT-CAMPUS-MASTER.md",
+    "extractedAt": "2026-05-29T15:31:59.646Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "permit",
+  "id": "PERMIT-CAMPUS-MASTER",
+  "version": "2.4.0",
+  "projectPhase": "design_development",
+  "permitType": "environmental_decision",
+  "permitTitle": "Decyzja o środowiskowych uwarunkowaniach — Green Terrace Park (campus)",
+  "status": "approved_with_conditions",
+  "referenceNumber": "OS.6220.0061.2026",
+  "issuingAuthority": {
+    "name": "Regionalny Dyrektor Ochrony Środowiska",
+    "nameEn": "Regional Director for Environmental Protection",
+    "authorityType": "environmental",
+    "jurisdiction": "Mazowieckie"
+  },
+  "gatesPhase": "concept",
+  "statutoryDeadlineDays": 90,
+  "submittedDate": "2026-01-12",
+  "decisionDate": "2026-04-30",
+  "validFrom": "2026-05-15",
+  "conditions": [
+    {
+      "text": "Stormwater retention sized for the whole campus (4 buildings + shared grounds)",
+      "status": "open"
+    },
+    {
+      "text": "Construction-phase noise limits at the residential boundary",
+      "status": "open"
+    },
+    {
+      "text": "Protected-tree survey and retention plan for the central garden",
+      "status": "met"
+    }
+  ],
+  "prerequisiteDocuments": [
+    "Project Information Sheet (KIP)",
+    "Campus masterplan 1:1000",
+    "Tree survey and green-area balance"
+  ],
+  "feePaid": {
+    "amount": 205,
+    "currency": "PLN"
+  },
+  "relatedEntityIds": [
+    "CAM-GREEN-TERRACE-PARK"
+  ],
+  "responsibility": {
+    "discipline": "sustainability",
+    "organization": "Masterplan consultant"
+  },
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

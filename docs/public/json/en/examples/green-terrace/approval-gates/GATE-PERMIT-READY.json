@@ -1,0 +1,57 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\approval-gates\\GATE-PERMIT-READY.md",
+    "extractedAt": "2026-05-29T15:31:59.596Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "approval_gate",
+  "id": "GATE-PERMIT-READY",
+  "version": "2.4.0",
+  "projectPhase": "construction_documents",
+  "gateType": "permit_ready",
+  "gateTitle": "Permit-ready — building permit obtained, pre-construction checklist",
+  "gatePhase": "construction_documents",
+  "status": "passed_with_actions",
+  "decisionOwner": {
+    "role": "investor",
+    "name": "Green Terrace Sp. z o.o."
+  },
+  "decisionDate": "2025-12-03",
+  "prerequisites": [
+    {
+      "description": "WZ decision final",
+      "met": true,
+      "evidenceRef": "PERMIT-WZ-001"
+    },
+    {
+      "description": "Building permit issued and final",
+      "met": true,
+      "evidenceRef": "PERMIT-PB-001"
+    },
+    {
+      "description": "Kierownik budowy (site manager) appointed",
+      "met": false
+    },
+    {
+      "description": "Construction log (EDB) registered",
+      "met": false
+    }
+  ],
+  "deliverableRefs": [
+    "PERMIT-PB-001"
+  ],
+  "relatedPermitIds": [
+    "PERMIT-WZ-001",
+    "PERMIT-PB-001"
+  ],
+  "relatedEntityIds": [
+    "BLD-01"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

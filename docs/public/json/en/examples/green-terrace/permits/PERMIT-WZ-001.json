@@ -1,0 +1,63 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\permits\\PERMIT-WZ-001.md",
+    "extractedAt": "2026-05-29T15:31:59.616Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "permit",
+  "id": "PERMIT-WZ-001",
+  "version": "2.4.0",
+  "projectPhase": "construction_documents",
+  "permitType": "zoning_decision",
+  "permitTitle": "Decyzja o warunkach zabudowy (WZ) — Green Terrace",
+  "status": "valid",
+  "referenceNumber": "WZ/2025/0142",
+  "issuingAuthority": {
+    "name": "Prezydent Miasta — Wydział Architektury i Urbanistyki",
+    "nameEn": "City President — Department of Architecture and Urban Planning",
+    "authorityType": "municipal",
+    "jurisdiction": "Warszawa"
+  },
+  "gatesPhase": "concept",
+  "statutoryDeadlineDays": 60,
+  "submittedDate": "2025-01-20",
+  "decisionDate": "2025-04-08",
+  "validFrom": "2025-04-22",
+  "conditions": [
+    {
+      "text": "Maximum building height 5 storeys / 16.0 m to eaves",
+      "status": "met"
+    },
+    {
+      "text": "Minimum 25% biologically active (green) plot area",
+      "status": "met"
+    },
+    {
+      "text": "Frontage line set 6.0 m from the northern plot boundary",
+      "status": "met"
+    }
+  ],
+  "prerequisiteDocuments": [
+    "Site location map 1:500 (PODGiK extract)",
+    "Utility connection statements (water, sewer, power, district heating)",
+    "Conceptual development description"
+  ],
+  "feePaid": {
+    "amount": 598,
+    "currency": "PLN"
+  },
+  "relatedEntityIds": [
+    "BLD-01"
+  ],
+  "responsibility": {
+    "discipline": "architectural",
+    "organization": "Pracownia Architektoniczna (lead designer)"
+  },
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

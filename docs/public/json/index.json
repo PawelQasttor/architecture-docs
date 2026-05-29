@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-29T13:44:09.661Z",
-  "totalDocuments": 221,
+  "generatedAt": "2026-05-29T15:31:59.589Z",
+  "totalDocuments": 241,
   "documents": [
     {
       "file": "en\\bim-integration\\ifc-entities.json",
@@ -13,6 +13,18 @@
       "documentType": "technical_reference",
       "projectPhase": "unknown",
       "title": "Level of Development (LOD) Definitions"
+    },
+    {
+      "file": "en\\examples\\green-terrace\\approval-gates\\GATE-DESIGN-FREEZE-CD.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Approval Gate: Design Freeze (Construction Documents)"
+    },
+    {
+      "file": "en\\examples\\green-terrace\\approval-gates\\GATE-PERMIT-READY.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Approval Gate: Permit-Ready"
     },
     {
       "file": "en\\examples\\green-terrace\\asset-types\\bosch-heat-pump-7000i.json",
@@ -207,6 +219,18 @@
       "title": "Opening: North Living Room Window"
     },
     {
+      "file": "en\\examples\\green-terrace\\permits\\PERMIT-PB-001.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Permit: Building Permit (Pozwolenie na budowę)"
+    },
+    {
+      "file": "en\\examples\\green-terrace\\permits\\PERMIT-WZ-001.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Permit: Land Development Conditions Decision (WZ)"
+    },
+    {
       "file": "en\\examples\\green-terrace\\project-specification.json",
       "documentType": "unknown",
       "projectPhase": "unknown",
@@ -363,6 +387,12 @@
       "title": "HVAC Zone: North"
     },
     {
+      "file": "en\\examples\\green-terrace-2028\\approval-gates\\GATE-COMPLETION-AUTHORIZED.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Approval Gate: Completion Authorized"
+    },
+    {
       "file": "en\\examples\\green-terrace-2028\\assets\\ai-hp-01-ops.json",
       "documentType": "unknown",
       "projectPhase": "operation",
@@ -409,6 +439,18 @@
       "documentType": "unknown",
       "projectPhase": "operation",
       "title": "Energy verification record — Green Terrace 2027 (EVR-BLD-01-2027)"
+    },
+    {
+      "file": "en\\examples\\green-terrace-2028\\inspections\\INSP-5YEAR-DUE-2028.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Regulatory Inspection: 5-Year Comprehensive Inspection (scheduled)"
+    },
+    {
+      "file": "en\\examples\\green-terrace-2028\\inspections\\INSP-ANNUAL-2027.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Regulatory Inspection: Annual Building Inspection 2027"
     },
     {
       "file": "en\\examples\\green-terrace-2028\\issues\\ISS-ANOMALY-CO2-001.json",
@@ -459,6 +501,12 @@
       "title": "Occupant survey — Green Terrace 2027 annual IEQ (SURVEY-BLD-01-IEQ-2027)"
     },
     {
+      "file": "en\\examples\\green-terrace-2028\\permits\\PERMIT-OCCUPANCY-001.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Permit: Occupancy Permit (Pozwolenie na użytkowanie)"
+    },
+    {
       "file": "en\\examples\\green-terrace-2028\\retrocx-recommendations\\RCX-MVHR-001.json",
       "documentType": "unknown",
       "projectPhase": "operation",
@@ -495,6 +543,12 @@
       "title": "Telemetry stream — Heat pump COP (TEL-HP-COP-001)"
     },
     {
+      "file": "en\\examples\\green-terrace-park\\approval-gates\\GATE-CAMPUS-PLANNING.json",
+      "documentType": "unknown",
+      "projectPhase": "design_development",
+      "title": "Approval Gate: Campus Planning Path Confirmed"
+    },
+    {
       "file": "en\\examples\\green-terrace-park\\buildings\\BLD-02-sunny-crescent.json",
       "documentType": "unknown",
       "projectPhase": "construction",
@@ -529,6 +583,12 @@
       "documentType": "unknown",
       "projectPhase": "construction",
       "title": "Campus-scope, not building-scope"
+    },
+    {
+      "file": "en\\examples\\green-terrace-park\\permits\\PERMIT-CAMPUS-MASTER.json",
+      "documentType": "unknown",
+      "projectPhase": "design_development",
+      "title": "Permit: Campus Environmental Decision"
     },
     {
       "file": "en\\examples\\green-terrace-park\\project-specification.json",
@@ -711,6 +771,18 @@
       "title": "Proweniencja danych"
     },
     {
+      "file": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-DESIGN-FREEZE-CD.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Bramka zatwierdzenia: Zamrożenie projektu (dokumentacja wykonawcza)"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-PERMIT-READY.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Bramka zatwierdzenia: Gotowość do pozwolenia"
+    },
+    {
       "file": "pl\\przyklady\\zielony-taras\\budynek.json",
       "documentType": "unknown",
       "projectPhase": "design_development",
@@ -835,6 +907,18 @@
       "documentType": "unknown",
       "projectPhase": "design_development",
       "title": "Piętro 5 (LVL-05)"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-PB-001.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Pozwolenie: Pozwolenie na budowę"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-WZ-001.json",
+      "documentType": "unknown",
+      "projectPhase": "construction_documents",
+      "title": "Pozwolenie: Decyzja o warunkach zabudowy (WZ)"
     },
     {
       "file": "pl\\przyklady\\zielony-taras\\programy-przestrzeni\\PROG-BEDROOM-STANDARD.json",
@@ -1065,6 +1149,12 @@
       "title": "Ankieta mieszkańców — Zielony Taras 2027 roczna IEQ (SURVEY-BLD-01-IEQ-2027)"
     },
     {
+      "file": "pl\\przyklady\\zielony-taras-2028\\bramki-zatwierdzen\\GATE-COMPLETION-AUTHORIZED.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Bramka zatwierdzenia: Autoryzacja zakończenia"
+    },
+    {
       "file": "pl\\przyklady\\zielony-taras-2028\\budynek.json",
       "documentType": "unknown",
       "projectPhase": "operation",
@@ -1081,6 +1171,24 @@
       "documentType": "unknown",
       "projectPhase": "operation",
       "title": "Poziom 04 — faza eksploatacji"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras-2028\\pozwolenia\\PERMIT-OCCUPANCY-001.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Pozwolenie: Pozwolenie na użytkowanie"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-5YEAR-DUE-2028.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Przegląd ustawowy: Przegląd pięcioletni (zaplanowany)"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-ANNUAL-2027.json",
+      "documentType": "unknown",
+      "projectPhase": "operation",
+      "title": "Przegląd ustawowy: Roczny przegląd budynku 2027"
     },
     {
       "file": "pl\\przyklady\\zielony-taras-2028\\przestrzenie\\sypialnia-402.json",
@@ -1191,6 +1299,12 @@
       "title": "Zgłoszenie — Wymiana sprężarki pompy ciepła w ramach gwarancji (ISS-WARRANTY-HP-001)"
     },
     {
+      "file": "pl\\przyklady\\zielony-taras-park\\bramki-zatwierdzen\\GATE-CAMPUS-PLANNING.json",
+      "documentType": "unknown",
+      "projectPhase": "design_development",
+      "title": "Bramka zatwierdzenia: Potwierdzenie ścieżki planistycznej kampusu"
+    },
+    {
       "file": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-02-sloneczny-polksiezyc.json",
       "documentType": "unknown",
       "projectPhase": "construction",
@@ -1249,6 +1363,12 @@
       "documentType": "unknown",
       "projectPhase": "construction",
       "title": "CP infrastruktury terenowej (CP-SITE-INFRASTRUCTURE)"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras-park\\pozwolenia\\PERMIT-CAMPUS-MASTER.json",
+      "documentType": "unknown",
+      "projectPhase": "design_development",
+      "title": "Pozwolenie: Decyzja środowiskowa dla kampusu"
     },
     {
       "file": "pl\\przyklady\\zielony-taras-park\\specyfikacja-projektu.json",

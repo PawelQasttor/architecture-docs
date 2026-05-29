@@ -15,6 +15,14 @@
   ],
   "unknown": [
     {
+      "sourceFile": "en\\examples\\green-terrace\\approval-gates\\GATE-DESIGN-FREEZE-CD.md",
+      "projectPhase": "construction_documents"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\approval-gates\\GATE-PERMIT-READY.md",
+      "projectPhase": "construction_documents"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace\\asset-types\\bosch-heat-pump-7000i.md"
     },
     {
@@ -140,6 +148,14 @@
       "sourceFile": "en\\examples\\green-terrace\\openings\\opn-win-n-002.md"
     },
     {
+      "sourceFile": "en\\examples\\green-terrace\\permits\\PERMIT-PB-001.md",
+      "projectPhase": "construction_documents"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\permits\\PERMIT-WZ-001.md",
+      "projectPhase": "construction_documents"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace\\project-specification.md",
       "bimLOD": "LOD_400"
     },
@@ -239,6 +255,10 @@
       "bimLOD": "LOD_300"
     },
     {
+      "sourceFile": "en\\examples\\green-terrace-2028\\approval-gates\\GATE-COMPLETION-AUTHORIZED.md",
+      "projectPhase": "operation"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-hp-01-ops.md",
       "projectPhase": "operation"
     },
@@ -269,6 +289,14 @@
     },
     {
       "sourceFile": "en\\examples\\green-terrace-2028\\energy-verification-records\\EVR-BLD-01-2027.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\inspections\\INSP-5YEAR-DUE-2028.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\inspections\\INSP-ANNUAL-2027.md",
       "projectPhase": "operation"
     },
     {
@@ -304,6 +332,10 @@
       "projectPhase": "operation"
     },
     {
+      "sourceFile": "en\\examples\\green-terrace-2028\\permits\\PERMIT-OCCUPANCY-001.md",
+      "projectPhase": "operation"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace-2028\\retrocx-recommendations\\RCX-MVHR-001.md",
       "projectPhase": "operation"
     },
@@ -326,6 +358,10 @@
     {
       "sourceFile": "en\\examples\\green-terrace-2028\\telemetry-streams\\TEL-HP-COP-001.md",
       "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\approval-gates\\GATE-CAMPUS-PLANNING.md",
+      "projectPhase": "design_development"
     },
     {
       "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-02-sunny-crescent.md",
@@ -353,6 +389,10 @@
     {
       "sourceFile": "en\\examples\\green-terrace-park\\issues\\ISS-CAMPUS-PLANNING-001.md",
       "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\permits\\PERMIT-CAMPUS-MASTER.md",
+      "projectPhase": "design_development"
     },
     {
       "sourceFile": "en\\examples\\green-terrace-park\\project-specification.md",
@@ -434,6 +474,14 @@
       "sourceFile": "pl\\przewodniki\\proweniencja-danych.md"
     },
     {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-DESIGN-FREEZE-CD.md",
+      "projectPhase": "construction_documents"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-PERMIT-READY.md",
+      "projectPhase": "construction_documents"
+    },
+    {
       "sourceFile": "pl\\przyklady\\zielony-taras\\budynek.md",
       "projectPhase": "design_development",
       "bimLOD": "LOD_300"
@@ -512,6 +560,14 @@
       "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-05.md",
       "projectPhase": "design_development",
       "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-PB-001.md",
+      "projectPhase": "construction_documents"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-WZ-001.md",
+      "projectPhase": "construction_documents"
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras\\programy-przestrzeni\\PROG-BEDROOM-STANDARD.md",
@@ -662,6 +718,10 @@
       "projectPhase": "operation"
     },
     {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\bramki-zatwierdzen\\GATE-COMPLETION-AUTHORIZED.md",
+      "projectPhase": "operation"
+    },
+    {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\budynek.md",
       "projectPhase": "operation",
       "bimLOD": "LOD_500"
@@ -672,6 +732,18 @@
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\poziomy\\poziom-04.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\pozwolenia\\PERMIT-OCCUPANCY-001.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-5YEAR-DUE-2028.md",
+      "projectPhase": "operation"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-ANNUAL-2027.md",
       "projectPhase": "operation"
     },
     {
@@ -747,6 +819,10 @@
       "projectPhase": "operation"
     },
     {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\bramki-zatwierdzen\\GATE-CAMPUS-PLANNING.md",
+      "projectPhase": "design_development"
+    },
+    {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-02-sloneczny-polksiezyc.md",
       "projectPhase": "construction",
       "bimLOD": "LOD_400"
@@ -788,6 +864,10 @@
     {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\pakiety-budowlane\\CP-SITE-INFRASTRUCTURE.md",
       "projectPhase": "construction"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\pozwolenia\\PERMIT-CAMPUS-MASTER.md",
+      "projectPhase": "design_development"
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\specyfikacja-projektu.md",

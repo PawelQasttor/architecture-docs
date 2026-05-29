@@ -329,7 +329,11 @@ export default defineConfig({
                     { text: 'Issue: Change Order 001', link: '/en/examples/green-terrace/issues/ISS-CO-001' },
                     { text: 'Test: MVHR Balancing', link: '/en/examples/green-terrace/commissioning-tests/CT-MVHR-001' },
                     { text: 'Test: Air-tightness', link: '/en/examples/green-terrace/commissioning-tests/CT-AIRTIGHTNESS-001' },
-                    { text: 'Test: Fire Drill', link: '/en/examples/green-terrace/commissioning-tests/CT-FIRE-DRILL-001' }
+                    { text: 'Test: Fire Drill', link: '/en/examples/green-terrace/commissioning-tests/CT-FIRE-DRILL-001' },
+                    { text: 'Permit: Zoning decision WZ (v2.4)', link: '/en/examples/green-terrace/permits/PERMIT-WZ-001' },
+                    { text: 'Permit: Building permit (v2.4)', link: '/en/examples/green-terrace/permits/PERMIT-PB-001' },
+                    { text: 'Gate: Design freeze CD (v2.4)', link: '/en/examples/green-terrace/approval-gates/GATE-DESIGN-FREEZE-CD' },
+                    { text: 'Gate: Permit-ready (v2.4)', link: '/en/examples/green-terrace/approval-gates/GATE-PERMIT-READY' }
                   ]
                 },
                 {
@@ -361,7 +365,11 @@ export default defineConfig({
                     { text: 'Telemetry: Heat pump COP (v2.2)', link: '/en/examples/green-terrace-2028/telemetry-streams/TEL-HP-COP-001' },
                     { text: 'Occupant Survey 2027 IEQ (v2.3)', link: '/en/examples/green-terrace-2028/occupant-surveys/SURVEY-BLD-01-IEQ-2027' },
                     { text: 'Energy Verification 2027 (v2.3)', link: '/en/examples/green-terrace-2028/energy-verification-records/EVR-BLD-01-2027' },
-                    { text: 'Retro-cx: MVHR rebalance (v2.3)', link: '/en/examples/green-terrace-2028/retrocx-recommendations/RCX-MVHR-001' }
+                    { text: 'Retro-cx: MVHR rebalance (v2.3)', link: '/en/examples/green-terrace-2028/retrocx-recommendations/RCX-MVHR-001' },
+                    { text: 'Permit: Occupancy permit (v2.4)', link: '/en/examples/green-terrace-2028/permits/PERMIT-OCCUPANCY-001' },
+                    { text: 'Gate: Completion authorized (v2.4)', link: '/en/examples/green-terrace-2028/approval-gates/GATE-COMPLETION-AUTHORIZED' },
+                    { text: 'Inspection: Annual 2027 (v2.4)', link: '/en/examples/green-terrace-2028/inspections/INSP-ANNUAL-2027' },
+                    { text: 'Inspection: 5-year scheduled (v2.4)', link: '/en/examples/green-terrace-2028/inspections/INSP-5YEAR-DUE-2028' }
                   ]
                 },
                 {
@@ -380,7 +388,9 @@ export default defineConfig({
                     { text: 'Bike storage', link: '/en/examples/green-terrace-park/site-features/SF-BIKE-STORAGE' },
                     { text: 'Communal garden', link: '/en/examples/green-terrace-park/site-features/SF-COMMUNAL-GARDEN' },
                     { text: 'Site infrastructure CP', link: '/en/examples/green-terrace-park/construction-packages/CP-SITE-INFRASTRUCTURE' },
-                    { text: 'Issue: Campus planning condition', link: '/en/examples/green-terrace-park/issues/ISS-CAMPUS-PLANNING-001' }
+                    { text: 'Issue: Campus planning condition', link: '/en/examples/green-terrace-park/issues/ISS-CAMPUS-PLANNING-001' },
+                    { text: 'Permit: Campus environmental decision (v2.4)', link: '/en/examples/green-terrace-park/permits/PERMIT-CAMPUS-MASTER' },
+                    { text: 'Gate: Campus planning path (v2.4)', link: '/en/examples/green-terrace-park/approval-gates/GATE-CAMPUS-PLANNING' }
                   ]
                 }
               ]
@@ -708,7 +718,11 @@ export default defineConfig({
                     { text: 'Zgłoszenie: Zmiana 001', link: '/pl/przyklady/zielony-taras/zgloszenia/ISS-CO-001' },
                     { text: 'Test: Regulacja MVHR', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-MVHR-001' },
                     { text: 'Test: Szczelność powietrzna', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-AIRTIGHTNESS-001' },
-                    { text: 'Test: Próbna ewakuacja', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-FIRE-DRILL-001' }
+                    { text: 'Test: Próbna ewakuacja', link: '/pl/przyklady/zielony-taras/testy-rozruchowe/CT-FIRE-DRILL-001' },
+                    { text: 'Pozwolenie: Decyzja WZ (v2.4)', link: '/pl/przyklady/zielony-taras/pozwolenia/PERMIT-WZ-001' },
+                    { text: 'Pozwolenie: Pozwolenie na budowę (v2.4)', link: '/pl/przyklady/zielony-taras/pozwolenia/PERMIT-PB-001' },
+                    { text: 'Bramka: Zamrożenie projektu CD (v2.4)', link: '/pl/przyklady/zielony-taras/bramki-zatwierdzen/GATE-DESIGN-FREEZE-CD' },
+                    { text: 'Bramka: Gotowość do pozwolenia (v2.4)', link: '/pl/przyklady/zielony-taras/bramki-zatwierdzen/GATE-PERMIT-READY' }
                   ]
                 },
                 {
@@ -740,7 +754,11 @@ export default defineConfig({
                     { text: 'Telemetria: COP pompy ciepła (v2.2)', link: '/pl/przyklady/zielony-taras-2028/strumienie-telemetrii/TEL-HP-COP-001' },
                     { text: 'Ankieta mieszkańców IEQ 2027 (v2.3)', link: '/pl/przyklady/zielony-taras-2028/ankiety-mieszkancow/SURVEY-BLD-01-IEQ-2027' },
                     { text: 'Weryfikacja energetyczna 2027 (v2.3)', link: '/pl/przyklady/zielony-taras-2028/zapisy-weryfikacji-energetycznej/EVR-BLD-01-2027' },
-                    { text: 'Retro-cx: Rebalans MVHR (v2.3)', link: '/pl/przyklady/zielony-taras-2028/rekomendacje-retrocx/RCX-MVHR-001' }
+                    { text: 'Retro-cx: Rebalans MVHR (v2.3)', link: '/pl/przyklady/zielony-taras-2028/rekomendacje-retrocx/RCX-MVHR-001' },
+                    { text: 'Pozwolenie: Pozwolenie na użytkowanie (v2.4)', link: '/pl/przyklady/zielony-taras-2028/pozwolenia/PERMIT-OCCUPANCY-001' },
+                    { text: 'Bramka: Autoryzacja zakończenia (v2.4)', link: '/pl/przyklady/zielony-taras-2028/bramki-zatwierdzen/GATE-COMPLETION-AUTHORIZED' },
+                    { text: 'Przegląd: Roczny 2027 (v2.4)', link: '/pl/przyklady/zielony-taras-2028/przeglady/INSP-ANNUAL-2027' },
+                    { text: 'Przegląd: Pięcioletni zaplanowany (v2.4)', link: '/pl/przyklady/zielony-taras-2028/przeglady/INSP-5YEAR-DUE-2028' }
                   ]
                 },
                 {
@@ -759,7 +777,9 @@ export default defineConfig({
                     { text: 'Schowek na rowery', link: '/pl/przyklady/zielony-taras-park/elementy-terenu/SF-BIKE-STORAGE' },
                     { text: 'Ogród wspólnotowy', link: '/pl/przyklady/zielony-taras-park/elementy-terenu/SF-COMMUNAL-GARDEN' },
                     { text: 'CP infrastruktury terenowej', link: '/pl/przyklady/zielony-taras-park/pakiety-budowlane/CP-SITE-INFRASTRUCTURE' },
-                    { text: 'Zgłoszenie: Warunek planistyczny kampusu', link: '/pl/przyklady/zielony-taras-park/zgloszenia/ISS-CAMPUS-PLANNING-001' }
+                    { text: 'Zgłoszenie: Warunek planistyczny kampusu', link: '/pl/przyklady/zielony-taras-park/zgloszenia/ISS-CAMPUS-PLANNING-001' },
+                    { text: 'Pozwolenie: Decyzja środowiskowa kampusu (v2.4)', link: '/pl/przyklady/zielony-taras-park/pozwolenia/PERMIT-CAMPUS-MASTER' },
+                    { text: 'Bramka: Ścieżka planistyczna kampusu (v2.4)', link: '/pl/przyklady/zielony-taras-park/bramki-zatwierdzen/GATE-CAMPUS-PLANNING' }
                   ]
                 }
               ]

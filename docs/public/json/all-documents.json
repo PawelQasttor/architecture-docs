@@ -2,7 +2,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\bim-integration\\ifc-entities.md",
-      "extractedAt": "2026-05-29T13:44:09.663Z",
+      "extractedAt": "2026-05-29T15:31:59.592Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "technical_reference",
@@ -13,7 +13,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\bim-integration\\lod-definitions.md",
-      "extractedAt": "2026-05-29T13:44:09.664Z",
+      "extractedAt": "2026-05-29T15:31:59.592Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "technical_reference",
@@ -23,8 +23,120 @@
   },
   {
     "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace\\approval-gates\\GATE-DESIGN-FREEZE-CD.md",
+      "extractedAt": "2026-05-29T15:31:59.595Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-DESIGN-FREEZE-CD",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "gateType": "design_freeze",
+    "gateTitle": "Design freeze — Construction Documents (LOD 400)",
+    "gatePhase": "construction_documents",
+    "status": "passed",
+    "decisionOwner": {
+      "role": "architect",
+      "name": "Anna Nowak"
+    },
+    "decisionDate": "2026-02-27",
+    "prerequisites": [
+      {
+        "description": "Interdisciplinary clash log resolved (architecture / structure / MEP)",
+        "met": true
+      },
+      {
+        "description": "Code-compliance matrix complete (fire, accessibility, energy)",
+        "met": true
+      },
+      {
+        "description": "Space program reconciled against design (PROG-BEDROOM-STANDARD)",
+        "met": true,
+        "evidenceRef": "PROG-BEDROOM-STANDARD"
+      },
+      {
+        "description": "All envelope U-values verified against WT 2021",
+        "met": true
+      }
+    ],
+    "deliverableRefs": [
+      "BLD-01",
+      "CP-STRUCTURE",
+      "CP-ENVELOPE",
+      "CP-MEP"
+    ],
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace\\approval-gates\\GATE-PERMIT-READY.md",
+      "extractedAt": "2026-05-29T15:31:59.596Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-PERMIT-READY",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "gateType": "permit_ready",
+    "gateTitle": "Permit-ready — building permit obtained, pre-construction checklist",
+    "gatePhase": "construction_documents",
+    "status": "passed_with_actions",
+    "decisionOwner": {
+      "role": "investor",
+      "name": "Green Terrace Sp. z o.o."
+    },
+    "decisionDate": "2025-12-03",
+    "prerequisites": [
+      {
+        "description": "WZ decision final",
+        "met": true,
+        "evidenceRef": "PERMIT-WZ-001"
+      },
+      {
+        "description": "Building permit issued and final",
+        "met": true,
+        "evidenceRef": "PERMIT-PB-001"
+      },
+      {
+        "description": "Kierownik budowy (site manager) appointed",
+        "met": false
+      },
+      {
+        "description": "Construction log (EDB) registered",
+        "met": false
+      }
+    ],
+    "deliverableRefs": [
+      "PERMIT-PB-001"
+    ],
+    "relatedPermitIds": [
+      "PERMIT-WZ-001",
+      "PERMIT-PB-001"
+    ],
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\asset-types\\bosch-heat-pump-7000i.md",
-      "extractedAt": "2026-05-29T13:44:09.666Z",
+      "extractedAt": "2026-05-29T15:31:59.597Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset_type",
@@ -89,7 +201,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\asset-types\\mvhr-residential.md",
-      "extractedAt": "2026-05-29T13:44:09.667Z",
+      "extractedAt": "2026-05-29T15:31:59.598Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset_type",
@@ -116,7 +228,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\asset-types\\ufh-manifold-12zone.md",
-      "extractedAt": "2026-05-29T13:44:09.667Z",
+      "extractedAt": "2026-05-29T15:31:59.598Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset_type",
@@ -144,7 +256,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\assets\\ai-hp-01.md",
-      "extractedAt": "2026-05-29T13:44:09.668Z",
+      "extractedAt": "2026-05-29T15:31:59.599Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -189,7 +301,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\assets\\ai-mvhr-01.md",
-      "extractedAt": "2026-05-29T13:44:09.669Z",
+      "extractedAt": "2026-05-29T15:31:59.600Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -375,7 +487,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\assets\\ai-ufh-manifold-01.md",
-      "extractedAt": "2026-05-29T13:44:09.670Z",
+      "extractedAt": "2026-05-29T15:31:59.601Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -599,7 +711,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\building.md",
-      "extractedAt": "2026-05-29T13:44:09.671Z",
+      "extractedAt": "2026-05-29T15:31:59.602Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -641,7 +753,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\circulation-routes\\CR-FIRE-EGRESS-L01.md",
-      "extractedAt": "2026-05-29T13:44:09.671Z",
+      "extractedAt": "2026-05-29T15:31:59.603Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "circulation_route",
@@ -753,7 +865,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-AIRTIGHTNESS-001.md",
-      "extractedAt": "2026-05-29T13:44:09.672Z",
+      "extractedAt": "2026-05-29T15:31:59.603Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -834,7 +946,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-FIRE-DRILL-001.md",
-      "extractedAt": "2026-05-29T13:44:09.673Z",
+      "extractedAt": "2026-05-29T15:31:59.604Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -922,7 +1034,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\commissioning-tests\\CT-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.673Z",
+      "extractedAt": "2026-05-29T15:31:59.604Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -1010,7 +1122,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-envelope.md",
-      "extractedAt": "2026-05-29T13:44:09.674Z",
+      "extractedAt": "2026-05-29T15:31:59.605Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -1078,7 +1190,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-finishes.md",
-      "extractedAt": "2026-05-29T13:44:09.674Z",
+      "extractedAt": "2026-05-29T15:31:59.605Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -1145,7 +1257,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-mep.md",
-      "extractedAt": "2026-05-29T13:44:09.675Z",
+      "extractedAt": "2026-05-29T15:31:59.606Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -1211,7 +1323,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-structure.md",
-      "extractedAt": "2026-05-29T13:44:09.675Z",
+      "extractedAt": "2026-05-29T15:31:59.606Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -1272,7 +1384,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\envelope-external-wall-type-a.md",
-      "extractedAt": "2026-05-29T13:44:09.676Z",
+      "extractedAt": "2026-05-29T15:31:59.607Z",
       "format": "yaml-frontmatter"
     },
     "id": "ENV-EW-01",
@@ -1474,7 +1586,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-BID-001.md",
-      "extractedAt": "2026-05-29T13:44:09.676Z",
+      "extractedAt": "2026-05-29T15:31:59.607Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -1548,7 +1660,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-CO-001.md",
-      "extractedAt": "2026-05-29T13:44:09.677Z",
+      "extractedAt": "2026-05-29T15:31:59.608Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -1625,7 +1737,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-RFI-001.md",
-      "extractedAt": "2026-05-29T13:44:09.677Z",
+      "extractedAt": "2026-05-29T15:31:59.609Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -1700,7 +1812,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\levels\\level-00.md",
-      "extractedAt": "2026-05-29T13:44:09.677Z",
+      "extractedAt": "2026-05-29T15:31:59.609Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -1724,7 +1836,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\levels\\level-01.md",
-      "extractedAt": "2026-05-29T13:44:09.678Z",
+      "extractedAt": "2026-05-29T15:31:59.610Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -1880,7 +1992,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\levels\\level-02.md",
-      "extractedAt": "2026-05-29T13:44:09.678Z",
+      "extractedAt": "2026-05-29T15:31:59.610Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -1905,7 +2017,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\levels\\level-03.md",
-      "extractedAt": "2026-05-29T13:44:09.679Z",
+      "extractedAt": "2026-05-29T15:31:59.610Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -1930,7 +2042,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\levels\\level-04.md",
-      "extractedAt": "2026-05-29T13:44:09.679Z",
+      "extractedAt": "2026-05-29T15:31:59.611Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -1955,7 +2067,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\levels\\level-05.md",
-      "extractedAt": "2026-05-29T13:44:09.679Z",
+      "extractedAt": "2026-05-29T15:31:59.611Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -1980,7 +2092,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\materials\\MT-CONCRETE-C30-37.md",
-      "extractedAt": "2026-05-29T13:44:09.680Z",
+      "extractedAt": "2026-05-29T15:31:59.612Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "material_type",
@@ -2045,7 +2157,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\materials\\MT-INSULATION-PIR-150.md",
-      "extractedAt": "2026-05-29T13:44:09.681Z",
+      "extractedAt": "2026-05-29T15:31:59.612Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "material_type",
@@ -2109,7 +2221,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\opening-types\\fire-door-ei30.md",
-      "extractedAt": "2026-05-29T13:44:09.681Z",
+      "extractedAt": "2026-05-29T15:31:59.613Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening_type",
@@ -2159,7 +2271,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\opening-types\\internorm-kf410-window.md",
-      "extractedAt": "2026-05-29T13:44:09.681Z",
+      "extractedAt": "2026-05-29T15:31:59.613Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening_type",
@@ -2208,7 +2320,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\openings\\opn-door-stair-01.md",
-      "extractedAt": "2026-05-29T13:44:09.682Z",
+      "extractedAt": "2026-05-29T15:31:59.614Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening",
@@ -2304,7 +2416,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\openings\\opn-win-n-001.md",
-      "extractedAt": "2026-05-29T13:44:09.683Z",
+      "extractedAt": "2026-05-29T15:31:59.614Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening",
@@ -2376,7 +2488,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\openings\\opn-win-n-002.md",
-      "extractedAt": "2026-05-29T13:44:09.683Z",
+      "extractedAt": "2026-05-29T15:31:59.615Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening",
@@ -2442,8 +2554,135 @@
   },
   {
     "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace\\permits\\PERMIT-PB-001.md",
+      "extractedAt": "2026-05-29T15:31:59.615Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-PB-001",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "permitType": "building_permit",
+    "permitTitle": "Pozwolenie na budowę — Green Terrace (BLD-01)",
+    "status": "valid",
+    "referenceNumber": "AB.6740.0337.2025",
+    "issuingAuthority": {
+      "name": "Starosta — Organ Administracji Architektoniczno-Budowlanej",
+      "nameEn": "County Architecture-and-Building Administration Authority",
+      "authorityType": "architecture_building_admin",
+      "jurisdiction": "Warszawa"
+    },
+    "gatesPhase": "construction",
+    "statutoryDeadlineDays": 65,
+    "submittedDate": "2025-09-15",
+    "decisionDate": "2025-11-18",
+    "validFrom": "2025-12-03",
+    "expiryDate": "2028-12-03",
+    "appealDeadline": "2025-12-02",
+    "conditions": [
+      {
+        "text": "Kierownik budowy (site manager) must be appointed before works start",
+        "status": "open"
+      },
+      {
+        "text": "Construction log (EDB) registered before first works entry",
+        "status": "open"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "PERMIT-WZ-001 (zoning decision, final)",
+      "PZT — site development plan",
+      "PAB — architectural & construction design",
+      "Right-to-build statement (oświadczenie o prawie do dysponowania nieruchomością)",
+      "Geotechnical opinion"
+    ],
+    "feePaid": {
+      "amount": 539,
+      "currency": "PLN"
+    },
+    "appealOfPermitId": "PERMIT-WZ-001",
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "architectural",
+      "organization": "Pracownia Architektoniczna (lead designer)"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace\\permits\\PERMIT-WZ-001.md",
+      "extractedAt": "2026-05-29T15:31:59.616Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-WZ-001",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "permitType": "zoning_decision",
+    "permitTitle": "Decyzja o warunkach zabudowy (WZ) — Green Terrace",
+    "status": "valid",
+    "referenceNumber": "WZ/2025/0142",
+    "issuingAuthority": {
+      "name": "Prezydent Miasta — Wydział Architektury i Urbanistyki",
+      "nameEn": "City President — Department of Architecture and Urban Planning",
+      "authorityType": "municipal",
+      "jurisdiction": "Warszawa"
+    },
+    "gatesPhase": "concept",
+    "statutoryDeadlineDays": 60,
+    "submittedDate": "2025-01-20",
+    "decisionDate": "2025-04-08",
+    "validFrom": "2025-04-22",
+    "conditions": [
+      {
+        "text": "Maximum building height 5 storeys / 16.0 m to eaves",
+        "status": "met"
+      },
+      {
+        "text": "Minimum 25% biologically active (green) plot area",
+        "status": "met"
+      },
+      {
+        "text": "Frontage line set 6.0 m from the northern plot boundary",
+        "status": "met"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "Site location map 1:500 (PODGiK extract)",
+      "Utility connection statements (water, sewer, power, district heating)",
+      "Conceptual development description"
+    ],
+    "feePaid": {
+      "amount": 598,
+      "currency": "PLN"
+    },
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "architectural",
+      "organization": "Pracownia Architektoniczna (lead designer)"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\project-specification.md",
-      "extractedAt": "2026-05-29T13:44:09.684Z",
+      "extractedAt": "2026-05-29T15:31:59.617Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "project",
@@ -2871,7 +3110,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-FIRE-EGRESS-TIME-001.md",
-      "extractedAt": "2026-05-29T13:44:09.684Z",
+      "extractedAt": "2026-05-29T15:31:59.618Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "requirement",
@@ -3051,7 +3290,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-LEVEL-ACOUSTIC-B.md",
-      "extractedAt": "2026-05-29T13:44:09.685Z",
+      "extractedAt": "2026-05-29T15:31:59.618Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "requirement",
@@ -3203,7 +3442,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\requirements\\REQ-LEVEL-FIRE-RATING.md",
-      "extractedAt": "2026-05-29T13:44:09.686Z",
+      "extractedAt": "2026-05-29T15:31:59.619Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "requirement",
@@ -3299,7 +3538,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\site-feature-types\\sft-permeable-paving.md",
-      "extractedAt": "2026-05-29T13:44:09.686Z",
+      "extractedAt": "2026-05-29T15:31:59.619Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature_type",
@@ -3369,7 +3608,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\site-features\\sf-north-garden.md",
-      "extractedAt": "2026-05-29T13:44:09.687Z",
+      "extractedAt": "2026-05-29T15:31:59.620Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -3449,7 +3688,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\site-features\\sf-parking.md",
-      "extractedAt": "2026-05-29T13:44:09.687Z",
+      "extractedAt": "2026-05-29T15:31:59.620Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -3526,7 +3765,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\site.md",
-      "extractedAt": "2026-05-29T13:44:09.687Z",
+      "extractedAt": "2026-05-29T15:31:59.621Z",
       "format": "yaml-frontmatter"
     },
     "id": "SITE-GREEN-TERRACE",
@@ -3676,7 +3915,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\space-programs\\PROG-BEDROOM-STANDARD.md",
-      "extractedAt": "2026-05-29T13:44:09.688Z",
+      "extractedAt": "2026-05-29T15:31:59.621Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space_program",
@@ -3727,7 +3966,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\space-types\\ST-BEDROOM-STANDARD-A.md",
-      "extractedAt": "2026-05-29T13:44:09.688Z",
+      "extractedAt": "2026-05-29T15:31:59.622Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space_type",
@@ -3931,7 +4170,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-01.md",
-      "extractedAt": "2026-05-29T13:44:09.689Z",
+      "extractedAt": "2026-05-29T15:31:59.623Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -4270,7 +4509,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-02.md",
-      "extractedAt": "2026-05-29T13:44:09.690Z",
+      "extractedAt": "2026-05-29T15:31:59.623Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -4599,7 +4838,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\spaces\\corridor.md",
-      "extractedAt": "2026-05-29T13:44:09.690Z",
+      "extractedAt": "2026-05-29T15:31:59.624Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -4894,7 +5133,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\spaces\\stairwell-void.md",
-      "extractedAt": "2026-05-29T13:44:09.691Z",
+      "extractedAt": "2026-05-29T15:31:59.625Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -4936,7 +5175,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\staircase-a.md",
-      "extractedAt": "2026-05-29T13:44:09.691Z",
+      "extractedAt": "2026-05-29T15:31:59.626Z",
       "format": "yaml-frontmatter"
     },
     "id": "VC-STAIR-A",
@@ -5075,7 +5314,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\structural-systems\\STR-GREEN-TERRACE.md",
-      "extractedAt": "2026-05-29T13:44:09.692Z",
+      "extractedAt": "2026-05-29T15:31:59.626Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "structural_system",
@@ -5173,7 +5412,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\system-types\\hvac-residential-mvhr.md",
-      "extractedAt": "2026-05-29T13:44:09.692Z",
+      "extractedAt": "2026-05-29T15:31:59.626Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system_type",
@@ -5268,7 +5507,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01-heating.md",
-      "extractedAt": "2026-05-29T13:44:09.692Z",
+      "extractedAt": "2026-05-29T15:31:59.627Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -5301,7 +5540,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01-vent.md",
-      "extractedAt": "2026-05-29T13:44:09.693Z",
+      "extractedAt": "2026-05-29T15:31:59.627Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -5332,7 +5571,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\systems\\sys-hvac-01.md",
-      "extractedAt": "2026-05-29T13:44:09.694Z",
+      "extractedAt": "2026-05-29T15:31:59.628Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -5365,7 +5604,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\zone-types\\acoustic-zone-night.md",
-      "extractedAt": "2026-05-29T13:44:09.694Z",
+      "extractedAt": "2026-05-29T15:31:59.628Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone_type",
@@ -5398,7 +5637,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\zone-types\\fire-zone-zl-iv.md",
-      "extractedAt": "2026-05-29T13:44:09.694Z",
+      "extractedAt": "2026-05-29T15:31:59.628Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone_type",
@@ -5434,7 +5673,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\zone-types\\hvac-zone-residential.md",
-      "extractedAt": "2026-05-29T13:44:09.695Z",
+      "extractedAt": "2026-05-29T15:31:59.629Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone_type",
@@ -5470,7 +5709,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\zones\\acoustic-zone-night.md",
-      "extractedAt": "2026-05-29T13:44:09.695Z",
+      "extractedAt": "2026-05-29T15:31:59.629Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone",
@@ -5508,7 +5747,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\zones\\fire-zone-zl-iv.md",
-      "extractedAt": "2026-05-29T13:44:09.695Z",
+      "extractedAt": "2026-05-29T15:31:59.629Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone",
@@ -5548,7 +5787,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace\\zones\\hvac-zone-north.md",
-      "extractedAt": "2026-05-29T13:44:09.696Z",
+      "extractedAt": "2026-05-29T15:31:59.630Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone",
@@ -5589,8 +5828,64 @@
   },
   {
     "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace-2028\\approval-gates\\GATE-COMPLETION-AUTHORIZED.md",
+      "extractedAt": "2026-05-29T15:31:59.630Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-COMPLETION-AUTHORIZED",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "gateType": "completion_authorized",
+    "gateTitle": "Completion authorized — occupancy permit granted, handover to operation",
+    "gatePhase": "commissioning",
+    "status": "passed",
+    "decisionOwner": {
+      "role": "authority",
+      "name": "PINB (County Building Control)"
+    },
+    "decisionDate": "2026-06-19",
+    "prerequisites": [
+      {
+        "description": "Occupancy permit granted",
+        "met": true,
+        "evidenceRef": "PERMIT-OCCUPANCY-001"
+      },
+      {
+        "description": "All commissioning tests executed (MVHR, air-tightness, fire drill)",
+        "met": true,
+        "evidenceRef": "CT-MVHR-001"
+      },
+      {
+        "description": "c-KOB digital building logbook established",
+        "met": true
+      },
+      {
+        "description": "O&M manuals + warranties transferred to building manager",
+        "met": true
+      }
+    ],
+    "deliverableRefs": [
+      "PERMIT-OCCUPANCY-001"
+    ],
+    "relatedPermitIds": [
+      "PERMIT-OCCUPANCY-001"
+    ],
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-hp-01-ops.md",
-      "extractedAt": "2026-05-29T13:44:09.696Z",
+      "extractedAt": "2026-05-29T15:31:59.631Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -5674,7 +5969,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-mvhr-01-ops.md",
-      "extractedAt": "2026-05-29T13:44:09.696Z",
+      "extractedAt": "2026-05-29T15:31:59.631Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -5757,7 +6052,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-ufh-manifold-01-ops.md",
-      "extractedAt": "2026-05-29T13:44:09.697Z",
+      "extractedAt": "2026-05-29T15:31:59.632Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -5827,7 +6122,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\building.md",
-      "extractedAt": "2026-05-29T13:44:09.698Z",
+      "extractedAt": "2026-05-29T15:31:59.632Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -5884,7 +6179,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-AIRTIGHTNESS-001.md",
-      "extractedAt": "2026-05-29T13:44:09.698Z",
+      "extractedAt": "2026-05-29T15:31:59.632Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -5981,7 +6276,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-FIRE-DRILL-001.md",
-      "extractedAt": "2026-05-29T13:44:09.698Z",
+      "extractedAt": "2026-05-29T15:31:59.633Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -6081,7 +6376,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\commissioning-tests\\CT-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.699Z",
+      "extractedAt": "2026-05-29T15:31:59.633Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -6180,7 +6475,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\energy-verification-records\\EVR-BLD-01-2027.md",
-      "extractedAt": "2026-05-29T13:44:09.699Z",
+      "extractedAt": "2026-05-29T15:31:59.634Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "energy_verification_record",
@@ -6257,8 +6552,98 @@
   },
   {
     "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace-2028\\inspections\\INSP-5YEAR-DUE-2028.md",
+      "extractedAt": "2026-05-29T15:31:59.635Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "regulatory_inspection",
+    "id": "INSP-5YEAR-DUE-2028",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "inspectionType": "periodic_5year",
+    "inspectionTitle": "5-year comprehensive building inspection — scheduled 2028",
+    "statutoryBasis": "Prawo Budowlane Art. 62 ust. 1 pkt 2",
+    "status": "scheduled",
+    "buildingId": "BLD-01",
+    "frequencyMonths": 60,
+    "dueDate": "2031-07-03",
+    "nextDueDate": "2031-07-03",
+    "result": {
+      "summary": "Not yet performed — first 5-year comprehensive inspection scheduled within the statutory cycle.",
+      "deficiencies": []
+    },
+    "cKobEntry": {
+      "recorded": false,
+      "system": "Cyfrowa Książka Obiektu Budowlanego (GUNB)"
+    },
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "other",
+      "organization": "GreenFM Sp. z o.o. (building manager)"
+    },
+    "authors": [
+      {
+        "name": "Marek Zieliński",
+        "role": "inspector"
+      }
+    ]
+  },
+  {
+    "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace-2028\\inspections\\INSP-ANNUAL-2027.md",
+      "extractedAt": "2026-05-29T15:31:59.635Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "regulatory_inspection",
+    "id": "INSP-ANNUAL-2027",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "inspectionType": "periodic_annual",
+    "inspectionTitle": "Annual building condition inspection 2027",
+    "statutoryBasis": "Prawo Budowlane Art. 62 ust. 1 pkt 1",
+    "status": "completed_pass",
+    "buildingId": "BLD-01",
+    "frequencyMonths": 12,
+    "dueDate": "2027-07-03",
+    "performedDate": "2027-06-28",
+    "nextDueDate": "2028-07-03",
+    "inspector": {
+      "name": "Marek Zieliński",
+      "license": "Uprawnienia budowlane MAZ/0421/POOK/12",
+      "organization": "GreenFM Sp. z o.o.",
+      "role": "inspektor — przegląd okresowy"
+    },
+    "result": {
+      "outcome": "pass",
+      "summary": "First annual periodic inspection following handover. Building elements,\nfinishes, installations and safety equipment inspected. No structural or\nsafety deficiencies. One minor observation logged (corridor sealant\nwear) tracked under tenant maintenance, not an Art. 62 deficiency.\n",
+      "deficiencies": []
+    },
+    "cKobEntry": {
+      "recorded": true,
+      "recordRef": "c-KOB/BLD-01/2027/PER-01",
+      "system": "Cyfrowa Książka Obiektu Budowlanego (GUNB)"
+    },
+    "certificateRef": "przeglad-okresowy-roczny-2027.pdf",
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "other",
+      "organization": "GreenFM Sp. z o.o. (building manager)"
+    },
+    "authors": [
+      {
+        "name": "Marek Zieliński",
+        "role": "inspector"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-ANOMALY-CO2-001.md",
-      "extractedAt": "2026-05-29T13:44:09.700Z",
+      "extractedAt": "2026-05-29T15:31:59.636Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -6309,7 +6694,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-INSPECTION-FD-001.md",
-      "extractedAt": "2026-05-29T13:44:09.700Z",
+      "extractedAt": "2026-05-29T15:31:59.636Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -6370,7 +6755,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-NC-AIRTIGHTNESS-001.md",
-      "extractedAt": "2026-05-29T13:44:09.701Z",
+      "extractedAt": "2026-05-29T15:31:59.636Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -6430,7 +6815,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-RETROCX-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.701Z",
+      "extractedAt": "2026-05-29T15:31:59.637Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -6489,7 +6874,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-TENANT-MR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.702Z",
+      "extractedAt": "2026-05-29T15:31:59.638Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -6549,7 +6934,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-WARRANTY-HP-001.md",
-      "extractedAt": "2026-05-29T13:44:09.702Z",
+      "extractedAt": "2026-05-29T15:31:59.638Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -6624,7 +7009,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\levels\\level-04.md",
-      "extractedAt": "2026-05-29T13:44:09.703Z",
+      "extractedAt": "2026-05-29T15:31:59.638Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -6652,7 +7037,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\occupant-surveys\\SURVEY-BLD-01-IEQ-2027.md",
-      "extractedAt": "2026-05-29T13:44:09.703Z",
+      "extractedAt": "2026-05-29T15:31:59.639Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "occupant_survey",
@@ -6779,8 +7164,73 @@
   },
   {
     "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace-2028\\permits\\PERMIT-OCCUPANCY-001.md",
+      "extractedAt": "2026-05-29T15:31:59.639Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-OCCUPANCY-001",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "permitType": "occupancy_permit",
+    "permitTitle": "Pozwolenie na użytkowanie — Green Terrace (BLD-01)",
+    "status": "valid",
+    "referenceNumber": "PINB.5142.0098.2026",
+    "issuingAuthority": {
+      "name": "Powiatowy Inspektorat Nadzoru Budowlanego (PINB)",
+      "nameEn": "County Building Control Authority (PINB)",
+      "authorityType": "building_control_pinb",
+      "jurisdiction": "Warszawa"
+    },
+    "gatesPhase": "operation",
+    "statutoryDeadlineDays": 60,
+    "submittedDate": "2026-05-04",
+    "decisionDate": "2026-06-19",
+    "validFrom": "2026-07-03",
+    "conditions": [
+      {
+        "text": "Mandatory PINB occupancy inspection passed (>4 storeys building)",
+        "status": "met"
+      },
+      {
+        "text": "As-built geodetic survey registered with PODGiK",
+        "status": "met"
+      },
+      {
+        "text": "Fire-protection acceptance from straż pożarna on file",
+        "status": "met"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "Construction log (EDB export)",
+      "Site manager completion + cleanup declarations",
+      "As-built geodetic survey (PODGiK)",
+      "Energy performance certificate",
+      "Test protocols: electrical, gas, chimney/ventilation, water"
+    ],
+    "feePaid": {
+      "amount": 135,
+      "currency": "PLN"
+    },
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "other",
+      "organization": "Green Terrace Sp. z o.o. (investor)"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\retrocx-recommendations\\RCX-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.703Z",
+      "extractedAt": "2026-05-29T15:31:59.640Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "retrocx_recommendation",
@@ -6838,7 +7288,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\site.md",
-      "extractedAt": "2026-05-29T13:44:09.704Z",
+      "extractedAt": "2026-05-29T15:31:59.640Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site",
@@ -6876,7 +7326,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\spaces\\bedroom-402.md",
-      "extractedAt": "2026-05-29T13:44:09.704Z",
+      "extractedAt": "2026-05-29T15:31:59.641Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -6930,7 +7380,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\systems\\sys-hvac-01.md",
-      "extractedAt": "2026-05-29T13:44:09.704Z",
+      "extractedAt": "2026-05-29T15:31:59.641Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -6974,7 +7424,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\telemetry-streams\\TEL-CO2-402-001.md",
-      "extractedAt": "2026-05-29T13:44:09.705Z",
+      "extractedAt": "2026-05-29T15:31:59.642Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "telemetry_stream",
@@ -7051,7 +7501,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-2028\\telemetry-streams\\TEL-HP-COP-001.md",
-      "extractedAt": "2026-05-29T13:44:09.706Z",
+      "extractedAt": "2026-05-29T15:31:59.642Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "telemetry_stream",
@@ -7131,8 +7581,68 @@
   },
   {
     "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace-park\\approval-gates\\GATE-CAMPUS-PLANNING.md",
+      "extractedAt": "2026-05-29T15:31:59.643Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-CAMPUS-PLANNING",
+    "version": "2.4.0",
+    "projectPhase": "design_development",
+    "gateType": "planning_path_confirmed",
+    "gateTitle": "Campus planning path confirmed — phasing & shared-infrastructure sequencing",
+    "gatePhase": "concept",
+    "status": "in_progress",
+    "decisionOwner": {
+      "role": "investor",
+      "name": "Green Terrace Park Development"
+    },
+    "prerequisites": [
+      {
+        "description": "Campus environmental decision obtained",
+        "met": true,
+        "evidenceRef": "PERMIT-CAMPUS-MASTER"
+      },
+      {
+        "description": "Shared district-heating loop capacity confirmed for all 4 buildings",
+        "met": true,
+        "evidenceRef": "SYS-DH-LOOP-CAMPUS"
+      },
+      {
+        "description": "Building phasing sequence agreed (which building permits in which order)",
+        "met": false
+      },
+      {
+        "description": "Shared site-infrastructure construction package sequenced",
+        "met": false,
+        "evidenceRef": "CP-SITE-INFRASTRUCTURE"
+      }
+    ],
+    "deliverableRefs": [
+      "PERMIT-CAMPUS-MASTER",
+      "CP-SITE-INFRASTRUCTURE"
+    ],
+    "blockingIssueIds": [
+      "ISS-CAMPUS-PLANNING-001"
+    ],
+    "relatedPermitIds": [
+      "PERMIT-CAMPUS-MASTER"
+    ],
+    "relatedEntityIds": [
+      "CAM-GREEN-TERRACE-PARK"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-02-sunny-crescent.md",
-      "extractedAt": "2026-05-29T13:44:09.706Z",
+      "extractedAt": "2026-05-29T15:31:59.643Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -7195,7 +7705,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-03-linden-court.md",
-      "extractedAt": "2026-05-29T13:44:09.706Z",
+      "extractedAt": "2026-05-29T15:31:59.644Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -7260,7 +7770,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-04-oak-pavilion.md",
-      "extractedAt": "2026-05-29T13:44:09.707Z",
+      "extractedAt": "2026-05-29T15:31:59.644Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -7327,7 +7837,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\campus.md",
-      "extractedAt": "2026-05-29T13:44:09.707Z",
+      "extractedAt": "2026-05-29T15:31:59.644Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "campus",
@@ -7433,7 +7943,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\construction-packages\\CP-SITE-INFRASTRUCTURE.md",
-      "extractedAt": "2026-05-29T13:44:09.708Z",
+      "extractedAt": "2026-05-29T15:31:59.645Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -7477,7 +7987,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\issues\\ISS-CAMPUS-PLANNING-001.md",
-      "extractedAt": "2026-05-29T13:44:09.708Z",
+      "extractedAt": "2026-05-29T15:31:59.645Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -7554,8 +8064,71 @@
   },
   {
     "_metadata": {
+      "sourceFile": "en\\examples\\green-terrace-park\\permits\\PERMIT-CAMPUS-MASTER.md",
+      "extractedAt": "2026-05-29T15:31:59.646Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-CAMPUS-MASTER",
+    "version": "2.4.0",
+    "projectPhase": "design_development",
+    "permitType": "environmental_decision",
+    "permitTitle": "Decyzja o środowiskowych uwarunkowaniach — Green Terrace Park (campus)",
+    "status": "approved_with_conditions",
+    "referenceNumber": "OS.6220.0061.2026",
+    "issuingAuthority": {
+      "name": "Regionalny Dyrektor Ochrony Środowiska",
+      "nameEn": "Regional Director for Environmental Protection",
+      "authorityType": "environmental",
+      "jurisdiction": "Mazowieckie"
+    },
+    "gatesPhase": "concept",
+    "statutoryDeadlineDays": 90,
+    "submittedDate": "2026-01-12",
+    "decisionDate": "2026-04-30",
+    "validFrom": "2026-05-15",
+    "conditions": [
+      {
+        "text": "Stormwater retention sized for the whole campus (4 buildings + shared grounds)",
+        "status": "open"
+      },
+      {
+        "text": "Construction-phase noise limits at the residential boundary",
+        "status": "open"
+      },
+      {
+        "text": "Protected-tree survey and retention plan for the central garden",
+        "status": "met"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "Project Information Sheet (KIP)",
+      "Campus masterplan 1:1000",
+      "Tree survey and green-area balance"
+    ],
+    "feePaid": {
+      "amount": 205,
+      "currency": "PLN"
+    },
+    "relatedEntityIds": [
+      "CAM-GREEN-TERRACE-PARK"
+    ],
+    "responsibility": {
+      "discipline": "sustainability",
+      "organization": "Masterplan consultant"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\project-specification.md",
-      "extractedAt": "2026-05-29T13:44:09.708Z",
+      "extractedAt": "2026-05-29T15:31:59.646Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "project",
@@ -7591,7 +8164,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-BIKE-STORAGE.md",
-      "extractedAt": "2026-05-29T13:44:09.709Z",
+      "extractedAt": "2026-05-29T15:31:59.647Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -7642,7 +8215,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-COMMUNAL-GARDEN.md",
-      "extractedAt": "2026-05-29T13:44:09.709Z",
+      "extractedAt": "2026-05-29T15:31:59.647Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -7694,7 +8267,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-EV-HUB.md",
-      "extractedAt": "2026-05-29T13:44:09.709Z",
+      "extractedAt": "2026-05-29T15:31:59.647Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -7745,7 +8318,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\site-features\\SF-PLAYGROUND.md",
-      "extractedAt": "2026-05-29T13:44:09.710Z",
+      "extractedAt": "2026-05-29T15:31:59.648Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -7793,7 +8366,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\site.md",
-      "extractedAt": "2026-05-29T13:44:09.710Z",
+      "extractedAt": "2026-05-29T15:31:59.648Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site",
@@ -7828,7 +8401,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\examples\\green-terrace-park\\systems\\SYS-DH-LOOP-CAMPUS.md",
-      "extractedAt": "2026-05-29T13:44:09.710Z",
+      "extractedAt": "2026-05-29T15:31:59.648Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -7899,7 +8472,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\guides\\data-provenance.md",
-      "extractedAt": "2026-05-29T13:44:09.711Z",
+      "extractedAt": "2026-05-29T15:31:59.649Z",
       "format": "yaml-frontmatter"
     },
     "title": "Data Provenance",
@@ -7908,7 +8481,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\project-management\\change-management.md",
-      "extractedAt": "2026-05-29T13:44:09.711Z",
+      "extractedAt": "2026-05-29T15:31:59.650Z",
       "format": "yaml-frontmatter"
     },
     "title": "Change Management",
@@ -7917,7 +8490,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\project-management\\data-governance.md",
-      "extractedAt": "2026-05-29T13:44:09.712Z",
+      "extractedAt": "2026-05-29T15:31:59.650Z",
       "format": "yaml-frontmatter"
     },
     "title": "Data Governance",
@@ -7926,7 +8499,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\project-management\\document-control.md",
-      "extractedAt": "2026-05-29T13:44:09.712Z",
+      "extractedAt": "2026-05-29T15:31:59.650Z",
       "format": "yaml-frontmatter"
     },
     "title": "Document Control",
@@ -7935,7 +8508,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\project-management\\governance.md",
-      "extractedAt": "2026-05-29T13:44:09.712Z",
+      "extractedAt": "2026-05-29T15:31:59.651Z",
       "format": "yaml-frontmatter"
     },
     "title": "Governance",
@@ -7944,7 +8517,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\project-management\\index.md",
-      "extractedAt": "2026-05-29T13:44:09.712Z",
+      "extractedAt": "2026-05-29T15:31:59.651Z",
       "format": "yaml-frontmatter"
     },
     "title": "Project Management",
@@ -7953,7 +8526,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\project-management\\risk-management.md",
-      "extractedAt": "2026-05-29T13:44:09.713Z",
+      "extractedAt": "2026-05-29T15:31:59.651Z",
       "format": "yaml-frontmatter"
     },
     "title": "Risk Management",
@@ -7962,7 +8535,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\quality\\index.md",
-      "extractedAt": "2026-05-29T13:44:09.713Z",
+      "extractedAt": "2026-05-29T15:31:59.651Z",
       "format": "yaml-frontmatter"
     },
     "title": "Quality Assurance",
@@ -7971,7 +8544,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\quality\\phase-gates.md",
-      "extractedAt": "2026-05-29T13:44:09.713Z",
+      "extractedAt": "2026-05-29T15:31:59.651Z",
       "format": "yaml-frontmatter"
     },
     "title": "Phase Gate Checklists",
@@ -7980,7 +8553,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\quality\\review-procedures.md",
-      "extractedAt": "2026-05-29T13:44:09.713Z",
+      "extractedAt": "2026-05-29T15:31:59.652Z",
       "format": "yaml-frontmatter"
     },
     "title": "Review Procedures",
@@ -7989,7 +8562,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\regulations\\prawo-budowlane.md",
-      "extractedAt": "2026-05-29T13:44:09.714Z",
+      "extractedAt": "2026-05-29T15:31:59.652Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "regulatory_reference",
@@ -8001,7 +8574,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\regulations\\wt-2021.md",
-      "extractedAt": "2026-05-29T13:44:09.714Z",
+      "extractedAt": "2026-05-29T15:31:59.653Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "regulatory_reference",
@@ -8014,7 +8587,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\sustainability\\energy-carbon.md",
-      "extractedAt": "2026-05-29T13:44:09.715Z",
+      "extractedAt": "2026-05-29T15:31:59.653Z",
       "format": "yaml-frontmatter"
     },
     "title": "Energy & Carbon",
@@ -8023,7 +8596,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\sustainability\\index.md",
-      "extractedAt": "2026-05-29T13:44:09.715Z",
+      "extractedAt": "2026-05-29T15:31:59.654Z",
       "format": "yaml-frontmatter"
     },
     "title": "Sustainability",
@@ -8032,7 +8605,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\sustainability\\indoor-quality.md",
-      "extractedAt": "2026-05-29T13:44:09.715Z",
+      "extractedAt": "2026-05-29T15:31:59.654Z",
       "format": "yaml-frontmatter"
     },
     "title": "Indoor Environment Quality",
@@ -8041,7 +8614,7 @@
   {
     "_metadata": {
       "sourceFile": "en\\sustainability\\water.md",
-      "extractedAt": "2026-05-29T13:44:09.715Z",
+      "extractedAt": "2026-05-29T15:31:59.654Z",
       "format": "yaml-frontmatter"
     },
     "title": "Water Management",
@@ -8050,7 +8623,7 @@
   {
     "_metadata": {
       "sourceFile": "index.md",
-      "extractedAt": "2026-05-29T13:44:09.716Z",
+      "extractedAt": "2026-05-29T15:31:59.655Z",
       "format": "yaml-frontmatter"
     },
     "layout": "home",
@@ -8112,7 +8685,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\index.md",
-      "extractedAt": "2026-05-29T13:44:09.719Z",
+      "extractedAt": "2026-05-29T15:31:59.658Z",
       "format": "yaml-frontmatter"
     },
     "layout": "home",
@@ -8174,7 +8747,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\integracja-bim\\definicje-lod.md",
-      "extractedAt": "2026-05-29T13:44:09.719Z",
+      "extractedAt": "2026-05-29T15:31:59.658Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "technical_reference",
@@ -8186,7 +8759,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\integracja-bim\\encje-ifc.md",
-      "extractedAt": "2026-05-29T13:44:09.720Z",
+      "extractedAt": "2026-05-29T15:31:59.659Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "technical_reference",
@@ -8198,7 +8771,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przepisy\\prawo-budowlane.md",
-      "extractedAt": "2026-05-29T13:44:09.721Z",
+      "extractedAt": "2026-05-29T15:31:59.659Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "regulatory_reference",
@@ -8211,7 +8784,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przepisy\\wt-2021.md",
-      "extractedAt": "2026-05-29T13:44:09.721Z",
+      "extractedAt": "2026-05-29T15:31:59.660Z",
       "format": "yaml-frontmatter"
     },
     "documentType": "regulatory_reference",
@@ -8225,7 +8798,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przewodniki\\proweniencja-danych.md",
-      "extractedAt": "2026-05-29T13:44:09.722Z",
+      "extractedAt": "2026-05-29T15:31:59.660Z",
       "format": "yaml-frontmatter"
     },
     "title": "Proweniencja danych",
@@ -8233,8 +8806,120 @@
   },
   {
     "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-DESIGN-FREEZE-CD.md",
+      "extractedAt": "2026-05-29T15:31:59.660Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-DESIGN-FREEZE-CD",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "gateType": "design_freeze",
+    "gateTitle": "Zamrożenie projektu — Dokumentacja wykonawcza (LOD 400)",
+    "gatePhase": "construction_documents",
+    "status": "passed",
+    "decisionOwner": {
+      "role": "architect",
+      "name": "Anna Nowak"
+    },
+    "decisionDate": "2026-02-27",
+    "prerequisites": [
+      {
+        "description": "Rejestr kolizji międzybranżowych rozwiązany (architektura / konstrukcja / instalacje)",
+        "met": true
+      },
+      {
+        "description": "Macierz zgodności z przepisami kompletna (pożar, dostępność, energia)",
+        "met": true
+      },
+      {
+        "description": "Program przestrzeni uzgodniony z projektem (PROG-BEDROOM-STANDARD)",
+        "met": true,
+        "evidenceRef": "PROG-BEDROOM-STANDARD"
+      },
+      {
+        "description": "Wszystkie współczynniki U przegród zweryfikowane wg WT 2021",
+        "met": true
+      }
+    ],
+    "deliverableRefs": [
+      "BLD-01",
+      "CP-STRUCTURE",
+      "CP-ENVELOPE",
+      "CP-MEP"
+    ],
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-PERMIT-READY.md",
+      "extractedAt": "2026-05-29T15:31:59.661Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-PERMIT-READY",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "gateType": "permit_ready",
+    "gateTitle": "Gotowość do pozwolenia — pozwolenie na budowę uzyskane, lista kontrolna przed budową",
+    "gatePhase": "construction_documents",
+    "status": "passed_with_actions",
+    "decisionOwner": {
+      "role": "investor",
+      "name": "Zielony Taras Sp. z o.o."
+    },
+    "decisionDate": "2025-12-03",
+    "prerequisites": [
+      {
+        "description": "Decyzja WZ ostateczna",
+        "met": true,
+        "evidenceRef": "PERMIT-WZ-001"
+      },
+      {
+        "description": "Pozwolenie na budowę wydane i ostateczne",
+        "met": true,
+        "evidenceRef": "PERMIT-PB-001"
+      },
+      {
+        "description": "Kierownik budowy ustanowiony",
+        "met": false
+      },
+      {
+        "description": "Dziennik budowy (EDB) zarejestrowany",
+        "met": false
+      }
+    ],
+    "deliverableRefs": [
+      "PERMIT-PB-001"
+    ],
+    "relatedPermitIds": [
+      "PERMIT-WZ-001",
+      "PERMIT-PB-001"
+    ],
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\budynek.md",
-      "extractedAt": "2026-05-29T13:44:09.722Z",
+      "extractedAt": "2026-05-29T15:31:59.662Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -8276,7 +8961,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\drogi-cyrkulacji\\CR-FIRE-EGRESS-L01.md",
-      "extractedAt": "2026-05-29T13:44:09.723Z",
+      "extractedAt": "2026-05-29T15:31:59.662Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "circulation_route",
@@ -8388,7 +9073,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\dzialka.md",
-      "extractedAt": "2026-05-29T13:44:09.723Z",
+      "extractedAt": "2026-05-29T15:31:59.662Z",
       "format": "yaml-frontmatter"
     },
     "id": "SITE-GREEN-TERRACE",
@@ -8538,7 +9223,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\elementy-terenu\\sf-ogrod-polnocny.md",
-      "extractedAt": "2026-05-29T13:44:09.724Z",
+      "extractedAt": "2026-05-29T15:31:59.663Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -8618,7 +9303,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\elementy-terenu\\sf-parking.md",
-      "extractedAt": "2026-05-29T13:44:09.724Z",
+      "extractedAt": "2026-05-29T15:31:59.663Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -8695,7 +9380,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\klatka-schodowa-a.md",
-      "extractedAt": "2026-05-29T13:44:09.725Z",
+      "extractedAt": "2026-05-29T15:31:59.664Z",
       "format": "yaml-frontmatter"
     },
     "id": "VC-STAIR-A",
@@ -8834,7 +9519,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\materialy\\MT-CONCRETE-C30-37.md",
-      "extractedAt": "2026-05-29T13:44:09.725Z",
+      "extractedAt": "2026-05-29T15:31:59.664Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "material_type",
@@ -8899,7 +9584,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\materialy\\MT-INSULATION-PIR-150.md",
-      "extractedAt": "2026-05-29T13:44:09.726Z",
+      "extractedAt": "2026-05-29T15:31:59.664Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "material_type",
@@ -8963,7 +9648,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-door-stair-01.md",
-      "extractedAt": "2026-05-29T13:44:09.726Z",
+      "extractedAt": "2026-05-29T15:31:59.665Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening",
@@ -9059,7 +9744,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-win-n-001.md",
-      "extractedAt": "2026-05-29T13:44:09.727Z",
+      "extractedAt": "2026-05-29T15:31:59.665Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening",
@@ -9131,7 +9816,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\otwory\\opn-win-n-002.md",
-      "extractedAt": "2026-05-29T13:44:09.727Z",
+      "extractedAt": "2026-05-29T15:31:59.665Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening",
@@ -9198,7 +9883,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-instalacje.md",
-      "extractedAt": "2026-05-29T13:44:09.728Z",
+      "extractedAt": "2026-05-29T15:31:59.666Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -9264,7 +9949,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-konstrukcja.md",
-      "extractedAt": "2026-05-29T13:44:09.728Z",
+      "extractedAt": "2026-05-29T15:31:59.666Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -9325,7 +10010,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-przegroda.md",
-      "extractedAt": "2026-05-29T13:44:09.729Z",
+      "extractedAt": "2026-05-29T15:31:59.667Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -9393,7 +10078,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\pakiety-budowlane\\cp-wykonczenie.md",
-      "extractedAt": "2026-05-29T13:44:09.729Z",
+      "extractedAt": "2026-05-29T15:31:59.667Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -9460,7 +10145,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-00.md",
-      "extractedAt": "2026-05-29T13:44:09.730Z",
+      "extractedAt": "2026-05-29T15:31:59.667Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -9484,7 +10169,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-01.md",
-      "extractedAt": "2026-05-29T13:44:09.730Z",
+      "extractedAt": "2026-05-29T15:31:59.668Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -9522,7 +10207,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-02.md",
-      "extractedAt": "2026-05-29T13:44:09.731Z",
+      "extractedAt": "2026-05-29T15:31:59.668Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -9547,7 +10232,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-03.md",
-      "extractedAt": "2026-05-29T13:44:09.731Z",
+      "extractedAt": "2026-05-29T15:31:59.668Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -9572,7 +10257,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-04.md",
-      "extractedAt": "2026-05-29T13:44:09.731Z",
+      "extractedAt": "2026-05-29T15:31:59.669Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -9597,7 +10282,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\poziomy\\poziom-05.md",
-      "extractedAt": "2026-05-29T13:44:09.732Z",
+      "extractedAt": "2026-05-29T15:31:59.669Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -9621,8 +10306,135 @@
   },
   {
     "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-PB-001.md",
+      "extractedAt": "2026-05-29T15:31:59.669Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-PB-001",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "permitType": "building_permit",
+    "permitTitle": "Pozwolenie na budowę — Zielony Taras (BLD-01)",
+    "status": "valid",
+    "referenceNumber": "AB.6740.0337.2025",
+    "issuingAuthority": {
+      "name": "Starosta — Organ Administracji Architektoniczno-Budowlanej",
+      "nameEn": "County Architecture-and-Building Administration Authority",
+      "authorityType": "architecture_building_admin",
+      "jurisdiction": "Warszawa"
+    },
+    "gatesPhase": "construction",
+    "statutoryDeadlineDays": 65,
+    "submittedDate": "2025-09-15",
+    "decisionDate": "2025-11-18",
+    "validFrom": "2025-12-03",
+    "expiryDate": "2028-12-03",
+    "appealDeadline": "2025-12-02",
+    "conditions": [
+      {
+        "text": "Kierownik budowy musi zostać ustanowiony przed rozpoczęciem robót",
+        "status": "open"
+      },
+      {
+        "text": "Dziennik budowy (EDB) zarejestrowany przed pierwszym wpisem robót",
+        "status": "open"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "PERMIT-WZ-001 (decyzja WZ, ostateczna)",
+      "PZT — projekt zagospodarowania terenu",
+      "PAB — projekt architektoniczno-budowlany",
+      "Oświadczenie o prawie do dysponowania nieruchomością na cele budowlane",
+      "Opinia geotechniczna"
+    ],
+    "feePaid": {
+      "amount": 539,
+      "currency": "PLN"
+    },
+    "appealOfPermitId": "PERMIT-WZ-001",
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "architectural",
+      "organization": "Pracownia Architektoniczna (główny projektant)"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-WZ-001.md",
+      "extractedAt": "2026-05-29T15:31:59.670Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-WZ-001",
+    "version": "2.4.0",
+    "projectPhase": "construction_documents",
+    "permitType": "zoning_decision",
+    "permitTitle": "Decyzja o warunkach zabudowy (WZ) — Zielony Taras",
+    "status": "valid",
+    "referenceNumber": "WZ/2025/0142",
+    "issuingAuthority": {
+      "name": "Prezydent Miasta — Wydział Architektury i Urbanistyki",
+      "nameEn": "City President — Department of Architecture and Urban Planning",
+      "authorityType": "municipal",
+      "jurisdiction": "Warszawa"
+    },
+    "gatesPhase": "concept",
+    "statutoryDeadlineDays": 60,
+    "submittedDate": "2025-01-20",
+    "decisionDate": "2025-04-08",
+    "validFrom": "2025-04-22",
+    "conditions": [
+      {
+        "text": "Maksymalna wysokość budynku 5 kondygnacji / 16,0 m do okapu",
+        "status": "met"
+      },
+      {
+        "text": "Minimum 25% powierzchni biologicznie czynnej działki",
+        "status": "met"
+      },
+      {
+        "text": "Linia zabudowy 6,0 m od północnej granicy działki",
+        "status": "met"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "Mapa do celów lokalizacyjnych 1:500 (wyrys z PODGiK)",
+      "Warunki przyłączenia mediów (woda, kanalizacja, energia, ciepło sieciowe)",
+      "Opis koncepcji zabudowy"
+    ],
+    "feePaid": {
+      "amount": 598,
+      "currency": "PLN"
+    },
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "architectural",
+      "organization": "Pracownia Architektoniczna (główny projektant)"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\programy-przestrzeni\\PROG-BEDROOM-STANDARD.md",
-      "extractedAt": "2026-05-29T13:44:09.733Z",
+      "extractedAt": "2026-05-29T15:31:59.670Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space_program",
@@ -9673,7 +10485,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\przegroda-sciana-zewnetrzna-typ-a.md",
-      "extractedAt": "2026-05-29T13:44:09.733Z",
+      "extractedAt": "2026-05-29T15:31:59.671Z",
       "format": "yaml-frontmatter"
     },
     "id": "ENV-EW-01",
@@ -9875,7 +10687,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\korytarz.md",
-      "extractedAt": "2026-05-29T13:44:09.734Z",
+      "extractedAt": "2026-05-29T15:31:59.671Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -9931,7 +10743,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\pustka-klatki-schodowej.md",
-      "extractedAt": "2026-05-29T13:44:09.735Z",
+      "extractedAt": "2026-05-29T15:31:59.672Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -9973,7 +10785,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-01.md",
-      "extractedAt": "2026-05-29T13:44:09.735Z",
+      "extractedAt": "2026-05-29T15:31:59.672Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -10037,7 +10849,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-02.md",
-      "extractedAt": "2026-05-29T13:44:09.736Z",
+      "extractedAt": "2026-05-29T15:31:59.672Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -10096,7 +10908,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\specyfikacja-projektu.md",
-      "extractedAt": "2026-05-29T13:44:09.736Z",
+      "extractedAt": "2026-05-29T15:31:59.673Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "project",
@@ -10175,7 +10987,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\strefy\\strefa-akustyczna-noc.md",
-      "extractedAt": "2026-05-29T13:44:09.737Z",
+      "extractedAt": "2026-05-29T15:31:59.673Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone",
@@ -10213,7 +11025,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\strefy\\strefa-hvac-polnoc.md",
-      "extractedAt": "2026-05-29T13:44:09.737Z",
+      "extractedAt": "2026-05-29T15:31:59.674Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone",
@@ -10255,7 +11067,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\strefy\\strefa-pozarowa-zl-iv.md",
-      "extractedAt": "2026-05-29T13:44:09.738Z",
+      "extractedAt": "2026-05-29T15:31:59.674Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone",
@@ -10295,7 +11107,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\systemy\\sys-hvac-01-ogrzewanie.md",
-      "extractedAt": "2026-05-29T13:44:09.738Z",
+      "extractedAt": "2026-05-29T15:31:59.674Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -10328,7 +11140,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\systemy\\sys-hvac-01-wentylacja.md",
-      "extractedAt": "2026-05-29T13:44:09.738Z",
+      "extractedAt": "2026-05-29T15:31:59.674Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -10359,7 +11171,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\systemy\\sys-hvac-01.md",
-      "extractedAt": "2026-05-29T13:44:09.739Z",
+      "extractedAt": "2026-05-29T15:31:59.675Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -10396,7 +11208,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\systemy-konstrukcyjne\\STR-GREEN-TERRACE.md",
-      "extractedAt": "2026-05-29T13:44:09.739Z",
+      "extractedAt": "2026-05-29T15:31:59.675Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "structural_system",
@@ -10494,7 +11306,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-AIRTIGHTNESS-001.md",
-      "extractedAt": "2026-05-29T13:44:09.740Z",
+      "extractedAt": "2026-05-29T15:31:59.676Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -10575,7 +11387,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-FIRE-DRILL-001.md",
-      "extractedAt": "2026-05-29T13:44:09.740Z",
+      "extractedAt": "2026-05-29T15:31:59.676Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -10663,7 +11475,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.740Z",
+      "extractedAt": "2026-05-29T15:31:59.676Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -10751,7 +11563,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-elementow-terenu\\sft-nawierzchnia-przepuszczalna.md",
-      "extractedAt": "2026-05-29T13:44:09.741Z",
+      "extractedAt": "2026-05-29T15:31:59.677Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature_type",
@@ -10821,7 +11633,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-otworow\\drzwi-pozarowe-ei30.md",
-      "extractedAt": "2026-05-29T13:44:09.741Z",
+      "extractedAt": "2026-05-29T15:31:59.677Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening_type",
@@ -10871,7 +11683,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-otworow\\okno-internorm-kf410.md",
-      "extractedAt": "2026-05-29T13:44:09.742Z",
+      "extractedAt": "2026-05-29T15:31:59.677Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "opening_type",
@@ -10920,7 +11732,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-przestrzeni\\ST-BEDROOM-STANDARD-A.md",
-      "extractedAt": "2026-05-29T13:44:09.742Z",
+      "extractedAt": "2026-05-29T15:31:59.678Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space_type",
@@ -11124,7 +11936,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-stref\\strefa-akustyczna-noc.md",
-      "extractedAt": "2026-05-29T13:44:09.743Z",
+      "extractedAt": "2026-05-29T15:31:59.678Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone_type",
@@ -11157,7 +11969,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-stref\\strefa-hvac-mieszkalna.md",
-      "extractedAt": "2026-05-29T13:44:09.743Z",
+      "extractedAt": "2026-05-29T15:31:59.679Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone_type",
@@ -11193,7 +12005,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-stref\\strefa-pozarowa-zl-iv.md",
-      "extractedAt": "2026-05-29T13:44:09.743Z",
+      "extractedAt": "2026-05-29T15:31:59.679Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "zone_type",
@@ -11229,7 +12041,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-systemow\\hvac-mieszkalny-mvhr.md",
-      "extractedAt": "2026-05-29T13:44:09.744Z",
+      "extractedAt": "2026-05-29T15:31:59.679Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system_type",
@@ -11324,7 +12136,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-zasobow\\mvhr-mieszkalny.md",
-      "extractedAt": "2026-05-29T13:44:09.744Z",
+      "extractedAt": "2026-05-29T15:31:59.680Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset_type",
@@ -11351,7 +12163,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-zasobow\\pompa-ciepla-bosch-7000i.md",
-      "extractedAt": "2026-05-29T13:44:09.745Z",
+      "extractedAt": "2026-05-29T15:31:59.680Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset_type",
@@ -11416,7 +12228,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-zasobow\\rozdzielacz-ufh-12-stref.md",
-      "extractedAt": "2026-05-29T13:44:09.745Z",
+      "extractedAt": "2026-05-29T15:31:59.680Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset_type",
@@ -11444,7 +12256,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-FIRE-EGRESS-TIME-001.md",
-      "extractedAt": "2026-05-29T13:44:09.745Z",
+      "extractedAt": "2026-05-29T15:31:59.681Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "requirement",
@@ -11624,7 +12436,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-LEVEL-ACOUSTIC-B.md",
-      "extractedAt": "2026-05-29T13:44:09.746Z",
+      "extractedAt": "2026-05-29T15:31:59.682Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "requirement",
@@ -11776,7 +12588,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-LEVEL-FIRE-RATING.md",
-      "extractedAt": "2026-05-29T13:44:09.746Z",
+      "extractedAt": "2026-05-29T15:31:59.682Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "requirement",
@@ -11872,7 +12684,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\zasoby\\ai-hp-01.md",
-      "extractedAt": "2026-05-29T13:44:09.747Z",
+      "extractedAt": "2026-05-29T15:31:59.682Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -11916,7 +12728,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\zasoby\\ai-mvhr-01.md",
-      "extractedAt": "2026-05-29T13:44:09.747Z",
+      "extractedAt": "2026-05-29T15:31:59.683Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -12102,7 +12914,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\zasoby\\ai-ufh-manifold-01.md",
-      "extractedAt": "2026-05-29T13:44:09.748Z",
+      "extractedAt": "2026-05-29T15:31:59.683Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -12326,7 +13138,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-BID-001.md",
-      "extractedAt": "2026-05-29T13:44:09.748Z",
+      "extractedAt": "2026-05-29T15:31:59.684Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -12400,7 +13212,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-CO-001.md",
-      "extractedAt": "2026-05-29T13:44:09.749Z",
+      "extractedAt": "2026-05-29T15:31:59.684Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -12477,7 +13289,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras\\zgloszenia\\ISS-RFI-001.md",
-      "extractedAt": "2026-05-29T13:44:09.749Z",
+      "extractedAt": "2026-05-29T15:31:59.684Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -12552,7 +13364,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\ankiety-mieszkancow\\SURVEY-BLD-01-IEQ-2027.md",
-      "extractedAt": "2026-05-29T13:44:09.749Z",
+      "extractedAt": "2026-05-29T15:31:59.685Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "occupant_survey",
@@ -12679,8 +13491,64 @@
   },
   {
     "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\bramki-zatwierdzen\\GATE-COMPLETION-AUTHORIZED.md",
+      "extractedAt": "2026-05-29T15:31:59.685Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-COMPLETION-AUTHORIZED",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "gateType": "completion_authorized",
+    "gateTitle": "Autoryzacja zakończenia — pozwolenie na użytkowanie wydane, przekazanie do eksploatacji",
+    "gatePhase": "commissioning",
+    "status": "passed",
+    "decisionOwner": {
+      "role": "authority",
+      "name": "PINB (Powiatowy Nadzór Budowlany)"
+    },
+    "decisionDate": "2026-06-19",
+    "prerequisites": [
+      {
+        "description": "Pozwolenie na użytkowanie wydane",
+        "met": true,
+        "evidenceRef": "PERMIT-OCCUPANCY-001"
+      },
+      {
+        "description": "Wszystkie testy rozruchowe wykonane (MVHR, szczelność, próbna ewakuacja)",
+        "met": true,
+        "evidenceRef": "CT-MVHR-001"
+      },
+      {
+        "description": "Cyfrowa Książka Obiektu Budowlanego (c-KOB) założona",
+        "met": true
+      },
+      {
+        "description": "Instrukcje O&M + gwarancje przekazane zarządcy budynku",
+        "met": true
+      }
+    ],
+    "deliverableRefs": [
+      "PERMIT-OCCUPANCY-001"
+    ],
+    "relatedPermitIds": [
+      "PERMIT-OCCUPANCY-001"
+    ],
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\budynek.md",
-      "extractedAt": "2026-05-29T13:44:09.750Z",
+      "extractedAt": "2026-05-29T15:31:59.686Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -12737,7 +13605,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\dzialka.md",
-      "extractedAt": "2026-05-29T13:44:09.750Z",
+      "extractedAt": "2026-05-29T15:31:59.686Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site",
@@ -12775,7 +13643,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\poziomy\\poziom-04.md",
-      "extractedAt": "2026-05-29T13:44:09.751Z",
+      "extractedAt": "2026-05-29T15:31:59.686Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "level",
@@ -12802,8 +13670,163 @@
   },
   {
     "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\pozwolenia\\PERMIT-OCCUPANCY-001.md",
+      "extractedAt": "2026-05-29T15:31:59.687Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-OCCUPANCY-001",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "permitType": "occupancy_permit",
+    "permitTitle": "Pozwolenie na użytkowanie — Zielony Taras (BLD-01)",
+    "status": "valid",
+    "referenceNumber": "PINB.5142.0098.2026",
+    "issuingAuthority": {
+      "name": "Powiatowy Inspektorat Nadzoru Budowlanego (PINB)",
+      "nameEn": "County Building Control Authority (PINB)",
+      "authorityType": "building_control_pinb",
+      "jurisdiction": "Warszawa"
+    },
+    "gatesPhase": "operation",
+    "statutoryDeadlineDays": 60,
+    "submittedDate": "2026-05-04",
+    "decisionDate": "2026-06-19",
+    "validFrom": "2026-07-03",
+    "conditions": [
+      {
+        "text": "Obowiązkowa kontrola PINB zakończona (budynek > 4 kondygnacji)",
+        "status": "met"
+      },
+      {
+        "text": "Geodezyjna inwentaryzacja powykonawcza zarejestrowana w PODGiK",
+        "status": "met"
+      },
+      {
+        "text": "Odbiór przeciwpożarowy straży pożarnej w aktach",
+        "status": "met"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "Dziennik budowy (eksport EDB)",
+      "Oświadczenia kierownika budowy o zakończeniu i uporządkowaniu",
+      "Geodezyjna inwentaryzacja powykonawcza (PODGiK)",
+      "Świadectwo charakterystyki energetycznej",
+      "Protokoły badań: elektryczne, gazowe, kominowe/wentylacja, wodne"
+    ],
+    "feePaid": {
+      "amount": 135,
+      "currency": "PLN"
+    },
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "other",
+      "organization": "Zielony Taras Sp. z o.o. (inwestor)"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-5YEAR-DUE-2028.md",
+      "extractedAt": "2026-05-29T15:31:59.687Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "regulatory_inspection",
+    "id": "INSP-5YEAR-DUE-2028",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "inspectionType": "periodic_5year",
+    "inspectionTitle": "Pięcioletni przegląd budynku — zaplanowany 2028",
+    "statutoryBasis": "Prawo Budowlane Art. 62 ust. 1 pkt 2",
+    "status": "scheduled",
+    "buildingId": "BLD-01",
+    "frequencyMonths": 60,
+    "dueDate": "2031-07-03",
+    "nextDueDate": "2031-07-03",
+    "result": {
+      "summary": "Jeszcze nie wykonany — pierwszy przegląd pięcioletni zaplanowany w cyklu ustawowym.",
+      "deficiencies": []
+    },
+    "cKobEntry": {
+      "recorded": false,
+      "system": "Cyfrowa Książka Obiektu Budowlanego (GUNB)"
+    },
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "other",
+      "organization": "GreenFM Sp. z o.o. (zarządca budynku)"
+    },
+    "authors": [
+      {
+        "name": "Marek Zieliński",
+        "role": "inspector"
+      }
+    ]
+  },
+  {
+    "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-ANNUAL-2027.md",
+      "extractedAt": "2026-05-29T15:31:59.688Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "regulatory_inspection",
+    "id": "INSP-ANNUAL-2027",
+    "version": "2.4.0",
+    "projectPhase": "operation",
+    "inspectionType": "periodic_annual",
+    "inspectionTitle": "Roczny przegląd stanu technicznego budynku 2027",
+    "statutoryBasis": "Prawo Budowlane Art. 62 ust. 1 pkt 1",
+    "status": "completed_pass",
+    "buildingId": "BLD-01",
+    "frequencyMonths": 12,
+    "dueDate": "2027-07-03",
+    "performedDate": "2027-06-28",
+    "nextDueDate": "2028-07-03",
+    "inspector": {
+      "name": "Marek Zieliński",
+      "license": "Uprawnienia budowlane MAZ/0421/POOK/12",
+      "organization": "GreenFM Sp. z o.o.",
+      "role": "inspektor — przegląd okresowy"
+    },
+    "result": {
+      "outcome": "pass",
+      "summary": "Pierwszy roczny przegląd okresowy po przekazaniu do eksploatacji.\nSkontrolowano elementy budynku, wykończenia, instalacje i urządzenia\nbezpieczeństwa. Brak usterek konstrukcyjnych i bezpieczeństwa. Jedna drobna\nuwaga (zużycie uszczelnienia w korytarzu) prowadzona w ramach konserwacji\nnajemcy, nie jest usterką w rozumieniu Art. 62.\n",
+      "deficiencies": []
+    },
+    "cKobEntry": {
+      "recorded": true,
+      "recordRef": "c-KOB/BLD-01/2027/PER-01",
+      "system": "Cyfrowa Książka Obiektu Budowlanego (GUNB)"
+    },
+    "certificateRef": "przeglad-okresowy-roczny-2027.pdf",
+    "relatedEntityIds": [
+      "BLD-01"
+    ],
+    "responsibility": {
+      "discipline": "other",
+      "organization": "GreenFM Sp. z o.o. (zarządca budynku)"
+    },
+    "authors": [
+      {
+        "name": "Marek Zieliński",
+        "role": "inspector"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przestrzenie\\sypialnia-402.md",
-      "extractedAt": "2026-05-29T13:44:09.751Z",
+      "extractedAt": "2026-05-29T15:31:59.688Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "space",
@@ -12857,7 +13880,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\rekomendacje-retrocx\\RCX-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.752Z",
+      "extractedAt": "2026-05-29T15:31:59.688Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "retrocx_recommendation",
@@ -12915,7 +13938,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\strumienie-telemetrii\\TEL-CO2-402-001.md",
-      "extractedAt": "2026-05-29T13:44:09.752Z",
+      "extractedAt": "2026-05-29T15:31:59.689Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "telemetry_stream",
@@ -12992,7 +14015,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\strumienie-telemetrii\\TEL-HP-COP-001.md",
-      "extractedAt": "2026-05-29T13:44:09.753Z",
+      "extractedAt": "2026-05-29T15:31:59.689Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "telemetry_stream",
@@ -13073,7 +14096,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\systemy\\sys-hvac-01.md",
-      "extractedAt": "2026-05-29T13:44:09.753Z",
+      "extractedAt": "2026-05-29T15:31:59.689Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -13117,7 +14140,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-AIRTIGHTNESS-001.md",
-      "extractedAt": "2026-05-29T13:44:09.753Z",
+      "extractedAt": "2026-05-29T15:31:59.690Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -13214,7 +14237,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-FIRE-DRILL-001.md",
-      "extractedAt": "2026-05-29T13:44:09.754Z",
+      "extractedAt": "2026-05-29T15:31:59.690Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -13314,7 +14337,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\testy-rozruchowe\\CT-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.754Z",
+      "extractedAt": "2026-05-29T15:31:59.690Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "commissioning_test",
@@ -13413,7 +14436,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zapisy-weryfikacji-energetycznej\\EVR-BLD-01-2027.md",
-      "extractedAt": "2026-05-29T13:44:09.755Z",
+      "extractedAt": "2026-05-29T15:31:59.691Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "energy_verification_record",
@@ -13491,7 +14514,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zasoby\\ai-hp-01-ops.md",
-      "extractedAt": "2026-05-29T13:44:09.756Z",
+      "extractedAt": "2026-05-29T15:31:59.691Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -13575,7 +14598,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zasoby\\ai-mvhr-01-ops.md",
-      "extractedAt": "2026-05-29T13:44:09.756Z",
+      "extractedAt": "2026-05-29T15:31:59.692Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -13658,7 +14681,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zasoby\\ai-ufh-manifold-01-ops.md",
-      "extractedAt": "2026-05-29T13:44:09.756Z",
+      "extractedAt": "2026-05-29T15:31:59.692Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "asset",
@@ -13728,7 +14751,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-ANOMALY-CO2-001.md",
-      "extractedAt": "2026-05-29T13:44:09.757Z",
+      "extractedAt": "2026-05-29T15:31:59.692Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -13779,7 +14802,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-INSPECTION-FD-001.md",
-      "extractedAt": "2026-05-29T13:44:09.757Z",
+      "extractedAt": "2026-05-29T15:31:59.693Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -13840,7 +14863,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-NC-AIRTIGHTNESS-001.md",
-      "extractedAt": "2026-05-29T13:44:09.758Z",
+      "extractedAt": "2026-05-29T15:31:59.693Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -13900,7 +14923,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-RETROCX-MVHR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.758Z",
+      "extractedAt": "2026-05-29T15:31:59.693Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -13959,7 +14982,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-TENANT-MR-001.md",
-      "extractedAt": "2026-05-29T13:44:09.759Z",
+      "extractedAt": "2026-05-29T15:31:59.694Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -14019,7 +15042,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-WARRANTY-HP-001.md",
-      "extractedAt": "2026-05-29T13:44:09.759Z",
+      "extractedAt": "2026-05-29T15:31:59.694Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -14091,8 +15114,68 @@
   },
   {
     "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\bramki-zatwierdzen\\GATE-CAMPUS-PLANNING.md",
+      "extractedAt": "2026-05-29T15:31:59.694Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "approval_gate",
+    "id": "GATE-CAMPUS-PLANNING",
+    "version": "2.4.0",
+    "projectPhase": "design_development",
+    "gateType": "planning_path_confirmed",
+    "gateTitle": "Ścieżka planistyczna kampusu potwierdzona — etapowanie i sekwencja wspólnej infrastruktury",
+    "gatePhase": "concept",
+    "status": "in_progress",
+    "decisionOwner": {
+      "role": "investor",
+      "name": "Zielony Taras Park Development"
+    },
+    "prerequisites": [
+      {
+        "description": "Decyzja środowiskowa dla kampusu uzyskana",
+        "met": true,
+        "evidenceRef": "PERMIT-CAMPUS-MASTER"
+      },
+      {
+        "description": "Potwierdzona wydajność wspólnej pętli ciepłowniczej dla 4 budynków",
+        "met": true,
+        "evidenceRef": "SYS-DH-LOOP-CAMPUS"
+      },
+      {
+        "description": "Uzgodniona kolejność etapowania budynków (które pozwolenia w jakiej kolejności)",
+        "met": false
+      },
+      {
+        "description": "Pakiet budowy wspólnej infrastruktury terenu zsekwencjonowany",
+        "met": false,
+        "evidenceRef": "CP-SITE-INFRASTRUCTURE"
+      }
+    ],
+    "deliverableRefs": [
+      "PERMIT-CAMPUS-MASTER",
+      "CP-SITE-INFRASTRUCTURE"
+    ],
+    "blockingIssueIds": [
+      "ISS-CAMPUS-PLANNING-001"
+    ],
+    "relatedPermitIds": [
+      "PERMIT-CAMPUS-MASTER"
+    ],
+    "relatedEntityIds": [
+      "CAM-GREEN-TERRACE-PARK"
+    ],
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-02-sloneczny-polksiezyc.md",
-      "extractedAt": "2026-05-29T13:44:09.759Z",
+      "extractedAt": "2026-05-29T15:31:59.695Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -14155,7 +15238,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-03-dziedziniec-lipowy.md",
-      "extractedAt": "2026-05-29T13:44:09.760Z",
+      "extractedAt": "2026-05-29T15:31:59.695Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -14220,7 +15303,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-04-pawilon-debowy.md",
-      "extractedAt": "2026-05-29T13:44:09.760Z",
+      "extractedAt": "2026-05-29T15:31:59.695Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "building",
@@ -14287,7 +15370,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\dzialka.md",
-      "extractedAt": "2026-05-29T13:44:09.760Z",
+      "extractedAt": "2026-05-29T15:31:59.696Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site",
@@ -14322,7 +15405,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-BIKE-STORAGE.md",
-      "extractedAt": "2026-05-29T13:44:09.761Z",
+      "extractedAt": "2026-05-29T15:31:59.696Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -14372,7 +15455,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-COMMUNAL-GARDEN.md",
-      "extractedAt": "2026-05-29T13:44:09.761Z",
+      "extractedAt": "2026-05-29T15:31:59.696Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -14424,7 +15507,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-EV-HUB.md",
-      "extractedAt": "2026-05-29T13:44:09.762Z",
+      "extractedAt": "2026-05-29T15:31:59.697Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -14475,7 +15558,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\elementy-terenu\\SF-PLAYGROUND.md",
-      "extractedAt": "2026-05-29T13:44:09.762Z",
+      "extractedAt": "2026-05-29T15:31:59.697Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "site_feature",
@@ -14523,7 +15606,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\kampus.md",
-      "extractedAt": "2026-05-29T13:44:09.762Z",
+      "extractedAt": "2026-05-29T15:31:59.697Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "campus",
@@ -14629,7 +15712,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\pakiety-budowlane\\CP-SITE-INFRASTRUCTURE.md",
-      "extractedAt": "2026-05-29T13:44:09.763Z",
+      "extractedAt": "2026-05-29T15:31:59.698Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "construction_package",
@@ -14672,8 +15755,71 @@
   },
   {
     "_metadata": {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\pozwolenia\\PERMIT-CAMPUS-MASTER.md",
+      "extractedAt": "2026-05-29T15:31:59.698Z",
+      "format": "yaml-frontmatter"
+    },
+    "entityType": "permit",
+    "id": "PERMIT-CAMPUS-MASTER",
+    "version": "2.4.0",
+    "projectPhase": "design_development",
+    "permitType": "environmental_decision",
+    "permitTitle": "Decyzja o środowiskowych uwarunkowaniach — Zielony Taras Park (kampus)",
+    "status": "approved_with_conditions",
+    "referenceNumber": "OS.6220.0061.2026",
+    "issuingAuthority": {
+      "name": "Regionalny Dyrektor Ochrony Środowiska",
+      "nameEn": "Regional Director for Environmental Protection",
+      "authorityType": "environmental",
+      "jurisdiction": "Mazowieckie"
+    },
+    "gatesPhase": "concept",
+    "statutoryDeadlineDays": 90,
+    "submittedDate": "2026-01-12",
+    "decisionDate": "2026-04-30",
+    "validFrom": "2026-05-15",
+    "conditions": [
+      {
+        "text": "Retencja wód opadowych zwymiarowana dla całego kampusu (4 budynki + tereny wspólne)",
+        "status": "open"
+      },
+      {
+        "text": "Limity hałasu w fazie budowy na granicy zabudowy mieszkaniowej",
+        "status": "open"
+      },
+      {
+        "text": "Inwentaryzacja drzew chronionych i plan ich zachowania dla ogrodu centralnego",
+        "status": "met"
+      }
+    ],
+    "prerequisiteDocuments": [
+      "Karta Informacyjna Przedsięwzięcia (KIP)",
+      "Masterplan kampusu 1:1000",
+      "Inwentaryzacja drzew i bilans powierzchni biologicznie czynnej"
+    ],
+    "feePaid": {
+      "amount": 205,
+      "currency": "PLN"
+    },
+    "relatedEntityIds": [
+      "CAM-GREEN-TERRACE-PARK"
+    ],
+    "responsibility": {
+      "discipline": "sustainability",
+      "organization": "Konsultant masterplanu"
+    },
+    "authors": [
+      {
+        "name": "Anna Nowak",
+        "role": "architect",
+        "license": "IARP 5678"
+      }
+    ]
+  },
+  {
+    "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\specyfikacja-projektu.md",
-      "extractedAt": "2026-05-29T13:44:09.763Z",
+      "extractedAt": "2026-05-29T15:31:59.698Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "project",
@@ -14709,7 +15855,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\systemy\\SYS-DH-LOOP-CAMPUS.md",
-      "extractedAt": "2026-05-29T13:44:09.763Z",
+      "extractedAt": "2026-05-29T15:31:59.699Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "system",
@@ -14779,7 +15925,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\zgloszenia\\ISS-CAMPUS-PLANNING-001.md",
-      "extractedAt": "2026-05-29T13:44:09.764Z",
+      "extractedAt": "2026-05-29T15:31:59.699Z",
       "format": "yaml-frontmatter"
     },
     "entityType": "issue",
@@ -14857,7 +16003,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zarzadzanie-projektem\\index.md",
-      "extractedAt": "2026-05-29T13:44:09.765Z",
+      "extractedAt": "2026-05-29T15:31:59.700Z",
       "format": "yaml-frontmatter"
     },
     "title": "Zarządzanie Projektem",
@@ -14866,7 +16012,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zarzadzanie-projektem\\kontrola-dokumentow.md",
-      "extractedAt": "2026-05-29T13:44:09.765Z",
+      "extractedAt": "2026-05-29T15:31:59.700Z",
       "format": "yaml-frontmatter"
     },
     "title": "Kontrola dokumentów",
@@ -14875,7 +16021,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie-danymi.md",
-      "extractedAt": "2026-05-29T13:44:09.766Z",
+      "extractedAt": "2026-05-29T15:31:59.701Z",
       "format": "yaml-frontmatter"
     },
     "title": "Zarządzanie danymi",
@@ -14884,7 +16030,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie-ryzykiem.md",
-      "extractedAt": "2026-05-29T13:44:09.766Z",
+      "extractedAt": "2026-05-29T15:31:59.701Z",
       "format": "yaml-frontmatter"
     },
     "title": "Zarządzanie ryzykiem",
@@ -14893,7 +16039,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie-zmianami.md",
-      "extractedAt": "2026-05-29T13:44:09.766Z",
+      "extractedAt": "2026-05-29T15:31:59.701Z",
       "format": "yaml-frontmatter"
     },
     "title": "Zarządzanie zmianami",
@@ -14902,7 +16048,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zarzadzanie-projektem\\zarzadzanie.md",
-      "extractedAt": "2026-05-29T13:44:09.767Z",
+      "extractedAt": "2026-05-29T15:31:59.702Z",
       "format": "yaml-frontmatter"
     },
     "title": "Nadzór i organizacja",
@@ -14911,7 +16057,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zrownowazonosc\\energia-karbon.md",
-      "extractedAt": "2026-05-29T13:44:09.767Z",
+      "extractedAt": "2026-05-29T15:31:59.702Z",
       "format": "yaml-frontmatter"
     },
     "title": "Energia i ślad węglowy",
@@ -14920,7 +16066,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zrownowazonosc\\index.md",
-      "extractedAt": "2026-05-29T13:44:09.767Z",
+      "extractedAt": "2026-05-29T15:31:59.702Z",
       "format": "yaml-frontmatter"
     },
     "title": "Zrównoważone budownictwo",
@@ -14929,7 +16075,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zrownowazonosc\\jakosc-wnetrz.md",
-      "extractedAt": "2026-05-29T13:44:09.768Z",
+      "extractedAt": "2026-05-29T15:31:59.703Z",
       "format": "yaml-frontmatter"
     },
     "title": "Jakość środowiska wewnętrznego",
@@ -14938,7 +16084,7 @@
   {
     "_metadata": {
       "sourceFile": "pl\\zrownowazonosc\\woda.md",
-      "extractedAt": "2026-05-29T13:44:09.768Z",
+      "extractedAt": "2026-05-29T15:31:59.703Z",
       "format": "yaml-frontmatter"
     },
     "title": "Gospodarka wodna",

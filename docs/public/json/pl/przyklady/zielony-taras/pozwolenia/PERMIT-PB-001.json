@@ -1,0 +1,64 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-PB-001.md",
+    "extractedAt": "2026-05-29T15:31:59.669Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "permit",
+  "id": "PERMIT-PB-001",
+  "version": "2.4.0",
+  "projectPhase": "construction_documents",
+  "permitType": "building_permit",
+  "permitTitle": "Pozwolenie na budowę — Zielony Taras (BLD-01)",
+  "status": "valid",
+  "referenceNumber": "AB.6740.0337.2025",
+  "issuingAuthority": {
+    "name": "Starosta — Organ Administracji Architektoniczno-Budowlanej",
+    "nameEn": "County Architecture-and-Building Administration Authority",
+    "authorityType": "architecture_building_admin",
+    "jurisdiction": "Warszawa"
+  },
+  "gatesPhase": "construction",
+  "statutoryDeadlineDays": 65,
+  "submittedDate": "2025-09-15",
+  "decisionDate": "2025-11-18",
+  "validFrom": "2025-12-03",
+  "expiryDate": "2028-12-03",
+  "appealDeadline": "2025-12-02",
+  "conditions": [
+    {
+      "text": "Kierownik budowy musi zostać ustanowiony przed rozpoczęciem robót",
+      "status": "open"
+    },
+    {
+      "text": "Dziennik budowy (EDB) zarejestrowany przed pierwszym wpisem robót",
+      "status": "open"
+    }
+  ],
+  "prerequisiteDocuments": [
+    "PERMIT-WZ-001 (decyzja WZ, ostateczna)",
+    "PZT — projekt zagospodarowania terenu",
+    "PAB — projekt architektoniczno-budowlany",
+    "Oświadczenie o prawie do dysponowania nieruchomością na cele budowlane",
+    "Opinia geotechniczna"
+  ],
+  "feePaid": {
+    "amount": 539,
+    "currency": "PLN"
+  },
+  "appealOfPermitId": "PERMIT-WZ-001",
+  "relatedEntityIds": [
+    "BLD-01"
+  ],
+  "responsibility": {
+    "discipline": "architectural",
+    "organization": "Pracownia Architektoniczna (główny projektant)"
+  },
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

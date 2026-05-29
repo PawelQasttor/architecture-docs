@@ -292,6 +292,38 @@
       "sourceFile": "pl\\zrownowazonosc\\woda.md"
     }
   ],
+  "construction_documents": [
+    {
+      "sourceFile": "en\\examples\\green-terrace\\approval-gates\\GATE-DESIGN-FREEZE-CD.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\approval-gates\\GATE-PERMIT-READY.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\circulation-routes\\CR-FIRE-EGRESS-L01.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\permits\\PERMIT-PB-001.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\permits\\PERMIT-WZ-001.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-DESIGN-FREEZE-CD.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\bramki-zatwierdzen\\GATE-PERMIT-READY.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\drogi-cyrkulacji\\CR-FIRE-EGRESS-L01.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-PB-001.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\pozwolenia\\PERMIT-WZ-001.md"
+    }
+  ],
   "construction": [
     {
       "sourceFile": "en\\examples\\green-terrace\\assets\\ai-hp-01.md",
@@ -461,8 +493,14 @@
       "bimLOD": "LOD_300"
     },
     {
+      "sourceFile": "en\\examples\\green-terrace-park\\approval-gates\\GATE-CAMPUS-PLANNING.md"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-03-linden-court.md",
       "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\permits\\PERMIT-CAMPUS-MASTER.md"
     },
     {
       "sourceFile": "en\\examples\\green-terrace-park\\site.md"
@@ -541,19 +579,17 @@
       "sourceFile": "pl\\przyklady\\zielony-taras\\systemy-konstrukcyjne\\STR-GREEN-TERRACE.md"
     },
     {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\bramki-zatwierdzen\\GATE-CAMPUS-PLANNING.md"
+    },
+    {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-03-dziedziniec-lipowy.md",
       "bimLOD": "LOD_300"
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras-park\\dzialka.md"
-    }
-  ],
-  "construction_documents": [
-    {
-      "sourceFile": "en\\examples\\green-terrace\\circulation-routes\\CR-FIRE-EGRESS-L01.md"
     },
     {
-      "sourceFile": "pl\\przyklady\\zielony-taras\\drogi-cyrkulacji\\CR-FIRE-EGRESS-L01.md"
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\pozwolenia\\PERMIT-CAMPUS-MASTER.md"
     }
   ],
   "commissioning": [
@@ -594,6 +630,9 @@
   ],
   "operation": [
     {
+      "sourceFile": "en\\examples\\green-terrace-2028\\approval-gates\\GATE-COMPLETION-AUTHORIZED.md"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace-2028\\assets\\ai-hp-01-ops.md"
     },
     {
@@ -617,6 +656,12 @@
     },
     {
       "sourceFile": "en\\examples\\green-terrace-2028\\energy-verification-records\\EVR-BLD-01-2027.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\inspections\\INSP-5YEAR-DUE-2028.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-2028\\inspections\\INSP-ANNUAL-2027.md"
     },
     {
       "sourceFile": "en\\examples\\green-terrace-2028\\issues\\ISS-ANOMALY-CO2-001.md"
@@ -643,6 +688,9 @@
       "sourceFile": "en\\examples\\green-terrace-2028\\occupant-surveys\\SURVEY-BLD-01-IEQ-2027.md"
     },
     {
+      "sourceFile": "en\\examples\\green-terrace-2028\\permits\\PERMIT-OCCUPANCY-001.md"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace-2028\\retrocx-recommendations\\RCX-MVHR-001.md"
     },
     {
@@ -664,6 +712,9 @@
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\ankiety-mieszkancow\\SURVEY-BLD-01-IEQ-2027.md"
     },
     {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\bramki-zatwierdzen\\GATE-COMPLETION-AUTHORIZED.md"
+    },
+    {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\budynek.md",
       "bimLOD": "LOD_500"
     },
@@ -672,6 +723,15 @@
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\poziomy\\poziom-04.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\pozwolenia\\PERMIT-OCCUPANCY-001.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-5YEAR-DUE-2028.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-ANNUAL-2027.md"
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przestrzenie\\sypialnia-402.md"

@@ -1,0 +1,56 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\approval-gates\\GATE-COMPLETION-AUTHORIZED.md",
+    "extractedAt": "2026-05-29T15:31:59.630Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "approval_gate",
+  "id": "GATE-COMPLETION-AUTHORIZED",
+  "version": "2.4.0",
+  "projectPhase": "operation",
+  "gateType": "completion_authorized",
+  "gateTitle": "Completion authorized — occupancy permit granted, handover to operation",
+  "gatePhase": "commissioning",
+  "status": "passed",
+  "decisionOwner": {
+    "role": "authority",
+    "name": "PINB (County Building Control)"
+  },
+  "decisionDate": "2026-06-19",
+  "prerequisites": [
+    {
+      "description": "Occupancy permit granted",
+      "met": true,
+      "evidenceRef": "PERMIT-OCCUPANCY-001"
+    },
+    {
+      "description": "All commissioning tests executed (MVHR, air-tightness, fire drill)",
+      "met": true,
+      "evidenceRef": "CT-MVHR-001"
+    },
+    {
+      "description": "c-KOB digital building logbook established",
+      "met": true
+    },
+    {
+      "description": "O&M manuals + warranties transferred to building manager",
+      "met": true
+    }
+  ],
+  "deliverableRefs": [
+    "PERMIT-OCCUPANCY-001"
+  ],
+  "relatedPermitIds": [
+    "PERMIT-OCCUPANCY-001"
+  ],
+  "relatedEntityIds": [
+    "BLD-01"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

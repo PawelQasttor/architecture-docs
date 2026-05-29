@@ -1,0 +1,65 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-2028\\permits\\PERMIT-OCCUPANCY-001.md",
+    "extractedAt": "2026-05-29T15:31:59.639Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "permit",
+  "id": "PERMIT-OCCUPANCY-001",
+  "version": "2.4.0",
+  "projectPhase": "operation",
+  "permitType": "occupancy_permit",
+  "permitTitle": "Pozwolenie na użytkowanie — Green Terrace (BLD-01)",
+  "status": "valid",
+  "referenceNumber": "PINB.5142.0098.2026",
+  "issuingAuthority": {
+    "name": "Powiatowy Inspektorat Nadzoru Budowlanego (PINB)",
+    "nameEn": "County Building Control Authority (PINB)",
+    "authorityType": "building_control_pinb",
+    "jurisdiction": "Warszawa"
+  },
+  "gatesPhase": "operation",
+  "statutoryDeadlineDays": 60,
+  "submittedDate": "2026-05-04",
+  "decisionDate": "2026-06-19",
+  "validFrom": "2026-07-03",
+  "conditions": [
+    {
+      "text": "Mandatory PINB occupancy inspection passed (>4 storeys building)",
+      "status": "met"
+    },
+    {
+      "text": "As-built geodetic survey registered with PODGiK",
+      "status": "met"
+    },
+    {
+      "text": "Fire-protection acceptance from straż pożarna on file",
+      "status": "met"
+    }
+  ],
+  "prerequisiteDocuments": [
+    "Construction log (EDB export)",
+    "Site manager completion + cleanup declarations",
+    "As-built geodetic survey (PODGiK)",
+    "Energy performance certificate",
+    "Test protocols: electrical, gas, chimney/ventilation, water"
+  ],
+  "feePaid": {
+    "amount": 135,
+    "currency": "PLN"
+  },
+  "relatedEntityIds": [
+    "BLD-01"
+  ],
+  "responsibility": {
+    "discipline": "other",
+    "organization": "Green Terrace Sp. z o.o. (investor)"
+  },
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

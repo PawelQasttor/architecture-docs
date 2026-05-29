@@ -1,0 +1,60 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace-park\\approval-gates\\GATE-CAMPUS-PLANNING.md",
+    "extractedAt": "2026-05-29T15:31:59.643Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "approval_gate",
+  "id": "GATE-CAMPUS-PLANNING",
+  "version": "2.4.0",
+  "projectPhase": "design_development",
+  "gateType": "planning_path_confirmed",
+  "gateTitle": "Campus planning path confirmed — phasing & shared-infrastructure sequencing",
+  "gatePhase": "concept",
+  "status": "in_progress",
+  "decisionOwner": {
+    "role": "investor",
+    "name": "Green Terrace Park Development"
+  },
+  "prerequisites": [
+    {
+      "description": "Campus environmental decision obtained",
+      "met": true,
+      "evidenceRef": "PERMIT-CAMPUS-MASTER"
+    },
+    {
+      "description": "Shared district-heating loop capacity confirmed for all 4 buildings",
+      "met": true,
+      "evidenceRef": "SYS-DH-LOOP-CAMPUS"
+    },
+    {
+      "description": "Building phasing sequence agreed (which building permits in which order)",
+      "met": false
+    },
+    {
+      "description": "Shared site-infrastructure construction package sequenced",
+      "met": false,
+      "evidenceRef": "CP-SITE-INFRASTRUCTURE"
+    }
+  ],
+  "deliverableRefs": [
+    "PERMIT-CAMPUS-MASTER",
+    "CP-SITE-INFRASTRUCTURE"
+  ],
+  "blockingIssueIds": [
+    "ISS-CAMPUS-PLANNING-001"
+  ],
+  "relatedPermitIds": [
+    "PERMIT-CAMPUS-MASTER"
+  ],
+  "relatedEntityIds": [
+    "CAM-GREEN-TERRACE-PARK"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

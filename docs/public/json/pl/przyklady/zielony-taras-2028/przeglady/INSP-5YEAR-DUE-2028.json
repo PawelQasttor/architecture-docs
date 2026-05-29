@@ -1,0 +1,40 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras-2028\\przeglady\\INSP-5YEAR-DUE-2028.md",
+    "extractedAt": "2026-05-29T15:31:59.687Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "regulatory_inspection",
+  "id": "INSP-5YEAR-DUE-2028",
+  "version": "2.4.0",
+  "projectPhase": "operation",
+  "inspectionType": "periodic_5year",
+  "inspectionTitle": "Pięcioletni przegląd budynku — zaplanowany 2028",
+  "statutoryBasis": "Prawo Budowlane Art. 62 ust. 1 pkt 2",
+  "status": "scheduled",
+  "buildingId": "BLD-01",
+  "frequencyMonths": 60,
+  "dueDate": "2031-07-03",
+  "nextDueDate": "2031-07-03",
+  "result": {
+    "summary": "Jeszcze nie wykonany — pierwszy przegląd pięcioletni zaplanowany w cyklu ustawowym.",
+    "deficiencies": []
+  },
+  "cKobEntry": {
+    "recorded": false,
+    "system": "Cyfrowa Książka Obiektu Budowlanego (GUNB)"
+  },
+  "relatedEntityIds": [
+    "BLD-01"
+  ],
+  "responsibility": {
+    "discipline": "other",
+    "organization": "GreenFM Sp. z o.o. (zarządca budynku)"
+  },
+  "authors": [
+    {
+      "name": "Marek Zieliński",
+      "role": "inspector"
+    }
+  ]
+}
