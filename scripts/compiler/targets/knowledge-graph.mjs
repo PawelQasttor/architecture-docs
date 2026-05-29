@@ -47,6 +47,8 @@ const REL_TYPES = {
   boundarySpaceIds: 'bounds', servedZoneIds: 'serves_zone',
   locatedInSpaceId: 'located_in', envelopeId: 'has_envelope',
   assignedEntityIds: 'assigned_to',
+  // design options / variants (v2.5)
+  designOptionId: 'in_option', variantOf: 'variant_of', supersededByOptionId: 'superseded_by',
   // generic
   relatedEntityIds: 'related_to', relatedIssueIds: 'related_to',
   testedEntityIds: 'tests', certificationIds: 'certified_by'
@@ -120,8 +122,8 @@ export function generateKnowledgeGraph(sbm, logger) {
     for (const [key, value] of Object.entries(e)) {
       if (key === 'id' || key.endsWith('_meta') || key === 'sources') continue;
 
-      // single ref: *Id
-      if (key.endsWith('Id') && typeof value === 'string') {
+      // single ref: *Id (plus variantOf, which doesn't follow the *Id suffix)
+      if ((key.endsWith('Id') || key === 'variantOf') && typeof value === 'string') {
         addEdge(e.id, value, relType(key));
         continue;
       }
