@@ -6,6 +6,48 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [2.5.0] - 2026-05-29 — Knowledge-graph export target (AI-ready linked-data projection)
+
+Tooling-only release — **the spec is unchanged** (`sbm_version` stays `"2.4"`,
+34 entity types). Adds an 8th compile target that projects the whole compiled
+model as a **linked-data knowledge graph**: typed nodes (one per entity) + typed
+edges (derived from the relationships the normalize stage already resolves),
+plus a JSON-LD `@graph`. This is the shape graph databases, RAG pipelines, and
+LLM tooling consume best, directly serving the standard's "AI-ready" mission.
+Because it is a read-only projection, **every existing v2.0–v2.4 model gets a
+graph for free** — no migration.
+
+### Added
+
+- **New `knowledge-graph` target** (`scripts/compiler/targets/knowledge-graph.mjs`)
+  → `knowledge_graph.json` per example. Output: `nodes[]` (id, type, label,
+  phase, completeness), `edges[]` (from, to, type, optional subtype), a
+  `summary` (counts by node/edge type), and a `jsonld` block (`@context` +
+  `@graph` with outgoing edges grouped per node).
+- **Controlled edge vocabulary** (~23 relationship verbs) derived from entity
+  fields: `part_of`, `contains`, `in_zone`, `instance_of`, `must_satisfy`,
+  `adjacent_to`, `served_by_system`, `subsystem_of`, `in_package`, `measures`,
+  `blocked_by`, `depends_on_permit`, `delivers`, `triggered_by`, … Edges are
+  only emitted when the target id resolves to a real node (no dangling edges).
+- **8 unit tests** (`tests/knowledge-graph.test.mjs`): node/edge generation,
+  dangling-edge prevention, `_meta`-field skipping, summary integrity, JSON-LD shape.
+
+### Changed
+
+- Compiler `VERSION` 2.4.0 → 2.5.0; `package.json` + lockfile → 2.5.0.
+  `sbm_version` output stays `"2.4"` (spec unchanged; tooling-ahead-of-spec, as
+  with the v2.1.0 release).
+- `index.mjs` now generates **7 compile targets (6 JSON + HTML report)**;
+  graph emitted as `knowledge_graph.json`.
+- Tests: **138/138 pass** (was 130).
+
+### Significance
+
+The SBM compiler can now hand an LLM or graph store the entire building model as
+a navigable graph — "what connects to what" across spaces, systems, zones,
+requirements, permits, gates, and inspections — without the consumer needing to
+understand the Markdown/frontmatter source or the compiler internals.
+
 ## [2.4.0] - 2026-05-29 — Delivery & approval process layer: permit + approval_gate + regulatory_inspection
 
 Opens the **"how the building gets BUILT"** dimension that the original

@@ -21,8 +21,11 @@ was contamination and has been removed.
 - **Schema:** JSON Schema at `schemas/sbm-schema-v2.4.json` (version 2.4.0,
   `sbm_version` const `"2.4"`). Older schemas (v0.1–v2.3) kept frozen for reference.
 
-> Note: `package.json`, the schema, and the compiler are all aligned at `2.4.0`.
-> The compiler `VERSION` / schema `sbm_version` remain the source of truth.
+> Note: tooling (`package.json` + compiler `VERSION`) is at `2.5.0`, while the
+> **spec** (schema file + `sbm_version`) stays at `2.4` — v2.5.0 was a tooling-only
+> release (knowledge-graph target), spec unchanged. This tooling-ahead-of-spec
+> pattern mirrors the earlier v2.1.0 release. The compiler `VERSION` / schema
+> `sbm_version` remain the source of truth for their respective layers.
 
 ## Common commands
 
@@ -57,7 +60,8 @@ scripts/
     stages/                # pipeline: parse -> normalize -> validate -> quality
     enrichers/             # jurisdiction-pack.mjs (country-specific enrichment)
     targets/               # output generators: asset-register, bim-mapping,
-                           #   compliance-report, quality-report, twin-schema
+                           #   compliance-report, quality-report, twin-schema,
+                           #   html-report, diagrams, knowledge-graph (JSON-LD)
     tests/*.test.mjs       # node:test (parse/normalize/validate/quality/integration)
   validate-frontmatter.js          # standalone frontmatter validator
   extract-frontmatter-to-json.mjs  # frontmatter -> JSON exporter
