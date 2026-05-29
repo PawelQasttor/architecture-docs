@@ -13,7 +13,7 @@ zoneIds:
   - "ZONE-FIRE-ZL-IV"
 
 designArea: 8.2
-# designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight (v0.1.4)
+# designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight
 # finishes: ceramic tile ← OVERRIDE needed (different from level's oak floor)
 designVolume: 22.1
 unit: "m"
@@ -207,7 +207,7 @@ bimIntegration:
     min: [0.0, 0.0, 3.20]
     max: [6.50, 1.25, 5.90]
 
-# Requirements merged: Level requirements + Instance requirements (v0.1.4)
+# Requirements merged: Level requirements + Instance requirements
 requirements:
   # From LVL-01.levelRequirements (MERGED):
   #   - REQ-PL-WT-ROOM-HEIGHT-001 (2.50m minimum)
@@ -256,12 +256,12 @@ authors:
     role: "architect"
     license: "IARP 5678"
 changelog:
-  - version: "0.4.0"
+  - version: "2.1.0"
     date: "2026-02-27"
-    description: "Updated to v0.4.0 with cost tracking, performance targets (circulation-appropriate), emergency lighting simulation, and enhanced BIM integration"
-  - version: "1.1.0"
+    description: "Added cost tracking, circulation-appropriate performance targets, emergency lighting simulation, and IFC-validated BIM integration"
+  - version: "2.0.0"
     date: "2026-02-23"
-    description: "Updated to use property inheritance (v0.1.4) - ceiling height inherited, floor finish overridden"
+    description: "Adopted level property inheritance — ceiling height inherited, floor finish overridden for durability"
   - version: "1.0.0"
     date: "2026-02-22"
     description: "Initial creation"
@@ -271,7 +271,7 @@ changelog:
 
 Protected circulation space connecting bedrooms to staircase.
 
-::: tip Level Inheritance (v0.1.4)
+::: tip Level Inheritance
 This corridor inherits from **Level 01**:
 - ✅ **Ceiling Height:** 2.70m (inherited, no need to specify)
 - ✅ **Finishes:** White painted walls/ceiling (inherited)

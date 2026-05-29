@@ -22,10 +22,10 @@ zoneIds:
 
 # Instance-Specific Spatial Data
 designArea: 14.5
-# designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight (v0.1.4)
-# finishes: oak/white ← INHERITED from LVL-01.typicalFinishes (v0.1.4)
-# environmentalConditions ← INHERITED from LVL-01.typicalEnvironmentalConditions (v0.1.4)
-# requirements (partial) ← MERGED with LVL-01.levelRequirements + type requirements (v0.1.4)
+# designHeight: 2.70  ← INHERITED from LVL-01.typicalCeilingHeight
+# finishes: oak/white ← INHERITED from LVL-01.typicalFinishes
+# environmentalConditions ← INHERITED from LVL-01.typicalEnvironmentalConditions
+# requirements (partial) ← MERGED with LVL-01.levelRequirements + type requirements
 designVolume: 39.15
 unit: "m"
 
@@ -300,15 +300,12 @@ authors:
     role: "architect"
     license: "IARP 5678"
 changelog:
-  - version: "0.4.0"
-    date: "2026-02-27"
-    description: "Updated to v0.4.0 with cost tracking, performance targets, simulations, and enhanced BIM integration"
   - version: "2.1.0"
-    date: "2026-02-23"
-    description: "Updated to use property inheritance (v0.1.4) - removed designHeight, finishes (now inherited from level)"
+    date: "2026-02-27"
+    description: "Added cost tracking, performance targets, simulations, and IFC-validated BIM integration; adopted level + type property inheritance (designHeight, finishes, environmental conditions now inherited)"
   - version: "2.0.0"
     date: "2026-02-22"
-    description: "Migrated to type/instance pattern"
+    description: "Migrated to type/instance pattern (Space + Space Type)"
 ---
 
 # Space: Bedroom 01
@@ -317,7 +314,7 @@ changelog:
 
 Standard bedroom in apartment unit 01 on first floor of the Green Terrace residential building. North-facing room with single window providing natural daylight and ventilation. This space is part of a 2-bedroom apartment designed for a small family.
 
-::: tip Type-Based + Level Inheritance (v0.1.4)
+::: tip Type-Based + Level Inheritance
 This bedroom inherits specifications from **two sources**:
 
 **From Space Type (ST-BEDROOM-STANDARD-A):**

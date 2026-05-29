@@ -14,7 +14,7 @@ elevation: 3.20
 floorToFloorHeight: 3.20
 unit: "m"
 
-# Property Inheritance (v0.1.4) - These properties cascade to all spaces on this level
+# Property Inheritance - These properties cascade to all spaces on this level
 typicalCeilingHeight: 2.70
 typicalFinishes:
   floor: "Oak engineered 3-layer 15mm"
@@ -120,12 +120,12 @@ authors:
     license: "IARP 5678"
 
 changelog:
-  - version: "0.4.0"
+  - version: "2.1.0"
     date: "2026-02-27"
-    description: "Updated to v0.4.0 with enhanced BIM integration (IFC validation, 2D outline, bounds)"
+    description: "Added IFC-validated BIM integration (2D outline, centroid, bounding box)"
   - version: "2.0.0"
     date: "2026-02-23"
-    description: "Added property inheritance (v0.1.4) - typical ceiling, finishes, environment"
+    description: "Added property inheritance — typical ceiling height, finishes, and environmental conditions cascade to all spaces"
   - version: "1.0.0"
     date: "2026-02-22"
     description: "Initial level definition"
@@ -135,7 +135,7 @@ changelog:
 
 First floor of Building 01 containing residential apartments.
 
-::: tip Property Inheritance (v0.1.4)
+::: tip Property Inheritance
 This level defines **typical properties** that automatically cascade to all spaces on this floor:
 - ✅ **Ceiling Height:** 2.70m clear (all bedrooms and corridor inherit)
 - ✅ **Finishes:** Oak floor, white painted walls/ceiling (all spaces inherit)
