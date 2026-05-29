@@ -6,6 +6,44 @@ Format based on [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [tooling 2.7.0] - 2026-05-30 — Query layer + semantic model-diff
+
+Tooling-only — **spec unchanged** (`sbm_version` stays `"2.5"`, 35 entity types). Adds two
+deterministic, offline ways to *interrogate* the compiled model, building on the v2.5
+knowledge graph and v2.6 `revisionHistory`: a **query DSL** ("what is X / what connects to X
+/ which entities match Y") and a **semantic diff** ("what changed between two snapshots").
+No LLM, no network — these are the substrate an external agent or a human uses.
+
+### Added
+
+- **`query` CLI command + `scripts/compiler/query.mjs`** — a small parser-free DSL over a
+  compiled `sbm.json`: `list <type> [where <path> <op> <value>]`, `count …`, `get <id>`,
+  `neighbors <id> [<relType>] [in|out]`. Ops `= != > < >= <= contains exists`; dotted paths
+  (`cost.totalCost`) via a new `getByPath`. Attribute filters run over entities; relationship
+  traversal reuses the knowledge graph. `--format text|json`.
+  - e.g. `query --input build/green-terrace "list spaces where designArea > 14"`,
+    `query --input build/green-terrace "neighbors SP-BLD-01-L01-001 must_satisfy out"`.
+- **`diff` CLI command + `scripts/compiler/model-diff.mjs`** — entity- and relationship-aware
+  diff of two compiled snapshots: entities added/removed/changed (field paths with from→to,
+  derived keys denylisted), edges added/removed (via the knowledge graph), and entity-type
+  count deltas. `--from`/`--to` (file or build dir), `--output` writes `model_diff.json`,
+  `--format text|json`. Complements `revisionHistory` (narrative) by computing the actual delta.
+- **18 unit tests** (`tests/query.test.mjs` + `tests/model-diff.test.mjs`).
+- npm convenience scripts `sbm:query` and `sbm:diff`.
+
+### Changed
+
+- Compiler `VERSION` 2.6.0 → 2.7.0; `package.json` + lockfile → 2.7.0. `sbm_version` stays "2.5".
+- `index.mjs`: `parseArgs` gains `--query`/`--from`/`--to`/`--format` + a trailing-positional
+  query; `main()` gains `query` + `diff` command branches + a `loadSbm` helper; help extended.
+- Tests: **168/168 pass** (was 150).
+
+### Significance
+
+The compiled model is now directly **queryable and diffable** without reading raw JSON or
+understanding the compiler internals — and both run offline. This is the deterministic
+substrate that an LLM/MCP front-end (a deliberate future step) would sit on top of.
+
 ## [2.5.0-spec / tooling 2.6.0] - 2026-05-29 — Temporal versioning + design-options
 
 Adds the two axes the model still couldn't express, both from `SBM-EVALUATION-v1.1.md`:

@@ -24,19 +24,25 @@ was contamination and has been removed.
 > Note: tooling (`package.json` + compiler `VERSION`) is at `2.6.0`, while the
 > **spec** (schema file + `sbm_version`) is at `2.5`. The offset comes from the
 > tooling-only v2.5.0 release (knowledge-graph target, spec unchanged); the spec
-> then advanced to 2.5 in the temporal/design-options release (tooling 2.6.0). The
-> compiler `VERSION` / schema `sbm_version` remain the source of truth per layer.
+> then advanced to 2.5 in the temporal/design-options release (tooling 2.6.0).
+> Tooling is now `2.7.0` (query + diff CLI, spec unchanged at 2.5). The compiler
+> `VERSION` / schema `sbm_version` remain the source of truth per layer.
 
 ## Common commands
 
 ```bash
 npm run docs:dev          # VitePress dev server (localhost:5173)
 npm run docs:build        # Production build — ALSO the dead-link checker (CI gate)
-npm test                  # Compiler test suite — node:test, 104 tests
+npm test                  # Compiler test suite — node:test, 168 tests
 npm run sbm:validate      # Validate the Green Terrace example against the schema
 npm run sbm:compile       # Compile Green Terrace -> build/green-terrace
 npm run extract:json      # Extract all frontmatter -> docs/public/json
 npm run build:all         # extract:json + sbm:compile + docs:build
+
+# Interrogate a compiled model (tooling v2.7, offline):
+npm run sbm:query -- "list spaces where designArea > 14"   # query DSL over build/green-terrace
+node scripts/compiler/index.mjs query --input build/green-terrace "neighbors SP-BLD-01-L01-001 must_satisfy out"
+node scripts/compiler/index.mjs diff --from build/gt-sd --to build/gt-cd --format text  # semantic diff
 ```
 
 **Before any commit:** run `npm test` (must be 104/104) **and** `npm run docs:build`
@@ -55,8 +61,10 @@ docs/
 schemas/sbm-schema-v2.5.json  # current JSON Schema (v2.0–v2.4 frozen for reference)
 scripts/
   compiler/
-    index.mjs              # entry point — `compile` and `validate` modes
+    index.mjs              # entry point — compile / validate / query / diff modes
     constants.mjs          # phases, entity-type set, safety-critical fields
+    query.mjs              # query DSL over a compiled sbm.json (v2.7, offline)
+    model-diff.mjs         # semantic diff between two compiled snapshots (v2.7)
     stages/                # pipeline: parse -> normalize -> validate -> quality
     enrichers/             # jurisdiction-pack.mjs (country-specific enrichment)
     targets/               # output generators: asset-register, bim-mapping,

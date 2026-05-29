@@ -1,6 +1,6 @@
 {
   "name": "architecture-docs",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "AI-ready documentation standard for Polish architects",
   "type": "module",
   "scripts": {
@@ -18,6 +18,8 @@
     "sbm:validate:2028": "node scripts/compiler/index.mjs validate --input docs/en/examples/green-terrace-2028 --country PL --phase operation --verbose",
     "sbm:compile:park": "node scripts/compiler/index.mjs compile --input docs/en/examples/green-terrace-park --output build/green-terrace-park --country PL --phase construction --verbose",
     "sbm:validate:park": "node scripts/compiler/index.mjs validate --input docs/en/examples/green-terrace-park --country PL --phase construction --verbose",
+    "sbm:query": "node scripts/compiler/index.mjs query --input build/green-terrace",
+    "sbm:diff": "node scripts/compiler/index.mjs diff",
     "test": "node --test scripts/compiler/tests/*.test.mjs",
     "sbm:clean": "node -e \"import('fs').then(fs=>fs.promises.rm('build',{recursive:true,force:true}).then(()=>console.log('Build cleaned')))\"",
     "build:all": "npm run extract:json && npm run sbm:compile && npm run docs:build"
