@@ -80,6 +80,14 @@
       "sourceFile": "en\\examples\\green-terrace\\construction-packages\\cp-structure.md"
     },
     {
+      "sourceFile": "en\\examples\\green-terrace\\design-options\\OPT-SCHEME-A.md",
+      "projectPhase": "schematic_design"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\design-options\\OPT-SCHEME-B.md",
+      "projectPhase": "schematic_design"
+    },
+    {
       "sourceFile": "en\\examples\\green-terrace\\envelope-external-wall-type-a.md"
     },
     {
@@ -196,6 +204,14 @@
       "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-02.md",
       "projectPhase": "design_development",
       "bimLOD": "LOD_300"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-opt-a-01.md",
+      "projectPhase": "schematic_design"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-opt-b-01.md",
+      "projectPhase": "schematic_design"
     },
     {
       "sourceFile": "en\\examples\\green-terrace\\spaces\\corridor.md",
@@ -595,6 +611,14 @@
       "bimLOD": "LOD_300"
     },
     {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-wariant-a-01.md",
+      "projectPhase": "schematic_design"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-wariant-b-01.md",
+      "projectPhase": "schematic_design"
+    },
+    {
       "sourceFile": "pl\\przyklady\\zielony-taras\\specyfikacja-projektu.md",
       "bimLOD": "LOD_400"
     },
@@ -676,6 +700,14 @@
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras\\typy-zasobow\\rozdzielacz-ufh-12-stref.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-A.md",
+      "projectPhase": "schematic_design"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-B.md",
+      "projectPhase": "schematic_design"
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-FIRE-EGRESS-TIME-001.md"

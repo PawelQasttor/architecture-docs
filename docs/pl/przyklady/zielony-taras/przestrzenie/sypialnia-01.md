@@ -4,6 +4,25 @@ id: "SP-BLD-01-L01-001"
 projectPhase: "design_development"
 bimLOD: "LOD_300"
 
+# v2.5: ścieżka audytu czasowego (licznik rewizji + historia)
+revision: 3
+revisionHistory:
+  - rev: 1
+    date: "2025-06-15"
+    author: "A. Nowak"
+    phase: "schematic_design"
+    summary: "Pierwotna sypialnia 14,5 m²"
+  - rev: 2
+    date: "2025-09-20"
+    author: "M. Nowak"
+    phase: "design_development"
+    summary: "Ścianka akustyczna podniesiona do Rw 52 dB po analizie hałasu od sąsiadów"
+  - rev: 3
+    date: "2026-02-27"
+    author: "A. Nowak"
+    phase: "construction_documents"
+    summary: "Światło dzienne zweryfikowane przez DIVA (DF 2,3%); wykończenia i koszt zamrożone na design freeze"
+
 # Basic Properties
 spaceName: "Bedroom 01"
 spaceType: "sleeping_space"

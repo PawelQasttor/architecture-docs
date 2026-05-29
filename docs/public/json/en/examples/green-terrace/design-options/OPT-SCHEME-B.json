@@ -1,0 +1,39 @@
+{
+  "_metadata": {
+    "sourceFile": "en\\examples\\green-terrace\\design-options\\OPT-SCHEME-B.md",
+    "extractedAt": "2026-05-29T21:37:01.207Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "design_option",
+  "id": "OPT-SCHEME-B",
+  "version": "2.5.0",
+  "projectPhase": "schematic_design",
+  "optionName": "Scheme B — compact bedrooms (12 m²)",
+  "status": "rejected",
+  "description": "Apartment layout favouring more, smaller bedrooms (12 m² each) to maximise\nunit count per floor plate.\n",
+  "rationale": "Rejected at SD review: although it raised the bedroom count, the 12 m² rooms\nfell short on daylight and storage for the target market, and the extra\npartitions/services raised embodied carbon and capex per usable m².\n",
+  "decisionOwner": {
+    "role": "investor",
+    "name": "Green Terrace Sp. z o.o."
+  },
+  "decisionDate": "2025-08-12",
+  "supersededByOptionId": "OPT-SCHEME-A",
+  "comparison": {
+    "gfa": 12,
+    "unitCount": 1,
+    "capexEur": 20640,
+    "embodiedCarbon": 1040,
+    "notes": "Per representative bedroom variant (SP-OPTB-BED-01); smaller room, but more partitions/services per usable m²."
+  },
+  "relatedEntityIds": [
+    "BLD-01",
+    "SP-OPTB-BED-01"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

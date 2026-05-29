@@ -1,7 +1,7 @@
 {
   "_metadata": {
     "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-01.md",
-    "extractedAt": "2026-05-29T13:44:09.689Z",
+    "extractedAt": "2026-05-29T21:37:01.221Z",
     "format": "yaml-frontmatter"
   },
   "entityType": "space",
@@ -9,6 +9,30 @@
   "version": "2.1.0",
   "projectPhase": "design_development",
   "bimLOD": "LOD_300",
+  "revision": 3,
+  "revisionHistory": [
+    {
+      "rev": 1,
+      "date": "2025-06-15",
+      "author": "A. Nowak",
+      "phase": "schematic_design",
+      "summary": "Initial bedroom at 14.5 m²"
+    },
+    {
+      "rev": 2,
+      "date": "2025-09-20",
+      "author": "M. Nowak",
+      "phase": "design_development",
+      "summary": "Acoustic partition upgraded to Rw 52 dB after neighbour-noise review"
+    },
+    {
+      "rev": 3,
+      "date": "2026-02-27",
+      "author": "A. Nowak",
+      "phase": "construction_documents",
+      "summary": "Daylight verified by DIVA (DF 2.3%); finishes + cost locked at design freeze"
+    }
+  ],
   "spaceName": "Bedroom 01",
   "spaceTypeId": "ST-BEDROOM-STANDARD-A",
   "roomNumber": "1.01.1",

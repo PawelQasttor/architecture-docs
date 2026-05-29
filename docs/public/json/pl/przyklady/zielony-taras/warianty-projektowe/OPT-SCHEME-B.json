@@ -1,0 +1,39 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-B.md",
+    "extractedAt": "2026-05-29T21:37:01.285Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "design_option",
+  "id": "OPT-SCHEME-B",
+  "version": "2.5.0",
+  "projectPhase": "schematic_design",
+  "optionName": "Wariant B — kompaktowe sypialnie (12 m²)",
+  "status": "rejected",
+  "description": "Układ mieszkania preferujący więcej mniejszych sypialni (po 12 m²) w celu\nmaksymalizacji liczby pomieszczeń na rzut.\n",
+  "rationale": "Odrzucony na przeglądzie koncepcji: mimo większej liczby sypialni, pokoje 12 m²\nnie spełniały oczekiwań co do światła dziennego i przechowywania dla rynku\ndocelowego, a dodatkowe ścianki/instalacje podniosły ślad węglowy i capex na\nużytkowy m².\n",
+  "decisionOwner": {
+    "role": "investor",
+    "name": "Zielony Taras Sp. z o.o."
+  },
+  "decisionDate": "2025-08-12",
+  "supersededByOptionId": "OPT-SCHEME-A",
+  "comparison": {
+    "gfa": 12,
+    "unitCount": 1,
+    "capexEur": 20640,
+    "embodiedCarbon": 1040,
+    "notes": "Na reprezentatywny wariant sypialni (SP-OPTB-BED-01); mniejszy pokój, ale więcej ścianek/instalacji na użytkowy m²."
+  },
+  "relatedEntityIds": [
+    "BLD-01",
+    "SP-OPTB-BED-01"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

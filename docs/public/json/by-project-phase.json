@@ -612,6 +612,40 @@
       "sourceFile": "pl\\przyklady\\zielony-taras\\testy-rozruchowe\\CT-MVHR-001.md"
     }
   ],
+  "schematic_design": [
+    {
+      "sourceFile": "en\\examples\\green-terrace\\design-options\\OPT-SCHEME-A.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\design-options\\OPT-SCHEME-B.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-opt-a-01.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace\\spaces\\bedroom-opt-b-01.md"
+    },
+    {
+      "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-04-oak-pavilion.md",
+      "bimLOD": "LOD_200"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-wariant-a-01.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-wariant-b-01.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-A.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-B.md"
+    },
+    {
+      "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-04-pawilon-debowy.md",
+      "bimLOD": "LOD_200"
+    }
+  ],
   "bidding_procurement": [
     {
       "sourceFile": "en\\examples\\green-terrace\\issues\\ISS-BID-001.md"
@@ -786,16 +820,6 @@
     },
     {
       "sourceFile": "pl\\przyklady\\zielony-taras-2028\\zgloszenia\\ISS-WARRANTY-HP-001.md"
-    }
-  ],
-  "schematic_design": [
-    {
-      "sourceFile": "en\\examples\\green-terrace-park\\buildings\\BLD-04-oak-pavilion.md",
-      "bimLOD": "LOD_200"
-    },
-    {
-      "sourceFile": "pl\\przyklady\\zielony-taras-park\\budynki\\BLD-04-pawilon-debowy.md",
-      "bimLOD": "LOD_200"
     }
   ]
 }

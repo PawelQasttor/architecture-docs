@@ -333,7 +333,11 @@ export default defineConfig({
                     { text: 'Permit: Zoning decision WZ (v2.4)', link: '/en/examples/green-terrace/permits/PERMIT-WZ-001' },
                     { text: 'Permit: Building permit (v2.4)', link: '/en/examples/green-terrace/permits/PERMIT-PB-001' },
                     { text: 'Gate: Design freeze CD (v2.4)', link: '/en/examples/green-terrace/approval-gates/GATE-DESIGN-FREEZE-CD' },
-                    { text: 'Gate: Permit-ready (v2.4)', link: '/en/examples/green-terrace/approval-gates/GATE-PERMIT-READY' }
+                    { text: 'Gate: Permit-ready (v2.4)', link: '/en/examples/green-terrace/approval-gates/GATE-PERMIT-READY' },
+                    { text: 'Option A: larger bedrooms — selected (v2.5)', link: '/en/examples/green-terrace/design-options/OPT-SCHEME-A' },
+                    { text: 'Option B: compact bedrooms — rejected (v2.5)', link: '/en/examples/green-terrace/design-options/OPT-SCHEME-B' },
+                    { text: 'Bedroom variant A (16 m²) (v2.5)', link: '/en/examples/green-terrace/spaces/bedroom-opt-a-01' },
+                    { text: 'Bedroom variant B (12 m²) (v2.5)', link: '/en/examples/green-terrace/spaces/bedroom-opt-b-01' }
                   ]
                 },
                 {
@@ -722,7 +726,11 @@ export default defineConfig({
                     { text: 'Pozwolenie: Decyzja WZ (v2.4)', link: '/pl/przyklady/zielony-taras/pozwolenia/PERMIT-WZ-001' },
                     { text: 'Pozwolenie: Pozwolenie na budowę (v2.4)', link: '/pl/przyklady/zielony-taras/pozwolenia/PERMIT-PB-001' },
                     { text: 'Bramka: Zamrożenie projektu CD (v2.4)', link: '/pl/przyklady/zielony-taras/bramki-zatwierdzen/GATE-DESIGN-FREEZE-CD' },
-                    { text: 'Bramka: Gotowość do pozwolenia (v2.4)', link: '/pl/przyklady/zielony-taras/bramki-zatwierdzen/GATE-PERMIT-READY' }
+                    { text: 'Bramka: Gotowość do pozwolenia (v2.4)', link: '/pl/przyklady/zielony-taras/bramki-zatwierdzen/GATE-PERMIT-READY' },
+                    { text: 'Wariant A: większe sypialnie — wybrany (v2.5)', link: '/pl/przyklady/zielony-taras/warianty-projektowe/OPT-SCHEME-A' },
+                    { text: 'Wariant B: kompaktowe sypialnie — odrzucony (v2.5)', link: '/pl/przyklady/zielony-taras/warianty-projektowe/OPT-SCHEME-B' },
+                    { text: 'Sypialnia wariant A (16 m²) (v2.5)', link: '/pl/przyklady/zielony-taras/przestrzenie/sypialnia-wariant-a-01' },
+                    { text: 'Sypialnia wariant B (12 m²) (v2.5)', link: '/pl/przyklady/zielony-taras/przestrzenie/sypialnia-wariant-b-01' }
                   ]
                 },
                 {

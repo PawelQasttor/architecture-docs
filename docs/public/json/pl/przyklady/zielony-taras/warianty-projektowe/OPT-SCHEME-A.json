@@ -1,0 +1,38 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-A.md",
+    "extractedAt": "2026-05-29T21:37:01.284Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "design_option",
+  "id": "OPT-SCHEME-A",
+  "version": "2.5.0",
+  "projectPhase": "schematic_design",
+  "optionName": "Wariant A — większe sypialnie (16 m²)",
+  "status": "selected",
+  "description": "Układ mieszkania preferujący mniej, ale większych sypialni (po 16 m²) z dużą\nilością światła dziennego i miejsca do przechowywania, kosztem jednej sypialni\nmniej na lokal.\n",
+  "rationale": "Wybrany na przeglądzie koncepcji: lepszy współczynnik światła dziennego i\nwartość rynkowa przeważyły nad mniejszą liczbą pomieszczeń. Ślad węglowy na m²\nporównywalny; całkowity capex niższy niż w Wariancie B dla tego samego rzutu.\n",
+  "decisionOwner": {
+    "role": "investor",
+    "name": "Zielony Taras Sp. z o.o."
+  },
+  "decisionDate": "2025-08-12",
+  "comparison": {
+    "gfa": 16,
+    "unitCount": 1,
+    "capexEur": 25085,
+    "embodiedCarbon": 1250,
+    "notes": "Na reprezentatywny wariant sypialni (SP-OPTA-BED-01); zob. rollup option-comparison dla sum baseline + wariant."
+  },
+  "relatedEntityIds": [
+    "BLD-01",
+    "SP-OPTA-BED-01"
+  ],
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

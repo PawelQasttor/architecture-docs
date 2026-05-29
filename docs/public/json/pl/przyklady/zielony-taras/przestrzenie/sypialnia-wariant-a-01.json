@@ -1,0 +1,30 @@
+{
+  "_metadata": {
+    "sourceFile": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-wariant-a-01.md",
+    "extractedAt": "2026-05-29T21:37:01.274Z",
+    "format": "yaml-frontmatter"
+  },
+  "entityType": "space",
+  "id": "SP-OPTA-BED-01",
+  "version": "2.5.0",
+  "projectPhase": "schematic_design",
+  "spaceName": "Sypialnia (wariant A, 16 m²)",
+  "spaceType": "sleeping_space",
+  "buildingId": "BLD-01",
+  "levelId": "LVL-01",
+  "designArea": 16,
+  "unit": "m",
+  "designOptionId": "OPT-SCHEME-A",
+  "cost": {
+    "totalCost": 25085,
+    "currency": "PLN",
+    "basis": "calculated_from_type"
+  },
+  "authors": [
+    {
+      "name": "Anna Nowak",
+      "role": "architect",
+      "license": "IARP 5678"
+    }
+  ]
+}

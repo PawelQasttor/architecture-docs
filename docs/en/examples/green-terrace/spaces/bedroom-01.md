@@ -5,6 +5,25 @@ version: "2.1.0"
 projectPhase: "design_development"
 bimLOD: "LOD_300"
 
+# v2.5: temporal audit trail (revision counter + history)
+revision: 3
+revisionHistory:
+  - rev: 1
+    date: "2025-06-15"
+    author: "A. Nowak"
+    phase: "schematic_design"
+    summary: "Initial bedroom at 14.5 m²"
+  - rev: 2
+    date: "2025-09-20"
+    author: "M. Nowak"
+    phase: "design_development"
+    summary: "Acoustic partition upgraded to Rw 52 dB after neighbour-noise review"
+  - rev: 3
+    date: "2026-02-27"
+    author: "A. Nowak"
+    phase: "construction_documents"
+    summary: "Daylight verified by DIVA (DF 2.3%); finishes + cost locked at design freeze"
+
 # Basic Properties
 spaceName: "Bedroom 01"
 spaceTypeId: "ST-BEDROOM-STANDARD-A"

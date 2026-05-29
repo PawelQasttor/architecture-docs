@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-05-29T15:31:59.589Z",
-  "totalDocuments": 241,
+  "generatedAt": "2026-05-29T21:37:01.189Z",
+  "totalDocuments": 249,
   "documents": [
     {
       "file": "en\\bim-integration\\ifc-entities.json",
@@ -115,6 +115,18 @@
       "documentType": "unknown",
       "projectPhase": "unknown",
       "title": "Construction Package: Structural Works"
+    },
+    {
+      "file": "en\\examples\\green-terrace\\design-options\\OPT-SCHEME-A.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "Design Option: Scheme A — larger bedrooms"
+    },
+    {
+      "file": "en\\examples\\green-terrace\\design-options\\OPT-SCHEME-B.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "Design Option: Scheme B — compact bedrooms"
     },
     {
       "file": "en\\examples\\green-terrace\\envelope-external-wall-type-a.json",
@@ -294,13 +306,25 @@
       "file": "en\\examples\\green-terrace\\spaces\\bedroom-01.json",
       "documentType": "unknown",
       "projectPhase": "design_development",
-      "title": "Basic Properties"
+      "title": "v2.5: temporal audit trail (revision counter + history)"
     },
     {
       "file": "en\\examples\\green-terrace\\spaces\\bedroom-02.json",
       "documentType": "unknown",
       "projectPhase": "design_development",
       "title": "Basic Properties"
+    },
+    {
+      "file": "en\\examples\\green-terrace\\spaces\\bedroom-opt-a-01.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "v2.5: belongs to design option Scheme A (excluded from baseline rollups)"
+    },
+    {
+      "file": "en\\examples\\green-terrace\\spaces\\bedroom-opt-b-01.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "v2.5: belongs to design option Scheme B; variant of its Scheme A counterpart"
     },
     {
       "file": "en\\examples\\green-terrace\\spaces\\corridor.json",
@@ -948,13 +972,25 @@
       "file": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-01.json",
       "documentType": "unknown",
       "projectPhase": "design_development",
-      "title": "Basic Properties"
+      "title": "v2.5: ścieżka audytu czasowego (licznik rewizji + historia)"
     },
     {
       "file": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-02.json",
       "documentType": "unknown",
       "projectPhase": "design_development",
       "title": "Przestrzeń: Sypialnia 02"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-wariant-a-01.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "v2.5: należy do wariantu projektowego A (wyłączona z rollupu bazowego)"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras\\przestrzenie\\sypialnia-wariant-b-01.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "v2.5: należy do wariantu B; wariant swojego odpowiednika z Wariantu A"
     },
     {
       "file": "pl\\przyklady\\zielony-taras\\specyfikacja-projektu.json",
@@ -1087,6 +1123,18 @@
       "documentType": "unknown",
       "projectPhase": "unknown",
       "title": "Rozdzielacz ogrzewania podłogowego 12-strefowy (AT-UFH-MANIFOLD-12ZONE)"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-A.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "Wariant projektowy: Wariant A — większe sypialnie"
+    },
+    {
+      "file": "pl\\przyklady\\zielony-taras\\warianty-projektowe\\OPT-SCHEME-B.json",
+      "documentType": "unknown",
+      "projectPhase": "schematic_design",
+      "title": "Wariant projektowy: Wariant B — kompaktowe sypialnie"
     },
     {
       "file": "pl\\przyklady\\zielony-taras\\wymagania\\REQ-FIRE-EGRESS-TIME-001.json",
