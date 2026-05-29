@@ -125,7 +125,15 @@ export const V2_3_ENTITY_TYPES = new Set([
 ]);
 
 /**
- * All entity types recognized by the compiler (v1.x + v2.0 + v2.2 + v2.3)
+ * v2.4 entity types recognized by the compiler (additions beyond v2.3) —
+ * the delivery & approval process layer.
+ */
+export const V2_4_ENTITY_TYPES = new Set([
+  'permit', 'approval_gate', 'regulatory_inspection'
+]);
+
+/**
+ * All entity types recognized by the compiler (v1.x + v2.0 + v2.2 + v2.3 + v2.4)
  */
 export const ALL_ENTITY_TYPES = new Set([
   'site', 'building', 'level', 'space', 'zone', 'system', 'asset', 'requirement',
@@ -137,5 +145,7 @@ export const ALL_ENTITY_TYPES = new Set([
   // v2.2
   'telemetry_stream',
   // v2.3
-  'occupant_survey', 'energy_verification_record', 'retrocx_recommendation'
+  'occupant_survey', 'energy_verification_record', 'retrocx_recommendation',
+  // v2.4
+  'permit', 'approval_gate', 'regulatory_inspection'
 ]);

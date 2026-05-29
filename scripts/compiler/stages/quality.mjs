@@ -134,6 +134,19 @@ const QUALITY_PROFILES = {
   retrocx_recommendation: {
     critical: ['recommendationTitle', 'status'],
     important: ['proposedIntervention', 'expectedOutcome', 'verificationPlan', 'affectedSystemIds']
+  },
+  // v2.4 entity type profiles (delivery & approval layer)
+  permit: {
+    critical: ['permitType', 'status'],
+    important: ['issuingAuthority', 'referenceNumber', 'decisionDate', 'gatesPhase', 'relatedEntityIds']
+  },
+  approval_gate: {
+    critical: ['gateType', 'status'],
+    important: ['gatePhase', 'decisionOwner', 'prerequisites', 'deliverableRefs']
+  },
+  regulatory_inspection: {
+    critical: ['inspectionType', 'status'],
+    important: ['statutoryBasis', 'buildingId', 'frequencyMonths', 'dueDate', 'result']
   }
 };
 

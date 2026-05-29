@@ -27,7 +27,7 @@ function createMockLogger() {
  */
 function createValidSbm(overrides = {}) {
   return {
-    sbm_version: '2.3',
+    sbm_version: '2.4',
     generatedAt: new Date().toISOString(),
     compiler: { version: '2.0.0', mode: 'production' },
     project: {
@@ -601,7 +601,7 @@ describe('validate', () => {
       assert.equal(result.valid, false, 'should fail without sbm_version');
     });
 
-    it('should fail when sbm_version is not "2.3"', async () => {
+    it('should fail when sbm_version is not "2.4"', async () => {
       const sbm = createValidSbm();
       sbm.sbm_version = '0.5';
 
@@ -791,6 +791,159 @@ describe('validate', () => {
       const result = await validate(sbm, logger);
 
       assert.equal(result.valid, false, 'should fail without recommendationTitle');
+    });
+  });
+
+  describe('permit entity (v2.4)', () => {
+    function makePermit(overrides = {}) {
+      return {
+        id: 'PERMIT-TEST-001',
+        entityType: 'permit',
+        permitType: 'building_permit',
+        status: 'valid',
+        version: '2.4.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid permit', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.permits = [makePermit()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject permit with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.permits = [makePermit({ id: 'PRM-001' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-PERMIT- ID prefix');
+    });
+
+    it('should reject permit with off-enum permitType', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.permits = [makePermit({ permitType: 'super_permit' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum permitType');
+    });
+
+    it('should reject permit missing required status', async () => {
+      const sbm = createValidSbm();
+      const permit = makePermit();
+      delete permit.status;
+      sbm.entities.permits = [permit];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail without status');
+    });
+  });
+
+  describe('approval_gate entity (v2.4)', () => {
+    function makeGate(overrides = {}) {
+      return {
+        id: 'GATE-TEST-001',
+        entityType: 'approval_gate',
+        gateType: 'design_freeze',
+        status: 'passed',
+        version: '2.4.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid approval_gate', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.approval_gates = [makeGate()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject approval_gate with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.approval_gates = [makeGate({ id: 'GT-001' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-GATE- ID prefix');
+    });
+
+    it('should reject approval_gate with off-enum gateType', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.approval_gates = [makeGate({ gateType: 'mega_gate' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum gateType');
+    });
+
+    it('should reject approval_gate missing required gateType', async () => {
+      const sbm = createValidSbm();
+      const gate = makeGate();
+      delete gate.gateType;
+      sbm.entities.approval_gates = [gate];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail without gateType');
+    });
+  });
+
+  describe('regulatory_inspection entity (v2.4)', () => {
+    function makeInspection(overrides = {}) {
+      return {
+        id: 'INSP-TEST-001',
+        entityType: 'regulatory_inspection',
+        inspectionType: 'periodic_annual',
+        status: 'completed_pass',
+        version: '2.4.0',
+        ...overrides
+      };
+    }
+
+    it('should accept a minimal valid regulatory_inspection', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.regulatory_inspections = [makeInspection()];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, true, `should be valid; errors: ${JSON.stringify(result.errors)}`);
+    });
+
+    it('should reject regulatory_inspection with invalid ID prefix', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.regulatory_inspections = [makeInspection({ id: 'INSPECTION-001' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with non-INSP- ID prefix');
+    });
+
+    it('should reject regulatory_inspection with off-enum inspectionType', async () => {
+      const sbm = createValidSbm();
+      sbm.entities.regulatory_inspections = [makeInspection({ inspectionType: 'vibe_check' })];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail with off-enum inspectionType');
+    });
+
+    it('should reject regulatory_inspection missing required inspectionType', async () => {
+      const sbm = createValidSbm();
+      const insp = makeInspection();
+      delete insp.inspectionType;
+      sbm.entities.regulatory_inspections = [insp];
+
+      const result = await validate(sbm, logger);
+
+      assert.equal(result.valid, false, 'should fail without inspectionType');
     });
   });
 });

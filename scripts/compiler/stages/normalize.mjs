@@ -73,6 +73,10 @@ function groupEntitiesByType(entities) {
     occupant_surveys: [],
     energy_verification_records: [],
     retrocx_recommendations: [],
+    // v2.4 entity types
+    permits: [],
+    approval_gates: [],
+    regulatory_inspections: [],
     other: [] // For legacy document types
   };
 
@@ -141,6 +145,12 @@ function groupEntitiesByType(entities) {
       grouped.energy_verification_records.push(normalizeEntity(entity));
     } else if (type === 'retrocx_recommendation') {
       grouped.retrocx_recommendations.push(normalizeEntity(entity));
+    } else if (type === 'permit') {
+      grouped.permits.push(normalizeEntity(entity));
+    } else if (type === 'approval_gate') {
+      grouped.approval_gates.push(normalizeEntity(entity));
+    } else if (type === 'regulatory_inspection') {
+      grouped.regulatory_inspections.push(normalizeEntity(entity));
     } else {
       // Legacy types (element_specification, project_specification)
       grouped.other.push(normalizeEntity(entity));
@@ -1695,7 +1705,11 @@ export async function normalize(rawEntities, options, logger) {
       // v2.3 entity types
       ...(grouped.occupant_surveys.length > 0 && { occupant_surveys: grouped.occupant_surveys }),
       ...(grouped.energy_verification_records.length > 0 && { energy_verification_records: grouped.energy_verification_records }),
-      ...(grouped.retrocx_recommendations.length > 0 && { retrocx_recommendations: grouped.retrocx_recommendations })
+      ...(grouped.retrocx_recommendations.length > 0 && { retrocx_recommendations: grouped.retrocx_recommendations }),
+      // v2.4 entity types
+      ...(grouped.permits.length > 0 && { permits: grouped.permits }),
+      ...(grouped.approval_gates.length > 0 && { approval_gates: grouped.approval_gates }),
+      ...(grouped.regulatory_inspections.length > 0 && { regulatory_inspections: grouped.regulatory_inspections })
     },
     metadata: {
       totalEntities: rawEntities.length,
@@ -1733,7 +1747,11 @@ export async function normalize(rawEntities, options, logger) {
         // v2.3 entity types
         occupant_surveys: grouped.occupant_surveys.length,
         energy_verification_records: grouped.energy_verification_records.length,
-        retrocx_recommendations: grouped.retrocx_recommendations.length
+        retrocx_recommendations: grouped.retrocx_recommendations.length,
+        // v2.4 entity types
+        permits: grouped.permits.length,
+        approval_gates: grouped.approval_gates.length,
+        regulatory_inspections: grouped.regulatory_inspections.length
       }
     }
   };

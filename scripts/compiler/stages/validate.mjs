@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
  * Load JSON schema
  */
 async function loadSchema() {
-  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v2.3.json');
+  const schemaPath = path.join(__dirname, '../../../schemas/sbm-schema-v2.4.json');
   const schemaContent = await fs.readFile(schemaPath, 'utf-8');
   return JSON.parse(schemaContent);
 }
@@ -420,6 +420,80 @@ function checkReferentialIntegrity(sbm, logger) {
           path: `${entity._type}/${entity.id}/constructionPackageId`,
           message: `Referenced construction package "${entity.constructionPackageId}" does not exist`
         });
+      }
+    }
+  }
+
+  // v2.4: delivery & approval layer cross-entity checks
+  if (sbm.entities.permits) {
+    for (const permit of sbm.entities.permits) {
+      for (const ref of permit.relatedEntityIds || []) {
+        if (!allIds.has(ref)) {
+          warnings.push({
+            path: `permits/${permit.id}/relatedEntityIds`,
+            message: `Referenced entity "${ref}" does not exist`
+          });
+        }
+      }
+      for (const field of ['supersedesPermitId', 'appealOfPermitId']) {
+        if (permit[field] && !allIds.has(permit[field])) {
+          warnings.push({
+            path: `permits/${permit.id}/${field}`,
+            message: `Referenced permit "${permit[field]}" does not exist`
+          });
+        }
+      }
+      if (permit.validFrom && permit.expiryDate && permit.expiryDate < permit.validFrom) {
+        errors.push({
+          path: `permits/${permit.id}/expiryDate`,
+          message: `Permit expiryDate (${permit.expiryDate}) is before validFrom (${permit.validFrom})`
+        });
+      }
+    }
+  }
+
+  if (sbm.entities.approval_gates) {
+    for (const gate of sbm.entities.approval_gates) {
+      for (const [field, refs] of [['blockingIssueIds', gate.blockingIssueIds], ['relatedPermitIds', gate.relatedPermitIds], ['relatedEntityIds', gate.relatedEntityIds]]) {
+        for (const ref of refs || []) {
+          if (!allIds.has(ref)) {
+            warnings.push({
+              path: `approval_gates/${gate.id}/${field}`,
+              message: `Referenced entity "${ref}" does not exist`
+            });
+          }
+        }
+      }
+      // Logical rule: a passed gate should not have unmet prerequisites
+      if (gate.status === 'passed' && Array.isArray(gate.prerequisites)) {
+        const unmet = gate.prerequisites.filter(p => p && p.met === false);
+        if (unmet.length > 0) {
+          warnings.push({
+            path: `approval_gates/${gate.id}/prerequisites`,
+            message: `Gate is "passed" but ${unmet.length} prerequisite(s) are marked not met`
+          });
+        }
+      }
+    }
+  }
+
+  if (sbm.entities.regulatory_inspections) {
+    for (const insp of sbm.entities.regulatory_inspections) {
+      for (const field of ['buildingId', 'campusId', 'assetId']) {
+        if (insp[field] && !allIds.has(insp[field])) {
+          warnings.push({
+            path: `regulatory_inspections/${insp.id}/${field}`,
+            message: `Referenced entity "${insp[field]}" does not exist`
+          });
+        }
+      }
+      for (const ref of [...(insp.relatedEntityIds || []), ...(insp.relatedIssueIds || [])]) {
+        if (!allIds.has(ref)) {
+          warnings.push({
+            path: `regulatory_inspections/${insp.id}`,
+            message: `Referenced entity "${ref}" does not exist`
+          });
+        }
       }
     }
   }
